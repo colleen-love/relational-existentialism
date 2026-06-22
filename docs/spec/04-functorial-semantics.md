@@ -114,10 +114,14 @@ constructive), with the frontier marked precisely.
   the unit), **vanishing-II** (trace over `U ⊗ V` = nested traces), and **superposing**
   (trace commutes with `W ◁ -`). Adding the structural isos as morphisms is what makes the
   retensoring axioms statable transport-free. mathlib has no such typeclass.
-- **It is non-vacuous and the axioms are validated**, not just consistent: beyond the
-  trivial one-object model (`trivialTracedSMC`), a commutative monoid gives a genuine
-  model (`scalarTracedSMC`) in which **sliding holds *exactly because* the monoid is
-  commutative** — the symmetry the braiding provides.
+- **It is non-vacuous and the axioms are validated** at three strengths: the trivial
+  one-object model (`trivialTracedSMC`, consistency by `rfl`); a commutative monoid
+  (`scalarTracedSMC`) in which **sliding holds *exactly because* `·` is commutative**; and
+  — fittingly for *relational* existentialism — **`Rel`, the category of sets and
+  relations** ([`Scratch/Rel.lean`](../../formal/Scratch/Rel.lean), `relTracedSMC`), a
+  genuine **multi-object** model with `⊗ = ×` and the relational trace
+  `(trace R) x y := ∃ u, R (x,u) (y,u)`, which validates the **full** axiom set —
+  including the retensoring axioms — *non-trivially*.
 - **Literal functors** — `TracedFunctor` is a real structure-preserving map (a *model* in
   the Layer-4 sense), with `TracedFunctor.id`, `TracedFunctor.toTrivial`, and
   `TracedFunctor.comp`. The last makes functorial semantics genuinely *functorial*:

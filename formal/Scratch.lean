@@ -15,6 +15,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`≈`, whole). ✅ verified.
 * `Scratch.Chemistry`   — Layer 4, first domain functor: autocatalytic sets as
                           eigenforms (`νΦ`); the functor is definitional. ✅ verified.
+* `Scratch.Rel`         — `Rel` (sets & relations) as a genuine multi-object `TracedSMC`
+                          instance: the full JSV axiom set, validated non-trivially.
+                          ✅ verified.
 * `Scratch.Compact`     — Layer 4, categorical: compact closure, the firewall collapse
                           theorem, and categorical no-cloning (physics). ✅ verified.
 * `Scratch.NoCloning`   — Layer 4, physics: the concrete (linear-algebra) no-cloning
@@ -27,6 +30,7 @@ import Scratch.Attention
 import Scratch.Trace
 import Scratch.KnowingFeeling
 import Scratch.Chemistry
+import Scratch.Rel
 import Scratch.Compact
 import Scratch.NoCloning
 import Scratch.SparsityReal

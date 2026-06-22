@@ -78,6 +78,7 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | --- | --- | --- | --- |
 | **traced SMC typeclass** | `RelExist.Traced.TracedSMC` | trace + the **full JSV axiom set** (naturality, sliding, yanking, vanishing-I/II, superposing) via associator/unitor isos | ✅ defined |
 | consistency + **validation** | `trivialTracedSMC`, `scalarTracedSMC` | a comm. monoid is a model; **sliding ⟺ commutativity** | ✅ proved |
+| **`Rel` — a genuine multi-object model** | `RelExist.RelModel.relTracedSMC` | sets & relations, `⊗ = ×`, relational trace; full JSV validated non-trivially | ✅ proved |
 | **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
 
 Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): a concrete
