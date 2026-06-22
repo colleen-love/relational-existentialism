@@ -6,28 +6,35 @@ symmetric monoidal category*. mathlib has monoidal / symmetric / rigid categorie
 `ChosenFiniteProducts`, but **no traced-monoidal typeclass and no monoidal trace**, so we
 build one.
 
-This is the **strict, transport-free core**: objects carry a strict tensor `⊗`, and we
-impose the Joyal–Street–Verity trace axioms that do *not* retensor objects — naturality
-(left/right), sliding (dinaturality), and yanking — which characterise the trace's
-behaviour on a single wire. (The two retensoring axioms — vanishing-II and superposing —
-need object-equality transport along strict associativity/unit; together with a concrete
-`FdHilb` instance and the free traced SMC `Cl(𝕋)` they are the marked frontier — see the
-docs.)
+`TracedSMC` carries the tensor `⊗`, a unit, the symmetry braiding, **associator and
+unitor isomorphisms** (as morphism data — the non-strict monoidal move, which lets the
+retensoring axioms compose with structural isos instead of needing object-equality
+transport), and the **trace** with the *full* Joyal–Street–Verity axiom set:
 
-We then define **traced functors** (structure-preserving maps) and exhibit two literal
-ones: the identity and the terminal (collapse) functor. The functor *mechanism* of
-Layer 4 — a model as a structure-preserving functor — is thereby a real Lean object.
+* naturality (left/right), sliding (dinaturality), yanking — behaviour on a wire;
+* **vanishing-I** (trace over the unit), **vanishing-II** (trace over `U ⊗ V` = nested
+  traces), **superposing** (trace commutes with `W ◁ -`).
+
+We then define **traced functors** (structure-preserving models) and exhibit literal ones
+— identity, terminal, and composition — so functorial semantics is genuinely functorial.
+
+Validation: beyond the trivial one-object model, a commutative monoid is a model
+(`scalarTracedSMC`) in which **sliding holds precisely because `·` is commutative**.
+
+Not imposed (and noted): the monoidal *coherence* equations (pentagon, triangle) and
+naturality of the structural isos — they constrain the monoidal base, not the trace, and
+are not referenced by the JSV axioms. A concrete `FdHilb` instance and the free traced SMC
+`Cl(𝕋)` remain the research-grade frontier (see docs/spec/04 §4.6).
 -/
 
 namespace RelExist.Traced
 
 universe u v
 
-/-- A **strict traced symmetric monoidal category** (transport-free core). -/
+/-- A **traced symmetric monoidal category** (with associators/unitors as isos, so the
+full JSV trace axioms are statable transport-free). -/
 structure TracedSMC where
-  /-- objects (system-types) -/
   Obj : Type u
-  /-- morphisms (relatings) -/
   Hom : Obj → Obj → Type v
   id : (X : Obj) → Hom X X
   comp : {X Y Z : Obj} → Hom X Y → Hom Y Z → Hom X Z
@@ -35,29 +42,42 @@ structure TracedSMC where
   comp_id : ∀ {X Y} (f : Hom X Y), comp f (id Y) = f
   assoc : ∀ {W X Y Z} (f : Hom W X) (g : Hom X Y) (h : Hom Y Z),
     comp (comp f g) h = comp f (comp g h)
-  /-- strict tensor of objects (coexistence) -/
   tens : Obj → Obj → Obj
   unit : Obj
-  /-- tensor of morphisms -/
   tensH : {A B C D : Obj} → Hom A B → Hom C D → Hom (tens A C) (tens B D)
-  /-- the symmetry braiding on a wire -/
   braid : (X Y : Obj) → Hom (tens X Y) (tens Y X)
-  /-- **the trace**: feed the `U`-wire back. -/
   trace : {X Y U : Obj} → Hom (tens X U) (tens Y U) → Hom X Y
-  /-- naturality (left tightening): pre-composition on the kept input slides out. -/
+  -- structural isomorphisms (associator, right/left unitors)
+  aHom : (X Y Z : Obj) → Hom (tens (tens X Y) Z) (tens X (tens Y Z))
+  aInv : (X Y Z : Obj) → Hom (tens X (tens Y Z)) (tens (tens X Y) Z)
+  a_hom_inv : ∀ X Y Z, comp (aHom X Y Z) (aInv X Y Z) = id (tens (tens X Y) Z)
+  a_inv_hom : ∀ X Y Z, comp (aInv X Y Z) (aHom X Y Z) = id (tens X (tens Y Z))
+  ruHom : (X : Obj) → Hom (tens X unit) X
+  ruInv : (X : Obj) → Hom X (tens X unit)
+  ru_hom_inv : ∀ X, comp (ruHom X) (ruInv X) = id (tens X unit)
+  ru_inv_hom : ∀ X, comp (ruInv X) (ruHom X) = id X
+  luHom : (X : Obj) → Hom (tens unit X) X
+  luInv : (X : Obj) → Hom X (tens unit X)
+  lu_hom_inv : ∀ X, comp (luHom X) (luInv X) = id (tens unit X)
+  lu_inv_hom : ∀ X, comp (luInv X) (luHom X) = id X
+  -- JSV: behaviour on a wire
   trace_nat_left : ∀ {X X' Y U} (g : Hom X' X) (f : Hom (tens X U) (tens Y U)),
     trace (comp (tensH g (id U)) f) = comp g (trace f)
-  /-- naturality (right tightening): post-composition on the kept output slides out. -/
   trace_nat_right : ∀ {X Y Y' U} (f : Hom (tens X U) (tens Y U)) (g : Hom Y Y'),
     trace (comp f (tensH g (id U))) = comp (trace f) g
-  /-- sliding (dinaturality): a map may slide around the feedback loop. -/
   trace_slide : ∀ {X Y U V} (f : Hom (tens X U) (tens Y V)) (h : Hom V U),
     trace (comp f (tensH (id Y) h)) = trace (comp (tensH (id X) h) f)
-  /-- yanking: a single crossing fed back is a straight wire. -/
   trace_yank : ∀ (U : Obj), trace (braid U U) = id U
+  -- JSV: retensoring axioms (via the structural isos)
+  trace_vanish_unit : ∀ {X Y} (f : Hom (tens X unit) (tens Y unit)),
+    trace f = comp (ruInv X) (comp f (ruHom Y))
+  trace_vanish_tens : ∀ {X Y U V} (f : Hom (tens X (tens U V)) (tens Y (tens U V))),
+    trace f = trace (trace (comp (aHom X U V) (comp f (aInv Y U V))))
+  trace_superpose : ∀ {W X Y U} (f : Hom (tens X U) (tens Y U)),
+    trace (comp (aHom W X U) (comp (tensH (id W) f) (aInv W Y U))) = tensH (id W) (trace f)
 
-/-- **A trivial model** — the terminal (one-object, one-morphism) traced SMC. It shows
-the typeclass is consistent and inhabited. -/
+/-- **A trivial model** — the terminal (one-object, one-morphism) traced SMC, showing the
+full typeclass is consistent and inhabited. -/
 def trivialTracedSMC : TracedSMC where
   Obj := PUnit
   Hom := fun _ _ => PUnit
@@ -71,16 +91,30 @@ def trivialTracedSMC : TracedSMC where
   tensH := fun _ _ => PUnit.unit
   braid := fun _ _ => PUnit.unit
   trace := fun _ => PUnit.unit
+  aHom := fun _ _ _ => PUnit.unit
+  aInv := fun _ _ _ => PUnit.unit
+  a_hom_inv := by intros; rfl
+  a_inv_hom := by intros; rfl
+  ruHom := fun _ => PUnit.unit
+  ruInv := fun _ => PUnit.unit
+  ru_hom_inv := by intros; rfl
+  ru_inv_hom := by intros; rfl
+  luHom := fun _ => PUnit.unit
+  luInv := fun _ => PUnit.unit
+  lu_hom_inv := by intros; rfl
+  lu_inv_hom := by intros; rfl
   trace_nat_left := by intros; rfl
   trace_nat_right := by intros; rfl
   trace_slide := by intros; rfl
   trace_yank := by intros; rfl
+  trace_vanish_unit := by intros; rfl
+  trace_vanish_tens := by intros; rfl
+  trace_superpose := by intros; rfl
 
 /-- **A non-trivial model — scalars.** A commutative monoid `(M, ·, 1)` is a one-object
-traced SMC: morphisms are scalars, composition and tensor are `·`, and the trace is the
-identity. This *validates* the axioms (the trivial model discharges them by `rfl`): in
-particular **sliding holds precisely because `·` is commutative** — the symmetry the
-braiding is supposed to provide. -/
+traced SMC: morphisms are scalars, composition/tensor are `·`, structural isos are `1`,
+and the trace is the identity. This *validates* the axioms (the trivial model discharges
+them by `rfl`): in particular **sliding holds because `·` is commutative**. -/
 def scalarTracedSMC (M : Type v) (mul : M → M → M) (one : M)
     (mul_assoc : ∀ a b c, mul (mul a b) c = mul a (mul b c))
     (one_mul : ∀ a, mul one a = a) (mul_one : ∀ a, mul a one = a)
@@ -97,6 +131,18 @@ def scalarTracedSMC (M : Type v) (mul : M → M → M) (one : M)
   tensH := fun a b => mul a b
   braid := fun _ _ => one
   trace := fun f => f
+  aHom := fun _ _ _ => one
+  aInv := fun _ _ _ => one
+  a_hom_inv := by intros; exact one_mul one
+  a_inv_hom := by intros; exact one_mul one
+  ruHom := fun _ => one
+  ruInv := fun _ => one
+  ru_hom_inv := by intros; exact one_mul one
+  ru_inv_hom := by intros; exact one_mul one
+  luHom := fun _ => one
+  luInv := fun _ => one
+  lu_hom_inv := by intros; exact one_mul one
+  lu_inv_hom := by intros; exact one_mul one
   trace_nat_left := by intro X X' Y U g f; show mul (mul g one) f = mul g f; rw [mul_one]
   trace_nat_right := by intro X Y Y' U f g; show mul f (mul g one) = mul f g; rw [mul_one]
   trace_slide := by
@@ -104,10 +150,17 @@ def scalarTracedSMC (M : Type v) (mul : M → M → M) (one : M)
     show mul f (mul one h) = mul (mul one h) f
     rw [mul_comm f (mul one h)]
   trace_yank := by intro U; rfl
+  trace_vanish_unit := by
+    intro X Y f; show f = mul one (mul f one); rw [mul_one, one_mul]
+  trace_vanish_tens := by
+    intro X Y U V f; show f = mul one (mul f one); rw [mul_one, one_mul]
+  trace_superpose := by
+    intro W X Y U f
+    show mul one (mul (mul one f) one) = mul one f
+    simp only [one_mul, mul_one]
 
-/-- **A traced functor** `C ⟶ D`: a structure-preserving map of traced SMCs. This is the
-formal shape of a *model* in Layer 4 — a domain interpretation of the theory. (Strict on
-objects: `obj` preserves `⊗` and `I` on the nose.) -/
+/-- **A traced functor** `C ⟶ D`: a structure-preserving map of traced SMCs (preserving
+the category and the monoidal objects). This is the formal shape of a *model* in Layer 4. -/
 structure TracedFunctor (C D : TracedSMC) where
   obj : C.Obj → D.Obj
   map : {X Y : C.Obj} → C.Hom X Y → D.Hom (obj X) (obj Y)
@@ -126,8 +179,7 @@ def TracedFunctor.id (C : TracedSMC) : TracedFunctor C C where
   map_id := by intros; rfl
   map_comp := by intros; rfl
 
-/-- **The terminal functor** `C ⟶ trivial` — every system collapses to the one point;
-every relating to the one morphism. The unique model into the trivial domain. -/
+/-- **The terminal functor** `C ⟶ trivial` — every system collapses to the one point. -/
 def TracedFunctor.toTrivial (C : TracedSMC) : TracedFunctor C trivialTracedSMC where
   obj := fun _ => PUnit.unit
   map := fun _ => PUnit.unit
@@ -136,9 +188,8 @@ def TracedFunctor.toTrivial (C : TracedSMC) : TracedFunctor C trivialTracedSMC w
   map_id := by intros; rfl
   map_comp := by intros; rfl
 
-/-- **Composition of traced functors** — models compose, so traced SMCs and their
-structure-preserving functors form a genuine categorical structure (functorial semantics
-is functorial). -/
+/-- **Composition of traced functors** — models compose; functorial semantics is
+functorial. -/
 def TracedFunctor.comp {C D E : TracedSMC}
     (F : TracedFunctor C D) (G : TracedFunctor D E) : TracedFunctor C E where
   obj := fun X => G.obj (F.obj X)
