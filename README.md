@@ -5,8 +5,9 @@ A philosophy — relation comes first, and the self is what relation produces �
 - **The view, in plain language:** [`docs/relational-existentialism.md`](docs/relational-existentialism.md)
 - **The four-layer formalization program:** [`docs/formalization-plan.md`](docs/formalization-plan.md)
 - **The formal spec (doctrine, signature, axioms):** [`docs/spec/`](docs/spec/)
+- **The mechanized development (Lean 4):** [`formal/`](formal/) — the sparsity dichotomy (Lemmas 3.1 & 3.2), machine-checked and `sorry`-free.
 
-Code implementing the formalization (proof-assistant developments, `Catlab.jl` / `AlgebraicJulia` schemas, `DisCoPy` string-diagram functors, and so on) will live alongside these documents as the work develops.
+Code implementing the formalization (proof-assistant developments, `Catlab.jl` / `AlgebraicJulia` schemas, `DisCoPy` string-diagram functors, and so on) lives alongside these documents as the work develops.
 
 ## Licensing
 

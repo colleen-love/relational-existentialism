@@ -70,6 +70,14 @@ The two lemmas are the dichotomy of §3.1, and they are *already* theorems — a
 level of the resource model. They formalize, exactly, "you cannot return to
 everything, so which relations get to constitute you is rationed."
 
+> **Mechanized.** The discrete (ℕ-valued) core of both lemmas is now machine-checked
+> in Lean 4 — `sorry`-free, depending only on `propext` — in
+> [`formal/RelExist/Sparsity.lean`](../../formal/RelExist/Sparsity.lean):
+> `stab_card_bound` / `stab_card_le_div` (Lemma 3.1), `stab_card_le_half` (the
+> `d ≥ 2` regime), and `unbounded_without_budget` (Lemma 3.2). The `ℝ`-valued and
+> density-→-0 forms are the mathlib upgrade tracked in
+> [`formal/README.md`](../../formal/README.md).
+
 ---
 
 ## 3.3 Why this is the right toy, and its honest gaps
@@ -122,7 +130,9 @@ A plausible route, in increasing difficulty:
 
 1. **Mechanize Lemma 3.1 / 3.2 as-is.** Pure arithmetic over an ordered monoid;
    trivial in Lean/Agda/Rocq. Establishes the dichotomy at the resource layer and
-   pins down the definitions. *(This is the "first discharged result.")*
+   pins down the definitions. *(This is the "first discharged result."* **✅ done** —
+   [`formal/RelExist/Sparsity.lean`](../../formal/RelExist/Sparsity.lean), Lean 4,
+   `sorry`-free.)
 2. **Replace the finite set by a graded poset of couplings.** Model sharing: cost
    over a meet-semilattice with `c` sub-additive. Re-derive the bound as
    `|Stab_R| ≤ β / (d_min λ_min)` *up to the sharing defect*, i.e. show the worst

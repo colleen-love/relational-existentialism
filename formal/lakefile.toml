@@ -1,0 +1,10 @@
+name = "RelExist"
+defaultTargets = ["RelExist"]
+
+# Deliberately dependency-free (no mathlib): this lets the project build and check
+# in remote sessions where mathlib's prebuilt cache is unreachable. The mathlib
+# upgrade (ℝ-valued costs, density-→-0 limit, topology) is tracked in
+# docs/spec/03-sparsity-conjecture.md and formal/README.md.
+
+[[lean_lib]]
+name = "RelExist"
