@@ -100,18 +100,40 @@ exactly what separates it from the cartesian domains: **no-cloning**.
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
 
-## 4.6 What remains: the literal functor and the traced SMC
+## 4.6 The traced SMC typeclass and literal functors — a down payment
 
-Two pieces are deliberately *not* claimed done, and named here for honesty:
+The two research-grade pieces are now **partially built** in
+[`formal/RelExist/Traced.lean`](../../formal/RelExist/Traced.lean) (axiom-free, fully
+constructive), with the frontier marked precisely.
 
-1. **A literal `Functor` out of a reconstructed `Cl(𝕋)`.** Functors above are exhibited
-   at the level of the *structure the theory exports* (the eigenform/`gfp` and
-   compact-closed/Lawvere content), not as `CategoryTheory.Functor`s out of the free
-   traced SMC as a Lean category. Building `Cl(𝕋)` as that category is research-grade.
-2. **The traced symmetric monoidal typeclass.** mathlib lacks it; defining it with the
-   full JSV coherence and instantiating it (e.g. proving `FGModuleCat` traced) is the
-   remaining infrastructure. The collapse (§4.4) sidesteps it via the minimal
-   axiomatization, which is why it lands cleanly now.
+**Done:**
+
+- **A traced symmetric monoidal category typeclass** — `TracedSMC`, with the trace and
+  the Joyal–Street–Verity axioms that characterise its behaviour on a wire: naturality
+  (left/right), sliding (dinaturality), and yanking. mathlib has no such typeclass.
+- **It is non-vacuous and the axioms are validated**, not just consistent: beyond the
+  trivial one-object model (`trivialTracedSMC`), a commutative monoid gives a genuine
+  model (`scalarTracedSMC`) in which **sliding holds *exactly because* the monoid is
+  commutative** — the symmetry the braiding provides. (The trivial model discharges the
+  axioms by `rfl`; the scalar model shows they have content.)
+- **Literal functors** — `TracedFunctor` is a real structure-preserving map (a *model* in
+  the Layer-4 sense), with `TracedFunctor.id`, `TracedFunctor.toTrivial`, and
+  `TracedFunctor.comp`. The last makes functorial semantics genuinely *functorial*:
+  models compose.
+
+**Frontier (named, not faked):**
+
+1. **The two retensoring trace axioms — vanishing-II and superposing.** These reassociate
+   objects (`X ⊗ (U ⊗ V)`), so stating them needs object-equality *transport* along
+   strict associativity, the standard dependent-type wall for strict monoidal categories.
+   The transport-free core above is the honest fragment.
+2. **A concrete `FdHilb`/`FGModuleCat` instance.** mathlib's `FGModuleCat` is rigid
+   (compact closed), hence canonically traced — but proving it an instance of `TracedSMC`
+   (the partial trace satisfies JSV) is real linear-algebra-through-coherence work.
+3. **A literal `Functor` out of the free traced SMC `Cl(𝕋)`.** Building `Cl(𝕋)` as a Lean
+   category (the free traced SMC on the signature — a colored PROP) is the genuinely
+   research-grade piece; the functors above are between concrete `TracedSMC`s, which is
+   the functor *mechanism* without that free object.
 
 ## 4.7 What this layer shows
 

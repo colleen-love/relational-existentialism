@@ -69,6 +69,21 @@ The first domain functor and the firewall ([spec 04](../docs/spec/04-functorial-
 | **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |
 | **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
 
+#### Doctrine — the traced SMC typeclass and literal functors
+
+The doctrine's ambient structure ([spec 00](../docs/spec/00-doctrine.md)), as a typeclass
+mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **traced SMC typeclass** | `RelExist.Traced.TracedSMC` | trace + JSV core axioms (naturality, sliding, yanking) | ✅ defined |
+| consistency + **validation** | `trivialTracedSMC`, `scalarTracedSMC` | a comm. monoid is a model; **sliding ⟺ commutativity** | ✅ proved |
+| **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
+
+Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): the two retensoring
+trace axioms (transport), a concrete `FGModuleCat`/`FdHilb` instance, and a literal functor
+out of the free traced SMC `Cl(𝕋)`.
+
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
 (`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying

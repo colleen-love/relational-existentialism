@@ -7,7 +7,10 @@
 --   * RelExist.Mirror   — A6 (σ-side): Lawvere's theorem, the mirror that can't close.
 --   * RelExist.Firewall — Layer 4: the cartesian-side firewall (no entanglement in
 --                         social/mental-health domains).
+--   * RelExist.Traced   — the traced symmetric monoidal category typeclass and literal
+--                         (structure-preserving) functors.
 import RelExist.Sparsity
 import RelExist.Loop
 import RelExist.Mirror
 import RelExist.Firewall
+import RelExist.Traced
