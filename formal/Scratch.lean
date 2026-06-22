@@ -6,8 +6,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 
 * `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (axiom A5),
                           via `OrderHom.gfp` (Knaster–Tarski). ✅ verified.
+* `Scratch.Attention`   — attention as the co-directed eigenstructure of the relational
+                          coupling (a consequence of structure, not a bolted-on budget);
+                          the self as an eigenform `νΦ`. ✅ verified.
 * `Scratch.SparsityReal` — the ℝ-valued sparsity bound and density-→-0 statement
                           (the analytic upgrade of Lemmas 3.1/3.2). ✅ verified.
 -/
 import Scratch.We
+import Scratch.Attention
 import Scratch.SparsityReal

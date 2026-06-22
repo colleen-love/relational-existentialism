@@ -53,7 +53,14 @@ inward, modeled as feedback. Because `Tr` needs no copying, this definition is
 **fragment-neutral** and survives into the quantum fragment as the partial trace —
 even though its *mirror* reading (A6) does not.
 
-**Role.** Pure definition; fixes the referent of `σ` used by A3, A4, A6.
+**Co-directed form.** Self-relation is the unary case (`Tr` over a private wire). When
+the looped wire is *shared* between two systems, the same feedback is **co-directed** —
+neither end closes the loop alone — and this is the engine of attention in
+[§1.3](01-signature.md): the attention operator `Φ_c` is feedback through the coupling,
+so co-direction is a consequence of the relating, not added to it.
+
+**Role.** Pure definition; fixes the referent of `σ` used by A3, A4, A6, and the
+co-directed `Φ_c` of A4.
 
 ---
 
@@ -80,37 +87,46 @@ theorem); A4 says only the budget-affordable, sufficiently-looped ones become
 
 ## A4 — Recursion constitutes the self `[posit; both, with cartesian existence]`
 
-**The discriminating axiom.** A **self / eigenform** is a state that is a fixed
-point of **iterated, attention-funded** self-relation. Using `loop_R` from
-[§1.3.3](01-signature.md):
+**The discriminating axiom.** A **self / eigenform** is a state that is a fixed point
+of **co-directed attention-feedback** — equivalently, that is sustained by the
+relations it keeps looping. In the structural form ([§1.3](01-signature.md),
+[`Scratch/Attention.lean`](../../formal/Scratch/Attention.lean)): a self is an
+eigenform of the co-directed attention operator `Φ_c` induced by the coupling, the
+carrier of selves being its greatest sustainable field,
+
+$$
+\text{self} \;=\; \nu\Phi_c, \qquad \Phi_c(\nu\Phi_c) = \nu\Phi_c .
+$$
+
+Finiteness here is *constitutive* (the bounded capacity `α`), not an external budget,
+so the selection is built into the structure rather than bolted on. In the **uniform,
+depleting special case** ([§1.3.4](01-signature.md),
+[`RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)) this reduces to the threshold
+form: with `loop_R` and budget `β`,
 
 $$
 e \ \text{is a self}
 \quad:\Longleftrightarrow\quad
-\mathrm{loop}_R(e) = e
-\ \ \wedge\ \
-d(e) \ge 2
-\ \ \wedge\ \
-c\big(\text{maintain}(e)\big) \le \beta.
+\mathrm{loop}_R(e) = e \ \ \wedge\ \ d(e) \ge 2 \ \ \wedge\ \ d(e)\cdot\lambda(e) \le \beta,
 $$
 
-That is: `e` is unchanged by budgeted return (`σ^{N}(e) = e`), it required genuine
-recursion to form (`d(e) ≥ 2`, not a one-off), and the cost of *maintaining* the
-loop is affordable. Define the **carrier of selves**:
+with carrier `Stab_R := { e : loop_R(e) = e, d(e) ≥ 2, d·λ ≤ β }`. Here `e` is
+unchanged by budgeted return, it required genuine recursion (`d ≥ 2`, not a one-off),
+and the cost of reaching the eigenform is affordable. (The bridge proving these two
+coincide — `loop_R(e)=e ⟺ d·λ ≤ β` — is [Step 3](03-sparsity-conjecture.md).)
 
-$$
-\mathrm{Stab}_R \;:=\; \{\, e : I \to D \ \mid\ \mathrm{loop}_R(e) = e,\ d(e)\ge 2,\ c(\text{maintain}(e)) \le \beta \,\}.
-$$
-
-**Status: posit.** This is the philosophy's central wager, *asserted*. Its
-existence-of-fixed-points half is underwritten by A3; its *selection* half — that
-recursion *under finite budget* is what promotes a fixed point to a self — is the
-new content. It is what stops the theory from being a universal solvent.
+**Status: posit.** The philosophy's central wager, *asserted*. The existence of fixed
+points is underwritten by A3 and by Knaster–Tarski (`νΦ_c`); the *selection* — that
+co-directed recursion under constitutive finiteness is what promotes a fixed point to
+a self — is the new content. It is what stops the theory from being a universal
+solvent.
 
 **Gloss.** A relation builds a persisting self only when it loops — returned to,
 re-entered, lived again until it holds. The decades-long friendship, the formative
 parent, the work you keep choosing: built from relations *iterated*, not merely had.
-Attention, being finite, rations which loops close.
+Attention, co-directed and finite, is what shapes which loops close — and being
+attended-to *raises* the attention one can give, so the self is sustained generatively,
+not spent down.
 
 **Role.** Everything discriminating about the theory routes through here. Drop A4
 and the resource bound and *nearly everything* models `𝕋` (the triviality pole);

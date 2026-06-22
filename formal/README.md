@@ -48,14 +48,22 @@ condition, and the sparsity bound's cost-floor hypothesis is a theorem.
 | **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
 | `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
 | **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [A5](../docs/spec/02-axioms.md) | ✅ defined (quotient) |
+| co-directed attention operator (induced by coupling) | `RelExist.Attention.couplingOp` | [§1.3](../docs/spec/01-signature.md) | ✅ defined |
+| "receiving raises giving" (monotone) | `RelExist.Attention.couplingOp_mono` | [§1.3.2](../docs/spec/01-signature.md) | ✅ proved |
+| **self = eigenform** `νΦ` (fixed point, maximal) | `RelExist.Attention.sustainedField{,_fixed,_greatest}` | [§1.3.3](../docs/spec/01-signature.md), [A4](../docs/spec/02-axioms.md) | ✅ proved |
+| generativity — relating **accumulates** attention | `RelExist.Attention.orbit_{ascending,le_gfp}` | [§1.3.3](../docs/spec/01-signature.md) | ✅ proved |
 | Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
 | **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved (`Filter.Tendsto`) |
 
-`Scratch.We` formalizes **axiom A5** (`docs/spec`): observational identity as
-`νΘ = OrderHom.gfp Θ` (Knaster–Tarski *is* the `ν`-modality the spec needs), with the
-coinduction principle, the proof that `≈` is an equivalence, and the shared world as
-the quotient `𝔼 := D/≈`. `Scratch.SparsityReal` lifts the sparsity dichotomy to `ℝ`
-and proves the genuine **density-→-0** limit. See *One-command setup* below.
+`Scratch.We` formalizes **axiom A5**: observational identity as `νΘ = OrderHom.gfp Θ`,
+with coinduction, the proof that `≈` is an equivalence, and the shared world `𝔼 := D/≈`.
+`Scratch.Attention` recasts **attention as a consequence of structure** (§1.3): a
+co-directed, asymmetric operator `Φ_c` induced by the coupling, with the self an
+*eigenform* `νΦ_c`, finiteness *constitutive* (the bounded capacity `α`, no budget), and
+"receiving raises giving" as monotone accumulation — the budget model of
+`RelExist/Loop.lean` becomes its uniform-depleting special case. `Scratch.SparsityReal`
+lifts the sparsity dichotomy to `ℝ` with the genuine **density-→-0** limit. See
+*One-command setup* below.
 
 ## Build
 

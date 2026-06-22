@@ -1,6 +1,14 @@
 /-
 # The loop bridge — step 3: from resource threshold to fixed point
 
+> **Status note.** This module is the **uniform, conserved, depleting special case** of
+> attention (a private scalar budget `β` drawn down at fixed per-return cost). The
+> general, structurally-derived account — attention as the co-directed eigenstructure of
+> the relational coupling, with the self an eigenform `νΦ` and finiteness constitutive
+> rather than budgeted — is `Scratch/Attention.lean` (see `docs/spec/01-signature.md
+> §1.3`). This file remains valid and is what makes the threshold↔fixed-point bridge
+> quantitative in the depleting regime.
+
 This module discharges the gap flagged in
 [`docs/spec/03-sparsity-conjecture.md` §3.3](../../docs/spec/03-sparsity-conjecture.md):
 the sparsity lemmas count with a *threshold* ("a self costs at least `m`"), but

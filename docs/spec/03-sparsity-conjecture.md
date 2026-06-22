@@ -23,9 +23,17 @@
 This is the **expressivity/triviality dial** made into a dichotomy. Bounded budget =
 discriminating theory; unbounded budget = universal solvent.
 
----
-
-## 3.2 The provable core: a resource-counting lemma
+> **Two readings of "rare," and which is primary.** Since [§1.3](01-signature.md)
+> recast attention as the **co-directed operator** `Φ_c` rather than a spent budget,
+> the *deep* reason selves are rare is no longer a budget cap — it is **spectral /
+> closure**: under co-directed feedback with gain, only a few eigenforms sit near the
+> top of the spectrum and self-sustain; the rest are subdominant modes that **decay**
+> under iteration (the thousand one-off encounters wash out). Equivalently, the
+> sustained self `νΦ_c` is supported on the few relata that lie on self-sustaining
+> loops; most do not, so most "run out." The resource-counting lemma below is then the
+> **uniform, depleting special case** (§1.3.4) — still true, still the cleanest
+> *quantitative* handle, but a corollary of the structure, not the source of the
+> rarity. The spectral form is stated as Conjecture 3.4.
 
 The full statement quantifies over all of `Cl(𝕋)`; that lift is the conjecture
 (§3.4). But its *engine* is an elementary, fully provable counting fact. Work in the
@@ -122,9 +130,26 @@ None of these is hand-waving-away-able, and naming them is the point: the lemma 
 > Moreover (sharp dichotomy): dropping the bound (`β = ⊤`) makes `Stab_R` dense
 > (Lemma 3.2 lifts), so finiteness of `β` is **necessary** for sparsity.
 
-This is the proposition to point a proof assistant at *first* — it is where the
-theory either lands in the rich-but-narrow zone (good) or the broad-but-empty zone
+> **Conjecture 3.4 (spectral / closure form — the structural reason).** Let attention
+> be the co-directed operator `Φ_c` of [§1.3](01-signature.md) on a perspective of
+> constitutive capacity `α` (no external budget). Then the set of selves — eigenforms
+> of `Φ_c`, i.e. the support of `νΦ_c` — is **sparse**: it is confined to relata on
+> self-sustaining loops, and under iterated co-directed feedback all subdominant modes
+> decay, so the sustained selves are few relative to all couplings. The resource bound
+> of Conjecture 3.3 is the **uniform, depleting special case** ([§1.3.4](01-signature.md));
+> this is the general statement, and the one that makes rarity a *consequence of the
+> relational dynamics* rather than of an imposed cap.
+>
+> (Quantitatively this is a spectral-gap statement — few eigenvalues near the spectral
+> radius of the coupling — generalizing eigenvector centrality to the recurrent,
+> asymmetric, saturating setting; the nonlinearity buys *multiple* attractors, i.e. the
+> contingency the view wants, at the cost of Perron-style uniqueness. Hence it is
+> harder than Conjecture 3.3 and stated, for now, as a horizon.)
+
+Conjecture 3.3 is the proposition to point a proof assistant at *first* — it is where
+the theory either lands in the rich-but-narrow zone (good) or the broad-but-empty zone
 (fatal), and the proof attempt is rigor finding the overclaim before a referee does.
+Conjecture 3.4 is the structural target it is a special case of.
 
 ---
 

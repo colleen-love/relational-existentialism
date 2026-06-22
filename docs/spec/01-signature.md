@@ -43,83 +43,92 @@ axioms of [02](02-axioms.md). A **model** is a structure-preserving functor
 No further *relating* generators are primitive. Specific relatings (a conversation,
 a parenting, a measurement) are introduced per-model, as the image of generic
 morphisms under a semantic functor. The theory itself is deliberately thin: its
-content is in the **axioms** and in the **resource grading** below, not in a rich
-stock of named arrows.
+content is in the **axioms** and in the **co-directed attention operator** below, not
+in a rich stock of named arrows.
 
 ---
 
-## 1.3 Attention as a bounded resource
+## 1.3 Attention as co-directed eigenstructure
 
-This is the honest part — flagged in the plan as *added structure, not derived*.
-The doctrine gives looping (`Tr`) but says nothing about its **cost** or its
-**finiteness**. The philosophy's central refinement — *not every relation makes a
-self, because you cannot return to everything* — requires us to add exactly that.
+Earlier drafts bolted attention on as an **external budget**: a private scalar `β` a
+self spends down, finiteness imposed from outside. That quietly smuggled in a
+*pre-relational* self — the one who "has" the attention and "allocates" it — which is
+exactly what relation-primacy denies. This section replaces it. Attention is a
+**consequence of the relational structure**: co-directed, generative, and finite *by
+constitution* rather than by allowance. Everything below is mechanized in
+[`formal/Scratch/Attention.lean`](../../formal/Scratch/Attention.lean).
 
-### 1.3.1 The attention monoid `[structural]`
+### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
-Fix a **commutative ordered monoid**
+A perspective is finite *by definition* — bounded integration capacity is part of what
+being a located someone *is*, the same un-closable mirror as [A6](02-axioms.md). We
+encode it as a **bounded capacity** `α` (a complete lattice, with top `⊤`); an
+attention **field** assigns each relatum a standing, `att : V → α`. The only bound is
+`⊤` of `α` — the perspective's own limit — and there is **no budget parameter `β`
+anywhere** in the account. Attention-scarcity, perspectival partiality, and the
+generativity of relation thus become three faces of one fact, rather than a posit
+standing apart from the doctrine.
 
-$$
-(R,\ \cdot,\ 1,\ \le)
-$$
+### 1.3.2 The co-directed attention operator `[structural]`
 
-— `R` a set of *attention-budget* values, `·` associative-commutative with unit
-`1`, and `≤` a partial order compatible with `·` (`a ≤ a'` and `b ≤ b'` imply
-`a·b ≤ a'·b'`). The intended reading: `·` accumulates expenditure, `≤` compares
-total spend. The canonical instance is `(ℝ_{≥0}, +, 0, ≤)`, but the abstract monoid
-keeps us honest about what is actually used.
-
-Fix a **global bound** `β ∈ R`. This single element is the entire formal content of
-*"you cannot return to everything."* `β = ⊤` (unbounded) recovers the degenerate
-"everything stabilizes" regime that the philosophy rejects; the interesting theory
-is `β` finite.
-
-### 1.3.2 The cost grading `[structural]`
-
-A **cost grading** assigns to each active coupling a value in `R`:
+A relation co-directs the attention of *both* relaters; having a relation is what
+elicits and routes attention, so the **coupling is the operator**. Given a coupling
+`c` on relata (read `c i j` as "`i` relates to `j`"; **not** required symmetric, so
+co-direction is asymmetric), define
 
 $$
-c : \mathrm{Mor}(\mathcal{C}) \longrightarrow R
+\Phi_c(att)(i) \;=\; \bigsqcup_{j} \ \bigsqcup_{c\,i\,j}\ att(j).
 $$
 
-required to be **lax monoidal and lax compositional**:
+Your sustained standing is the supremum of the standing of those you relate to. Two
+properties carry the philosophy:
 
-- `c(id) = 1`,
-- `c(g ∘ f) ≤ c(g) · c(f)`,
-- `c(f ⊗ g) ≤ c(f) · c(g)`,
-- `c(Tr^U(f)) ≥ c(f)` for non-trivial `U` — *looping costs at least as much as the
-  underlying relating*, and strictly more per return (see 1.3.3).
+- **Receiving raises giving** (`couplingOp_mono`): `Φ_c` is *monotone* — more standing
+  among those who relate to you yields at least as much for you. This positive
+  feedback, not a depleting allowance, is what shapes attention. Structurally it is the
+  recursion of eigenvector centrality, `xᵢ ∝ Σⱼ Aᵢⱼ xⱼ`.
+- **Asymmetry, perspective-dependence**: `c` (and quantitatively its weights) need not
+  be symmetric and is read through each node's whole field, so the same edge expresses
+  differently at each end.
 
-The inequalities (rather than equalities) let a model *economize* — shared
-sub-relatings need not be paid for twice — while guaranteeing that feedback is never
-free. A coupling is **affordable under `β`** iff `c(f) ≤ β`.
+### 1.3.3 The self as an eigenform; generativity `[the load-bearing reframing]`
 
-### 1.3.3 Budgeted iteration and `loop_R` `[definitional]`
-
-Self-relation is iterated under budget. Write `σ = Tr` (the self-relation operator,
-[00 §0.3](00-doctrine.md)). For a state `s` and `n ≥ 0` define the `n`-fold return
-`σ^n(s)` (with `σ^0(s) = s`). Each return charges a **per-return cost** `ε(s) ∈ R`
-with `1 < ε(s)` (strictly, in `≤`), so that the accumulated cost of `n` returns is
-`ε(s)^n`. Define the **budgeted loop**
+A **self is an eigenform of co-directed attention** — a fixed point of `Φ_c`. The
+sustained self is the *greatest* such field,
 
 $$
-\mathrm{loop}_R(s) \;=\; \sigma^{\,N(s)}(s),
+\text{self} \;:=\; \nu\Phi_c \quad(\texttt{sustainedField}),
 \qquad
-N(s) \;=\; \max\{\, n : \varepsilon(s)^{\,n} \le \beta \,\}.
+\Phi_c(\nu\Phi_c) = \nu\Phi_c \quad(\texttt{sustainedField\_fixed}),
 $$
 
-`N(s)` is the number of returns the budget `β` can fund for `s`. The map `loop_R`
-is "iterate self-relation as far as the budget allows." It is the formal engine of
-Axiom **A4** and the sparsity result of [03](03-sparsity-conjecture.md): because
-`β` is fixed and `ε(s) > 1`, `N(s)` is **finite and uniformly bounded** by
-`log_{ε}(β)`.
+via the same `ν`-modality (Knaster–Tarski / `OrderHom.gfp`) used for `≈` in
+[A5](02-axioms.md): the self is *the most attention that can be co-sustained*. Two
+mechanized consequences make this **generative**, not allocative:
 
-> **Modeling assumption (stabilization depth).** A relating becomes a *self* only by
-> closing a loop, and a loop closes only on **return** — being lived again. We
-> therefore require a **stabilization depth** `d(s) ≥ 2`: a state must be returned
-> to at least twice for its self-relation to hold. One-off encounters have effective
-> depth `1` and never close. This `d ≥ 2` threshold, together with `ε > 1` and finite
-> `β`, is what makes selfhood *rare* rather than *automatic*. `[posit]`
+- **Accumulation** (`orbit_ascending`, `orbit_le_gfp`): from a self-reinforcing seed
+  (`a ≤ Φ_c a`), iterated relating only *grows* the field, never depletes it, bounded
+  above by the self. "Receiving more increases what you can give" is a theorem.
+- **Maximality / coinduction** (`sustainedField_greatest`): to show a standing is
+  sustained, exhibit a self-upholding field carrying it.
+
+This is where **Mozart** lives: a node whose biological substrate is gone still carries
+weight in `νΦ_c`, because the edges — scores, recordings, each listener's return — keep
+the coupling live; he radiates attention *through the fabric*. Death is those edges
+decaying, the weight fading *on the timescale of others' returning* — the same
+distributed-self story as [A5](02-axioms.md)'s `𝔼`.
+
+### 1.3.4 The resource budget as a special case `[reduction]`
+
+The old budget model is not *wrong*; it is the **uniform, conserved, depleting** regime
+— attention treated as one conserved scalar drawn down at a fixed per-return cost.
+There, "how many times can I return to this one relation" collapses to `N = ⌊β/λ⌋` and
+the eigenform condition collapses to a threshold `d·λ ≤ β`. That reduction is exactly
+[`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean), now read as the
+depleting special case of the generative operator above. The **stabilization depth**
+`d` survives as the *convergence depth* of the orbit `Φ_c^{\,n}` (how many returns until
+the field is fixed), with `d ≥ 2` — a self needs genuine return, not a one-off — the
+posit that keeps selfhood rare. `[posit]`
 
 ---
 
@@ -153,9 +162,9 @@ domain has:
 - preserving `⊗`, `γ`, `Tr`, `ν` → a **monoidal** model (e.g. `FdHilb`: physics);
 - preserving additionally `Δ`, `!` → a **cartesian** model (e.g. social /
   mental-health framings, which have copying but no entanglement);
-- preserving the grading `c` and bound `β` → a model that **respects attention**,
-  in which the sparsity statement of [03](03-sparsity-conjecture.md) can even be
-  asked.
+- preserving the coupling and capacity `α` (the co-directed attention operator `Φ_c`
+  of §1.3) → a model that **carries attention**, in which the sparsity statement of
+  [03](03-sparsity-conjecture.md) can even be asked.
 
 The **firewall theorem** previewed in the plan lives exactly here: because the
 cartesian-only domains have a natural `Δ` and the compact-closed fragment provably
