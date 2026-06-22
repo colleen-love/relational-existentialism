@@ -58,7 +58,7 @@ incompleteness is not an assumption but the contrapositive of a one-line diagona
 
 ### Layer 4 — functorial semantics (domains)
 
-The first domain functor and the firewall ([spec 04](../docs/spec/04-functorial-semantics.md)).
+The domain functors — chemistry, physics, AI — and the firewall ([spec 04](../docs/spec/04-functorial-semantics.md)).
 
 | Result | Lean name | Meaning | State |
 | --- | --- | --- | --- |
@@ -68,8 +68,8 @@ The first domain functor and the firewall ([spec 04](../docs/spec/04-functorial-
 | **firewall, categorical (the collapse)** | `RelExist.Compact.collapse` | compact-closed + cartesian copying ⇒ **thin** | ✅ proved |
 | **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |
 | **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
-
-#### Doctrine — the traced SMC typeclass and literal functors
+| **AI: feedback = the trace** | `RelExist.Recurrence.{feedback, feedback_eq_trace, feedback_iff}` | a recurrent system's behaviour *is* the trace over its hidden wire (GoI execution formula) | ✅ proved |
+| **AI: sustained recurrence = `νΦ`** | `RelExist.Recurrence.{sustained, selfConsistent_sustained, feedback_witnessed_by_sustained}` | persistent recurrence is the eigenform; a self-consistent hidden state is sustained | ✅ proved |
 
 The doctrine's ambient structure ([spec 00](../docs/spec/00-doctrine.md)), as a typeclass
 mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.

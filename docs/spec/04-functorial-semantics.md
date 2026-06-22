@@ -29,7 +29,7 @@ mechanized, so a functor can be exhibited at that level, which is what §4.3 doe
 | **Physics (quantum)** | `FGModuleCat`/`FdHilb`; `Tr` = partial trace, co-determination = entanglement | literal monoidal functor — **redescriptive, not predictive**; the distinctive fact is **no-cloning** | ✅ **no-cloning mechanized** (§4.5) |
 | **Chemistry** | reaction networks (Baez–Pollard); autocatalytic sets = looped eigenforms | **strong, near-literal** — best non-quantum fit | ✅ **mechanized** (§4.3) |
 | Biology | Rosen relational biology / (M,R)-systems | strong, with an ancestor | future |
-| AI | semantics of recurrence; Geometry of Interaction *is* traced categories | design-principle functor | future |
+| **AI** | semantics of recurrence; Geometry of Interaction *is* traced categories | design-principle functor — feedback **is** the trace | ✅ **mechanized** (§4.8) |
 | Sociology, mental health | **cartesian fragment only** | framing; the firewall (§4.4) | ✅ **firewall mechanized** (categorical) |
 
 ## 4.3 Chemistry — the first functor (mechanized)
@@ -186,3 +186,29 @@ constructive), with the frontier marked precisely.
   structure, and valence / the hard problem / freedom are precisely the non-structural
   remainder — so no functor reaches them, exactly as [A6](02-axioms.md) predicts of the
   σ-move that formalizing itself is.
+
+## 4.8 AI — recurrence is the trace (mechanized)
+
+The AI verdict is a **design-principle functor**: the *Geometry of Interaction* is the
+mathematics of traced categories, and the semantics of recurrence **is** feedback through a
+hidden wire. In [`formal/Scratch/Recurrence.lean`](../../formal/Scratch/Recurrence.lean) this
+is made literal by *reusing the doctrine's own structure*, not re-deriving it:
+
+- **Feedback = the trace.** A recurrent system `step : (input × state) → (output × state)`
+  loops its hidden `state` back. Its observable behaviour is `feedback step := rtrace step`,
+  and `feedback_eq_trace` proves this **is** the trace of `Rel` (§4.4/[`Rel.lean`](../../formal/Scratch/Rel.lean))
+  *definitionally*. The GoI "execution formula" — input `i` produces output `o` exactly when
+  some hidden state is **self-consistent** (`step (i,s) (o,s)`, the wire fed back unchanged)
+  — is `feedback_iff`, true by `rfl`.
+- **Sustained recurrence = the eigenform `ν`.** State dynamics `next : state → state` induce
+  a monotone "can-keep-going" operator `recurOp`; its **greatest fixed point**
+  `sustained := ν(recurOp)` is the set of states on an unbounded orbit — the net's persistent
+  activity. This is the *same* `OrderHom.gfp` ν-modality as `≈` (We) and attention, with
+  coinduction (`sustained_greatest`) and `selfLoop_sustained` (a fixed point of the dynamics
+  recurs forever).
+- **The bridge.** `selfConsistent_sustained`: a self-consistent hidden state realising the
+  feedback is a *sustained* state of the induced dynamics — so the **looped self of the
+  theory (a self-trace fixed point) maps to persistent recurrence in the AI domain**, and
+  `feedback_witnessed_by_sustained` packages it: observable feedback is witnessed by a
+  sustained eigenform. Trace ⟶ feedback and `ν` ⟶ sustained activity, both *received with
+  nothing bolted on* — which is exactly what "design-principle functor" means.
