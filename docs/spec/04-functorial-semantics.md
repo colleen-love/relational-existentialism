@@ -96,6 +96,13 @@ exactly what separates it from the cartesian domains: **no-cloning**.
   one-dimensional space, `x ↦ x²`, which is **not linear**; so no linear (unitary,
   physical) process clones. The obstruction is precisely that copying is quadratic while
   quantum evolution is linear.
+- **The partial trace** ([`Scratch/PartialTrace.lean`](../../formal/Scratch/PartialTrace.lean)):
+  the doctrine's `Tr` *is* the QM partial trace `ptrace M i j := ∑ k, M (i,k) (j,k)`, and
+  its defining properties are mechanized — linearity (`ptrace_add`, `ptrace_smul`),
+  **vanishing-II** (`ptrace_prod`: tracing out `u × v` = nested traces), full-trace
+  compatibility (`trace_ptrace`), and **yanking** (`ptrace_swap`: `Tr(σ) = id`). These are
+  the operator and laws an `FdHilb`/`FGModuleCat` `TracedSMC` instance is built from; the
+  full instance (with the associator-as-reindexing coherence) remains the frontier (§4.6).
 
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
