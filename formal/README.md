@@ -19,10 +19,25 @@ positive floor, bounds the number of selves independently of how many couplings
 exist — and remove the budget and that bound collapses.
 
 The core (`RelExist`) is deliberately **dependency-free (no mathlib)** so it builds
-in seconds even where mathlib's cache is unreachable. **mathlib is now wired in**
-under a separate, non-default target (`Scratch`): `Mathlib.Order.FixedPoints`
-compiles and the `OrderHom.gfp` (Knaster–Tarski) smoke test for `≈ := νΘ` (axiom A5)
-typechecks. See *One-command setup* below.
+in seconds even where mathlib's cache is unreachable.
+
+### mathlib-backed results (target `Scratch`)
+
+| Result | Lean name | Spec source | State |
+| --- | --- | --- | --- |
+| `≈ := νΘ` as the greatest bisimulation | `RelExist.We.bisim` | [A5](../docs/spec/02-axioms.md) | ✅ defined (`OrderHom.gfp`) |
+| `Θ ≈ = ≈` (fixed point) | `RelExist.We.bisim_unfold` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
+| **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
+| `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
+| **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [A5](../docs/spec/02-axioms.md) | ✅ defined (quotient) |
+| Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ⏳ written; analysis-slice build verifying |
+| **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ⏳ written; analysis-slice build verifying |
+
+`Scratch.We` formalizes **axiom A5** (`docs/spec`): observational identity as
+`νΘ = OrderHom.gfp Θ` (Knaster–Tarski *is* the `ν`-modality the spec needs), with the
+coinduction principle, the proof that `≈` is an equivalence, and the shared world as
+the quotient `𝔼 := D/≈`. `Scratch.SparsityReal` lifts the sparsity dichotomy to `ℝ`
+and proves the genuine **density-→-0** limit. See *One-command setup* below.
 
 ## Build
 
