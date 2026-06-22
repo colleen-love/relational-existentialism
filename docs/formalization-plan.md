@@ -1,7 +1,5 @@
 # Bringing the View to Life: A Four-Layer Formalization Program
 
-You've handed me the missing piece without naming it. Every prior draft had a weakness I kept circling: relation-primacy alone is too generous — if relating constitutes selves and you're always relating, every encounter should mint a self, which is absurd and makes the schema model everything and therefore say nothing. The plain-language doc fixes this, and the fix is the formalizable heart of the whole program: **a relation constitutes a self only when it loops.** Recursion is the selection principle. Attention, being finite, is what rations the looping. That single move is what turns your philosophy from an evocative stance into a theory with *teeth* — because "stable self = fixed point of iterated attended self-relation, and the iteration budget is bounded" is a discriminating claim, not a universal solvent. Build the formalism around that, not around relation-primacy, and it stops being trivially true.
-
 Here is the four-layer program, concretely.
 
 ## 1. The doctrine — what your language is allowed to say.
