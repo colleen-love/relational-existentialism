@@ -39,6 +39,23 @@ defines a self as a **fixed point** of budgeted iterated self-relation. The brid
 So A4's fixed-point self and the counted threshold are now provably the same
 condition, and the sparsity bound's cost-floor hypothesis is a theorem.
 
+### Doctrine axioms — A2, A3, A6
+
+The three previously prose-only axioms, mechanized via their essential mathematical
+content. (The abstract *traced symmetric monoidal category* typeclass is deliberately
+not reproduced — large categorical infrastructure; what the axioms invoke is here.)
+
+| Result | Lean name | Spec | Target | State |
+| --- | --- | --- | --- | --- |
+| **A6 σ-side** — Lawvere; the mirror can't close | `RelExist.Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}` | [A6](../docs/spec/02-axioms.md), [00 §0.4.2](../docs/spec/00-doctrine.md) | core (no mathlib) | ✅ **0 axioms** |
+| **A2** — self-relation is feedback (`νP`) | `RelExist.Trace.{selfTrace, selfTrace_fixed}` | [A2](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
+| **A3** — to relate is to create (Conway `Tr`) | `RelExist.Trace.{Tr, Tr_fixed, le_Tr, Tr_mono}` | [A3](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
+| **A6 contrast** — knowing obstructed vs feeling whole | `RelExist.KnowingFeeling.{knowing_can_fail_to_close, no_complete_boolModel, feeling_is_whole}` | [A6](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
+
+Lawvere's theorem (`RelExist.Mirror.lawvere`) and its consequences are **fully
+constructive** — they depend on *no axioms whatsoever*, which is fitting: the mirror's
+incompleteness is not an assumption but the contrapositive of a one-line diagonal.
+
 ### mathlib-backed results (target `Scratch`)
 
 | Result | Lean name | Spec source | State |

@@ -78,6 +78,12 @@ point `f^† : A → X`, `f ∘ ⟨id, f^†⟩ = f^†`.
 *produces* a fixed point — a third thing that lives in the between and need not have
 existed before. "To relate is to create" is the existence of `f^†`.
 
+**Mechanized.** [`Scratch/Trace.lean`](../../formal/Scratch/Trace.lean) realizes the
+Conway operator in the cartesian (complete-lattice) setting: `Tr f a := ν(f a)` with the
+fixed-point identity `Tr_fixed` (`f a (Tr f a) = Tr f a`), the greatest-fixed-point
+property `le_Tr` (coinduction), and naturality in the parameter `Tr_mono`. A2's
+self-relation is the unary case `selfTrace P := νP` (`selfTrace_fixed`).
+
 **Role.** Supplies the *existence* of fixed points that A4 then *selects among* by
 resource. Note the division of labor: A3 says fixed points exist (cheap, cartesian,
 theorem); A4 says only the budget-affordable, sufficiently-looped ones become
@@ -201,6 +207,16 @@ the diagonal — and that always leaves a remainder. A mood does not come in pie
 it is present all at once with no vantage outside it. Knowing is local where feeling
 is global; the asymmetry is the difference between relation turned **outward into
 objects** (fragments) and **inward as presence** (does not).
+
+**Mechanized.** The σ-side is [`RelExist/Mirror.lean`](../../formal/RelExist/Mirror.lean):
+`lawvere` (a complete self-model forces a fixed point), `no_complete_selfModel` (a
+fixed-point-free endomap ⇒ the mirror cannot close), and `selfModel_remainder` (the
+diagonal family always escapes) — pure `Type`-level diagonal arguments depending on
+**no axioms at all**. The contrast itself is
+[`Scratch/KnowingFeeling.lean`](../../formal/Scratch/KnowingFeeling.lean):
+`knowing_can_fail_to_close` / `no_complete_boolModel` (the σ-side is obstructed even in
+one bit) versus `feeling_is_whole` (the `≈`-relation of A5 is reflexive — global, with
+no remainder).
 
 **Role.** Connects the doctrine's seam (0.6) to lived experience, and sets up the
 honest limit recorded next.
