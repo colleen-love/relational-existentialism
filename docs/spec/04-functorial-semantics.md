@@ -135,6 +135,18 @@ constructive), with the frontier marked precisely.
   the Layer-4 sense), with `TracedFunctor.id`, `TracedFunctor.toTrivial`, and
   `TracedFunctor.comp`. The last makes functorial semantics genuinely *functorial*:
   models compose.
+- **A literal functor out of a free object** (`TracedFunctor.fromFreeScalar`). The scalar
+  fragment of the free traced SMC on one object — `End(I)`, the endomorphisms of the unit —
+  is the **free commutative monoid on one generator**, i.e. `(ℕ, +)`. This *is* buildable
+  concretely, with its **universal property**: `natCMon.lift B b` is the unique monoid
+  homomorphism sending the generator `1` to a chosen `b : B`, and `natCMon.lift_unique`
+  proves uniqueness (every hom out of `ℕ` is such a lift — *axiom-free*, not even
+  `propext`). Packaged through `TracedFunctor.ofCMonHom` (a traced functor from any monoid
+  homomorphism, since a commutative monoid is a one-object `TracedSMC` via
+  `scalarTracedSMC`), this yields a genuine **literal functor out of a free object**,
+  determined precisely by *where the generator (the loop/dimension `δ`) is sent*. That is
+  the functorial-semantics ideal — a model is fixed by the image of the generators — in
+  its smallest honest instance.
 
 **Frontier (named, not faked):**
 
@@ -142,10 +154,12 @@ constructive), with the frontier marked precisely.
    (compact closed), hence canonically traced — but proving it an instance of `TracedSMC`
    (the partial trace satisfies JSV) is real linear-algebra-through-coherence work. This
    is what would make the physics functor *literal* rather than content-level.
-2. **A literal `Functor` out of the free traced SMC `Cl(𝕋)`.** Building `Cl(𝕋)` as a Lean
-   category (the free traced SMC on the signature — a colored PROP) is the genuinely
-   research-grade piece; the functors above are between concrete `TracedSMC`s, which is
-   the functor *mechanism* without that free object.
+2. **A literal `Functor` out of the *full* free traced SMC `Cl(𝕋)`.** The scalar fragment
+   (`End(I) = ℕ`) is now done (above); building the *whole* `Cl(𝕋)` as a Lean category (the
+   free traced SMC on the signature — a colored PROP, with all objects and the JSV-coherent
+   trace) is the genuinely research-grade piece. The functors above are between concrete
+   `TracedSMC`s and out of the free scalar object, which is the functor *mechanism* and the
+   universal-property idiom without that full free object.
 3. **Monoidal coherence** (pentagon, triangle, naturality of the structural isos) is *not*
    imposed: it constrains the monoidal base, not the trace, and is not referenced by the
    JSV axioms. A fully coherent base is a further (standard) refinement.

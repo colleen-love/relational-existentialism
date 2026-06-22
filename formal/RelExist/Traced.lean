@@ -199,4 +199,94 @@ def TracedFunctor.comp {C D E : TracedSMC}
   map_id := fun X => (congrArg G.map (F.map_id X)).trans (G.map_id (F.obj X))
   map_comp := fun f g => (congrArg G.map (F.map_comp f g)).trans (G.map_comp (F.map f) (F.map g))
 
+/-! ### A literal functor out of a free object
+
+The full free traced SMC `Cl(𝕋)` (a colored PROP) is research-grade. But its **scalar
+fragment** — the endomorphisms of the unit — is, in the free traced SMC on one object, the
+**free commutative monoid on one generator** (the generator being the loop/dimension
+`δ = Tr(id)`). That free object *is* `(ℕ, +)`, which we can build concretely, with its
+universal property, and so obtain a genuine literal functor determined by where the
+generator goes. -/
+
+/-- A commutative monoid, bundled — the data of a one-object (scalar) traced SMC. -/
+structure CMon where
+  carrier : Type
+  mul : carrier → carrier → carrier
+  one : carrier
+  mul_assoc : ∀ a b c, mul (mul a b) c = mul a (mul b c)
+  one_mul : ∀ a, mul one a = a
+  mul_one : ∀ a, mul a one = a
+  mul_comm : ∀ a b, mul a b = mul b a
+
+/-- Every commutative monoid is a (one-object, scalar) traced SMC. -/
+def CMon.toTracedSMC (A : CMon) : TracedSMC :=
+  scalarTracedSMC A.carrier A.mul A.one A.mul_assoc A.one_mul A.mul_one A.mul_comm
+
+/-- A homomorphism of commutative monoids. -/
+structure CMonHom (A B : CMon) where
+  toFun : A.carrier → B.carrier
+  map_one : toFun A.one = B.one
+  map_mul : ∀ a b, toFun (A.mul a b) = B.mul (toFun a) (toFun b)
+
+/-- **A traced functor from a monoid homomorphism.** A hom `φ : A → B` *is* a model
+interpreting the scalars of `A` in `B` — a literal traced functor carrying genuine data,
+beyond identity/terminal. -/
+def TracedFunctor.ofCMonHom {A B : CMon} (φ : CMonHom A B) :
+    TracedFunctor A.toTracedSMC B.toTracedSMC where
+  obj := fun _ => PUnit.unit
+  map := fun f => φ.toFun f
+  obj_tens := by intros; rfl
+  obj_unit := rfl
+  map_id := fun _ => φ.map_one
+  map_comp := fun f g => φ.map_mul f g
+
+/-- `n`-fold product of `b` — the action of the free generator iterated. -/
+def CMon.npow (B : CMon) (b : B.carrier) : Nat → B.carrier
+  | 0 => B.one
+  | n + 1 => B.mul (B.npow b n) b
+
+theorem CMon.npow_add (B : CMon) (b : B.carrier) (m n : Nat) :
+    B.npow b (m + n) = B.mul (B.npow b m) (B.npow b n) := by
+  induction n with
+  | zero => exact (B.mul_one _).symm
+  | succ n ih =>
+    show B.mul (B.npow b (m + n)) b = B.mul (B.npow b m) (B.mul (B.npow b n) b)
+    rw [ih, B.mul_assoc]
+
+/-- **`(ℕ, +)` — the free commutative monoid on one generator** (the scalar fragment of
+the free traced SMC on one object). -/
+def natCMon : CMon where
+  carrier := Nat
+  mul := Nat.add
+  one := 0
+  mul_assoc := Nat.add_assoc
+  one_mul := Nat.zero_add
+  mul_one := Nat.add_zero
+  mul_comm := Nat.add_comm
+
+/-- **The universal map (existence).** Any choice of image `b` for the generator extends to
+a homomorphism `ℕ → B`, `n ↦ bⁿ`. -/
+def natCMon.lift (B : CMon) (b : B.carrier) : CMonHom natCMon B where
+  toFun := B.npow b
+  map_one := rfl
+  map_mul := fun m n => B.npow_add b m n
+
+/-- **The universal property (uniqueness).** Every homomorphism out of `ℕ` is the lift of
+the image of `1` — so `ℕ` is genuinely free on one generator. -/
+theorem natCMon.lift_unique (B : CMon) (ψ : CMonHom natCMon B) (n : Nat) :
+    ψ.toFun n = B.npow (ψ.toFun (1 : Nat)) n := by
+  induction n with
+  | zero => exact ψ.map_one
+  | succ n ih =>
+    have h : ψ.toFun (n + 1) = B.mul (ψ.toFun n) (ψ.toFun (1 : Nat)) := ψ.map_mul n (1 : Nat)
+    rw [h, ih]; rfl
+
+/-- **A literal functor out of the free object.** Determined by the image `b` of the
+generator (the loop/dimension `δ`): the universal traced functor from the free scalar SMC.
+The full free traced SMC `Cl(𝕋)` over all objects remains the research-grade construction;
+this is its scalar fragment, done. -/
+def TracedFunctor.fromFreeScalar (B : CMon) (b : B.carrier) :
+    TracedFunctor natCMon.toTracedSMC B.toTracedSMC :=
+  TracedFunctor.ofCMonHom (natCMon.lift B b)
+
 end RelExist.Traced

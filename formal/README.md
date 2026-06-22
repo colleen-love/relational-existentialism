@@ -80,19 +80,22 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | consistency + **validation** | `trivialTracedSMC`, `scalarTracedSMC` | a comm. monoid is a model; **sliding ⟺ commutativity** | ✅ proved |
 | **`Rel` — a genuine multi-object model** | `RelExist.RelModel.relTracedSMC` | sets & relations, `⊗ = ×`, relational trace; full JSV validated non-trivially | ✅ proved |
 | **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
+| **functor out of a free object** | `TracedFunctor.fromFreeScalar` | `ℕ` is the free comm. monoid (the scalar fragment of the free traced SMC on one object); its **universal property** (`natCMon.lift`, `natCMon.lift_unique`, axiom-free) yields a literal functor fixed by where the generator goes | ✅ proved |
 
 Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): a concrete
-`FGModuleCat`/`FdHilb` instance, a literal functor out of the free traced SMC `Cl(𝕋)`, and
-monoidal coherence (pentagon/triangle) on the base.
+`FGModuleCat`/`FdHilb` instance, the literal functor out of the *full* free traced SMC
+`Cl(𝕋)` over all objects (the scalar fragment is now done), and monoidal coherence
+(pentagon/triangle) on the base.
 
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
 (`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying
 cannot coexist — with `no_cloning` (categorical) and `no_linear_clone` (the concrete
-physics fact: cloning is nonlinear) on the quantum side. Two pieces remain scoped as
-research-grade infrastructure: a literal `Functor` out of a reconstructed free traced SMC
-`Cl(𝕋)`, and the traced-monoidal typeclass itself (mathlib has rigid monoidal +
-`ChosenFiniteProducts` but neither of those). See [spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
+physics fact: cloning is nonlinear) on the quantum side. The literal functor out of a
+**free object** is now down — via the universal property of `ℕ` as the free commutative
+monoid (the scalar fragment of `Cl(𝕋)`); the remaining research-grade piece is the *full*
+free traced SMC `Cl(𝕋)` over all objects (a colored PROP). See
+[spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
 
 ### mathlib-backed results (target `Scratch`)
 
