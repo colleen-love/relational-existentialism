@@ -27,7 +27,7 @@ variable {ι : Type*}
 number of selves times `m` is at most the total attention spent. -/
 theorem card_mul_le_sum (S : Finset ι) (cost : ι → ℝ) (m : ℝ)
     (h : ∀ i ∈ S, m ≤ cost i) : (S.card : ℝ) * m ≤ ∑ i ∈ S, cost i := by
-  have h1 := Finset.card_nsmul_le_sum h
+  have h1 := Finset.card_nsmul_le_sum S cost m h
   simpa [nsmul_eq_mul] using h1
 
 /-- **Lemma 3.1 (ℝ), division-free.** Finite budget `β`, positive floor `m` ⇒ the
@@ -42,7 +42,7 @@ total number of couplings. -/
 theorem stab_card_le_div (S : Finset ι) (cost : ι → ℝ) (m β : ℝ) (hm : 0 < m)
     (hcost : ∀ i ∈ S, m ≤ cost i) (hbudget : ∑ i ∈ S, cost i ≤ β) :
     (S.card : ℝ) ≤ β / m := by
-  rw [le_div_iff hm]
+  rw [le_div_iff₀ hm]
   exact stab_card_le_budget S cost m β hcost hbudget
 
 /-- A nonnegative sequence bounded by a constant has vanishing density: if

@@ -30,8 +30,8 @@ in seconds even where mathlib's cache is unreachable.
 | **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
 | `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [A5](../docs/spec/02-axioms.md) | ✅ proved |
 | **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [A5](../docs/spec/02-axioms.md) | ✅ defined (quotient) |
-| Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ⏳ written; analysis-slice build verifying |
-| **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ⏳ written; analysis-slice build verifying |
+| Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
+| **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved (`Filter.Tendsto`) |
 
 `Scratch.We` formalizes **axiom A5** (`docs/spec`): observational identity as
 `νΘ = OrderHom.gfp Θ` (Knaster–Tarski *is* the `ν`-modality the spec needs), with the

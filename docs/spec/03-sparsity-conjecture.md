@@ -70,13 +70,17 @@ The two lemmas are the dichotomy of §3.1, and they are *already* theorems — a
 level of the resource model. They formalize, exactly, "you cannot return to
 everything, so which relations get to constitute you is rationed."
 
-> **Mechanized.** The discrete (ℕ-valued) core of both lemmas is now machine-checked
-> in Lean 4 — `sorry`-free, depending only on `propext` — in
-> [`formal/RelExist/Sparsity.lean`](../../formal/RelExist/Sparsity.lean):
-> `stab_card_bound` / `stab_card_le_div` (Lemma 3.1), `stab_card_le_half` (the
-> `d ≥ 2` regime), and `unbounded_without_budget` (Lemma 3.2). The `ℝ`-valued and
-> density-→-0 forms are the mathlib upgrade tracked in
-> [`formal/README.md`](../../formal/README.md).
+> **Mechanized.** Both lemmas are machine-checked in Lean 4, `sorry`-free.
+> * Discrete (ℕ-valued) core — depends only on `propext` —
+>   [`formal/RelExist/Sparsity.lean`](../../formal/RelExist/Sparsity.lean):
+>   `stab_card_bound` / `stab_card_le_div` (Lemma 3.1), `stab_card_le_half` (the
+>   `d ≥ 2` regime), and `unbounded_without_budget` (Lemma 3.2).
+> * **ℝ-valued + density limit** (mathlib) —
+>   [`formal/Scratch/SparsityReal.lean`](../../formal/Scratch/SparsityReal.lean):
+>   `stab_card_le_div` (`|Stab| ≤ β/m`, a constant bound) and
+>   `stab_density_tendsto_zero` — the genuine `Filter.Tendsto` proof that the
+>   stabilized fraction `|Stab N| / N → 0`. This discharges the "density → 0" clause
+>   of Lemma 3.1 as a theorem.
 
 ---
 
