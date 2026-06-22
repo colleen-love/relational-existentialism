@@ -4,6 +4,7 @@ A philosophy â€” relation comes first, and the self is what relation produces â€
 
 - **The view, in plain language:** [`docs/relational-existentialism.md`](docs/relational-existentialism.md)
 - **The four-layer formalization program:** [`docs/formalization-plan.md`](docs/formalization-plan.md)
+- **The formal spec (doctrine, signature, axioms):** [`docs/spec/`](docs/spec/)
 
 Code implementing the formalization (proof-assistant developments, `Catlab.jl` / `AlgebraicJulia` schemas, `DisCoPy` string-diagram functors, and so on) will live alongside these documents as the work develops.
 

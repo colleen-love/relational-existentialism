@@ -1,0 +1,163 @@
+# 03 — The Sparsity Conjecture
+
+> *The one place the spec reaches for a theorem.* Everything before this is
+> definition, citation, or posit. Here is the candidate **result** — the claim that,
+> if proved, turns "a self is an achievement of recursion" from an assertion into a
+> theorem of `Cl(𝕋)`.
+
+---
+
+## 3.1 The claim, informally
+
+> **Under a finite attention budget, selves are rare.**
+>
+> If the budget `β` is finite (and per-return cost `ε > 1`, stabilization depth
+> `d ≥ 2`), then the carrier of stabilized selves `Stab_R` is **sparse** among all
+> couplings: its size is bounded by a constant depending only on `(β, ε, d)`, not on
+> how many relations the system has. As the system's stock of relations grows, the
+> *fraction* that become selves tends to `0`.
+>
+> Remove the bound (`β = ⊤`) and the statement fails completely: **every** loop
+> closes, every coupling stabilizes, and the theory says nothing.
+
+This is the **expressivity/triviality dial** made into a dichotomy. Bounded budget =
+discriminating theory; unbounded budget = universal solvent.
+
+---
+
+## 3.2 The provable core: a resource-counting lemma
+
+The full statement quantifies over all of `Cl(𝕋)`; that lift is the conjecture
+(§3.4). But its *engine* is an elementary, fully provable counting fact. Work in the
+canonical monoid `(ℝ_{≥0}, +, 0, ≤)` (so `·` is `+`, costs are additive, and
+`ε(s) > 1` means a per-return cost `λ(s) := \log ε(s) > 0`).
+
+**Setup.** Let `Φ` be a finite set of candidate couplings (the relations a system
+actually has), `|Φ| = N`. Each `f ∈ Φ` has a per-return cost `λ(f) ≥ λ_min > 0` and
+requires depth `d(f) ≥ d_min ≥ 2` returns to close into an eigenform. A coupling
+**stabilizes within budget `β`** iff the system can fund its required returns:
+
+$$
+f \in \mathrm{Stab}_R
+\quad\Longleftrightarrow\quad
+d(f)\cdot \lambda(f) \ \le\ \beta .
+$$
+
+The total attention actually spent across all maintained selves cannot exceed the
+budget:
+
+$$
+\sum_{f \in \mathrm{Stab}_R} d(f)\,\lambda(f) \ \le\ \beta .
+$$
+
+> **Lemma 3.1 (sparsity from a budget).** With the setup above,
+> $$
+> |\mathrm{Stab}_R| \ \le\ \frac{\beta}{d_{\min}\,\lambda_{\min}} .
+> $$
+> In particular `|Stab_R|` is bounded by a constant **independent of `N`**, so the
+> density `|Stab_R| / N \le \dfrac{\beta}{d_{\min}\lambda_{\min}\,N} \to 0` as
+> `N \to \infty`.
+
+**Proof.** Each `f ∈ Stab_R` contributes at least `d_min · λ_min` to the spend
+`∑_{f} d(f)λ(f)`, which is `≤ β`. Hence
+`|Stab_R| · d_min · λ_min ≤ β`. Divide. ∎
+
+> **Lemma 3.2 (collapse without a bound).** If `β = ⊤` (no finite bound), then the
+> constraint `d(f)λ(f) ≤ β` is vacuous, so `Stab_R = Φ` and density `= 1`.
+
+Together: **finite budget ⇒ vanishing density; unbounded budget ⇒ full density.**
+The two lemmas are the dichotomy of §3.1, and they are *already* theorems — at the
+level of the resource model. They formalize, exactly, "you cannot return to
+everything, so which relations get to constitute you is rationed."
+
+---
+
+## 3.3 Why this is the right toy, and its honest gaps
+
+Lemma 3.1 is deliberately the *thin* model: couplings as a finite set with additive
+costs. It earns its keep by being unarguable and by isolating the mechanism (a
+fixed budget divided among items each costing a positive minimum). But three gaps
+separate it from a theorem about `Cl(𝕋)`:
+
+1. **Couplings are not an unstructured set.** In `Cl(𝕋)` they compose, tensor, and
+   share sub-relatings; the cost grading `c` is *lax* (sub-additive), so spends can
+   overlap and the clean sum `∑ d λ` becomes an inequality over a *poset* of
+   couplings. Sparsity must be re-proved with sharing allowed.
+2. **"Stabilizes" is a fixed-point condition, not a threshold.** `f ∈ Stab_R` was
+   defined in [A4](02-axioms.md) as `loop_R(e) = e`, not as `dλ ≤ β`. The lemma
+   assumes these coincide; showing `loop_R`'s budgeted iteration *realizes* the
+   threshold (that `N(s) = ⌊β/λ⌋` returns suffice and are necessary to reach the
+   fixed point) is real work in the traced category.
+3. **"Sparse" deserves a topological/measure form, not just counting.** For infinite
+   or continuous state spaces, the right statement is `Stab_R` is **nowhere dense**
+   (or measure zero) in the space of states under a natural topology, recovering
+   the density statement in the finite case.
+
+None of these is hand-waving-away-able, and naming them is the point: the lemma is
+*true and small*; the conjecture is its honest generalization.
+
+---
+
+## 3.4 The conjecture
+
+> **Conjecture 3.3 (sparsity of `Stab` in `Cl(𝕋)`).** Let `Cl(𝕋)` carry a cost
+> grading `c` valued in a finite-`β` attention monoid with `ε > 1` and stabilization
+> depth `d ≥ 2`. Then `Stab_R` is **sparse**: under the natural topology on states
+> `I → D`, `Stab_R` is nowhere dense; and for any finite sub-collection of `N`
+> couplings closed under the doctrine operations, `|Stab_R| / N \to 0` as `N \to ∞`,
+> with the bound degrading gracefully under cost-sharing (lax `c`).
+>
+> Moreover (sharp dichotomy): dropping the bound (`β = ⊤`) makes `Stab_R` dense
+> (Lemma 3.2 lifts), so finiteness of `β` is **necessary** for sparsity.
+
+This is the proposition to point a proof assistant at *first* — it is where the
+theory either lands in the rich-but-narrow zone (good) or the broad-but-empty zone
+(fatal), and the proof attempt is rigor finding the overclaim before a referee does.
+
+---
+
+## 3.5 Proof strategy (for mechanization)
+
+A plausible route, in increasing difficulty:
+
+1. **Mechanize Lemma 3.1 / 3.2 as-is.** Pure arithmetic over an ordered monoid;
+   trivial in Lean/Agda/Rocq. Establishes the dichotomy at the resource layer and
+   pins down the definitions. *(This is the "first discharged result.")*
+2. **Replace the finite set by a graded poset of couplings.** Model sharing: cost
+   over a meet-semilattice with `c` sub-additive. Re-derive the bound as
+   `|Stab_R| ≤ β / (d_min λ_min)` *up to the sharing defect*, i.e. show the worst
+   case (no sharing) is the set bound and sharing only helps.
+3. **Connect the threshold to the fixed point.** In the traced fragment, prove
+   `loop_R(e) = e ⟺ N(e) ≥ d(e)` with `N(e) = ⌊β/λ(e)⌋` ([§1.3.3](01-signature.md)) —
+   i.e. budgeted iteration reaches the eigenform iff the budget funds the depth.
+   This is the genuinely categorical lemma and the likely crux.
+4. **Topologize.** Put the product/cylinder topology on `I → D` (states as
+   behaviors in the final coalgebra), show the threshold set is closed with empty
+   interior. Coinduction-friendly; Agda's `ν`-layer is the natural host for this step.
+
+Steps 1–2 are near-term and proof-assistant-ready. Step 3 is the heart. Step 4 is
+the polished form.
+
+---
+
+## 3.6 What a positive result would and would not mean
+
+- **Would mean.** "A self is an achievement of recursion" is a *theorem* of the
+  theory, not a slogan: given finite attention, stable selves are provably rare, and
+  the rarity is *caused by* the finiteness. The firewall (no monoidal functor into
+  cartesian-only domains) and this sparsity result are the two places the formalism
+  earns the word "rigor."
+- **Would not mean.** That the world *is* this way (the theory is a lens, not a
+  proof — see the view's "What it doesn't settle"); nor would it touch the three
+  typed-out residues (valence, the hard problem, freedom), which [A6](02-axioms.md)
+  predicts the formalism *cannot* reach. Proving sparsity confirms the program's
+  ambition exactly to its own stated boundary — and no further, which is the point.
+
+---
+
+### Cross-references
+
+- Definitions of `loop_R`, `β`, `ε`, `d`, `c`: [01 §1.3](01-signature.md).
+- The selfhood predicate `Stab_R`: [02 — A4](02-axioms.md).
+- The doctrine fragments the sparsity lives across: [00](00-doctrine.md).
+- Mechanization targets and tooling: [formalization plan §5](../formalization-plan.md).

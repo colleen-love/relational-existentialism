@@ -1,0 +1,208 @@
+# 02 — The Axioms
+
+> *The six commitments as sequents.* Each axiom is stated formally, tagged
+> `[fragment; status]`, glossed against the plain-language view, and annotated with
+> what it would take to discharge or use it. Together they cut the free theory on
+> the [signature](01-signature.md) down to `𝕋`.
+
+Throughout, `𝒞 = Cl(𝕋)`, `σ = Tr` is the self-relation operator, `γ` is the
+symmetry, `Δ` the diagonal (cartesian fragment only), and `(R, ·, 1, ≤, β, c, ε)`
+the attention data of [§1.3](01-signature.md).
+
+---
+
+## A1 — Relation primacy `[structural; both]`
+
+**Statement.** A state's identity is exhausted by its behavior under all
+process-contexts. Writing a *context* as a unary morphism-with-a-hole
+`C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generators, define for states `s, t : I → D`:
+
+$$
+s \;\equiv\; t
+\quad:\Longleftrightarrow\quad
+\forall\, C[-].\ C[s] = C[t].
+$$
+
+**Axiom.** `≡` is the finest congruence the theory distinguishes; there is **no**
+state-distinguishing data beyond contextual behavior. Equivalently: the only points
+of `D` are those forced by the morphisms (no "bare carrier" under the relatings).
+
+**Gloss.** *Take away every relation and there is no bare self left underneath.* The
+knot is a shape the rope holds; pull the rope straight and nothing remains. This is
+Yoneda made into a commitment: an object is its relatings.
+
+**Role.** Structural premise. It is what licenses defining identity *coinductively*
+in **A5** — `≡` will be exhibited as the bisimilarity `≈`, so that "same behavior in
+all contexts" and "greatest bisimulation" coincide.
+
+---
+
+## A2 — Self-relation is feedback `[definitional; both]`
+
+**Statement.**
+
+$$
+\sigma(P) \;:=\; \mathrm{Tr}(P).
+$$
+
+**Axiom.** The self-relating of a system *is* the trace of a relating on it — output
+returned to input — and nothing more is meant by "the mind aware of the mind."
+
+**Gloss.** The simplest relation is the self relating to itself: attention turned
+inward, modeled as feedback. Because `Tr` needs no copying, this definition is
+**fragment-neutral** and survives into the quantum fragment as the partial trace —
+even though its *mirror* reading (A6) does not.
+
+**Role.** Pure definition; fixes the referent of `σ` used by A3, A4, A6.
+
+---
+
+## A3 — To relate is to create `[theorem; cartesian]`
+
+**Statement.** In the cartesian fragment `𝒞_×`, the trace is a **Conway fixed-point
+operator**; hence every feedback endomorphism `f : A × X → X` has a canonical fixed
+point `f^† : A → X`, `f ∘ ⟨id, f^†⟩ = f^†`.
+
+**Status: theorem.** This is the Hasegawa–Hyland correspondence
+([00 §0.4.1](00-doctrine.md)) instantiated at `𝒞_×`; nothing new to prove, only to
+*cite and apply*.
+
+**Gloss.** Relating does not rearrange pre-existing pieces; under return it
+*produces* a fixed point — a third thing that lives in the between and need not have
+existed before. "To relate is to create" is the existence of `f^†`.
+
+**Role.** Supplies the *existence* of fixed points that A4 then *selects among* by
+resource. Note the division of labor: A3 says fixed points exist (cheap, cartesian,
+theorem); A4 says only the budget-affordable, sufficiently-looped ones become
+**selves** (expensive, the load-bearing posit).
+
+---
+
+## A4 — Recursion constitutes the self `[posit; both, with cartesian existence]`
+
+**The discriminating axiom.** A **self / eigenform** is a state that is a fixed
+point of **iterated, attention-funded** self-relation. Using `loop_R` from
+[§1.3.3](01-signature.md):
+
+$$
+e \ \text{is a self}
+\quad:\Longleftrightarrow\quad
+\mathrm{loop}_R(e) = e
+\ \ \wedge\ \
+d(e) \ge 2
+\ \ \wedge\ \
+c\big(\text{maintain}(e)\big) \le \beta.
+$$
+
+That is: `e` is unchanged by budgeted return (`σ^{N}(e) = e`), it required genuine
+recursion to form (`d(e) ≥ 2`, not a one-off), and the cost of *maintaining* the
+loop is affordable. Define the **carrier of selves**:
+
+$$
+\mathrm{Stab}_R \;:=\; \{\, e : I \to D \ \mid\ \mathrm{loop}_R(e) = e,\ d(e)\ge 2,\ c(\text{maintain}(e)) \le \beta \,\}.
+$$
+
+**Status: posit.** This is the philosophy's central wager, *asserted*. Its
+existence-of-fixed-points half is underwritten by A3; its *selection* half — that
+recursion *under finite budget* is what promotes a fixed point to a self — is the
+new content. It is what stops the theory from being a universal solvent.
+
+**Gloss.** A relation builds a persisting self only when it loops — returned to,
+re-entered, lived again until it holds. The decades-long friendship, the formative
+parent, the work you keep choosing: built from relations *iterated*, not merely had.
+Attention, being finite, rations which loops close.
+
+**Role.** Everything discriminating about the theory routes through here. Drop A4
+and the resource bound and *nearly everything* models `𝕋` (the triviality pole);
+keep them and models thin out to the systems that actually stabilize selves. The
+candidate theorem of [03](03-sparsity-conjecture.md) — **`Stab_R` is sparse under
+finite `β`** — is the formal cash value of "a self is an achievement of recursion."
+
+---
+
+## A5 — Observational identity and the "we" `[theorem given the ν-modality; both]`
+
+**Statement.** Let `Θ` be the monotone operator on relations `R ⊆ D ⊗ D` whose
+greatest fixed point is "indistinguishable under one step of every relating." Define
+
+$$
+{\approx} \;:=\; \nu\Theta
+\qquad(\text{the greatest bisimulation}),
+\qquad
+\mathbb{E} \;:=\; D/{\approx}\ \ (\text{the shared world}).
+$$
+
+**Axiom + theorem.** `≈` exists as a final coalgebra (the `ν`-modality guarantees
+it), and it **coincides with the contextual congruence `≡` of A1** — *behavioral
+equivalence = greatest bisimilarity*. The quotient `𝔼` is the objective world as the
+**overlap of perspectives**.
+
+**The seam, kept open.** `𝔼` is **not terminal**: the overlaps do not collapse to a
+single master perspective. Formally, the canonical map `D → 𝔼` is not split by any
+global section that all states agree on; there remains an irreducible non-foundation
+— the *seam* of §"We." We record this as a *required* property, not a defect:
+
+> **Property 5.1 (irreducible seam).** There is no perspective `p : 𝔼 → D` with
+> `(D → 𝔼) ∘ p = id_𝔼` natural in all relatings. The "we" is real (the quotient
+> exists) and the gap inside it is real (no master section).
+
+**Gloss.** Objectivity is not a god's-eye fact but the structure that survives being
+looked at from everywhere it can be — agreement maintained across perspectives, an
+ongoing social achievement. And the seam that never closes is the trace of each
+perspective being genuinely separate, not a copy of one master view.
+
+**Role.** Defines the shared world used by the death/persistence discussion
+(distributed self = the part of `s` surviving in `≈`-neighbors after `s`'s own loop
+opens) and supplies the *unobstructed* relation that A6 contrasts with `σ`.
+
+---
+
+## A6 — Knowing vs feeling `[both, with the σ-side cartesian]`
+
+**Statement.** The two ways relation can turn are different *kinds of arrow*, and
+their formal properties diverge exactly:
+
+| | the **σ-move** (knowing) | the **≈-relation** (feeling) |
+| --- | --- | --- |
+| type | endomorphism `σ : D → D` (`= Tr`) | relation `≈ ↣ D ⊗ D` |
+| fragment | **cartesian** (uses `Δ` to compare a copy) | fragment-neutral |
+| obstruction | **Lawvere**: no complete self-model; leaves a **remainder** | none of this kind |
+| character | local, partial, assembled, *from somewhere* | global, whole, all-at-once |
+
+**Axiom.** `σ` is Lawvere-obstructed ([00 §0.4.2](00-doctrine.md)): there is a
+fixed-point-free endomorphism witnessing that no state holds a total image of its
+own self-relatings — *knowing leaves a remainder*. The relation `≈`, living one
+type-level up and built coinductively rather than by copying, carries **no** such
+obstruction — *feeling is whole*.
+
+**Gloss.** To know is to make something an object held at a distance — the σ-move,
+the diagonal — and that always leaves a remainder. A mood does not come in pieces;
+it is present all at once with no vantage outside it. Knowing is local where feeling
+is global; the asymmetry is the difference between relation turned **outward into
+objects** (fragments) and **inward as presence** (does not).
+
+**Role.** Connects the doctrine's seam (0.6) to lived experience, and sets up the
+honest limit recorded next.
+
+---
+
+## Derived notions and the residue
+
+- **Self / eigenform**: a member of `Stab_R` (A4).
+- **Distributed self**: for `e ∈ Stab_R`, its `≈`-image in `𝔼`; persists on the
+  timescale of neighbors' returning even after `e`'s own loop opens (A5 + A4).
+- **Birth / death**: a fresh fixed point forced into being already coupled (A3+A4
+  with non-trivial initial coupling) / the loop `loop_R(e) = e` ceasing to hold as
+  budget is withdrawn (A4 negated).
+
+**The residue is typed out, not missing.** Valence, the hard problem, and freedom
+are not unstated axioms; they are **outside what any structure-preserving functor
+can express**, because the language speaks only of structure functors preserve, and
+those three are the non-structural remainder. By A6, *formalizing is itself the
+σ-move* — the objectifying look that leaves a remainder — so the language captures
+the **structure** of feeling (`≈`) and *necessarily* not feeling-as-lived. The
+formalism fails exactly where its own sixth axiom predicts. That is the program
+confirming its thesis from the inside, not breaking.
+
+→ Continue to [03 — The Sparsity Conjecture](03-sparsity-conjecture.md), the one
+place the spec reaches for a genuine **theorem** rather than a redescription.
