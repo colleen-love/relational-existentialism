@@ -26,11 +26,11 @@ mechanized, so a functor can be exhibited at that level, which is what §4.3 doe
 
 | Domain | Target | Verdict | Status |
 | --- | --- | --- | --- |
-| Physics (quantum) | `FdHilb` (categorical QM); `Tr` = partial trace, co-determination = entanglement | literal monoidal functor — **redescriptive, not predictive** | needs SMC/Hilbert infra |
+| **Physics (quantum)** | `FGModuleCat`/`FdHilb`; `Tr` = partial trace, co-determination = entanglement | literal monoidal functor — **redescriptive, not predictive**; the distinctive fact is **no-cloning** | ✅ **no-cloning mechanized** (§4.5) |
 | **Chemistry** | reaction networks (Baez–Pollard); autocatalytic sets = looped eigenforms | **strong, near-literal** — best non-quantum fit | ✅ **mechanized** (§4.3) |
 | Biology | Rosen relational biology / (M,R)-systems | strong, with an ancestor | future |
 | AI | semantics of recurrence; Geometry of Interaction *is* traced categories | design-principle functor | future |
-| Sociology, mental health | **cartesian fragment only** | framing; the firewall (§4.4) | ◐ firewall mechanized |
+| Sociology, mental health | **cartesian fragment only** | framing; the firewall (§4.4) | ✅ **firewall mechanized** (categorical) |
 
 ## 4.3 Chemistry — the first functor (mechanized)
 
@@ -50,7 +50,7 @@ machinery wholesale. In [`formal/Scratch/Chemistry.lean`](../../formal/Scratch/C
   autocatalytic core. A *looped self* in the theory maps to a *self-sustaining
   autocatalytic set* in chemistry. The "near-literal fit" is a one-line theorem.
 
-## 4.4 The firewall — the cartesian side (mechanized, lightweight)
+## 4.4 The firewall — the cartesian side (mechanized: `Type`-level *and* categorical)
 
 Social and mental-health domains live in the **cartesian fragment**: copying and
 projections are free. The firewall is that this *forbids* the compact-closed
@@ -65,13 +65,55 @@ unwise. In [`formal/RelExist/Firewall.lean`](../../formal/RelExist/Firewall.lean
   entangled (non-factoring) joint. Importing the compact-closed co-determination has no
   faithful image.
 
-The full categorical statement — *a category that is simultaneously cartesian and
-compact closed is thin (a preorder), so the functor collapses to triviality* — is the
-clean theorem the firewall ultimately rests on; it requires the symmetric-monoidal
-infrastructure left unbuilt. What is mechanized is the `Type`-level obstruction beneath
-it: cartesian joints factor, so there is nothing for entanglement to be.
+**Now the categorical theorem too.** The collapse is mechanized in
+[`formal/Scratch/Compact.lean`](../../formal/Scratch/Compact.lean). Axiomatizing the
+operative content of compact closure — the *name* bijection `(A ⟶ B) ≃ (A ⊗ Bᵈ ⟶ I)` —
+together with a (sub)terminal unit (cartesian copying), `collapse` proves the structure
+is **thin**: every parallel pair of morphisms coincides. So "compact-closed + cartesian"
+*provably* collapses to triviality — you cannot host entanglement and free copying in one
+domain. `no_cloning` is the contrapositive: a non-trivial compact-closed structure admits
+no uniform copying. This is what makes "two people are entangled" ill-typed for the
+cartesian social domain, as a theorem rather than a stance.
 
-## 4.5 What this layer shows
+This axiomatizes compact closure minimally (the dual adjunction) rather than deriving it
+from a fully reconstructed traced symmetric monoidal category; mathlib has
+symmetric/braided/**rigid** monoidal categories and `ChosenFiniteProducts`, but not
+traced-monoidal or a compact-closed typeclass, and the free traced SMC `Cl(𝕋)` itself is
+the remaining heavy infrastructure (see §4.6).
+
+## 4.5 Physics — the quantum fragment and no-cloning (mechanized)
+
+Physics is the most *literal* functor (categorical quantum mechanics in
+`FGModuleCat`/`FdHilb`: `Tr` is the partial trace, co-determination is entanglement),
+but "redescriptive, not predictive." Its **distinctive, theory-relevant fact** is
+exactly what separates it from the cartesian domains: **no-cloning**.
+
+- **Categorical** ([`Scratch/Compact.lean`](../../formal/Scratch/Compact.lean),
+  `no_cloning`): a non-trivial compact-closed structure cannot have uniform copying — the
+  contrapositive of the firewall collapse.
+- **Concrete** ([`Scratch/NoCloning.lean`](../../formal/Scratch/NoCloning.lean),
+  `no_linear_clone`): the linear-algebra heart — cloning `ψ ↦ ψ ⊗ ψ` is, on the
+  one-dimensional space, `x ↦ x²`, which is **not linear**; so no linear (unitary,
+  physical) process clones. The obstruction is precisely that copying is quadratic while
+  quantum evolution is linear.
+
+So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
+seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
+
+## 4.6 What remains: the literal functor and the traced SMC
+
+Two pieces are deliberately *not* claimed done, and named here for honesty:
+
+1. **A literal `Functor` out of a reconstructed `Cl(𝕋)`.** Functors above are exhibited
+   at the level of the *structure the theory exports* (the eigenform/`gfp` and
+   compact-closed/Lawvere content), not as `CategoryTheory.Functor`s out of the free
+   traced SMC as a Lean category. Building `Cl(𝕋)` as that category is research-grade.
+2. **The traced symmetric monoidal typeclass.** mathlib lacks it; defining it with the
+   full JSV coherence and instantiating it (e.g. proving `FGModuleCat` traced) is the
+   remaining infrastructure. The collapse (§4.4) sidesteps it via the minimal
+   axiomatization, which is why it lands cleanly now.
+
+## 4.7 What this layer shows
 
 - The **expressivity/triviality dial** in action: the chemistry functor *exists* and is
   near-literal (the theory says something real about autocatalysis); the social-domain

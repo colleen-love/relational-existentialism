@@ -64,12 +64,19 @@ The first domain functor and the firewall ([spec 04](../docs/spec/04-functorial-
 | --- | --- | --- | --- |
 | autocatalytic core = eigenform `νΦ` | `RelExist.Chemistry.{autocatalyticCore, autocatalyticCore_selfSustaining, autocatalytic_greatest}` | a self-sustaining reaction set is a fixed point | ✅ proved |
 | **the chemistry functor, witnessed** | `RelExist.Chemistry.selfTrace_eq_autocatalyticCore` | the theory's `νP` *is* the autocatalytic core (definitional) | ✅ proved |
-| **the firewall** (cartesian side) | `RelExist.Firewall.{copy, joint_factors}` | cartesian joints factor ⇒ no entanglement; "two people are entangled" is ill-typed | ✅ proved |
+| firewall, `Type`-level (cartesian joints factor) | `RelExist.Firewall.{copy, joint_factors}` | cartesian joints factor ⇒ no entanglement | ✅ proved |
+| **firewall, categorical (the collapse)** | `RelExist.Compact.collapse` | compact-closed + cartesian copying ⇒ **thin** | ✅ proved |
+| **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |
+| **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
 
-Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because
-an autocatalytic set just **is** an eigenform. The firewall mechanizes the `Type`-level
-obstruction (cartesian joints factor); the full "cartesian + compact-closed ⇒ thin"
-collapse needs the unbuilt symmetric-monoidal infrastructure.
+Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
+autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
+(`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying
+cannot coexist — with `no_cloning` (categorical) and `no_linear_clone` (the concrete
+physics fact: cloning is nonlinear) on the quantum side. Two pieces remain scoped as
+research-grade infrastructure: a literal `Functor` out of a reconstructed free traced SMC
+`Cl(𝕋)`, and the traced-monoidal typeclass itself (mathlib has rigid monoidal +
+`ChosenFiniteProducts` but neither of those). See [spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
 
 ### mathlib-backed results (target `Scratch`)
 
