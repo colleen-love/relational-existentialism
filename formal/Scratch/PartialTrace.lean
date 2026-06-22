@@ -13,12 +13,20 @@ associator-as-reindexing coherence, remains the marked frontier).
   `u` then `v` (nested sums).
 * `trace_ptrace` — **compatibility**: the full trace of a partial trace is the full trace
   (`Tr` of `Tr_u` is `Tr`), the categorical "vanishing into the unit".
+* `ptrace_nat_left`, `ptrace_nat_right` — **naturality**: the trace slides past whiskering
+  on the kept input/output, `Tr((g⊗1)·M) = g·Tr(M)` and `Tr(M·(g⊗1)) = Tr(M)·g`.
+* `ptrace_swap` — **yanking**: `Tr(σ) = id`, the characteristic trace law.
+
+So the matrix partial trace satisfies the JSV *wire* axioms (naturality, yanking) plus
+vanishing-II and trace-compatibility — most of what a literal `FdHilb`/`FGModuleCat`
+`TracedSMC` instance requires (the associator-coherent retensoring packaging is frontier).
 -/
 import Mathlib.LinearAlgebra.Matrix.Trace
+import Mathlib.Data.Matrix.Kronecker
 
 namespace RelExist.PartialTrace
 
-open Matrix BigOperators
+open Matrix Kronecker BigOperators
 
 variable {R : Type*} [CommSemiring R] {m n u v : Type*} [Fintype u] [Fintype v]
 
@@ -51,6 +59,50 @@ theorem trace_ptrace [Fintype m] (M : Matrix (m × u) (m × u) R) :
   rw [Fintype.sum_prod_type]
 
 variable [DecidableEq u]
+
+/-- Whiskering by `g` on the kept input, expanded: `(g ⊗ 1_u) · M` sums `g` against the
+kept index, leaving the wire `u` untouched. -/
+theorem kron_one_mul [Fintype m] {m' : Type*} (g : Matrix m' m R)
+    (M : Matrix (m × u) (n × u) R) (i : m') (k : u) (q : n × u) :
+    ((g ⊗ₖ (1 : Matrix u u R)) * M) (i, k) q = ∑ x, g i x * M (x, k) q := by
+  simp only [Matrix.mul_apply, Fintype.sum_prod_type, kronecker_apply, Matrix.one_apply]
+  refine Finset.sum_congr rfl fun x _ => ?_
+  rw [Finset.sum_eq_single k]
+  · simp
+  · intro b _ hb; simp [Ne.symm hb]
+  · simp
+
+/-- **Naturality (left tightening).** The partial trace slides past whiskering on the kept
+input: `Tr((g ⊗ 1) · M) = g · Tr(M)`. -/
+theorem ptrace_nat_left [Fintype m] {m' : Type*} (g : Matrix m' m R)
+    (M : Matrix (m × u) (n × u) R) :
+    ptrace ((g ⊗ₖ (1 : Matrix u u R)) * M) = g * ptrace M := by
+  ext i j
+  rw [ptrace_apply, Matrix.mul_apply]
+  simp only [ptrace_apply, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun k _ => kron_one_mul g M i k (j, k)
+
+/-- Whiskering by `g` on the kept output, expanded. -/
+theorem mul_kron_one [Fintype n] {n' : Type*} (M : Matrix (m × u) (n × u) R)
+    (g : Matrix n n' R) (p : m × u) (j : n') (k : u) :
+    (M * (g ⊗ₖ (1 : Matrix u u R))) p (j, k) = ∑ y, M p (y, k) * g y j := by
+  simp only [Matrix.mul_apply, Fintype.sum_prod_type, kronecker_apply, Matrix.one_apply]
+  refine Finset.sum_congr rfl fun y _ => ?_
+  rw [Finset.sum_eq_single k]
+  · simp
+  · intro b _ hb; simp [hb]
+  · simp
+
+/-- **Naturality (right tightening).** `Tr(M · (g ⊗ 1)) = Tr(M) · g`. -/
+theorem ptrace_nat_right [Fintype n] {n' : Type*} (M : Matrix (m × u) (n × u) R)
+    (g : Matrix n n' R) :
+    ptrace (M * (g ⊗ₖ (1 : Matrix u u R))) = ptrace M * g := by
+  ext i j
+  rw [ptrace_apply, Matrix.mul_apply]
+  simp only [ptrace_apply, Finset.sum_mul]
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun k _ => mul_kron_one M g (i, k) j k
 
 /-- The symmetry (swap) on `u ⊗ u`. -/
 def swap : Matrix (u × u) (u × u) R :=
