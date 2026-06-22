@@ -18,14 +18,18 @@ dichotomy: a finite attention budget, divided among selves each costing at least
 positive floor, bounds the number of selves independently of how many couplings
 exist — and remove the budget and that bound collapses.
 
-Deliberately **dependency-free (no mathlib)** so it builds in remote sessions where
-mathlib's prebuilt cache is unreachable (see *Network note* below).
+The core (`RelExist`) is deliberately **dependency-free (no mathlib)** so it builds
+in seconds even where mathlib's cache is unreachable. **mathlib is now wired in**
+under a separate, non-default target (`Scratch`): `Mathlib.Order.FixedPoints`
+compiles and the `OrderHom.gfp` (Knaster–Tarski) smoke test for `≈ := νΘ` (axiom A5)
+typechecks. See *One-command setup* below.
 
 ## Build
 
 ```sh
 cd formal
-lake build
+lake build            # the dependency-free core (RelExist) — fast, no mathlib
+lake build Scratch    # the mathlib-backed target — compiles mathlib on first run
 ```
 
 Requires the Lean toolchain pinned in [`lean-toolchain`](lean-toolchain)
@@ -35,34 +39,34 @@ Requires the Lean toolchain pinned in [`lean-toolchain`](lean-toolchain)
 lake env lean -e '#print axioms RelExist.stab_card_bound'
 ```
 
-### Network note — bootstrapping the toolchain offline-ish
+### One-command setup — `scripts/bootstrap.sh`
 
-In environments whose network policy allows `github.com` + `pypi.org` but blocks
-`release.lean-lang.org` / `api.github.com` (so `elan` cannot auto-resolve a
-toolchain), install Lean by fetching the release asset directly and registering it:
+[`scripts/bootstrap.sh`](scripts/bootstrap.sh) installs everything idempotently:
+`elan`, the Lean toolchain, the core build, and (unless `SKIP_MATHLIB=1`) the
+mathlib-backed target.
 
 ```sh
-# 1. elan (version manager) from its GitHub release
-curl -fL -o /tmp/elan.tar.gz \
-  https://github.com/leanprover/elan/releases/latest/download/elan-x86_64-unknown-linux-gnu.tar.gz
-tar -xzf /tmp/elan.tar.gz -C /tmp
-/tmp/elan-init -y --default-toolchain none
-export PATH="$HOME/.elan/bin:$PATH"
-
-# 2. the Lean toolchain asset (direct download; .tar.zst, decompressed via Python)
-VER=4.15.0
-curl -fL -o /tmp/lean.tar.zst \
-  "https://github.com/leanprover/lean4/releases/download/v${VER}/lean-${VER}-linux.tar.zst"
-python3 -m pip install --quiet zstandard
-python3 -c "import zstandard; zstandard.ZstdDecompressor().copy_stream(open('/tmp/lean.tar.zst','rb'), open('/tmp/lean.tar','wb'))"
-mkdir -p /opt/lean && tar -xf /tmp/lean.tar -C /opt/lean
-
-# 3. register under the name elan derives from the pin, so `lean-toolchain` resolves
-ln -sfn /opt/lean/lean-${VER}-linux "$HOME/.elan/toolchains/leanprover--lean4---v${VER}"
+formal/scripts/bootstrap.sh                  # toolchain + core + mathlib
+SKIP_MATHLIB=1 formal/scripts/bootstrap.sh   # toolchain + core only (seconds)
 ```
 
-With a permissive network policy none of this is needed — `elan` installs the
-pinned toolchain automatically on first `lake build`.
+It is written for the network policy in our remote sessions — `github.com` +
+`pypi.org` allowed, but `release.lean-lang.org` / `api.github.com` and the mathlib
+cache blob blocked. So it installs the toolchain by **direct GitHub download**
+(decompressing the `.tar.zst` via the `zstandard` PyPI module, since there is no
+`zstd` binary) and **compiles mathlib from source** (no cache). With a permissive
+policy none of these workarounds are needed — `elan` and `lake exe cache get` do it
+automatically.
+
+### Reusable container (Claude Code on the web)
+
+A `SessionStart` hook ([`.claude/hooks/session-start.sh`](../.claude/hooks/session-start.sh),
+registered in [`.claude/settings.json`](../.claude/settings.json)) runs
+`bootstrap.sh` at the start of every **remote** session and persists the toolchain
+on `PATH`. The first remote session compiles the mathlib slice once (≈4 min for the
+current imports); the platform then caches the container state, so later sessions
+start with Lean + mathlib already built. The hook no-ops in local (non-remote)
+sessions. Once merged to the default branch, all future sessions pick it up.
 
 ## Roadmap
 
@@ -70,8 +74,9 @@ The discrete core is step 1 of [the spec's proof strategy](../docs/spec/03-spars
 Next, in rough order:
 
 1. **mathlib upgrade.** Re-cast costs in `ℝ_{≥0}`, prove the density-→-0 statement
-   (`Filter.Tendsto`) and the "nowhere dense" form (topology). Needs mathlib, hence a
-   network policy that reaches the cache.
+   (`Filter.Tendsto`) and the "nowhere dense" form (topology). mathlib is now
+   installed (target `Scratch`), so this proceeds there — no cache required, just the
+   one-time source compile the bootstrap already does.
 2. **Sharing.** Replace the `List` of costs by a graded poset with sub-additive cost
    (lax `c`), re-deriving the bound up to the sharing defect ([03 §3.3](../docs/spec/03-sparsity-conjecture.md)).
 3. **Threshold ⇔ fixed point.** The categorical crux: in the traced fragment,
