@@ -15,11 +15,13 @@ associator-as-reindexing coherence, remains the marked frontier).
   (`Tr` of `Tr_u` is `Tr`), the categorical "vanishing into the unit".
 * `ptrace_nat_left`, `ptrace_nat_right` — **naturality**: the trace slides past whiskering
   on the kept input/output, `Tr((g⊗1)·M) = g·Tr(M)` and `Tr(M·(g⊗1)) = Tr(M)·g`.
+* `ptrace_slide` — **sliding (dinaturality)**: `Tr_u(f·(1⊗h)) = Tr_v((1⊗h)·f)`.
 * `ptrace_swap` — **yanking**: `Tr(σ) = id`, the characteristic trace law.
 
-So the matrix partial trace satisfies the JSV *wire* axioms (naturality, yanking) plus
-vanishing-II and trace-compatibility — most of what a literal `FdHilb`/`FGModuleCat`
-`TracedSMC` instance requires (the associator-coherent retensoring packaging is frontier).
+So the matrix partial trace satisfies **all three JSV wire axioms** (naturality, sliding,
+yanking) plus vanishing-II and trace-compatibility — most of what a literal
+`FdHilb`/`FGModuleCat` `TracedSMC` instance requires (the associator-coherent retensoring
+packaging — vanishing-I/II and superposing with the reindexing isos — is the frontier).
 -/
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Data.Matrix.Kronecker
@@ -103,6 +105,44 @@ theorem ptrace_nat_right [Fintype n] {n' : Type*} (M : Matrix (m × u) (n × u) 
   simp only [ptrace_apply, Finset.sum_mul]
   rw [Finset.sum_comm]
   exact Finset.sum_congr rfl fun k _ => mul_kron_one M g (i, k) j k
+
+omit [Fintype u] [DecidableEq u] in
+/-- Whiskering by `h` on the wire, kept output side. -/
+theorem mul_one_kron [Fintype n] [DecidableEq n] (f : Matrix (m × u) (n × v) R)
+    (h : Matrix v u R) (p : m × u) (j : n) (k' : u) :
+    (f * ((1 : Matrix n n R) ⊗ₖ h)) p (j, k') = ∑ w, f p (j, w) * h w k' := by
+  simp only [Matrix.mul_apply, Fintype.sum_prod_type, kronecker_apply, Matrix.one_apply]
+  rw [Finset.sum_eq_single j]
+  · simp
+  · intro y _ hy; simp [hy]
+  · simp
+
+omit [Fintype v] [DecidableEq u] in
+/-- Whiskering by `h` on the wire, kept input side. -/
+theorem one_kron_mul [Fintype m] [DecidableEq m] (h : Matrix v u R)
+    (f : Matrix (m × u) (n × v) R) (i : m) (w : v) (q : n × v) :
+    (((1 : Matrix m m R) ⊗ₖ h) * f) (i, w) q = ∑ k, h w k * f (i, k) q := by
+  simp only [Matrix.mul_apply, Fintype.sum_prod_type, kronecker_apply, Matrix.one_apply]
+  rw [Finset.sum_eq_single i]
+  · simp
+  · intro x _ hx; simp [Ne.symm hx]
+  · simp
+
+omit [DecidableEq u] in
+/-- **Sliding (dinaturality).** A map `h` may slide around the feedback loop — switching
+which wire is traced: `Tr_u(f · (1 ⊗ h)) = Tr_v((1 ⊗ h) · f)`. -/
+theorem ptrace_slide [Fintype m] [Fintype n] [DecidableEq m] [DecidableEq n]
+    (f : Matrix (m × u) (n × v) R) (h : Matrix v u R) :
+    ptrace (f * ((1 : Matrix n n R) ⊗ₖ h)) = ptrace (((1 : Matrix m m R) ⊗ₖ h) * f) := by
+  ext i j
+  simp only [ptrace_apply]
+  have hL : ∀ k, (f * ((1 : Matrix n n R) ⊗ₖ h)) (i, k) (j, k) = ∑ w, f (i, k) (j, w) * h w k :=
+    fun k => mul_one_kron f h (i, k) j k
+  have hR : ∀ w, (((1 : Matrix m m R) ⊗ₖ h) * f) (i, w) (j, w) = ∑ k, h w k * f (i, k) (j, w) :=
+    fun w => one_kron_mul h f i w (j, w)
+  simp_rw [hL, hR]
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl fun w _ => Finset.sum_congr rfl fun k _ => mul_comm _ _
 
 /-- The symmetry (swap) on `u ⊗ u`. -/
 def swap : Matrix (u × u) (u × u) R :=

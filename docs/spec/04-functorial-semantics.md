@@ -98,11 +98,13 @@ exactly what separates it from the cartesian domains: **no-cloning**.
   quantum evolution is linear.
 - **The partial trace** ([`Scratch/PartialTrace.lean`](../../formal/Scratch/PartialTrace.lean)):
   the doctrine's `Tr` *is* the QM partial trace `ptrace M i j := ∑ k, M (i,k) (j,k)`, and
-  its defining properties are mechanized — linearity (`ptrace_add`, `ptrace_smul`),
-  **vanishing-II** (`ptrace_prod`: tracing out `u × v` = nested traces), full-trace
-  compatibility (`trace_ptrace`), and **yanking** (`ptrace_swap`: `Tr(σ) = id`). These are
-  the operator and laws an `FdHilb`/`FGModuleCat` `TracedSMC` instance is built from; the
-  full instance (with the associator-as-reindexing coherence) remains the frontier (§4.6).
+  it is proved to satisfy **all three JSV wire axioms** — **naturality** (`ptrace_nat_left`,
+  `ptrace_nat_right`), **sliding** (`ptrace_slide`), **yanking** (`ptrace_swap`: `Tr(σ) =
+  id`) — plus linearity, **vanishing-II** (`ptrace_prod`), and full-trace compatibility
+  (`trace_ptrace`). This is most of what a literal `FdHilb`/`FGModuleCat` `TracedSMC`
+  instance requires; the remaining piece is the associator-as-reindexing coherence for the
+  retensoring axioms (vanishing-I/II and superposing packaged with the structural isos) —
+  the frontier (§4.6).
 
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
