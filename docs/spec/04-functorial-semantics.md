@@ -147,6 +147,17 @@ constructive), with the frontier marked precisely.
   determined precisely by *where the generator (the loop/dimension `δ`) is sent*. That is
   the functorial-semantics ideal — a model is fixed by the image of the generators — in
   its smallest honest instance.
+- **The multi-color form** (`TracedFunctor.fromFreeCMon`). The one-generator result extends
+  to `k` generators: `ℕᵏ` is the **free commutative monoid on `k` generators** (the scalar
+  fragment of the free traced SMC on `k` objects/colors), built by prepending one free
+  generator at a time (`freeCMon`). Its full universal property is mechanized — existence
+  (`freeCMon.lift`: a tuple `(n₀,…,n_{k-1})` is sent to `g₀^{n₀}·…·g_{k-1}^{n_{k-1}}`) and
+  **uniqueness** (`freeCMon.lift_unique`: every homomorphism out of `ℕᵏ` is the lift of the
+  images it assigns to the generators) — both **fully axiom-free** (not even `propext`). The
+  step that makes a *tuple* of independent generators combine coherently is the middle-four
+  interchange `(ab)(cd) = (ac)(bd)`, which holds *exactly because* the monoid is commutative
+  — the same commutativity that drives sliding. So a model out of the free scalar object on
+  any finite number of colors is determined, constructively, by where its generators go.
 
 **Frontier (named, not faked):**
 
@@ -154,12 +165,13 @@ constructive), with the frontier marked precisely.
    (compact closed), hence canonically traced — but proving it an instance of `TracedSMC`
    (the partial trace satisfies JSV) is real linear-algebra-through-coherence work. This
    is what would make the physics functor *literal* rather than content-level.
-2. **A literal `Functor` out of the *full* free traced SMC `Cl(𝕋)`.** The scalar fragment
-   (`End(I) = ℕ`) is now done (above); building the *whole* `Cl(𝕋)` as a Lean category (the
-   free traced SMC on the signature — a colored PROP, with all objects and the JSV-coherent
-   trace) is the genuinely research-grade piece. The functors above are between concrete
-   `TracedSMC`s and out of the free scalar object, which is the functor *mechanism* and the
-   universal-property idiom without that full free object.
+2. **A literal `Functor` out of the *full* free traced SMC `Cl(𝕋)`.** The scalar fragment is
+   now done on *any finite number of colors* (`End(I)` on `k` generators `= ℕᵏ`, above);
+   building the *whole* `Cl(𝕋)` as a Lean category (the free traced SMC on the signature — a
+   colored PROP, with all objects, non-scalar morphisms, and the JSV-coherent trace) is the
+   genuinely research-grade piece. The functors above are between concrete `TracedSMC`s and
+   out of the free scalar objects, which is the functor *mechanism* and the universal-property
+   idiom without that full free object.
 3. **Monoidal coherence** (pentagon, triangle, naturality of the structural isos) is *not*
    imposed: it constrains the monoidal base, not the trace, and is not referenced by the
    JSV axioms. A fully coherent base is a further (standard) refinement.

@@ -289,4 +289,136 @@ def TracedFunctor.fromFreeScalar (B : CMon) (b : B.carrier) :
     TracedFunctor natCMon.toTracedSMC B.toTracedSMC :=
   TracedFunctor.ofCMonHom (natCMon.lift B b)
 
+/-! ### Free on `k` generators — the multi-color scalar fragment
+
+The one-generator result extends to `k` generators: `ℕᵏ` is the free commutative monoid on
+`k` generators (the scalar fragment of the free traced SMC on `k` objects/colors), with its
+full universal property — existence (`freeCMon.lift`) and uniqueness (`freeCMon.lift_unique`).
+-/
+
+/-- Middle-four interchange in a commutative monoid: `(ab)(cd) = (ac)(bd)`. The fact that
+makes a *tuple* of independent generators combine coherently — commutativity is exactly
+what lets the factors be regrouped. -/
+theorem CMon.mul_mul_mul_comm (B : CMon) (a b c d : B.carrier) :
+    B.mul (B.mul a b) (B.mul c d) = B.mul (B.mul a c) (B.mul b d) :=
+  calc B.mul (B.mul a b) (B.mul c d)
+      = B.mul a (B.mul b (B.mul c d)) := B.mul_assoc a b _
+    _ = B.mul a (B.mul (B.mul b c) d) := by rw [← B.mul_assoc b c d]
+    _ = B.mul a (B.mul (B.mul c b) d) := by rw [B.mul_comm b c]
+    _ = B.mul a (B.mul c (B.mul b d)) := by rw [B.mul_assoc c b d]
+    _ = B.mul (B.mul a c) (B.mul b d) := (B.mul_assoc a c _).symm
+
+/-- Prepend a free generator: `ℕ ×' B`, the product of `(ℕ,+)` with `B` (carrier literally
+`Nat × B.carrier`, so numerals and `+` on the new generator are the genuine `Nat` ones). -/
+def CMon.natProd (B : CMon) : CMon where
+  carrier := Nat × B.carrier
+  mul := fun x y => (x.1 + y.1, B.mul x.2 y.2)
+  one := (0, B.one)
+  mul_assoc := fun a b c => by
+    show (a.1 + b.1 + c.1, B.mul (B.mul a.2 b.2) c.2)
+       = (a.1 + (b.1 + c.1), B.mul a.2 (B.mul b.2 c.2))
+    rw [Nat.add_assoc, B.mul_assoc]
+  one_mul := fun a => by
+    show (0 + a.1, B.mul B.one a.2) = a
+    rw [Nat.zero_add, B.one_mul]
+  mul_one := fun a => by
+    show (a.1 + 0, B.mul a.2 B.one) = a
+    rw [Nat.add_zero, B.mul_one]
+  mul_comm := fun a b => by
+    show (a.1 + b.1, B.mul a.2 b.2) = (b.1 + a.1, B.mul b.2 a.2)
+    rw [Nat.add_comm a.1, B.mul_comm a.2]
+
+/-- The trivial (one-element) commutative monoid — the free monoid on *zero* generators. -/
+def trivCMon : CMon where
+  carrier := PUnit
+  mul := fun _ _ => PUnit.unit
+  one := PUnit.unit
+  mul_assoc := fun _ _ _ => rfl
+  one_mul := fun _ => rfl
+  mul_one := fun _ => rfl
+  mul_comm := fun _ _ => rfl
+
+/-- **The free commutative monoid on `k` generators**, `ℕᵏ`, built by prepending one free
+generator at a time — the scalar fragment of the free traced SMC on `k` objects (colors). -/
+def freeCMon : Nat → CMon
+  | 0 => trivCMon
+  | k + 1 => CMon.natProd (freeCMon k)
+
+/-- The `i`-th generator of `freeCMon k`: the basis tuple `eᵢ` (one in slot `i`, zero
+elsewhere). Indices `i ≥ k` collapse to the unit. -/
+def freeCMon.gen : (k : Nat) → Nat → (freeCMon k).carrier
+  | 0, _ => PUnit.unit
+  | _ + 1, 0 => (1, (freeCMon _).one)
+  | k + 1, i + 1 => (0, freeCMon.gen k i)
+
+/-- **The universal map (existence).** Any choice of images `g i` for the generators
+extends to a homomorphism `freeCMon k → B`, sending the tuple `(n₀,…,n_{k-1})` to
+`g₀^{n₀} · … · g_{k-1}^{n_{k-1}}`. -/
+def freeCMon.lift (B : CMon) : (k : Nat) → (Nat → B.carrier) → CMonHom (freeCMon k) B
+  | 0, _ =>
+    { toFun := fun _ => B.one
+      map_one := rfl
+      map_mul := fun _ _ => (B.one_mul B.one).symm }
+  | k + 1, g =>
+    let tail := freeCMon.lift B k (fun i => g (i + 1))
+    { toFun := fun p => B.mul (B.npow (g 0) p.1) (tail.toFun p.2)
+      map_one := by
+        show B.mul (B.npow (g 0) 0) (tail.toFun (freeCMon k).one) = B.one
+        rw [tail.map_one]; exact B.one_mul B.one
+      map_mul := fun x y => by
+        show B.mul (B.npow (g 0) (x.1 + y.1)) (tail.toFun ((freeCMon k).mul x.2 y.2))
+           = B.mul (B.mul (B.npow (g 0) x.1) (tail.toFun x.2))
+                   (B.mul (B.npow (g 0) y.1) (tail.toFun y.2))
+        rw [B.npow_add, tail.map_mul,
+            B.mul_mul_mul_comm (B.npow (g 0) x.1) (B.npow (g 0) y.1)
+              (tail.toFun x.2) (tail.toFun y.2)] }
+
+/-- **The universal property (uniqueness).** Every homomorphism `ψ` out of `freeCMon k` is
+the lift of the images it assigns to the generators — so `freeCMon k` is genuinely free on
+`k` generators. -/
+theorem freeCMon.lift_unique (B : CMon) :
+    ∀ (k : Nat) (ψ : CMonHom (freeCMon k) B) (p : (freeCMon k).carrier),
+      ψ.toFun p = (freeCMon.lift B k (fun i => ψ.toFun (freeCMon.gen k i))).toFun p
+  | 0, ψ, _ => ψ.map_one
+  | k + 1, ψ, p => by
+    obtain ⟨m, r⟩ := p
+    -- restrict ψ along the second injection  r ↦ (0, r)  to get a hom out of freeCMon k
+    let ψ' : CMonHom (freeCMon k) B :=
+      { toFun := fun r => ψ.toFun ((0 : Nat), r)
+        map_one := ψ.map_one
+        map_mul := fun r r' => ψ.map_mul ((0 : Nat), r) ((0 : Nat), r') }
+    -- step 2: along the first injection  n ↦ (n, one),  ψ is the npow of ψ(e₀)
+    have hfirst : ∀ n : Nat,
+        ψ.toFun (n, (freeCMon k).one) = B.npow (ψ.toFun (freeCMon.gen (k+1) 0)) n := by
+      intro n
+      induction n with
+      | zero => exact ψ.map_one
+      | succ n ih =>
+        have hpair : ((n + 1 : Nat), (freeCMon k).one)
+            = (freeCMon (k+1)).mul (n, (freeCMon k).one) ((1 : Nat), (freeCMon k).one) := by
+          show ((n + 1 : Nat), (freeCMon k).one)
+             = ((n + 1 : Nat), (freeCMon k).mul (freeCMon k).one (freeCMon k).one)
+          rw [(freeCMon k).mul_one]
+        rw [hpair, ψ.map_mul, ih]; rfl
+    -- step 1: split  (m, r) = (m, one) · (0, r)
+    have hpairP : ((m, r) : (freeCMon (k+1)).carrier)
+        = (freeCMon (k+1)).mul (m, (freeCMon k).one) ((0 : Nat), r) := by
+      show ((m, r) : (freeCMon (k+1)).carrier) = (m, (freeCMon k).mul (freeCMon k).one r)
+      rw [(freeCMon k).one_mul]
+    have hsplit : ψ.toFun (m, r)
+        = B.mul (ψ.toFun (m, (freeCMon k).one)) (ψ.toFun ((0 : Nat), r)) :=
+      (congrArg ψ.toFun hpairP).trans (ψ.map_mul _ _)
+    -- step 3: the restricted hom ψ' is its own lift, by induction on k
+    have hsnd : ψ.toFun ((0 : Nat), r)
+        = (freeCMon.lift B k (fun i => ψ.toFun ((0 : Nat), freeCMon.gen k i))).toFun r :=
+      freeCMon.lift_unique B k ψ' r
+    rw [hsplit, hfirst, hsnd]; rfl
+
+/-- **The literal functor out of the free object on `k` generators.** A model is fixed by
+where the `k` generators (colors) are sent — `TracedFunctor.ofCMonHom` of the universal
+lift. The one-generator case is `fromFreeScalar`; this is its full multi-color form. -/
+def TracedFunctor.fromFreeCMon (B : CMon) (k : Nat) (g : Nat → B.carrier) :
+    TracedFunctor (freeCMon k).toTracedSMC B.toTracedSMC :=
+  TracedFunctor.ofCMonHom (freeCMon.lift B k g)
+
 end RelExist.Traced

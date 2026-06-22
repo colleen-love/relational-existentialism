@@ -81,6 +81,7 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **`Rel` — a genuine multi-object model** | `RelExist.RelModel.relTracedSMC` | sets & relations, `⊗ = ×`, relational trace; full JSV validated non-trivially | ✅ proved |
 | **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
 | **functor out of a free object** | `TracedFunctor.fromFreeScalar` | `ℕ` is the free comm. monoid (the scalar fragment of the free traced SMC on one object); its **universal property** (`natCMon.lift`, `natCMon.lift_unique`, axiom-free) yields a literal functor fixed by where the generator goes | ✅ proved |
+| **functor out of the free object on `k` generators** | `TracedFunctor.fromFreeCMon` | `ℕᵏ` is free on `k` generators (the scalar fragment on `k` colors); full universal property `freeCMon.lift` / `freeCMon.lift_unique` (both **axiom-free**), a model fixed by where the `k` generators go | ✅ proved |
 
 Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): a concrete
 `FGModuleCat`/`FdHilb` instance, the literal functor out of the *full* free traced SMC
