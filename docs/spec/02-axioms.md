@@ -118,6 +118,11 @@ keep them and models thin out to the systems that actually stabilize selves. The
 candidate theorem of [03](03-sparsity-conjecture.md) — **`Stab_R` is sparse under
 finite `β`** — is the formal cash value of "a self is an achievement of recursion."
 
+**Mechanized.** The defining condition `loop_R(e) = e` is now tied to the resource
+threshold in Lean — [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
+proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`), so A4's
+fixed-point self and the counted threshold are provably the same condition.
+
 ---
 
 ## A5 — Observational identity and the "we" `[theorem given the ν-modality; both]`

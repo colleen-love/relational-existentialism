@@ -141,10 +141,16 @@ A plausible route, in increasing difficulty:
    over a meet-semilattice with `c` sub-additive. Re-derive the bound as
    `|Stab_R| ≤ β / (d_min λ_min)` *up to the sharing defect*, i.e. show the worst
    case (no sharing) is the set bound and sharing only helps.
-3. **Connect the threshold to the fixed point.** In the traced fragment, prove
+3. **Connect the threshold to the fixed point.** Prove
    `loop_R(e) = e ⟺ N(e) ≥ d(e)` with `N(e) = ⌊β/λ(e)⌋` ([§1.3.3](01-signature.md)) —
    i.e. budgeted iteration reaches the eigenform iff the budget funds the depth.
-   This is the genuinely categorical lemma and the likely crux.
+   **✅ done** — [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean):
+   `loopR_isEigen_iff_le_fundedReturns` (the `N ≥ d` form), `loopR_isEigen_iff`
+   (`d·λ ≤ β`), a non-vacuous witness (`matarN_stabilizesAt`), and the capstone
+   `stab_card_le_half_of_depths`, which feeds the **derived** floor `2 ≤ d·λ` into the
+   discrete bound — so the sparsity floor hypothesis is now a theorem, not a posit.
+   (Done at the dynamical/resource level over `Nat`; lifting it inside the *traced
+   category* proper is the remaining categorical work.)
 4. **Topologize.** Put the product/cylinder topology on `I → D` (states as
    behaviors in the final coalgebra), show the threshold set is closed with empty
    interior. Coinduction-friendly; Agda's `ν`-layer is the natural host for this step.

@@ -21,6 +21,24 @@ exist — and remove the budget and that bound collapses.
 The core (`RelExist`) is deliberately **dependency-free (no mathlib)** so it builds
 in seconds even where mathlib's cache is unreachable.
 
+### The loop bridge — step 3 (core, no mathlib)
+
+This closes the gap the spec flagged ([03 §3.3](../docs/spec/03-sparsity-conjecture.md)):
+the sparsity lemmas count with a *threshold*, but [A4](../docs/spec/02-axioms.md)
+defines a self as a **fixed point** of budgeted iterated self-relation. The bridge
+([`RelExist/Loop.lean`](RelExist/Loop.lean)) connects them.
+
+| Result | Lean name (`RelExist.*`) | Meaning | State |
+| --- | --- | --- | --- |
+| `loop_R(e) = e ⟺ N(e) ≥ d(e)` | `loopR_isEigen_iff_le_fundedReturns` | budgeted loop is an eigenform iff budget funds depth-many returns | ✅ proved |
+| `loop_R(e) = e ⟺ d·λ ≤ β` | `loopR_isEigen_iff` / `loopR_isEigen_iff_selfCost` | …iff the budget covers the self's cost (the resource threshold) | ✅ proved |
+| derived cost floor `2 ≤ d·λ` | `two_le_selfCost` | depth `≥ 2` (A4) ⇒ cost `≥ 2`: the sparsity floor is *derived*, not posited | ✅ proved |
+| witness model is non-vacuous | `matarN_stabilizesAt` | a concrete maturation dynamics actually `StabilizesAt` depth `d` | ✅ proved |
+| capstone | `stab_card_le_half_of_depths` | selves with depths `≥ 2` and total cost `≤ β` number `≤ β/2`, floor **discharged** | ✅ proved |
+
+So A4's fixed-point self and the counted threshold are now provably the same
+condition, and the sparsity bound's cost-floor hypothesis is a theorem.
+
 ### mathlib-backed results (target `Scratch`)
 
 | Result | Lean name | Spec source | State |
