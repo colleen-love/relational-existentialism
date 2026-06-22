@@ -13,6 +13,8 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           parameterized fixed-point operator (`Tr`). ✅ verified.
 * `Scratch.KnowingFeeling` — the A6 contrast: knowing (Lawvere-obstructed) vs feeling
                           (`≈`, whole). ✅ verified.
+* `Scratch.Chemistry`   — Layer 4, first domain functor: autocatalytic sets as
+                          eigenforms (`νΦ`); the functor is definitional. ✅ verified.
 * `Scratch.SparsityReal` — the ℝ-valued sparsity bound and density-→-0 statement
                           (the analytic upgrade of Lemmas 3.1/3.2). ✅ verified.
 -/
@@ -20,4 +22,5 @@ import Scratch.We
 import Scratch.Attention
 import Scratch.Trace
 import Scratch.KnowingFeeling
+import Scratch.Chemistry
 import Scratch.SparsityReal

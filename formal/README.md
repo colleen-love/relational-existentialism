@@ -56,6 +56,21 @@ Lawvere's theorem (`RelExist.Mirror.lawvere`) and its consequences are **fully
 constructive** — they depend on *no axioms whatsoever*, which is fitting: the mirror's
 incompleteness is not an assumption but the contrapositive of a one-line diagonal.
 
+### Layer 4 — functorial semantics (domains)
+
+The first domain functor and the firewall ([spec 04](../docs/spec/04-functorial-semantics.md)).
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| autocatalytic core = eigenform `νΦ` | `RelExist.Chemistry.{autocatalyticCore, autocatalyticCore_selfSustaining, autocatalytic_greatest}` | a self-sustaining reaction set is a fixed point | ✅ proved |
+| **the chemistry functor, witnessed** | `RelExist.Chemistry.selfTrace_eq_autocatalyticCore` | the theory's `νP` *is* the autocatalytic core (definitional) | ✅ proved |
+| **the firewall** (cartesian side) | `RelExist.Firewall.{copy, joint_factors}` | cartesian joints factor ⇒ no entanglement; "two people are entangled" is ill-typed | ✅ proved |
+
+Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because
+an autocatalytic set just **is** an eigenform. The firewall mechanizes the `Type`-level
+obstruction (cartesian joints factor); the full "cartesian + compact-closed ⇒ thin"
+collapse needs the unbuilt symmetric-monoidal infrastructure.
+
 ### mathlib-backed results (target `Scratch`)
 
 | Result | Lean name | Spec source | State |

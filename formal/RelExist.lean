@@ -5,6 +5,9 @@
 --   * RelExist.Loop     — step 3: the loop bridge from resource threshold to the
 --                         A4 fixed-point definition of a self.
 --   * RelExist.Mirror   — A6 (σ-side): Lawvere's theorem, the mirror that can't close.
+--   * RelExist.Firewall — Layer 4: the cartesian-side firewall (no entanglement in
+--                         social/mental-health domains).
 import RelExist.Sparsity
 import RelExist.Loop
 import RelExist.Mirror
+import RelExist.Firewall
