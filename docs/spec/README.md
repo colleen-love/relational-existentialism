@@ -22,6 +22,10 @@ Read in order:
    theorem: **under a finite attention budget, `Stab` is sparse.** Includes a
    provable resource-counting lemma and the strategy for lifting it to the full
    doctrine.
+5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
+   domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. The **chemistry** functor
+   (autocatalytic sets = eigenforms) and the **firewall** (no entanglement in
+   cartesian/social domains) are mechanized.
 
 ## Status legend
 

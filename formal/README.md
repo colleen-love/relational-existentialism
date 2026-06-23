@@ -56,6 +56,58 @@ Lawvere's theorem (`RelExist.Mirror.lawvere`) and its consequences are **fully
 constructive** — they depend on *no axioms whatsoever*, which is fitting: the mirror's
 incompleteness is not an assumption but the contrapositive of a one-line diagonal.
 
+### Layer 4 — functorial semantics (domains)
+
+The domain functors — chemistry, physics, biology, AI — and the firewall (all five domains;
+[spec 04](../docs/spec/04-functorial-semantics.md)).
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| autocatalytic core = eigenform `νΦ` | `RelExist.Chemistry.{autocatalyticCore, autocatalyticCore_selfSustaining, autocatalytic_greatest}` | a self-sustaining reaction set is a fixed point | ✅ proved |
+| **the chemistry functor, witnessed** | `RelExist.Chemistry.selfTrace_eq_autocatalyticCore` | the theory's `νP` *is* the autocatalytic core (definitional) | ✅ proved |
+| **biology: (M,R)-systems** | `RelExist.Biology.{organism, mr_cycle_closes, closed_to_efficient_causation, selfTrace_eq_organism}` | closure to efficient causation = the organism `ν(repair ∘ metabolize)`; the functor is definitional | ✅ proved |
+| firewall, `Type`-level (cartesian joints factor) | `RelExist.Firewall.{copy, joint_factors}` | cartesian joints factor ⇒ no entanglement | ✅ proved |
+| **firewall, categorical (the collapse)** | `RelExist.Compact.collapse` | compact-closed + cartesian copying ⇒ **thin** | ✅ proved |
+| **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |
+| **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
+| **physics: the literal traced SMC** | `RelExist.MatrixModel.matTracedSMC` | matrices, `⊗` = Kronecker, **trace = partial trace**; full JSV — the physics functor made literal | ✅ proved |
+| **AI: feedback = the trace** | `RelExist.Recurrence.{feedback, feedback_eq_trace, feedback_iff}` | a recurrent system's behaviour *is* the trace over its hidden wire (GoI execution formula) | ✅ proved |
+| **AI: sustained recurrence = `νΦ`** | `RelExist.Recurrence.{sustained, selfConsistent_sustained, feedback_witnessed_by_sustained}` | persistent recurrence is the eigenform; a self-consistent hidden state is sustained | ✅ proved |
+
+The doctrine's ambient structure ([spec 00](../docs/spec/00-doctrine.md)), as a typeclass
+mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **traced SMC typeclass** | `RelExist.Traced.TracedSMC` | trace + the **full JSV axiom set** (naturality, sliding, yanking, vanishing-I/II, superposing) via associator/unitor isos | ✅ defined |
+| consistency + **validation** | `trivialTracedSMC`, `scalarTracedSMC` | a comm. monoid is a model; **sliding ⟺ commutativity** | ✅ proved |
+| **`Rel` — a genuine multi-object model** | `RelExist.RelModel.relTracedSMC` | sets & relations, `⊗ = ×`, relational trace; full JSV validated non-trivially | ✅ proved |
+| **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
+| **functor out of a free object** | `TracedFunctor.fromFreeScalar` | `ℕ` is the free comm. monoid (the scalar fragment of the free traced SMC on one object); its **universal property** (`natCMon.lift`, `natCMon.lift_unique`, axiom-free) yields a literal functor fixed by where the generator goes | ✅ proved |
+| **functor out of the free object on `k` generators** | `TracedFunctor.fromFreeCMon` | `ℕᵏ` is free on `k` generators (the scalar fragment on `k` colors); full universal property `freeCMon.lift` / `freeCMon.lift_unique` (both **axiom-free**), a model fixed by where the `k` generators go | ✅ proved |
+| **the literal matrix instance** | `RelExist.MatrixModel.matTracedSMC` | finite types & matrices, `⊗` = Kronecker, **trace = quantum partial trace**, associators as permutation matrices; the full JSV axiom set — makes the **physics functor literal** | ✅ proved |
+| **the free traced SMC `Cl(𝕋)`** | `RelExist.Free.clTracedSMC` | terms over a signature modulo *exactly* the `TracedSMC` equations is itself a traced SMC (`Quot.sound`-only) | ✅ proved |
+| **the universal (literal) functor** | `RelExist.Free.functor` / `RelExist.Free.functor_unique` | a model `(ιC, ιG)` of the signature extends to a **unique** traced functor `Cl(𝕋) ⟶ 𝒟` — the genuine universal property | ✅ proved |
+| **the coherence refinement** | `RelExist.Traced.CoherentTracedSMC` | `TracedSMC` + the 8 symmetric-monoidal coherence laws (pentagon, triangle, hexagon, naturalities, symmetry) | ✅ defined |
+| **coherence validated** | `trivialCoherentTracedSMC`, `scalarCoherentTracedSMC`, `RelExist.RelModel.relCoherentTracedSMC` | trivial (axiom-free), scalar (= comm-monoid identities), and **`Rel` multi-object** all coherent | ✅ proved |
+
+Monoidal coherence is now also layered on as a refinement (`CoherentTracedSMC`), validated in
+the trivial, scalar, and **multi-object `Rel`** models ([spec 04 §4.6](../docs/spec/04-functorial-semantics.md)).
+Everything the doctrine references is built: the typeclass, the coherence refinement, concrete
+models (`Rel`, the matrix instance), the free scalar objects, and the **full free traced SMC
+`Cl(𝕋)` with its universal functor**. Remaining (standard, orthogonal) extensions: the free
+*coherent* object and a coherence proof for the matrix model.
+
+Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
+autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
+(`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying
+cannot coexist — with `no_cloning` (categorical) and `no_linear_clone` (the concrete
+physics fact: cloning is nonlinear) on the quantum side. The **literal matrix traced SMC**
+(`matTracedSMC`: trace = partial trace) and — the capstone — the **full free traced SMC
+`Cl(𝕋)`** (`clTracedSMC`) with its **universal functor** (`Free.functor` / `functor_unique`,
+`Quot.sound`-only) are now both down. See
+[spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
+
 ### mathlib-backed results (target `Scratch`)
 
 | Result | Lean name | Spec source | State |
