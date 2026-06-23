@@ -313,5 +313,20 @@ proper classical fragment, the **copy-defect** measures continuously how far a s
 being copyable (zero iff classical, positive on a superposition), and "copyable ⟺ commuting"
 makes the no-broadcasting fault line literal. This is the structural shadow of the
 quantum→classical passage — `sorry`-free, axiom footprint `propext`/`Classical.choice`/`Quot.sound`.
-(The abstract form — a `ClassicalStructure` on a dagger-SMC, with decoherence a functor onto
-the cartesian sub-fragment — is the typeclass-level companion to this concrete instance.)
+
+**The abstract companion** ([`Scratch/Classical.lean`](../../formal/Scratch/Classical.lean)),
+in the operative style of `Compact.lean` (axiomatize the operative content, don't reconstruct
+the full `†`-Frobenius coherence):
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **dagger category** | `RelExist.Classical.DaggerCategory` / `matDagger` | involutive contravariant `(·)†`; the matrix model is one, with `† = transpose` | ✅ defined + instance |
+| **decoherence, abstractly** | `RelExist.Classical.Decoherence` | the endomorphism `†`-monoid of an object with a decoherence retraction whose fixed points form a **commutative** submonoid, `dec` self-adjoint | ✅ defined |
+| structural theorems | `Decoherence.{isClassical_mul, isClassical_comm, isClassical_dgr, dec_eq_self_iff}` | from the axioms alone: the classical fragment is a commutative `†`-submonoid and `dec` retracts onto it (axiom-free) | ✅ proved |
+| **abstract = concrete** | `RelExist.Classical.matDecoherence` | the matrix model *is* a `Decoherence`, every axiom discharged from the `dephase` lemmas — abstract decoherence is matrix dephasing | ✅ proved |
+
+So the decoherence retraction is now a *definable structure* a category can carry, with the
+matrix model exhibited as an instance — the typeclass-level statement of "decoherence onto the
+cartesian fragment," validated by the concrete dephasing. The full `†`-Frobenius / monoidal
+coherence is deliberately not reconstructed (the same stance `Compact.lean` takes for compact
+closure); `Cl_coh(𝕋)` is where that coherence would live.

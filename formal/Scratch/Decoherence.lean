@@ -107,6 +107,18 @@ fragment is a genuine sub-thing the relational whole retracts onto. -/
 lemma dephase_of_classical {M : Matrix A A R} (h : IsClassical M) : dephase M = M :=
   dephase_eq_self_iff.2 h
 
+/-- The identity is classical — the trivial process is fully copyable. -/
+lemma isClassical_one : IsClassical (1 : Matrix A A R) :=
+  fun _ _ hij => Matrix.one_apply_ne hij
+
+/-- Decoherence **commutes with the dagger** (transpose): it is a *self-adjoint* idempotent.
+This is what makes the classical structure a `†`-Frobenius one — decoherence is "real". -/
+lemma transpose_dephase (M : Matrix A A R) : (dephase M)ᵀ = dephase Mᵀ := by
+  ext i j
+  by_cases e : i = j
+  · subst e; simp [dephase_apply, transpose_apply]
+  · simp [dephase_apply, transpose_apply, e, Ne.symm e]
+
 end Semiring
 
 /-! ### The continuous knob (over a `CommRing`, so we can subtract) -/

@@ -72,6 +72,7 @@ The domain functors — chemistry, physics, biology, AI — and the firewall (al
 | **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
 | **physics: the literal traced SMC** | `RelExist.MatrixModel.matTracedSMC` | matrices, `⊗` = Kronecker, **trace = partial trace**; full JSV — the physics functor made literal | ✅ proved |
 | **decoherence: the quantum→classical retraction** | `RelExist.Decoherence.{dephase, copyDefect, defectSq, classical_comm}` | dephasing retracts onto the diagonal (classical) fragment; copy-defect is the continuous knob (`0` ⟺ classical), copyable ⟺ commuting, fragment proper (`defectSq_plus_pos`) | ✅ proved |
+| **decoherence, abstractly** + dagger | `RelExist.Classical.{DaggerCategory, Decoherence, matDagger, matDecoherence}` | dagger category (`† = transpose`) and the operative decoherence retraction as a definable structure; the matrix model is an instance (abstract decoherence *is* dephasing) | ✅ proved |
 | **AI: feedback = the trace** | `RelExist.Recurrence.{feedback, feedback_eq_trace, feedback_iff}` | a recurrent system's behaviour *is* the trace over its hidden wire (GoI execution formula) | ✅ proved |
 | **AI: sustained recurrence = `νΦ`** | `RelExist.Recurrence.{sustained, selfConsistent_sustained, feedback_witnessed_by_sustained}` | persistent recurrence is the eigenform; a self-consistent hidden state is sustained | ✅ proved |
 
