@@ -21,6 +21,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.Rel`         — `Rel` (sets & relations) as a genuine multi-object `TracedSMC`
                           instance: the full JSV axiom set, validated non-trivially.
                           ✅ verified.
+* `Scratch.RelCoherence` — `Rel` promoted to a `CoherentTracedSMC`: the eight monoidal
+                          coherence laws (pentagon, triangle, hexagon, naturalities,
+                          symmetry), validated in a genuine multi-object model. ✅ verified.
 * `Scratch.Recurrence`  — Layer 4, AI: recurrence/Geometry-of-Interaction. Feedback **is**
                           the trace (in `Rel`); sustained recurrence is the eigenform `νΦ`;
                           a self-consistent hidden state is sustained. ✅ verified.
@@ -45,6 +48,7 @@ import Scratch.KnowingFeeling
 import Scratch.Chemistry
 import Scratch.Biology
 import Scratch.Rel
+import Scratch.RelCoherence
 import Scratch.Recurrence
 import Scratch.PartialTrace
 import Scratch.MatrixModel

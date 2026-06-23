@@ -194,12 +194,27 @@ The whole construction's only axiom is **`Quot.sound`** (the defining law of quo
 not `propext`, not choice); `interp_respects` (that the interpretation respects every
 equation) is **fully axiom-free**. This is the last named frontier, closed.
 
+**Now also done — the monoidal-coherence layer.** The coherence equations the bare
+`TracedSMC` deliberately omits are layered back on as a refinement
+`CoherentTracedSMC extends TracedSMC` ([`RelExist/Coherence.lean`](../../formal/RelExist/Coherence.lean)),
+carrying the eight standard symmetric-monoidal laws — naturality of the associator and both
+unitors, the **pentagon** and **triangle**, naturality of the braiding, its **symmetry**
+(`σ∘σ = id`), and the **hexagon**. It is non-vacuous and validated at three strengths: the
+trivial model (axiom-free), the **scalar** model (each law reduces to a commutative-monoid
+identity — associativity for the associator laws, commutativity for the braiding laws), and —
+the real check — **`Rel`** ([`Scratch/RelCoherence.lean`](../../formal/Scratch/RelCoherence.lean),
+`relCoherentTracedSMC`), a genuine **multi-object** model in which all eight coherence laws
+hold. So coherence is now a first-class, validated refinement; it sits *above* the trace,
+exactly as the doctrine claims (the JSV axioms never reference it).
+
 **Frontier (named, not faked):**
 
-1. **Monoidal coherence** (pentagon, triangle, naturality of the structural isos) is *not*
-   imposed — in the typeclass, in `Cl 𝕋`, or in the models — because it constrains the
-   monoidal base, not the trace, and is not referenced by the JSV axioms. A fully coherent
-   base is a further (standard) refinement, orthogonal to everything above.
+1. **`Cl 𝕋` is the free model of the *bare* typeclass** — matching the doctrine's thesis that
+   the trace needs no coherence. The free *coherent* traced SMC is the identical construction
+   with the eight coherence equations adjoined to `Rel` (by the same `Quot.sound` pattern
+   `clTracedSMC` and `relCoherentTracedSMC` already exhibit), and a coherence proof for the
+   matrix model `matTracedSMC` (the associator/braiding being permutation matrices, this is
+   the same `permMat` machinery) — both standard extensions, orthogonal to everything above.
 
 ## 4.7 What this layer shows
 

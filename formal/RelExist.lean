@@ -11,9 +11,12 @@
 --                         (structure-preserving) functors.
 --   * RelExist.Free      — the free traced SMC Cl(𝕋) over a signature, and the universal
 --                         (literal) functor out of it into any model.
+--   * RelExist.Coherence — the monoidal-coherence refinement (CoherentTracedSMC) layered on
+--                         top, with the trivial and scalar models shown coherent.
 import RelExist.Sparsity
 import RelExist.Loop
 import RelExist.Mirror
 import RelExist.Firewall
 import RelExist.Traced
 import RelExist.Free
+import RelExist.Coherence

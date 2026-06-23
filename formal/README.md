@@ -88,12 +88,15 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **the literal matrix instance** | `RelExist.MatrixModel.matTracedSMC` | finite types & matrices, `⊗` = Kronecker, **trace = quantum partial trace**, associators as permutation matrices; the full JSV axiom set — makes the **physics functor literal** | ✅ proved |
 | **the free traced SMC `Cl(𝕋)`** | `RelExist.Free.clTracedSMC` | terms over a signature modulo *exactly* the `TracedSMC` equations is itself a traced SMC (`Quot.sound`-only) | ✅ proved |
 | **the universal (literal) functor** | `RelExist.Free.functor` / `RelExist.Free.functor_unique` | a model `(ιC, ιG)` of the signature extends to a **unique** traced functor `Cl(𝕋) ⟶ 𝒟` — the genuine universal property | ✅ proved |
+| **the coherence refinement** | `RelExist.Traced.CoherentTracedSMC` | `TracedSMC` + the 8 symmetric-monoidal coherence laws (pentagon, triangle, hexagon, naturalities, symmetry) | ✅ defined |
+| **coherence validated** | `trivialCoherentTracedSMC`, `scalarCoherentTracedSMC`, `RelExist.RelModel.relCoherentTracedSMC` | trivial (axiom-free), scalar (= comm-monoid identities), and **`Rel` multi-object** all coherent | ✅ proved |
 
-Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): only monoidal
-coherence (pentagon/triangle/hexagon) on the base remains — deliberately not imposed, since
-it constrains the monoidal base, not the trace. Everything the doctrine references is built:
-the typeclass, concrete models (`Rel`, the matrix instance), the free scalar objects, and now
-the **full free traced SMC `Cl(𝕋)` with its universal functor**.
+Monoidal coherence is now also layered on as a refinement (`CoherentTracedSMC`), validated in
+the trivial, scalar, and **multi-object `Rel`** models ([spec 04 §4.6](../docs/spec/04-functorial-semantics.md)).
+Everything the doctrine references is built: the typeclass, the coherence refinement, concrete
+models (`Rel`, the matrix instance), the free scalar objects, and the **full free traced SMC
+`Cl(𝕋)` with its universal functor**. Remaining (standard, orthogonal) extensions: the free
+*coherent* object and a coherence proof for the matrix model.
 
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
