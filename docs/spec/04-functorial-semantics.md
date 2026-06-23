@@ -203,18 +203,23 @@ unitors, the **pentagon** and **triangle**, naturality of the braiding, its **sy
 trivial model (axiom-free), the **scalar** model (each law reduces to a commutative-monoid
 identity — associativity for the associator laws, commutativity for the braiding laws), and —
 the real check — **`Rel`** ([`Scratch/RelCoherence.lean`](../../formal/Scratch/RelCoherence.lean),
-`relCoherentTracedSMC`), a genuine **multi-object** model in which all eight coherence laws
-hold. So coherence is now a first-class, validated refinement; it sits *above* the trace,
-exactly as the doctrine claims (the JSV axioms never reference it).
+`relCoherentTracedSMC`) and the **literal matrix model**
+([`Scratch/MatrixCoherence.lean`](../../formal/Scratch/MatrixCoherence.lean),
+`matCoherentTracedSMC`), both genuine **multi-object** models in which all eight coherence
+laws hold. For the matrix model the engine is the *functoriality of permutation matrices*
+(`permMat (e ∘ e') = permMat e · permMat e'`, `permMat e ⊗ₖ permMat e' = permMat (e ×' e')`),
+which turns the pure-permutation laws (pentagon, triangle, symmetry, hexagon) into equalities
+of `Equiv`s that hold by computation. So coherence is a first-class, validated refinement; it
+sits *above* the trace, exactly as the doctrine claims (the JSV axioms never reference it).
 
-**Frontier (named, not faked):**
-
-1. **`Cl 𝕋` is the free model of the *bare* typeclass** — matching the doctrine's thesis that
-   the trace needs no coherence. The free *coherent* traced SMC is the identical construction
-   with the eight coherence equations adjoined to `Rel` (by the same `Quot.sound` pattern
-   `clTracedSMC` and `relCoherentTracedSMC` already exhibit), and a coherence proof for the
-   matrix model `matTracedSMC` (the associator/braiding being permutation matrices, this is
-   the same `permMat` machinery) — both standard extensions, orthogonal to everything above.
+**And the free coherent object.** [`RelExist/FreeCoherent.lean`](../../formal/RelExist/FreeCoherent.lean)
+builds `Cl_coh 𝕋`, the **free `CoherentTracedSMC`** on the signature: the syntax quotiented by
+`CohRel` — the bare congruence `Rel` (embedded via `ofRel`) *plus* the eight coherence
+equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the universal functor
+`functorC` into any coherent model (the bare `interp_respects` discharges the embedded steps,
+`𝒟`'s coherence fields the rest). So **both** free objects now exist: the bare `Cl 𝕋`
+(doctrine-faithful — the trace needs no coherence) and the coherent `Cl_coh 𝕋`. Both are
+`Quot.sound`-only.
 
 ## 4.7 What this layer shows
 

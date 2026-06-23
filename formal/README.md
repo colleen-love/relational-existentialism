@@ -89,14 +89,16 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **the free traced SMC `Cl(𝕋)`** | `RelExist.Free.clTracedSMC` | terms over a signature modulo *exactly* the `TracedSMC` equations is itself a traced SMC (`Quot.sound`-only) | ✅ proved |
 | **the universal (literal) functor** | `RelExist.Free.functor` / `RelExist.Free.functor_unique` | a model `(ιC, ιG)` of the signature extends to a **unique** traced functor `Cl(𝕋) ⟶ 𝒟` — the genuine universal property | ✅ proved |
 | **the coherence refinement** | `RelExist.Traced.CoherentTracedSMC` | `TracedSMC` + the 8 symmetric-monoidal coherence laws (pentagon, triangle, hexagon, naturalities, symmetry) | ✅ defined |
-| **coherence validated** | `trivialCoherentTracedSMC`, `scalarCoherentTracedSMC`, `RelExist.RelModel.relCoherentTracedSMC` | trivial (axiom-free), scalar (= comm-monoid identities), and **`Rel` multi-object** all coherent | ✅ proved |
+| **coherence validated** | `trivialCoherentTracedSMC`, `scalarCoherentTracedSMC`, `RelExist.RelModel.relCoherentTracedSMC`, `RelExist.MatrixModel.matCoherentTracedSMC` | trivial (axiom-free), scalar (= comm-monoid identities), **`Rel`** and the **literal matrix model** all coherent | ✅ proved |
+| **the free *coherent* traced SMC** | `RelExist.Free.clCoherentTracedSMC` / `RelExist.Free.functorC` | `Cl_coh(𝕋) := Quot CohRel` is a coherent traced SMC, with the universal functor into any coherent model (`Quot.sound`-only) | ✅ proved |
 
-Monoidal coherence is now also layered on as a refinement (`CoherentTracedSMC`), validated in
-the trivial, scalar, and **multi-object `Rel`** models ([spec 04 §4.6](../docs/spec/04-functorial-semantics.md)).
-Everything the doctrine references is built: the typeclass, the coherence refinement, concrete
-models (`Rel`, the matrix instance), the free scalar objects, and the **full free traced SMC
-`Cl(𝕋)` with its universal functor**. Remaining (standard, orthogonal) extensions: the free
-*coherent* object and a coherence proof for the matrix model.
+Monoidal coherence is also layered on as a refinement (`CoherentTracedSMC`), validated in the
+trivial, scalar, **multi-object `Rel`**, and **literal matrix** models, and the **free coherent
+traced SMC `Cl_coh(𝕋)` with its universal functor** is built too
+([spec 04 §4.6](../docs/spec/04-functorial-semantics.md)). Everything the doctrine references —
+and its full coherent refinement — is now mechanized: the typeclass, the coherence refinement,
+concrete models (`Rel`, the matrix instance, both coherent), the free scalar objects, and the
+**free traced SMC `Cl(𝕋)` (bare and coherent) with universal functors**.
 
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**

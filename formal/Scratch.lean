@@ -34,6 +34,8 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           matrices, `⊗` = Kronecker, trace = partial trace, associators as
                           permutation matrices; the full JSV axiom set. `matTracedSMC`.
                           The named frontier, closed. ✅ verified.
+* `Scratch.MatrixCoherence` — the matrix model promoted to a `CoherentTracedSMC`: all eight
+                          coherence laws, via functoriality of permutation matrices. ✅ verified.
 * `Scratch.Compact`     — Layer 4, categorical: compact closure, the firewall collapse
                           theorem, and categorical no-cloning (physics). ✅ verified.
 * `Scratch.NoCloning`   — Layer 4, physics: the concrete (linear-algebra) no-cloning
@@ -52,6 +54,7 @@ import Scratch.RelCoherence
 import Scratch.Recurrence
 import Scratch.PartialTrace
 import Scratch.MatrixModel
+import Scratch.MatrixCoherence
 import Scratch.Compact
 import Scratch.NoCloning
 import Scratch.SparsityReal
