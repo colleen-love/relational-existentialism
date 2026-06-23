@@ -84,20 +84,23 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **functor out of a free object** | `TracedFunctor.fromFreeScalar` | `ℕ` is the free comm. monoid (the scalar fragment of the free traced SMC on one object); its **universal property** (`natCMon.lift`, `natCMon.lift_unique`, axiom-free) yields a literal functor fixed by where the generator goes | ✅ proved |
 | **functor out of the free object on `k` generators** | `TracedFunctor.fromFreeCMon` | `ℕᵏ` is free on `k` generators (the scalar fragment on `k` colors); full universal property `freeCMon.lift` / `freeCMon.lift_unique` (both **axiom-free**), a model fixed by where the `k` generators go | ✅ proved |
 | **the literal matrix instance** | `RelExist.MatrixModel.matTracedSMC` | finite types & matrices, `⊗` = Kronecker, **trace = quantum partial trace**, associators as permutation matrices; the full JSV axiom set — makes the **physics functor literal** | ✅ proved |
+| **the free traced SMC `Cl(𝕋)`** | `RelExist.Free.clTracedSMC` | terms over a signature modulo *exactly* the `TracedSMC` equations is itself a traced SMC (`Quot.sound`-only) | ✅ proved |
+| **the universal (literal) functor** | `RelExist.Free.functor` / `RelExist.Free.functor_unique` | a model `(ιC, ιG)` of the signature extends to a **unique** traced functor `Cl(𝕋) ⟶ 𝒟` — the genuine universal property | ✅ proved |
 
-Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): only the literal
-functor out of the *full* free traced SMC `Cl(𝕋)` over all objects (the scalar fragment is
-done on any finite number of colors; the concrete matrix `TracedSMC` is now done too), and
-monoidal coherence (pentagon/triangle) on the base.
+Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): only monoidal
+coherence (pentagon/triangle/hexagon) on the base remains — deliberately not imposed, since
+it constrains the monoidal base, not the trace. Everything the doctrine references is built:
+the typeclass, concrete models (`Rel`, the matrix instance), the free scalar objects, and now
+the **full free traced SMC `Cl(𝕋)` with its universal functor**.
 
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
 (`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying
 cannot coexist — with `no_cloning` (categorical) and `no_linear_clone` (the concrete
 physics fact: cloning is nonlinear) on the quantum side. The **literal matrix traced SMC**
-(`matTracedSMC`: trace = partial trace) and the literal functor out of a **free object**
-(`ℕᵏ`, all finite colors) are both now down; the remaining research-grade piece is the
-*full* free traced SMC `Cl(𝕋)` over all objects (a colored PROP). See
+(`matTracedSMC`: trace = partial trace) and — the capstone — the **full free traced SMC
+`Cl(𝕋)`** (`clTracedSMC`) with its **universal functor** (`Free.functor` / `functor_unique`,
+`Quot.sound`-only) are now both down. See
 [spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
 
 ### mathlib-backed results (target `Scratch`)

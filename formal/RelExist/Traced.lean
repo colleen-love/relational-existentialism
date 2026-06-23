@@ -24,8 +24,9 @@ Validation: beyond the trivial one-object model, a commutative monoid is a model
 Not imposed (and noted): the monoidal *coherence* equations (pentagon, triangle) and
 naturality of the structural isos — they constrain the monoidal base, not the trace, and
 are not referenced by the JSV axioms. A concrete matrix instance (`Scratch/MatrixModel.lean`,
-trace = partial trace) is now built; only the free traced SMC `Cl(𝕋)` over all objects
-remains the research-grade frontier (see docs/spec/04 §4.6).
+trace = partial trace) and the **free traced SMC `Cl(𝕋)` with its universal functor**
+(`RelExist/Free.lean`) are now both built (see docs/spec/04 §4.6); only monoidal coherence on
+the base is deliberately left out.
 -/
 
 namespace RelExist.Traced
