@@ -136,6 +136,11 @@ co-directed, asymmetric operator `Φ_c` induced by the coupling, with the self a
 lifts the sparsity dichotomy to `ℝ` with the genuine **density-→-0** limit. See
 *One-command setup* below.
 
+This lattice-theoretic `νΘ` reading of A5 now has a second, independent mechanization:
+the [`agda/`](../agda/) layer (Layer 5) rebuilds `≈`, its coinduction principle, and the
+shared world with **native coinduction** (final coalgebra, copatterns) rather than
+`OrderHom.gfp` — the two developments agree on the doctrine's observational identity.
+
 ## Build
 
 ```sh
