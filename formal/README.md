@@ -58,12 +58,14 @@ incompleteness is not an assumption but the contrapositive of a one-line diagona
 
 ### Layer 4 — functorial semantics (domains)
 
-The domain functors — chemistry, physics, AI — and the firewall ([spec 04](../docs/spec/04-functorial-semantics.md)).
+The domain functors — chemistry, physics, biology, AI — and the firewall (all five domains;
+[spec 04](../docs/spec/04-functorial-semantics.md)).
 
 | Result | Lean name | Meaning | State |
 | --- | --- | --- | --- |
 | autocatalytic core = eigenform `νΦ` | `RelExist.Chemistry.{autocatalyticCore, autocatalyticCore_selfSustaining, autocatalytic_greatest}` | a self-sustaining reaction set is a fixed point | ✅ proved |
 | **the chemistry functor, witnessed** | `RelExist.Chemistry.selfTrace_eq_autocatalyticCore` | the theory's `νP` *is* the autocatalytic core (definitional) | ✅ proved |
+| **biology: (M,R)-systems** | `RelExist.Biology.{organism, mr_cycle_closes, closed_to_efficient_causation, selfTrace_eq_organism}` | closure to efficient causation = the organism `ν(repair ∘ metabolize)`; the functor is definitional | ✅ proved |
 | firewall, `Type`-level (cartesian joints factor) | `RelExist.Firewall.{copy, joint_factors}` | cartesian joints factor ⇒ no entanglement | ✅ proved |
 | **firewall, categorical (the collapse)** | `RelExist.Compact.collapse` | compact-closed + cartesian copying ⇒ **thin** | ✅ proved |
 | **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |

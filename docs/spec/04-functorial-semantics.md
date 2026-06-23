@@ -28,7 +28,7 @@ mechanized, so a functor can be exhibited at that level, which is what §4.3 doe
 | --- | --- | --- | --- |
 | **Physics (quantum)** | `FGModuleCat`/`FdHilb`; `Tr` = partial trace, co-determination = entanglement | **literal traced-SMC functor** (`matTracedSMC`) — redescriptive, not predictive; the distinctive fact is **no-cloning** | ✅ **literal instance + no-cloning** (§4.5–4.6) |
 | **Chemistry** | reaction networks (Baez–Pollard); autocatalytic sets = looped eigenforms | **strong, near-literal** — best non-quantum fit | ✅ **mechanized** (§4.3) |
-| Biology | Rosen relational biology / (M,R)-systems | strong, with an ancestor | future |
+| **Biology** | Rosen relational biology / (M,R)-systems | **strong, with an ancestor** — closure to efficient causation = a looped eigenform | ✅ **mechanized** (§4.9) |
 | **AI** | semantics of recurrence; Geometry of Interaction *is* traced categories | design-principle functor — feedback **is** the trace | ✅ **mechanized** (§4.8) |
 | Sociology, mental health | **cartesian fragment only** | framing; the firewall (§4.4) | ✅ **firewall mechanized** (categorical) |
 
@@ -237,3 +237,29 @@ is made literal by *reusing the doctrine's own structure*, not re-deriving it:
   `feedback_witnessed_by_sustained` packages it: observable feedback is witnessed by a
   sustained eigenform. Trace ⟶ feedback and `ν` ⟶ sustained activity, both *received with
   nothing bolted on* — which is exactly what "design-principle functor" means.
+
+## 4.9 Biology — Rosen's (M,R)-systems and closure to efficient causation (mechanized)
+
+The biology verdict is "**strong, with an ancestor**": Robert Rosen's *metabolism–repair
+(M,R) systems* anticipate the doctrine's looped self. An organism is **closed to efficient
+causation** — it fabricates all its own parts, *including its own maintainers* — an
+impredicative self-closure that is precisely a greatest fixed point. In
+[`formal/Scratch/Biology.lean`](../../formal/Scratch/Biology.lean):
+
+- Unlike chemistry's single production operator, an `MRSystem` **couples two** monotone
+  operators — `metabolize` (what present components make) and `repair` (what regenerates the
+  makers) — and `fabricate := repair ∘ metabolize` is their composite.
+- `organism := ν(fabricate)` is the maximal self-fabricating whole, with `organism_closed`
+  (fixed point) and `organism_greatest` (coinduction). `mr_cycle_closes` is the two-operator
+  heart: the organism is **repaired from its own metabolites**.
+- `closed_to_efficient_causation` — a component the system fabricates *from itself alone* lies
+  in the organism: the efficient cause of its own maintenance is **internal**, Rosen's
+  defining property, as a one-line consequence of coinduction.
+- `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, A2) of
+  the fabrication operator *is* the organism, definitionally — a looped self maps to a
+  self-fabricating organism.
+
+The impredicative "the repairer is itself repaired" is the same self-reference the
+[mirror](../../formal/RelExist/Mirror.lean) makes precise on the σ-side — biology as the
+**ancestor** of the doctrine's self-modelling. With this, **all five domains** of the plan
+(physics, chemistry, biology, AI, and the social/mental-health firewall) are mechanized.
