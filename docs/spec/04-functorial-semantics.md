@@ -26,7 +26,7 @@ mechanized, so a functor can be exhibited at that level, which is what §4.3 doe
 
 | Domain | Target | Verdict | Status |
 | --- | --- | --- | --- |
-| **Physics (quantum)** | `FGModuleCat`/`FdHilb`; `Tr` = partial trace, co-determination = entanglement | literal monoidal functor — **redescriptive, not predictive**; the distinctive fact is **no-cloning** | ✅ **no-cloning mechanized** (§4.5) |
+| **Physics (quantum)** | `FGModuleCat`/`FdHilb`; `Tr` = partial trace, co-determination = entanglement | **literal traced-SMC functor** (`matTracedSMC`) — redescriptive, not predictive; the distinctive fact is **no-cloning** | ✅ **literal instance + no-cloning** (§4.5–4.6) |
 | **Chemistry** | reaction networks (Baez–Pollard); autocatalytic sets = looped eigenforms | **strong, near-literal** — best non-quantum fit | ✅ **mechanized** (§4.3) |
 | Biology | Rosen relational biology / (M,R)-systems | strong, with an ancestor | future |
 | **AI** | semantics of recurrence; Geometry of Interaction *is* traced categories | design-principle functor — feedback **is** the trace | ✅ **mechanized** (§4.8) |
@@ -101,10 +101,9 @@ exactly what separates it from the cartesian domains: **no-cloning**.
   it is proved to satisfy **all three JSV wire axioms** — **naturality** (`ptrace_nat_left`,
   `ptrace_nat_right`), **sliding** (`ptrace_slide`), **yanking** (`ptrace_swap`: `Tr(σ) =
   id`) — plus linearity, **vanishing-II** (`ptrace_prod`), and full-trace compatibility
-  (`trace_ptrace`). This is most of what a literal `FdHilb`/`FGModuleCat` `TracedSMC`
-  instance requires; the remaining piece is the associator-as-reindexing coherence for the
-  retensoring axioms (vanishing-I/II and superposing packaged with the structural isos) —
-  the frontier (§4.6).
+  (`trace_ptrace`). These assemble into a literal `FdHilb`/`FGModuleCat`-style `TracedSMC`
+  instance — **`matTracedSMC`** (§4.6) — with the associator-as-reindexing coherence for the
+  retensoring axioms supplied by permutation matrices. **The physics functor is now literal.**
 
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
@@ -159,20 +158,27 @@ constructive), with the frontier marked precisely.
   — the same commutativity that drives sliding. So a model out of the free scalar object on
   any finite number of colors is determined, constructively, by where its generators go.
 
+**Now also done — the literal matrix instance.** `matTracedSMC`
+([`Scratch/MatrixModel.lean`](../../formal/Scratch/MatrixModel.lean)) is a genuine
+`TracedSMC` whose **objects are finite types, morphisms are matrices, `⊗` is the Kronecker
+product, and the trace *is* the quantum partial trace** `ptrace`. Five of the seven JSV trace
+axioms are exactly the `PartialTrace` lemmas (naturality, sliding, yanking); the two
+**retensoring** axioms (vanishing-II, superposing) are discharged by realising the
+associators as honest **permutation matrices** (`permMat` of `Equiv.prodAssoc`) and proving
+the reindexing lemmas `permMat_mul` / `mul_permMat`. This makes the **physics functor
+literal**, not content-level — the doctrine's `Tr` is, on the nose, the partial trace of
+categorical quantum mechanics. (Axioms: the standard mathlib three; `sorry`-free.)
+
 **Frontier (named, not faked):**
 
-1. **A concrete `FdHilb`/`FGModuleCat` instance.** mathlib's `FGModuleCat` is rigid
-   (compact closed), hence canonically traced — but proving it an instance of `TracedSMC`
-   (the partial trace satisfies JSV) is real linear-algebra-through-coherence work. This
-   is what would make the physics functor *literal* rather than content-level.
-2. **A literal `Functor` out of the *full* free traced SMC `Cl(𝕋)`.** The scalar fragment is
+1. **A literal `Functor` out of the *full* free traced SMC `Cl(𝕋)`.** The scalar fragment is
    now done on *any finite number of colors* (`End(I)` on `k` generators `= ℕᵏ`, above);
    building the *whole* `Cl(𝕋)` as a Lean category (the free traced SMC on the signature — a
    colored PROP, with all objects, non-scalar morphisms, and the JSV-coherent trace) is the
    genuinely research-grade piece. The functors above are between concrete `TracedSMC`s and
    out of the free scalar objects, which is the functor *mechanism* and the universal-property
    idiom without that full free object.
-3. **Monoidal coherence** (pentagon, triangle, naturality of the structural isos) is *not*
+2. **Monoidal coherence** (pentagon, triangle, naturality of the structural isos) is *not*
    imposed: it constrains the monoidal base, not the trace, and is not referenced by the
    JSV axioms. A fully coherent base is a further (standard) refinement.
 

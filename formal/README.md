@@ -68,6 +68,7 @@ The domain functors — chemistry, physics, AI — and the firewall ([spec 04](.
 | **firewall, categorical (the collapse)** | `RelExist.Compact.collapse` | compact-closed + cartesian copying ⇒ **thin** | ✅ proved |
 | **no-cloning, categorical** | `RelExist.Compact.no_cloning` | a non-trivial compact-closed structure admits no copying | ✅ proved |
 | **no-cloning, concrete (physics)** | `RelExist.NoCloning.no_linear_clone` | cloning `x ↦ x²` (`≅ x ↦ x⊗x`) is nonlinear | ✅ proved |
+| **physics: the literal traced SMC** | `RelExist.MatrixModel.matTracedSMC` | matrices, `⊗` = Kronecker, **trace = partial trace**; full JSV — the physics functor made literal | ✅ proved |
 | **AI: feedback = the trace** | `RelExist.Recurrence.{feedback, feedback_eq_trace, feedback_iff}` | a recurrent system's behaviour *is* the trace over its hidden wire (GoI execution formula) | ✅ proved |
 | **AI: sustained recurrence = `νΦ`** | `RelExist.Recurrence.{sustained, selfConsistent_sustained, feedback_witnessed_by_sustained}` | persistent recurrence is the eigenform; a self-consistent hidden state is sustained | ✅ proved |
 
@@ -82,20 +83,21 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **literal functors** | `TracedFunctor.{id, toTrivial, comp}` | structure-preserving models; they **compose** | ✅ proved |
 | **functor out of a free object** | `TracedFunctor.fromFreeScalar` | `ℕ` is the free comm. monoid (the scalar fragment of the free traced SMC on one object); its **universal property** (`natCMon.lift`, `natCMon.lift_unique`, axiom-free) yields a literal functor fixed by where the generator goes | ✅ proved |
 | **functor out of the free object on `k` generators** | `TracedFunctor.fromFreeCMon` | `ℕᵏ` is free on `k` generators (the scalar fragment on `k` colors); full universal property `freeCMon.lift` / `freeCMon.lift_unique` (both **axiom-free**), a model fixed by where the `k` generators go | ✅ proved |
+| **the literal matrix instance** | `RelExist.MatrixModel.matTracedSMC` | finite types & matrices, `⊗` = Kronecker, **trace = quantum partial trace**, associators as permutation matrices; the full JSV axiom set — makes the **physics functor literal** | ✅ proved |
 
-Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): a concrete
-`FGModuleCat`/`FdHilb` instance, the literal functor out of the *full* free traced SMC
-`Cl(𝕋)` over all objects (the scalar fragment is now done), and monoidal coherence
-(pentagon/triangle) on the base.
+Frontier (in spec [04 §4.6](../docs/spec/04-functorial-semantics.md)): only the literal
+functor out of the *full* free traced SMC `Cl(𝕋)` over all objects (the scalar fragment is
+done on any finite number of colors; the concrete matrix `TracedSMC` is now done too), and
+monoidal coherence (pentagon/triangle) on the base.
 
 Chemistry is the plan's "best non-quantum fit"; the functor is *definitional* because an
 autocatalytic set just **is** an eigenform. The **firewall is now a categorical theorem**
 (`Compact.collapse`): compact-closed + cartesian ⇒ thin, so entanglement and free copying
 cannot coexist — with `no_cloning` (categorical) and `no_linear_clone` (the concrete
-physics fact: cloning is nonlinear) on the quantum side. The literal functor out of a
-**free object** is now down — via the universal property of `ℕ` as the free commutative
-monoid (the scalar fragment of `Cl(𝕋)`); the remaining research-grade piece is the *full*
-free traced SMC `Cl(𝕋)` over all objects (a colored PROP). See
+physics fact: cloning is nonlinear) on the quantum side. The **literal matrix traced SMC**
+(`matTracedSMC`: trace = partial trace) and the literal functor out of a **free object**
+(`ℕᵏ`, all finite colors) are both now down; the remaining research-grade piece is the
+*full* free traced SMC `Cl(𝕋)` over all objects (a colored PROP). See
 [spec 04 §4.6](../docs/spec/04-functorial-semantics.md).
 
 ### mathlib-backed results (target `Scratch`)

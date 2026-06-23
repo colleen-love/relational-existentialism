@@ -24,6 +24,10 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.PartialTrace` — Layer 4, physics: the quantum **partial trace** on matrices and
                           its defining properties (linearity, vanishing-II, yanking,
                           full-trace compatibility). ✅ verified.
+* `Scratch.MatrixModel` — Layer 4, physics: **the literal traced SMC** — finite types &
+                          matrices, `⊗` = Kronecker, trace = partial trace, associators as
+                          permutation matrices; the full JSV axiom set. `matTracedSMC`.
+                          The named frontier, closed. ✅ verified.
 * `Scratch.Compact`     — Layer 4, categorical: compact closure, the firewall collapse
                           theorem, and categorical no-cloning (physics). ✅ verified.
 * `Scratch.NoCloning`   — Layer 4, physics: the concrete (linear-algebra) no-cloning
@@ -39,6 +43,7 @@ import Scratch.Chemistry
 import Scratch.Rel
 import Scratch.Recurrence
 import Scratch.PartialTrace
+import Scratch.MatrixModel
 import Scratch.Compact
 import Scratch.NoCloning
 import Scratch.SparsityReal
