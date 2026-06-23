@@ -17,10 +17,11 @@ A domain *receives* a functor exactly when it has the structure the theory expor
 - a **compact-closed** (quantum) domain receives the entanglement/no-cloning structure
   — and, crucially, **cannot** also be cartesian without collapsing (§4.4).
 
-We do not have the full traced-symmetric-monoidal `Cl(𝕋)` as a Lean object (it is left
-as categorical infrastructure). But the **operative content** the functors carry — the
-eigenform/`gfp` structure (A2–A5) and the cartesian copy/Lawvere structure (A6) — *is*
-mechanized, so a functor can be exhibited at that level, which is what §4.3 does.
+The full traced-symmetric-monoidal `Cl(𝕋)` is now a genuine Lean object — the free traced
+SMC on a signature, with its universal functor (§4.6). The domain functors below are also
+exhibited directly at the level of **operative content** — the eigenform/`gfp` structure
+(A2–A5) and the cartesian copy/Lawvere structure (A6) — which is what makes each one a
+*one-line* theorem (§4.3, §4.8, §4.9).
 
 ## 4.2 The domains, with verdicts
 
@@ -75,11 +76,11 @@ domain. `no_cloning` is the contrapositive: a non-trivial compact-closed structu
 no uniform copying. This is what makes "two people are entangled" ill-typed for the
 cartesian social domain, as a theorem rather than a stance.
 
-This axiomatizes compact closure minimally (the dual adjunction) rather than deriving it
-from a fully reconstructed traced symmetric monoidal category; mathlib has
-symmetric/braided/**rigid** monoidal categories and `ChosenFiniteProducts`, but not
-traced-monoidal or a compact-closed typeclass, and the free traced SMC `Cl(𝕋)` itself is
-the remaining heavy infrastructure (see §4.6).
+This axiomatizes compact closure minimally (the dual adjunction) rather than routing through
+the full traced SMC; mathlib has symmetric/braided/**rigid** monoidal categories and
+`ChosenFiniteProducts`, but no traced-monoidal or compact-closed typeclass — so the traced
+SMC structure, the concrete models, and the free traced SMC `Cl(𝕋)` are all built from
+scratch here (§4.6).
 
 ## 4.5 Physics — the quantum fragment and no-cloning (mechanized)
 
@@ -108,11 +109,14 @@ exactly what separates it from the cartesian domains: **no-cloning**.
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
 
-## 4.6 The traced SMC typeclass and literal functors — a down payment
+## 4.6 The traced SMC typeclass, the free category `Cl(𝕋)`, and literal functors
 
-The two research-grade pieces are now **partially built** in
-[`formal/RelExist/Traced.lean`](../../formal/RelExist/Traced.lean) (axiom-free, fully
-constructive), with the frontier marked precisely.
+What were once the two research-grade frontier pieces — a real traced-SMC typeclass and a
+literal functor out of the free traced SMC — are now **fully built** in
+[`formal/RelExist/Traced.lean`](../../formal/RelExist/Traced.lean) and
+[`formal/RelExist/Free.lean`](../../formal/RelExist/Free.lean) (axiom-free / `Quot.sound`-only,
+fully constructive), together with the monoidal-coherence refinement and a concrete matrix
+model. The progression, in order of strength:
 
 **Done:**
 
@@ -192,7 +196,7 @@ signature** `(C, G)` (colors and generating morphisms) as a genuine Lean categor
 
 The whole construction's only axiom is **`Quot.sound`** (the defining law of quotients —
 not `propext`, not choice); `interp_respects` (that the interpretation respects every
-equation) is **fully axiom-free**. This is the last named frontier, closed.
+equation) is **fully axiom-free**.
 
 **Now also done — the monoidal-coherence layer.** The coherence equations the bare
 `TracedSMC` deliberately omits are layered back on as a refinement
@@ -203,18 +207,23 @@ unitors, the **pentagon** and **triangle**, naturality of the braiding, its **sy
 trivial model (axiom-free), the **scalar** model (each law reduces to a commutative-monoid
 identity — associativity for the associator laws, commutativity for the braiding laws), and —
 the real check — **`Rel`** ([`Scratch/RelCoherence.lean`](../../formal/Scratch/RelCoherence.lean),
-`relCoherentTracedSMC`), a genuine **multi-object** model in which all eight coherence laws
-hold. So coherence is now a first-class, validated refinement; it sits *above* the trace,
-exactly as the doctrine claims (the JSV axioms never reference it).
+`relCoherentTracedSMC`) and the **literal matrix model**
+([`Scratch/MatrixCoherence.lean`](../../formal/Scratch/MatrixCoherence.lean),
+`matCoherentTracedSMC`), both genuine **multi-object** models in which all eight coherence
+laws hold. For the matrix model the engine is the *functoriality of permutation matrices*
+(`permMat (e ∘ e') = permMat e · permMat e'`, `permMat e ⊗ₖ permMat e' = permMat (e ×' e')`),
+which turns the pure-permutation laws (pentagon, triangle, symmetry, hexagon) into equalities
+of `Equiv`s that hold by computation. So coherence is a first-class, validated refinement; it
+sits *above* the trace, exactly as the doctrine claims (the JSV axioms never reference it).
 
-**Frontier (named, not faked):**
-
-1. **`Cl 𝕋` is the free model of the *bare* typeclass** — matching the doctrine's thesis that
-   the trace needs no coherence. The free *coherent* traced SMC is the identical construction
-   with the eight coherence equations adjoined to `Rel` (by the same `Quot.sound` pattern
-   `clTracedSMC` and `relCoherentTracedSMC` already exhibit), and a coherence proof for the
-   matrix model `matTracedSMC` (the associator/braiding being permutation matrices, this is
-   the same `permMat` machinery) — both standard extensions, orthogonal to everything above.
+**And the free coherent object.** [`RelExist/FreeCoherent.lean`](../../formal/RelExist/FreeCoherent.lean)
+builds `Cl_coh 𝕋`, the **free `CoherentTracedSMC`** on the signature: the syntax quotiented by
+`CohRel` — the bare congruence `Rel` (embedded via `ofRel`) *plus* the eight coherence
+equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the universal functor
+`functorC` into any coherent model (the bare `interp_respects` discharges the embedded steps,
+`𝒟`'s coherence fields the rest). So **both** free objects now exist: the bare `Cl 𝕋`
+(doctrine-faithful — the trace needs no coherence) and the coherent `Cl_coh 𝕋`. Both are
+`Quot.sound`-only.
 
 ## 4.7 What this layer shows
 

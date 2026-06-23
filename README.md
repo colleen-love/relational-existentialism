@@ -5,7 +5,7 @@ A philosophy — relation comes first, and the self is what relation produces �
 - **The view, in plain language:** [`docs/relational-existentialism.md`](docs/relational-existentialism.md)
 - **The four-layer formalization program:** [`docs/formalization-plan.md`](docs/formalization-plan.md)
 - **The formal spec (doctrine, signature, axioms):** [`docs/spec/`](docs/spec/)
-- **The mechanized development (Lean 4):** [`formal/`](formal/) — the sparsity dichotomy (Lemmas 3.1 & 3.2), machine-checked and `sorry`-free.
+- **The mechanized development (Lean 4):** [`formal/`](formal/) — machine-checked and `sorry`-free, now spanning all four layers: the sparsity dichotomy (Lemmas 3.1 & 3.2), the Lawvere mirror and the cartesian firewall, a **traced symmetric monoidal category** typeclass with its **monoidal-coherence** refinement, the **free traced SMC `Cl(𝕋)`** (bare and coherent) with universal functors, a **literal matrix model** (trace = the quantum partial trace), and all **five Layer-4 domain functors** (physics, chemistry, biology, AI, and the firewall).
 
 Code implementing the formalization (proof-assistant developments, `Catlab.jl` / `AlgebraicJulia` schemas, `DisCoPy` string-diagram functors, and so on) lives alongside these documents as the work develops.
 

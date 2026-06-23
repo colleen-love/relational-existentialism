@@ -174,8 +174,9 @@ A plausible route, in increasing difficulty:
    (`d·λ ≤ β`), a non-vacuous witness (`matarN_stabilizesAt`), and the capstone
    `stab_card_le_half_of_depths`, which feeds the **derived** floor `2 ≤ d·λ` into the
    discrete bound — so the sparsity floor hypothesis is now a theorem, not a posit.
-   (Done at the dynamical/resource level over `Nat`; lifting it inside the *traced
-   category* proper is the remaining categorical work.)
+   (Done at the dynamical/resource level over `Nat`; the *traced category* proper now also
+   exists — the free traced SMC `Cl(𝕋)` of [spec 04 §4.6](04-functorial-semantics.md) — so
+   lifting the bound inside it is a well-posed next step rather than missing infrastructure.)
 4. **Topologize.** Put the product/cylinder topology on `I → D` (states as
    behaviors in the final coalgebra), show the threshold set is closed with empty
    interior. Coinduction-friendly; Agda's `ν`-layer is the natural host for this step.

@@ -1,10 +1,11 @@
-# Formalization Spec — Layers 1–3
+# Formalization Spec — Layers 1–4
 
 This directory is the rigorous mathematical specification of the **doctrine**, the
-**signature**, and the **axioms** of Relational Existentialism — layers 1–3 of the
-[formalization plan](../formalization-plan.md). It is written tool-agnostically
-(prose + math) on purpose: the math should be settled before committing to Lean,
-Agda, Catlab, or Rocq for mechanization.
+**signature**, the **axioms**, and the **functorial semantics** of Relational
+Existentialism — layers 1–4 of the [formalization plan](../formalization-plan.md). The prose
++ math here settles the mathematics; the [`formal/`](../../formal) directory carries the Lean
+mechanization, which now reaches all the way through Layer 4 (the free traced SMC `Cl(𝕋)`,
+its coherent refinement, and all five domain functors).
 
 Read in order:
 
@@ -23,9 +24,11 @@ Read in order:
    provable resource-counting lemma and the strategy for lifting it to the full
    doctrine.
 5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
-   domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. The **chemistry** functor
-   (autocatalytic sets = eigenforms) and the **firewall** (no entanglement in
-   cartesian/social domains) are mechanized.
+   domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. All five domains
+   (**physics** — a literal matrix model with trace = partial trace; **chemistry** and
+   **biology** — eigenforms; **AI** — feedback = the trace; and the **firewall** for the
+   cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
+   and the **monoidal-coherence** refinement are all mechanized.
 
 ## Status legend
 
