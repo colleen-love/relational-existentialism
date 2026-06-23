@@ -287,3 +287,31 @@ The impredicative "the repairer is itself repaired" is the same self-reference t
 [mirror](../../formal/RelExist/Mirror.lean) makes precise on the σ-side — biology as the
 **ancestor** of the doctrine's self-modelling. With this, **all five domains** of the plan
 (physics, chemistry, biology, AI, and the social/mental-health firewall) are mechanized.
+
+## 4.10 Decoherence — the quantum→classical retraction (mechanized, concrete)
+
+The firewall (§4.4) is a *binary*: a domain is cartesian (copyable) or compact (entangleable),
+never both. But the **passage** between them — how the classical fragment arises *inside* the
+relational whole — is not binary, it is graded, and it has a name: **decoherence**. This is
+mechanized concretely inside the literal matrix model
+([`Scratch/Decoherence.lean`](../../formal/Scratch/Decoherence.lean)), with the standard
+basis as the **classical structure**.
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **decoherence** — kill the coherences | `RelExist.Decoherence.dephase` | keep the diagonal, zero the off-diagonal (the basis-induced retraction) | ✅ defined |
+| the **classical fragment** = diagonal states | `IsClassical` / `isClassical_iff_diagonal` | the copyable, broadcastable states are exactly the diagonal ones | ✅ proved |
+| decoherence is a **retraction** | `dephase_eq_self_iff` / `dephase_idem` / `trace_dephase` | idempotent, trace-preserving, fixes exactly the classical fragment | ✅ proved |
+| **copyability ⟺ commutativity** | `isClassical_mul` / `classical_comm` | the classical fragment is closed under composition *and commuting* — the no-broadcasting fault line, concretely | ✅ proved |
+| **copy-defect** — the continuous knob | `copyDefect` / `copyDefect_eq_zero_iff` | the off-diagonal mass; `= 0` ⟺ classical (the dial from feeling to knowing) | ✅ proved |
+| a **numeric magnitude** | `defectSq` / `defectSq_eq_zero_iff` / `defectSq_nonneg` | squared off-diagonal mass: `0` exactly on the classical fragment, positive otherwise | ✅ proved |
+| the fragment is **proper** | `plus_not_classical` / `dephase_plus_ne` / `defectSq_plus_pos` | a witnessed superposition (`|+⟩⟨+|`) has positive defect; decoherence loses information — the concrete face of `no_cloning` | ✅ proved |
+
+So the cartesian/compact binary of `Compact.collapse` is refined, *inside* a genuine traced
+SMC, into a **graded retraction**: decoherence `dephase` projects the relational whole onto a
+proper classical fragment, the **copy-defect** measures continuously how far a state is from
+being copyable (zero iff classical, positive on a superposition), and "copyable ⟺ commuting"
+makes the no-broadcasting fault line literal. This is the structural shadow of the
+quantum→classical passage — `sorry`-free, axiom footprint `propext`/`Classical.choice`/`Quot.sound`.
+(The abstract form — a `ClassicalStructure` on a dagger-SMC, with decoherence a functor onto
+the cartesian sub-fragment — is the typeclass-level companion to this concrete instance.)
