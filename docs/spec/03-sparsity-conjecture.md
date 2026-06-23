@@ -130,6 +130,16 @@ None of these is hand-waving-away-able, and naming them is the point: the lemma 
 > Moreover (sharp dichotomy): dropping the bound (`β = ⊤`) makes `Stab_R` dense
 > (Lemma 3.2 lifts), so finiteness of `β` is **necessary** for sparsity.
 
+> **Partially mechanized (topological clause).** The "nowhere dense" half of
+> Conjecture 3.3 is now machine-checked for the **final-coalgebra model** of states —
+> [`agda/RelExist/Sparsity.agda`](../../agda/RelExist/Sparsity.agda) (`selves-nowhereDense`):
+> under the cylinder topology on behaviours, the selves (the constant behaviours) are
+> closed with empty interior, and the sharp dichotomy holds (`trivial→allSelf`: a
+> trivial observation alphabet makes them dense). What remains conjectural is the
+> *cost-graded* content — the lax grading `c`, cost-sharing over the poset of couplings,
+> and the lift to all of `Cl(𝕋)` (step 2 of §3.5); the topological *shape* of the claim
+> is no longer open.
+
 > **Conjecture 3.4 (spectral / closure form — the structural reason).** Let attention
 > be the co-directed operator `Φ_c` of [§1.3](01-signature.md) on a perspective of
 > constitutive capacity `α` (no external budget). Then the set of selves — eigenforms
@@ -180,9 +190,19 @@ A plausible route, in increasing difficulty:
 4. **Topologize.** Put the product/cylinder topology on `I → D` (states as
    behaviors in the final coalgebra), show the threshold set is closed with empty
    interior. Coinduction-friendly; Agda's `ν`-layer is the natural host for this step.
+   **✅ done** — [`agda/RelExist/Sparsity.agda`](../../agda/RelExist/Sparsity.agda),
+   Agda (`--safe --guardedness`): states are behaviours in the final coalgebra, the
+   topology is the cylinder topology, and the selves are the *constant* behaviours.
+   `nonConst-open` (the selves are **closed** — their positive complement is open) and
+   `selves-emptyInterior` (every cylinder contains a non-self) give
+   `selves-nowhereDense`: `Stab` is **nowhere dense**, the topological form of
+   Conjecture 3.3. `trivial→allSelf` is the matching dichotomy — a trivial observation
+   alphabet makes `Stab` dense (Lemma 3.2 lifts), so expressivity (`≥ 2` distinct
+   observations) is *necessary* for sparsity.
 
 Steps 1–2 are near-term and proof-assistant-ready. Step 3 is the heart. Step 4 is
-the polished form.
+the polished form. Steps 1, 3, and 4 are mechanized (Lean for 1 & 3, Agda for 4);
+step 2 (cost-sharing over a graded poset) is the remaining gap.
 
 ---
 

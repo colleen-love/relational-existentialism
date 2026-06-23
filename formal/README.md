@@ -193,7 +193,10 @@ Next, in rough order:
 1. **mathlib upgrade.** Re-cast costs in `ℝ_{≥0}`, prove the density-→-0 statement
    (`Filter.Tendsto`) and the "nowhere dense" form (topology). mathlib is now
    installed (target `Scratch`), so this proceeds there — no cache required, just the
-   one-time source compile the bootstrap already does.
+   one-time source compile the bootstrap already does. (The density-→-0 statement is
+   done in `Scratch.SparsityReal`; the **nowhere-dense / topological** form is now
+   mechanized on the Agda side — [`agda/RelExist/Sparsity.agda`](../agda/RelExist/Sparsity.agda),
+   `selves-nowhereDense` — over the final coalgebra, where it is most natural.)
 2. **Sharing.** Replace the `List` of costs by a graded poset with sub-additive cost
    (lax `c`), re-deriving the bound up to the sharing defect ([03 §3.3](../docs/spec/03-sparsity-conjecture.md)).
 3. **Threshold ⇔ fixed point.** The categorical crux: in the traced fragment,
