@@ -143,11 +143,11 @@ $$
 — a subobject of `D ⊗ D` — for **observational identity**. It is *not* an
 endomorphism `D → D` (that would be the σ-move, the diagonal, the cartesian
 self-look); it is a relation living one level up. This type-level distinction is the
-whole of Axiom **T3**: `σ` (an endomap, cartesian, Lawvere-obstructed) fragments;
+whole of Theorem **T3**: `σ` (an endomap, cartesian, Lawvere-obstructed) fragments;
 `≈` (a relation, coinductive, fragment-neutral) does not. The two are different
 *kinds of arrow*, and that difference is the formal image of "knowing vs feeling."
 
-`≈` is not freely generated — it is pinned down coinductively by Axiom **T2** as a
+`≈` is not freely generated — it is pinned down coinductively by Theorem **T2** as a
 greatest fixed point `νΘ`. Its quotient `𝔼 := D/≈` is the **shared world**.
 
 `[definitional]`

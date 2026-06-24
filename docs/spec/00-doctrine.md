@@ -87,7 +87,7 @@ $$
 $$
 
 `[structural; both]` — this is the operator the philosophy calls the *σ-move*, the
-turning of a relating back on itself. Axiom **D1** records the definition; Axiom
+turning of a relating back on itself. Definition **D1** records the definition; Theorem
 **T3** records its cartesian obstruction.
 
 ---
@@ -114,7 +114,7 @@ bijection with **Conway fixed-point operators** — operators
 dinaturality, the diagonal/Bekič rule). Consequently every endomorphism arising by
 feedback *has* a fixed point, canonically.
 
-This is the precise sense of **"to relate is to create"** (Axiom **T1**): in the
+This is the precise sense of **"to relate is to create"** (Theorem **T1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure.
 
@@ -155,7 +155,7 @@ need, their final coalgebras. Two uses:
   becomes a type, not a metaphor.
 - **The "we".** Observational identity `≈` is defined coinductively as the greatest
   relation closed under one step of mutual indistinguishability — a **bisimilarity**
-  — and the shared world is the quotient `𝔼 := D/≈`. Axiom **T2** is stated here.
+  — and the shared world is the quotient `𝔼 := D/≈`. Theorem **T2** is stated here.
 
 `[structural; both]`
 
@@ -180,7 +180,7 @@ theorem versus a no-go on a natural transformation existing. The philosophy as
 **cartesian** story. The monoidal generalization buys **quantum reach** (Layer 4's
 physics functor) at the cost of the literal mirror reading.
 
-**Methodological consequence.** All self-reference axioms — **D1's** mirror reading,
+**Methodological consequence.** All the self-reference results — **D1's** mirror reading,
 **T1**, **T3** — are stated in the cartesian fragment. The compact-closed fragment
 inherits only what is fragment-neutral (`⊗`, `Tr`-as-feedback, `≈`). We never write
 "`Δ`" in the quantum fragment, and Layer 4 will turn this discipline into a typing

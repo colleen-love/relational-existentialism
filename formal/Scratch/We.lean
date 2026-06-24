@@ -1,5 +1,5 @@
 /-
-# Observational identity `≈` and the shared world `𝔼` — axiom T2
+# Observational identity `≈` and the shared world `𝔼` — theorem T2
 
 A faithful mechanization of [spec T2](../../docs/spec/02-axioms.md): observational
 identity is the **greatest fixed point of a monotone operator on the complete
@@ -44,7 +44,7 @@ def Step (obs : X → O) (step : X → X → Prop) :
       obtain ⟨a', ha', hr⟩ := hbk b' hb'
       exact ⟨a', ha', hRS a' b' hr⟩
 
-/-- **Observational identity `≈ := νΘ`** — the greatest bisimulation (axiom T2). -/
+/-- **Observational identity `≈ := νΘ`** — the greatest bisimulation (theorem T2). -/
 def bisim (obs : X → O) (step : X → X → Prop) : X → X → Prop :=
   (Step obs step).gfp
 
@@ -112,7 +112,7 @@ def bisimSetoid (obs : X → O) (step : X → X → Prop) : Setoid X where
   r := bisim obs step
   iseqv := ⟨bisim_refl obs step, bisim_symm obs step, bisim_trans obs step⟩
 
-/-- **The shared world `𝔼 := D/≈`** (axiom T2): states quotiented by observational
+/-- **The shared world `𝔼 := D/≈`** (theorem T2): states quotiented by observational
 identity — the objective world as the overlap of perspectives. -/
 abbrev World (obs : X → O) (step : X → X → Prop) : Type _ :=
   Quotient (bisimSetoid obs step)

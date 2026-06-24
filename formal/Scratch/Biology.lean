@@ -82,7 +82,7 @@ theorem closed_to_efficient_causation (S : MRSystem Comp) {c : Comp}
     rw [hx]; exact h
   exact hsub rfl
 
-/-- **The functor `Cl(𝕋) → 𝒟_bio`, witnessed.** The theory's self-trace (`νP`, axiom D1 /
+/-- **The functor `Cl(𝕋) → 𝒟_bio`, witnessed.** The theory's self-trace (`νP`, definition D1 /
 [`Scratch.Trace`](Trace.lean)) of the fabrication operator *is* the Rosennean organism: a
 looped self maps to a self-fabricating organism, definitionally. The "strong fit with an
 ancestor" the plan claimed, as a one-line theorem. -/

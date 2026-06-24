@@ -128,7 +128,7 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 | Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
 | **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved (`Filter.Tendsto`) |
 
-`Scratch.We` formalizes **axiom T2**: observational identity as `νΘ = OrderHom.gfp Θ`,
+`Scratch.We` formalizes **theorem T2**: observational identity as `νΘ = OrderHom.gfp Θ`,
 with coinduction, the proof that `≈` is an equivalence, and the shared world `𝔼 := D/≈`.
 `Scratch.Attention` recasts **attention as a consequence of structure** (§1.3): a
 co-directed, asymmetric operator `Φ_c` induced by the coupling, with the self an
