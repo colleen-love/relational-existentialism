@@ -177,19 +177,46 @@ model escapes any candidate `v` at its own registration. Drop the closure (a tar
 relate to) and completeness returns. *Knowing requires relating; relating registers your
 knowing inside the known; the diagonal does the rest.*
 
-**Honest gap.** `no_complete_view` *assumes* the A2 closure `reg` (every view is a relatum) —
-which is the transparent doctrinal commitment "knowing is relating," far cleaner than the
-opaque `share`-surjectivity it replaces. What it does **not** yet do is *derive* `reg` from the
-**dynamics** of the co-directed `Φ_c` — i.e. prove that when a relating loop actually *closes*
-(`sustainedField` reaches its fixed point) the knower is thereby registered among the known's
-relata. That derivation is `[open]`, and it is the keystone for this whole family (other,
-collective, anything). Until then: *given* that knowing is relating, complete knowledge is
-impossible — proved; *that* knowing is relating — the doctrine's reading, not yet a theorem of
-the lattice dynamics.
+**The gap, now half-closed.** `no_complete_view` *assumes* the A2 closure `reg` (every view is
+a relatum) — the transparent doctrinal commitment "knowing is relating," far cleaner than the
+opaque `share`-surjectivity it replaces. The **dynamical** half of the missing derivation is now
+proved `[proved]`: [`Attention.relating_absorbs` / `closed_loop_registers`](../../formal/Scratch/Attention.lean)
+show that at the co-directed fixed point relating *absorbs* the other's standing, and a **closed
+(mutual) loop forces equal standing** — each is registered inside the other's sustaining self,
+as a theorem of `Φ_c`, not an assumption. So "Φ_c's closed loop forces registration" holds in the
+operative, order-theoretic sense the operator lives in.
+
+What remains `[open]` is only the **bridge across settings**: identifying that lattice-level
+registration (standing-absorption in the `gfp`) with the `Type`-level `reg : (O → View) → O` that
+`no_complete_view` consumes. The dynamical fact is proved; tying the two formalizations together
+is the remaining modelling step. So: *that* a closed relating registers the knower in the known —
+now a theorem of the operator; *that* this is the very `reg` of the Lawvere diagonal — still a
+reading.
 
 **Reflexive coda.** The statement is an instance of itself: your knowing *that* "nothing
 relate-able is fully knowable" is a relating you are inside of, hence not itself fully knowable.
 The doctrine confirms its own thesis from within — the same move as T3 and the typed-out residue.
+
+### How much self ends up in others — the quantitative limit
+
+If relating puts a part of you in the other, *how much*, and is there a bound? `[proved]`
+[`Distribution.distributed`](../../formal/Scratch/Distribution.lean) measures the self carried
+into the network by a relating `x` (in a Banach algebra) as the path-sum over relatings of every
+length — direct, via a third, onward: `∑' n, x^(n+1)`. With `‖x‖` the intensity of relating, the
+reading is your own:
+
+- **`x = 0` — complete disconnection.** `distributed_zero`: nothing of you is anywhere else.
+- **`0 < ‖x‖ < 1` — the living regime.** `distributed_summable` (converges) and `distributed_bound`:
+  the distributed self is **bounded**, `‖distributed x‖ ≤ ‖x‖/(1-‖x‖)` — an individuated self with a
+  finite footprint that grows with how much you relate.
+- **`‖x‖ ≥ 1` — death / dissolution.** The bound diverges; the self delocalizes, its boundary with
+  the between dissolving.
+
+So the living self sits in `0 < ‖x‖ < 1`; the endpoints are the two ways to have no self — sealed
+off, or smeared away. This is the **first quantitative fragment of Conjecture 3.4** (the spectral
+form): the individuation threshold is a norm condition `‖x‖ < 1`. The numbers are real; tying `x`
+to the *specific* co-directed `Φ_c` of [§1.3](01-signature.md) (so `‖x‖` is read off the actual
+coupling) is the remaining `[open]` modelling step.
 
 ---
 

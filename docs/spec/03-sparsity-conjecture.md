@@ -156,6 +156,17 @@ None of these is hand-waving-away-able, and naming them is the point: the lemma 
 > contingency the view wants, at the cost of Perron-style uniqueness. Hence it is
 > harder than Conjecture 3.3 and stated, for now, as a horizon.)
 
+> **A first quantitative fragment (mechanized).** The *distribution* side of the spectral
+> picture — how much of a self is carried into the network through relating — is mechanized in
+> [`formal/Scratch/Distribution.lean`](../../formal/Scratch/Distribution.lean): in a Banach
+> algebra the self-in-other path-sum `∑ x^{n+1}` is **bounded** (`distributed_bound`,
+> `‖·‖ ≤ ‖x‖/(1-‖x‖)`) exactly in the regime `‖x‖ < 1`, with `x = 0` complete disconnection and
+> `‖x‖ ≥ 1` the dissolution limit. The individuation threshold is thus a spectral/norm condition
+> `‖x‖ < 1` — the living self in the open interval `(0,1)`. What remains is to read `x` off the
+> *actual* co-directed `Φ_c` (so the bound is computed from the coupling, not an abstract `x`);
+> on the dynamics side, [`Attention.closed_loop_registers`](../../formal/Scratch/Attention.lean)
+> proves a closed loop makes two sustained selves coincide — registration as a theorem of `Φ_c`.
+
 Conjecture 3.3 is the proposition to point a proof assistant at *first* — it is where
 the theory either lands in the rich-but-narrow zone (good) or the broad-but-empty zone
 (fatal), and the proof attempt is rigor finding the overclaim before a referee does.
