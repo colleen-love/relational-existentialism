@@ -5,7 +5,7 @@ a **second proof assistant**. The [`formal/`](../formal/) Lean development mecha
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom the plan flags Agda as "cleanest" for, and the
-one axioms [T2](../docs/spec/02-axioms.md) (the "we") and [D1](../docs/spec/02-axioms.md)
+one that theorem [T2](../docs/spec/02-axioms.md) (the "we") and definition [D1](../docs/spec/02-axioms.md)
 (the looped self) were reaching for all along. Here `≈` is not the greatest *post*-fixed
 point of a lattice operator but the **final coalgebra** itself: a proof of `x ≈ y` is an
 infinite, productive agreement, and the coinduction principle is one guarded definition

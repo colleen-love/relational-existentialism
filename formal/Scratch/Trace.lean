@@ -1,5 +1,5 @@
 /-
-# Trace as feedback, and the Conway operator — axioms D1 & T1
+# Trace as feedback, and the Conway operator — definition D1 & theorem T1
 
 Mechanizes the *operational content* of the doctrine's trace (`Tr`) in the cartesian
 (complete-lattice) setting, where feedback genuinely produces fixed points:
