@@ -104,7 +104,7 @@ separate it from a theorem about `Cl(𝕋)`:
    overlap and the clean sum `∑ d λ` becomes an inequality over a *poset* of
    couplings. Sparsity must be re-proved with sharing allowed.
 2. **"Stabilizes" is a fixed-point condition, not a threshold.** `f ∈ Stab_R` was
-   defined in [A4](02-axioms.md) as `loop_R(e) = e`, not as `dλ ≤ β`. The lemma
+   defined in [A3](02-axioms.md) as `loop_R(e) = e`, not as `dλ ≤ β`. The lemma
    assumes these coincide; showing `loop_R`'s budgeted iteration *realizes* the
    threshold (that `N(s) = ⌊β/λ⌋` returns suffice and are necessary to reach the
    fixed point) is real work in the traced category.
@@ -215,7 +215,7 @@ step 2 (cost-sharing over a graded poset) is the remaining gap.
   earns the word "rigor."
 - **Would not mean.** That the world *is* this way (the theory is a lens, not a
   proof — see the view's "What it doesn't settle"); nor would it touch the three
-  typed-out residues (valence, the hard problem, freedom), which [A6](02-axioms.md)
+  typed-out residues (valence, the hard problem, freedom), which [T3](02-axioms.md)
   predicts the formalism *cannot* reach. Proving sparsity confirms the program's
   ambition exactly to its own stated boundary — and no further, which is the point.
 
@@ -224,6 +224,6 @@ step 2 (cost-sharing over a graded poset) is the remaining gap.
 ### Cross-references
 
 - Definitions of `loop_R`, `β`, `ε`, `d`, `c`: [01 §1.3](01-signature.md).
-- The selfhood predicate `Stab_R`: [02 — A4](02-axioms.md).
+- The selfhood predicate `Stab_R`: [02 — A3](02-axioms.md).
 - The doctrine fragments the sparsity lives across: [00](00-doctrine.md).
 - Mechanization targets and tooling: [formalization plan §5](../formalization-plan.md).

@@ -68,7 +68,7 @@ theorem stab_card_le_div (cs : Selves) (m β : Nat) (hm : 0 < m)
   exact h
 
 /-- **Sparsity with stabilization depth ≥ 2.** Because a genuine self requires being
-returned to at least twice (`d ≥ 2`, axiom A4), each costs at least `2`, so at most
+returned to at least twice (`d ≥ 2`, axiom A3), each costs at least `2`, so at most
 `β / 2` selves stabilize: the rare-by-construction regime. -/
 theorem stab_card_le_half (cs : Selves) (β : Nat)
     (hcost : ∀ c ∈ cs, 2 ≤ c) (hbudget : totalSpend cs ≤ β) :

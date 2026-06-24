@@ -1,7 +1,7 @@
 /-
-# Knowing vs feeling — the A6 contrast, mechanized
+# Knowing vs feeling — the T3 contrast, mechanized
 
-[A6](../../docs/spec/02-axioms.md) says the two ways relation turns are different kinds
+[T3](../../docs/spec/02-axioms.md) says the two ways relation turns are different kinds
 of arrow with diverging properties: *knowing* (the σ-move, an endomap, cartesian) is
 Lawvere-obstructed — local, leaving a remainder; *feeling* (the `≈`-relation, one level
 up) is unobstructed — global, whole. This module states that contrast as theorems,

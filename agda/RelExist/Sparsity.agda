@@ -15,7 +15,7 @@
 --
 -- States are **behaviours in the final coalgebra** ([RelExist.Coinductive]); the
 -- natural topology is the **cylinder topology** — basic opens are finite-prefix
--- determined. The looped selves (A2) are exactly the *constant* behaviours
+-- determined. The looped selves (D1) are exactly the *constant* behaviours
 -- `repeat a`. This module proves, over only the standard library:
 --   * `Const ⟺ isSelf` — the topological "Stab" *is* the doctrine's self predicate;
 --   * `nonConst-open`  — the non-selves are open, i.e. the selves are **closed**
@@ -63,7 +63,7 @@ nth-repeat (suc n) b = nth-repeat n b
 ------------------------------------------------------------------------
 -- The self-set `Stab`, and its positive complement.
 --
--- A behaviour is a **self** (A2: a looped, stationary self) when every later
+-- A behaviour is a **self** (D1: a looped, stationary self) when every later
 -- observation repeats the first — i.e. it is the constant behaviour `repeat (obs x)`.
 -- `NonConst` is the *positive* complement: a concrete moment that already differs.
 -- Constructively this apartness, not the double negation `¬ Const`, is the open set.
@@ -87,7 +87,7 @@ const→¬nonConst c (n , d) = d (c n)
 
 ------------------------------------------------------------------------
 -- `Const` is exactly the doctrine's `isSelf` (Coinductive.agda) — so the
--- topological "Stab" is the very same set A2 calls the looped selves.
+-- topological "Stab" is the very same set D1 calls the looped selves.
 
 isSelf→Const : {x : Behaviour A} → isSelf x → Const x
 isSelf→Const     s zero    = refl

@@ -12,7 +12,7 @@ the very machinery built for `≈` and attention.
   its own production (`autocatalyticCore_selfSustaining`) and greatest such
   (`autocatalytic_greatest`, coinduction).
 * `selfTrace_eq_autocatalyticCore` — **the functor, witnessed**: the theory's
-  self-trace (A2, `νP`) of the production operator *is* the autocatalytic core. "A
+  self-trace (D1, `νP`) of the production operator *is* the autocatalytic core. "A
   looped self" maps to "a self-sustaining autocatalytic set," definitionally.
 -/
 import Mathlib.Data.Set.Lattice
@@ -59,7 +59,7 @@ theorem autocatalytic_greatest (R : ReactionSystem M) {X : Set M}
   (prodOp R).le_gfp h
 
 /-- **The functor `Cl(𝕋) → 𝒟_chem`, witnessed.** The theory's self-trace (`νP`, axiom
-A2 / [`Scratch.Trace`](Trace.lean)) of the production operator *is* the autocatalytic
+D1 / [`Scratch.Trace`](Trace.lean)) of the production operator *is* the autocatalytic
 core: a looped self maps to a self-sustaining autocatalytic set, definitionally. This
 is the near-literal fit the plan claimed, as a one-line theorem. -/
 theorem selfTrace_eq_autocatalyticCore (R : ReactionSystem M) :

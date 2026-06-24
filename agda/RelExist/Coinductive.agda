@@ -7,16 +7,16 @@
 -- development mechanizes the doctrine's greatest-fixed-point modality `ν`
 -- through `OrderHom.gfp` (Knaster–Tarski on a complete lattice). Agda hosts the
 -- *same* content with **native coinduction** — coinductive records and
--- copatterns — which is the idiom the doctrine's ≈ (A5) and looped self (A2)
+-- copatterns — which is the idiom the doctrine's ≈ (T2) and looped self (D1)
 -- were reaching for all along.
 --
 -- This module builds, from scratch (only the standard library):
 --   * `Behaviour`   — a system as the final coalgebra of the observation functor;
---   * `_≈_`         — A5: observational identity as the *greatest bisimulation*;
+--   * `_≈_`         — T2: observational identity as the *greatest bisimulation*;
 --   * `≈-refl/sym/trans`, `SharedWorld` — ≈ is an equivalence; `𝔼 := D/≈` is a Setoid;
 --   * `coinduction` — the coinduction principle: every bisimulation is ⊆ ≈
 --                     (≈ *is* the ν — proved by guarded corecursion, not a lattice);
---   * `fixpoint-isStationary` — A2: a fixed point of the dynamics is a stationary
+--   * `fixpoint-isStationary` — D1: a fixed point of the dynamics is a stationary
 --                     self (the eigenform νΦ), via the coinduction principle.
 ------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ record Behaviour (A : Set) : Set where
 open Behaviour public
 
 ------------------------------------------------------------------------
--- A5 — observational identity `≈`, the GREATEST bisimulation.
+-- T2 — observational identity `≈`, the GREATEST bisimulation.
 --
 -- Two systems are observationally identical when they agree now and stay so
 -- forever. As a coinductive record this *is* the ν-closure: there is no
@@ -72,7 +72,7 @@ step≈ (≈-trans p q) = ≈-trans (step≈ p) (step≈ q)
 ≈-isEquivalence : IsEquivalence (_≈_ {A})
 ≈-isEquivalence = record { refl = ≈-refl ; sym = ≈-sym ; trans = ≈-trans }
 
--- 𝔼 := D/≈ — the **shared world** (A5): behaviours up to observational
+-- 𝔼 := D/≈ — the **shared world** (T2): behaviours up to observational
 -- identity, as a setoid. The "between" is the quotient, not the points.
 SharedWorld : (A : Set) → Setoid 0ℓ 0ℓ
 SharedWorld A = record
@@ -101,7 +101,7 @@ obs≈  (coinduction B r) = obs-resp B r
 step≈ (coinduction B r) = coinduction B (step-resp B r)
 
 ------------------------------------------------------------------------
--- A2 — the looped self: a fixed point of the dynamics is a stationary self.
+-- D1 — the looped self: a fixed point of the dynamics is a stationary self.
 
 -- the stationary system (one observation, forever)
 repeat : A → Behaviour A
@@ -121,7 +121,7 @@ repeat-isSelf : (a : A) → isSelf (repeat a)
 repeat-isSelf a = ≈-refl
 
 -- **The eigenform.** `f a ≡ a` ⇒ the orbit from `a` collapses to the stationary
--- self: a fixed point of the dynamics *is* a looped self (A2 / the eigenform
+-- self: a fixed point of the dynamics *is* a looped self (D1 / the eigenform
 -- `νΦ`). Proved by the coinduction principle — exhibit the bisimulation that
 -- relates the orbit to the stationary self, the iterates never leaving `a`.
 fixpoint-isStationary : {f : A → A} {a : A} → f a ≡ a → orbit f a ≈ repeat a

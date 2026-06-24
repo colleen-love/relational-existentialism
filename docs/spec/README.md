@@ -16,9 +16,9 @@ Read in order:
 2. [`01-signature.md`](01-signature.md) — the presented theory `𝕋`: sorts,
    generators, **attention as a bounded resource** `(R, ·, 1, ≤)`, and the
    relational sort `≈`.
-3. [`02-axioms.md`](02-axioms.md) — the six commitments **A1–A6** as definitions
-   and sequents, each tagged `[fragment; status]`, with the derived carrier of
-   selves `Stab`.
+3. [`02-axioms.md`](02-axioms.md) — the commitments grouped by kind: **axioms A1–A3**,
+   **definition D1**, **theorems T1–T3**, each tagged `[fragment; status]`, with the
+   derived carrier of selves `Stab`.
 4. [`03-sparsity-conjecture.md`](03-sparsity-conjecture.md) — the candidate
    theorem: **under a finite attention budget, `Stab` is sparse.** Includes a
    provable resource-counting lemma and the strategy for lifting it to the full
@@ -31,9 +31,9 @@ Read in order:
    cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
    and the **monoidal-coherence** refinement are all mechanized.
 
-Cross-cutting: [`axiom-audit.md`](axiom-audit.md) — a **checked** dependency map of the
-six commitments (which are posits vs. theorems, with verified `#print axioms` footprints),
-concluding that the doctrine reduces to **one discriminating posit (A4)** over the ambient
+Cross-cutting: [`axiom-audit.md`](axiom-audit.md) — a **checked** map separating the
+**axioms** (A1–A3) from the **theorems** (T1–T3), with verified `#print axioms` footprints,
+concluding that the doctrine reduces to **one discriminating posit (A3)** over the ambient
 structure.
 
 ## Status legend

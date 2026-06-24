@@ -20,7 +20,7 @@ A domain *receives* a functor exactly when it has the structure the theory expor
 The full traced-symmetric-monoidal `Cl(𝕋)` is now a genuine Lean object — the free traced
 SMC on a signature, with its universal functor (§4.6). The domain functors below are also
 exhibited directly at the level of **operative content** — the eigenform/`gfp` structure
-(A2–A5) and the cartesian copy/Lawvere structure (A6) — which is what makes each one a
+(D1–T2) and the cartesian copy/Lawvere structure (T3) — which is what makes each one a
 *one-line* theorem (§4.3, §4.8, §4.9).
 
 ## 4.2 The domains, with verdicts
@@ -47,7 +47,7 @@ machinery wholesale. In [`formal/Scratch/Chemistry.lean`](../../formal/Scratch/C
   `autocatalytic_greatest` (any self-sustaining set lies within it — coinduction);
 - **the functor, witnessed:** `selfTrace_eq_autocatalyticCore` proves
   `selfTrace (prodOp R) = autocatalyticCore R` *definitionally* — the theory's
-  self-trace (`νP`, [A2](02-axioms.md)) of the production operator **is** the
+  self-trace (`νP`, [D1](02-axioms.md)) of the production operator **is** the
   autocatalytic core. A *looped self* in the theory maps to a *self-sustaining
   autocatalytic set* in chemistry. The "near-literal fit" is a one-line theorem.
 
@@ -233,7 +233,7 @@ equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the univers
   construction). The firewall is enforced by the type system, not by willpower.
 - It also confirms the **residues** sit outside the language: a functor preserves only
   structure, and valence / the hard problem / freedom are precisely the non-structural
-  remainder — so no functor reaches them, exactly as [A6](02-axioms.md) predicts of the
+  remainder — so no functor reaches them, exactly as [T3](02-axioms.md) predicts of the
   σ-move that formalizing itself is.
 
 ## 4.8 AI — recurrence is the trace (mechanized)
@@ -279,7 +279,7 @@ impredicative self-closure that is precisely a greatest fixed point. In
 - `closed_to_efficient_causation` — a component the system fabricates *from itself alone* lies
   in the organism: the efficient cause of its own maintenance is **internal**, Rosen's
   defining property, as a one-line consequence of coinduction.
-- `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, A2) of
+- `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, D1) of
   the fabrication operator *is* the organism, definitionally — a looped self maps to a
   self-fabricating organism.
 

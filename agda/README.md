@@ -5,7 +5,7 @@ a **second proof assistant**. The [`formal/`](../formal/) Lean development mecha
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom the plan flags Agda as "cleanest" for, and the
-one axioms [A5](../docs/spec/02-axioms.md) (the "we") and [A2](../docs/spec/02-axioms.md)
+one axioms [T2](../docs/spec/02-axioms.md) (the "we") and [D1](../docs/spec/02-axioms.md)
 (the looped self) were reaching for all along. Here `≈` is not the greatest *post*-fixed
 point of a lattice operator but the **final coalgebra** itself: a proof of `x ≈ y` is an
 infinite, productive agreement, and the coinduction principle is one guarded definition
@@ -21,11 +21,11 @@ sparsity dichotomy ([spec 03 §3.5](../docs/spec/03-sparsity-conjecture.md), ste
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
 | a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../docs/spec/00-doctrine.md) | ✅ defined (coinductive record) |
-| **A5** — `≈` as the greatest bisimulation | `_≈_` | [A5](../docs/spec/02-axioms.md) | ✅ defined (coinductive record) |
-| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [A5](../docs/spec/02-axioms.md) | ✅ proved (copattern corecursion) |
-| **shared world** `𝔼 := D/≈` | `SharedWorld` | [A5](../docs/spec/02-axioms.md) | ✅ defined (`Setoid`) |
-| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [A5](../docs/spec/02-axioms.md) | ✅ proved (one guarded definition) |
-| **A2** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [A2](../docs/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
+| **T2** — `≈` as the greatest bisimulation | `_≈_` | [T2](../docs/spec/02-axioms.md) | ✅ defined (coinductive record) |
+| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [T2](../docs/spec/02-axioms.md) | ✅ proved (copattern corecursion) |
+| **shared world** `𝔼 := D/≈` | `SharedWorld` | [T2](../docs/spec/02-axioms.md) | ✅ defined (`Setoid`) |
+| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [T2](../docs/spec/02-axioms.md) | ✅ proved (one guarded definition) |
+| **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../docs/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
 
 ## Status — `RelExist.Sparsity` (topological sparsity, step 4)
 
@@ -35,11 +35,11 @@ for the *infinite-state* form of "selves are rare": that the carrier of selves `
 [§3.5 step 4](../docs/spec/03-sparsity-conjecture.md#35-proof-strategy-for-mechanization)
 names Agda's ν-layer as the host. States are **behaviours in the final coalgebra**; the
 natural topology is the **cylinder topology** (basic opens are finite-prefix determined);
-the looped selves (A2) are exactly the *constant* behaviours `repeat a`.
+the looped selves (D1) are exactly the *constant* behaviours `repeat a`.
 
 | Result | Agda name | Meaning | State |
 | --- | --- | --- | --- |
-| topological "Stab" *is* the doctrine's self | `Const→isSelf` / `isSelf→Const` | the constant behaviours are exactly the A2 selves | ✅ proved |
+| topological "Stab" *is* the doctrine's self | `Const→isSelf` / `isSelf→Const` | the constant behaviours are exactly the D1 selves | ✅ proved |
 | **closed** — the non-selves are open | `nonConst-open` | one moment of difference is finite-prefix witnessed ⇒ `Stab` is closed | ✅ proved |
 | **empty interior** — every cylinder meets the non-selves | `selves-emptyInterior` | no observation prefix forces selfhood | ✅ proved |
 | **nowhere dense** — sparsity, topological form | `selves-nowhereDense` | given two distinct observations, `Stab` is closed with empty interior | ✅ proved |

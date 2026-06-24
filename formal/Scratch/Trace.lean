@@ -1,12 +1,12 @@
 /-
-# Trace as feedback, and the Conway operator — axioms A2 & A3
+# Trace as feedback, and the Conway operator — axioms D1 & T1
 
 Mechanizes the *operational content* of the doctrine's trace (`Tr`) in the cartesian
 (complete-lattice) setting, where feedback genuinely produces fixed points:
 
-* **A2 — self-relation is feedback.** `selfTrace P := νP` (the same `ν`-modality as `≈`):
+* **D1 — self-relation is feedback.** `selfTrace P := νP` (the same `ν`-modality as `≈`):
   the trace of a self-relating `P` is the fixed point it feeds back to.
-* **A3 — to relate is to create.** The *parameterized* fixed-point (Conway) operator
+* **T1 — to relate is to create.** The *parameterized* fixed-point (Conway) operator
   `Tr f a := ν(f a)`: looping the wire `β` with a parameter `a` manufactures a fixed
   point `f a (Tr f a) = Tr f a` that need not have pre-existed. We prove the Conway
   fixed-point identity, the greatest-fixed-point (coinduction) property, and naturality
@@ -23,7 +23,7 @@ namespace RelExist.Trace
 
 variable {α : Type*} {β : Type*}
 
-/-- **A2 — self-relation is feedback.** The trace of a self-relating `P : α →o α` is the
+/-- **D1 — self-relation is feedback.** The trace of a self-relating `P : α →o α` is the
 (greatest) fixed point it feeds back to: `σ(P) := Tr(P) = νP`. -/
 def selfTrace [CompleteLattice α] (P : α →o α) : α := P.gfp
 
@@ -33,7 +33,7 @@ theorem selfTrace_fixed [CompleteLattice α] (P : α →o α) : P (selfTrace P) 
 
 variable [CompleteLattice β]
 
-/-- **A3 — the parameterized fixed-point (Conway) operator.** Tracing the looped wire
+/-- **T1 — the parameterized fixed-point (Conway) operator.** Tracing the looped wire
 `β` against a parameter `a : α` yields `Tr f a := ν(f a)`. -/
 def Tr (f : α → β →o β) (a : α) : β := (f a).gfp
 
