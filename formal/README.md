@@ -128,6 +128,7 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 | **registration** — a closed loop absorbs the knower into the known | `RelExist.Attention.{relating_absorbs, closed_loop_registers}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
 | **self-in-other, quantified** — bounded iff `‖x‖<1` | `RelExist.Distribution.{distributed, distributed_bound, distributed_zero}` | [03 §3.4](../docs/spec/03-sparsity-conjecture.md), [theorems.md](../docs/spec/theorems.md) | ✅ proved |
 | **quantitative eigenform** — `total x = 1 + x·total x` | `RelExist.Distribution.{total, total_feedback, total_bound}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
+| **quantitative coinduction** — sustained self is *unique* (any seed) | `RelExist.Distribution.{sustained, sustained_fixed, sustained_unique, sustained_bound}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
 | Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
 | **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved (`Filter.Tendsto`) |
 

@@ -227,6 +227,15 @@ contains itself, one step deep) realized in the *same* Banach algebra that bound
 (`total_bound`: `‖total x‖ ≤ (1-‖x‖)⁻¹`). So in the living regime the self is a bounded fixed point
 of relating — registration and the limit of self-in-other are one object, about one `x`.
 
+**Quantitative coinduction — the eigenform is the *unique* self.** `[proved]` For any seed `b`,
+the sustained self [`Distribution.sustained`](../../formal/Scratch/Distribution.lean)` x b := total x · b`
+is a fixed point of feedback (`sustained_fixed`: `sustained x b = b + x · sustained x b`) and — the
+gem — it is the **only** one: `sustained_unique` proves any field upheld by the feedback (`s = b + x·s`)
+*equals* it, by contraction (`s − sustained = x·(s − sustained)` forces the difference to `0`). This
+is the quantitative twin of the lattice coinduction `Attention.sustainedField_greatest`: where the
+order-theoretic self is the *greatest* fixed point, the contractive quantitative self is the
+*unique* one. Bounded by `‖b‖·(1-‖x‖)⁻¹` (`sustained_bound`).
+
 ---
 
 ## Derived notions

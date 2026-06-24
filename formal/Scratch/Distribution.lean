@@ -108,4 +108,48 @@ theorem total_bound [CompleteSpace E] [NormOneClass E] {x : E} (hx : ‖x‖ < 1
   rw [norm_one, sub_self, zero_add] at h
   exact h
 
+/-! ### The sustained self for any seed — the quantitative coinduction
+
+Generalising `total` (seed `1`): for any seed `b`, the **sustained self** `sustained x b` is the
+*unique* field satisfying the co-directed feedback `s = b + x · s`. `sustained_fixed` exhibits it
+as a fixed point; `sustained_unique` proves it is **the** one — by contraction, the quantitative
+analog of `Attention.sustainedField_greatest`'s coinduction; `sustained_bound` bounds it. -/
+
+/-- The **sustained self** seeded by `b`: `(∑ xⁿ)·b`, the field built by relating `b` onward. -/
+noncomputable def sustained (x b : E) : E := total x * b
+
+/-- The sustained self is a **fixed point of co-directed feedback**: `sustained x b = b + x · sustained x b`. -/
+theorem sustained_fixed [CompleteSpace E] {x : E} (hx : ‖x‖ < 1) (b : E) :
+    sustained x b = b + x * sustained x b := by
+  simp only [sustained]
+  conv_lhs => rw [total_feedback hx]
+  rw [add_mul, one_mul, mul_assoc]
+
+/-- **Quantitative coinduction.** Any field upheld by the feedback (`s = b + x · s`) **is** the
+sustained self — uniqueness, by contraction (`s - sustained = x·(s - sustained)` forces the
+difference to `0`). The eigenform of co-directed feedback is the one and only. -/
+theorem sustained_unique [CompleteSpace E] {x b s : E} (hx : ‖x‖ < 1)
+    (hs : s = b + x * s) : s = sustained x b := by
+  have hd : s - sustained x b = x * (s - sustained x b) := by
+    rw [mul_sub]
+    nth_rewrite 1 [hs]
+    nth_rewrite 1 [sustained_fixed hx b]
+    abel
+  have hnorm : ‖s - sustained x b‖ ≤ ‖x‖ * ‖s - sustained x b‖ := by
+    conv_lhs => rw [hd]
+    exact norm_mul_le _ _
+  have hzero : ‖s - sustained x b‖ = 0 := by
+    by_contra h
+    have hpos : 0 < ‖s - sustained x b‖ := (norm_nonneg _).lt_of_ne (Ne.symm h)
+    nlinarith [hnorm, hpos, hx]
+  rwa [norm_sub_eq_zero_iff] at hzero
+
+/-- The sustained self is **bounded** by `‖b‖ · (1-‖x‖)⁻¹`. -/
+theorem sustained_bound [CompleteSpace E] [NormOneClass E] {x : E} (hx : ‖x‖ < 1) (b : E) :
+    ‖sustained x b‖ ≤ ‖b‖ * (1 - ‖x‖)⁻¹ := by
+  simp only [sustained]
+  calc ‖total x * b‖ ≤ ‖total x‖ * ‖b‖ := norm_mul_le _ _
+    _ ≤ (1 - ‖x‖)⁻¹ * ‖b‖ := mul_le_mul_of_nonneg_right (total_bound hx) (norm_nonneg _)
+    _ = ‖b‖ * (1 - ‖x‖)⁻¹ := mul_comm _ _
+
 end RelExist.Distribution
