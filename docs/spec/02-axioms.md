@@ -5,11 +5,12 @@
 > what it would take to discharge or use it. Together they cut the free theory on
 > the [signature](01-signature.md) down to `𝕋`.
 >
-> For a **checked** map of which commitments are genuine posits versus already
-> theorems — with verified `#print axioms` footprints and the minimal base they
-> reduce to — see the [Axiom Dependency Audit](axiom-audit.md). (Summary: one
-> discriminating posit, A4; the rest are definitions or theorems, the σ-side of A6
-> needing *no* axioms at all.)
+> For a **checked** separation of what the theory *assumes* from what it *proves* —
+> a **basis** (A0 the ambient structure, A1, A2, A4) versus the **theorems** built on
+> it (A3, A5, A6 and all downstream results), with per-item independence evidence and
+> verified `#print axioms` footprints — see the [Axiom Dependency Audit](axiom-audit.md).
+> (Summary: the basis is four items; only A4 is a load-bearing wager, and its
+> independence is mechanized — drop it and the theory collapses to the universal solvent.)
 
 Throughout, `𝒞 = Cl(𝕋)`, `σ = Tr` is the self-relation operator, `γ` is the
 symmetry, `Δ` the diagonal (cartesian fragment only), and `(R, ·, 1, ≤, β, c, ε)`
