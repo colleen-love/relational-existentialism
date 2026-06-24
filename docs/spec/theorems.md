@@ -218,6 +218,15 @@ form): the individuation threshold is a norm condition `‖x‖ < 1`. The number
 to the *specific* co-directed `Φ_c` of [§1.3](01-signature.md) (so `‖x‖` is read off the actual
 coupling) is the remaining `[open]` modelling step.
 
+**Registration and the bound, fused — the quantitative eigenform.** `[proved]` The *full* self
+`total x = ∑ xⁿ` (the path-sum *including itself*) satisfies a **feedback fixed-point equation**,
+[`Distribution.total_feedback`](../../formal/Scratch/Distribution.lean): `total x = 1 + x · total x`
+— the self is itself, plus one relating folded back in. This is the quantitative **eigenform**
+(A3 / D1: self = fixed point of co-directed feedback) and the registration statement (the self
+contains itself, one step deep) realized in the *same* Banach algebra that bounds it
+(`total_bound`: `‖total x‖ ≤ (1-‖x‖)⁻¹`). So in the living regime the self is a bounded fixed point
+of relating — registration and the limit of self-in-other are one object, about one `x`.
+
 ---
 
 ## Derived notions

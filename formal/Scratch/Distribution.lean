@@ -69,4 +69,43 @@ theorem distributed_bound [CompleteSpace E] {x : E} (hx : ‖x‖ < 1) :
     _ ≤ ∑' n : ℕ, ‖x‖ ^ (n + 1) := tsum_le_tsum hterm hsumnorm hmaj
     _ = ‖x‖ / (1 - ‖x‖) := hgeo
 
+/-! ### The self as a fixed point of feedback — registration and the bound, fused
+
+The **full self** `total x = ∑ xⁿ` (the path-sum *including* length 0 — the self before it
+leaves itself) satisfies a feedback fixed-point equation. This is the quantitative **eigenform**
+([A3](../../docs/spec/02-axioms.md), [D1](../../docs/spec/02-axioms.md)): the self is a fixed
+point of co-directed feedback, now in the same Banach algebra that bounds it — so registration
+(the self contains itself, one relating deep) and the distribution bound are one object. -/
+
+/-- The **full self**: the path-sum from length 0 (itself), `∑ xⁿ`. `total x = 1 + distributed x`
+— the self is itself, plus the part of it that has left into others. -/
+noncomputable def total (x : E) : E := ∑' n : ℕ, x ^ n
+
+theorem total_eq_one_add_distributed [CompleteSpace E] {x : E} (hx : ‖x‖ < 1) :
+    total x = 1 + distributed x := by
+  rw [total, distributed, tsum_eq_zero_add (summable_geometric_of_norm_lt_one hx), pow_zero]
+
+/-- **The self is a fixed point of feedback** — the quantitative eigenform. `total x = 1 + x·total x`:
+the self is itself plus one relating folded back in. This is registration realized in the Banach
+algebra — the self contains itself, one step deep — fusing the order-theoretic
+`Attention.closed_loop_registers` with the bounded distribution `distributed`. -/
+theorem total_feedback [CompleteSpace E] {x : E} (hx : ‖x‖ < 1) :
+    total x = 1 + x * total x := by
+  have hs : Summable (fun n : ℕ => x ^ n) := summable_geometric_of_norm_lt_one hx
+  have hfun : (fun n : ℕ => x ^ (n + 1)) = fun n => x * x ^ n := funext fun n => pow_succ' x n
+  have hxt : ∑' n : ℕ, x ^ (n + 1) = x * ∑' n : ℕ, x ^ n := by
+    have h : HasSum (fun n : ℕ => x ^ (n + 1)) (x * ∑' n : ℕ, x ^ n) := by
+      rw [hfun]; exact hs.hasSum.mul_left x
+    exact h.tsum_eq
+  calc total x = x ^ 0 + ∑' n : ℕ, x ^ (n + 1) := tsum_eq_zero_add hs
+    _ = 1 + x * ∑' n : ℕ, x ^ n := by rw [pow_zero, hxt]
+    _ = 1 + x * total x := rfl
+
+/-- The full self is **bounded** by `(1 - ‖x‖)⁻¹` in the living regime. -/
+theorem total_bound [CompleteSpace E] [NormOneClass E] {x : E} (hx : ‖x‖ < 1) :
+    ‖total x‖ ≤ (1 - ‖x‖)⁻¹ := by
+  have h := tsum_geometric_le_of_norm_lt_one x hx
+  rw [norm_one, sub_self, zero_add] at h
+  exact h
+
 end RelExist.Distribution
