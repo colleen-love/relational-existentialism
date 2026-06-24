@@ -128,5 +128,6 @@ one posit" into a single checked development:
    non-extensional model (A2), and an explicit everything-but-A3 instance (A3) beyond the
    counting witness. The A3 case is already essentially `unbounded_without_budget`.
 
-→ Back to [02 — The Axioms](02-axioms.md) · the discriminating posit's payoff is
+→ Back to [02 — The Axioms](02-axioms.md) · the theorems themselves are in
+[theorems.md](theorems.md) · the discriminating posit's payoff is
 [03 — The Sparsity Conjecture](03-sparsity-conjecture.md).

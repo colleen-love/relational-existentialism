@@ -215,7 +215,7 @@ step 2 (cost-sharing over a graded poset) is the remaining gap.
   earns the word "rigor."
 - **Would not mean.** That the world *is* this way (the theory is a lens, not a
   proof — see the view's "What it doesn't settle"); nor would it touch the three
-  typed-out residues (valence, the hard problem, freedom), which [T3](02-axioms.md)
+  typed-out residues (valence, the hard problem, freedom), which [T3](theorems.md)
   predicts the formalism *cannot* reach. Proving sparsity confirms the program's
   ambition exactly to its own stated boundary — and no further, which is the point.
 

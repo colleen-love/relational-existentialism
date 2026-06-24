@@ -5,7 +5,7 @@ a **second proof assistant**. The [`formal/`](../formal/) Lean development mecha
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom the plan flags Agda as "cleanest" for, and the
-one that theorem [T2](../docs/spec/02-axioms.md) (the "we") and definition [D1](../docs/spec/02-axioms.md)
+one that theorem [T2](../docs/spec/theorems.md) (the "we") and definition [D1](../docs/spec/02-axioms.md)
 (the looped self) were reaching for all along. Here `≈` is not the greatest *post*-fixed
 point of a lattice operator but the **final coalgebra** itself: a proof of `x ≈ y` is an
 infinite, productive agreement, and the coinduction principle is one guarded definition
@@ -21,10 +21,10 @@ sparsity dichotomy ([spec 03 §3.5](../docs/spec/03-sparsity-conjecture.md), ste
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
 | a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../docs/spec/00-doctrine.md) | ✅ defined (coinductive record) |
-| **T2** — `≈` as the greatest bisimulation | `_≈_` | [T2](../docs/spec/02-axioms.md) | ✅ defined (coinductive record) |
-| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [T2](../docs/spec/02-axioms.md) | ✅ proved (copattern corecursion) |
-| **shared world** `𝔼 := D/≈` | `SharedWorld` | [T2](../docs/spec/02-axioms.md) | ✅ defined (`Setoid`) |
-| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [T2](../docs/spec/02-axioms.md) | ✅ proved (one guarded definition) |
+| **T2** — `≈` as the greatest bisimulation | `_≈_` | [T2](../docs/spec/theorems.md) | ✅ defined (coinductive record) |
+| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [T2](../docs/spec/theorems.md) | ✅ proved (copattern corecursion) |
+| **shared world** `𝔼 := D/≈` | `SharedWorld` | [T2](../docs/spec/theorems.md) | ✅ defined (`Setoid`) |
+| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [T2](../docs/spec/theorems.md) | ✅ proved (one guarded definition) |
 | **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../docs/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
 
 ## Status — `RelExist.Sparsity` (topological sparsity, step 4)

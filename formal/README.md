@@ -47,10 +47,10 @@ not reproduced — large categorical infrastructure; what the axioms invoke is h
 
 | Result | Lean name | Spec | Target | State |
 | --- | --- | --- | --- | --- |
-| **T3 σ-side** — Lawvere; the mirror can't close | `RelExist.Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}` | [T3](../docs/spec/02-axioms.md), [00 §0.4.2](../docs/spec/00-doctrine.md) | core (no mathlib) | ✅ **0 axioms** |
+| **T3 σ-side** — Lawvere; the mirror can't close | `RelExist.Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}` | [T3](../docs/spec/theorems.md), [00 §0.4.2](../docs/spec/00-doctrine.md) | core (no mathlib) | ✅ **0 axioms** |
 | **D1** — self-relation is feedback (`νP`) | `RelExist.Trace.{selfTrace, selfTrace_fixed}` | [D1](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
-| **T1** — to relate is to create (Conway `Tr`) | `RelExist.Trace.{Tr, Tr_fixed, le_Tr, Tr_mono}` | [T1](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
-| **T3 contrast** — knowing obstructed vs feeling whole | `RelExist.KnowingFeeling.{knowing_can_fail_to_close, no_complete_boolModel, feeling_is_whole}` | [T3](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
+| **T1** — to relate is to create (Conway `Tr`) | `RelExist.Trace.{Tr, Tr_fixed, le_Tr, Tr_mono}` | [T1](../docs/spec/theorems.md) | Scratch | ✅ proved |
+| **T3 contrast** — knowing obstructed vs feeling whole | `RelExist.KnowingFeeling.{knowing_can_fail_to_close, no_complete_boolModel, feeling_is_whole}` | [T3](../docs/spec/theorems.md) | Scratch | ✅ proved |
 
 Lawvere's theorem (`RelExist.Mirror.lawvere`) and its consequences are **fully
 constructive** — they depend on *no axioms whatsoever*, which is fitting: the mirror's
@@ -116,11 +116,11 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 
 | Result | Lean name | Spec source | State |
 | --- | --- | --- | --- |
-| `≈ := νΘ` as the greatest bisimulation | `RelExist.We.bisim` | [T2](../docs/spec/02-axioms.md) | ✅ defined (`OrderHom.gfp`) |
-| `Θ ≈ = ≈` (fixed point) | `RelExist.We.bisim_unfold` | [T2](../docs/spec/02-axioms.md) | ✅ proved |
-| **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [T2](../docs/spec/02-axioms.md) | ✅ proved |
-| `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [T2](../docs/spec/02-axioms.md) | ✅ proved |
-| **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [T2](../docs/spec/02-axioms.md) | ✅ defined (quotient) |
+| `≈ := νΘ` as the greatest bisimulation | `RelExist.We.bisim` | [T2](../docs/spec/theorems.md) | ✅ defined (`OrderHom.gfp`) |
+| `Θ ≈ = ≈` (fixed point) | `RelExist.We.bisim_unfold` | [T2](../docs/spec/theorems.md) | ✅ proved |
+| **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [T2](../docs/spec/theorems.md) | ✅ proved |
+| `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [T2](../docs/spec/theorems.md) | ✅ proved |
+| **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [T2](../docs/spec/theorems.md) | ✅ defined (quotient) |
 | co-directed attention operator (induced by coupling) | `RelExist.Attention.couplingOp` | [§1.3](../docs/spec/01-signature.md) | ✅ defined |
 | "receiving raises giving" (monotone) | `RelExist.Attention.couplingOp_mono` | [§1.3.2](../docs/spec/01-signature.md) | ✅ proved |
 | **self = eigenform** `νΦ` (fixed point, maximal) | `RelExist.Attention.sustainedField{,_fixed,_greatest}` | [§1.3.3](../docs/spec/01-signature.md), [A3](../docs/spec/02-axioms.md) | ✅ proved |
