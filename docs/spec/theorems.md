@@ -236,6 +236,19 @@ is the quantitative twin of the lattice coinduction `Attention.sustainedField_gr
 order-theoretic self is the *greatest* fixed point, the contractive quantitative self is the
 *unique* one. Bounded by `‖b‖·(1-‖x‖)⁻¹` (`sustained_bound`).
 
+**Unifying the two selves — both realize the ν-modality.** `[proved]` The order-theoretic self
+(`sustainedField`, a *sup* operator, greatest fixed point by Knaster–Tarski) and the quantitative
+self (`sustained`, a *sum* operator, unique fixed point by Banach contraction) are **not** the same
+operator — idempotent semiring vs ring, greatest vs unique — and cannot be made one. What they
+share is exactly the doctrine's **ν-modality** (A1): each is *the canonical fixed point of
+co-directed feedback*. [`Feedback.CoDirectedSelf`](../../formal/Scratch/Feedback.lean) is the shared
+interface (a feedback operator with a sustained self that is a fixed point); `self_iterate` is a
+theorem proved **once** over it (the self persists under any number of feedback rounds); and
+**both** selves are exhibited as instances (`latticeSelf`, `banachSelf`). The unification is exact
+at the ν-role and stops exactly there: *greatest-by-order* and *unique-by-contraction* are recorded
+as the irreducible difference the interface cannot — and should not — erase. So the two models are
+one doctrine's `ν`, realized by two different fixed-point theorems.
+
 ---
 
 ## Derived notions
