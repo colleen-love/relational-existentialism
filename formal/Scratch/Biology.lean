@@ -20,7 +20,7 @@ the organism is the fixed point of their composite. So:
   from its own metabolites;
 * `closed_to_efficient_causation` — a component the system fabricates *from itself* lies in
   the organism: the efficient cause of its own maintenance is **internal**;
-* `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, A2) of
+* `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, D1) of
   the fabrication operator *is* the Rosennean organism, definitionally.
 
 The impredicative self-reference ("the repairer is itself repaired") is the same loop the
@@ -82,7 +82,7 @@ theorem closed_to_efficient_causation (S : MRSystem Comp) {c : Comp}
     rw [hx]; exact h
   exact hsub rfl
 
-/-- **The functor `Cl(𝕋) → 𝒟_bio`, witnessed.** The theory's self-trace (`νP`, axiom A2 /
+/-- **The functor `Cl(𝕋) → 𝒟_bio`, witnessed.** The theory's self-trace (`νP`, axiom D1 /
 [`Scratch.Trace`](Trace.lean)) of the fabrication operator *is* the Rosennean organism: a
 looped self maps to a self-fabricating organism, definitionally. The "strong fit with an
 ancestor" the plan claimed, as a one-line theorem. -/

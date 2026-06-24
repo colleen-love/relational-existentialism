@@ -20,7 +20,7 @@ A domain *receives* a functor exactly when it has the structure the theory expor
 The full traced-symmetric-monoidal `Cl(𝕋)` is now a genuine Lean object — the free traced
 SMC on a signature, with its universal functor (§4.6). The domain functors below are also
 exhibited directly at the level of **operative content** — the eigenform/`gfp` structure
-(A2–A5) and the cartesian copy/Lawvere structure (A6) — which is what makes each one a
+(D1–T2) and the cartesian copy/Lawvere structure (T3) — which is what makes each one a
 *one-line* theorem (§4.3, §4.8, §4.9).
 
 ## 4.2 The domains, with verdicts
@@ -47,7 +47,7 @@ machinery wholesale. In [`formal/Scratch/Chemistry.lean`](../../formal/Scratch/C
   `autocatalytic_greatest` (any self-sustaining set lies within it — coinduction);
 - **the functor, witnessed:** `selfTrace_eq_autocatalyticCore` proves
   `selfTrace (prodOp R) = autocatalyticCore R` *definitionally* — the theory's
-  self-trace (`νP`, [A2](02-axioms.md)) of the production operator **is** the
+  self-trace (`νP`, [D1](02-axioms.md)) of the production operator **is** the
   autocatalytic core. A *looped self* in the theory maps to a *self-sustaining
   autocatalytic set* in chemistry. The "near-literal fit" is a one-line theorem.
 
@@ -233,7 +233,7 @@ equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the univers
   construction). The firewall is enforced by the type system, not by willpower.
 - It also confirms the **residues** sit outside the language: a functor preserves only
   structure, and valence / the hard problem / freedom are precisely the non-structural
-  remainder — so no functor reaches them, exactly as [A6](02-axioms.md) predicts of the
+  remainder — so no functor reaches them, exactly as [T3](02-axioms.md) predicts of the
   σ-move that formalizing itself is.
 
 ## 4.8 AI — recurrence is the trace (mechanized)
@@ -279,7 +279,7 @@ impredicative self-closure that is precisely a greatest fixed point. In
 - `closed_to_efficient_causation` — a component the system fabricates *from itself alone* lies
   in the organism: the efficient cause of its own maintenance is **internal**, Rosen's
   defining property, as a one-line consequence of coinduction.
-- `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, A2) of
+- `selfTrace_eq_organism` — **the functor, witnessed**: the theory's self-trace (`νP`, D1) of
   the fabrication operator *is* the organism, definitionally — a looped self maps to a
   self-fabricating organism.
 
@@ -287,3 +287,46 @@ The impredicative "the repairer is itself repaired" is the same self-reference t
 [mirror](../../formal/RelExist/Mirror.lean) makes precise on the σ-side — biology as the
 **ancestor** of the doctrine's self-modelling. With this, **all five domains** of the plan
 (physics, chemistry, biology, AI, and the social/mental-health firewall) are mechanized.
+
+## 4.10 Decoherence — the quantum→classical retraction (mechanized, concrete)
+
+The firewall (§4.4) is a *binary*: a domain is cartesian (copyable) or compact (entangleable),
+never both. But the **passage** between them — how the classical fragment arises *inside* the
+relational whole — is not binary, it is graded, and it has a name: **decoherence**. This is
+mechanized concretely inside the literal matrix model
+([`Scratch/Decoherence.lean`](../../formal/Scratch/Decoherence.lean)), with the standard
+basis as the **classical structure**.
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **decoherence** — kill the coherences | `RelExist.Decoherence.dephase` | keep the diagonal, zero the off-diagonal (the basis-induced retraction) | ✅ defined |
+| the **classical fragment** = diagonal states | `IsClassical` / `isClassical_iff_diagonal` | the copyable, broadcastable states are exactly the diagonal ones | ✅ proved |
+| decoherence is a **retraction** | `dephase_eq_self_iff` / `dephase_idem` / `trace_dephase` | idempotent, trace-preserving, fixes exactly the classical fragment | ✅ proved |
+| **copyability ⟺ commutativity** | `isClassical_mul` / `classical_comm` | the classical fragment is closed under composition *and commuting* — the no-broadcasting fault line, concretely | ✅ proved |
+| **copy-defect** — the continuous knob | `copyDefect` / `copyDefect_eq_zero_iff` | the off-diagonal mass; `= 0` ⟺ classical (the dial from feeling to knowing) | ✅ proved |
+| a **numeric magnitude** | `defectSq` / `defectSq_eq_zero_iff` / `defectSq_nonneg` | squared off-diagonal mass: `0` exactly on the classical fragment, positive otherwise | ✅ proved |
+| the fragment is **proper** | `plus_not_classical` / `dephase_plus_ne` / `defectSq_plus_pos` | a witnessed superposition (`|+⟩⟨+|`) has positive defect; decoherence loses information — the concrete face of `no_cloning` | ✅ proved |
+
+So the cartesian/compact binary of `Compact.collapse` is refined, *inside* a genuine traced
+SMC, into a **graded retraction**: decoherence `dephase` projects the relational whole onto a
+proper classical fragment, the **copy-defect** measures continuously how far a state is from
+being copyable (zero iff classical, positive on a superposition), and "copyable ⟺ commuting"
+makes the no-broadcasting fault line literal. This is the structural shadow of the
+quantum→classical passage — `sorry`-free, axiom footprint `propext`/`Classical.choice`/`Quot.sound`.
+
+**The abstract companion** ([`Scratch/Classical.lean`](../../formal/Scratch/Classical.lean)),
+in the operative style of `Compact.lean` (axiomatize the operative content, don't reconstruct
+the full `†`-Frobenius coherence):
+
+| Result | Lean name | Meaning | State |
+| --- | --- | --- | --- |
+| **dagger category** | `RelExist.Classical.DaggerCategory` / `matDagger` | involutive contravariant `(·)†`; the matrix model is one, with `† = transpose` | ✅ defined + instance |
+| **decoherence, abstractly** | `RelExist.Classical.Decoherence` | the endomorphism `†`-monoid of an object with a decoherence retraction whose fixed points form a **commutative** submonoid, `dec` self-adjoint | ✅ defined |
+| structural theorems | `Decoherence.{isClassical_mul, isClassical_comm, isClassical_dgr, dec_eq_self_iff}` | from the axioms alone: the classical fragment is a commutative `†`-submonoid and `dec` retracts onto it (axiom-free) | ✅ proved |
+| **abstract = concrete** | `RelExist.Classical.matDecoherence` | the matrix model *is* a `Decoherence`, every axiom discharged from the `dephase` lemmas — abstract decoherence is matrix dephasing | ✅ proved |
+
+So the decoherence retraction is now a *definable structure* a category can carry, with the
+matrix model exhibited as an instance — the typeclass-level statement of "decoherence onto the
+cartesian fragment," validated by the concrete dephasing. The full `†`-Frobenius / monoidal
+coherence is deliberately not reconstructed (the same stance `Compact.lean` takes for compact
+closure); `Cl_coh(𝕋)` is where that coherence would live.

@@ -25,10 +25,10 @@ associatively with identities. We read it relationally:
 This is already the inversion of the plain-language doc made structural: in a
 category you cannot speak of an object except via the morphisms into and out of it
 (Yoneda). An object's identity *is* its pattern of relatings. Relation is primitive;
-the object is what the relatings determine. Axiom **A1** will make this precise.
+the object is what the relatings determine. Axiom **A2** will make this precise.
 
 We do **not** start from a category of "selves with relations attached." We start
-from relatings, and selves appear only later, as fixed points (Axiom **A4**).
+from relatings, and selves appear only later, as fixed points (Axiom **A3**).
 
 ---
 
@@ -44,8 +44,8 @@ A **symmetric monoidal category** (SMC) `(𝒞, ⊗, I, γ)` adds:
 
 `⊗` is not "and" as set-theoretic pairing; it is parallel coexistence with no
 implied communication. Communication is a *morphism* between tensored systems.
-This is the fragment in which **relation-primacy (A2 in the plan's numbering of
-ingredients)** is native: morphisms are the data, objects are bookkeeping.
+This is the fragment in which **relation-primacy (A2)** is native: morphisms are the
+data, objects are bookkeeping.
 
 `[structural; both]`
 
@@ -87,8 +87,8 @@ $$
 $$
 
 `[structural; both]` — this is the operator the philosophy calls the *σ-move*, the
-turning of a relating back on itself. Axiom **A2** records the definition; Axiom
-**A6** records its cartesian obstruction.
+turning of a relating back on itself. Axiom **D1** records the definition; Axiom
+**T3** records its cartesian obstruction.
 
 ---
 
@@ -114,7 +114,7 @@ bijection with **Conway fixed-point operators** — operators
 dinaturality, the diagonal/Bekič rule). Consequently every endomorphism arising by
 feedback *has* a fixed point, canonically.
 
-This is the precise sense of **"to relate is to create"** (Axiom **A3**): in the
+This is the precise sense of **"to relate is to create"** (Axiom **T1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure.
 
@@ -155,7 +155,7 @@ need, their final coalgebras. Two uses:
   becomes a type, not a metaphor.
 - **The "we".** Observational identity `≈` is defined coinductively as the greatest
   relation closed under one step of mutual indistinguishability — a **bisimilarity**
-  — and the shared world is the quotient `𝔼 := D/≈`. Axiom **A5** is stated here.
+  — and the shared world is the quotient `𝔼 := D/≈`. Axiom **T2** is stated here.
 
 `[structural; both]`
 
@@ -180,8 +180,8 @@ theorem versus a no-go on a natural transformation existing. The philosophy as
 **cartesian** story. The monoidal generalization buys **quantum reach** (Layer 4's
 physics functor) at the cost of the literal mirror reading.
 
-**Methodological consequence.** All self-reference axioms — **A2's** mirror reading,
-**A3**, **A6** — are stated in the cartesian fragment. The compact-closed fragment
+**Methodological consequence.** All self-reference axioms — **D1's** mirror reading,
+**T1**, **T3** — are stated in the cartesian fragment. The compact-closed fragment
 inherits only what is fragment-neutral (`⊗`, `Tr`-as-feedback, `≈`). We never write
 "`Δ`" in the quantum fragment, and Layer 4 will turn this discipline into a typing
 theorem (no monoidal functor from the compact-closed fragment into the

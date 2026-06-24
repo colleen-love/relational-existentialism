@@ -6,7 +6,7 @@ Here is the four-layer program, concretely.
 
 A **traced symmetric monoidal doctrine extended with greatest fixed points** (a coinductive/Conway doctrine), carrying a distinguished **cartesian fragment**. Three ingredients, each load-bearing for a specific part of your philosophy:
 
-- *Symmetric monoidal* gives you relation-primacy: morphisms (relatings) are primitive, objects are types, and `⊗` is coexistence. This is the doctrine where A2 is native rather than argued.
+- *Symmetric monoidal* gives you relation-primacy: morphisms (relatings) are primitive, objects are types, and `⊗` is coexistence. This is the doctrine where D1 is native rather than argued.
 - *Trace* `Tr` is self-relation as feedback — the looping, with no copying required, so it survives into the quantum fragment.
 - *Greatest fixed points* (`ν`, final coalgebras) give you becoming and the "we": `≈` and `𝔼`.
 
@@ -22,9 +22,11 @@ Generators:
 
 ## 3. The axioms — the six commitments as sequents.
 
-Marked by fragment and status.
+Marked by fragment and status. (In the spec's typed labeling — see
+[`02-axioms.md`](spec/02-axioms.md) — items 1–6 below are **A2, D1, T1, A3, T2, T3**
+respectively; the ambient structure of §1 is the first axiom **A1**.)
 
-1. *Relation primacy.* A state's identity is its behavior under all process-contexts. `[structural; defines ≈ in A5]`
+1. *Relation primacy.* A state's identity is its behavior under all process-contexts. `[structural; defines ≈ in T2]`
 2. *Self-relation is feedback.* `σ(P) := Tr(P)`. `[definitional]`
 3. *To relate is to create.* In the cartesian fragment `Tr` is a Conway operator, so fixed points exist. `[cartesian; theorem]`
 4. *Recursion constitutes the self — the discriminating axiom.* A self/eigenform is a fixed point of **iterated, attention-funded** self-relation: `e` such that `loop_R(e) = e` where `loop_R` is `Tr` iterated under budget `R`. The carrier of "selves" is `Stab := { e : loop_R(e) = e }`. `[the load-bearing posit]`

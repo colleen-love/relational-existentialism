@@ -17,8 +17,10 @@ if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
   exit 0
 fi
 
-# Persist the Lean toolchain on PATH for the whole session.
+# Persist the Lean toolchain on PATH, and a UTF-8 locale (Agda needs it to read
+# its unicode source), for the whole session.
 echo 'export PATH="$HOME/.elan/bin:$PATH"' >> "$CLAUDE_ENV_FILE"
+echo 'export LC_ALL=C.UTF-8' >> "$CLAUDE_ENV_FILE"
 
 LOG="/tmp/relexist-bootstrap.log"
 if "$CLAUDE_PROJECT_DIR/formal/scripts/bootstrap.sh" > "$LOG" 2>&1; then
@@ -27,4 +29,12 @@ else
   echo "[session-start] bootstrap FAILED — tail of $LOG:"
   tail -25 "$LOG"
   exit 1
+fi
+
+# Agda layer (Layer 5). Non-fatal: a session without it still has the full Lean
+# development, so a transient apt failure must not block the session from starting.
+if "$CLAUDE_PROJECT_DIR/agda/scripts/bootstrap.sh" >> "$LOG" 2>&1; then
+  echo "[session-start] Agda env ready: $(agda --version 2>/dev/null | head -1)"
+else
+  echo "[session-start] Agda bootstrap skipped/failed (non-fatal); see $LOG"
 fi

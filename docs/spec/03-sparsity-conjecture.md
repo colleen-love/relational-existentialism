@@ -104,7 +104,7 @@ separate it from a theorem about `Cl(𝕋)`:
    overlap and the clean sum `∑ d λ` becomes an inequality over a *poset* of
    couplings. Sparsity must be re-proved with sharing allowed.
 2. **"Stabilizes" is a fixed-point condition, not a threshold.** `f ∈ Stab_R` was
-   defined in [A4](02-axioms.md) as `loop_R(e) = e`, not as `dλ ≤ β`. The lemma
+   defined in [A3](02-axioms.md) as `loop_R(e) = e`, not as `dλ ≤ β`. The lemma
    assumes these coincide; showing `loop_R`'s budgeted iteration *realizes* the
    threshold (that `N(s) = ⌊β/λ⌋` returns suffice and are necessary to reach the
    fixed point) is real work in the traced category.
@@ -129,6 +129,16 @@ None of these is hand-waving-away-able, and naming them is the point: the lemma 
 >
 > Moreover (sharp dichotomy): dropping the bound (`β = ⊤`) makes `Stab_R` dense
 > (Lemma 3.2 lifts), so finiteness of `β` is **necessary** for sparsity.
+
+> **Partially mechanized (topological clause).** The "nowhere dense" half of
+> Conjecture 3.3 is now machine-checked for the **final-coalgebra model** of states —
+> [`agda/RelExist/Sparsity.agda`](../../agda/RelExist/Sparsity.agda) (`selves-nowhereDense`):
+> under the cylinder topology on behaviours, the selves (the constant behaviours) are
+> closed with empty interior, and the sharp dichotomy holds (`trivial→allSelf`: a
+> trivial observation alphabet makes them dense). What remains conjectural is the
+> *cost-graded* content — the lax grading `c`, cost-sharing over the poset of couplings,
+> and the lift to all of `Cl(𝕋)` (step 2 of §3.5); the topological *shape* of the claim
+> is no longer open.
 
 > **Conjecture 3.4 (spectral / closure form — the structural reason).** Let attention
 > be the co-directed operator `Φ_c` of [§1.3](01-signature.md) on a perspective of
@@ -180,9 +190,19 @@ A plausible route, in increasing difficulty:
 4. **Topologize.** Put the product/cylinder topology on `I → D` (states as
    behaviors in the final coalgebra), show the threshold set is closed with empty
    interior. Coinduction-friendly; Agda's `ν`-layer is the natural host for this step.
+   **✅ done** — [`agda/RelExist/Sparsity.agda`](../../agda/RelExist/Sparsity.agda),
+   Agda (`--safe --guardedness`): states are behaviours in the final coalgebra, the
+   topology is the cylinder topology, and the selves are the *constant* behaviours.
+   `nonConst-open` (the selves are **closed** — their positive complement is open) and
+   `selves-emptyInterior` (every cylinder contains a non-self) give
+   `selves-nowhereDense`: `Stab` is **nowhere dense**, the topological form of
+   Conjecture 3.3. `trivial→allSelf` is the matching dichotomy — a trivial observation
+   alphabet makes `Stab` dense (Lemma 3.2 lifts), so expressivity (`≥ 2` distinct
+   observations) is *necessary* for sparsity.
 
 Steps 1–2 are near-term and proof-assistant-ready. Step 3 is the heart. Step 4 is
-the polished form.
+the polished form. Steps 1, 3, and 4 are mechanized (Lean for 1 & 3, Agda for 4);
+step 2 (cost-sharing over a graded poset) is the remaining gap.
 
 ---
 
@@ -195,7 +215,7 @@ the polished form.
   earns the word "rigor."
 - **Would not mean.** That the world *is* this way (the theory is a lens, not a
   proof — see the view's "What it doesn't settle"); nor would it touch the three
-  typed-out residues (valence, the hard problem, freedom), which [A6](02-axioms.md)
+  typed-out residues (valence, the hard problem, freedom), which [T3](02-axioms.md)
   predicts the formalism *cannot* reach. Proving sparsity confirms the program's
   ambition exactly to its own stated boundary — and no further, which is the point.
 
@@ -204,6 +224,6 @@ the polished form.
 ### Cross-references
 
 - Definitions of `loop_R`, `β`, `ε`, `d`, `c`: [01 §1.3](01-signature.md).
-- The selfhood predicate `Stab_R`: [02 — A4](02-axioms.md).
+- The selfhood predicate `Stab_R`: [02 — A3](02-axioms.md).
 - The doctrine fragments the sparsity lives across: [00](00-doctrine.md).
 - Mechanization targets and tooling: [formalization plan §5](../formalization-plan.md).

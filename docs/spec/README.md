@@ -16,19 +16,25 @@ Read in order:
 2. [`01-signature.md`](01-signature.md) — the presented theory `𝕋`: sorts,
    generators, **attention as a bounded resource** `(R, ·, 1, ≤)`, and the
    relational sort `≈`.
-3. [`02-axioms.md`](02-axioms.md) — the six commitments **A1–A6** as definitions
-   and sequents, each tagged `[fragment; status]`, with the derived carrier of
-   selves `Stab`.
+3. [`02-axioms.md`](02-axioms.md) — the commitments grouped by kind: **axioms A1–A3**,
+   **definition D1**, **theorems T1–T3**, each tagged `[fragment; status]`, with the
+   derived carrier of selves `Stab`.
 4. [`03-sparsity-conjecture.md`](03-sparsity-conjecture.md) — the candidate
    theorem: **under a finite attention budget, `Stab` is sparse.** Includes a
    provable resource-counting lemma and the strategy for lifting it to the full
    doctrine.
 5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
    domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. All five domains
-   (**physics** — a literal matrix model with trace = partial trace; **chemistry** and
+   (**physics** — a literal matrix model with trace = partial trace, plus the
+   **decoherence** retraction onto the classical fragment; **chemistry** and
    **biology** — eigenforms; **AI** — feedback = the trace; and the **firewall** for the
    cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
    and the **monoidal-coherence** refinement are all mechanized.
+
+Cross-cutting: [`axiom-audit.md`](axiom-audit.md) — a **checked** map separating the
+**axioms** (A1–A3) from the **theorems** (T1–T3), with verified `#print axioms` footprints,
+concluding that the doctrine reduces to **one discriminating posit (A3)** over the ambient
+structure.
 
 ## Status legend
 

@@ -12,7 +12,7 @@
 This module discharges the gap flagged in
 [`docs/spec/03-sparsity-conjecture.md` §3.3](../../docs/spec/03-sparsity-conjecture.md):
 the sparsity lemmas count with a *threshold* ("a self costs at least `m`"), but
-[A4](../../docs/spec/02-axioms.md) defines a self as a **fixed point** of budgeted,
+[A3](../../docs/spec/02-axioms.md) defines a self as a **fixed point** of budgeted,
 iterated self-relation (`loop_R(e) = e`). Step 3 connects the two.
 
 We model self-relation as an operator `σ : X → X` (one attended return). A seed `x`
@@ -72,7 +72,7 @@ theorem loopR_isEigen_iff_le_fundedReturns (σ : X → X) (x : X) (d lam beta : 
 
 /-- **Bridge, resource form: `loop_R(e) = e ⟺ d·λ ≤ β`.** The budgeted loop is an
 eigenform iff the budget covers the cost of reaching the depth. This is the equivalence
-that joins A4's fixed-point self to the threshold the sparsity lemmas count with. -/
+that joins A3's fixed-point self to the threshold the sparsity lemmas count with. -/
 theorem loopR_isEigen_iff (σ : X → X) (x : X) (d lam beta : Nat) (hlam : 0 < lam)
     (hstab : StabilizesAt σ x d) :
     IsEigen σ (loopR σ lam beta x) ↔ d * lam ≤ beta := by
@@ -96,7 +96,7 @@ theorem depth_le_selfCost (d lam : Nat) (hlam : 1 ≤ lam) : d ≤ selfCost d la
   have h : d * 1 ≤ d * lam := Nat.mul_le_mul (Nat.le_refl d) hlam
   simpa using h
 
-/-- **The derived cost floor.** With A4's depth floor `d ≥ 2` and per-return cost
+/-- **The derived cost floor.** With A3's depth floor `d ≥ 2` and per-return cost
 `λ ≥ 1`, every self costs at least `2` — exactly the floor the sparsity lemmas assume,
 now *derived* from the loop dynamics. -/
 theorem two_le_selfCost (d lam : Nat) (hd : 2 ≤ d) (hlam : 1 ≤ lam) :

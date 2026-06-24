@@ -61,7 +61,7 @@ constitution* rather than by allowance. Everything below is mechanized in
 ### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
 A perspective is finite *by definition* — bounded integration capacity is part of what
-being a located someone *is*, the same un-closable mirror as [A6](02-axioms.md). We
+being a located someone *is*, the same un-closable mirror as [T3](02-axioms.md). We
 encode it as a **bounded capacity** `α` (a complete lattice, with top `⊤`); an
 attention **field** assigns each relatum a standing, `att : V → α`. The only bound is
 `⊤` of `α` — the perspective's own limit — and there is **no budget parameter `β`
@@ -103,7 +103,7 @@ $$
 $$
 
 via the same `ν`-modality (Knaster–Tarski / `OrderHom.gfp`) used for `≈` in
-[A5](02-axioms.md): the self is *the most attention that can be co-sustained*. Two
+[T2](02-axioms.md): the self is *the most attention that can be co-sustained*. Two
 mechanized consequences make this **generative**, not allocative:
 
 - **Accumulation** (`orbit_ascending`, `orbit_le_gfp`): from a self-reinforcing seed
@@ -116,7 +116,7 @@ This is where **Mozart** lives: a node whose biological substrate is gone still 
 weight in `νΦ_c`, because the edges — scores, recordings, each listener's return — keep
 the coupling live; he radiates attention *through the fabric*. Death is those edges
 decaying, the weight fading *on the timescale of others' returning* — the same
-distributed-self story as [A5](02-axioms.md)'s `𝔼`.
+distributed-self story as [T2](02-axioms.md)'s `𝔼`.
 
 ### 1.3.4 The resource budget as a special case `[reduction]`
 
@@ -143,11 +143,11 @@ $$
 — a subobject of `D ⊗ D` — for **observational identity**. It is *not* an
 endomorphism `D → D` (that would be the σ-move, the diagonal, the cartesian
 self-look); it is a relation living one level up. This type-level distinction is the
-whole of Axiom **A6**: `σ` (an endomap, cartesian, Lawvere-obstructed) fragments;
+whole of Axiom **T3**: `σ` (an endomap, cartesian, Lawvere-obstructed) fragments;
 `≈` (a relation, coinductive, fragment-neutral) does not. The two are different
 *kinds of arrow*, and that difference is the formal image of "knowing vs feeling."
 
-`≈` is not freely generated — it is pinned down coinductively by Axiom **A5** as a
+`≈` is not freely generated — it is pinned down coinductively by Axiom **T2** as a
 greatest fixed point `νΘ`. Its quotient `𝔼 := D/≈` is the **shared world**.
 
 `[definitional]`
@@ -171,5 +171,5 @@ cartesian-only domains have a natural `Δ` and the compact-closed fragment prova
 does not, there is **no** structure-preserving functor from the compact-closed
 fragment into them. "Two people are entangled" is not unwise — it is *ill-typed*.
 
-The next file states the six axioms that cut `Cl(𝕋)` down from the free theory to
-*this* one.
+The next file states the commitments — three axioms (**A1–A3**), a definition (**D1**),
+and three theorems (**T1–T3**) — that cut `Cl(𝕋)` down from the free theory to *this* one.
