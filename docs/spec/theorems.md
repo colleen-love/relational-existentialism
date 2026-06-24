@@ -49,7 +49,8 @@ equivalence), and `World := D/≈` (the quotient). Footprint `propext, Quot.soun
 perspective on a whole one belongs to — is the Lawvere obstruction under self-inclusion:
 [`Relating.self_inclusive_unmodelable`](../../formal/RelExist/Relating.lean) (0 axioms). No
 member of a collection holds a complete model of the collection that contains it. (See §"The
-four topologies" below — this is where T2's seam and T3's remainder turn out to be one fact.)
+corrected map" below — this is where T2's seam and T3's remainder turn out to be one fact, and
+where it reaches the *other* too, through the shared between.)
 
 **Still open.** `[open]` That `≈` **coincides with the contextual congruence `≡`** of A2
 ("behavioral equivalence = greatest bisimilarity") — a context-lemma / full-abstraction
@@ -103,7 +104,7 @@ trace/feedback (D1); knowing is the diagonal (T3).
 hold the rest outside. The un-looped wires are the part "held at a distance" (objectifiable).
 A partial loop can have its own fixed point — a **sub-self** (a persona, a habit). `[follows]`
 
-### Relation to another — the co-directed, shared trace
+### Relation to another — the co-directed, shared trace (and why an other is *not* knowable)
 
 `[def + proved]` Relating to *another* is the **co-directed** trace (D1): the looped wire is
 *shared*, "neither end closes it alone," and the operator is `Φ_c`, feedback through the
@@ -111,28 +112,39 @@ coupling. When a shared loop closes, its fixed point `νΦ_c` is supported on *b
 self that lives **in the between**, the "we" of T2's `𝔼`. The gfp is proved (`sustainedField`);
 "the shared eigenform is a we" is a `[reading]`.
 
-### Relation to a collection containing oneself — the four topologies become two
+But the between is the crux: by **A2** a self *is* its relatings, so the shared relating `r`
+constitutes *both* parties — **a part of you is a part of the other.** A related other is
+therefore **not disjoint** from you, and not fully knowable: the other is partly constituted by
+its relation to you, so completely modelling them would yield a complete self-model of *you* —
+which Lawvere forbids. `[proved, 0 axioms]`
+[`Relating.related_other_unmodelable`](../../formal/RelExist/Relating.lean). *To know fully you
+must not relate; to relate is to make the other unknowable* — and relating is the only access
+you have. (So intimacy and complete knowledge are antagonistic: the stranger is knowable, the
+beloved is not.)
 
-This is the **self-inclusion** case (the relater is *inside* the relatum), and it is the heart
-of the matter. For the question *"can the relation be completely known/modelled?"* the four
-topologies collapse to **two classes**, by one criterion — is the modeller inside the modelled?
+### The corrected map — one knowable case, three unknowable
 
-- **Reference outside its target ⇒ knowable.** `[proved, 0 axioms]` A part one stands outside
-  of, or a disjoint other, can be modelled completely:
-  [`Relating.disjoint_modelable`](../../formal/RelExist/Relating.lean). The witness is trivial
-  — and that triviality is the point: knowing an other is *not hard*, so the seam is not about
-  difficulty.
-- **Reference inside its target ⇒ unknowable.** `[proved, 0 axioms]` The whole of oneself, or
-  a collection that contains one, cannot: [`Relating.self_inclusive_unmodelable`](../../formal/RelExist/Relating.lean).
-  This is Lawvere (T3) under self-inclusion, and it **is** T2's irreducible seam — no member
-  holds a master view of a whole it belongs to. The whole of yourself sits on the unknowable
-  side for the *same reason* a collective does: you cannot get outside the whole you are in.
+For the question *"can the relation be completely known/modelled?"*, the four topologies do
+**not** split outside-vs-inside; they split **relationless vs relation-laden**, because relating
+creates shared constitution (A2). There is exactly **one** knowable case:
 
-So the four topologies are two — *outside ⇒ knowable, inside ⇒ not* — and the boundary is
-self-inclusion. Relating to a containing collection can give birth to a larger self you are a
-part of, co-constitute you with it `[follows]`, and let you outlast your own loop in its
-eigenform (the distributed self, below) `[reading]` — but it forecloses ever knowing it whole
-from the inside `[proved]`.
+- **No relation ⇒ knowable.** `[proved, 0 axioms]` Only a target you share *nothing* with — a
+  part you stand entirely outside of, or a stranger you merely observe — is fully modelable:
+  [`Relating.disjoint_modelable`](../../formal/RelExist/Relating.lean). The witness is trivial;
+  the point is that knowability is reserved for the **relationally empty** limit (cold, inert).
+- **Any relation ⇒ unknowable**, by the single Lawvere obstruction (T3), reaching the target
+  through what it shares with you:
+  - a **related other** — `related_other_unmodelable` (the shared between makes them contain you);
+  - the **whole of yourself** / a **collection containing you** — `self_inclusive_unmodelable`
+    (you cannot get outside the whole you are in; this is also T2's irreducible seam, and read
+    with the view-space as aims, "you cannot aim at the aimer").
+
+So the boundary is not inside-vs-outside but **related-vs-unrelated**: the moment a relation
+exists, the other shares a part with you, and the self-inclusion obstruction reaches them
+through it. Relating to a containing collection (or another) can give birth to a larger self you
+are part of, co-constitute you with it `[follows]`, and let you outlast your own loop in its
+eigenform (the distributed self, below) `[reading]` — but it forecloses ever knowing it whole.
+Knowing-fully and relating are antagonistic.
 
 ### Routing vs directing — and what knowing does to a relation
 
