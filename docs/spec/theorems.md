@@ -161,6 +161,36 @@ Knowing-fully and relating are antagonistic.
   `[proved]`; that this *is* "the act of knowing" is a `[reading]`. Knowing fragments the whole
   relation into the part objectified plus the remainder it cannot reach (T3).
 
+### To know it you must relate to it — and so cannot completely know it
+
+The limit consequence: **complete knowledge and access are disjoint.** The only fully
+modelable target is one you have *no* relation to (`disjoint_modelable`) — but a target you
+have no relation to is one you have no *access* to; the complete model lives at a **view from
+nowhere** no situated knower can occupy. Everything you can actually know, you relate to, and
+so cannot fully know.
+
+The bridge is mechanized with the relating made explicit rather than assumed `[proved, 0
+axioms]`: [`Relating.no_complete_view`](../../formal/RelExist/Relating.lean). Encode the **A2
+closure** — every view/model of `t` is itself one of `t`'s relata (`reg`), because viewing-`t`
+is a relating-to-`t`, hence part of `t`. Then no complete view of `t` exists: the self-negating
+model escapes any candidate `v` at its own registration. Drop the closure (a target you do not
+relate to) and completeness returns. *Knowing requires relating; relating registers your
+knowing inside the known; the diagonal does the rest.*
+
+**Honest gap.** `no_complete_view` *assumes* the A2 closure `reg` (every view is a relatum) —
+which is the transparent doctrinal commitment "knowing is relating," far cleaner than the
+opaque `share`-surjectivity it replaces. What it does **not** yet do is *derive* `reg` from the
+**dynamics** of the co-directed `Φ_c` — i.e. prove that when a relating loop actually *closes*
+(`sustainedField` reaches its fixed point) the knower is thereby registered among the known's
+relata. That derivation is `[open]`, and it is the keystone for this whole family (other,
+collective, anything). Until then: *given* that knowing is relating, complete knowledge is
+impossible — proved; *that* knowing is relating — the doctrine's reading, not yet a theorem of
+the lattice dynamics.
+
+**Reflexive coda.** The statement is an instance of itself: your knowing *that* "nothing
+relate-able is fully knowable" is a relating you are inside of, hence not itself fully knowable.
+The doctrine confirms its own thesis from within — the same move as T3 and the typed-out residue.
+
 ---
 
 ## Derived notions

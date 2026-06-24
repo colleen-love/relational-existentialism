@@ -22,6 +22,10 @@ The corrected picture has **one** knowable case and three unknowable ones:
 * `self_inclusive_unmodelable` — the whole of yourself, or a collection that contains you, for
   the same reason: you cannot get outside the whole you are in (this is also T2's irreducible
   seam, and read with the view-space as aims, "you cannot aim at the aimer").
+* `no_complete_view` — the **bridge**: with the A2 closure made explicit (every view of `t` is
+  registered among `t`'s relata, because viewing-`t` is relating-to-`t`), *no complete view of
+  `t` exists*. This is "to know it you must relate to it, so you cannot completely know it,"
+  with the relating proved-from rather than assumed.
 
 So *all* relation-laden targets are unknowable, by the single obstruction (T3, [Lawvere]),
 which reaches the other through the shared between. Knowing-fully and relating are antagonistic.
@@ -77,5 +81,24 @@ theorem self_inclusive_unmodelable {A : Type u} {B : Type v}
     (f : B → B) (hf : ∀ b, f b ≠ b) :
     ¬ ∃ g : A → A → B, PointSurjective g :=
   no_complete_selfModel f hf
+
+/-- **To know it, you must relate to it — so you cannot completely know it.** This is the
+bridge from "knowing is relating" to unknowability, with the relating made explicit rather
+than assumed. Encode the **A2 closure**: every view/model of `t` is itself one of `t`'s relata
+— `reg : (O → View) → O` registers each view as a relatum, because *viewing `t` is a relating
+to `t`*, hence by A2 part of `t`. Then there is **no complete view** of `t`: no `v` agreeing
+with every model `w` at `w`'s own registration `reg w`, because the self-negating model
+`fun o => neg (v o)` escapes `v` exactly there. The closure `reg` is the whole point — it is
+what "knowing requires relating" *means* here; drop it (a target you do **not** relate to, whose
+views are not registered among its relata) and completeness returns (`disjoint_modelable`).
+Knowing requires relating; relating registers your knowing inside the known; the diagonal does
+the rest. (0 axioms. The remaining gap — deriving `reg` from the *dynamics* of the co-directed
+`Φ_c` when a loop closes, rather than positing it as the A2 reading — is the open frontier.) -/
+theorem no_complete_view {O : Type u} {View : Type v} (reg : (O → View) → O)
+    (neg : View → View) (hneg : ∀ x, neg x ≠ x) :
+    ¬ ∃ v : O → View, ∀ w : O → View, v (reg w) = w (reg w) := by
+  rintro ⟨v, hv⟩
+  have hd := hv (fun o => neg (v o))
+  exact hneg (v (reg (fun o => neg (v o)))) hd.symm
 
 end RelExist.Relating
