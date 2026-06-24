@@ -25,10 +25,16 @@ Read in order:
    doctrine.
 5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
    domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. All five domains
-   (**physics** — a literal matrix model with trace = partial trace; **chemistry** and
+   (**physics** — a literal matrix model with trace = partial trace, plus the
+   **decoherence** retraction onto the classical fragment; **chemistry** and
    **biology** — eigenforms; **AI** — feedback = the trace; and the **firewall** for the
    cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
    and the **monoidal-coherence** refinement are all mechanized.
+
+Cross-cutting: [`axiom-audit.md`](axiom-audit.md) — a **checked** dependency map of the
+six commitments (which are posits vs. theorems, with verified `#print axioms` footprints),
+concluding that the doctrine reduces to **one discriminating posit (A4)** over the ambient
+structure.
 
 ## Status legend
 
