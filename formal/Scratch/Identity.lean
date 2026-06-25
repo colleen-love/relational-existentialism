@@ -327,4 +327,103 @@ theorem livedToObserved_not_injective :
     exact Quotient.sound obsEq_p0_q0
   exact Quotient.exact heq
 
+/-! ### The headline: the surplus is exactly nondeterminism
+
+The first-person surplus `≈ ⊊ ≅` exists **only** because of branching. We prove the general
+theorem: in a **deterministic** system, `≈ = ≅` — the outside trace recovers the lived identity
+in full. Equivalently (contrapositive): *a surplus implies branching* — no first-person remainder
+without the freedom to have done otherwise. The witness above (which is genuinely nondeterministic,
+`not_deterministic_stepW`) shows the hypothesis is necessary; branching is **necessary but not
+sufficient** (a system can branch redundantly and still collapse). -/
+
+/-- A transition system is **deterministic** when each state has at most one successor — no
+branching, no "could have done otherwise." -/
+def Deterministic (step : X → X → Prop) : Prop := ∀ {x y z}, step x y → step x z → y = z
+
+/-- Every trace is nonempty (a system always exhibits *something* now). -/
+theorem hasTrace_ne_nil {obs : X → O} {step : X → X → Prop} {x : X} {w : List O}
+    (h : HasTrace obs step x w) : w ≠ [] := by
+  cases h <;> simp
+
+/-- The only length-one trace of `x` reads off its current observation. -/
+theorem hasTrace_single_eq {obs : X → O} {step : X → X → Prop} {x : X} {o : O}
+    (h : HasTrace obs step x [o]) : o = obs x := by
+  rw [hasTrace_succ_iff] at h
+  rcases h with h | ⟨_, _, _, heq, _⟩
+  · rw [List.cons.injEq] at h; exact h.1
+  · rw [List.cons.injEq] at heq; exact heq.1
+
+/-- Observationally equal states agree on the current observation. -/
+theorem obsEq_obs {obs : X → O} {step : X → X → Prop} {a b : X}
+    (h : ObsEq obs step a b) : obs a = obs b :=
+  hasTrace_single_eq ((h [obs a]).1 (HasTrace.single a))
+
+/-- From the outside you can read off that a successor *exists* and what it shows: if `a ≅ b` and
+`a` can step to `a'`, then `b` can step to some `b'` showing the same observation. -/
+theorem obsEq_step {obs : X → O} {step : X → X → Prop} {a b a' : X}
+    (h : ObsEq obs step a b) (hstep : step a a') :
+    ∃ b', step b b' ∧ obs b' = obs a' := by
+  have hb2 : HasTrace obs step b [obs a, obs a'] :=
+    (h _).1 (HasTrace.step' a a' [obs a'] hstep (HasTrace.single a'))
+  rw [obsEq_obs h, hasTrace_succ_iff] at hb2
+  rcases hb2 with h1 | ⟨b', w', hs, heq, ht⟩
+  · simp at h1
+  · rw [List.cons.injEq] at heq; obtain ⟨_, rfl⟩ := heq
+    exact ⟨b', hs, (hasTrace_single_eq ht).symm⟩
+
+/-- **The step lemma under determinism.** If `x ≅ y` and each steps (to its *unique* successor),
+the successors are again `≅`. This is where branching would break things: with a unique successor,
+trace-equality of the wholes forces trace-equality of the tails. -/
+theorem deterministic_succ_obsEq {obs : X → O} {step : X → X → Prop}
+    {x y x' y' : X} (h : ObsEq obs step x y) (hdet : Deterministic step)
+    (hx' : step x x') (hy' : step y y') :
+    ObsEq obs step x' y' := by
+  intro w
+  constructor
+  · intro htx'
+    have hy2 : HasTrace obs step y (obs x :: w) := (h _).1 (HasTrace.step' x x' w hx' htx')
+    rw [obsEq_obs h, hasTrace_succ_iff] at hy2
+    rcases hy2 with h1 | ⟨y'', _, hs, heq, ht⟩
+    · rw [List.cons.injEq] at h1; exact absurd h1.2 (hasTrace_ne_nil htx')
+    · rw [List.cons.injEq] at heq; obtain ⟨_, rfl⟩ := heq
+      have : y'' = y' := hdet hs hy'; subst this; exact ht
+  · intro hty'
+    have hx2 : HasTrace obs step x (obs y :: w) := (h _).2 (HasTrace.step' y y' w hy' hty')
+    rw [← obsEq_obs h, hasTrace_succ_iff] at hx2
+    rcases hx2 with h1 | ⟨x'', _, hs, heq, ht⟩
+    · rw [List.cons.injEq] at h1; exact absurd h1.2 (hasTrace_ne_nil hty')
+    · rw [List.cons.injEq] at heq; obtain ⟨_, rfl⟩ := heq
+      have : x'' = x' := hdet hs hx'; subst this; exact ht
+
+/-- **The collapse.** In a deterministic system, observational equality `≅` *is* a bisimulation,
+so `≅ ⊆ ≈`. (With soundness `≈ ⊆ ≅`, this gives `≈ = ≅`.) -/
+theorem deterministic_obsEq_imp_bisim {obs : X → O} {step : X → X → Prop}
+    {a b : X} (h : ObsEq obs step a b) (hdet : Deterministic step) : bisim obs step a b := by
+  refine bisim_of_bisimulation obs step (R := ObsEq obs step) ?_ h
+  intro x y hxy
+  refine ⟨obsEq_obs hxy, ?_, ?_⟩
+  · intro x' hx'
+    obtain ⟨y', hy', _⟩ := obsEq_step hxy hx'
+    exact ⟨y', hy', deterministic_succ_obsEq hxy hdet hx' hy'⟩
+  · intro y' hy'
+    obtain ⟨x', hx', _⟩ := obsEq_step (obsEq_symm hxy) hy'
+    exact ⟨x', hx', deterministic_succ_obsEq hxy hdet hx' hy'⟩
+
+/-- **The headline.** In a deterministic system the lived identity and the observed identity
+*coincide*: `≈ ⟺ ≅`. The outside recovers the inside in full — there is no surplus. So the surplus,
+where it exists, is the trace of **branches not taken**. -/
+theorem deterministic_bisim_iff_obsEq {obs : X → O} {step : X → X → Prop}
+    (hdet : Deterministic step) (a b : X) : bisim obs step a b ↔ ObsEq obs step a b := by
+  constructor
+  · intro hb; exact bisim_le_obsEq hb
+  · intro ho; exact deterministic_obsEq_imp_bisim ho hdet
+
+/-- The witness system is genuinely **nondeterministic** (`q0` branches to `qL` and `qR`) — so the
+hypothesis of the collapse cannot be dropped: determinism is *necessary* for `≈ = ≅`. -/
+theorem not_deterministic_stepW : ¬ Deterministic stepW := by
+  intro hdet
+  have hLR : St.qL = St.qR :=
+    @hdet St.q0 St.qL St.qR (by simp [stepW, succW]) (by simp [stepW, succW])
+  exact absurd hLR (by decide)
+
 end RelExist.Identity
