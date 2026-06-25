@@ -42,6 +42,20 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           theorem — cloning is nonlinear. ✅ verified.
 * `Scratch.SparsityReal` — the ℝ-valued sparsity bound and density-→-0 statement
                           (the analytic upgrade of Lemmas 3.1/3.2). ✅ verified.
+* `Scratch.Decoherence`  — Layer 4, physics: the quantum→classical passage in the matrix model
+                          — `dephase`, the classical fragment, copyability ⟺ commutativity, and
+                          the continuous `copyDefect`/`defectSq`. ✅ verified.
+* `Scratch.Classical`    — the abstract (typeclass) companion: `DaggerCategory` and a
+                          `Decoherence` structure, validated by the matrix instance. ✅ verified.
+* `Scratch.Distribution` — self-in-other quantified in a Banach algebra: `distributed`/`total`,
+                          the living regime `0<‖x‖<1`, the bound, and the quantitative
+                          eigenform `sustained` (unique by contraction). ✅ verified.
+* `Scratch.Feedback`     — the two sustained selves unified at the ν-modality
+                          (`CoDirectedSelf`): lattice `νΦ` and Banach `sustained` as instances.
+                          ✅ verified.
+* `Scratch.Attending`    — directed attention as **selective decoherence**: `attend S` (partial
+                          dephase), interpolating `id`⟶`dephase`, with the copy-defect proved
+                          to drop monotonically — and a witnessed collapse. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Attention
@@ -58,3 +72,8 @@ import Scratch.MatrixCoherence
 import Scratch.Compact
 import Scratch.NoCloning
 import Scratch.SparsityReal
+import Scratch.Decoherence
+import Scratch.Classical
+import Scratch.Distribution
+import Scratch.Feedback
+import Scratch.Attending

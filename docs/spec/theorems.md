@@ -160,6 +160,25 @@ Knowing-fully and relating are antagonistic.
   [`Decoherence.dephase`, `copyDefect`, `copyDefect_eq_zero_iff`](../../formal/Scratch/Decoherence.lean)
   `[proved]`; that this *is* "the act of knowing" is a `[reading]`. Knowing fragments the whole
   relation into the part objectified plus the remainder it cannot reach (T3).
+- **Directed attention is *selective* decoherence** — where `dephase` is total decoherence,
+  directing attention at a set `S` of branches is the **partial** version `attend S`: it severs
+  exactly the coherences that touch `S`, leaving the unattended branches still entangled. The
+  structure, all `[proved]` in [`Decoherence.attend`](../../formal/Scratch/Attending.lean):
+  - it **interpolates** `id ⟶ dephase` (`attend ∅ = id`, `attend univ = dephase`) and
+    **accumulates** (`attend_union`: attending `S` then `T` = attending `S ∪ T`) — so attending
+    everything is total dephasing;
+  - the **copy-defect only ever drops**, monotonically in how much you attend
+    (`defectSq_attend_le`, `defectSq_attend_mono`): *you cannot attend your way to more
+    coherence — knowing a relation can only classicalize it*;
+  - and you can **watch it collapse**: on the maximally-coherent qubit, attending one branch
+    drops the defect `2 ↦ 0` (`defectSq_attend_plus_lt`); on a three-branch superposition,
+    attending *one* branch drops the defect strictly yet leaves it **positive**
+    (`defectSq_attend_plus3_lt`, `defectSq_attend_plus3_pos`) — *the possibility you knew is
+    decohered from the rest; the two you left unattended go on interfering in the dark.*
+
+  That directed attention *is* this partial dephasing is the standing `[reading]` (the concrete
+  matrix toy of `Decoherence`, not a derivation of QM); the monotone-drop and the witnessed
+  collapse are `[proved]`.
 
 ### To know it you must relate to it — and so cannot completely know it
 
