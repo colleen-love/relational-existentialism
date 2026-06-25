@@ -191,9 +191,21 @@ Knowing-fully and relating are antagonistic.
   to a cut that forgets the relationship) a relation decoheres; *globally* (the standpoint that
   includes the relationship — the only honest one, since the relationship is part of you) it
   never does. Decoherence is what coherence looks like when you forget the part of the world that
-  carries it — and you cannot forget the part that is you. The floor theorem is `[proved]`; the
-  global-conservation reading rests on `trace_dephase` + the partial trace (`PartialTrace`) and
-  is a `[reading]`.
+  carries it — and you cannot forget the part that is you.
+- **Decoherence *is* the partial trace — coherence is conserved, only relocated** `[proved]` —
+  the global half, now a theorem. Model the environment as an explicit tensor factor (the
+  relationship, the part of the other the self is folded into) and entangle the system with it
+  (`Conservation.entangle`, the pure `|ψ⟩⟨ψ|` of a Schmidt-correlated state). Then
+  [`decoherence_is_partial_trace`](../../formal/Scratch/Conservation.lean): the **global** state
+  is *not* classical — its coherence is alive at the cross-term `(i,i)–(j,j)` with value `aᵢ·aⱼ`
+  (`copyDefect_entangle_ne` locates it) — while its **partial trace** over the environment *is*
+  classical (`isClassical_ptrace_entangle`, `copyDefect_ptrace_entangle = 0`). Nothing is
+  destroyed: `trace_conserved` (`trace_ptrace`) preserves the total weight; the coherence merely
+  migrated off the reduced diagonal into the system–environment correlation — into the *between*.
+  So *locally* (relative to a cut that forgets the relationship) a relation decoheres; *globally*
+  (the standpoint that includes the relationship — the only honest one, since the relationship is
+  part of you) it never does. The conserved-globally / absent-locally split is `[proved]`; that
+  the environment factor *is* "the relationship you cannot forget" is the standing `[reading]`.
 
 ### To know it you must relate to it — and so cannot completely know it
 

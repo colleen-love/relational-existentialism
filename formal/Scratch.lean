@@ -55,7 +55,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           ✅ verified.
 * `Scratch.Attending`    — directed attention as **selective decoherence**: `attend S` (partial
                           dephase), interpolating `id`⟶`dephase`, with the copy-defect proved
-                          to drop monotonically — and a witnessed collapse. ✅ verified.
+                          to drop monotonically — and a witnessed collapse; plus the irreducible
+                          floor (the shared block attention cannot reach). ✅ verified.
+* `Scratch.Conservation` — **decoherence *is* the partial trace**: entangle a system with an
+                          environment (`entangle`); the global state stays coherent while its
+                          partial trace (the relationship forgotten) is classical — coherence
+                          conserved, only relocated. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Attention
@@ -77,3 +82,4 @@ import Scratch.Classical
 import Scratch.Distribution
 import Scratch.Feedback
 import Scratch.Attending
+import Scratch.Conservation
