@@ -69,7 +69,9 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 | `Δ_A : A → A×A`, `!_A : A → 1` | diagonal (copy) and delete |
 | `σ` | the **self-relation operator**, `σ(P) := Tr(P)` (the "objectifying look") |
 | `F`, `νF` | an endofunctor and its greatest fixed point (final coalgebra) |
-| `≈` | observational identity (a coinductive relation); `𝔼 := D/≈` the shared world |
+| `=` | literal/representational equality — the **bare carrier**; A2 discards it (we work in `D/≈`) |
+| `≈` | **lived identity** — the greatest bisimulation `νΘ` (first-person, the finest *real* identity); `𝔼 := D/≈` the shared world |
+| `≅` | **observational identity** — sameness under external observation (the bounded outside view); `≈ ⊊ ≅`, proved |
 | `(R, ·, 1, ≤)` | the attention-budget monoid; `β ∈ R` the global bound |
 | `Stab` | the carrier of stabilized selves (eigenforms within budget) |
 
@@ -77,3 +79,36 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 > `σ` is reserved for the *self-relation* operator, because `σ` is the philosophy's
 > "σ-move" — the objectifying look of §"Knowing and feeling" — and it earns the
 > letter. Standard category-theory texts use `σ` for the braid; we do not.
+
+> **The identity symbols, and a warning.** Three identities, **finest → coarsest**:
+> `=` (literal equality — the bare carrier, discarded by A2) ⊊ `≈` (**bisimulation**, the lived
+> first-person identity — the finest one grounded in relating) ⊊ `≅` (**observational** equivalence,
+> the bounded outside view). Note this is *not* the casual "`≡` is exact, `≈` is approximate"
+> reading: here the **finer** relation is `≈` and the coarser is `≅`, following the
+> model-theoretic / Hennessy–Milner convention (bisimilarity finer than observational/logical
+> equivalence; they coincide only under unbounded observation). We avoid `≡` for the coarse relation
+> precisely because it collides with Agda's `≡` (propositional equality, the *finest*).
+
+**The same symbols in both proof assistants**, with the same roles:
+
+| concept | doctrine | Lean | Agda |
+| --- | --- | --- | --- |
+| bare carrier (literal equality) | `=` | `=` (`Eq`) | `≡` (`PropositionalEquality`) |
+| lived identity (bisimulation) | `≈` | `We.bisim` | `Coinductive._≈_` |
+| observational equality | `≅` | `Identity.ObsEq` | `Coinductive._≅_` |
+
+Agda writes literal equality `≡` by standard-library convention — it is the doctrine's `=` (and is
+*used*, e.g. inside `≈`'s "heads agree"; A2 discards it only as a notion of *self-identity*, never as
+a tool). **Both** assistants now prove **both** facts about `≅`, and the difference between them is
+itself a theorem about *determinism*:
+
+- the **headline** `≈ ⊊ ≅` (the first-person surplus) over a **nondeterministic** system —
+  [`Identity.bisim_ne_obsEq`](../../formal/Scratch/Identity.lean) (Lean) and
+  [`Inversion.surplus`](../../agda/RelExist/Inversion.agda) (Agda);
+- the **boundary** `≈ ⟺ ≅` (no surplus) over a **deterministic** system —
+  [`Coinductive.≈⇒≅` / `≅⇒≈`](../../agda/RelExist/Coinductive.agda) (Agda).
+
+Together they locate the surplus exactly: it is what **branching (nondeterminism)** opens — the trace
+of the branches *not taken*. A deterministic being (no unrealized possibility) has a trace that
+reveals all of it; a branching one — one that *could have done otherwise* — keeps a first-person
+remainder. The inversion's "you exceed how you appear" is, precisely, a fact about **free** selves.

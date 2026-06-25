@@ -1,7 +1,7 @@
 /-
 # Knowing vs feeling — the T3 contrast, mechanized
 
-[T3](../../docs/spec/theorems.md) says the two ways relation turns are different *kinds of
+[T3](../../docs/spec/03-theorems.md) says the two ways relation turns are different *kinds of
 arrow*. The honest, mechanized content is a **type-level asymmetry**, not a proof of
 "wholeness":
 
@@ -36,7 +36,7 @@ theorem no_complete_boolModel {A : Type*} :
 
 /-- **Feeling is reflexive** — the honest positive content of the `≈`-side. The
 `≈`-relation, living one level up as a relation `X → X → Prop` rather than an endomap
-`X → X`, is reflexive: every state is observationally identical to itself. This is *not* a
+`X → X`, is reflexive: every state is bisimilar (lived-identical) to itself. This is *not* a
 proof of "wholeness"; the real asymmetry with knowing is **type-level** — there is no
 diagonal `g a a` to run against a relation, so the Lawvere obstruction that blocks the
 σ-move (an endomap) does not even typecheck against `≈`. -/

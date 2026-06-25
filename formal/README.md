@@ -64,7 +64,11 @@ knowing *does* to a relation, and the one trace a self cannot take on itself.
 | --- | --- | --- | --- | --- |
 | **Limits of knowing** — one knowable case, three unknowable | `RelExist.Relating.{disjoint_modelable, related_other_unmodelable, self_inclusive_unmodelable, no_complete_view}` | [03.2](../docs/spec/03.2-limits-of-knowing.md) | core (no mathlib) | ✅ **0 axioms** |
 | **The seam** — the trace a self cannot take | `RelExist.Seam.{disjoint_trace_exists, self_cannot_trace_relation, self_cannot_view_relation}` | [03.3](../docs/spec/03.3-decoherence.md) | core (no mathlib) | ✅ **0 axioms** |
-| **Inside ⊊ outside** — identity `≈` exceeds observation `≡` (A2 restated) | `RelExist.Identity.{ObsEq, bisim_le_obsEq, bisim_ne_obsEq, livedToObserved_not_injective}` | [02 A2](../docs/spec/02-axioms.md), [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **`reg` derived from the dynamics** — registration *is* absorption; the obstruction with `reg` grounded in `Φ_c` (not posited) | `RelExist.Registration.{Registering, reg_absorbs, no_complete_view_of_registering}` | [03.2](../docs/spec/03.2-limits-of-knowing.md) | Scratch | ✅ proved (`no_complete_view_of_registering` **0 axioms**) |
+| **Inside ⊊ outside** — identity `≈` exceeds observation `≅` (A2 restated) | `RelExist.Identity.{ObsEq, bisim_le_obsEq, bisim_ne_obsEq, livedToObserved_not_injective}` | [02 A2](../docs/spec/02-axioms.md), [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **The surplus is exactly nondeterminism** — `Deterministic ⟹ ≈ ⟺ ≅`; the witness branches | `RelExist.Identity.{Deterministic, deterministic_bisim_iff_obsEq, deterministic_obsEq_imp_bisim, not_deterministic_stepW}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **The requirements for the surplus** — nondeterminism ∧ a relating; exact boundary `surplus ⟺ ≅ not a bisimulation`; both necessary, jointly insufficient | `RelExist.Identity.{IsBisimulation, surplus_iff_obsEq_not_isBisimulation, surplus_imp_not_deterministic, surplus_imp_relating, nondeterminism_and_selves_insufficient}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **The bridge** — the gap is governed by relation; `≅` is the *disjoint* observer; completeness ⟺ disjointness, so the necessary Lawvere floor dominates the contingent branching surplus | `RelExist.Knowing.{traceView, obsEq_iff_traceView_eq, knowing_complete_iff_disjoint, witness_disjoint_vs_related}` | [03.2](../docs/spec/03.2-limits-of-knowing.md), [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved (`knowing_complete_iff_disjoint` **0 axioms**) |
 | **One forgetting** — identity-collapse, dephasing, partial trace are one shape | `RelExist.Forgetting.{Coarsening, not_injective_of_residue, forgettings_have_residue}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **Knowing decoheres** — dephasing onto the classical fragment | `RelExist.Decoherence.{dephase, copyDefect, copyDefect_eq_zero_iff, classical_comm}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **Directed attention** — selective decoherence; the defect drops | `RelExist.Decoherence.{attend, defectSq_attend_le, defectSq_attend_mono, defectSq_attend_plus_lt, defectSq_attend_shared_pos}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
@@ -153,7 +157,7 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 | Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved |
 | **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved (`Filter.Tendsto`) |
 
-`Scratch.We` formalizes **theorem T2**: observational identity as `νΘ = OrderHom.gfp Θ`,
+`Scratch.We` formalizes **theorem T2**: the lived identity (greatest bisimulation) as `νΘ = OrderHom.gfp Θ`,
 with coinduction, the proof that `≈` is an equivalence, and the shared world `𝔼 := D/≈`.
 `Scratch.Attention` recasts **attention as a consequence of structure** (§1.3): a
 co-directed, asymmetric operator `Φ_c` induced by the coupling, with the self an
@@ -166,7 +170,7 @@ lifts the sparsity dichotomy to `ℝ` with the genuine **density-→-0** limit. 
 This lattice-theoretic `νΘ` reading of T2 now has a second, independent mechanization:
 the [`agda/`](../agda/) layer (Layer 5) rebuilds `≈`, its coinduction principle, and the
 shared world with **native coinduction** (final coalgebra, copatterns) rather than
-`OrderHom.gfp` — the two developments agree on the doctrine's observational identity.
+`OrderHom.gfp` — the two developments agree on the doctrine's lived identity (and on observational equality `≅`).
 
 ## Build
 

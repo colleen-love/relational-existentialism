@@ -6,9 +6,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 
 * `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem T2),
                           via `OrderHom.gfp` (Knaster–Tarski). ✅ verified.
-* `Scratch.Identity`    — A2 restated: identity is the lived `≈`; observation `≡` is a
-                          **strictly lossy** projection. Proves soundness `≈ ⊆ ≡`, strictness
-                          `≈ ⊊ ≡` (witness), and the non-injective forgetting `D/≈ ↠ D/≡` (the
+* `Scratch.Identity`    — A2 restated: identity is the lived `≈`; observation `≅` is a
+                          **strictly lossy** projection. Proves soundness `≈ ⊆ ≅`, strictness
+                          `≈ ⊊ ≅` (witness), and the non-injective forgetting `D/≈ ↠ D/≅` (the
                           first-person surplus). ✅ verified.
 * `Scratch.Forgetting`  — the unification: identity-collapse, dephasing, and the partial trace are
                           one construction (`Coarsening`), each non-injective for the same reason —

@@ -50,19 +50,22 @@ morphism-with-a-hole `C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generator
 **observational identity** is
 
 $$
-s \;\equiv\; t
+s \;\cong\; t
 \quad:\Longleftrightarrow\quad
 \forall\, C[-].\ C[s] = C[t],
 $$
 
-and the commitment is that `≈` is the real identity, of which `≡` is a **strictly lossy
-projection**: `≈ ⊊ ≡`.
+and the commitment is that `≈` is the real identity, of which `≅` is a **strictly lossy
+projection**: `≈ ⊊ ≅`. (The mechanization realizes `≅` concretely as *trace* equivalence — one
+particular observational equivalence; whether it coincides with the full *contextual* `≅` defined
+above is the open context-lemma question, deliberately left open, since proving it would be the full
+abstraction the inversion denies.)
 
 **Axiom.** There is **no bare carrier** *below* the relational unfolding `≈`: the only individuation
 a state has is how it relates, lived out. But identity is **not** exhausted by *external* observation
-— the inside is strictly finer than any outside can read (`≈ ⊊ ≡`). Soundness holds (lived sameness
-⇒ observed sameness, `≈ ⊆ ≡`); completeness is **denied**: contextual equivalence does not recover
-bisimilarity. This is not a failure to prove full abstraction — proving `≈ = ≡` would *contradict*
+— the inside is strictly finer than any outside can read (`≈ ⊊ ≅`). Soundness holds (lived sameness
+⇒ observed sameness, `≈ ⊆ ≅`); completeness is **denied**: contextual equivalence does not recover
+bisimilarity. This is not a failure to prove full abstraction — proving `≈ = ≅` would *contradict*
 the theory's own limitative core (T3, the seam: you cannot completely view from outside what you
 relate to), so the equality is the one thing the theory must *not* assert.
 
@@ -73,9 +76,9 @@ different selves inside: the first-person surplus, the part of who you are that 
 read off. Behavior is a function of self, not a definition of it.
 
 **Role.** Structural premise. It is what licenses defining identity *coinductively* in **T2** as the
-bisimilarity `≈` — and it fixes, against the third-person `≡`, that the lived identity is the real
-one. The proved soundness `≈ ⊆ ≡`, the proved strictness `≈ ⊊ ≡`, and the resulting non-injective
-*forgetting from inside to outside* `D/≈ ↠ D/≡` (the decoherence of identity) are mechanized in
+bisimilarity `≈` — and it fixes, against the third-person `≅`, that the lived identity is the real
+one. The proved soundness `≈ ⊆ ≅`, the proved strictness `≈ ⊊ ≅`, and the resulting non-injective
+*forgetting from inside to outside* `D/≈ ↠ D/≅` (the decoherence of identity) are mechanized in
 [`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean); see
 [03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
@@ -173,7 +176,7 @@ co-directed `Φ_c` of A3.
 # The theorems
 
 The theorems that follow from this basis — **T1** (to relate is to create), **T2**
-(observational identity and the "we"), **T3** (knowing vs feeling) — together with the
+(lived identity and the "we"), **T3** (knowing vs feeling) — together with the
 structural results about relating (self, part, other, collection; routing vs directing;
 what knowing does to a relation) live in their own file, with honest status tags and Lean
 names: **[03-theorems.md](03-theorems.md)**. The quantitative theorem (sparsity) is

@@ -95,7 +95,7 @@ isSelf→Const {x = x} s (suc n) =
   trans (isSelf→Const {x = step x} (step≈ s) n) (sym (obs≈ s))
 
 -- `Const x` says x agrees with the constant behaviour at every coordinate — which
--- is exactly observational identity (≈) unfolded. So a self *is* `repeat (obs x)`.
+-- is exactly the lived identity (≈) unfolded. So a self *is* `repeat (obs x)`.
 Const→≈repeat : {A : Set} {x : Behaviour A} → Const x → x ≈ repeat (obs x)
 Const→≈repeat {A = A} {x = x} c =
   coinduction bisim λ n → trans (c n) (sym (nth-repeat n (obs x)))

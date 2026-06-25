@@ -2,7 +2,7 @@
 # Forgetting, abstractly: the identity-collapse, dephasing, and the partial trace are one shape
 
 This collapses the standing `[reading]` that the *forgetting from inside to outside*
-`𝔼 = D/≈ ↠ D/≡` ([`Scratch/Identity.lean`](Identity.lean)) and the decoherence forgettings —
+`𝔼 = D/≈ ↠ D/≅` ([`Scratch/Identity.lean`](Identity.lean)) and the decoherence forgettings —
 **dephasing** ([`Scratch/Decoherence.lean`](Decoherence.lean)) and the **partial trace**
 ([`Scratch/PartialTrace.lean`](PartialTrace.lean)) — are "the same shape." They are: each is a
 **`Coarsening`** — a finer identity `fine` and a coarser one `coarse` with `fine ⊆ coarse` — whose
@@ -12,8 +12,8 @@ canonical **collapse** `X/fine ↠ X/coarse` is the forgetting. The theorem that
 
 Three instances, three residues — *the same construction*:
 
-* **Identity** (`identityForgetting`): `fine = ≈` (lived), `coarse = ≡` (observed). Residue = the
-  **first-person surplus** (`≡`-equal, `≈`-distinct). Its collapse *is* `livedToObserved` (`rfl`).
+* **Identity** (`identityForgetting`): `fine = ≈` (lived), `coarse = ≅` (observed). Residue = the
+  **first-person surplus** (`≅`-equal, `≈`-distinct). Its collapse *is* `livedToObserved` (`rfl`).
 * **Dephasing** (`dephaseForgetting`): `fine = ` equality, `coarse = ` "same dephased shadow".
   Residue = the **copy-defect** (same diagonal, different off-diagonal — a live coherence).
 * **Partial trace** (`ptraceForgetting`): `fine = ` equality, `coarse = ` "same reduced state".
@@ -84,10 +84,10 @@ theorem not_injective_of_residue {a b : X} (hr : C.residue a b) :
 
 end Coarsening
 
-/-! ### Instance 1 — identity: `fine = ≈` (lived), `coarse = ≡` (observed) -/
+/-! ### Instance 1 — identity: `fine = ≈` (lived), `coarse = ≅` (observed) -/
 
 /-- The **inside→outside forgetting** as a `Coarsening`: lived identity `≈` refined by observed
-identity `≡`, sound by `bisim_le_obsEq`. -/
+identity `≅`, sound by `bisim_le_obsEq`. -/
 @[reducible] def identityForgetting {Xs Os : Type*} (obs : Xs → Os) (step : Xs → Xs → Prop) :
     Coarsening Xs where
   fine := bisimSetoid obs step

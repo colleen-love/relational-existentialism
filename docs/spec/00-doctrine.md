@@ -156,7 +156,7 @@ need, their final coalgebras. Two uses:
   are the canonical inhabitants of final coalgebras (streams, processes, eigenforms
   under continued return). The `ν`-layer is where "maintained rather than given"
   becomes a type, not a metaphor.
-- **The "we".** Observational identity `≈` is defined coinductively as the greatest
+- **The "we".** Lived identity `≈` (the greatest bisimulation) is defined coinductively as the greatest
   relation closed under one step of mutual indistinguishability — a **bisimilarity**
   — and the shared world is the quotient `𝔼 := D/≈`. Theorem **T2** is stated here.
 

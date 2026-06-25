@@ -12,7 +12,9 @@
 --
 -- This module builds, from scratch (only the standard library):
 --   * `Behaviour`   — a system as the final coalgebra of the observation functor;
---   * `_≈_`         — T2: observational identity as the *greatest bisimulation*;
+--   * `_≈_`         — T2: the **lived identity** `≈` (the greatest bisimulation);
+--   * `_≅_`         — **observational equality** (the bounded outside view: same
+--                     observation stream), with the deterministic collapse `≈ ⟺ ≅`;
 --   * `≈-refl/sym/trans`, `SharedWorld` — ≈ is an equivalence; `𝔼 := D/≈` is a Setoid;
 --   * `coinduction` — the coinduction principle: every bisimulation is ⊆ ≈
 --                     (≈ *is* the ν — proved by guarded corecursion, not a lattice);
@@ -23,6 +25,7 @@
 module RelExist.Coinductive where
 
 open import Level using (Level; 0ℓ)
+open import Data.Nat using (ℕ; zero; suc)
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary using (Rel; IsEquivalence; Setoid)
 open import Relation.Binary.PropositionalEquality as ≡ using (_≡_; refl; cong)
@@ -42,12 +45,15 @@ record Behaviour (A : Set) : Set where
 open Behaviour public
 
 ------------------------------------------------------------------------
--- T2 — observational identity `≈`, the GREATEST bisimulation.
+-- T2 — the **lived identity** `≈`, the GREATEST bisimulation.
 --
--- Two systems are observationally identical when they agree now and stay so
+-- Two systems share a lived identity when they agree now and stay so
 -- forever. As a coinductive record this *is* the ν-closure: there is no
 -- "construct a witness" — a proof of `x ≈ y` is an infinite, productive
 -- agreement, exactly the final-coalgebra reading of the doctrine's ≈.
+-- (`≡` here is propositional equality — the doctrine's literal `=`, the bare
+-- carrier; `≈` is the lived identity built on top of it; `≅` below is the
+-- coarser observed shadow.)
 
 record _≈_ (x y : Behaviour A) : Set where
   coinductive
@@ -72,7 +78,7 @@ step≈ (≈-trans p q) = ≈-trans (step≈ p) (step≈ q)
 ≈-isEquivalence : IsEquivalence (_≈_ {A})
 ≈-isEquivalence = record { refl = ≈-refl ; sym = ≈-sym ; trans = ≈-trans }
 
--- 𝔼 := D/≈ — the **shared world** (T2): behaviours up to observational
+-- 𝔼 := D/≈ — the **shared world** (T2): behaviours up to lived
 -- identity, as a setoid. The "between" is the quotient, not the points.
 SharedWorld : (A : Set) → Setoid 0ℓ 0ℓ
 SharedWorld A = record
@@ -86,7 +92,7 @@ SharedWorld A = record
 --
 -- A bisimulation is any relation respecting observation and closed under
 -- stepping. The principle says **every** bisimulation is contained in ≈: to
--- prove two systems observationally identical, exhibit a bisimulation relating
+-- prove two systems share a lived identity (bisimilar), exhibit a bisimulation relating
 -- them. Where Lean invokes `OrderHom.le_gfp`, here it is one guarded definition.
 
 record Bisimulation (R : Rel (Behaviour A) 0ℓ) : Set where
@@ -101,6 +107,47 @@ obs≈  (coinduction B r) = obs-resp B r
 step≈ (coinduction B r) = coinduction B (step-resp B r)
 
 ------------------------------------------------------------------------
+-- Observational equality `≅` — the *outside* view — and the deterministic
+-- collapse `≈ ⟺ ≅`.
+--
+-- `≅` compares only the **stream of observations**: `x ≅ y` iff `x` and `y`
+-- exhibit the same observation at every depth. This is the bounded outside
+-- observer of the Lean development (`Scratch/Identity.lean`, `ObsEq`). The
+-- doctrine's three identities, used consistently across both proof assistants:
+--   `≡`  literal equality (the bare carrier)   = Lean `=`
+--   `≈`  bisimulation (the lived identity)      = Lean `We.bisim`
+--   `≅`  observational equality (the shadow)    = Lean `Identity.ObsEq`
+--
+-- Because `Behaviour` is **deterministic** (a single `step`), here `≈` and `≅`
+-- *coincide* — with no branching, the observation stream determines the system.
+-- This is the **boundary case**: a clockwork, with no branches *not* taken, has
+-- no first-person surplus. The doctrine's headline — the strict gap `≈ ⊊ ≅` — is
+-- a **nondeterminism** phenomenon (the surplus is the trace of the branches not
+-- taken), and it is proved in `RelExist.Inversion` (Agda) and
+-- `Scratch/Identity.lean` (Lean), each over a nondeterministic system. So both
+-- proof assistants now mechanize *both* facts: the gap (`Inversion` / `Identity`)
+-- and the deterministic collapse here.
+
+obsAt : ℕ → Behaviour A → A
+obsAt zero    x = obs x
+obsAt (suc n) x = obsAt n (step x)
+
+-- observational equality: the same observation at every depth
+_≅_ : Behaviour A → Behaviour A → Set
+x ≅ y = ∀ n → obsAt n x ≡ obsAt n y
+
+-- soundness — lived sameness ⇒ observed sameness (holds in any model)
+≈⇒≅ : {x y : Behaviour A} → x ≈ y → x ≅ y
+≈⇒≅ p zero    = obs≈ p
+≈⇒≅ p (suc n) = ≈⇒≅ (step≈ p) n
+
+-- completeness — observed sameness ⇒ lived sameness, **because deterministic**.
+-- Guarded corecursion: the observation stream rebuilds the bisimulation.
+≅⇒≈ : {x y : Behaviour A} → x ≅ y → x ≈ y
+obs≈  (≅⇒≈ p) = p zero
+step≈ (≅⇒≈ p) = ≅⇒≈ (λ n → p (suc n))
+
+------------------------------------------------------------------------
 -- D1 — the looped self: a fixed point of the dynamics is a stationary self.
 
 -- the stationary system (one observation, forever)
@@ -113,7 +160,7 @@ orbit : (A → A) → A → Behaviour A
 obs  (orbit f a) = a
 step (orbit f a) = orbit f (f a)
 
--- a system is a **self** when stepping leaves it observationally unchanged
+-- a system is a **self** when stepping leaves it unchanged up to lived identity
 isSelf : Behaviour A → Set
 isSelf x = x ≈ step x
 
@@ -134,7 +181,7 @@ fixpoint-isStationary {A = A} {f = f} {a = a} eq =
     obs-resp  bisim (refl , refl) = refl
     step-resp bisim (refl , refl) = (cong (orbit f) eq , refl)
 
--- being a self is invariant under observational identity
+-- being a self is invariant under lived identity
 isSelf-≈ : {x y : Behaviour A} → x ≈ y → isSelf y → isSelf x
 isSelf-≈ p s = ≈-trans p (≈-trans s (≈-sym (step≈ p)))
 
