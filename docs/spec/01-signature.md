@@ -61,7 +61,7 @@ constitution* rather than by allowance. Everything below is mechanized in
 ### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
 A perspective is finite *by definition* — bounded integration capacity is part of what
-being a located someone *is*, the same un-closable mirror as [T3](theorems.md). We
+being a located someone *is*, the same un-closable mirror as [T3](03-theorems.md). We
 encode it as a **bounded capacity** `α` (a complete lattice, with top `⊤`); an
 attention **field** assigns each relatum a standing, `att : V → α`. The only bound is
 `⊤` of `α` — the perspective's own limit — and there is **no budget parameter `β`
@@ -103,7 +103,7 @@ $$
 $$
 
 via the same `ν`-modality (Knaster–Tarski / `OrderHom.gfp`) used for `≈` in
-[T2](theorems.md): the self is *the most attention that can be co-sustained*. Two
+[T2](03-theorems.md): the self is *the most attention that can be co-sustained*. Two
 mechanized consequences make this **generative**, not allocative:
 
 - **Accumulation** (`orbit_ascending`, `orbit_le_gfp`): from a self-reinforcing seed
@@ -116,7 +116,7 @@ This is where **Mozart** lives: a node whose biological substrate is gone still 
 weight in `νΦ_c`, because the edges — scores, recordings, each listener's return — keep
 the coupling live; he radiates attention *through the fabric*. Death is those edges
 decaying, the weight fading *on the timescale of others' returning* — the same
-distributed-self story as [T2](theorems.md)'s `𝔼`.
+distributed-self story as [T2](03-theorems.md)'s `𝔼`.
 
 ### 1.3.4 The resource budget as a special case `[reduction]`
 
@@ -164,7 +164,7 @@ domain has:
   mental-health framings, which have copying but no entanglement);
 - preserving the coupling and capacity `α` (the co-directed attention operator `Φ_c`
   of §1.3) → a model that **carries attention**, in which the sparsity statement of
-  [03](03-sparsity-conjecture.md) can even be asked.
+  [03.1](03.1-sparsity.md) can even be asked.
 
 The **firewall theorem** previewed in the plan lives exactly here: because the
 cartesian-only domains have a natural `Δ` and the compact-closed fragment provably

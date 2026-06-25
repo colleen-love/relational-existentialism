@@ -1,11 +1,10 @@
 # Formalization Spec — Layers 1–4
 
 This directory is the rigorous mathematical specification of the **doctrine**, the
-**signature**, the **axioms**, and the **functorial semantics** of Relational
-Existentialism — layers 1–4 of the [formalization plan](../formalization-plan.md). The prose
-+ math here settles the mathematics; the [`formal/`](../../formal) directory carries the Lean
-mechanization, which now reaches all the way through Layer 4 (the free traced SMC `Cl(𝕋)`,
-its coherent refinement, and all five domain functors).
+**signature**, the **axioms**, the **theorems**, and the **functorial semantics** of Relational
+Existentialism. The prose + math here settles the mathematics; the [`formal/`](../../formal)
+directory carries the Lean mechanization, which now reaches all the way through Layer 4 (the free
+traced SMC `Cl(𝕋)`, its coherent refinement, and all five domain functors).
 
 Read in order:
 
@@ -18,25 +17,26 @@ Read in order:
    relational sort `≈`.
 3. [`02-axioms.md`](02-axioms.md) — the **basis**: the **axioms A1–A3** and the
    **definition D1**, each tagged `[fragment; status]`. (Only what is *assumed*.)
-4. [`theorems.md`](theorems.md) — what is *proved*: the theorems **T1–T3** and the
-   structural results about relating (self, part, other, collection; routing vs directing;
-   what knowing does to a relation), each with a status tag and Lean name.
-5. [`03-sparsity-conjecture.md`](03-sparsity-conjecture.md) — the candidate
-   theorem: **under a finite attention budget, `Stab` is sparse.** Includes a
-   provable resource-counting lemma and the strategy for lifting it to the full
-   doctrine.
-6. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
+4. [`03-theorems.md`](03-theorems.md) — what is *proved*: the theorems **T1–T3** and the
+   derived notions, each with a status tag and Lean name. The structural results split into
+   four pages:
+   - [`03.1-sparsity.md`](03.1-sparsity.md) — the candidate theorem: **under a finite
+     attention budget, `Stab` is sparse.** A provable resource-counting lemma, the
+     mechanized topological form, and the strategy for the full lift.
+   - [`03.2-limits-of-knowing.md`](03.2-limits-of-knowing.md) — the relational typology and the
+     Lawvere obstruction: *to relate is to make the other unknowable.*
+   - [`03.3-decoherence.md`](03.3-decoherence.md) — what knowing does to a relation
+     (decoherence, selective attention, the conserved coherence, and the **seam** — the one
+     trace a self cannot take on itself).
+   - [`03.4-the-self-quantified.md`](03.4-the-self-quantified.md) — the Banach-algebra limit of
+     self-in-other, the quantitative eigenform, and the unification of the two selves.
+5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
    domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. All five domains
    (**physics** — a literal matrix model with trace = partial trace, plus the
    **decoherence** retraction onto the classical fragment; **chemistry** and
    **biology** — eigenforms; **AI** — feedback = the trace; and the **firewall** for the
    cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
    and the **monoidal-coherence** refinement are all mechanized.
-
-Cross-cutting: [`axiom-audit.md`](axiom-audit.md) — a **checked** map separating the
-**axioms** (A1–A3) from the **theorems** (T1–T3), with verified `#print axioms` footprints,
-concluding that the doctrine reduces to **one discriminating posit (A3)** over the ambient
-structure.
 
 ## Status legend
 

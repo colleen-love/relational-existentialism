@@ -6,11 +6,11 @@ Lean 4 formalization of Relational Existentialism, tracking [`docs/spec/`](../do
 
 | Result | Lean name (`RelExist.*`) | Spec source | State |
 | --- | --- | --- | --- |
-| Core counting bound | `min_mul_length_le_totalSpend` | [03 §3.2](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
-| **Lemma 3.1** (sparsity from a budget), division-free | `stab_card_bound` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
-| Lemma 3.1, divided form `≤ β/m` | `stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
-| Sparsity at depth `d ≥ 2` (`≤ β/2`) | `stab_card_le_half` | [03 §3.2](../docs/spec/03-sparsity-conjecture.md) + [A3](../docs/spec/02-axioms.md) | ✅ proved |
-| **Lemma 3.2** (collapse without a bound) | `unbounded_without_budget` | [03 Lemma 3.2](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
+| Core counting bound | `min_mul_length_le_totalSpend` | [03 §3.2](../docs/spec/03.1-sparsity.md) | ✅ proved |
+| **Lemma 3.1** (sparsity from a budget), division-free | `stab_card_bound` | [03 Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved |
+| Lemma 3.1, divided form `≤ β/m` | `stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved |
+| Sparsity at depth `d ≥ 2` (`≤ β/2`) | `stab_card_le_half` | [03 §3.2](../docs/spec/03.1-sparsity.md) + [A3](../docs/spec/02-axioms.md) | ✅ proved |
+| **Lemma 3.2** (collapse without a bound) | `unbounded_without_budget` | [03 Lemma 3.2](../docs/spec/03.1-sparsity.md) | ✅ proved |
 
 All five are `sorry`-free; their only axiom dependency is `propext` (verified via
 `#print axioms`). This is the **discrete (ℕ-valued) core** of the sparsity
@@ -23,7 +23,7 @@ in seconds even where mathlib's cache is unreachable.
 
 ### The loop bridge — step 3 (core, no mathlib)
 
-This closes the gap the spec flagged ([03 §3.3](../docs/spec/03-sparsity-conjecture.md)):
+This closes the gap the spec flagged ([03 §3.3](../docs/spec/03.1-sparsity.md)):
 the sparsity lemmas count with a *threshold*, but [A3](../docs/spec/02-axioms.md)
 defines a self as a **fixed point** of budgeted iterated self-relation. The bridge
 ([`RelExist/Loop.lean`](RelExist/Loop.lean)) connects them.
@@ -47,10 +47,25 @@ not reproduced — large categorical infrastructure; what the axioms invoke is h
 
 | Result | Lean name | Spec | Target | State |
 | --- | --- | --- | --- | --- |
-| **T3 σ-side** — Lawvere; the mirror can't close | `RelExist.Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}` | [T3](../docs/spec/theorems.md), [00 §0.4.2](../docs/spec/00-doctrine.md) | core (no mathlib) | ✅ **0 axioms** |
+| **T3 σ-side** — Lawvere; the mirror can't close | `RelExist.Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}` | [T3](../docs/spec/03-theorems.md), [00 §0.4.2](../docs/spec/00-doctrine.md) | core (no mathlib) | ✅ **0 axioms** |
 | **D1** — self-relation is feedback (`νP`) | `RelExist.Trace.{selfTrace, selfTrace_fixed}` | [D1](../docs/spec/02-axioms.md) | Scratch | ✅ proved |
-| **T1** — to relate is to create (Conway `Tr`) | `RelExist.Trace.{Tr, Tr_fixed, le_Tr, Tr_mono}` | [T1](../docs/spec/theorems.md) | Scratch | ✅ proved |
-| **T3 contrast** — knowing obstructed vs feeling whole | `RelExist.KnowingFeeling.{knowing_can_fail_to_close, no_complete_boolModel, feeling_is_whole}` | [T3](../docs/spec/theorems.md) | Scratch | ✅ proved |
+| **T1** — to relate is to create (Conway `Tr`) | `RelExist.Trace.{Tr, Tr_fixed, le_Tr, Tr_mono}` | [T1](../docs/spec/03-theorems.md) | Scratch | ✅ proved |
+| **T3 contrast** — knowing obstructed; feeling is reflexive (type-level asymmetry) | `RelExist.KnowingFeeling.{knowing_can_fail_to_close, no_complete_boolModel, feeling_is_reflexive}` | [T3](../docs/spec/03-theorems.md) | Scratch | ✅ proved |
+
+### The limits of knowing, decoherence, and the seam
+
+The relational consequences of the Lawvere obstruction — what can and cannot be known, what
+knowing *does* to a relation, and the one trace a self cannot take on itself.
+
+| Result | Lean name | Spec | Target | State |
+| --- | --- | --- | --- | --- |
+| **Limits of knowing** — one knowable case, three unknowable | `RelExist.Relating.{disjoint_modelable, related_other_unmodelable, self_inclusive_unmodelable, no_complete_view}` | [03.2](../docs/spec/03.2-limits-of-knowing.md) | core (no mathlib) | ✅ **0 axioms** |
+| **The seam** — the trace a self cannot take | `RelExist.Seam.{disjoint_trace_exists, self_cannot_trace_relation, self_cannot_view_relation}` | [03.3](../docs/spec/03.3-decoherence.md) | core (no mathlib) | ✅ **0 axioms** |
+| **Knowing decoheres** — dephasing onto the classical fragment | `RelExist.Decoherence.{dephase, copyDefect, copyDefect_eq_zero_iff, classical_comm}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **Directed attention** — selective decoherence; the defect drops | `RelExist.Decoherence.{attend, defectSq_attend_le, defectSq_attend_mono, defectSq_attend_plus_lt, defectSq_attend_shared_pos}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **Decoherence is the partial trace** — coherence conserved, relocated | `RelExist.Conservation.{entangle, decoherence_is_partial_trace, copyDefect_entangle_ne, trace_conserved}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
+| **Self-in-other quantified** — the Banach-algebra bound and eigenform | `RelExist.Distribution.{distributed, distributed_bound, total_feedback, sustained_unique}` | [03.4](../docs/spec/03.4-the-self-quantified.md) | Scratch | ✅ proved |
+| **Unifying the two selves** — both realize the ν-modality | `RelExist.Feedback.{CoDirectedSelf, self_iterate, latticeSelf, banachSelf}` | [03.4](../docs/spec/03.4-the-self-quantified.md) | Scratch | ✅ proved |
 
 Lawvere's theorem (`RelExist.Mirror.lawvere`) and its consequences are **fully
 constructive** — they depend on *no axioms whatsoever*, which is fitting: the mirror's
@@ -116,22 +131,22 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 
 | Result | Lean name | Spec source | State |
 | --- | --- | --- | --- |
-| `≈ := νΘ` as the greatest bisimulation | `RelExist.We.bisim` | [T2](../docs/spec/theorems.md) | ✅ defined (`OrderHom.gfp`) |
-| `Θ ≈ = ≈` (fixed point) | `RelExist.We.bisim_unfold` | [T2](../docs/spec/theorems.md) | ✅ proved |
-| **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [T2](../docs/spec/theorems.md) | ✅ proved |
-| `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [T2](../docs/spec/theorems.md) | ✅ proved |
-| **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [T2](../docs/spec/theorems.md) | ✅ defined (quotient) |
+| `≈ := νΘ` as the greatest bisimulation | `RelExist.We.bisim` | [T2](../docs/spec/03-theorems.md) | ✅ defined (`OrderHom.gfp`) |
+| `Θ ≈ = ≈` (fixed point) | `RelExist.We.bisim_unfold` | [T2](../docs/spec/03-theorems.md) | ✅ proved |
+| **coinduction** — every bisimulation `≤ ≈` | `RelExist.We.bisim_coind` / `bisim_of_bisimulation` | [T2](../docs/spec/03-theorems.md) | ✅ proved |
+| `≈` is an equivalence (refl/symm/trans) | `RelExist.We.bisim_{refl,symm,trans}` | [T2](../docs/spec/03-theorems.md) | ✅ proved |
+| **shared world** `𝔼 := D/≈` | `RelExist.We.World` | [T2](../docs/spec/03-theorems.md) | ✅ defined (quotient) |
 | co-directed attention operator (induced by coupling) | `RelExist.Attention.couplingOp` | [§1.3](../docs/spec/01-signature.md) | ✅ defined |
 | "receiving raises giving" (monotone) | `RelExist.Attention.couplingOp_mono` | [§1.3.2](../docs/spec/01-signature.md) | ✅ proved |
 | **self = eigenform** `νΦ` (fixed point, maximal) | `RelExist.Attention.sustainedField{,_fixed,_greatest}` | [§1.3.3](../docs/spec/01-signature.md), [A3](../docs/spec/02-axioms.md) | ✅ proved |
 | generativity — relating **accumulates** attention | `RelExist.Attention.orbit_{ascending,le_gfp}` | [§1.3.3](../docs/spec/01-signature.md) | ✅ proved |
-| **registration** — a closed loop absorbs the knower into the known | `RelExist.Attention.{relating_absorbs, closed_loop_registers}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
-| **self-in-other, quantified** — bounded iff `‖x‖<1` | `RelExist.Distribution.{distributed, distributed_bound, distributed_zero}` | [03 §3.4](../docs/spec/03-sparsity-conjecture.md), [theorems.md](../docs/spec/theorems.md) | ✅ proved |
-| **quantitative eigenform** — `total x = 1 + x·total x` | `RelExist.Distribution.{total, total_feedback, total_bound}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
-| **quantitative coinduction** — sustained self is *unique* (any seed) | `RelExist.Distribution.{sustained, sustained_fixed, sustained_unique, sustained_bound}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
-| **unification** — both selves realize the ν-modality | `RelExist.Feedback.{CoDirectedSelf, self_iterate, latticeSelf, banachSelf}` | [theorems.md](../docs/spec/theorems.md) | ✅ proved |
-| Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved |
-| **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03-sparsity-conjecture.md) | ✅ proved (`Filter.Tendsto`) |
+| **registration** — a closed loop absorbs the knower into the known | `RelExist.Attention.{relating_absorbs, closed_loop_registers}` | [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
+| **self-in-other, quantified** — bounded iff `‖x‖<1` | `RelExist.Distribution.{distributed, distributed_bound, distributed_zero}` | [03 §3.4](../docs/spec/03.1-sparsity.md), [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
+| **quantitative eigenform** — `total x = 1 + x·total x` | `RelExist.Distribution.{total, total_feedback, total_bound}` | [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
+| **quantitative coinduction** — sustained self is *unique* (any seed) | `RelExist.Distribution.{sustained, sustained_fixed, sustained_unique, sustained_bound}` | [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
+| **unification** — both selves realize the ν-modality | `RelExist.Feedback.{CoDirectedSelf, self_iterate, latticeSelf, banachSelf}` | [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
+| Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved |
+| **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved (`Filter.Tendsto`) |
 
 `Scratch.We` formalizes **theorem T2**: observational identity as `νΘ = OrderHom.gfp Θ`,
 with coinduction, the proof that `≈` is an equivalence, and the shared world `𝔼 := D/≈`.
@@ -194,7 +209,7 @@ sessions. Once merged to the default branch, all future sessions pick it up.
 
 ## Roadmap
 
-The discrete core is step 1 of [the spec's proof strategy](../docs/spec/03-sparsity-conjecture.md#35-proof-strategy-for-mechanization).
+The discrete core is step 1 of [the spec's proof strategy](../docs/spec/03.1-sparsity.md#35-proof-strategy-for-mechanization).
 Next, in rough order:
 
 1. **mathlib upgrade.** Re-cast costs in `ℝ_{≥0}`, prove the density-→-0 statement
@@ -205,7 +220,7 @@ Next, in rough order:
    mechanized on the Agda side — [`agda/RelExist/Sparsity.agda`](../agda/RelExist/Sparsity.agda),
    `selves-nowhereDense` — over the final coalgebra, where it is most natural.)
 2. **Sharing.** Replace the `List` of costs by a graded poset with sub-additive cost
-   (lax `c`), re-deriving the bound up to the sharing defect ([03 §3.3](../docs/spec/03-sparsity-conjecture.md)).
+   (lax `c`), re-deriving the bound up to the sharing defect ([03 §3.3](../docs/spec/03.1-sparsity.md)).
 3. **Threshold ⇔ fixed point.** The categorical crux: in the traced fragment,
    `loop_R(e) = e ⟺ N(e) ≥ d(e)` ([01 §1.3.3](../docs/spec/01-signature.md)).
 4. **Doctrine + Layer 4.** Symmetric monoidal / cartesian fragment structures and
