@@ -3,27 +3,39 @@
 
 The founding commitment, **restated** (the doctrinal inversion of [03.3](../../docs/spec/03.3-decoherence.md)):
 a self's identity **is** its first-person relational unfolding `≈` ([`We.bisim`](We.lean), `νΘ`),
-and the third-person observational identity `≡` is a **strictly lossy projection** of it. We do not
-try to prove full abstraction (`≈ = ≡`) — that would *contradict* the theory's own limitative core
+and the third-person observational identity `≅` is a **strictly lossy projection** of it. We do not
+try to prove full abstraction (`≈ = ≅`) — that would *contradict* the theory's own limitative core
 (you cannot completely view from outside what you relate to: `Relating`, `Seam`). Instead we adopt
 and **prove** the inequality:
 
-* `≡` — **observational (trace) equivalence**, `ObsEq`: the *outside* view. Two states are
-  `≡`-equal iff no external observer, recording sequences of observations, can tell them apart.
-* **Soundness `≈ ⊆ ≡`** (`bisim_le_obsEq`): if two states are the same *inside* (bisimilar), no
+* `≅` — **observational (trace) equivalence**, `ObsEq`: the *outside* view. Two states are
+  `≅`-equal iff no external observer, recording sequences of observations, can tell them apart.
+* **Soundness `≈ ⊆ ≅`** (`bisim_le_obsEq`): if two states are the same *inside* (bisimilar), no
   outside observation separates them. Lived sameness ⇒ observed sameness. `[proved]`
-* **Strictness `≈ ⊊ ≡`** (`bisim_ne_obsEq`, with the witness `p0`/`q0`): there are states that are
+* **Strictness `≈ ⊊ ≅`** (`bisim_ne_obsEq`, with the witness `p0`/`q0`): there are states that are
   *observationally identical from outside yet not bisimilar inside* — the classic "early vs late
   choice." The outside underdetermines the inside. `[proved]`
 * **The inside→outside map** (`livedToObserved`): soundness gives a canonical surjection
-  `𝔼 = D/≈ ↠ D/≡` — the *forgetting from inside to outside*, the decoherence of identity. It is
+  `𝔼 = D/≈ ↠ D/≅` — the *forgetting from inside to outside*, the decoherence of identity. It is
   **not injective** (`livedToObserved_not_injective`): distinct lived selves collapse to one
-  observed self. Its kernel — `≡`-equal, `≈`-distinct — is the formal address of the **first-person
+  observed self. Its kernel — `≅`-equal, `≈`-distinct — is the formal address of the **first-person
   surplus**: the part of who you are that exceeds how you appear. `[proved]`
 
-The interpretation (`≈` = lived first-person identity, `≡` = observed projection) is a `[reading]`;
+The interpretation (`≈` = lived first-person identity, `≅` = observed projection) is a `[reading]`;
 the inequality, the soundness, and the non-injectivity are theorems. *You are your lived relating,
 which exceeds how you appear.*
+
+**Notation.** `≈` is bisimulation (`We.bisim`), `≅` is observational equivalence (`ObsEq`, below).
+The *finer* relation is `≈`, the coarser `≅` (the model-theoretic / Hennessy–Milner convention —
+bisimilarity finer than observational equivalence). We avoid `≡` for `≅`: in Agda `≡` is
+propositional equality, the *finest* relation, so reusing it for the coarsest would invert it.
+
+**Scope of `≅`.** A2's prose defines the observational identity *contextually* (`∀ C[-], C[s]=C[t]`).
+Here `≅` is realized **concretely as trace equivalence** — one particular observational equivalence,
+the bounded "record the observation sequence" observer. Whether trace equivalence equals the full
+contextual `≅` is the context-lemma question the theory deliberately leaves open (proving them equal
+would be the full abstraction the inversion denies); `≈ ⊊ ≅` is proved for *this* concrete `≅`, and
+a fortiori the inside exceeds this bounded outside.
 -/
 import Scratch.We
 
@@ -34,7 +46,7 @@ open RelExist.We
 universe u v
 variable {X : Type u} {O : Type v}
 
-/-! ### The outside view: observational (trace) equivalence `≡` -/
+/-! ### The outside view: observational (trace) equivalence `≅` -/
 
 /-- A finite **observation-trace** from a state: the sequence of observations recorded along a
 path. `single` observes the state and stops; `step'` observes the state and continues from a
@@ -58,7 +70,7 @@ theorem hasTrace_succ_iff {obs : X → O} {step : X → X → Prop} {a : X} {w :
     · exact HasTrace.single a
     · exact HasTrace.step' a a' w' hs ht
 
-/-- **Observational identity `≡`** — the lossy *outside* view: same set of observation-traces. -/
+/-- **Observational identity `≅`** — the lossy *outside* view: same set of observation-traces. -/
 def ObsEq (obs : X → O) (step : X → X → Prop) (a b : X) : Prop :=
   ∀ w, HasTrace obs step a w ↔ HasTrace obs step b w
 
@@ -72,7 +84,7 @@ theorem obsEq_trans {obs : X → O} {step : X → X → Prop} {a b c : X}
     (hab : ObsEq obs step a b) (hbc : ObsEq obs step b c) : ObsEq obs step a c :=
   fun w => (hab w).trans (hbc w)
 
-/-! ### Soundness: `≈ ⊆ ≡` — lived sameness implies observed sameness -/
+/-! ### Soundness: `≈ ⊆ ≅` — lived sameness implies observed sameness -/
 
 /-- One-step destructor for `≈` (from `bisim_unfold`): equal observation, and matched successors. -/
 theorem bisim_dest {obs : X → O} {step : X → X → Prop} {a b : X} (h : bisim obs step a b) :
@@ -97,7 +109,7 @@ theorem hasTrace_of_bisim {obs : X → O} {step : X → X → Prop} {a : X} {w :
     obtain ⟨b', hstepb, hb'⟩ := hf a' hstep
     rw [ho]; exact HasTrace.step' b b' w hstepb (ih b' hb')
 
-/-- **Soundness, `≈ ⊆ ≡`.** Two states that are the same *inside* (bisimilar) are indistinguishable
+/-- **Soundness, `≈ ⊆ ≅`.** Two states that are the same *inside* (bisimilar) are indistinguishable
 *outside*: no sequence of observations separates them. Lived sameness ⇒ observed sameness. -/
 theorem bisim_le_obsEq {obs : X → O} {step : X → X → Prop} {a b : X}
     (h : bisim obs step a b) : ObsEq obs step a b := by
@@ -107,16 +119,16 @@ theorem bisim_le_obsEq {obs : X → O} {step : X → X → Prop} {a b : X}
 
 /-! ### The inside→outside map: the decoherence of identity -/
 
-/-- `≡` as a `Setoid`, so the *observed world* is a quotient. -/
+/-- `≅` as a `Setoid`, so the *observed world* is a quotient. -/
 def obsSetoid (obs : X → O) (step : X → X → Prop) : Setoid X where
   r := ObsEq obs step
   iseqv := ⟨obsEq_refl obs step, obsEq_symm, obsEq_trans⟩
 
-/-- **The observed world `D/≡`** — the outside's quotient, coarser than the lived `𝔼 = D/≈`. -/
+/-- **The observed world `D/≅`** — the outside's quotient, coarser than the lived `𝔼 = D/≈`. -/
 abbrev ObservedWorld (obs : X → O) (step : X → X → Prop) : Type _ :=
   Quotient (obsSetoid obs step)
 
-/-- **The forgetting from inside to outside**, `𝔼 = D/≈ ↠ D/≡`. Well-defined precisely by
+/-- **The forgetting from inside to outside**, `𝔼 = D/≈ ↠ D/≅`. Well-defined precisely by
 soundness (`bisim_le_obsEq`): every lived self has a well-defined observed shadow. This is the
 *decoherence of identity* — the same shape as `ptrace`/`dephase` on states. -/
 def livedToObserved (obs : X → O) (step : X → X → Prop) :
@@ -124,7 +136,7 @@ def livedToObserved (obs : X → O) (step : X → X → Prop) :
   Quotient.lift (fun a => Quotient.mk (obsSetoid obs step) a)
     (fun _ _ h => Quotient.sound (bisim_le_obsEq h))
 
-/-! ### Strictness `≈ ⊊ ≡` — a witness: observationally identical, not bisimilar
+/-! ### Strictness `≈ ⊊ ≅` — a witness: observationally identical, not bisimilar
 
 The classic "early vs late choice." Both `p0` and `q0` show `A`, then `M`, then either `B` or `C`
 — identical trace languages. But `p0` defers the choice (one `M`-state that can still do both `B`
@@ -294,7 +306,7 @@ theorem obsEq_and_not_bisim :
     ∃ a b : St, ObsEq obsW stepW a b ∧ ¬ bisim obsW stepW a b :=
   ⟨p0, q0, obsEq_p0_q0, not_bisim_p0_q0⟩
 
-/-- **`≈ ⊊ ≡`, as relations.** Lived identity and observed identity provably differ: with soundness
+/-- **`≈ ⊊ ≅`, as relations.** Lived identity and observed identity provably differ: with soundness
 (`bisim_le_obsEq`) this is the strict inclusion — the inside is strictly finer than the outside. -/
 theorem bisim_ne_obsEq : bisim obsW stepW ≠ ObsEq obsW stepW := by
   intro h
@@ -302,7 +314,7 @@ theorem bisim_ne_obsEq : bisim obsW stepW ≠ ObsEq obsW stepW := by
   rw [h]; exact obsEq_p0_q0
 
 /-- **The forgetting from inside to outside is not injective** — distinct lived selves (`p0`, `q0`)
-collapse to one observed self. The kernel `≡`-equal/`≈`-distinct is the **first-person surplus**:
+collapse to one observed self. The kernel `≅`-equal/`≈`-distinct is the **first-person surplus**:
 who you are exceeds how you appear. -/
 theorem livedToObserved_not_injective :
     ¬ Function.Injective (livedToObserved obsW stepW) := by

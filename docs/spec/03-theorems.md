@@ -74,15 +74,15 @@ remainder turn out to be one fact, and where it reaches the *other* too, through
 between.)
 
 **Resolved, by inversion.** `[proved]` The old `[open]` target was that `≈` **coincides** with the
-contextual congruence `≡` (full abstraction). That demand was a *mistake* — proving `≈ = ≡` would
+contextual congruence `≅` (full abstraction). That demand was a *mistake* — proving `≈ = ≅` would
 contradict the theory's limitative core (T3, the seam: the inside of what you relate to cannot be
 completely viewed from outside). So A2 is restated (the inversion): the lived `≈` *is* identity, and
-`≡` is a **strictly lossy projection** of it. Now mechanized in
-[`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean): `≡` is defined (`ObsEq`), **soundness
-`≈ ⊆ ≡`** is proved (`bisim_le_obsEq` — lived sameness ⇒ observed sameness), and **strictness
-`≈ ⊊ ≡`** is proved with a witness (`bisim_ne_obsEq`, `obsEq_and_not_bisim` — states observationally
+`≅` is a **strictly lossy projection** of it. Now mechanized in
+[`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean): `≅` is defined (`ObsEq`), **soundness
+`≈ ⊆ ≅`** is proved (`bisim_le_obsEq` — lived sameness ⇒ observed sameness), and **strictness
+`≈ ⊊ ≅`** is proved with a witness (`bisim_ne_obsEq`, `obsEq_and_not_bisim` — states observationally
 identical yet not bisimilar). The full unfolding — and the *identity residue* (the non-injective
-forgetting `D/≈ ↠ D/≡`) — is [03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
+forgetting `D/≈ ↠ D/≅`) — is [03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
 **Still open.** `[open]` The *full naturality* of the no-master-section claim (Property "T2.1")
 beyond the point-surjective case remains unmechanized — a real target, not a done deal.
