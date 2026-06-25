@@ -18,6 +18,8 @@
 import RelExist.Sparsity
 import RelExist.Loop
 import RelExist.Mirror
+import RelExist.Relating
+import RelExist.Seam
 import RelExist.Firewall
 import RelExist.Traced
 import RelExist.Free

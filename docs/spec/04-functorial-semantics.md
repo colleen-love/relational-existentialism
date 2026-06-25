@@ -233,7 +233,7 @@ equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the univers
   construction). The firewall is enforced by the type system, not by willpower.
 - It also confirms the **residues** sit outside the language: a functor preserves only
   structure, and valence / the hard problem / freedom are precisely the non-structural
-  remainder — so no functor reaches them, exactly as [T3](02-axioms.md) predicts of the
+  remainder — so no functor reaches them, exactly as [T3](03-theorems.md) predicts of the
   σ-move that formalizing itself is.
 
 ## 4.8 AI — recurrence is the trace (mechanized)

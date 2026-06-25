@@ -1,7 +1,7 @@
 /-
 # Observational identity `≈` and the shared world `𝔼` — theorem T2
 
-A faithful mechanization of [spec T2](../../docs/spec/02-axioms.md): observational
+A faithful mechanization of [spec T2](../../docs/spec/theorems.md): observational
 identity is the **greatest fixed point of a monotone operator on the complete
 lattice of relations** — i.e. the greatest bisimulation, `≈ := νΘ`. Concretely we use
 mathlib's `OrderHom.gfp` (Knaster–Tarski), which is exactly the `ν`-modality the spec

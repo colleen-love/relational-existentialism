@@ -91,6 +91,36 @@ external budget enforces this — it is `α`'s boundedness, the perspective's ow
 theorem sustainedField_le_top (c : V → V → Prop) : sustainedField (α := α) c ≤ ⊤ :=
   le_top
 
+/-! ### Registration — a closed loop absorbs the knower into the known
+
+The **dynamical form** of "relating registers you inside the known" — the `reg` closure
+posited by [`RelExist.Relating.no_complete_view`](../RelExist/Relating.lean). At the
+co-directed fixed point, relating to `j` *absorbs* `j`'s standing into yours; and a **closed
+(mutual) loop forces equal standing**, so each is fully registered in the other's sustaining
+self. This proves "Φ_c's closed loop forces registration" in the operative, order-theoretic
+sense the operator actually lives in (standing-absorption in the `gfp`); identifying it with
+the `Type`-level `reg : (O → View) → O` of `no_complete_view` remains a modelling step across
+the lattice/`Type` settings. -/
+
+/-- **Relating absorbs.** At the sustained fixed point, if `i` relates to `j` then `j`'s
+standing is contained in `i`'s — a part of the related is, literally, in the relater. -/
+theorem relating_absorbs (c : V → V → Prop) {i j : V} (h : c i j) :
+    sustainedField (α := α) c j ≤ sustainedField c i := by
+  have hfix : couplingOp c (sustainedField (α := α) c) i = sustainedField c i :=
+    congrFun (sustainedField_fixed c) i
+  rw [← hfix, couplingOp_apply]
+  exact le_iSup_of_le j (le_iSup_of_le h le_rfl)
+
+/-- **A closed loop forces registration.** If `i` and `j` relate *both ways* — the loop
+closes — their sustained selves coincide: each is fully absorbed into the other. This is the
+dynamical keystone the bridge needed: the co-directed fixed point makes a closed relating
+identify the two standings, so the relater is registered inside the related (and vice versa),
+not by assumption but as a theorem of the operator. -/
+theorem closed_loop_registers (c : V → V → Prop) {i j : V}
+    (hij : c i j) (hji : c j i) :
+    sustainedField (α := α) c i = sustainedField c j :=
+  le_antisymm (relating_absorbs c hji) (relating_absorbs c hij)
+
 /-! ### Generativity — relating accumulates attention, bounded by the self
 
 For any monotone attention operator `Φ`, a **self-reinforcing seed** (`a ≤ Φ a`) only
