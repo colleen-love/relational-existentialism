@@ -17,6 +17,13 @@ maintenance costs (in natural-number attention units); `totalSpend` is the budge
 actually consumed. The real-valued and density-→-0 / nowhere-dense refinements
 (steps 3–4 of the spec's proof strategy) need mathlib and are deferred — see
 `formal/README.md`.
+
+**Honest scope.** The core lemma (`min_mul_length_le_totalSpend`) is elementary pigeonhole
+on `List Nat`: `(∀ c ∈ cs, m ≤ c) → m · length ≤ Σ`. It says nothing about traces, eigenforms,
+or `νΦ_c`; *all* the theory is in the modeling claim that a collection of stabilized selves **is**
+a `List Nat` of costs with a forced floor `m ≥ 2`. That floor is supplied here as a hypothesis;
+it traces back to the depth posit `d ≥ 2` (`RelExist/Loop.lean`), which is itself *not* derived.
+The genuinely structural rarity is the Agda nowhere-dense result, not this counting bound.
 -/
 
 namespace RelExist

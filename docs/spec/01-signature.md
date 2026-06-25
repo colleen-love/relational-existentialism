@@ -123,12 +123,12 @@ distributed-self story as [T2](03-theorems.md)'s `𝔼`.
 The old budget model is not *wrong*; it is the **uniform, conserved, depleting** regime
 — attention treated as one conserved scalar drawn down at a fixed per-return cost.
 There, "how many times can I return to this one relation" collapses to `N = ⌊β/λ⌋` and
-the eigenform condition collapses to a threshold `d·λ ≤ β`. That reduction is exactly
-[`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean), now read as the
-depleting special case of the generative operator above. The **stabilization depth**
-`d` survives as the *convergence depth* of the orbit `Φ_c^{\,n}` (how many returns until
-the field is fixed), with `d ≥ 2` — a self needs genuine return, not a one-off — the
-posit that keeps selfhood rare. `[posit]`
+the eigenform condition collapses to a threshold `d·λ ≤ β`. That regime is the subject of
+[`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean) — though the file works with an
+**abstract** self-relation endomap, and identifying *its* `σ` and depth `d` with `Φ_c` and the
+*convergence depth* of the orbit `Φ_c^{\,n}` is a **modeling reading, not mechanized**. The depth
+floor `d ≥ 2` — a self needs genuine return, not a one-off — is the posit that keeps selfhood rare;
+it is assumed, not derived (nothing forces a fixed point to require two returns). `[posit]`
 
 ---
 

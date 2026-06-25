@@ -130,10 +130,14 @@ keep them and models thin out to the systems that actually stabilize selves. The
 candidate theorem of [03.1](03.1-sparsity.md) — **`Stab_R` is sparse under
 finite `β`** — is the formal cash value of "a self is an achievement of recursion."
 
-**Mechanized.** The defining condition `loop_R(e) = e` is now tied to the resource
-threshold in Lean — [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
-proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`), so A3's
-fixed-point self and the counted threshold are provably the same condition.
+**Mechanized — and its limits.** [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
+proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`) — but for an **abstract**
+self-relation endomap `σ`, *not* the relational `Φ_c`; the first `⟺` is just `StabilizesAt` unfolded
+(definitional), the second one arithmetic lemma. So it ties an abstract fixed point to a threshold.
+It does **not** force the depth floor `d ≥ 2` (the posit that makes selfhood rare — it is a
+hypothesis, and even the witness builds `d` in by construction), and it does not connect the
+trace/`νΦ_c` structure to the cost. The structural rarity is carried by the Agda nowhere-dense
+result ([03.1 §3.4](03.1-sparsity.md)), not the counting bound.
 
 ---
 

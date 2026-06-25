@@ -23,21 +23,24 @@ in seconds even where mathlib's cache is unreachable.
 
 ### The loop bridge — step 3 (core, no mathlib)
 
-This closes the gap the spec flagged ([03 §3.3](../docs/spec/03.1-sparsity.md)):
-the sparsity lemmas count with a *threshold*, but [A3](../docs/spec/02-axioms.md)
-defines a self as a **fixed point** of budgeted iterated self-relation. The bridge
-([`RelExist/Loop.lean`](RelExist/Loop.lean)) connects them.
+This **partly** addresses the gap the spec flagged ([03 §3.3](../docs/spec/03.1-sparsity.md)):
+the sparsity lemmas count with a *threshold*, but [A3](../docs/spec/02-axioms.md) defines a self as
+a **fixed point** of self-relation. The bridge ([`RelExist/Loop.lean`](RelExist/Loop.lean)) connects
+them — but for an *abstract* endomap `σ` (not the relational `Φ_c`), with the eigenform-`⟺`-`N≥d`
+step definitional and the rest one arithmetic lemma. It does **not** force the depth floor `d ≥ 2`.
 
 | Result | Lean name (`RelExist.*`) | Meaning | State |
 | --- | --- | --- | --- |
 | `loop_R(e) = e ⟺ N(e) ≥ d(e)` | `loopR_isEigen_iff_le_fundedReturns` | budgeted loop is an eigenform iff budget funds depth-many returns | ✅ proved |
 | `loop_R(e) = e ⟺ d·λ ≤ β` | `loopR_isEigen_iff` / `loopR_isEigen_iff_selfCost` | …iff the budget covers the self's cost (the resource threshold) | ✅ proved |
-| derived cost floor `2 ≤ d·λ` | `two_le_selfCost` | depth `≥ 2` (A3) ⇒ cost `≥ 2`: the sparsity floor is *derived*, not posited | ✅ proved |
-| witness model is non-vacuous | `matarN_stabilizesAt` | a concrete maturation dynamics actually `StabilizesAt` depth `d` | ✅ proved |
-| capstone | `stab_card_le_half_of_depths` | selves with depths `≥ 2` and total cost `≤ β` number `≤ β/2`, floor **discharged** | ✅ proved |
+| cost floor `2 ≤ d·λ` (relocated) | `two_le_selfCost` | depth `≥ 2` (A3) ⇒ cost `≥ 2`: trivial arithmetic; the posit is the **depth** `d ≥ 2`, not derived | ✅ proved |
+| witness model is non-vacuous | `matarN_stabilizesAt` | a concrete maturation dynamics `StabilizesAt` depth `d` — but builds `d` in by its cap | ✅ proved |
+| capstone | `stab_card_le_half_of_depths` | selves with depths `≥ 2`, total cost `≤ β`, number `≤ β/2`; floor **relocated to the depth posit**, not discharged | ✅ proved |
 
-So A3's fixed-point self and the counted threshold are now provably the same
-condition, and the sparsity bound's cost-floor hypothesis is a theorem.
+So A3's *abstract* fixed point and the counted threshold are provably interchangeable, and the
+sparsity bound's cost floor is shown to follow from the **depth posit `d ≥ 2`**. What is *not* done:
+forcing `d ≥ 2` from the structure, and connecting the trace/`νΦ_c` operator to the cost at all. The
+structural rarity is carried by the Agda nowhere-dense result, not this counting bound.
 
 ### Doctrine commitments — D1, T1, T3
 
