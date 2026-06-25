@@ -15,19 +15,28 @@ the sparsity lemmas count with a *threshold* ("a self costs at least `m`"), but
 [A3](../../docs/spec/02-axioms.md) defines a self as a **fixed point** of budgeted,
 iterated self-relation (`loop_R(e) = e`). Step 3 connects the two.
 
-We model self-relation as an operator `σ : X → X` (one attended return). A seed `x`
-**stabilizes at depth `d`** when iterating `σ` from `x` reaches an eigenform (a fixed
-point of `σ`) after exactly `d` returns. The budget `β`, with per-return cost `λ`,
-funds `N = ⌊β/λ⌋` returns, and `loop_R x := σ^N x`. The bridge is then:
+We model self-relation as an **abstract** operator `σ : X → X` (one attended return) — a *bare
+endomap*, **not** the relational `Φ_c` of `Scratch/Attention.lean`. Tying this `σ` to the actual
+co-directed operator is the modeling step this file does *not* take. A seed `x` **stabilizes at
+depth `d`** when iterating `σ` from `x` reaches an eigenform after exactly `d` returns
+(`StabilizesAt`). The budget `β`, with per-return cost `λ`, funds `N = ⌊β/λ⌋` returns, and
+`loop_R x := σ^N x`. The bridge is then:
 
     loop_R(x) is an eigenform  ⟺  N ≥ d  ⟺  d · λ ≤ β.
 
-The middle is the literal "`loop_R(e) = e ⟺ N(e) ≥ d(e)`"; the right reattaches it to
-the resource threshold. (We work additively over `Nat`, the log-scale of the spec's
-multiplicative `ε^n ≤ β`: take `λ := log ε`, `β := log` budget.) As a capstone,
-`stab_card_le_half_of_depths` feeds the **derived** cost floor `2 ≤ d·λ` (from
-`d ≥ 2`) into the discrete sparsity bound — so its floor hypothesis is now a theorem,
-not a posit. Pure `Nat`/iteration; no mathlib.
+**Be clear about how little this is.** The left `⟺` is `StabilizesAt` *unfolded* at `n := N` — the
+definition with the iteration count plugged in. The right `⟺` is a single arithmetic lemma
+(`Nat.le_div_iff_mul_le`). (We work additively over `Nat`, the log-scale of the spec's multiplicative
+`ε^n ≤ β`: take `λ := log ε`, `β := log` budget.)
+
+And the capstone `stab_card_le_half_of_depths` **relocates** the sparsity floor, it does not derive
+it: `two_le_selfCost` gets `2 ≤ d·λ` from `2 ≤ d` (trivial, since `λ ≥ 1`), so the load-bearing posit
+is the **depth floor `d ≥ 2`** ("a self needs genuine return, not a one-off"; A3). That is arguably a
+cleaner home for the posit than "cost ≥ 2", but nothing here *forces* `d ≥ 2`: it is a hypothesis,
+and even the witness `matarN_stabilizesAt` builds `d` in by construction (its dynamics caps at `d`).
+The genuinely structural rarity — selves *nowhere dense*, with the sharp dichotomy — is the Agda
+result (`agda/RelExist/Sparsity.agda`), which needs no cost model and which this counting bound
+cannot reach. Pure `Nat`/iteration; no mathlib.
 -/
 import RelExist.Sparsity
 
@@ -96,9 +105,10 @@ theorem depth_le_selfCost (d lam : Nat) (hlam : 1 ≤ lam) : d ≤ selfCost d la
   have h : d * 1 ≤ d * lam := Nat.mul_le_mul (Nat.le_refl d) hlam
   simpa using h
 
-/-- **The derived cost floor.** With A3's depth floor `d ≥ 2` and per-return cost
-`λ ≥ 1`, every self costs at least `2` — exactly the floor the sparsity lemmas assume,
-now *derived* from the loop dynamics. -/
+/-- **The cost floor, downstream of the depth posit.** With A3's depth floor `d ≥ 2` and per-return
+cost `λ ≥ 1`, every self costs at least `2`. This is **not** a derivation of the floor — it relocates
+it: the content is the posit `d ≥ 2` (genuine return, not a one-off), and `2 ≤ d·λ` then follows by
+trivial arithmetic. -/
 theorem two_le_selfCost (d lam : Nat) (hd : 2 ≤ d) (hlam : 1 ≤ lam) :
     2 ≤ selfCost d lam :=
   Nat.le_trans hd (depth_le_selfCost d lam hlam)
@@ -125,10 +135,11 @@ theorem matarN_stabilizesAt (d : Nat) : StabilizesAt (fun k => min (k + 1) d) 0 
 
 /-! ### Capstone: the sparsity cost-floor is now discharged -/
 
-/-- **Step 3, closing the gap.** A finite collection of selves, each given by its depth
-`dᵢ ≥ 2` and per-return cost `λᵢ ≥ 1`, whose total maintenance cost fits the budget `β`,
-numbers at most `β / 2`. The floor-`2` hypothesis of `stab_card_le_half` is supplied by
-`two_le_selfCost` — i.e. *derived from the loop dynamics*, not assumed. -/
+/-- **Step 3, relocating the floor.** A finite collection of selves, each given by its depth
+`dᵢ ≥ 2` and per-return cost `λᵢ ≥ 1`, whose total maintenance cost fits the budget `β`, numbers at
+most `β / 2`. The floor-`2` hypothesis of `stab_card_le_half` is supplied by `two_le_selfCost` — so
+the sparsity bound rests on the **depth posit `dᵢ ≥ 2`** rather than a separately-assumed cost floor.
+The depth posit itself is *not* derived here. -/
 theorem stab_card_le_half_of_depths (selves : List (Nat × Nat)) (beta : Nat)
     (hd : ∀ p ∈ selves, 2 ≤ p.1) (hlam : ∀ p ∈ selves, 1 ≤ p.2)
     (hbudget : totalSpend (selves.map (fun p => selfCost p.1 p.2)) ≤ beta) :

@@ -43,27 +43,41 @@ stated without it. A1 is independent in the strongest sense — removing it remo
 
 ## A2 — Relation primacy `[structural; both]`
 
-**Statement.** A state's identity is exhausted by its behavior under all
-process-contexts. Writing a *context* as a unary morphism-with-a-hole
-`C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generators, define for states `s, t : I → D`:
+**Statement.** A state's identity **is** its first-person relational unfolding — the way it relates,
+lived forward — formalized as the greatest bisimulation `≈` (T2, `νΘ`). Behavior under external
+contexts is a *function* of that identity, not its definition. Writing a *context* as a unary
+morphism-with-a-hole `C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generators, the third-person
+**observational identity** is
 
 $$
 s \;\equiv\; t
 \quad:\Longleftrightarrow\quad
-\forall\, C[-].\ C[s] = C[t].
+\forall\, C[-].\ C[s] = C[t],
 $$
 
-**Axiom.** `≡` is the finest congruence the theory distinguishes; there is **no**
-state-distinguishing data beyond contextual behavior. Equivalently: the only points
-of `D` are those forced by the morphisms (no "bare carrier" under the relatings).
+and the commitment is that `≈` is the real identity, of which `≡` is a **strictly lossy
+projection**: `≈ ⊊ ≡`.
 
-**Gloss.** *Take away every relation and there is no bare self left underneath.* The
-knot is a shape the rope holds; pull the rope straight and nothing remains. This is
-Yoneda made into a commitment: an object is its relatings.
+**Axiom.** There is **no bare carrier** *below* the relational unfolding `≈`: the only individuation
+a state has is how it relates, lived out. But identity is **not** exhausted by *external* observation
+— the inside is strictly finer than any outside can read (`≈ ⊊ ≡`). Soundness holds (lived sameness
+⇒ observed sameness, `≈ ⊆ ≡`); completeness is **denied**: contextual equivalence does not recover
+bisimilarity. This is not a failure to prove full abstraction — proving `≈ = ≡` would *contradict*
+the theory's own limitative core (T3, the seam: you cannot completely view from outside what you
+relate to), so the equality is the one thing the theory must *not* assert.
 
-**Role.** Structural premise. It is what licenses defining identity *coinductively*
-in **T2** — `≡` will be exhibited as the bisimilarity `≈`, so that "same behavior in
-all contexts" and "greatest bisimulation" coincide.
+**Gloss.** *You are your lived relating, which exceeds how you appear.* Take away every relation and
+no bare self remains underneath (no carrier below `≈`) — Yoneda made into a commitment, an object is
+its relatings. But two selves can be observationally identical to every outside probe and still be
+different selves inside: the first-person surplus, the part of who you are that no external view can
+read off. Behavior is a function of self, not a definition of it.
+
+**Role.** Structural premise. It is what licenses defining identity *coinductively* in **T2** as the
+bisimilarity `≈` — and it fixes, against the third-person `≡`, that the lived identity is the real
+one. The proved soundness `≈ ⊆ ≡`, the proved strictness `≈ ⊊ ≡`, and the resulting non-injective
+*forgetting from inside to outside* `D/≈ ↠ D/≡` (the decoherence of identity) are mechanized in
+[`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean); see
+[03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
 ---
 
@@ -116,10 +130,14 @@ keep them and models thin out to the systems that actually stabilize selves. The
 candidate theorem of [03.1](03.1-sparsity.md) — **`Stab_R` is sparse under
 finite `β`** — is the formal cash value of "a self is an achievement of recursion."
 
-**Mechanized.** The defining condition `loop_R(e) = e` is now tied to the resource
-threshold in Lean — [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
-proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`), so A3's
-fixed-point self and the counted threshold are provably the same condition.
+**Mechanized — and its limits.** [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
+proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`) — but for an **abstract**
+self-relation endomap `σ`, *not* the relational `Φ_c`; the first `⟺` is just `StabilizesAt` unfolded
+(definitional), the second one arithmetic lemma. So it ties an abstract fixed point to a threshold.
+It does **not** force the depth floor `d ≥ 2` (the posit that makes selfhood rare — it is a
+hypothesis, and even the witness builds `d` in by construction), and it does not connect the
+trace/`νΦ_c` structure to the cost. The structural rarity is carried by the Agda nowhere-dense
+result ([03.1 §3.4](03.1-sparsity.md)), not the counting bound.
 
 ---
 
