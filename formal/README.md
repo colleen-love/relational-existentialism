@@ -38,9 +38,34 @@ step definitional and the rest one arithmetic lemma. It does **not** force the d
 | capstone | `stab_card_le_half_of_depths` | selves with depths `≥ 2`, total cost `≤ β`, number `≤ β/2`; floor **relocated to the depth posit**, not discharged | ✅ proved |
 
 So A3's *abstract* fixed point and the counted threshold are provably interchangeable, and the
-sparsity bound's cost floor is shown to follow from the **depth posit `d ≥ 2`**. What is *not* done:
-forcing `d ≥ 2` from the structure, and connecting the trace/`νΦ_c` operator to the cost at all. The
-structural rarity is carried by the Agda nowhere-dense result, not this counting bound.
+sparsity bound's cost floor is shown to follow from the **depth posit `d ≥ 2`**.
+
+**The abstract `σ`, now discharged for the depth** ([`Scratch/Convergence.lean`](Scratch/Convergence.lean)).
+The same open seam recurs across all four pages — nearly every result runs over an *abstract proxy* for
+`Φ_c`, and the identification with the genuine operator is the standing reading. `Convergence.lean`
+takes that bridge at the node where it pays off most: it derives `Loop`'s depth structure from the
+**convergence behaviour of `Φ_c`'s orbit directly**. `iter_eq_iterate` (Loop's `iter` *is* `Φ^[n]`),
+`ConvergesAt` (the intrinsic convergence depth), and `convergesAt_imp_stabilizesAt` `[0 axioms]`
+*derive* `StabilizesAt` from convergence; `couplingOp_loopR_isEigen_iff` then runs Loop's whole
+threshold↔fixed-point bridge over the **genuine `Φ_c = couplingOp c`**, with `d` its orbit's
+convergence depth (`convergedValue_le_sustained` ties the converged value to `νΦ_c`). And
+`selfCost_le_valuationGain` reads the per-return cost `λ` off the orbit's standing increment, given a
+valuation.
+
+**Does the orbit converge? Two honest answers** ([`Scratch/Stabilization.lean`](Scratch/Stabilization.lean)).
+The frontier `Convergence.lean` left — *does `Φ_c`'s orbit actually reach a fixed point?* — is now
+answered in the two regimes it splits into. **ω-convergence (always, under continuity):**
+`iSup_orbit_isFixed` — the orbit's supremum `⨆ Φ^[n] a` is a fixed point whenever `Φ` commutes with
+that sup, a genuine self in `[a, νΦ_c]` (`iSup_orbit_le_sustained`); the self *is* the limit of
+relating, no finiteness needed (Kleene). **Finite-depth convergence (iff ACC):**
+`convergesAt_of_stabilizes` `[0 axioms]` (stabilizing ⇒ a least convergence depth) and
+`orbit_stabilizes` (under `WellFoundedGT (Field V α)` — no infinite ascending chains of standing — the
+monotone orbit *must* stabilize, via `WellFounded.monotone_chain_condition`) combine in
+`couplingOp_selfForms`: under ACC the genuine `Φ_c` orbit forms a self at a finite depth and satisfies
+`Loop`'s `StabilizesAt`. So the cost model's depth posit is **discharged for the real operator**, and
+the only residue is a single standard order condition — **ACC on standing** ("a self forms in finitely
+many returns"), automatic for finite standing-lattices. The structural rarity is still carried
+independently by the Agda nowhere-dense result.
 
 ### Doctrine commitments — D1, T1, T3
 
@@ -69,6 +94,7 @@ knowing *does* to a relation, and the one trace a self cannot take on itself.
 | **The surplus is exactly nondeterminism** — `Deterministic ⟹ ≈ ⟺ ≅`; the witness branches | `RelExist.Identity.{Deterministic, deterministic_bisim_iff_obsEq, deterministic_obsEq_imp_bisim, not_deterministic_stepW}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **The requirements for the surplus** — nondeterminism ∧ a relating; exact boundary `surplus ⟺ ≅ not a bisimulation`; both necessary, jointly insufficient | `RelExist.Identity.{IsBisimulation, surplus_iff_obsEq_not_isBisimulation, surplus_imp_not_deterministic, surplus_imp_relating, nondeterminism_and_selves_insufficient}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **The bridge** — the gap is governed by relation; `≅` is the *disjoint* observer; completeness ⟺ disjointness, so the necessary Lawvere floor dominates the contingent branching surplus | `RelExist.Knowing.{traceView, obsEq_iff_traceView_eq, knowing_complete_iff_disjoint, witness_disjoint_vs_related}` | [03.2](../docs/spec/03.2-limits-of-knowing.md), [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved (`knowing_complete_iff_disjoint` **0 axioms**) |
+| **Nondeterminism is a consequence of relation** — deterministic whole, related across a between ⟹ nondeterministic marginal; local determinism ⟺ no relation; the seam forces the marginal view | `RelExist.Marginal.{jointStep_deterministic, marginal_deterministic_iff_disentangled, marginal_nondeterministic_iff_entangled, relation_makes_marginal_nondeterministic}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved (`marginal_deterministic_iff_disentangled` **0 axioms**) |
 | **One forgetting** — identity-collapse, dephasing, partial trace are one shape | `RelExist.Forgetting.{Coarsening, not_injective_of_residue, forgettings_have_residue}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **Knowing decoheres** — dephasing onto the classical fragment | `RelExist.Decoherence.{dephase, copyDefect, copyDefect_eq_zero_iff, classical_comm}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
 | **Directed attention** — selective decoherence; the defect drops | `RelExist.Decoherence.{attend, defectSq_attend_le, defectSq_attend_mono, defectSq_attend_plus_lt, defectSq_attend_shared_pos}` | [03.3](../docs/spec/03.3-decoherence.md) | Scratch | ✅ proved |
