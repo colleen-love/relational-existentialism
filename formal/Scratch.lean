@@ -6,6 +6,10 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 
 * `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem T2),
                           via `OrderHom.gfp` (Knaster–Tarski). ✅ verified.
+* `Scratch.Identity`    — A2 restated: identity is the lived `≈`; observation `≡` is a
+                          **strictly lossy** projection. Proves soundness `≈ ⊆ ≡`, strictness
+                          `≈ ⊊ ≡` (witness), and the non-injective forgetting `D/≈ ↠ D/≡` (the
+                          first-person surplus). ✅ verified.
 * `Scratch.Attention`   — attention as the co-directed eigenstructure of the relational
                           coupling (a consequence of structure, not a bolted-on budget);
                           the self as an eigenform `νΦ`. ✅ verified.
@@ -63,6 +67,7 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           conserved, only relocated. ✅ verified.
 -/
 import Scratch.We
+import Scratch.Identity
 import Scratch.Attention
 import Scratch.Trace
 import Scratch.KnowingFeeling
