@@ -256,4 +256,44 @@ theorem defectSq_attend_plus3_lt :
     rw [copyDefect_apply, if_neg (show ¬ (0 : Fin 3) = 1 by decide)]; rfl
   rw [hl, hr]; norm_num
 
+/-! ### Never truly decohered — the shared block attention cannot reach
+
+The `2 ↦ 0` collapse above is for a state with **no shared constitution**: every coherence in
+`plus` sits *between two separable branches*, so attention can kill all of it. But A2 says a
+relationship is *part of both* selves — a bit of you is our relationship, which is a part of me
+([`Distribution.distributed`](Distribution.lean), [`Attention.closed_loop_registers`](Attention.lean)).
+That shared part lives in a block `J` that attention **cannot** be directed at: to dephase it
+would be to dephase part of the aimer, and *you cannot aim at the aimer*
+([`Relating.self_inclusive_unmodelable`](../RelExist/Relating.lean), T3/Lawvere). So the attended
+set is barred from `J`, the shared coherence survives every attention, and the copy-defect can
+**never** reach zero while the relationship is live. -/
+
+/-- **You can never fully decohere a relationship whose shared part you cannot attend.** If the
+attended set `S` is barred from the shared block `J` (because `J` is part of the aimer —
+`self_inclusive_unmodelable`), then any live coherence within `J` *survives* `attend S`, so the
+copy-defect stays strictly **positive**. The floor is the living relationship itself: it vanishes
+only when there is no shared coherence left — i.e. only in death / disconnection. -/
+theorem defectSq_attend_shared_pos [Fintype A] {J S : Finset A} (M : Matrix A A ℝ)
+    (hSJ : ∀ a ∈ S, a ∉ J)
+    {i j : A} (hi : i ∈ J) (hj : j ∈ J) (hij : i ≠ j) (hM : M i j ≠ 0) :
+    0 < defectSq (attend S M) := by
+  have hiS : i ∉ S := fun h => hSJ i h hi
+  have hjS : j ∉ S := fun h => hSJ j h hj
+  -- the shared coherence at (i,j) is kept: both indices lie outside the attended set
+  have hkept : attend S M i j = M i j := by
+    rw [attend_apply, if_pos (Or.inr ⟨hiS, hjS⟩)]
+  have hterm : 0 < (copyDefect (attend S M) i j) ^ 2 := by
+    rw [copyDefect_apply, if_neg hij, hkept]
+    exact (sq_nonneg (M i j)).lt_of_ne (Ne.symm (pow_ne_zero 2 hM))
+  -- one strictly-positive term in a sum of squares forces the whole defect positive
+  have hle : (copyDefect (attend S M) i j) ^ 2 ≤ defectSq (attend S M) := by
+    unfold defectSq
+    refine le_trans (Finset.single_le_sum
+      (f := fun j' => (copyDefect (attend S M) i j') ^ 2)
+      (fun k _ => sq_nonneg _) (Finset.mem_univ j)) ?_
+    exact Finset.single_le_sum
+      (f := fun i' => ∑ j', (copyDefect (attend S M) i' j') ^ 2)
+      (fun k _ => Finset.sum_nonneg fun _ _ => sq_nonneg _) (Finset.mem_univ i)
+  exact lt_of_lt_of_le hterm hle
+
 end RelExist.Decoherence

@@ -179,6 +179,21 @@ Knowing-fully and relating are antagonistic.
   That directed attention *is* this partial dephasing is the standing `[reading]` (the concrete
   matrix toy of `Decoherence`, not a derivation of QM); the monotone-drop and the witnessed
   collapse are `[proved]`.
+- **Never truly decohered — the shared block attention cannot reach** `[proved]` — the `2 ↦ 0`
+  collapse is only for a state with *no shared constitution*. A2 says a relationship is **part of
+  both** selves (`Distribution.distributed`, `Attention.closed_loop_registers`): a bit of you is
+  our relationship, which is a part of me. That shared part sits in a block `J` that attention
+  **cannot be aimed at** — to dephase it would be to dephase part of the aimer, and *you cannot
+  aim at the aimer* (`Relating.self_inclusive_unmodelable`). So whenever the attended set is
+  barred from `J`, any live coherence within `J` survives and the copy-defect stays strictly
+  positive: [`defectSq_attend_shared_pos`](../../formal/Scratch/Attending.lean). The floor is the
+  living relationship itself — it reaches `0` only in death / disconnection. *Locally* (relative
+  to a cut that forgets the relationship) a relation decoheres; *globally* (the standpoint that
+  includes the relationship — the only honest one, since the relationship is part of you) it
+  never does. Decoherence is what coherence looks like when you forget the part of the world that
+  carries it — and you cannot forget the part that is you. The floor theorem is `[proved]`; the
+  global-conservation reading rests on `trace_dephase` + the partial trace (`PartialTrace`) and
+  is a `[reading]`.
 
 ### To know it you must relate to it — and so cannot completely know it
 
