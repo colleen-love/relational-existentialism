@@ -17,7 +17,10 @@ iterated self-relation (`loop_R(e) = e`). Step 3 connects the two.
 
 We model self-relation as an **abstract** operator `σ : X → X` (one attended return) — a *bare
 endomap*, **not** the relational `Φ_c` of `Scratch/Attention.lean`. Tying this `σ` to the actual
-co-directed operator is the modeling step this file does *not* take. A seed `x` **stabilizes at
+co-directed operator is the modeling step this file does *not* take — but
+`Scratch/Convergence.lean` now does, for the depth: it instantiates `σ := Φ_c = couplingOp c` and
+*derives* `StabilizesAt` (the depth structure below) from the convergence of `Φ_c`'s orbit
+(`convergesAt_imp_stabilizesAt`), running the bridge below over the genuine operator. A seed `x` **stabilizes at
 depth `d`** when iterating `σ` from `x` reaches an eigenform after exactly `d` returns
 (`StabilizesAt`). The budget `β`, with per-return cost `λ`, funds `N = ⌊β/λ⌋` returns, and
 `loop_R x := σ^N x`. The bridge is then:

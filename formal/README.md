@@ -38,9 +38,21 @@ step definitional and the rest one arithmetic lemma. It does **not** force the d
 | capstone | `stab_card_le_half_of_depths` | selves with depths `≥ 2`, total cost `≤ β`, number `≤ β/2`; floor **relocated to the depth posit**, not discharged | ✅ proved |
 
 So A3's *abstract* fixed point and the counted threshold are provably interchangeable, and the
-sparsity bound's cost floor is shown to follow from the **depth posit `d ≥ 2`**. What is *not* done:
-forcing `d ≥ 2` from the structure, and connecting the trace/`νΦ_c` operator to the cost at all. The
-structural rarity is carried by the Agda nowhere-dense result, not this counting bound.
+sparsity bound's cost floor is shown to follow from the **depth posit `d ≥ 2`**.
+
+**The abstract `σ`, now discharged for the depth** ([`Scratch/Convergence.lean`](Scratch/Convergence.lean)).
+The same open seam recurs across all four pages — nearly every result runs over an *abstract proxy* for
+`Φ_c`, and the identification with the genuine operator is the standing reading. `Convergence.lean`
+takes that bridge at the node where it pays off most: it derives `Loop`'s depth structure from the
+**convergence behaviour of `Φ_c`'s orbit directly**. `iter_eq_iterate` (Loop's `iter` *is* `Φ^[n]`),
+`ConvergesAt` (the intrinsic convergence depth), and `convergesAt_imp_stabilizesAt` `[0 axioms]`
+*derive* `StabilizesAt` from convergence; `couplingOp_loopR_isEigen_iff` then runs Loop's whole
+threshold↔fixed-point bridge over the **genuine `Φ_c = couplingOp c`**, with `d` its orbit's
+convergence depth (`convergedValue_le_sustained` ties the converged value to `νΦ_c`). And
+`selfCost_le_valuationGain` reads the per-return cost `λ` off the orbit's standing increment, given a
+valuation. What remains: forcing `d ≥ 2` from the structure, the valuation `μ` (numeric cost), and
+that the orbit converges at finite depth — but all now phrased about `Φ_c` itself, not an abstract
+endomap. The structural rarity is still carried independently by the Agda nowhere-dense result.
 
 ### Doctrine commitments — D1, T1, T3
 
