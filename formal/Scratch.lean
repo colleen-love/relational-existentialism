@@ -10,6 +10,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           **strictly lossy** projection. Proves soundness `≈ ⊆ ≡`, strictness
                           `≈ ⊊ ≡` (witness), and the non-injective forgetting `D/≈ ↠ D/≡` (the
                           first-person surplus). ✅ verified.
+* `Scratch.Forgetting`  — the unification: identity-collapse, dephasing, and the partial trace are
+                          one construction (`Coarsening`), each non-injective for the same reason —
+                          a nonempty residue (surplus / copy-defect / entanglement). ✅ verified.
 * `Scratch.Attention`   — attention as the co-directed eigenstructure of the relational
                           coupling (a consequence of structure, not a bolted-on budget);
                           the self as an eigenform `νΦ`. ✅ verified.
@@ -88,3 +91,4 @@ import Scratch.Distribution
 import Scratch.Feedback
 import Scratch.Attending
 import Scratch.Conservation
+import Scratch.Forgetting
