@@ -50,9 +50,22 @@ takes that bridge at the node where it pays off most: it derives `Loop`'s depth 
 threshold↔fixed-point bridge over the **genuine `Φ_c = couplingOp c`**, with `d` its orbit's
 convergence depth (`convergedValue_le_sustained` ties the converged value to `νΦ_c`). And
 `selfCost_le_valuationGain` reads the per-return cost `λ` off the orbit's standing increment, given a
-valuation. What remains: forcing `d ≥ 2` from the structure, the valuation `μ` (numeric cost), and
-that the orbit converges at finite depth — but all now phrased about `Φ_c` itself, not an abstract
-endomap. The structural rarity is still carried independently by the Agda nowhere-dense result.
+valuation.
+
+**Does the orbit converge? Two honest answers** ([`Scratch/Stabilization.lean`](Scratch/Stabilization.lean)).
+The frontier `Convergence.lean` left — *does `Φ_c`'s orbit actually reach a fixed point?* — is now
+answered in the two regimes it splits into. **ω-convergence (always, under continuity):**
+`iSup_orbit_isFixed` — the orbit's supremum `⨆ Φ^[n] a` is a fixed point whenever `Φ` commutes with
+that sup, a genuine self in `[a, νΦ_c]` (`iSup_orbit_le_sustained`); the self *is* the limit of
+relating, no finiteness needed (Kleene). **Finite-depth convergence (iff ACC):**
+`convergesAt_of_stabilizes` `[0 axioms]` (stabilizing ⇒ a least convergence depth) and
+`orbit_stabilizes` (under `WellFoundedGT (Field V α)` — no infinite ascending chains of standing — the
+monotone orbit *must* stabilize, via `WellFounded.monotone_chain_condition`) combine in
+`couplingOp_selfForms`: under ACC the genuine `Φ_c` orbit forms a self at a finite depth and satisfies
+`Loop`'s `StabilizesAt`. So the cost model's depth posit is **discharged for the real operator**, and
+the only residue is a single standard order condition — **ACC on standing** ("a self forms in finitely
+many returns"), automatic for finite standing-lattices. The structural rarity is still carried
+independently by the Agda nowhere-dense result.
 
 ### Doctrine commitments — D1, T1, T3
 
