@@ -20,10 +20,12 @@ sparsity dichotomy ([spec 03 §3.5](../docs/spec/03.1-sparsity.md), step 4).
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
 | a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../docs/spec/00-doctrine.md) | ✅ defined (coinductive record) |
-| **T2** — `≈` as the greatest bisimulation | `_≈_` | [T2](../docs/spec/03-theorems.md) | ✅ defined (coinductive record) |
+| **T2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [T2](../docs/spec/03-theorems.md) | ✅ defined (coinductive record) |
 | `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [T2](../docs/spec/03-theorems.md) | ✅ proved (copattern corecursion) |
 | **shared world** `𝔼 := D/≈` | `SharedWorld` | [T2](../docs/spec/03-theorems.md) | ✅ defined (`Setoid`) |
 | **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [T2](../docs/spec/03-theorems.md) | ✅ proved (one guarded definition) |
+| **observational equality** `≅` (the outside view) | `_≅_` | [02 A2](../docs/spec/02-axioms.md), [03.3](../docs/spec/03.3-decoherence.md) | ✅ defined (same observation stream) |
+| **deterministic collapse** `≈ ⟺ ≅` | `≈⇒≅` / `≅⇒≈` | [03.3](../docs/spec/03.3-decoherence.md) | ✅ proved — *no surplus* (this model is deterministic; Lean's nondeterministic model has `≈ ⊊ ≅`) |
 | **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../docs/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
 
 ## Status — `RelExist.Sparsity` (topological sparsity, step 4)

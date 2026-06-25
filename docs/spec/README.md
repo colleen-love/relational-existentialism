@@ -87,5 +87,22 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 > reading: here the **finer** relation is `≈` and the coarser is `≅`, following the
 > model-theoretic / Hennessy–Milner convention (bisimilarity finer than observational/logical
 > equivalence; they coincide only under unbounded observation). We avoid `≡` for the coarse relation
-> precisely because it collides with Agda's `≡` (propositional equality, the *finest*). In Lean,
-> `≈` is `We.bisim` and `≅` is `Identity.ObsEq`.
+> precisely because it collides with Agda's `≡` (propositional equality, the *finest*).
+
+**The same symbols in both proof assistants**, with the same roles:
+
+| concept | doctrine | Lean | Agda |
+| --- | --- | --- | --- |
+| bare carrier (literal equality) | `=` | `=` (`Eq`) | `≡` (`PropositionalEquality`) |
+| lived identity (bisimulation) | `≈` | `We.bisim` | `Coinductive._≈_` |
+| observational equality | `≅` | `Identity.ObsEq` | `Coinductive._≅_` |
+
+Agda writes literal equality `≡` by standard-library convention — it is the doctrine's `=` (and is
+*used*, e.g. inside `≈`'s "heads agree"; A2 discards it only as a notion of *self-identity*, never as
+a tool). The two assistants prove **complementary** facts about `≅`: Lean's model is a
+**nondeterministic** LTS, where `≈ ⊊ ≅` ([`Identity.bisim_ne_obsEq`](../../formal/Scratch/Identity.lean) —
+the first-person surplus); Agda's model is **deterministic** behaviours, where `≈ ⟺ ≅`
+([`Coinductive.≈⇒≅` / `≅⇒≈`](../../agda/RelExist/Coinductive.agda)) — *no* surplus. Together they
+locate the surplus exactly: it is what **branching (nondeterminism)** opens — the trace of the
+branches not taken. A deterministic being's observable trace reveals all of it; a branching one keeps
+a first-person remainder.

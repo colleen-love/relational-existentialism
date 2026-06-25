@@ -140,7 +140,7 @@ $$
 {\approx}\ \rightarrowtail\ D \otimes D
 $$
 
-— a subobject of `D ⊗ D` — for **observational identity**. It is *not* an
+— a subobject of `D ⊗ D` — for the **lived identity** (the greatest bisimulation). It is *not* an
 endomorphism `D → D` (that would be the σ-move, the diagonal, the cartesian
 self-look); it is a relation living one level up. This type-level distinction is the
 whole of Theorem **T3**: `σ` (an endomap, cartesian, Lawvere-obstructed) fragments;

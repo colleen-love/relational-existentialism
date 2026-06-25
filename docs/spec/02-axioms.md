@@ -176,7 +176,7 @@ co-directed `Φ_c` of A3.
 # The theorems
 
 The theorems that follow from this basis — **T1** (to relate is to create), **T2**
-(observational identity and the "we"), **T3** (knowing vs feeling) — together with the
+(lived identity and the "we"), **T3** (knowing vs feeling) — together with the
 structural results about relating (self, part, other, collection; routing vs directing;
 what knowing does to a relation) live in their own file, with honest status tags and Lean
 names: **[03-theorems.md](03-theorems.md)**. The quantitative theorem (sparsity) is

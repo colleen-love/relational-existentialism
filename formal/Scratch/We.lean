@@ -1,7 +1,7 @@
 /-
-# Observational identity `≈` and the shared world `𝔼` — theorem T2
+# Lived identity `≈` and the shared world `𝔼` — theorem T2
 
-A faithful mechanization of [spec T2](../../docs/spec/theorems.md): observational
+A faithful mechanization of [spec T2](../../docs/spec/03-theorems.md): the lived
 identity is the **greatest fixed point of a monotone operator on the complete
 lattice of relations** — i.e. the greatest bisimulation, `≈ := νΘ`. Concretely we use
 mathlib's `OrderHom.gfp` (Knaster–Tarski), which is exactly the `ν`-modality the spec
@@ -10,7 +10,7 @@ needs (the doctrine's `ν` for `≈` is gfp-on-a-lattice, not codata).
 We then derive:
 * `bisim_unfold` — `≈` is a fixed point of one-step indistinguishability (`Θ ≈ = ≈`);
 * `bisim_coind` — **coinduction**: every bisimulation is contained in `≈` (the proof
-  principle "to show two states observationally identical, exhibit a bisimulation");
+  principle "to show two states share a lived identity (bisimilar), exhibit a bisimulation");
 * `bisim_refl/symm/trans` — `≈` is an equivalence; hence
 * `World := D/≈` — the **shared world `𝔼`** as a quotient (T2).
 
@@ -22,7 +22,7 @@ namespace RelExist.We
 
 variable {X O : Type*}
 
-/-- One unfolding `Θ` of observational indistinguishability, as a **monotone operator
+/-- One unfolding `Θ` of one-step bisimulation (behaving the same now and onward), as a **monotone operator
 on the complete lattice of relations** `X → X → Prop`. Here `obs : X → O` is the
 immediate observation and `step a a'` reads "`a'` is a one-step successor of `a`".
 `Θ R a b` holds iff `a` and `b` agree on `obs` and each one's successors are
@@ -44,7 +44,7 @@ def Step (obs : X → O) (step : X → X → Prop) :
       obtain ⟨a', ha', hr⟩ := hbk b' hb'
       exact ⟨a', ha', hRS a' b' hr⟩
 
-/-- **Observational identity `≈ := νΘ`** — the greatest bisimulation (theorem T2). -/
+/-- **Lived identity `≈ := νΘ`** — the greatest bisimulation (theorem T2). -/
 def bisim (obs : X → O) (step : X → X → Prop) : X → X → Prop :=
   (Step obs step).gfp
 
@@ -59,7 +59,7 @@ theorem bisim_coind (obs : X → O) (step : X → X → Prop)
     {R : X → X → Prop} (hR : R ≤ (Step obs step) R) : R ≤ bisim obs step :=
   (Step obs step).le_gfp hR
 
-/-- **Coinduction**, usable form. To prove two states observationally identical, give
+/-- **Coinduction**, usable form. To prove two states share a lived identity (bisimilar), give
 a relation `R` relating them that is closed under one step (a bisimulation). -/
 theorem bisim_of_bisimulation (obs : X → O) (step : X → X → Prop)
     {R : X → X → Prop}
@@ -112,7 +112,7 @@ def bisimSetoid (obs : X → O) (step : X → X → Prop) : Setoid X where
   r := bisim obs step
   iseqv := ⟨bisim_refl obs step, bisim_symm obs step, bisim_trans obs step⟩
 
-/-- **The shared world `𝔼 := D/≈`** (theorem T2): states quotiented by observational
+/-- **The shared world `𝔼 := D/≈`** (theorem T2): states quotiented by lived
 identity — the objective world as the overlap of perspectives. -/
 abbrev World (obs : X → O) (step : X → X → Prop) : Type _ :=
   Quotient (bisimSetoid obs step)

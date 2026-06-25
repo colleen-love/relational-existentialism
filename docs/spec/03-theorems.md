@@ -56,7 +56,7 @@ discriminating content — that the created selves are *rare* — is not here; i
 
 ---
 
-## T2 — Observational identity and the "we"
+## T2 — Lived identity and the "we"
 
 **Claim.** `≈ := νΘ` is the greatest bisimulation; the shared world is `𝔼 := D/≈`; and `𝔼`
 has an **irreducible seam** (no master perspective).
