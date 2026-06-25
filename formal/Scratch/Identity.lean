@@ -426,4 +426,140 @@ theorem not_deterministic_stepW : ¬ Deterministic stepW := by
     @hdet St.q0 St.qL St.qR (by simp [stepW, succW]) (by simp [stepW, succW])
   exact absurd hLR (by decide)
 
+/-! ### The requirements for the surplus: nondeterminism and a relating
+
+The headline isolated one *sufficient* condition for collapse (determinism). Here we pin the
+**exact** boundary and read off the **two necessary requirements** for a surplus to exist at all.
+A surplus needs (1) **nondeterminism** — branching, "could have done otherwise" — and (2) a
+**relating** — two distinct selves whose *appearances coincide* (`a ≅ b`). Crucially, neither alone
+*nor both together* forces a surplus: the exact condition is a single fixed-point statement — the
+outside view `≅` **fails to be a bisimulation**. The surplus is not a count of selves but a relation
+the branching tears. -/
+
+/-- A relation `R` is a **bisimulation** (the back-and-forth shape `≈` is the *greatest* instance
+of): related states agree now, and every move of one is matched by a move of the other into
+again-related states. -/
+def IsBisimulation (obs : X → O) (step : X → X → Prop) (R : X → X → Prop) : Prop :=
+  ∀ a b, R a b →
+    obs a = obs b ∧
+      (∀ a', step a a' → ∃ b', step b b' ∧ R a' b') ∧
+      (∀ b', step b b' → ∃ a', step a a' ∧ R a' b')
+
+/-- The lived identity `≈` is a bisimulation — indeed the greatest one. -/
+theorem bisim_isBisimulation (obs : X → O) (step : X → X → Prop) :
+    IsBisimulation obs step (bisim obs step) :=
+  fun _ _ h => bisim_dest h
+
+/-- **No surplus**: every observationally-equal pair is bisimilar (`≅ ⊆ ≈`). With soundness
+(`bisim_le_obsEq`, the reverse) this is exactly `≈ = ≅`. -/
+def NoSurplus (obs : X → O) (step : X → X → Prop) : Prop :=
+  ∀ a b, ObsEq obs step a b → bisim obs step a b
+
+/-- **The exact boundary.** There is no surplus **iff** the outside view `≅` is itself a
+bisimulation. (`→`: under no-surplus `≅ = ≈`, and `≈` is a bisimulation, so successors matched up to
+`≈` are matched up to `≅` by soundness; `←`: coinduction — any bisimulation is `⊆ ≈`.) This single
+fixed-point condition is the whole story: every sufficient condition for collapse must imply it. -/
+theorem noSurplus_iff_obsEq_isBisimulation (obs : X → O) (step : X → X → Prop) :
+    NoSurplus obs step ↔ IsBisimulation obs step (ObsEq obs step) := by
+  constructor
+  · intro hns a b hab
+    obtain ⟨ho, hf, hb⟩ := bisim_dest (hns a b hab)
+    refine ⟨ho, ?_, ?_⟩
+    · intro a' ha'
+      obtain ⟨b', hb', hab'⟩ := hf a' ha'
+      exact ⟨b', hb', bisim_le_obsEq hab'⟩
+    · intro b' hb'2
+      obtain ⟨a', ha', hab'⟩ := hb b' hb'2
+      exact ⟨a', ha', bisim_le_obsEq hab'⟩
+  · intro hbis a b hab
+    exact bisim_of_bisimulation obs step (R := ObsEq obs step) hbis hab
+
+/-- **The master characterization.** A surplus exists **iff** `≅` is *not* a bisimulation — iff
+there is a related pair `a ≅ b` and a move `a → a'` that no move of `b` can match *up to appearance*.
+That is the irreducible requirement: not a number of selves, but a *relating* the branching tears. -/
+theorem surplus_iff_obsEq_not_isBisimulation (obs : X → O) (step : X → X → Prop) :
+    (∃ a b, ObsEq obs step a b ∧ ¬ bisim obs step a b)
+      ↔ ¬ IsBisimulation obs step (ObsEq obs step) := by
+  rw [← noSurplus_iff_obsEq_isBisimulation]
+  constructor
+  · rintro ⟨a, b, hab, hnab⟩ hns; exact hnab (hns a b hab)
+  · intro hns; by_contra hcon; push_neg at hcon; exact hns hcon
+
+/-- Determinism is **one** sufficient condition for collapse — it makes `≅` a bisimulation. -/
+theorem deterministic_noSurplus {obs : X → O} {step : X → X → Prop}
+    (hdet : Deterministic step) : NoSurplus obs step :=
+  fun _ _ h => deterministic_obsEq_imp_bisim h hdet
+
+theorem deterministic_obsEq_isBisimulation {obs : X → O} {step : X → X → Prop}
+    (hdet : Deterministic step) : IsBisimulation obs step (ObsEq obs step) :=
+  (noSurplus_iff_obsEq_isBisimulation obs step).1 (deterministic_noSurplus hdet)
+
+/-- **Requirement 1 — nondeterminism.** A surplus forces branching: if `a ≅ b` yet `¬ a ≈ b`, the
+system cannot be deterministic (contrapositive of the headline). -/
+theorem surplus_imp_not_deterministic {obs : X → O} {step : X → X → Prop} {a b : X}
+    (hab : ObsEq obs step a b) (hnab : ¬ bisim obs step a b) : ¬ Deterministic step :=
+  fun hdet => hnab (deterministic_obsEq_imp_bisim hab hdet)
+
+/-- **Requirement 2 — a relating.** A surplus *is*, by its nature, two **distinct selves bound by a
+shared appearance**: the witnesses are non-bisimilar (genuinely different lived identities, hence
+`a ≠ b`) yet observationally equal (related from outside). The surplus is irreducibly a *relation*
+between two selves, never a property of one. -/
+theorem surplus_imp_relating {obs : X → O} {step : X → X → Prop} {a b : X}
+    (hab : ObsEq obs step a b) (hnab : ¬ bisim obs step a b) :
+    a ≠ b ∧ ObsEq obs step a b ∧ ¬ bisim obs step a b :=
+  ⟨fun h => hnab (h ▸ bisim_refl obs step a), hab, hnab⟩
+
+/-! #### Neither requirement suffices, even together
+
+A concrete **nondeterministic** system with **distinct selves** and yet **no surplus** — so the two
+requirements, even jointly, do not *force* `≈ ⊊ ≅`. What is missing is the *relating*: here every
+self wears its own appearance (the observations separate them), so `≅` is trivial and cannot tear. -/
+
+inductive StN | n0 | na | nb
+  deriving DecidableEq, Repr
+
+open StN
+
+/-- Three states, each with a *distinct* current observation. -/
+def obsN : StN → Obs
+  | n0 => oA | na => oM | nb => oB
+
+def succN : StN → List StN
+  | n0 => [na, nb]
+  | na => [na]
+  | nb => [nb]
+
+/-- A genuinely **nondeterministic** system: `n0` branches to two *non*-bisimilar successors. -/
+def stepN (a b : StN) : Prop := b ∈ succN a
+
+theorem not_deterministic_stepN : ¬ Deterministic stepN := by
+  intro hdet
+  have hab : StN.na = StN.nb :=
+    @hdet StN.n0 StN.na StN.nb (by simp [stepN, succN]) (by simp [stepN, succN])
+  exact absurd hab (by decide)
+
+/-- Distinct selves: `na` and `nb` are not bisimilar (their observations differ). -/
+theorem na_not_bisim_nb : ¬ bisim obsN stepN na nb := by
+  intro h
+  obtain ⟨ho, _, _⟩ := bisim_dest h
+  exact absurd ho (by decide)
+
+/-- **No surplus** on `stepN`: the observations are injective on states, so `≅` forces equality and
+collapses to `≈` trivially. There is no pair of distinct selves sharing an appearance. -/
+theorem stepN_noSurplus : NoSurplus obsN stepN := by
+  intro a b hab
+  have ho : obsN a = obsN b := obsEq_obs hab
+  have heq : a = b := by
+    cases a <;> cases b <;> first | rfl | exact absurd ho (by decide)
+  subst heq
+  exact bisim_refl obsN stepN a
+
+/-- **The two requirements do not suffice.** `stepN` is nondeterministic *and* has distinct selves,
+yet has **no surplus**: branching + many selves does not imply `≈ ⊊ ≅`. The missing ingredient is
+the *relating* — two selves that share an appearance — exactly the master characterization's
+`¬ IsBisimulation ≅`. -/
+theorem nondeterminism_and_selves_insufficient :
+    ¬ Deterministic stepN ∧ ¬ bisim obsN stepN na nb ∧ NoSurplus obsN stepN :=
+  ⟨not_deterministic_stepN, na_not_bisim_nb, stepN_noSurplus⟩
+
 end RelExist.Identity
