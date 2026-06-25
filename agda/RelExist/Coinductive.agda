@@ -120,11 +120,13 @@ step≈ (coinduction B r) = coinduction B (step-resp B r)
 --
 -- Because `Behaviour` is **deterministic** (a single `step`), here `≈` and `≅`
 -- *coincide* — with no branching, the observation stream determines the system.
--- The strict gap `≈ ⊊ ≅` proved in Lean is therefore a **nondeterminism**
--- phenomenon: the first-person surplus is the trace of the branches *not taken*,
--- and a deterministic being has none. (Lean's model is a nondeterministic LTS;
--- this Agda model is deterministic — so it proves the collapse, Lean the gap.
--- Same symbols, same definition of `≅`, complementary theorems.)
+-- This is the **boundary case**: a clockwork, with no branches *not* taken, has
+-- no first-person surplus. The doctrine's headline — the strict gap `≈ ⊊ ≅` — is
+-- a **nondeterminism** phenomenon (the surplus is the trace of the branches not
+-- taken), and it is proved in `RelExist.Inversion` (Agda) and
+-- `Scratch/Identity.lean` (Lean), each over a nondeterministic system. So both
+-- proof assistants now mechanize *both* facts: the gap (`Inversion` / `Identity`)
+-- and the deterministic collapse here.
 
 obsAt : ℕ → Behaviour A → A
 obsAt zero    x = obs x

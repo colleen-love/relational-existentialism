@@ -99,10 +99,16 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 
 Agda writes literal equality `≡` by standard-library convention — it is the doctrine's `=` (and is
 *used*, e.g. inside `≈`'s "heads agree"; A2 discards it only as a notion of *self-identity*, never as
-a tool). The two assistants prove **complementary** facts about `≅`: Lean's model is a
-**nondeterministic** LTS, where `≈ ⊊ ≅` ([`Identity.bisim_ne_obsEq`](../../formal/Scratch/Identity.lean) —
-the first-person surplus); Agda's model is **deterministic** behaviours, where `≈ ⟺ ≅`
-([`Coinductive.≈⇒≅` / `≅⇒≈`](../../agda/RelExist/Coinductive.agda)) — *no* surplus. Together they
-locate the surplus exactly: it is what **branching (nondeterminism)** opens — the trace of the
-branches not taken. A deterministic being's observable trace reveals all of it; a branching one keeps
-a first-person remainder.
+a tool). **Both** assistants now prove **both** facts about `≅`, and the difference between them is
+itself a theorem about *determinism*:
+
+- the **headline** `≈ ⊊ ≅` (the first-person surplus) over a **nondeterministic** system —
+  [`Identity.bisim_ne_obsEq`](../../formal/Scratch/Identity.lean) (Lean) and
+  [`Inversion.surplus`](../../agda/RelExist/Inversion.agda) (Agda);
+- the **boundary** `≈ ⟺ ≅` (no surplus) over a **deterministic** system —
+  [`Coinductive.≈⇒≅` / `≅⇒≈`](../../agda/RelExist/Coinductive.agda) (Agda).
+
+Together they locate the surplus exactly: it is what **branching (nondeterminism)** opens — the trace
+of the branches *not taken*. A deterministic being (no unrealized possibility) has a trace that
+reveals all of it; a branching one — one that *could have done otherwise* — keeps a first-person
+remainder. The inversion's "you exceed how you appear" is, precisely, a fact about **free** selves.
