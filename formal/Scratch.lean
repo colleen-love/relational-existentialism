@@ -155,6 +155,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
                           3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
                           extreme (`idempotent_pow`). ✅ verified.
+* `Scratch.SparsityCapstone` — **Conjecture 3.3 closed** (the cost-graded sparsity dichotomy): the
+                          density of selves `→ 0` **with** a private footprint per self
+                          (`cost_graded_density_tendsto_zero`), but unboundedly many selves within budget
+                          **without** it (full sharing) — `conjecture_3_3`. So the counting sparsity holds
+                          iff a finite budget *and* an exclusive cost per self; the unconditional form is
+                          provably false. With the Agda nowhere-dense topological clause, the conjecture is
+                          closed in its correct, exclusivity-conditioned form. ✅ verified.
 * `Scratch.PerronFrobenius` — **Perron–Frobenius existence** (the lift's last existence gap): a
                           column-stochastic map has **eigenvalue 1** (`exists_invariant_vector`, via the
                           all-ones vector fixed by `Mᵀ` and `det(M-1)=0`), and a *nonnegative* one has a
@@ -234,6 +241,7 @@ import Scratch.Peripheral
 import Scratch.QuantumSeamTrace
 import Scratch.SelfApplication
 import Scratch.SparsitySharing
+import Scratch.SparsityCapstone
 import Scratch.ConwayTrace
 import Scratch.ValuationBoundary
 import Scratch.IntConstruction

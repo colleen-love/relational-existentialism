@@ -214,6 +214,7 @@ physics fact: cloning is nonlinear) on the quantum side. The **literal matrix tr
 | **unification** — both selves realize the ν-modality | `RelExist.Feedback.{CoDirectedSelf, self_iterate, latticeSelf, banachSelf}` | [03-theorems.md](../docs/spec/03-theorems.md) | ✅ proved |
 | Lemma 3.1 over `ℝ` (`\|Stab\| ≤ β/m`) | `RelExist.Real.stab_card_le_div` | [03 Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved |
 | **density → 0** (`\|Stab N\|/N → 0`) | `RelExist.Real.stab_density_tendsto_zero` | [03 §3.1, Lemma 3.1](../docs/spec/03.1-sparsity.md) | ✅ proved (`Filter.Tendsto`) |
+| **Conjecture 3.3 closed** — the cost-graded sparsity dichotomy | `RelExist.SparsityCapstone.{conjecture_3_3, cost_graded_density_tendsto_zero}` | [03.1 §3.4](../docs/spec/03.1-sparsity.md) | ✅ proved — density `→ 0` **with** a private footprint per self, unbounded **without** it (full sharing); counting sparsity holds iff a finite budget *and* an exclusive cost. Topological clause: Agda `selves-nowhereDense` |
 
 `Scratch.We` formalizes **theorem T2**: the lived identity (greatest bisimulation) as `νΘ = OrderHom.gfp Θ`,
 with coinduction, the proof that `≈` is an equivalence, and the shared world `𝔼 := D/≈`.
