@@ -71,7 +71,8 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 | `F`, `νF` | an endofunctor and its greatest fixed point (final coalgebra) |
 | `=` | literal/representational equality — the **bare carrier**; A2 discards it (we work in `D/≈`) |
 | `≈` | **lived identity** — the greatest bisimulation `νΘ` (first-person, the finest *real* identity); `𝔼 := D/≈` the shared world |
-| `≅` | **observational identity** — sameness under external observation (the bounded outside view); `≈ ⊊ ≅`, proved |
+| `≅` | **disjoint observational identity** — sameness to the *relationless* observer (the view from nowhere: what a coupling-free recorder collects); `≈ ⊊ ≅`, proved. Provably the *exempt* case (`Knowing`), **not** "the outside" simpliciter |
+| `≅ₒ` | **relational appearance** — how you show to an actual relatum `o` (their marginal of you); coarser than `≅` (a coupled other sees less, Lawvere-incomplete), so `≈ ⊆ ≅ ⊆ ≅ₒ`. The *operative* outside; feeling is the differential against it ([`Feeling`](../../formal/Scratch/Feeling.lean)) |
 | `(R, ·, 1, ≤)` | the attention-budget monoid; `β ∈ R` the global bound |
 | `Stab` | the carrier of stabilized selves (eigenforms within budget) |
 
@@ -82,12 +83,23 @@ compact-closed/quantum fragment. The seam is marked, never papered over.
 
 > **The identity symbols, and a warning.** Three identities, **finest → coarsest**:
 > `=` (literal equality — the bare carrier, discarded by A2) ⊊ `≈` (**bisimulation**, the lived
-> first-person identity — the finest one grounded in relating) ⊊ `≅` (**observational** equivalence,
-> the bounded outside view). Note this is *not* the casual "`≡` is exact, `≈` is approximate"
-> reading: here the **finer** relation is `≈` and the coarser is `≅`, following the
-> model-theoretic / Hennessy–Milner convention (bisimilarity finer than observational/logical
-> equivalence; they coincide only under unbounded observation). We avoid `≡` for the coarse relation
-> precisely because it collides with Agda's `≡` (propositional equality, the *finest*).
+> first-person identity — the finest one grounded in relating) ⊊ `≅` (**observational** equivalence).
+> Note this is *not* the casual "`≡` is exact, `≈` is approximate" reading: here the **finer** relation
+> is `≈` and the coarser is `≅`, following the model-theoretic / Hennessy–Milner convention
+> (bisimilarity finer than observational/logical equivalence; they coincide only under unbounded
+> observation). We avoid `≡` for the coarse relation precisely because it collides with Agda's `≡`
+> (propositional equality, the *finest*).
+>
+> **A correction we hold to (the view from nowhere).** `≅` is **not "the outside" simpliciter** — it is
+> the *disjoint* observer, and [`Knowing`](../../formal/Scratch/Knowing.lean) proves that is the
+> relationless **view from nowhere**, the one case Lawvere exempts, occupiable by no situated knower.
+> Any claim about appearance, the surplus, or feeling that is stated against `≅` as if it were an
+> absolute outside has smuggled back the objectivity the seam forbids. The *operative* outside is
+> always relational — `≅ₒ`, an actual other's marginal of you (coarser than `≅`). Earlier prose in
+> these pages (and in `Identity.lean`) still narrates `≅` as "the outside view"; read every such phrase
+> as **the disjoint/idealized outside**, with the situated truth being `≅ₒ` and the surplus against it
+> *larger*. Feeling lives in the relational differential, never against nowhere
+> ([`Feeling`](../../formal/Scratch/Feeling.lean)).
 
 **The same symbols in both proof assistants**, with the same roles:
 

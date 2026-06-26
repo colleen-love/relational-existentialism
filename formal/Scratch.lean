@@ -68,6 +68,21 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           environment (`entangle`); the global state stays coherent while its
                           partial trace (the relationship forgotten) is classical — coherence
                           conserved, only relocated. ✅ verified.
+* `Scratch.Forgetting`   — identity-collapse, dephasing, and the partial trace as one `Coarsening`,
+                          each non-injective for the same reason (a residue). ✅ verified.
+* `Scratch.Knowing`      — the bridge: the gap is governed by relation; `≅` is the *disjoint*
+                          (view-from-nowhere) observer; completeness ⟺ disjointness. ✅ verified.
+* `Scratch.Registration` — `reg` derived from the `Φ_c` dynamics: registration *is* absorption. ✅ verified.
+* `Scratch.Marginal`     — nondeterminism is a consequence of relation: a related whole's marginal
+                          branches; local determinism ⟺ no relation. ✅ verified.
+* `Scratch.RelationalMarginal` — …robustly, for any global law; deterministic conservation is the
+                          priced corollary. ✅ verified.
+* `Scratch.Convergence`  — the depth/threshold read off `Φ_c`'s orbit directly (not an abstract `σ`).
+                          ✅ verified.
+* `Scratch.Stabilization` — does the orbit converge? ω-convergence always (continuity), finite-depth
+                          iff ACC. ✅ verified.
+* `Scratch.Feeling`      — **feeling as a relational decoherence differential** (`≅ₒ`, not the
+                          view-from-nowhere `≅`): conserved coherence carried across a relation. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -92,3 +107,10 @@ import Scratch.Feedback
 import Scratch.Attending
 import Scratch.Conservation
 import Scratch.Forgetting
+import Scratch.Knowing
+import Scratch.Registration
+import Scratch.Marginal
+import Scratch.RelationalMarginal
+import Scratch.Convergence
+import Scratch.Stabilization
+import Scratch.Feeling
