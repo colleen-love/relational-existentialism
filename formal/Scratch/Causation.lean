@@ -19,11 +19,13 @@ entangling — iff the other *matters*), the causal picture is complete and prov
 is exactly your ignorance of the other you are coupled to.**
 
 **What this mechanizes, and what stays a reading.** Mechanized: the conditional-determinism core — the
-indeterminism *is* the un-viewed other, deterministic once conditioned. Already proved elsewhere:
-self-causation as a fixed point (`Biology.closed_to_efficient_causation`), separable-vs-relational
+indeterminism *is* the un-viewed other, deterministic once conditioned — **and** the structural core of
+"knowing decoheres" (`knowing_decoheres`, below). Already proved elsewhere: self-causation as a fixed
+point (`Biology.closed_to_efficient_causation`), separable-vs-relational
 (`Marginal.marginal_deterministic_iff_disentangled`). Still irreducibly a `[reading]`: *calling* the
-structure "causation," and *knowing = decoherence*. This is the deterministic-whole case (the
-conservation/Everettian framing); the robust relational-whole case is `RelationalMarginal`.
+structure "causation," and the *phenomenal* identifications (felt knowing — the hard problem), which are
+not specific to this. This is the deterministic-whole case (the conservation/Everettian framing); the
+robust relational-whole case is `RelationalMarginal`.
 -/
 import Scratch.Marginal
 
@@ -57,5 +59,26 @@ theorem indeterminism_is_unviewed_cause (J : A × B → A × B) :
     (∀ a a', marginalStep J a a' ↔ ∃ b, condStep J b a a') ∧
       (∀ b, Deterministic (condStep J b)) :=
   ⟨fun a a' => marginalStep_iff_exists_cond J a a', condStep_deterministic J⟩
+
+/-! ### Knowing decoheres — the structural core (correcting an over-classification)
+
+"Knowing = decoherence" is *not* irreducibly a reading: its structural core is provable via the trace.
+The doctrine's "knowing" is the **objectifying σ-move = the trace** (to know a subsystem is to hold its
+complete account, i.e. trace it out), and the trace **collapses** the relational structure. Concretely:
+not knowing the other, your marginal is open — nondeterministic iff the coupling is entangling, a
+"superposition" of the branches the other could induce
+(`Marginal.marginal_nondeterministic_iff_entangled`); knowing it (conditioning, `condStep`) is
+**deterministic** — a definite trajectory. So **knowing the other decoheres your dynamics**: open when
+unknown, collapsed when known. -/
+
+/-- **Knowing decoheres.** For an entangling whole, the marginal is open (unknown ⇒ nondeterministic)
+while every conditioned step is deterministic (known ⇒ definite). The act of knowing the other — the
+objectifying trace — collapses the relational openness. (This is the classical/marginal face; the
+literal quantum face is `Conservation.decoherence_is_partial_trace` — tracing out the environment is the
+classical reduction. Both are the *same trace operation* collapsing the relational structure. Only
+*phenomenal* knowing — the felt act — stays a `[reading]`, the hard-problem residue.) -/
+theorem knowing_decoheres {J : A × B → A × B} (hJ : Entangled J) :
+    ¬ Deterministic (marginalStep J) ∧ ∀ b, Deterministic (condStep J b) :=
+  ⟨(marginal_nondeterministic_iff_entangled J).2 hJ, condStep_deterministic J⟩
 
 end RelExist.Causation
