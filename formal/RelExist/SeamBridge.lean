@@ -1,20 +1,21 @@
 /-
-# Closing the seam bridge: the Lawvere agent *is* the actual forgetting
+# Closing bridge A of the seam: the Lawvere agent is a *supplied* forgetting, not a posited one
 
 [`Seam.self_cannot_trace_relation`](Seam.lean) proves the obstruction — *a faithful trace over a
 self-inclusive factor would be a complete self-model, which Lawvere refutes* — but it takes the trace
-agent `traceAgent` and the inclusion `restrict` as **abstract hypotheses**. That the abstract
-`restrict`/`traceAgent` *are* the actual forgetting (the marginal / partial trace) was the standing
-`[reading]` ([03.3](../../docs/spec/03.3-decoherence.md): "bridge-across-settings still narrated rather
-than mechanized"). This module closes it: it instantiates the seam theorem at the **concrete
-forgetting**, so the obstruction bites the real operation, not a posited one.
+agent `traceAgent` and the inclusion `restrict` as **abstract hypotheses** (bridge A), and was read as
+biting the quantum partial trace specifically (bridge B). This module closes **A only**: it
+instantiates the seam theorem at a **concrete set-level forgetting**, so the abstract maps are
+supplied, not posited. It does **not** close B (the obstruction on the actual `ptrace`/`dephase`) —
+see "Honest scope" below; that is open research, not a residue.
 
 The construction. By A2 the relationship that constitutes the self carries the self's own view-space:
 the between is `S → V`. The actual forgetting — the marginal that keeps the self and drops the
 relationship — is `forget := Prod.fst : S × (S → V) → S`. Then:
 
-* `forget_not_injective` — the forgetting is **genuinely lossy**: distinct relationships over the same
-  self collapse to the same marginal. The relationship is dropped.
+* `forget_lossy` — the forgetting is **genuinely lossy**: distinct relationships over the same
+  self collapse to the same marginal. The relationship is dropped. (This part is trivial — projection
+  non-injectivity.)
 * `no_faithful_self_trace` — and **no reconstruction can restore it**: a faithful trace agent
   (recovering every relationship from the self) is `self_cannot_trace_relation` at the self-inclusive
   factor `Env = Self`, `restrict = id` — a point-surjective complete self-model, Lawvere-forbidden. The
@@ -24,14 +25,29 @@ relationship — is `forget := Prod.fst : S × (S → V) → S`. Then:
   self-inclusive factor is **forced by the diagonal**, not a feature of a model. You cannot decohere
   yourself relative to what you are made of, and you cannot undo the decoherence either.
 
-What this does and does not settle. The **operative (function-level) identification** — that the
-Lawvere agent is the actual forgetting — is now a theorem (`0` axioms, Lawvere alone). The matrix
-partial trace of [`Conservation`](../Scratch/Conservation.lean) is the *same forgetting* one category
-over (ℝ-matrices instead of functions), and is proved lossy in the same shape there
-(`not_isClassical_entangle` / `isClassical_ptrace_entangle`); equating ℝ-matrices with Type-functions
-is not a single theorem because they are different categories — that residue is inherent, not a gap in
-rigor. The abstractness the `[reading]` flagged is removed: `restrict`/`traceAgent` are no longer
-posited.
+**Honest scope — this closes one of two bridges, and is not new mathematics.** The `[open]` held two
+claims, and only the first is settled here.
+
+* **Bridge A (closed).** The seam theorem posited its trace agent and inclusion abstractly; A is that
+  these are the *actual* forgetting. Closed: `forget := Prod.fst`, `restrict = id`, `Env = Self`. But
+  note what A *is* — `forget_lossy` is projection non-injectivity (trivial), and
+  `no_faithful_self_trace` is `self_cannot_trace_relation` **specialized** to `Env = Self`, i.e.
+  Lawvere on the function space `S → V`. So A is "the seam on a **set-level** forgetting": the existing
+  obstruction at a concrete instance, **not new mathematics**. It removes a real referee objection (the
+  load-bearing map was assumed), nothing more.
+* **Bridge B (open — the candidate-novel result).** That the obstruction bites the **quantum** partial
+  trace `ptrace`/`dephase` of [`Conservation`](../Scratch/Conservation.lean) /
+  [`MatrixModel`](../Scratch/MatrixModel.lean) — the one producing `isClassical_ptrace_entangle` — is
+  **not** closed here, and is **not** an "inherent residue." It is remaining research. It is *not*
+  closeable in `matTracedSMC` directly: finite-dimensional, so by Cantor there is no reflexive object
+  (no point-surjective `A → [A,B]`), and Lawvere's diagonal cannot be set up there non-vacuously.
+  Closing B needs one of: **(1)** a traced/compact category that *has* reflexive objects —
+  domain-theoretic / GoI models where `D ≅ [D→D]` — where Lawvere genuinely runs non-cartesianly; or
+  **(2)** grounding the quantum-side obstruction in **no-broadcasting** (`Compact.no_cloning`,
+  `Decoherence.defectSq_plus_pos`), the compact-closed *face of the same firewall* (`Compact.collapse`)
+  whose cartesian face is Lawvere — which does bite the real `ptrace`/`dephase`, but is a distinct
+  obstruction unified with the seam via the firewall, not Lawvere inside the quantum fragment. Either
+  is a genuine theorem; neither is done.
 -/
 import RelExist.Seam
 
