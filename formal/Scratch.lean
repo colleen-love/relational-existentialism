@@ -152,6 +152,14 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`dephaseKnowing`), re-deriving `no_dephase_recovery` through the interface.
                           The `[proved]` core of the spec's one new theorem; "the arrow *is* time"
                           stays a `[reading]`. ✅ verified.
+* `Scratch.Peripheral`   — the **spectral picture of knowing** (conjecture-lift Decisions 1–2): `E =
+                          dephase` is an **idempotent**, so its eigenvalues are `⊆ {0,1}`
+                          (`dephase_eigenvalue`) — the **veto-check**: *no rotating peripheral spectrum*
+                          (`dephase_no_rotating_peripheral`), so for `E` peripheral = fixed. Eigenvalue-1
+                          space = classical/known, eigenvalue-0 = feeling (`dephase_eigenspace_{one,zero}`),
+                          every relation splits known ⊕ felt (`dephase_add_copyDefect`), and the standard
+                          trace is the invariant weight (`dephase_trace_invariant`). The finite-dim
+                          Perron–Frobenius core *for `E`*. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -191,6 +199,7 @@ import Scratch.DomainFixpoint
 import Scratch.Causation
 import Scratch.SparsityPosits
 import Scratch.Orientation
+import Scratch.Peripheral
 import Scratch.QuantumSeamTrace
 import Scratch.SelfApplication
 import Scratch.SparsitySharing
