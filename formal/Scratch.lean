@@ -142,6 +142,19 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           `relIntComp_assoc`), all `aesop`. The `Int` bridge's composition + snake axioms,
                           discharged in the canonical model; the abstract non-strict `Int(C)` stays the
                           named remainder. ✅ verified.
+* `Scratch.ReflexiveCompact` — **a non-cartesian reflexive object**: in compact-closed `Rel` the
+                          internal hom is `[D,D] = D* ⊗ D = D × D`, so a reflexive object is a `D` with
+                          `D ≅ D × D`. **No finite object works** (`finite_not_reflexive`, `|D| = |D|²` ⇒
+                          `|D| ≤ 1` — the compact-side Cantor obstruction), but **`ℕ` does**
+                          (`natReflexive`, via the pairing bijection): `ℕ ≅ ℕ ⊗ ℕ = [ℕ,ℕ]`, the
+                          linear/compact counterpart of `Pω`, in a category with **no copying**
+                          (`rel_no_cloning`). The bridge's non-cartesian reflexive object. ✅ verified.
+* `Scratch.SpectralDecay` — **the general spectral form of the conjecture**: write the dynamics
+                          `T = P + N` (peripheral projection `P`, subdominant `N` with `‖N‖<1`,
+                          orthogonal). `spectral_pow`: `Tⁿ = P + Nⁿ`; **`spectral_decay`: `Tⁿ → P`** — the
+                          subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
+                          3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
+                          extreme (`idempotent_pow`). ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -218,3 +231,5 @@ import Scratch.ConwayTrace
 import Scratch.ValuationBoundary
 import Scratch.IntConstruction
 import Scratch.RelCompact
+import Scratch.ReflexiveCompact
+import Scratch.SpectralDecay
