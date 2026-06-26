@@ -83,6 +83,10 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           iff ACC. ✅ verified.
 * `Scratch.Feeling`      — **feeling as a relational decoherence differential** (`≅ₒ`, not the
                           view-from-nowhere `≅`): conserved coherence carried across a relation. ✅ verified.
+* `Scratch.RelationalAppearance` — relativizing the outside: soundness/surplus *survive and strengthen*
+                          against `≅ₒ`, but "the surplus is exactly nondeterminism" does **not** — a
+                          deterministic system has a relational surplus (feeling from the seam, not
+                          choice). ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -114,3 +118,4 @@ import Scratch.RelationalMarginal
 import Scratch.Convergence
 import Scratch.Stabilization
 import Scratch.Feeling
+import Scratch.RelationalAppearance
