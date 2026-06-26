@@ -99,6 +99,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.GraphModel`   — **Pω**, the Plotkin–Scott graph model: a concrete non-trivial reflexive
                           object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`),
                           with the fixpoint (GoI's `Y`) and the `K` combinator. ✅ verified.
+* `Scratch.SelfApplication` — the **internal `Y` combinator via self-application** in `Pω`: the diagonal
+                          `fun x => app x x` is Scott-continuous (`selfApp_continuous`), so
+                          `Y f := app (W f) (W f)` is an element and `app f (Y f) = Y f`
+                          (`Ycomb_fixed`) — Lawvere's diagonal realized as the trace, concretely. Honest
+                          caveat: `Pω` is the *cartesian* λ-model (the non-cartesian/linear reflexive
+                          object is separate, firewall-constrained). ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -148,3 +154,4 @@ import Scratch.DomainTraced
 import Scratch.Causation
 import Scratch.SparsityPosits
 import Scratch.QuantumSeamTrace
+import Scratch.SelfApplication
