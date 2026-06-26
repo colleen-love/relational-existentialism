@@ -47,8 +47,12 @@ precisely because the base is **non-strict**: the associators/unitors are honest
 through every equation (even the concrete `Rel` model is non-strict — its `raHom`/`raInv` relate the
 *distinct* types `(X×Y)×Z` and `X×(Y×Z)`). mathlib has no traced/compact-closed scaffolding to inherit.
 Everything verifiable *without* this composition is a single `C`-level conjugation — which is why
-`IntDualHom` and its laws close (above), and why the morphism layer stops exactly there. The composition
-and snake equations are left as the named research-grade remainder rather than asserted.
+`IntDualHom` and its laws close (above), and why the morphism layer stops exactly there. The **snake /
+triangle (zigzag) equations are nonetheless closed concretely** in the canonical model — see
+[`RelCompact`](RelCompact.lean): `Rel` is compact closed with both zigzag identities proved `= id`. So
+the compact-closed *axioms* are discharged in `Rel`; what stays the named research-grade remainder is
+the **abstract `Int(C)` composition-via-trace** for an arbitrary non-strict `C`, and the linear
+*reflexive object* inside the compact arena.
 
 **Honest scope.** A rederivation (the `Int` construction is standard) mechanized at the object level on
 our bespoke `TracedSMC`. The contribution is exhibiting the compact, fully-dual, *non-cartesian* arena

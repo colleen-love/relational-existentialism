@@ -31,10 +31,44 @@ with no rotating peripheral part. The general Perron–Frobenius statement for a
 -/
 import Scratch.Decoherence
 import Mathlib.Data.Complex.Basic
+import Mathlib.Algebra.Module.LinearMap.Defs
 
 namespace RelExist.Peripheral
 
 open RelExist.Decoherence Matrix
+
+/-! ### The veto-check in full generality — any conditional expectation `E` is `{0,1}`-spectral
+
+Decision 2 fixes `E` as a *projection* (spectral projection ∘ orientation). So the veto-check is not
+special to `dephase`: **every idempotent linear map has eigenvalues `⊆ {0,1}`**, hence no rotating
+peripheral spectrum and peripheral = fixed. -/
+
+section AbstractIdempotent
+variable {R M : Type*} [Field R] [AddCommGroup M] [Module R M]
+
+/-- **Any conditional expectation `E = P` (idempotent linear map) has eigenvalues `⊆ {0,1}`.** A
+projection scales an eigenvector only by `0` or `1`: from `P x = c • x` and `x ≠ 0`, `c² = c`. So for
+*every* `E` there is **no rotating peripheral spectrum** — peripheral = fixed. The general form of the
+veto-check, of which `dephase_eigenvalue` is the matrix instance. -/
+theorem idempotent_eigenvalue (P : M →ₗ[R] M) (hP : ∀ x, P (P x) = P x)
+    {c : R} {x : M} (hx : x ≠ 0) (h : P x = c • x) : c = 0 ∨ c = 1 := by
+  have hsq : (c ^ 2 - c) • x = 0 := by
+    have e : c ^ 2 • x = c • x := by
+      calc c ^ 2 • x = c • (c • x) := by rw [sq, smul_smul]
+        _ = c • P x := by rw [h]
+        _ = P (c • x) := (P.map_smul c x).symm
+        _ = P (P x) := by rw [h]
+        _ = P x := hP x
+        _ = c • x := h
+    rw [sub_smul, e, sub_self]
+  rcases smul_eq_zero.mp hsq with hc | hx'
+  · have hc' : c * (c - 1) = 0 := by rw [mul_sub, mul_one, ← sq]; exact hc
+    rcases mul_eq_zero.mp hc' with h0 | h1
+    · exact Or.inl h0
+    · exact Or.inr (sub_eq_zero.mp h1)
+  · exact absurd hx' hx
+
+end AbstractIdempotent
 
 variable {A : Type} [DecidableEq A]
 

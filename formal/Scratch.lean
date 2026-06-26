@@ -133,6 +133,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           **involutive** `(fᵈ)ᵈ = f` over a coherent traced SMC (0 axioms, by `γ∘γ = id`).
                           Composition-via-trace and the snake equations (and the dual's full
                           functoriality) are the flagged remainder. ✅ verified.
+* `Scratch.RelCompact`   — **`Rel` is compact closed, snake equations and all**: the canonical model
+                          closed concretely. Self-dual (`Aᵈ = A`), with the diagonal cup/cap and **both
+                          zigzag / triangle identities** proved `= id` (`rel_snake_right`,
+                          `rel_snake_left`, via `aesop` as for `Rel`'s trace axioms), plus the minimal
+                          `Compact.CompactClosed` name bijection (`relCompactClosed`). The compact-closed
+                          **snake axioms** the `Int` bridge wanted, discharged in the canonical model;
+                          the abstract non-strict `Int(C)` composition stays the named remainder. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -158,8 +165,10 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`dephase_no_rotating_peripheral`), so for `E` peripheral = fixed. Eigenvalue-1
                           space = classical/known, eigenvalue-0 = feeling (`dephase_eigenspace_{one,zero}`),
                           every relation splits known ⊕ felt (`dephase_add_copyDefect`), and the standard
-                          trace is the invariant weight (`dephase_trace_invariant`). The finite-dim
-                          Perron–Frobenius core *for `E`*. ✅ verified.
+                          trace is the invariant weight (`dephase_trace_invariant`); the peripheral set
+                          is **sparse** (`peripheral_sparse`, `1/card A` density). Generalized:
+                          **any** conditional expectation (idempotent linear map) is `{0,1}`-spectral
+                          (`idempotent_eigenvalue`) — the veto-check for every `E`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -206,3 +215,4 @@ import Scratch.SparsitySharing
 import Scratch.ConwayTrace
 import Scratch.ValuationBoundary
 import Scratch.IntConstruction
+import Scratch.RelCompact
