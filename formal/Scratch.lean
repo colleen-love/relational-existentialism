@@ -198,6 +198,24 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           is **sparse** (`peripheral_sparse`, `1/card A` density). Generalized:
                           **any** conditional expectation (idempotent linear map) is `{0,1}`-spectral
                           (`idempotent_eigenvalue`) — the veto-check for every `E`. ✅ verified.
+* `Scratch.PeripheralAlgebra` — the **peripheral standard form**, dimension-independent: an abstract
+                          `PeripheralStandardForm` over *any* ring `𝒜` (finite matrices, `B(H)`, any
+                          C\*-algebra) — a projection `E` onto a commutative, product-closed, unital image
+                          — has its **fixed-point (peripheral) subalgebra commutative** (`fix_comm`, **0
+                          axioms**) and a unital subring (`fix_mul_mem`/`fix_add_mem`/`fix_one_mem`). The
+                          standard form the conjecture-lift's `E` lands in, needing *no finiteness*. The
+                          canonical `E = dephase` is a witness (`dephaseStandardForm`): the diagonal/known
+                          subalgebra commutes (`dephaseFix_comm`) and is `transpose`-closed
+                          (`dephaseFix_transpose_mem`, a `*`-subalgebra). The general analytic placement of
+                          an arbitrary primitive CP map into this form stays `[open]`. ✅ verified.
+* `Scratch.IntCompose`   — the **GoI composition built abstractly**: `IntCompose`, the
+                          Geometry-of-Interaction `g∘f := Tr^B(σ₁;(f⊗g);σ₂)` with the associator/braid
+                          plumbing `σ₁,σ₂` explicit and **type-checked** on **any** `TracedSMC` — the
+                          composition `IntConstruction` had flagged as *absent* abstractly is now a genuine
+                          definition (the type-correctness of the wiring on a non-strict base is itself the
+                          coherence content). Its category / compact-closed **laws** (the JSV/AHS theorem)
+                          stay the named `[open]` chase, discharged concretely in `Rel` (`relIntComp`,
+                          `RelCompact`). ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -238,6 +256,8 @@ import Scratch.Causation
 import Scratch.SparsityPosits
 import Scratch.Orientation
 import Scratch.Peripheral
+import Scratch.PeripheralAlgebra
+import Scratch.IntCompose
 import Scratch.QuantumSeamTrace
 import Scratch.SelfApplication
 import Scratch.SparsitySharing

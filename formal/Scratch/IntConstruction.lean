@@ -28,14 +28,16 @@ laws, and the identity — **and the dual's action on morphisms**: the contravar
 (`IntDualHom_id`) and be **involutive** (`IntDualHom_involutive`, `(fᵈ)ᵈ = f`) over a *coherent* traced
 SMC — both **0 axioms**, the two swap-braids cancelling by the symmetry `γ∘γ = id`. This is the *arena*
 plus the dual functor on arrows: every traced SMC embeds into its compact closed `Int(C)`, the
-non-cartesian setting a reflexive object would inhabit. **Not** built here (the research-grade
-remainder): **composition via the trace** — the GoI move `(g ∘ f) := Tr^{B}(wiring of f, g)` that feeds
-`f`'s output wire into `g` and back — and the **compact-closed axioms** (the snake/triangle equations),
-whose verification from the seven JSV axioms is a long structural-iso chase. (Full *functoriality* of the
-dual, `(g∘f)ᵈ = fᵈ∘gᵈ`, likewise waits on that composition.) Composition's *type* is
-`IntHom A B → IntHom B C → IntHom A C`, realized by a trace over the shared object `B⁺ ⊗ B⁻`; getting
-that wiring provably right (not merely type-correct) is the work left. By `ReflexiveModel`'s duality this
-whole construction is the **construction** side — it would host `Y` as the trace, orthogonal to the seam.
+non-cartesian setting a reflexive object would inhabit. The **composition via the trace** — the GoI move
+`(g ∘ f) := Tr^{B}(wiring of f, g)` that feeds `f`'s output wire into `g` and back — is now **built
+abstractly** in [`IntCompose`](IntCompose.lean) (`IntCompose`, with the associator/braid plumbing `σ₁, σ₂`
+explicit and type-checked on any non-strict `TracedSMC` — `IntHom A B → IntHom B D → IntHom A D` via a
+trace over the shared `B⁺ ⊗ B⁻`, the type-correctness of the composite *being* the coherence content).
+What stays the research-grade remainder is the **compact-closed axioms** of that abstract composition (the
+category laws and the snake/triangle equations), whose verification from the seven JSV axioms is a long
+structural-iso chase — the JSV/AHS theorem. (Full *functoriality* of the dual, `(g∘f)ᵈ = fᵈ∘gᵈ`, likewise
+waits on those abstract laws.) By `ReflexiveModel`'s duality this whole construction is the
+**construction** side — it would host `Y` as the trace, orthogonal to the seam.
 
 **Why composition + snake are research-grade (the grounded status).** The composition `g ∘ f` permutes
 `A⁺⊗C⁻⊗B⁺⊗B⁻` into `f`'s and `g`'s inputs, applies `f ⊗ g`, re-permutes the outputs, and traces over
@@ -51,9 +53,11 @@ Everything verifiable *without* this composition is a single `C`-level conjugati
 snake / triangle (zigzag) equations are nonetheless closed concretely** in the canonical model — see
 [`RelCompact`](RelCompact.lean): `Rel` is compact closed with both zigzag identities proved `= id`, and
 the GoI composition `relIntComp` makes `Int(Rel)` a category (identity + associativity). So the
-composition and compact-closed *axioms* are discharged in `Rel`; what stays the named research-grade
-remainder is the **abstract `Int(C)` composition-via-trace** for an arbitrary non-strict `C`, and the
-linear *reflexive object* inside the compact arena.
+composition and compact-closed *axioms* are discharged in `Rel`, and the **abstract composition-via-trace is
+now built** ([`IntCompose`](IntCompose.lean), on any non-strict `C`); what stays the named research-grade
+remainder is the **abstract law-verification** — proving that abstract `IntCompose` satisfies the
+compact-closed axioms for an arbitrary non-strict `C` — and the linear *reflexive object* inside the
+compact arena.
 
 **Honest scope.** A rederivation (the `Int` construction is standard) mechanized at the object level on
 our bespoke `TracedSMC`. The contribution is exhibiting the compact, fully-dual, *non-cartesian* arena
