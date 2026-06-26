@@ -16,18 +16,28 @@ and the heart of the model is the **retraction** `app (Graph f) = f` for **conti
 (`app_graph_of_continuous`): every continuous self-map of `Pω` *is* `app a` for a concrete `a` — so the
 continuous functions are a retract of `Pω`. That is a reflexive object (for continuous maps).
 
-**Honest scope.** This is a known construction (a rederivation), and a substantial *mechanization*. It is
-a reflexive object for **continuous** maps only — *not* all set-functions (Cantor bars that; cf.
-`ReflexiveModel`). By the duality of `ReflexiveModel`, it realizes the **construction** side (it will
-host the `Y`-combinator / least fixed points of continuous maps), **not** the seam — the seam is the
-non-existence of a reflexive observation into a settling-refusing target, already a theorem. This file
-is turn 1 of a multi-turn build: the carrier, application, the graph/section, and the retraction.
+**What is built (turns 1–2).** The **reflexive object itself**: `app`/`Graph` exhibit the continuous
+self-maps as a *retract* of `Pω` (`app_graph_of_continuous`, `app_continuous`,
+`app_pointSurjective_onContinuous`), and every continuous endomap has a fixed point
+(`continuous_hasFixpoint`) — GoI's `Y` on a concrete infinite domain. This is the non-trivial reflexive
+object `ReflexiveModel` flagged as the `[open]` part of route 1, now constructed.
+
+**Honest scope.** A known construction (Plotkin–Scott, a rederivation) and a substantial *mechanization*.
+It is a reflexive object for **continuous** maps only — *not* all set-functions (Cantor bars that; cf.
+`ReflexiveModel`). By the duality of `ReflexiveModel`, it realizes the **construction** side (it hosts
+`Y` / least fixed points of continuous maps — and indeed *every* continuous endomap *settles*, so there
+is no obstruction here), **not** the seam — the seam is the non-existence of a reflexive observation
+into a *settling-refusing* target, which is already a theorem and which Pω, being a construction, does
+not touch. What is **not** built: full combinatory completeness (`S`, `K`, interpreting arbitrary
+λ-terms) and an explicit embedding of `Pω` as an object of a traced SMC — the reflexive object is done;
+the full λ-algebra / categorical packaging is further work.
 -/
 import Mathlib.Data.Nat.Pairing
 import Mathlib.Logic.Encodable.Basic
 import Mathlib.Logic.Equiv.List
 import Mathlib.Data.Finset.Sort
 import Mathlib.Data.Set.Lattice
+import Mathlib.Order.FixedPoints
 
 namespace RelExist.GraphModel
 
@@ -89,5 +99,28 @@ theorem app_continuous (a : Pω) : IsContinuous (app a) := by
     exact ⟨e, hex, e, subset_rfl, hcode⟩
   · rintro ⟨e, hex, e', he'e, hcode⟩
     exact ⟨e', he'e.trans hex, hcode⟩
+
+/-! ### Turn 2: the construction side — point-surjectivity onto continuous maps, and the fixpoint -/
+
+/-- Continuity implies monotonicity (more input can only add output). -/
+theorem IsContinuous.monotone {f : Pω → Pω} (hf : IsContinuous f) : Monotone f := by
+  intro x y hxy n hn
+  obtain ⟨e, hex, hfe⟩ := (hf x n).mp hn
+  exact (hf y n).mpr ⟨e, hex.trans hxy, hfe⟩
+
+/-- **`app` is point-surjective onto the continuous maps.** Every continuous `f` is `app (Graph f)` —
+the precise sense in which `Pω` is a reflexive object: `[Pω →cont Pω]` is a retract, with section
+`Graph` and retraction `app`. -/
+theorem app_pointSurjective_onContinuous {f : Pω → Pω} (hf : IsContinuous f) :
+    ∃ a : Pω, ∀ x, app a x = f x :=
+  ⟨Graph f, app_graph_of_continuous hf⟩
+
+/-- **The construction side, realized — GoI's `Y` on a real domain.** Every continuous self-map of
+`Pω` has a fixed point (Knaster–Tarski on the complete lattice `Set ℕ`, since continuous ⇒ monotone).
+This is the reflexive object *doing its work*: it hosts fixed points of every continuous endomap — the
+`Y`-combinator made concrete. (By `ReflexiveModel`'s duality, this is the *construction*, not the seam:
+every continuous endomap *settles*, so there is no obstruction here, exactly as expected.) -/
+theorem continuous_hasFixpoint {f : Pω → Pω} (hf : IsContinuous f) : ∃ x : Pω, f x = x :=
+  ⟨OrderHom.lfp ⟨f, hf.monotone⟩, OrderHom.map_lfp ⟨f, hf.monotone⟩⟩
 
 end RelExist.GraphModel

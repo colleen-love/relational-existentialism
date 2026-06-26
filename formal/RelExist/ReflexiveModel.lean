@@ -34,11 +34,14 @@ reflexive object.
 necessarily infinite (`|D| = |D→D|` fails finitely for `|D| ≥ 2`): Scott's `D∞`, the graph model `Pω`,
 a domain `D ≅ [D→D]` of *continuous* maps — would make the **trace concrete**: a real infinite feedback
 domain on which GoI's `Y` literally runs (the *construction* side). It would **not** change the
-obstruction, which is settled. Building `D∞`/`Pω` is a substantial domain-theoretic formalization
-(inverse limits / Scott continuity / the retraction) that mathlib does not support and that is **not done
-here** — and, by the duality, it would realize the Y-combinator in a real model, not the seam. So the
-honest end of route 1: the *obstruction* is proved (it is the non-existence); the *construction* in a
-genuine traced domain is real, large, separate work that does not bear on the seam.
+obstruction, which is settled. **This is now built** — `Pω`, the Plotkin–Scott graph model, is
+constructed concretely in [`Scratch/GraphModel.lean`](../Scratch/GraphModel.lean): the continuous
+self-maps are a retract of `Set ℕ` (`app_graph_of_continuous`) and every continuous endomap has a fixed
+point (`continuous_hasFixpoint`) — a non-trivial reflexive object hosting GoI's `Y`. As predicted by the
+duality, it realizes the **construction** (every continuous endomap *settles*; no obstruction), **not**
+the seam. So the honest end of route 1: the *obstruction* is proved (it is the non-existence); the
+*construction* is now a concrete reflexive object (`GraphModel`), confirming the construction side is
+realizable and — exactly as the duality says — orthogonal to the seam.
 -/
 import RelExist.ReflexiveSeam
 
