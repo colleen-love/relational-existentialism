@@ -232,6 +232,7 @@ non-idempotent attention dynamics. `p = 0` is the identity (the unobserved web, 
 self-adjoint `id` and `dephase`), so its spectrum is real — no rotating peripheral part (spec §3c). -/
 def partialDephase (p : ℝ) (M : Matrix A A ℝ) : Matrix A A ℝ := (1 - p) • M + p • dephase M
 
+omit [Fintype A] in
 /-- **One step scales the felt (off-diagonal) mass by `(1−p)`.** The diagonal is fixed; every
 off-diagonal coherence is multiplied by `(1−p)`. This is the pointwise engine of the whole flow:
 attention shrinks coherence by a constant factor per closure of the loop. -/
@@ -244,6 +245,7 @@ lemma copyDefect_partialDephase (p : ℝ) (M : Matrix A A ℝ) (i j : A) :
     show ((1 - p) • M + p • dephase M) i j = (1 - p) * M i j
     rw [add_apply, smul_apply, smul_apply, hd, smul_zero, add_zero, smul_eq_mul]
 
+omit [Fintype A] in
 /-- **The felt mass after `n` steps**: `copyDefect (partialDephase p ^[n] M) = (1−p)^n · copyDefect M`,
 entrywise. The off-diagonal coherence is a geometric sequence in the return-depth — the microscopic
 form of the flow. -/
@@ -328,6 +330,7 @@ to `dephase M` — exactly `Orientation`'s knowing map `E`. So `Orientation.lean
 limit of the non-idempotent flow, and its single strict drop is the total of the flow's incremental
 decreases. The arrow is the boundary case of the line. -/
 
+omit [Fintype A] in
 /-- The diagonal is **fixed by every step**, hence by every iterate: `partialDephase p ^[n] M i i =
 M i i`. Knowing preserves the classical part exactly; only the felt off-diagonal moves. -/
 lemma partialDephase_apply_diag (p : ℝ) (M : Matrix A A ℝ) (i : A) :
@@ -336,12 +339,14 @@ lemma partialDephase_apply_diag (p : ℝ) (M : Matrix A A ℝ) (i : A) :
   simp only [partialDephase, add_apply, smul_apply, smul_eq_mul, hd]
   ring
 
+omit [Fintype A] in
 lemma partialDephase_iterate_diag (p : ℝ) (M : Matrix A A ℝ) (n : ℕ) (i : A) :
     (partialDephase p)^[n] M i i = M i i := by
   induction n with
   | zero => simp
   | succ n ih => rw [Function.iterate_succ_apply', partialDephase_apply_diag, ih]
 
+omit [Fintype A] in
 /-- Off the diagonal the iterate scales by `(1−p)^n`: `partialDephase p ^[n] M i j = (1−p)^n · M i j`
 for `i ≠ j`. The felt coherence shrinks geometrically while the known diagonal stands still. -/
 lemma partialDephase_iterate_offdiag (p : ℝ) (M : Matrix A A ℝ) (n : ℕ) {i j : A} (h : i ≠ j) :
@@ -349,6 +354,7 @@ lemma partialDephase_iterate_offdiag (p : ℝ) (M : Matrix A A ℝ) (n : ℕ) {i
   have hc := copyDefect_iterate p M n i j
   rwa [copyDefect_apply, if_neg h, copyDefect_apply, if_neg h] at hc
 
+omit [Fintype A] in
 /-- **Orientation is the `n → ∞` limit of the flow.** Each entry of the orbit converges to the
 corresponding entry of `dephase M` — that is, to `Orientation`'s knowing map `E`
 ([`Orientation.dephaseKnowing`](Orientation.lean) has `E = dephase`). The idempotent arrow is recovered

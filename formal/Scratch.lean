@@ -231,8 +231,7 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           boundary: the orbit converges entrywise to `dephase` = the knowing `E`
                           (`orbit_tendsto_knowing_entry`), and the single orientation drop is the
                           flow's total (`dephaseFlow_total_drop`). The `[proved]` graded structure;
-                          "the flow *is* time" stays a (weaker, clock-shaped) `[reading]`.
-                          ⏳ written, pending mathlib verification (egress-blocked this session).
+                          "the flow *is* time" stays a (weaker, clock-shaped) `[reading]`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity

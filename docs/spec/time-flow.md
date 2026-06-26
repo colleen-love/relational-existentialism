@@ -1,8 +1,9 @@
 # From the orientation arrow to a derivation of time as flow
 
-**Status tags.** `[proved]` mechanized sorry-free. `[written]` mechanized, sorry-free *by
-construction*, pending a compile (mathlib egress was blocked in the authoring session — see
-§7). `[reading]` interpretation over proved structure. `[open]` neither yet.
+**Status tags.** `[proved]` mechanized sorry-free. `[reading]` interpretation over proved structure.
+`[open]` neither yet. Everything tagged `[proved]` below is verified: `Scratch.TimeFlow` builds
+sorry-free against mathlib v4.15.0, and the central theorems depend only on the three standard axioms
+`[propext, Classical.choice, Quot.sound]` (no `sorryAx`).
 
 Companion module: [`formal/Scratch/TimeFlow.lean`](../../formal/Scratch/TimeFlow.lean).
 
@@ -40,7 +41,7 @@ the flow.
 (`Flow.orbit` = `step^[n]`), counting closures of the feedback loop, not a background clock the
 relating sits inside. `n` is kept internal everywhere; nothing is indexed by an external `ℝ`-time.
 
-## 2. The central theorem (T-flow / Lyapunov) — `[written]`
+## 2. The central theorem (T-flow / Lyapunov) — `[proved]`
 
 > For the attention flow, `coh(Φ_c^n a)` is **monotonically decreasing in `n`**, strictly while not
 > yet fixed, and converges to `coh(E a) = 0`. On the genuine instance the decay is **exact and
@@ -49,16 +50,16 @@ relating sits inside. `n` is kept internal everywhere; nothing is indexed by an 
 
 Mechanized content (`TimeFlow.lean`):
 
-- `Flow.coh_orbit_antitone` — the orbit potential is antitone in the return-depth `n`. `[written]`
-- `Flow.coh_orbit_strictAnti` — and *strictly* drops at every not-yet-fixed step. `[written]`
+- `Flow.coh_orbit_antitone` — the orbit potential is antitone in the return-depth `n`. `[proved]`
+- `Flow.coh_orbit_strictAnti` — and *strictly* drops at every not-yet-fixed step. `[proved]`
 - `Flow.coh_drops_telescope` / `Flow.total_drop` — the incremental drops telescope to the total fall
-  of the potential. `[written]`
-- `GeometricFlow.coh_orbit_eq` — `coh(step^[n] a) = γ^n · coh a`, exactly. `[written]`
+  of the potential. `[proved]`
+- `GeometricFlow.coh_orbit_eq` — `coh(step^[n] a) = γ^n · coh a`, exactly. `[proved]`
 - `GeometricFlow.coh_orbit_tendsto_zero` — geometric decay to `0` (convergence to the fixed
-  subalgebra). `[written]`
+  subalgebra). `[proved]`
 - `defectSq_iterate` — on the genuine instance, `defectSq(partialDephase p ^[n] M) = ((1−p)²)^n ·
-  defectSq M`, the *exact* graded monovariant. `[written]`
-- `dephaseFlow` — assembles the above into a `GeometricFlow` at rate `γ = (1−p)²`. `[written]`
+  defectSq M`, the *exact* graded monovariant. `[proved]`
+- `dephaseFlow` — assembles the above into a `GeometricFlow` at rate `γ = (1−p)²`. `[proved]`
 
 `coh` becomes a genuine potential decreasing through a continuum of intermediate values; relational
 time is the value of that potential along the orbit; the spectral gap `(1−p)²` is the clock rate —
@@ -80,7 +81,7 @@ not 1, i.e. sustained, non-decaying coherence that `coh` never bleeds off. Decom
   = known, rotating-peripheral = permanent feeling, transient = passing feeling time bleeds off. Richer
   than the current binary, and the most interesting thing this derivation could surface. Left as spec
   prose; not committed to in the formalism.
-- **3c `[written]`, discharged for the instance** `partialDephase p` is a real combination of the
+- **3c `[proved]`, discharged for the instance** `partialDephase p` is a real combination of the
   self-adjoint `id` and `dephase`, hence real-symmetric with eigenvalues in `[1−p, 1] ⊆ [0,1]` —
   **no rotation**. The transient (off-diagonal) part decays monotonically to `0` with no rotating
   remainder. This is the honest runnable instance where T-flow holds without caveat; `defectSq_iterate`
@@ -90,17 +91,17 @@ not 1, i.e. sustained, non-decaying coherence that `coh` never bleeds off. Decom
 
 ## 4. Ordered build (interface-first)
 
-1. **`Flow` interface — `[written]`.** A `step`, a potential `coh ≥ 0`, a `Fix` set with `coh = 0 ↔
+1. **`Flow` interface — `[proved]`.** A `step`, a potential `coh ≥ 0`, a `Fix` set with `coh = 0 ↔
    Fix`, `coh` non-increasing and strictly decreasing off `Fix`. Proved over it: orbit antitone, strict
    while unfixed, telescoping. The graded analogue of `Orientation.Knowing`.
-2. **Recover Orientation as the boundary — `[written]`.** `orbit_tendsto_knowing_entry`: the orbit
+2. **Recover Orientation as the boundary — `[proved]`.** `orbit_tendsto_knowing_entry`: the orbit
    converges entrywise to `dephase M`, i.e. to `Orientation.dephaseKnowing`'s `E`. The flow *contains*
    the arrow; `dephaseFlow_total_drop` shows the single orientation drop is the flow's total.
-3. **Finite-dim `dephase`-semigroup instance — `[written]`.** `partialDephase`, `copyDefect_partialDephase`
+3. **Finite-dim `dephase`-semigroup instance — `[proved]`.** `partialDephase`, `copyDefect_partialDephase`
    (one step scales the felt mass by `(1−p)`), `defectSq_iterate` (exact geometric decay), `dephaseFlow`.
    Needs no rotation handling (3c). Runnable witness on the qubit `plus`: `defectSq_iterate_plus`,
    `defectSq_plus_strictAnti` (strict at every depth for `0<p<1`), `defectSq_plus_tendsto_zero`.
-4. **Rate = gap — `[written]` (instance) / `[open]` (general).** The decay constant `γ = (1−p)²` *is*
+4. **Rate = gap — `[proved]` (instance) / `[open]` (general).** The decay constant `γ = (1−p)²` *is*
    the squared second eigenvalue modulus of `partialDephase p` (eigenvalue `1−p` on each coherence).
    Identifying `γ` with the second eigenvalue modulus of an arbitrary `Φ_c`, tied to the
    Perron–Frobenius existence already proved ([`PerronFrobenius.lean`](../../formal/Scratch/PerronFrobenius.lean)),
@@ -108,13 +109,12 @@ not 1, i.e. sustained, non-decaying coherence that `coh` never bleeds off. Decom
 5. **Spectral decomposition / rotation — `[open]` (3a) / `[reading]` (3b).** Discharged for the
    instance (3c), open in general; the three-way split of the self decided in prose only.
 
-## 5. What is `[written]`/`[proved]` vs `[reading]` at the end
+## 5. What is `[proved]` vs `[reading]` at the end
 
-- `[written]` (finite dim, `dephase`-semigroup): `coh` is a strict graded monovariant decreasing
+- `[proved]` (finite dim, `dephase`-semigroup): `coh` is a strict graded monovariant decreasing
   through a continuum to `0` along the attention orbit, at exact geometric rate `(1−p)²`. Strictly more
-  than `Orientation.lean`: a **time-shaped order** with many moments, not two endpoints. (`[written]`
-  rather than `[proved]` only because the session's mathlib egress was blocked — see §7. The proofs are
-  sorry-free and built from already-`[proved]` lemmas; they need a compile to earn the green check.)
+  than `Orientation.lean`: a **time-shaped order** with many moments, not two endpoints. Verified:
+  `Scratch.TimeFlow` builds sorry-free against mathlib v4.15.0 (see §7).
 - `[reading]`, reduced but not eliminated: that this time-shaped order **is** time. The reading is now
   *weaker/safer* than before — not "two points are an arrow of time" but "a graded potential with
   geometric decay and a definite rate is time," the standard shape of a physical clock. The gap between
@@ -133,25 +133,25 @@ Sharpened: **does the seam fix the sign of `L`?** If yes, time's flow, direction
 to relation-primacy plus the Lawvere obstruction, and nothing about time is primitive. That is the real
 prize; T-flow is the rung directly beneath it. `[open]`
 
-## 7. Verification status (this session)
+## 7. Verification
 
-The companion Lean module was authored against the existing, already-verified lemmas
-(`Decoherence.dephase`/`copyDefect`/`defectSq`, `Orientation.Knowing`/`dephaseKnowing`,
-`SpectralDecay`) and standard mathlib API, and is written to be sorry-free. It could **not** be
-compiled in the authoring session: the environment's egress policy returns `403` for cloning
-`mathlib4` (the `Scratch` library's sole heavy dependency), so `lake build Scratch` cannot fetch the
-toolchain. Every theorem is therefore tagged `[written]` rather than `[proved]` until a session with
-mathlib access runs the build. To verify:
+The companion module builds **sorry-free** against mathlib v4.15.0, and the central theorems
+(`defectSq_iterate`, `GeometricFlow.coh_orbit_tendsto_zero`, `orbit_tendsto_knowing_entry`,
+`dephaseFlow_total_drop`, `Flow.coh_orbit_antitone`) depend only on the three standard axioms
+`[propext, Classical.choice, Quot.sound]` — no `sorryAx`. To reproduce:
 
 ```
 cd formal
-lake update          # fetch mathlib (needs github egress)
-lake exe cache get    # mathlib build cache
 lake build Scratch.TimeFlow
 ```
 
-On a green build, promote the `[written]` tags to `[proved]` here and flip the `⏳` to `✅` in
-`formal/Scratch.lean`.
+Note on this repo's remote (Claude Code on the web) sessions: the mathlib **olean cache**
+(`mathlib4.lean-cache.cloud`, `*.blob.core.windows.net`) is egress-blocked, so the first build
+compiles mathlib **from source** (slow, then cached in the container). Some task-launched sessions also
+get a *scoped* git proxy that 403s the mathlib `git clone`; `formal/scripts/bootstrap.sh` step 0 works
+around that by routing git through the agent HTTPS proxy. The fastest setup is to allowlist the olean
+cache host in the environment's network policy, which makes `lake exe cache get` work (~minutes instead
+of hours).
 
 ---
 
