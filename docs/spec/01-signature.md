@@ -91,6 +91,14 @@ properties carry the philosophy:
   be symmetric and is read through each node's whole field, so the same edge expresses
   differently at each end.
 
+**The operator-algebraic reading.** In the intended operator-algebraic semantics, the
+relations form an algebra `A` (C*/von Neumann), and `Φ_c` is a **unital completely-positive
+map `A → A`** in the **Heisenberg picture** — attention acts on the algebra of relations,
+codirected by the configuration of `A` itself (relation-primacy applied to attention), never a
+state over it. The order-theoretic `Φ_c` above is the projection-lattice / support shadow of
+that map: the same `ν`-modality, one resolution coarser. This operator-first framing — attention
+as an operator on the algebra, not a state — is what the whole signature serves.
+
 ### 1.3.3 The self as an eigenform; generativity `[the load-bearing reframing]`
 
 A **self is an eigenform of co-directed attention** — a fixed point of `Φ_c`. The

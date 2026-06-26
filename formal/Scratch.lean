@@ -114,6 +114,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           Hasegawa): the parameterized lfp `pfp` with fixpoint/least/parameter-naturality,
                           the **rolling/dinaturality** rule `lfp (g∘h) = g (lfp (h∘g))` (the trace-slide
                           shadow; not in mathlib), and the Bekić **diagonal** rule. ✅ verified.
+* `Scratch.DomainFixpoint` — the **Conway operator packaged**: the category of complete lattices &
+                          monotone maps as a genuine multi-object `TracedSMC` (`domainFixpointTracedSMC`)
+                          with `⊗ = ×` and the **fixpoint trace** `Tr(f)(a) = π₁(f(a, lfp(u ↦ π₂(f(a,u)))))`.
+                          All seven JSV axioms discharged from the `ConwayTrace` identities — sliding via
+                          a heterogeneous `rolling'`, vanishing-II via **product Bekić** (`lfp_prod`),
+                          superposing via `tr_superpose`. The Hasegawa "only-if" direction in full; the
+                          `ConwayTrace` packaging the spec flagged open. ✅ verified.
 * `Scratch.ValuationBoundary` — the **valuation boundary:** a *densely-ordered* standing lattice admits
                           **no** ℕ-valuation (`no_strictMono_to_nat_of_dense`), so a non-unit numeric
                           per-return cost is *provably* unavailable without discretization — closing the
@@ -121,8 +128,40 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.IntConstruction` — the **GoI / `Int` construction** on any traced SMC: the non-cartesian,
                           fully-dual (compact) arena where a linear reflexive object lives — objects
                           `(A⁺,A⁻)`, two-way homs, tensor/unit, and the **dual** (wire-swap) proved an
-                          involution, monoidal, unit-fixing. Object-level core; composition-via-trace and
-                          the snake equations are the flagged remainder. ✅ verified.
+                          involution, monoidal, unit-fixing — **plus the dual's action on morphisms**
+                          (`IntDualHom`, the contravariant transpose), proved identity-preserving and
+                          **involutive** `(fᵈ)ᵈ = f` over a coherent traced SMC (0 axioms, by `γ∘γ = id`).
+                          Composition-via-trace and the snake equations (and the dual's full
+                          functoriality) are the flagged remainder. ✅ verified.
+* `Scratch.RelCompact`   — **`Rel` compact closed + `Int(Rel)` composition**: the canonical model closed
+                          concretely. Self-dual, diagonal cup/cap, **both zigzag / triangle identities**
+                          proved `= id` (`rel_snake_{right,left}`), the `Compact.CompactClosed` name
+                          bijection (`relCompactClosed`), **and the GoI composition-via-trace**
+                          (`relIntComp`, `∃` over the shared loop) making `Int(Rel)` a **category** —
+                          identity + **associativity** laws (`relIntComp_id_{left,right}`,
+                          `relIntComp_assoc`), all `aesop`. The `Int` bridge's composition + snake axioms,
+                          discharged in the canonical model; the abstract non-strict `Int(C)` stays the
+                          named remainder. ✅ verified.
+* `Scratch.ReflexiveCompact` — **a non-cartesian reflexive object**: in compact-closed `Rel` the
+                          internal hom is `[D,D] = D* ⊗ D = D × D`, so a reflexive object is a `D` with
+                          `D ≅ D × D`. **No finite object works** (`finite_not_reflexive`, `|D| = |D|²` ⇒
+                          `|D| ≤ 1` — the compact-side Cantor obstruction), but **`ℕ` does**
+                          (`natReflexive`, via the pairing bijection): `ℕ ≅ ℕ ⊗ ℕ = [ℕ,ℕ]`, the
+                          linear/compact counterpart of `Pω`, in a category with **no copying**
+                          (`rel_no_cloning`). The bridge's non-cartesian reflexive object. ✅ verified.
+* `Scratch.SpectralDecay` — **the general spectral form of the conjecture**: write the dynamics
+                          `T = P + N` (peripheral projection `P`, subdominant `N` with `‖N‖<1`,
+                          orthogonal). `spectral_pow`: `Tⁿ = P + Nⁿ`; **`spectral_decay`: `Tⁿ → P`** — the
+                          subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
+                          3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
+                          extreme (`idempotent_pow`). ✅ verified.
+* `Scratch.PerronFrobenius` — **Perron–Frobenius existence** (the lift's last existence gap): a
+                          column-stochastic map has **eigenvalue 1** (`exists_invariant_vector`, via the
+                          all-ones vector fixed by `Mᵀ` and `det(M-1)=0`), and a *nonnegative* one has a
+                          positive **invariant state** (`exists_invariant_state` — the full
+                          Perron–Frobenius, by the `w = |v|` trick: `Mw ≥ |Mv| = w` with equal total ⇒
+                          `Mw = w`, no Brouwer/Cesàro). The relational **weight** of Decision 1, existence
+                          discharged in general finite dim. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -134,6 +173,24 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           load-bearing (positive floor ⟺ sparse vs dense); and the valuation `μ`
                           **constructed** as the orbit's return index (the genuine returns are strict
                           standing increases), discharging it for unit cost. ✅ verified.
+* `Scratch.Orientation`  — **orientation from the seam**: knowing `E`
+                          generates a *directed* (`knows_antisymm`), strictly *temporal*
+                          (`arrow_strictAnti` — feeling falls along the arrow), and *irreversible*
+                          (`no_recovery`) structure oriented knower→known, all three from one
+                          idempotent-lossy operator; instantiated on the genuine `dephase`/`defectSq`
+                          (`dephaseKnowing`), re-deriving `no_dephase_recovery` through the interface.
+                          The `[proved]` core of the spec's one new theorem; "the arrow *is* time"
+                          stays a `[reading]`. ✅ verified.
+* `Scratch.Peripheral`   — the **spectral picture of knowing** (conjecture-lift Decisions 1–2): `E =
+                          dephase` is an **idempotent**, so its eigenvalues are `⊆ {0,1}`
+                          (`dephase_eigenvalue`) — the **veto-check**: *no rotating peripheral spectrum*
+                          (`dephase_no_rotating_peripheral`), so for `E` peripheral = fixed. Eigenvalue-1
+                          space = classical/known, eigenvalue-0 = feeling (`dephase_eigenspace_{one,zero}`),
+                          every relation splits known ⊕ felt (`dephase_add_copyDefect`), and the standard
+                          trace is the invariant weight (`dephase_trace_invariant`); the peripheral set
+                          is **sparse** (`peripheral_sparse`, `1/card A` density). Generalized:
+                          **any** conditional expectation (idempotent linear map) is `{0,1}`-spectral
+                          (`idempotent_eigenvalue`) — the veto-check for every `E`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -169,11 +226,18 @@ import Scratch.RelationalAppearance
 import Scratch.QuantumSeam
 import Scratch.GraphModel
 import Scratch.DomainTraced
+import Scratch.DomainFixpoint
 import Scratch.Causation
 import Scratch.SparsityPosits
+import Scratch.Orientation
+import Scratch.Peripheral
 import Scratch.QuantumSeamTrace
 import Scratch.SelfApplication
 import Scratch.SparsitySharing
 import Scratch.ConwayTrace
 import Scratch.ValuationBoundary
 import Scratch.IntConstruction
+import Scratch.RelCompact
+import Scratch.ReflexiveCompact
+import Scratch.SpectralDecay
+import Scratch.PerronFrobenius

@@ -4,8 +4,10 @@
 `GraphModel` placed `Pω` in "a traced category" via the `[reading]` that the category of domains is
 traced (Hasegawa/Hyland: a cartesian trace *is* a Conway fixed-point operator). Mechanizing *that* — the
 **fixpoint trace** on the multi-object category of cpos, with the full JSV axioms — is the
-Conway/Bekić identities, a genuinely hard multi-turn undertaking, and (by `ReflexiveModel`'s duality)
-the *construction* side, orthogonal to the theory. It is **not** done here.
+Conway/Bekić identities, and (by `ReflexiveModel`'s duality) the *construction* side, orthogonal to the
+theory. It is **now done** in [`DomainFixpoint`](DomainFixpoint.lean) (`domainFixpointTracedSMC`): the
+genuine multi-object fixpoint-trace `TracedSMC` on complete lattices, all seven JSV axioms discharged.
+This file keeps the smaller, complementary instance below.
 
 What *is* done here is the bounded honest instance: the **simplest domains — complete lattices — form a
 traced SMC**, via their join-monoid `(⊔, ⊥)`. `domainTracedSMC` instantiates `Traced.scalarTracedSMC`
