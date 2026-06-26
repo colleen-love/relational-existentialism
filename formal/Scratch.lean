@@ -243,8 +243,11 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           inverse is an anti-knowing** — a genuine knowing `0<p<1` is invertible, but its
                           unique inverse is `partialDephase q` with `q<0` in the expanding regime
                           (`knowing_inverse_is_antiphysical`): time-reversal exists as linear algebra
-                          but only as non-physical coherence-amplification. So *sign = contractivity =
-                          physicality of the seam* is `[proved]`; whether the seam **forces the
+                          but only as non-physical coherence-amplification. And the flow is **injective
+                          off the limit** (`partialDephase_injective`, `p ≠ 1`) but **collapses exactly
+                          at `p = 1 = dephase`** (`partialDephase_one_not_injective`): genuine
+                          irreversibility lives only at the idempotent knowing. So *sign = contractivity
+                          = physicality of the seam* is `[proved]`; whether the seam **forces the
                           subalgebra** (the last self-reference step) stays the `[open]` §6 prize.
                           ✅ verified.
 -/

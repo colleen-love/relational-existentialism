@@ -148,6 +148,12 @@ Sharpened: **does the seam fix the sign of `L`?**
   conditional expectation, no partial trace can do. The contractive seam admits the decreasing arrow
   alone; its sign is forced by the non-existence of a *contractive* inverse (the flow-graded
   strengthening of `Orientation.no_recovery`).
+- **Irreversibility lives at the limit `[proved]`.** The interior `0 < p < 1` is *secretly* invertible
+  (only anti-physically); genuine collapse — no inverse of any kind — appears at exactly one point. The
+  flow is injective for every `p ≠ 1` (`partialDephase_injective`) and non-injective precisely at
+  `p = 1 = dephase`, the idempotent knowing (`partialDephase_one_not_injective`,
+  `Orientation.no_recovery`). The arrow stops being injective exactly when it stops being a flow and
+  becomes the projection.
 
 So **sign = contractivity = physicality of the seam** is now `[proved]`: the dissipative direction is
 not an independent choice but is locked to the dynamics being a contraction (a partial trace /

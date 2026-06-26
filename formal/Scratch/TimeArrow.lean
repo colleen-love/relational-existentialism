@@ -189,4 +189,44 @@ theorem knowing_inverse_amplifies_plus (p : ℝ) (hp0 : 0 < p) (hp1 : p < 1) :
   obtain ⟨q, hqneg, hqexp, _⟩ := knowing_inverse_is_antiphysical (A := Fin 2) p hp0 hp1
   exact ⟨q, hqneg, defectSq_plus_expands q hqexp⟩
 
+/-! ## §D Where reversibility breaks completely — the idempotent limit `p = 1`
+
+§C showed the interior `0 < p < 1` is *secretly* invertible (only its inverse is anti-physical). The
+limit `p = 1` is different in kind: there `partialDephase 1 = dephase`, the idempotent knowing `E`,
+which is **not injective at all** — it has no inverse, physical or otherwise (`Orientation.no_recovery`).
+So genuine irreversibility (a collapse of distinct states) lives at exactly one point: the knowing
+limit. The flow is injective everywhere it is still a *flow*, and stops being injective precisely when
+it becomes the *projection*. -/
+
+omit [Fintype A] in
+/-- `partialDephase 1 = dephase`: the idempotent knowing is the `p = 1` endpoint of the flow. -/
+@[simp] lemma partialDephase_one (M : Matrix A A ℝ) : partialDephase 1 M = dephase M := by
+  simp [partialDephase]
+
+omit [Fintype A] in
+/-- **The flow is injective off the limit.** For every `p ≠ 1`, `partialDephase p` is injective: it has
+a (linear) inverse `partialDephase q` with `(1−q)(1−p) = 1`, so distinct states stay distinct. The
+arrow does not collapse anything until it reaches the projection. -/
+theorem partialDephase_injective {p : ℝ} (hp : p ≠ 1) :
+    Function.Injective (partialDephase p : Matrix A A ℝ → Matrix A A ℝ) := by
+  have h1p : (1 - p) ≠ 0 := sub_ne_zero.mpr (Ne.symm hp)
+  have hpq : (1 - (1 - 1 / (1 - p))) * (1 - p) = 1 := by
+    rw [show 1 - (1 - 1 / (1 - p)) = 1 / (1 - p) by ring, div_mul_cancel₀ _ h1p]
+  intro M N h
+  calc M = partialDephase (1 - 1 / (1 - p)) (partialDephase p M) :=
+            (partialDephase_leftInverse p _ hpq M).symm
+    _ = partialDephase (1 - 1 / (1 - p)) (partialDephase p N) := by rw [h]
+    _ = N := partialDephase_leftInverse p _ hpq N
+
+/-- **At the limit it collapses.** `partialDephase 1 = dephase` is **not** injective: it sends both the
+superposition `plus` and its decohered shadow `dephase plus` to the same classical state. Genuine
+irreversibility — the loss of a distinction, with no inverse of any kind — appears exactly at the
+idempotent knowing, the boundary the flow approaches but only reaches in the limit. -/
+theorem partialDephase_one_not_injective :
+    ¬ Function.Injective (partialDephase 1 : Matrix (Fin 2) (Fin 2) ℝ → Matrix (Fin 2) (Fin 2) ℝ) := by
+  intro hinj
+  have hcollapse : partialDephase 1 plus = partialDephase 1 (dephase plus) := by
+    rw [partialDephase_one, partialDephase_one, dephase_idem]
+  exact dephase_plus_ne (hinj hcollapse).symm
+
 end RelExist.TimeArrow
