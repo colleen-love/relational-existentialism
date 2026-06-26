@@ -22,6 +22,7 @@ import RelExist.Relating
 import RelExist.Seam
 import RelExist.SeamBridge
 import RelExist.ReflexiveSeam
+import RelExist.ReflexiveModel
 import RelExist.Firewall
 import RelExist.Traced
 import RelExist.Free
