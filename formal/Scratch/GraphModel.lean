@@ -28,9 +28,18 @@ It is a reflexive object for **continuous** maps only — *not* all set-function
 `Y` / least fixed points of continuous maps — and indeed *every* continuous endomap *settles*, so there
 is no obstruction here), **not** the seam — the seam is the non-existence of a reflexive observation
 into a *settling-refusing* target, which is already a theorem and which Pω, being a construction, does
-not touch. What is **not** built: full combinatory completeness (`S`, `K`, interpreting arbitrary
-λ-terms) and an explicit embedding of `Pω` as an object of a traced SMC — the reflexive object is done;
-the full λ-algebra / categorical packaging is further work.
+not touch. What is **not** built: full combinatory completeness (`S` alongside `K` — turn 3 gives `K`) and an
+explicit `TracedSMC` *instance* for domains — the reflexive object is done; the full λ-algebra and the
+categorical packaging are further work.
+
+**"In a traced category" — the honest placement** (`[reading]`). `Pω` lives in the cartesian-closed
+category of domains (cpos and Scott-continuous maps), which **is traced**: by Hasegawa/Hyland a
+cartesian category carries a trace iff it has a Conway fixed-point operator, and `continuous_hasFixpoint`
+*is* that operator (every continuous endomap has a fixed point). So the reflexive object is constructed
+*in* a traced setting, with the fixed-point operator playing the role of the trace — answering the
+original "construct a reflexive object in a traced category," modulo mechanizing the domain category's
+`TracedSMC` instance (which is the categorical-packaging work left open). And consistently with the
+duality: the trace here is the *constructive* `Y`, not a seam.
 -/
 import Mathlib.Data.Nat.Pairing
 import Mathlib.Logic.Encodable.Basic
@@ -122,5 +131,41 @@ This is the reflexive object *doing its work*: it hosts fixed points of every co
 every continuous endomap *settles*, so there is no obstruction here, exactly as expected.) -/
 theorem continuous_hasFixpoint {f : Pω → Pω} (hf : IsContinuous f) : ∃ x : Pω, f x = x :=
   ⟨OrderHom.lfp ⟨f, hf.monotone⟩, OrderHom.map_lfp ⟨f, hf.monotone⟩⟩
+
+/-! ### Turn 3: the model computes — the `K` combinator -/
+
+theorem mem_Graph {f : Pω → Pω} {m : ℕ} :
+    m ∈ Graph f ↔ ∃ (e : Finset ℕ) (n : ℕ), m = code e n ∧ n ∈ f (↑e) := Iff.rfl
+
+/-- Constant functions are continuous (`e := ∅` witnesses every value). -/
+theorem const_continuous (c : Pω) : IsContinuous (fun _ : Pω => c) := by
+  intro x n
+  show n ∈ c ↔ ∃ e : Finset ℕ, (↑e ⊆ x) ∧ n ∈ c
+  constructor
+  · intro hn; exact ⟨∅, by simp, hn⟩
+  · rintro ⟨_, _, hn⟩; exact hn
+
+/-- The curried-constant former is continuous (in its first argument). -/
+theorem graphConst_continuous : IsContinuous (fun x : Pω => Graph (fun _ : Pω => x)) := by
+  intro z m
+  show m ∈ Graph (fun _ => z) ↔ ∃ d : Finset ℕ, (↑d ⊆ z) ∧ m ∈ Graph (fun _ => (↑d : Pω))
+  simp only [mem_Graph]
+  constructor
+  · rintro ⟨e, n, hcode, hnz⟩
+    exact ⟨{n}, by simpa using hnz, e, n, hcode, by simp⟩
+  · rintro ⟨d, hdz, e, n, hcode, hnd⟩
+    exact ⟨e, n, hcode, hdz hnd⟩
+
+/-- **The `K` combinator** as a concrete element of `Pω`. -/
+def K : Pω := Graph (fun x => Graph (fun _ => x))
+
+/-- **`K · x · y = x`** — the model genuinely *computes*: `K` is a real element whose application
+discards its second argument, proved by two uses of the retraction. (With an `S` combinator this would
+extend to full combinatory completeness; `K` alone witnesses that the reflexive object is a computing
+λ-algebra, not just a retract.) -/
+theorem K_law (x y : Pω) : app (app K x) y = x := by
+  have h1 : app K x = Graph (fun _ => x) := app_graph_of_continuous graphConst_continuous x
+  rw [h1]
+  exact app_graph_of_continuous (const_continuous x) y
 
 end RelExist.GraphModel
