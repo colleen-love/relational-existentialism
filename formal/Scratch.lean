@@ -216,6 +216,23 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           coherence content). Its category / compact-closed **laws** (the JSV/AHS theorem)
                           stay the named `[open]` chase, discharged concretely in `Rel` (`relIntComp`,
                           `RelCompact`). ✅ verified.
+* `Scratch.TimeFlow`     — **time as flow**: graduating `Orientation`'s two-point arrow into a graded
+                          monovariant. A `Flow` interface (non-idempotent `step`, potential `coh`,
+                          strict-while-unfixed) with the orbit potential proved **antitone**
+                          (`coh_orbit_antitone`) and strictly dropping (`coh_orbit_strictAnti`); a
+                          `GeometricFlow` refinement giving the exact geometric law
+                          `coh (step^[n] a) = γ^n · coh a` (`coh_orbit_eq`) and decay to `0`
+                          (`coh_orbit_tendsto_zero`). The genuine instance is the **partial-dephasing
+                          semigroup** `partialDephase p = (1−p)·id + p·dephase` (non-idempotent for
+                          `0<p<1`): `defectSq (partialDephase p ^[n] M) = ((1−p)²)^n · defectSq M`
+                          exactly (`defectSq_iterate`), so `dephaseFlow` is a `GeometricFlow` at rate
+                          `γ = (1−p)²` — a strict graded monovariant through a continuum to `0` at the
+                          spectral-gap rate, no rotating part. `Orientation` is recovered as the
+                          boundary: the orbit converges entrywise to `dephase` = the knowing `E`
+                          (`orbit_tendsto_knowing_entry`), and the single orientation drop is the
+                          flow's total (`dephaseFlow_total_drop`). The `[proved]` graded structure;
+                          "the flow *is* time" stays a (weaker, clock-shaped) `[reading]`.
+                          ⏳ written, pending mathlib verification (egress-blocked this session).
 -/
 import Scratch.We
 import Scratch.Identity
@@ -269,3 +286,4 @@ import Scratch.RelCompact
 import Scratch.ReflexiveCompact
 import Scratch.SpectralDecay
 import Scratch.PerronFrobenius
+import Scratch.TimeFlow
