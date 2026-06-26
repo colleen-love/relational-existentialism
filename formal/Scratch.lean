@@ -87,6 +87,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           against `≅ₒ`, but "the surplus is exactly nondeterminism" does **not** — a
                           deterministic system has a relational surplus (feeling from the seam, not
                           choice). ✅ verified.
+* `Scratch.QuantumSeam`  — bridge B route 2: the seam on the **actual** `dephase` (lossy, irreversible)
+                          via **no-broadcasting** — the compact face of the firewall whose cartesian
+                          face is Lawvere. (B-as-Lawvere/route 1 remains open.) ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -119,3 +122,4 @@ import Scratch.Convergence
 import Scratch.Stabilization
 import Scratch.Feeling
 import Scratch.RelationalAppearance
+import Scratch.QuantumSeam
