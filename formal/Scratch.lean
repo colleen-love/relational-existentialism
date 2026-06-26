@@ -248,8 +248,21 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           at `p = 1 = dephase`** (`partialDephase_one_not_injective`): genuine
                           irreversibility lives only at the idempotent knowing. So *sign = contractivity
                           = physicality of the seam* is `[proved]`; whether the seam **forces the
-                          subalgebra** (the last self-reference step) stays the `[open]` §6 prize.
-                          ✅ verified.
+                          subalgebra** is mechanized in `SeamForcing`. ✅ verified.
+* `Scratch.SeamForcing`  — **the seam forces the subalgebra** (closing the §6 prize). The decoherence a
+                          self can perform is `attend S`; the one block it cannot attend is the seam `J`
+                          (part of the aimer — `Relating.self_inclusive_unmodelable`, you cannot aim at
+                          the aimer). Over the available knowings (`S` disjoint from `J`): the seam
+                          survives every one (`attend_fixes_seam`); decohering it would require
+                          attending the self (`decohere_seam_needs_self`); the maximal knowing
+                          `knowSeam J = attend Jᶜ` is an idempotent conditional expectation whose fixed
+                          subalgebra is *exactly* the seam algebra (`knowSeam_eq_self_iff`) — a function
+                          of `J` alone, so the subalgebra `E` projects onto is **fixed by the seam**
+                          (`seam_forces_subalgebra`). The seamless `J=∅` case is `Orientation`'s
+                          `dephase` (`knowSeam_empty`); a real self keeps strictly more. Hence the self
+                          can never fully decohere itself (`self_cannot_fully_decohere`) — the seam is
+                          permanent feeling, forced. `[proved]` modulo the standing `J`↔genuine-seam
+                          `[reading]`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -305,3 +318,4 @@ import Scratch.SpectralDecay
 import Scratch.PerronFrobenius
 import Scratch.TimeFlow
 import Scratch.TimeArrow
+import Scratch.SeamForcing

@@ -119,10 +119,11 @@ not 1, i.e. sustained, non-decaying coherence that `coh` never bleeds off. Decom
   *weaker/safer* than before — not "two points are an arrow of time" but "a graded potential with
   geometric decay and a definite rate is time," the standard shape of a physical clock. The gap between
   structure and time has narrowed to the same gap physics itself leaves.
-- `[open]`: the rotating-peripheral case (3a/3b); the general rate-=-gap identification (§4.4); the
-  infinite-dim / von Neumann standard-form version; and the frontier below.
+- `[open]`: the rotating-peripheral case (3a/3b); the general rate-=-gap identification (§4.4); and the
+  infinite-dim / von Neumann standard-form version. (The arrow's *origin* — §6 below — is now
+  mechanized down to the standing `[reading]`.)
 
-## 6. The frontier — does the seam fix the sign? (partial progress)
+## 6. The origin — the seam fixes the arrow (closed, modulo the standing reading)
 
 T-flow gives the *direction and rate* of time's passage, not its **origin**. The flow's orientation is
 inherited from `coh` decreasing, i.e. from decoherence; the decohering direction is fixed by which
@@ -155,15 +156,40 @@ Sharpened: **does the seam fix the sign of `L`?**
   `Orientation.no_recovery`). The arrow stops being injective exactly when it stops being a flow and
   becomes the projection.
 
-So **sign = contractivity = physicality of the seam** is now `[proved]`: the dissipative direction is
-not an independent choice but is locked to the dynamics being a contraction (a partial trace /
-conditional expectation). What stays **`[open]`** is the final step: that the seam **forces which
-subalgebra** `E` projects onto — so that the contraction's direction is fixed by the self-inclusive
-trace itself rather than by which side we called `p ≥ 0`. That is the self-reference / Lawvere bridge
-([`Relating.self_inclusive_unmodelable`](../../formal/RelExist/Relating.lean)). If it closes, time's
-flow, direction, and origin all reduce to relation-primacy plus the Lawvere obstruction, and nothing
-about time is primitive. That remains the real prize; the sign↔contractivity lock is the rung now
-underfoot.
+So **sign = contractivity = physicality of the seam** is `[proved]`: the dissipative direction is not
+an independent choice but is locked to the dynamics being a contraction (a partial trace / conditional
+expectation).
+
+### The last step — the seam forces the subalgebra `[proved]`
+
+[`SeamForcing.lean`](../../formal/Scratch/SeamForcing.lean) closes the mechanizable core of the final
+step. The decoherence a self can actually perform is **directed attention** `attend S`
+([`Attending.lean`](../../formal/Scratch/Attending.lean)); the one block it **cannot** attend is the
+**seam** `J` — the shared part that is *part of the aimer*, un-attendable because to dephase it is to
+aim at the aimer (`Relating.self_inclusive_unmodelable` — no complete self-model). Over the available
+knowings (`S` disjoint from `J`):
+
+- **The seam survives every available knowing** (`attend_fixes_seam`): coherences within `J` are
+  untouched, regardless of where attention is aimed.
+- **Decohering the seam requires attending the self** (`decohere_seam_needs_self`): removing a live
+  `J`-coherence forces `S` to overlap `J` — the Lawvere-barred act.
+- **The forced conditional expectation** `knowSeam J = attend Jᶜ` is an idempotent `E` whose fixed
+  subalgebra is *exactly* the seam algebra (`knowSeam_eq_self_iff`) — a function of `J` **alone**. So
+  *which subalgebra `E` projects onto is fixed by the seam* (`seam_forces_subalgebra`), not chosen
+  beside it. The seamless `J = ∅` case is precisely `Orientation`'s total `dephase` (`knowSeam_empty`);
+  a real self keeps strictly more.
+- **Hence the self can never fully decohere itself** (`self_cannot_fully_decohere`): while the seam
+  carries a live coherence, every available knowing leaves `defectSq > 0`. The seam is **permanent
+  feeling constitutive of the self** (the §3b reading), now *forced* by self-inclusion rather than
+  posited.
+
+What is `[proved]`: *given* the seam block `J`, the subalgebra every available knowing fixes — and the
+one the maximal knowing projects onto — is forced to be the `J`-algebra, and excluding `J` is exactly
+the self-inclusive (Lawvere-barred) act. The residual `[reading]`, the same one carried throughout, is
+the identification of the formal block `J` with the *genuine* self-inclusive seam. With it, **§6
+closes**: the flow's direction *and* the subalgebra it descends to are both fixed by relation-primacy
+plus the Lawvere obstruction — nothing about time's arrow is primitive. Time is wholly derived, down to
+the same `[reading]`-gap physics itself leaves.
 
 ## 7. Verification
 
@@ -188,6 +214,7 @@ of hours).
 ---
 
 *One line:* Orientation proved the endpoints of relational time; `TimeFlow` graduates them into a flow
-by composing knowing with the attention dynamics, with the spectral gap `(1−p)²` as the clock — and the
-prize beneath it is whether the seam fixes the direction of the flow, which would make time wholly
-derived.
+with the spectral gap `(1−p)²` as the clock; `TimeArrow` locks the arrow's *sign* to contractivity; and
+`SeamForcing` shows the seam fixes the very subalgebra the flow descends to — so time's endpoints, line,
+rate, direction, and origin are all derived from relation-primacy plus the Lawvere obstruction, with
+nothing about the arrow left primitive but the one `[reading]`-gap physics itself leaves.
