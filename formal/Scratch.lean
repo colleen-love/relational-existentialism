@@ -90,6 +90,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.QuantumSeam`  — bridge B route 2: the seam on the **actual** `dephase` (lossy, irreversible)
                           via **no-broadcasting** — the compact face of the firewall whose cartesian
                           face is Lawvere. (B-as-Lawvere/route 1 remains open.) ✅ verified.
+* `Scratch.GraphModel`   — **Pω**, the Plotkin–Scott graph model: a concrete non-trivial reflexive
+                          object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`).
+                          Turn 1 of the D∞/Pω build (carrier, application, retraction). ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -123,3 +126,4 @@ import Scratch.Stabilization
 import Scratch.Feeling
 import Scratch.RelationalAppearance
 import Scratch.QuantumSeam
+import Scratch.GraphModel
