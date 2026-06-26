@@ -134,7 +134,7 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           load-bearing (positive floor ⟺ sparse vs dense); and the valuation `μ`
                           **constructed** as the orbit's return index (the genuine returns are strict
                           standing increases), discharging it for unit cost. ✅ verified.
-* `Scratch.Orientation`  — **orientation from the seam** (relation-algebra model §4.3): knowing `E`
+* `Scratch.Orientation`  — **orientation from the seam**: knowing `E`
                           generates a *directed* (`knows_antisymm`), strictly *temporal*
                           (`arrow_strictAnti` — feeling falls along the arrow), and *irreversible*
                           (`no_recovery`) structure oriented knower→known, all three from one

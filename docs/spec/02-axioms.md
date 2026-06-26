@@ -100,15 +100,14 @@ $$
 Finiteness here is *constitutive* (the bounded capacity `α`), not an external budget,
 so the selection is built into the structure rather than bolted on.
 
-**The Heisenberg commitment (relation-algebra model §1.2/§2.3).** A3 fixes the *level* at
-which the self lives. Attention `Φ_c` is an **operator on the algebra of relations**, not a
-state over it; the self is the **fixed-point subalgebra** of `Φ_c` — the relations attention
-returns unchanged, in QI terms the *decoherence-free subalgebra* — not a stationary *state* of
-a channel. This is what makes "self is a collection of relations" literally true: a structured,
-plural sub-object closed under the dynamics, not a point. The channel-on-states (Schrödinger)
-reading, which would put the self at the level of a state, is the **road not taken**
-([relation-algebra model §5](../relation-algebra-model.md)) — and it is taken nowhere in the
-development: every self here is the eigenform `νΦ_c`, never an invariant density matrix.
+**The Heisenberg commitment.** A3 fixes the *level* at which the self lives. Attention `Φ_c` is
+an **operator on the algebra of relations**, not a state over it; the self is the **fixed-point
+subalgebra** of `Φ_c` — the relations attention returns unchanged, in QI terms the
+*decoherence-free subalgebra* — not a stationary *state* of a channel. This is what makes "self
+is a collection of relations" literally true: a structured, plural sub-object closed under the
+dynamics, not a point. The channel-on-states (Schrödinger) reading, which would put the self at
+the level of a state, is the **road not taken** — and it is taken nowhere in the development:
+every self here is the eigenform `νΦ_c`, never an invariant density matrix.
 
 In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
 [`RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)) this reduces to the threshold

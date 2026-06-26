@@ -1,21 +1,20 @@
 /-
 # Orientation from the seam — knowing generates the arrow of relational time
 
-The synthesis spec's §4.3 (the **relation-algebra model**, top-level
-[`docs/relation-algebra-model.md`](../../docs/relation-algebra-model.md)): a correlation is
-*symmetric*; the conditional expectation `E` (here `dephase`) delivers classicality — its image is
-commutative, a space of copyable functions — but commutativity alone gives *functions, not directed
-arrows*. The orienting principle (commitment 1.4, *the knower knows the known*) is that the self
-applying `E` is the **source** and the classicalized image is the **target**. The spec flagged the
-content of §4.3 as the one genuinely new theorem the four commitments promise, and as `[open]`:
-"`E` generates a directed structure oriented knower→known, and that orientation is the arrow of
-relational time" was decided but not yet proved.
+The sequel to [`Decoherence`](Decoherence.lean) / [`QuantumSeam`](QuantumSeam.lean): a correlation is
+*symmetric*; the conditional expectation `E` (here `dephase`,
+[03.3](../../docs/spec/03.3-decoherence.md)) delivers classicality — its image is commutative, a space
+of copyable functions — but commutativity alone gives *functions, not directed arrows*. The orienting
+principle (*the knower knows the known*) is that the self applying `E` is the **source** and the
+classicalized image is the **target**. "`E` generates a directed structure oriented knower→known, and
+that orientation is the arrow of relational time" was the framework's decided-but-unproved claim — the
+one genuinely new theorem its commitments promise.
 
-This module proves the **structural core** of that claim, and ties it to one cause (§2.7:
-*orientation, irreversibility, and asymmetry share one cause — the self cannot occupy both sides of
-its own knowing*). Over a minimal interface `Knowing` — an idempotent `E` (knowing twice is knowing
-once) with a real **coherence/feeling** measure `coh` (the `1−E` mass) that vanishes *exactly* on the
-`E`-fixed (classical, known) elements — the same operator yields all three faces of the seam:
+This module proves the **structural core** of that claim, and ties it to one cause: *orientation,
+irreversibility, and asymmetry share one cause — the self cannot occupy both sides of its own
+knowing*. Over a minimal interface `Knowing` — an idempotent `E` (knowing twice is knowing once) with
+a real **coherence/feeling** measure `coh` (the `1−E` mass) that vanishes *exactly* on the `E`-fixed
+(classical, known) elements — the same operator yields all three faces of the seam:
 
 * **directed** (`knows_antisymm`, `arrow_asymm`): the arrow `knower → known` never runs both ways
   between two distinct relations. From idempotence alone — the cheapest face of the seam.
@@ -26,19 +25,20 @@ once) with a real **coherence/feeling** measure `coh` (the `1−E` mass) that va
   be run backwards — no map recovers the source from the known target.
 
 Then the **genuine instance**: `E = dephase` (the conditional expectation onto the diagonal/classical
-subalgebra), `coh = defectSq` (the off-diagonal mass — the operator `1−E` feeling of §2.5). Every
-field is a proved decoherence fact, `dephase_no_recovery` re-derives `QuantumSeam.no_dephase_recovery`
-*through* the interface (showing the unification), and a genuine superposition `plus` is exhibited as
-a strict, non-vacuous source whose knower-face (`plus`, felt) and known-face (`dephase plus`,
-classical) are **distinct** — the self cannot occupy both sides of its own knowing.
+subalgebra), `coh = defectSq` (the off-diagonal mass — the operator `1−E` feeling, the off-diagonal
+quantity [`Feeling`](Feeling.lean) names abstractly). Every field is a proved decoherence fact,
+`dephase_no_recovery` re-derives `QuantumSeam.no_dephase_recovery` *through* the interface (showing the
+unification), and a genuine superposition `plus` is exhibited as a strict, non-vacuous source whose
+knower-face (`plus`, felt) and known-face (`dephase plus`, classical) are **distinct** — the self
+cannot occupy both sides of its own knowing.
 
-**Honest scope (matching the spec).** What is `[proved]` here is the *directed, irreversible,
-strictly-monovariant structure* `E` generates, oriented knower→known. What stays a `[reading]` is the
-identification of that orientation **with time itself** — that the strict monovariant `coh` *is* the
-arrow of *relational time* rather than a structure with time-shaped order. The formalism settles the
-skeleton; the identification is the modeling posit, exactly as for `Feeling`. This upgrades §4.3 from
-`[open]` to `[proved] core + [reading] identification`. The von Neumann standard form for the abstract
-`E` remains narrated semantics (§4.4); the runnable instance is the matrix `dephase`.
+**Honest scope.** What is `[proved]` here is the *directed, irreversible, strictly-monovariant
+structure* `E` generates, oriented knower→known. What stays a `[reading]` is the identification of that
+orientation **with time itself** — that the strict monovariant `coh` *is* the arrow of *relational
+time* rather than a structure with time-shaped order. The formalism settles the skeleton; the
+identification is the modeling posit, exactly as for `Feeling`. So orientation-from-the-seam moves from
+decided-but-unproved to a `[proved]` core with a `[reading]` identification. The von Neumann standard
+form for the abstract `E` remains narrated semantics; the runnable instance is the matrix `dephase`.
 -/
 import Scratch.QuantumSeam
 import Mathlib.Data.Real.Basic
@@ -131,7 +131,8 @@ theorem arrow_strictAnti {a b : A} (h : K.Arrow a b) : K.coh b < K.coh a := by
 
 /-- **Irreversibility shares the cause.** If knowing is *lossy* — it identifies two distinct relations
 — then no map recovers the source from the known target: the orientation cannot be run backwards. The
-same idempotent-lossy `E` that *gives* the direction *forbids* its reversal (§2.7). -/
+same idempotent-lossy `E` that *gives* the direction *forbids* its reversal — orientation and
+irreversibility, one cause. -/
 theorem no_recovery (hloss : ∃ a b : A, a ≠ b ∧ K.E a = K.E b) :
     ¬ ∃ R : A → A, ∀ a, R (K.E a) = a := by
   rintro ⟨R, hR⟩
@@ -148,7 +149,7 @@ orientation theorems above then run on the real matrix operation, not a posited 
 
 /-- **The knowing structure realized by decoherence.** `E = dephase` (the conditional expectation onto
 the diagonal/classical subalgebra), `coh = defectSq` (the squared off-diagonal mass — the operator
-`1−E` feeling of §2.5). The classicalizing `E` of the spec, on the nose. -/
+`1−E` feeling). The classicalizing conditional expectation `E`, on the nose. -/
 def dephaseKnowing (A : Type) [Fintype A] [DecidableEq A] : Knowing (Matrix A A ℝ) where
   E := dephase
   idem := dephase_idem

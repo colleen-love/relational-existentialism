@@ -6,13 +6,6 @@ Existentialism. The prose + math here settles the mathematics; the [`formal/`](.
 directory carries the Lean mechanization, which now reaches all the way through Layer 4 (the free
 traced SMC `Cl(𝕋)`, its coherent refinement, and all five domain functors).
 
-> **The synthesis these layers add up to** is stated separately, operator-first, in
-> [`docs/relation-algebra-model.md`](../relation-algebra-model.md): the carrier as a relation-algebra
-> `A`, attention `Φ_c` as a unital CP map (Heisenberg picture), the self as the **fixed-point
-> subalgebra**, knowing `E` as a **conditional expectation**, feeling as the `(1−E)` coherence, and
-> the knower→known **orientation** `E` generates. Read these pages for the layered build-up; read that
-> for the picture they form, with every claim tagged `[proved]` / `[reading]` / `[open]`.
-
 Read in order:
 
 1. [`00-doctrine.md`](00-doctrine.md) — the ambient language: a **traced symmetric

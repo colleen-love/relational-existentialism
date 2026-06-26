@@ -75,7 +75,7 @@ exhaustive. Lean/Agda names are the audited artifacts (see [`formal/README.md`](
 | No-cloning, categorical and concrete (cloning is nonlinear) | Abramsky (categorical no-cloning); Wootters–Zurek, Dieks | **R** | `Compact.no_cloning`, `NoCloning.no_linear_clone`. |
 | One forgetting: identity-collapse, dephasing, partial trace as one `Coarsening` | — (recognition) | **S** | Each non-injective for one reason (a residue); the unification is the content. |
 | Feeling **modeled** as a relational decoherence differential | — | **N? (reading)** | *Consequence-and-consistency, not identification.* The model's dynamics are theorems; the bridge "this *is* feeling" is an explicit `[reading]`, the hard-problem residue. Honest as a reading; not a theorem about the world. |
-| **Knowing `E` as a conditional expectation; the knower→known orientation it generates** — `E` idempotent/lossy/irreversible yields a *directed* (`knows_antisymm`), strictly *temporal* (`arrow_strictAnti`: feeling falls along the arrow), *irreversible* (`no_recovery`) structure, all from one operator; on the genuine `dephase`/`defectSq` | Conditional expectations onto a commutative subalgebra (Tomiyama; Umegaki); idempotence + a strict monovariant ⇒ acyclic direction | **R / S** | `Orientation.{Knowing, dephaseKnowing, knows_antisymm, arrow_strictAnti, no_recovery}`. **Structural core of [relation-algebra model §4.3](../relation-algebra-model.md)** — the one new theorem the four commitments promise. *Synthesis:* orientation, the arrow of relational time, and irreversibility as three faces of one idempotent-lossy `E`. The *identification* of the monovariant with time stays a `[reading]`. |
+| **Knowing `E` as a conditional expectation; the knower→known orientation it generates** — `E` idempotent/lossy/irreversible yields a *directed* (`knows_antisymm`), strictly *temporal* (`arrow_strictAnti`: feeling falls along the arrow), *irreversible* (`no_recovery`) structure, all from one operator; on the genuine `dephase`/`defectSq` | Conditional expectations onto a commutative subalgebra (Tomiyama; Umegaki); idempotence + a strict monovariant ⇒ acyclic direction | **R / S** | `Orientation.{Knowing, dephaseKnowing, knows_antisymm, arrow_strictAnti, no_recovery}`. **Structural core of orientation-from-the-seam** — that commitment's one new theorem: a correlation is symmetric, but the knower→known asymmetry is *generated* by the lossy idempotent `E`. *Synthesis:* orientation, the arrow of relational time, and irreversibility as three faces of one operator. The *identification* of the monovariant with time stays a `[reading]`. |
 
 ### 2.4 Trace, fixed points, functorial semantics
 
@@ -171,7 +171,6 @@ is the correction of record.**
 
 ### Cross-references
 
-- The operator-algebraic synthesis of the whole spec: [`relation-algebra model`](../relation-algebra-model.md).
 - The mechanization index and axiom footprints: [`formal/README.md`](../../formal/README.md).
 - The seam and its two bridges: [`03.3-decoherence.md`](03.3-decoherence.md).
 - The sparsity posits and their discharge: [`03.1-sparsity.md`](03.1-sparsity.md).
