@@ -261,8 +261,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`seam_forces_subalgebra`). The seamless `J=∅` case is `Orientation`'s
                           `dephase` (`knowSeam_empty`); a real self keeps strictly more. Hence the self
                           can never fully decohere itself (`self_cannot_fully_decohere`) — the seam is
-                          permanent feeling, forced. `[proved]` modulo the standing `J`↔genuine-seam
-                          `[reading]`. ✅ verified.
+                          permanent feeling, forced. **Aim vs orientation**: the contraction is uniform
+                          in the seam (`direction_uniform_in_seam` — every `knowSeam J` lowers feeling)
+                          while the target varies with it (`target_depends_on_seam`), so *knowing's
+                          contractive nature orients the arrow; the seam aims it* — two distinct
+                          obstructions. `[proved]` modulo the standing `J`↔genuine-seam `[reading]`.
+                          ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity

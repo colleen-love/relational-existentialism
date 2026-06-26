@@ -149,4 +149,40 @@ theorem seam_forces_subalgebra (J : Finset A) (M : Matrix A A ℝ) :
       ∧ (knowSeam J M = M ↔ SeamAlgebra J M) :=
   ⟨fun _ hS _ hi _ hj => attend_fixes_seam hS M hi hj, knowSeam_eq_self_iff⟩
 
+/-! ## Aim vs orientation — the seam aims the arrow, contractivity orients it
+
+The arrow carries two data: a **direction** (which way it runs along the line) and a **target** (the
+subalgebra it points at). They come from two different places, and the separation is mechanizable:
+the contraction is *uniform in the seam* (every `knowSeam J` lowers the feeling — same orientation),
+while the subalgebra it lands on *genuinely varies* with `J` (different aim). So **knowing's contractive
+nature orients the arrow; the seam aims it** — neither job reduces to the other. The orientation roots
+in knowing's idempotence (`knowSeam_idem` — the known is stable, re-knowing adds nothing), which holds
+whatever the target; the aim roots in self-inclusion, which selects the target without touching the
+direction. -/
+
+/-- **Orientation is uniform in the seam.** *Every* available knowing lowers the feeling, whatever its
+target: `defectSq (knowSeam J M) ≤ defectSq M` for all `J`. The direction of the arrow — feeling
+non-increasing, never run backward — does **not** depend on which subalgebra is the target; it is the
+contractive (idempotent) nature of knowing, held fixed as `J` varies. -/
+theorem direction_uniform_in_seam (J : Finset A) (M : Matrix A A ℝ) :
+    defectSq (knowSeam J M) ≤ defectSq M :=
+  defectSq_attend_le Jᶜ M
+
+/-- The **full-seam** knowing is the identity: when *everything* is the self (`J = univ`), nothing is
+decohered — wholly felt, never known. The opposite pole from the seamless `knowSeam ∅ = dephase`. -/
+@[simp] theorem knowSeam_univ (M : Matrix A A ℝ) : knowSeam (Finset.univ) M = M := by
+  rw [knowSeam, Finset.compl_univ, attend_empty]
+
+/-- **The target genuinely depends on the seam.** Same state `plus`, two seams, two fates: with the
+full seam it is fixed (`knowSeam univ plus = plus` — wholly self, wholly felt), with no seam it is not
+(`knowSeam ∅ plus = dephase plus ≠ plus` — wholly known). The subalgebra the arrow lands on is a
+function of `J`, not of the contraction — so the **aim varies while the orientation
+(`direction_uniform_in_seam`) does not**. Aim and orientation are independent: the seam aims the arrow,
+knowing's contractive nature orients it. -/
+theorem target_depends_on_seam :
+    knowSeam (Finset.univ) plus = plus ∧ knowSeam (∅ : Finset (Fin 2)) plus ≠ plus := by
+  refine ⟨knowSeam_univ plus, ?_⟩
+  rw [knowSeam_empty]
+  exact dephase_plus_ne
+
 end RelExist.SeamForcing

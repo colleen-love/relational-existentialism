@@ -186,10 +186,33 @@ knowings (`S` disjoint from `J`):
 What is `[proved]`: *given* the seam block `J`, the subalgebra every available knowing fixes — and the
 one the maximal knowing projects onto — is forced to be the `J`-algebra, and excluding `J` is exactly
 the self-inclusive (Lawvere-barred) act. The residual `[reading]`, the same one carried throughout, is
-the identification of the formal block `J` with the *genuine* self-inclusive seam. With it, **§6
-closes**: the flow's direction *and* the subalgebra it descends to are both fixed by relation-primacy
-plus the Lawvere obstruction — nothing about time's arrow is primitive. Time is wholly derived, down to
-the same `[reading]`-gap physics itself leaves.
+the identification of the formal block `J` with the *genuine* self-inclusive seam.
+
+### Aim vs orientation — two jobs, two obstructions
+
+A precision the modules force, and a correction to a careless earlier phrasing ("the seam fixes the
+*direction*"). An oriented arrow carries two data, and they come from two different places:
+
+| aspect | what fixes it | where |
+|---|---|---|
+| **direction** — which way along the line (feeling ↓, toward the fixed algebra) | knowing's **contractive/idempotent** nature (the known is stable; a projection has no section) | `TimeArrow` (`contractive_iff`, `knowing_inverse_is_antiphysical`) + `Orientation.no_recovery` |
+| **target** — *which* fixed algebra (= the self) | the **seam** (self-inclusion: can't aim at the aimer) | `SeamForcing` (`seam_forces_subalgebra`) |
+
+The separation is itself `[proved]` in `SeamForcing`: **the orientation is uniform in the seam** —
+*every* `knowSeam J` lowers the feeling, whatever its target (`direction_uniform_in_seam`) — while **the
+target genuinely varies with the seam** — the same state `plus` is fixed by the full-seam knowing but
+not the seamless one (`target_depends_on_seam`, `knowSeam_univ` vs `knowSeam_empty`). The contraction is
+held fixed while the aim is dialed, so neither job reduces to the other: **knowing's contractive nature
+orients the arrow; the seam aims it.**
+
+Both obstructions are relational and Lawvere-flavored — the direction because there must be relations
+(coherences) *to lose* for knowing to be lossy at all (no relations → `E = id` → no contraction → no
+arrow), and via knowing's idempotence (the known is stable); the target because the self is
+constitutively included in its relations. So **§6 closes**: time's endpoints, line, rate, *direction*,
+and *target* are all derived from relation-primacy plus the Lawvere obstruction — nothing about the
+arrow is primitive but the one `[reading]`-gap (formal block `J` ↔ genuine seam) that physics itself
+leaves everywhere. What is *not* claimed: that the seam alone orients the arrow. Orientation is the
+contractive nature of knowing; the seam supplies the destination.
 
 ## 7. Verification
 
@@ -214,7 +237,9 @@ of hours).
 ---
 
 *One line:* Orientation proved the endpoints of relational time; `TimeFlow` graduates them into a flow
-with the spectral gap `(1−p)²` as the clock; `TimeArrow` locks the arrow's *sign* to contractivity; and
-`SeamForcing` shows the seam fixes the very subalgebra the flow descends to — so time's endpoints, line,
-rate, direction, and origin are all derived from relation-primacy plus the Lawvere obstruction, with
-nothing about the arrow left primitive but the one `[reading]`-gap physics itself leaves.
+with the spectral gap `(1−p)²` as the clock; `TimeArrow` locks the arrow's *direction* to knowing's
+contractive nature (orientation); and `SeamForcing` shows the seam fixes the *target* subalgebra the
+flow descends to (aim) — two distinct relational obstructions doing two distinct jobs — so time's
+endpoints, line, rate, direction, and target are all derived from relation-primacy plus the Lawvere
+obstruction, with nothing about the arrow left primitive but the one `[reading]`-gap physics itself
+leaves.
