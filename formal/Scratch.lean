@@ -99,6 +99,11 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.Causation`    — a causality `[reading]` made a theorem: **the missing cause is the other** —
                           conditioning on the other's hidden state restores determinism; local
                           indeterminism *is* the un-viewed relational cause. ✅ verified.
+* `Scratch.SparsityPosits` — discharging the two sparsity posits: `d ≥ 2` given structural meaning
+                          (**genuine return** = not-given ∧ not-one-shot, `genuine_return_iff`) and shown
+                          load-bearing (positive floor ⟺ sparse vs dense); and the valuation `μ`
+                          **constructed** as the orbit's return index (the genuine returns are strict
+                          standing increases), discharging it for unit cost. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -135,3 +140,4 @@ import Scratch.QuantumSeam
 import Scratch.GraphModel
 import Scratch.DomainTraced
 import Scratch.Causation
+import Scratch.SparsityPosits

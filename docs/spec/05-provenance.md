@@ -1,0 +1,161 @@
+# 05 — Provenance Ledger
+
+> Part of the [Formalization Spec](README.md). *The honest accounting a referee reads first.* Every
+> other page argues the theory; this one states, per result, **what is rederived, what is synthesis,
+> and what (if anything) is novel** — and names the genuinely open bridges so they are found here, by
+> us, rather than on page one of a review.
+
+---
+
+## 0. The one-sentence claim
+
+> The **mathematical content** of this development is, almost entirely, **rederivation** of established
+> results (bisimulation, Lawvere, traced monoidal categories, the graph model, the partial trace,
+> Rosen, Banach/Neumann series). The **contribution** is a **synthesis** — a single typed identification
+> across decoherence, fixed-point logic, and relational dynamics — together with a set of philosophical
+> **readings** mounted on theorems, and the **mechanization artifact** itself (a sorry-free, axiom-audited
+> Lean+Agda corpus). The one place a *candidate-novel mathematical theorem* would live — that the seam's
+> Lawvere obstruction bites the **quantum partial trace specifically** — is **open** (Bridge B, §4), and
+> is labeled open everywhere it is touched.
+
+This is deliberately the *deflationary* reading. We would rather under-claim here and have the synthesis
+and the artifact carry the weight than overclaim a theorem and have a reviewer find the seam unmarked.
+
+---
+
+## 1. The three tiers
+
+| Tier | Meaning | What it would take to be more |
+| --- | --- | --- |
+| **R — Rederivation** | The theorem is established mathematics; we re-prove it (often in a proof assistant, sometimes in a lighter special case) to have it *inside* the corpus with an audited axiom footprint. Novelty: ~0; value: the machine-checked artifact and the uniform setting. | A new theorem, not a re-proof. |
+| **S — Synthesis** | No single new theorem, but a non-obvious **identification** or **transport**: the same structure recognized across two domains the literature keeps apart, so that a known fact in one becomes a statement in the other. Novelty: the bridge, not the endpoints. | Showing the identification is *forced* (an equivalence/obstruction), not merely *available*. |
+| **N? — Novel-candidate** | A statement that, if it holds at the claimed generality, is not a re-proof of anything we can cite. In this corpus these are **either** philosophical readings (explicitly lenses, not proofs of the world) **or** the one open quantum-seam theorem. | A closed proof at the claimed generality (for the theorem); nothing (the readings are honest as readings). |
+
+A result can be **R in content, S in framing**: the theorem is old, the recognition that it *is* this
+phenomenon is the contribution. Most of the corpus is exactly this. We mark such rows `R / S`.
+
+---
+
+## 2. The ledger
+
+Grouped by area. "Prior art" cites the result being rederived or transported; it is representative, not
+exhaustive. Lean/Agda names are the audited artifacts (see [`formal/README.md`](../../formal/README.md)).
+
+### 2.1 Identity, bisimulation, the first-person surplus
+
+| Result | Prior art | Tier | Note |
+| --- | --- | --- | --- |
+| `≈ := νΘ`, coinduction, `≈` an equivalence, shared world `D/≈` | Park, Milner (bisimulation); Aczel (non-well-founded sets); Rutten (universal coalgebra) | **R** | Lean via `OrderHom.gfp` (Knaster–Tarski); Agda via native final-coalgebra copatterns — two independent mechanizations agreeing. |
+| `≈ ⊊ ≅` (lived exceeds observed); `≅` observational/trace equivalence | van Glabbeek (linear-time/branching-time spectrum); Hennessy–Milner | **R / S** | The theorem is the spectrum's standard strict inclusion. *Synthesis:* reading the surplus as the **first-person remainder**. |
+| `Deterministic ⟹ (≈ ⟺ ≅)` — the surplus *is* branching | Folklore of the spectrum (determinism collapses the hierarchy); Hennessy–Milner under determinism | **R / S** | Mechanized both assistants. *Synthesis:* "you exceed how you appear" is, exactly, a fact about systems that *could have done otherwise*. |
+| Relational appearance `≅ₒ` (an other's marginal of you); `≈ ⊆ ≅ ⊆ ≅ₒ`; deterministic *relational* surplus | Coarser-than-observation equivalences are standard; the marginal/quotient is elementary | **S** | The move that corrects the "view from nowhere": the operative outside is a *coupled other*, and a **deterministic** system still has surplus against it (feeling from finite access, not from branching). |
+
+### 2.2 Knowing, the mirror, the seam (Lawvere)
+
+| Result | Prior art | Tier | Note |
+| --- | --- | --- | --- |
+| Lawvere diagonal; no complete self-model; remainder | Lawvere (1969); Yanofsky (survey) | **R** | Core, **0 axioms** — fitting, since incompleteness is the contrapositive of a one-line diagonal. |
+| No reflexive object in Set/finite (Cantor); the obstruction for `Bool` | Cantor; Lawvere | **R** | `no_reflexive_object_for_Bool`, **0 axioms**. |
+| The seam: `self_cannot_trace_relation` — the one trace a self can't take on itself | Lawvere, specialized | **R / S** | The *theorem* is Lawvere at `Env = Self`. *Synthesis:* identifying it as the relational seam (you cannot hold a complete account of a relation you are inside). |
+| **Bridge A** — the abstract Lawvere agent is a *supplied* map (instantiated at set-level forgetting) | — (specialization) | **R / S** | Closes the "is the agent real?" gap; *not new math* (Lawvere + trivial projection lossiness). Does **not** close Bridge B. |
+| The duality: reflexive object exists **xor** a settling-refusing observable | Lawvere/Cantor duality | **R / S** | Resolves "route 1": the obstruction **is** the non-existence; a reflexive object only ever *constructs* `Y`, never obstructs. |
+| **`Pω` graph model** — `D ≅ [D→D]` as a retract, `Y`, `K` | Plotkin, Scott; Engeler | **R** | Substantial mechanization (Knaster–Tarski fixpoint, `app (Graph f) = f`). Realizes the *construction* side; by the duality, orthogonal to the seam. |
+
+### 2.3 Decoherence, the firewall, no-cloning
+
+| Result | Prior art | Tier | Note |
+| --- | --- | --- | --- |
+| Partial trace on matrices; `⊗` = Kronecker; its defining laws | Standard linear algebra / quantum info | **R** | `MatrixModel`, `PartialTrace`. |
+| Decoherence **is** the partial trace; coherence conserved, relocated | Joos–Zeh, Zurek (einselection / reduced density matrix) | **R / S** | `Conservation.decoherence_is_partial_trace`. *Synthesis:* the same map is "forgetting the relation." |
+| Firewall: compact-closed + cartesian copying ⇒ **thin** | Folklore (a cartesian compact-closed category is degenerate); Abramsky | **R / S** | `Compact.collapse`. *Synthesis:* this degeneracy **is** the knowing/feeling firewall — copyable (cartesian) vs entangled (compact) cannot coexist. |
+| No-cloning, categorical and concrete (cloning is nonlinear) | Abramsky (categorical no-cloning); Wootters–Zurek, Dieks | **R** | `Compact.no_cloning`, `NoCloning.no_linear_clone`. |
+| One forgetting: identity-collapse, dephasing, partial trace as one `Coarsening` | — (recognition) | **S** | Each non-injective for one reason (a residue); the unification is the content. |
+| Feeling **modeled** as a relational decoherence differential | — | **N? (reading)** | *Consequence-and-consistency, not identification.* The model's dynamics are theorems; the bridge "this *is* feeling" is an explicit `[reading]`, the hard-problem residue. Honest as a reading; not a theorem about the world. |
+
+### 2.4 Trace, fixed points, functorial semantics
+
+| Result | Prior art | Tier | Note |
+| --- | --- | --- | --- |
+| Traced symmetric monoidal category (full JSV axioms); `Rel`, matrix instances; coherence | Joyal–Street–Verity; standard | **R** | Typeclass + non-trivial validated models; the free `Cl(𝕋)` and universal functor (`Quot.sound`-only). |
+| Feedback **is** the trace (GoI execution formula); recurrence as `νΦ` | Girard (GoI); Abramsky, Haghverdi–Scott; Hasegawa | **R / S** | `Recurrence.feedback_eq_trace`. *Synthesis:* the AI-domain functor. |
+| Cartesian trace ⟺ Conway fixed-point operator | Hasegawa; Hyland; Bloom–Ésik (iteration theories) | **R** | Cited as the reading behind the domain-trace; the *fixpoint*-trace instance is **open** (§4). |
+| Autocatalytic set = eigenform; (M,R)-system closure = `ν(repair∘metabolize)` | Kauffman; Rosen; Letelier et al. | **R / S** | `Chemistry`, `Biology` — the functors are *definitional* (a self-sustaining set just **is** a fixed point). |
+| Self-in-other bounded iff `‖x‖<1`; quantitative eigenform unique | Neumann series; Banach fixed point | **R / S** | `Distribution`. *Synthesis:* the individuation threshold as a spectral/norm condition. |
+
+### 2.5 Nondeterminism, causality, sparsity
+
+| Result | Prior art | Tier | Note |
+| --- | --- | --- | --- |
+| Deterministic entangled whole ⇒ nondeterministic marginal; robust for any global law | Reduced/open-system dynamics; coarse-graining ⇒ stochasticity (stat-mech, hidden-variable marginalization) | **R / S** | `Marginal`, `RelationalMarginal` (all **0 axioms**). *Synthesis:* "relation manufactures openness; the seam forces the marginal view." |
+| The missing cause is the other: conditioning restores determinism | Conditional/causal factorization; same reduced-dynamics fact | **R / S** | `Causation.indeterminism_is_unviewed_cause`, **0 axioms**. *Synthesis:* the causal reading. |
+| Knowing decoheres (open when unknown, definite when conditioned) | The marginal fact + the trace = σ-move identification | **R / S** | `Causation.knowing_decoheres`. Structural core of "knowing = decoherence"; only *phenomenal* knowing stays a reading. |
+| Sparsity counting (`\|Stab\| ≤ β/m`), density `→ 0`, nowhere-dense over the final coalgebra | Pigeonhole; cylinder topology on a coalgebraic state space | **R / S** | `Sparsity`, `SparsityReal`, Agda `selves-nowhereDense`. The form is standard; the *application* to selfhood-rarity is the synthesis. |
+| The two posits discharged: `d ≥ 2` structural + load-bearing; `μ` constructed from the orbit | Strict-chain / well-founded order arguments; `Function.invFun` | **R / S** | `SparsityPosits` (this revision). Turns two free posits into a named structural condition and a constructed valuation. |
+
+---
+
+## 3. Where the contribution actually is
+
+Stripping the rederivations, what remains:
+
+1. **The identification (the synthesis proper).** One typed thread runs through the whole corpus:
+   **objectifying knowing = the σ-move = the trace = the partial trace = the cartesian (copyable)
+   move**, opposed to **feeling = monoidal coherence = the entangled (compact, no-cloning) move**, with
+   the **cartesian/compact firewall** (`Compact.collapse`) as the formal wall between them. Every domain
+   functor and every decoherence result is a sighting of this one structure. That the *same* degeneracy
+   theorem is the quantum no-cloning fact, the knowing/feeling firewall, and the limit of self-modeling
+   is the non-obvious recognition. It is **synthesis, not theorem** — each endpoint is known; the
+   transport is the work.
+
+2. **The readings on theorems.** Feeling-as-decoherence-differential, the seam-as-perpetual-feeling,
+   indeterminism-as-unviewed-cause, the first-person surplus as freedom. These are **lenses**: each sits
+   on a genuine theorem, but the assignment-to-phenomenon is interpretive and labeled so. They are
+   honest *as readings* and claim nothing about the world the formalism cannot reach (T3's typed-out
+   residues — valence, the hard problem, freedom — are predicted *unreachable*, and we do not reach
+   them).
+
+3. **The artifact.** A sorry-free, axiom-audited Lean 4 corpus (dependency-free core at **0 axioms**
+   for the Lawvere/seam results; mathlib-backed `Scratch` for the analytic/quantum layer) plus an
+   independent Agda coinductive layer, with provenance and open seams marked in-line. The artifact's
+   value is that the synthesis is *checkable* and its boundaries are *enforced*, not asserted.
+
+---
+
+## 4. The open bridges (named, not hidden)
+
+These are the genuine gaps. None is papered over in the corpus; this section collects them.
+
+| # | Open bridge | Where it lives | Status |
+| --- | --- | --- | --- |
+| **B** | The seam's Lawvere obstruction bites the **quantum partial trace specifically** (not just an abstract lossy map). **Route 1** (Lawvere-on-`ptrace` via a *reflexive domain* `D ≅ [D→D]` with `ptrace` as the diagonal) and **route 2** (the compact-face no-broadcasting argument) are partial: route 2 (`QuantumSeam`) bites the *real* `dephase` but via no-broadcasting, not the diagonal; route 1's machinery is built but the identification of `ptrace` with a reflexive-object diagonal is not done. | [`03.3`](03.3-decoherence.md), `QuantumSeam`, `ReflexiveSeam` | **OPEN — the one candidate-novel theorem.** If closed at the claimed generality, this is the corpus's only genuinely new *mathematical* result. Until then it is research, **not** an "inherent residue." |
+| **Conway-trace instance** | An explicit **fixpoint**-trace `TracedSMC` on the category of domains (the Hasegawa cartesian-trace = Conway-operator correspondence), with the full JSV/Conway–Bekić identities — the *interesting* domain trace. `DomainTraced` gives only the **scalar/identity** trace (honestly scoped). | [`03.1`](03.1-sparsity.md) note, `DomainTraced`, `GraphModel` | **OPEN (construction side).** By `ReflexiveModel`'s duality, orthogonal to the seam — a construction task, not a theory gap. |
+| **Sparsity step 2** | Cost-**sharing** over a graded poset of couplings (lax/sub-additive `c`): re-derive the bound with sharing allowed. | [`03.1 §3.5`](03.1-sparsity.md) | **OPEN.** The counting bound assumes an unstructured set of costs. |
+| **The conjecture lift** | Sparsity for **all of `Cl(𝕋)`** (Conjecture 3.3) and the spectral/closure form (Conjecture 3.4). | [`03.1 §3.4`](03.1-sparsity.md) | **OPEN (conjectural by design).** The topological *shape* is mechanized (Agda); the cost-graded lift is not. |
+| **Non-unit valuation** | A numeric per-return cost `λ > 1` on a **dense** standing lattice needs a discretizing measure (no `ℕ`-valued strict-monotone map exists on a dense order). Unit cost is now constructed (`SparsityPosits`); the metric refinement is a modeling choice. | `SparsityPosits` | **OPEN (modeling choice, not a gap).** Exists exactly under the ACC/finite-depth condition. |
+
+The phenomenal residues — valence, the hard problem, freedom — are **not** on this list: T3 predicts the
+formalism cannot reach them, so their absence is a *result*, not an open bridge.
+
+---
+
+## 5. How to read a claim in this corpus
+
+- A `[theorem]` tag with a Lean/Agda name and an audited axiom footprint is **checkable** — that is its
+  warrant, and it is `R` or `R / S` unless this ledger marks it `N?`.
+- A `[reading]` is a **lens on** a theorem: the underlying statement is proved, the interpretation is
+  not, and is honest only as interpretation.
+- An `[open]` / Bridge entry is **research**: a statement we believe but have not closed at the claimed
+  generality. The one that matters is Bridge B (§4).
+
+If a future reader finds a claim in these pages stated more strongly than its tier here, **this ledger
+is the correction of record.**
+
+---
+
+### Cross-references
+
+- The mechanization index and axiom footprints: [`formal/README.md`](../../formal/README.md).
+- The seam and its two bridges: [`03.3-decoherence.md`](03.3-decoherence.md).
+- The sparsity posits and their discharge: [`03.1-sparsity.md`](03.1-sparsity.md).
+
+→ Back to [the spec index](README.md).

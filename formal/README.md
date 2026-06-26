@@ -67,6 +67,20 @@ the only residue is a single standard order condition — **ACC on standing** ("
 many returns"), automatic for finite standing-lattices. The structural rarity is still carried
 independently by the Agda nowhere-dense result.
 
+**The two residue posits, discharged** ([`Scratch/SparsityPosits.lean`](Scratch/SparsityPosits.lean)).
+What `Convergence`/`Stabilization` left — a *forced* floor `d ≥ 2` and the cost valuation `μ` — is now
+settled. (i) **`d ≥ 2` is given structural content**: `genuine_return_iff` proves that, *given the orbit
+converges at depth `d`,* `2 ≤ d ⟺ f a ≠ a ∧ f (f a) ≠ f a` — **genuine return = not-given ∧
+not-one-shot**, a named condition rather than a bare number — and it is shown *load-bearing*:
+`bounded_of_positive_floor` / `depth_positive_density_zero` (positive floor ⇒ bounded carrier, density
+`→ 0`) versus `zero_cost_unbounded` (depth-`0` "given, not achieved" selves are unboundedly many within
+any budget — sparsity fails), so `d ≥ 1` is *forced* by the rarity itself. (ii) **`μ` is constructed,
+not posited**: `orbit_strictStep` / `orbit_strict_lt` show every genuine return is a *strict* standing
+increase, so the orbit values are distinct and `exists_orbit_valuation` builds the canonical valuation
+— the return index — discharging it for unit cost (`selfCost_one_le_orbit_gain`). The honest limit: a
+*non-unit* numeric `λ` on a dense standing lattice still needs a discretizing measure (existing exactly
+under the ACC/finite-depth condition), a real modeling choice, not a gap.
+
 ### Doctrine commitments — D1, T1, T3
 
 The three previously prose-only axioms, mechanized via their essential mathematical
