@@ -91,8 +91,11 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           via **no-broadcasting** — the compact face of the firewall whose cartesian
                           face is Lawvere. (B-as-Lawvere/route 1 remains open.) ✅ verified.
 * `Scratch.GraphModel`   — **Pω**, the Plotkin–Scott graph model: a concrete non-trivial reflexive
-                          object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`).
-                          Turn 1 of the D∞/Pω build (carrier, application, retraction). ✅ verified.
+                          object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`),
+                          with the fixpoint (GoI's `Y`) and the `K` combinator. ✅ verified.
+* `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
+                          join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
+                          which stays open). ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -127,3 +130,4 @@ import Scratch.Feeling
 import Scratch.RelationalAppearance
 import Scratch.QuantumSeam
 import Scratch.GraphModel
+import Scratch.DomainTraced
