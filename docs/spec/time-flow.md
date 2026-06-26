@@ -122,16 +122,42 @@ not 1, i.e. sustained, non-decaying coherence that `coh` never bleeds off. Decom
 - `[open]`: the rotating-peripheral case (3a/3b); the general rate-=-gap identification (§4.4); the
   infinite-dim / von Neumann standard-form version; and the frontier below.
 
-## 6. The honest remaining frontier
+## 6. The frontier — does the seam fix the sign? (partial progress)
 
 T-flow gives the *direction and rate* of time's passage, not its **origin**. The flow's orientation is
 inherited from `coh` decreasing, i.e. from decoherence; the decohering direction is fixed by which
 subalgebra `E` projects onto, fixed by the seam (the self cannot trace out the factor it is part of).
 The deepest claim — *the arrow's origin is the seam, not a stipulated `L`* — requires showing the
 generator's dissipative direction is forced by the self-inclusive partial trace rather than chosen.
-Sharpened: **does the seam fix the sign of `L`?** If yes, time's flow, direction, and origin all reduce
-to relation-primacy plus the Lawvere obstruction, and nothing about time is primitive. That is the real
-prize; T-flow is the rung directly beneath it. `[open]`
+Sharpened: **does the seam fix the sign of `L`?**
+
+[`TimeArrow.lean`](../../formal/Scratch/TimeArrow.lean) mechanizes how far this is reachable:
+
+- **Acyclicity `[proved]`.** While still feeling, the orbit never returns to an earlier state
+  (`flow_orbit_ne`) — the timeline is a strict order with no closed loops before the self, the
+  order-theoretic face of irreversibility, from the monovariant alone.
+- **Sign = contractivity `[proved]`.** One step scales the feeling by exactly `(1−p)²`
+  (`defectSq_partialDephase`), so the flow contracts the feeling iff `0 ≤ p ≤ 2` (`contractive_iff`,
+  `time_forward_regime`) and *expands* it — runs time backward — iff `p < 0 ∨ p > 2`
+  (`expanding_regime`). The coh-decreasing (time-forward) sign is **exactly** the contractive regime:
+  the direction is locked to contractivity, not chosen beside it.
+- **A knowing's only inverse is an anti-knowing `[proved]`.** A genuine partial knowing `0 < p < 1` is
+  linearly invertible, but its unique inverse is `partialDephase q` with `q < 0`, in the expanding
+  regime `(1−q)² > 1` (`knowing_inverse_is_antiphysical`). Time-reversal exists as linear algebra but
+  only as the non-physical amplification of coherence from nothing — the thing no contraction, no
+  conditional expectation, no partial trace can do. The contractive seam admits the decreasing arrow
+  alone; its sign is forced by the non-existence of a *contractive* inverse (the flow-graded
+  strengthening of `Orientation.no_recovery`).
+
+So **sign = contractivity = physicality of the seam** is now `[proved]`: the dissipative direction is
+not an independent choice but is locked to the dynamics being a contraction (a partial trace /
+conditional expectation). What stays **`[open]`** is the final step: that the seam **forces which
+subalgebra** `E` projects onto — so that the contraction's direction is fixed by the self-inclusive
+trace itself rather than by which side we called `p ≥ 0`. That is the self-reference / Lawvere bridge
+([`Relating.self_inclusive_unmodelable`](../../formal/RelExist/Relating.lean)). If it closes, time's
+flow, direction, and origin all reduce to relation-primacy plus the Lawvere obstruction, and nothing
+about time is primitive. That remains the real prize; the sign↔contractivity lock is the rung now
+underfoot.
 
 ## 7. Verification
 

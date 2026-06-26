@@ -232,6 +232,21 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`orbit_tendsto_knowing_entry`), and the single orientation drop is the
                           flow's total (`dephaseFlow_total_drop`). The `[proved]` graded structure;
                           "the flow *is* time" stays a (weaker, clock-shaped) `[reading]`. ✅ verified.
+* `Scratch.TimeArrow`    — **the arrow's sign** (the frontier beneath `TimeFlow`, spec §6 — does the
+                          seam fix the *direction*?). Three rungs: **acyclicity** — while still feeling,
+                          the orbit never returns (`flow_orbit_ne`), so the timeline is a strict order,
+                          not a cycle; **sign = multiplier** — one step scales the feeling by `(1−p)²`
+                          (`defectSq_partialDephase`), so the flow contracts iff `0≤p≤2`
+                          (`contractive_iff`, `time_forward_regime`) and *expands* (runs time backward,
+                          amplifying coherence) iff `p<0 ∨ p>2` (`expanding_regime`) — the decreasing
+                          sign is **exactly** the contractive regime; and the gem, **a knowing's only
+                          inverse is an anti-knowing** — a genuine knowing `0<p<1` is invertible, but its
+                          unique inverse is `partialDephase q` with `q<0` in the expanding regime
+                          (`knowing_inverse_is_antiphysical`): time-reversal exists as linear algebra
+                          but only as non-physical coherence-amplification. So *sign = contractivity =
+                          physicality of the seam* is `[proved]`; whether the seam **forces the
+                          subalgebra** (the last self-reference step) stays the `[open]` §6 prize.
+                          ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -286,3 +301,4 @@ import Scratch.ReflexiveCompact
 import Scratch.SpectralDecay
 import Scratch.PerronFrobenius
 import Scratch.TimeFlow
+import Scratch.TimeArrow
