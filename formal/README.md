@@ -170,6 +170,7 @@ mathlib lacks — [`RelExist/Traced.lean`](RelExist/Traced.lean), axiom-free.
 | **the coherence refinement** | `RelExist.Traced.CoherentTracedSMC` | `TracedSMC` + the 8 symmetric-monoidal coherence laws (pentagon, triangle, hexagon, naturalities, symmetry) | ✅ defined |
 | **coherence validated** | `trivialCoherentTracedSMC`, `scalarCoherentTracedSMC`, `RelExist.RelModel.relCoherentTracedSMC`, `RelExist.MatrixModel.matCoherentTracedSMC` | trivial (axiom-free), scalar (= comm-monoid identities), **`Rel`** and the **literal matrix model** all coherent | ✅ proved |
 | **the free *coherent* traced SMC** | `RelExist.Free.clCoherentTracedSMC` / `RelExist.Free.functorC` | `Cl_coh(𝕋) := Quot CohRel` is a coherent traced SMC, with the universal functor into any coherent model (`Quot.sound`-only) | ✅ proved |
+| **the fixpoint-trace SMC on domains** (Hasegawa, packaged) | `RelExist.DomainFixpoint.domainFixpointTracedSMC` | complete lattices & monotone maps, `⊗ = ×`, trace = the **Conway fixpoint trace**; all seven JSV axioms discharged from the `ConwayTrace` identities — sliding via heterogeneous `rolling'`, **vanishing-II via product Bekić** (`lfp_prod`), superposing via `tr_superpose`. The Hasegawa "only-if" direction in full (`[propext, Quot.sound]`-only) | ✅ proved |
 
 Monoidal coherence is also layered on as a refinement (`CoherentTracedSMC`), validated in the
 trivial, scalar, **multi-object `Rel`**, and **literal matrix** models, and the **free coherent

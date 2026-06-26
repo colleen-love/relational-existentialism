@@ -114,6 +114,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           Hasegawa): the parameterized lfp `pfp` with fixpoint/least/parameter-naturality,
                           the **rolling/dinaturality** rule `lfp (g∘h) = g (lfp (h∘g))` (the trace-slide
                           shadow; not in mathlib), and the Bekić **diagonal** rule. ✅ verified.
+* `Scratch.DomainFixpoint` — the **Conway operator packaged**: the category of complete lattices &
+                          monotone maps as a genuine multi-object `TracedSMC` (`domainFixpointTracedSMC`)
+                          with `⊗ = ×` and the **fixpoint trace** `Tr(f)(a) = π₁(f(a, lfp(u ↦ π₂(f(a,u)))))`.
+                          All seven JSV axioms discharged from the `ConwayTrace` identities — sliding via
+                          a heterogeneous `rolling'`, vanishing-II via **product Bekić** (`lfp_prod`),
+                          superposing via `tr_superpose`. The Hasegawa "only-if" direction in full; the
+                          `ConwayTrace` packaging the spec flagged open. ✅ verified.
 * `Scratch.ValuationBoundary` — the **valuation boundary:** a *densely-ordered* standing lattice admits
                           **no** ℕ-valuation (`no_strictMono_to_nat_of_dense`), so a non-unit numeric
                           per-return cost is *provably* unavailable without discretization — closing the
@@ -177,6 +184,7 @@ import Scratch.RelationalAppearance
 import Scratch.QuantumSeam
 import Scratch.GraphModel
 import Scratch.DomainTraced
+import Scratch.DomainFixpoint
 import Scratch.Causation
 import Scratch.SparsityPosits
 import Scratch.Orientation
