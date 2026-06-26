@@ -23,11 +23,16 @@ itself, on *any* traced SMC.
 
 **What is built, and what is the flagged remainder.** Built and verified: the object-level compact
 structure — objects, two-way homs, tensor, unit, the dual with its involution / monoidality / unit
-laws, and the identity. This is the *arena*: every traced SMC embeds into its compact closed `Int(C)`,
-the non-cartesian setting a reflexive object would inhabit. **Not** built here (the research-grade
+laws, and the identity — **and the dual's action on morphisms**: the contravariant transpose `IntDualHom`
+(`f : A → B ↦ fᵈ : Bᵈ → Aᵈ`, by conjugating with the braidings), proved to **preserve identities**
+(`IntDualHom_id`) and be **involutive** (`IntDualHom_involutive`, `(fᵈ)ᵈ = f`) over a *coherent* traced
+SMC — both **0 axioms**, the two swap-braids cancelling by the symmetry `γ∘γ = id`. This is the *arena*
+plus the dual functor on arrows: every traced SMC embeds into its compact closed `Int(C)`, the
+non-cartesian setting a reflexive object would inhabit. **Not** built here (the research-grade
 remainder): **composition via the trace** — the GoI move `(g ∘ f) := Tr^{B}(wiring of f, g)` that feeds
 `f`'s output wire into `g` and back — and the **compact-closed axioms** (the snake/triangle equations),
-whose verification from the seven JSV axioms is a long structural-iso chase. Composition's *type* is
+whose verification from the seven JSV axioms is a long structural-iso chase. (Full *functoriality* of the
+dual, `(g∘f)ᵈ = fᵈ∘gᵈ`, likewise waits on that composition.) Composition's *type* is
 `IntHom A B → IntHom B C → IntHom A C`, realized by a trace over the shared object `B⁺ ⊗ B⁻`; getting
 that wiring provably right (not merely type-correct) is the work left. By `ReflexiveModel`'s duality this
 whole construction is the **construction** side — it would host `Y` as the trace, orthogonal to the seam.
@@ -38,6 +43,7 @@ concretely on any traced SMC — the home of the linear reflexive object — wit
 precisely scoped as the remaining build.
 -/
 import RelExist.Traced
+import RelExist.Coherence
 
 namespace RelExist.IntConstruction
 
@@ -85,5 +91,47 @@ This is the object-level shadow of `(f : A → B) ↦ (fᵈ : Bᵈ → Aᵈ)`, t
 braided identification of the two is part of the flagged morphism layer). -/
 theorem IntHom_dual_eq (A B : IntObj C) :
     IntHom C (IntDual C B) (IntDual C A) = C.Hom (C.tens B.2 A.1) (C.tens A.2 B.1) := rfl
+
+/-- **The dual (transpose) of a morphism** — `f : A → B` ↦ `fᵈ : Bᵈ → Aᵈ`, the contravariant action
+of the dual on arrows. Concretely it conjugates `f` by the braidings that swap the two wires of each
+object: `fᵈ = (B⁻⊗A⁺ →[γ] A⁺⊗B⁻ →[f] B⁺⊗A⁻ →[γ] A⁻⊗B⁺)`. Definable on any traced SMC (it uses only the
+braiding); the laws below need the symmetry coherence. -/
+def IntDualHom {A B : IntObj C} (f : IntHom C A B) : IntHom C (IntDual C B) (IntDual C A) :=
+  C.comp (C.braid B.2 A.1) (C.comp f (C.braid B.1 A.2))
+
+/-! ### The dual is a contravariant involutive functor on morphisms
+
+Over a **coherent** traced SMC (where the braiding is a genuine symmetry, `γ∘γ = id`), the
+morphism-dual preserves identities and is involutive — the action of the compact dual on arrows. (Full
+functoriality `(g∘f)ᵈ = fᵈ∘gᵈ` needs the GoI composition, which — with the snake equations — is the
+flagged research-grade remainder.) -/
+
+variable (K : CoherentTracedSMC)
+
+/-- **The dual preserves identities**: `(id_A)ᵈ = id_{Aᵈ}` — the two swap-braids cancel by symmetry. -/
+theorem IntDualHom_id (A : IntObj K.toTracedSMC) :
+    IntDualHom K.toTracedSMC (IntId K.toTracedSMC A) = IntId K.toTracedSMC (IntDual K.toTracedSMC A) := by
+  show K.comp (K.braid A.2 A.1) (K.comp (K.id (K.tens A.1 A.2)) (K.braid A.1 A.2))
+      = K.id (K.tens A.2 A.1)
+  rw [K.id_comp, K.braid_symm]
+
+/-- **The dual is involutive on morphisms**: `(fᵈ)ᵈ = f`. The four conjugating braids cancel in two
+symmetric pairs (`γ∘γ = id`), leaving `f` — the morphism-level shadow of `IntDual_involutive`. -/
+theorem IntDualHom_involutive {A B : IntObj K.toTracedSMC} (f : IntHom K.toTracedSMC A B) :
+    IntDualHom K.toTracedSMC (IntDualHom K.toTracedSMC f) = f := by
+  show K.comp (K.braid A.1 B.2)
+        (K.comp (K.comp (K.braid B.2 A.1) (K.comp f (K.braid B.1 A.2))) (K.braid A.2 B.1)) = f
+  calc K.comp (K.braid A.1 B.2)
+          (K.comp (K.comp (K.braid B.2 A.1) (K.comp f (K.braid B.1 A.2))) (K.braid A.2 B.1))
+      = K.comp (K.comp (K.braid A.1 B.2) (K.comp (K.braid B.2 A.1) (K.comp f (K.braid B.1 A.2))))
+          (K.braid A.2 B.1) := (K.assoc _ _ _).symm
+    _ = K.comp (K.comp (K.comp (K.braid A.1 B.2) (K.braid B.2 A.1)) (K.comp f (K.braid B.1 A.2)))
+          (K.braid A.2 B.1) := by rw [← K.assoc]
+    _ = K.comp (K.comp (K.id (K.tens A.1 B.2)) (K.comp f (K.braid B.1 A.2))) (K.braid A.2 B.1) := by
+          rw [K.braid_symm]
+    _ = K.comp (K.comp f (K.braid B.1 A.2)) (K.braid A.2 B.1) := by rw [K.id_comp]
+    _ = K.comp f (K.comp (K.braid B.1 A.2) (K.braid A.2 B.1)) := K.assoc _ _ _
+    _ = K.comp f (K.id (K.tens B.1 A.2)) := by rw [K.braid_symm]
+    _ = f := K.comp_id _
 
 end RelExist.IntConstruction

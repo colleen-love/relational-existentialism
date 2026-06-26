@@ -128,8 +128,11 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.IntConstruction` — the **GoI / `Int` construction** on any traced SMC: the non-cartesian,
                           fully-dual (compact) arena where a linear reflexive object lives — objects
                           `(A⁺,A⁻)`, two-way homs, tensor/unit, and the **dual** (wire-swap) proved an
-                          involution, monoidal, unit-fixing. Object-level core; composition-via-trace and
-                          the snake equations are the flagged remainder. ✅ verified.
+                          involution, monoidal, unit-fixing — **plus the dual's action on morphisms**
+                          (`IntDualHom`, the contravariant transpose), proved identity-preserving and
+                          **involutive** `(fᵈ)ᵈ = f` over a coherent traced SMC (0 axioms, by `γ∘γ = id`).
+                          Composition-via-trace and the snake equations (and the dual's full
+                          functoriality) are the flagged remainder. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
