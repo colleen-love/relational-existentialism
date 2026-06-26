@@ -90,6 +90,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.QuantumSeam`  — bridge B route 2: the seam on the **actual** `dephase` (lossy, irreversible)
                           via **no-broadcasting** — the compact face of the firewall whose cartesian
                           face is Lawvere. (B-as-Lawvere/route 1 remains open.) ✅ verified.
+* `Scratch.QuantumSeamTrace` — **bridge B, closed on the compact face**: the seam on the *genuine*
+                          `ptrace` — it collapses `entangle a` and its decohered shadow to one marginal
+                          (`ptrace_collapses_entanglement`), so a self with only its marginal cannot
+                          recover the relation (`no_ptrace_recovery`), and the lost fiber is exactly the
+                          non-broadcastable coherence; route 1 (Lawvere) is shown *firewall-obstructed*,
+                          not merely unbuilt. ✅ verified.
 * `Scratch.GraphModel`   — **Pω**, the Plotkin–Scott graph model: a concrete non-trivial reflexive
                           object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`),
                           with the fixpoint (GoI's `Y`) and the `K` combinator. ✅ verified.
@@ -141,3 +147,4 @@ import Scratch.GraphModel
 import Scratch.DomainTraced
 import Scratch.Causation
 import Scratch.SparsityPosits
+import Scratch.QuantumSeamTrace

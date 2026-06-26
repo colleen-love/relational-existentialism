@@ -14,9 +14,11 @@
 > Rosen, Banach/Neumann series). The **contribution** is a **synthesis** — a single typed identification
 > across decoherence, fixed-point logic, and relational dynamics — together with a set of philosophical
 > **readings** mounted on theorems, and the **mechanization artifact** itself (a sorry-free, axiom-audited
-> Lean+Agda corpus). The one place a *candidate-novel mathematical theorem* would live — that the seam's
-> Lawvere obstruction bites the **quantum partial trace specifically** — is **open** (Bridge B, §4), and
-> is labeled open everywhere it is touched.
+> Lean+Agda corpus). The one place a *candidate-novel mathematical theorem* lived — whether the seam
+> bites the **quantum partial trace specifically** — is now **resolved** (Bridge B, §4): the seam bites
+> the genuine `ptrace` on the **compact/no-broadcasting face**, and the cartesian/Lawvere face (route 1)
+> is shown *firewall-obstructed*, not merely unbuilt. The resolution is a synthesis on standard pieces
+> (non-injectivity of `ptrace`, no-broadcasting, the firewall), not new mathematics.
 
 This is deliberately the *deflationary* reading. We would rather under-claim here and have the synthesis
 and the artifact carry the weight than overclaim a theorem and have a reviewer find the seam unmarked.
@@ -29,7 +31,7 @@ and the artifact carry the weight than overclaim a theorem and have a reviewer f
 | --- | --- | --- |
 | **R — Rederivation** | The theorem is established mathematics; we re-prove it (often in a proof assistant, sometimes in a lighter special case) to have it *inside* the corpus with an audited axiom footprint. Novelty: ~0; value: the machine-checked artifact and the uniform setting. | A new theorem, not a re-proof. |
 | **S — Synthesis** | No single new theorem, but a non-obvious **identification** or **transport**: the same structure recognized across two domains the literature keeps apart, so that a known fact in one becomes a statement in the other. Novelty: the bridge, not the endpoints. | Showing the identification is *forced* (an equivalence/obstruction), not merely *available*. |
-| **N? — Novel-candidate** | A statement that, if it holds at the claimed generality, is not a re-proof of anything we can cite. In this corpus these are **either** philosophical readings (explicitly lenses, not proofs of the world) **or** the one open quantum-seam theorem. | A closed proof at the claimed generality (for the theorem); nothing (the readings are honest as readings). |
+| **N? — Novel-candidate** | A statement that, if it holds at the claimed generality, is not a re-proof of anything we can cite. In this corpus these are now **only** philosophical readings (explicitly lenses, not proofs of the world); the one *mathematical* candidate — the quantum-seam question (Bridge B) — has been **resolved** (§4) as a firewall dichotomy, i.e. as synthesis, not a new theorem. | Nothing further (the readings are honest as readings; Bridge B is settled). |
 
 A result can be **R in content, S in framing**: the theorem is old, the recognition that it *is* this
 phenomenon is the contribution. Most of the corpus is exactly this. We mark such rows `R / S`.
@@ -67,6 +69,7 @@ exhaustive. Lean/Agda names are the audited artifacts (see [`formal/README.md`](
 | --- | --- | --- | --- |
 | Partial trace on matrices; `⊗` = Kronecker; its defining laws | Standard linear algebra / quantum info | **R** | `MatrixModel`, `PartialTrace`. |
 | Decoherence **is** the partial trace; coherence conserved, relocated | Joos–Zeh, Zurek (einselection / reduced density matrix) | **R / S** | `Conservation.decoherence_is_partial_trace`. *Synthesis:* the same map is "forgetting the relation." |
+| **The seam on the genuine `ptrace`** — it collapses an entangled joint and its decohered shadow to one marginal, so a self holding only its marginal cannot recover the relation; the lost fiber is the non-broadcastable coherence | Non-injectivity of the partial trace; no-broadcasting (Barnum–Caves–Fuchs–Jozsa–Schumacher); the firewall | **R / S** | `QuantumSeamTrace.{ptrace_collapses_entanglement, no_ptrace_recovery, unresolved_fiber_is_coherence}`. **Bridge B, compact face** (see §4): moves route 2 from `dephase` to the real `ptrace`; route 1 shown firewall-obstructed. |
 | Firewall: compact-closed + cartesian copying ⇒ **thin** | Folklore (a cartesian compact-closed category is degenerate); Abramsky | **R / S** | `Compact.collapse`. *Synthesis:* this degeneracy **is** the knowing/feeling firewall — copyable (cartesian) vs entangled (compact) cannot coexist. |
 | No-cloning, categorical and concrete (cloning is nonlinear) | Abramsky (categorical no-cloning); Wootters–Zurek, Dieks | **R** | `Compact.no_cloning`, `NoCloning.no_linear_clone`. |
 | One forgetting: identity-collapse, dephasing, partial trace as one `Coarsening` | — (recognition) | **S** | Each non-injective for one reason (a residue); the unification is the content. |
@@ -105,7 +108,10 @@ Stripping the rederivations, what remains:
    functor and every decoherence result is a sighting of this one structure. That the *same* degeneracy
    theorem is the quantum no-cloning fact, the knowing/feeling firewall, and the limit of self-modeling
    is the non-obvious recognition. It is **synthesis, not theorem** — each endpoint is known; the
-   transport is the work.
+   transport is the work. The sharpest instance is **Bridge B** (§4): the partial-trace seam was the
+   candidate for a genuinely new theorem, and the resolution turned out to *be* the firewall — the seam
+   bites the real `ptrace` on the no-broadcasting face, and the Lawvere face is provably ruled out. The
+   work was recognizing which face, and proving the other impossible; not a new obstruction.
 
 2. **The readings on theorems.** Feeling-as-decoherence-differential, the seam-as-perpetual-feeling,
    indeterminism-as-unviewed-cause, the first-person surplus as freedom. These are **lenses**: each sits
@@ -121,13 +127,14 @@ Stripping the rederivations, what remains:
 
 ---
 
-## 4. The open bridges (named, not hidden)
+## 4. The bridges — open and resolved (named, not hidden)
 
-These are the genuine gaps. None is papered over in the corpus; this section collects them.
+None is papered over in the corpus; this section collects them. **Bridge B is now closed on the compact
+face** (route 1 ruled out by the firewall); the rest remain open.
 
-| # | Open bridge | Where it lives | Status |
+| # | Bridge | Where it lives | Status |
 | --- | --- | --- | --- |
-| **B** | The seam's Lawvere obstruction bites the **quantum partial trace specifically** (not just an abstract lossy map). **Route 1** (Lawvere-on-`ptrace` via a *reflexive domain* `D ≅ [D→D]` with `ptrace` as the diagonal) and **route 2** (the compact-face no-broadcasting argument) are partial: route 2 (`QuantumSeam`) bites the *real* `dephase` but via no-broadcasting, not the diagonal; route 1's machinery is built but the identification of `ptrace` with a reflexive-object diagonal is not done. | [`03.3`](03.3-decoherence.md), `QuantumSeam`, `ReflexiveSeam` | **OPEN — the one candidate-novel theorem.** If closed at the claimed generality, this is the corpus's only genuinely new *mathematical* result. Until then it is research, **not** an "inherent residue." |
+| **B** | Does the seam bite the **quantum partial trace specifically**? **Resolved as a dichotomy.** *Compact face (route 2):* the genuine `ptrace` collapses `entangle a` and its decohered shadow to one marginal (`QuantumSeamTrace.ptrace_collapses_entanglement`), so a self with only its marginal cannot recover the relation (`no_ptrace_recovery`); the unrecoverable fiber is exactly the non-broadcastable coherence (`unresolved_fiber_is_coherence`). *Cartesian face (route 1, Lawvere-on-`ptrace`):* shown **firewall-obstructed** — Lawvere's diagonal needs cartesian copy, which any non-trivial compact structure provably lacks (`QuantumSeamTrace.route1_needs_copy_blocked`, via `Compact.no_cloning`/`collapse`). | [`03.3`](03.3-decoherence.md), `QuantumSeamTrace`, `QuantumSeam`, `Compact` | **CLOSED on the compact face; route 1 ruled out.** The seam bites the real `ptrace` via no-broadcasting, and that is *necessarily* the only face — the firewall forbids the Lawvere face. Synthesis on standard pieces, **not new mathematics**. The standing `[reading]` (that the traced-out factor *is* the relationship, A2) is unchanged. |
 | **Conway-trace instance** | An explicit **fixpoint**-trace `TracedSMC` on the category of domains (the Hasegawa cartesian-trace = Conway-operator correspondence), with the full JSV/Conway–Bekić identities — the *interesting* domain trace. `DomainTraced` gives only the **scalar/identity** trace (honestly scoped). | [`03.1`](03.1-sparsity.md) note, `DomainTraced`, `GraphModel` | **OPEN (construction side).** By `ReflexiveModel`'s duality, orthogonal to the seam — a construction task, not a theory gap. |
 | **Sparsity step 2** | Cost-**sharing** over a graded poset of couplings (lax/sub-additive `c`): re-derive the bound with sharing allowed. | [`03.1 §3.5`](03.1-sparsity.md) | **OPEN.** The counting bound assumes an unstructured set of costs. |
 | **The conjecture lift** | Sparsity for **all of `Cl(𝕋)`** (Conjecture 3.3) and the spectral/closure form (Conjecture 3.4). | [`03.1 §3.4`](03.1-sparsity.md) | **OPEN (conjectural by design).** The topological *shape* is mechanized (Agda); the cost-graded lift is not. |
@@ -145,7 +152,8 @@ formalism cannot reach them, so their absence is a *result*, not an open bridge.
 - A `[reading]` is a **lens on** a theorem: the underlying statement is proved, the interpretation is
   not, and is honest only as interpretation.
 - An `[open]` / Bridge entry is **research**: a statement we believe but have not closed at the claimed
-  generality. The one that matters is Bridge B (§4).
+  generality. Bridge B is now resolved (§4); the ones that remain are the **conjecture lift** and
+  **cost-sharing** (sparsity step 2).
 
 If a future reader finds a claim in these pages stated more strongly than its tier here, **this ledger
 is the correction of record.**
