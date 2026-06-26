@@ -96,6 +96,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
+* `Scratch.Causation`    — a causality `[reading]` made a theorem: **the missing cause is the other** —
+                          conditioning on the other's hidden state restores determinism; local
+                          indeterminism *is* the un-viewed relational cause. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -131,3 +134,4 @@ import Scratch.RelationalAppearance
 import Scratch.QuantumSeam
 import Scratch.GraphModel
 import Scratch.DomainTraced
+import Scratch.Causation
