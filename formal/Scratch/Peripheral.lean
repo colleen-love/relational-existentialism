@@ -115,4 +115,29 @@ trace-preserving (the primitive / doubly-stochastic case). -/
 theorem dephase_trace_invariant [Fintype A] (M : Matrix A A ℝ) : (dephase M).trace = M.trace :=
   trace_dephase M
 
+/-! ### The peripheral set is sparse — the finite-dimensional spectral form of "few modes self-sustain" -/
+
+/-- The **diagonal support** of `E` — the peripheral / self-sustaining / known coordinates — has
+exactly `card A` elements. -/
+lemma card_diag [Fintype A] :
+    (Finset.univ.filter (fun ij : A × A => ij.1 = ij.2)).card = Fintype.card A := by
+  have h : (Finset.univ.filter (fun ij : A × A => ij.1 = ij.2))
+        = Finset.univ.image (fun a : A => (a, a)) := by
+    ext ⟨i, j⟩
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_image]
+    constructor
+    · intro hij; subst hij; exact ⟨i, rfl⟩
+    · rintro ⟨a, ha⟩; rw [Prod.mk.injEq] at ha; rw [← ha.1, ← ha.2]
+  rw [h, Finset.card_image_of_injective _ (fun a b hab => congrArg Prod.fst hab), Finset.card_univ]
+
+/-- **The peripheral (self-sustaining / known) set is sparse.** Under the reconciliation the
+self-sustaining relations are the peripheral = fixed = classical ones — the **diagonal** support of `E`.
+There are `card A` of them among `card (A × A) = (card A)²` couplings: a fraction `1/card A` that
+vanishes as the perspective grows. Stated exactly: `(diagonal).card · card A = card (A × A)`. The
+finite-dimensional spectral form of Conjecture 3.4's "few modes self-sustain". -/
+theorem peripheral_sparse [Fintype A] :
+    (Finset.univ.filter (fun ij : A × A => ij.1 = ij.2)).card * Fintype.card A
+      = Fintype.card (A × A) := by
+  rw [card_diag, Fintype.card_prod]
+
 end RelExist.Peripheral
