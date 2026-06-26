@@ -37,6 +37,10 @@ Read in order:
    **biology** — eigenforms; **AI** — feedback = the trace; and the **firewall** for the
    cartesian/social domains), the **free traced SMC `Cl(𝕋)`** with its universal functor,
    and the **monoidal-coherence** refinement are all mechanized.
+6. [`05-provenance.md`](05-provenance.md) — **the honest accounting**: per result,
+   **rederivation vs synthesis vs novel-candidate**, and the open bridges named in one place
+   (the one candidate-novel theorem is Bridge B, the quantum-seam obstruction — *open*). Read this
+   first if you are reviewing the claims.
 
 ## Status legend
 

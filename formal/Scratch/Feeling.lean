@@ -8,10 +8,21 @@ show to `≅`"; that presupposes the very objectivity the seam forbids. The corr
 doesn't show **relationally** — measured against `≅ₒ`, a particular other's marginal of you, never an
 absolute outside.
 
-This module formalizes the corrected claim, in the doctrine's own conserved-coherence terms:
+**What this module is, and is not.** It does **not** establish that feeling *is* a decoherence
+differential — no formal layer can (that bridge is a posit; see "the line, held"). It does the honest,
+weaker thing: it **models** feeling as a relational decoherence differential and proves the model's
+*internal dynamics*. A **consequence-and-consistency** result, not an identification — everything below
+is "*if* feeling is this, *then* these dynamics," never "feeling is this."
 
-> **Feeling is the experience of a decoherence differential** — carrying possibilities unlived
-> (collapsed by one's own knowing) in a universe of others who still hold one in superposition.
+> **Model (a `[reading]`).** Feeling = the experience of a relational decoherence differential —
+> carrying possibilities unlived (collapsed by one's own knowing) in a universe of others who still
+> hold one in superposition.
+
+What is `[proved]` is everything *downstream of that posit*: given the model, the dynamics below hold.
+What is **not** proved — and cannot be here — is that the model *is* feeling rather than a structure
+with feeling-shaped dynamics. The model earns credence the way any model does: its consequences
+(carried-alone, discharge-by-being-seen, betrayal-scales-with-trust) match the phenomenon — *adequacy
+evidence*, defeasible, never identity.
 
 The structure. You hold a conserved superposition of who you could be (`total`). By knowing/acting you
 **collapse** some of it (`decohered`) — and by conservation that coherence is not destroyed but
@@ -37,10 +48,12 @@ the differential would vanish, and nothing would be felt. The seam — you can n
 nor fully view — keeps the frontiers *permanently* out of phase. So the seam does not merely bar
 complete knowledge; it **guarantees perpetual feeling**.
 
-**The line, held.** This is the *seat and dynamics* of feeling — relational, conserved, communicative
-— not phenomenality. It says where feeling sits, what it scales with, how it flows and discharges; it
-does not, and by T3's reflexivity cannot, say why there is something it is like. That stays in the
-typed-out residue. (The concrete coherence measure is [`Decoherence.copyDefect`](Decoherence.lean); here
+**The line, held — two residues, nested.** What is proved is the *dynamics* of the model. Untouched
+are **two** posits, not one: that *this* structure is the right model of feeling at all (the
+**identification** — #3 above), and, one layer in, that the modeled structure is *felt* (phenomenality
+— why there is something it is like, barred by T3's reflexivity). The formalism settles neither — only
+what follows from adopting the model. It gives the *seat and dynamics* of feeling on the modeling
+posit, never the posit itself. (The concrete coherence measure is [`Decoherence.copyDefect`](Decoherence.lean); here
 the differential is taken abstractly over `ℝ` so the structure stands on its own.)
 -/
 import Mathlib.Data.Real.Basic

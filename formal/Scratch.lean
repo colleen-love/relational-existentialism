@@ -87,6 +87,53 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           against `≅ₒ`, but "the surplus is exactly nondeterminism" does **not** — a
                           deterministic system has a relational surplus (feeling from the seam, not
                           choice). ✅ verified.
+* `Scratch.QuantumSeam`  — bridge B route 2: the seam on the **actual** `dephase` (lossy, irreversible)
+                          via **no-broadcasting** — the compact face of the firewall whose cartesian
+                          face is Lawvere. (B-as-Lawvere/route 1 remains open.) ✅ verified.
+* `Scratch.QuantumSeamTrace` — **bridge B, closed on the compact face**: the seam on the *genuine*
+                          `ptrace` — it collapses `entangle a` and its decohered shadow to one marginal
+                          (`ptrace_collapses_entanglement`), so a self with only its marginal cannot
+                          recover the relation (`no_ptrace_recovery`), and the lost fiber is exactly the
+                          non-broadcastable coherence; route 1 (Lawvere) is shown *firewall-obstructed*,
+                          not merely unbuilt. ✅ verified.
+* `Scratch.GraphModel`   — **Pω**, the Plotkin–Scott graph model: a concrete non-trivial reflexive
+                          object — continuous self-maps are a retract of `Set ℕ` (`app (Graph f) = f`),
+                          with the fixpoint (GoI's `Y`) and the `K` combinator. ✅ verified.
+* `Scratch.SelfApplication` — the **internal `Y` combinator via self-application** in `Pω`: the diagonal
+                          `fun x => app x x` is Scott-continuous (`selfApp_continuous`), so
+                          `Y f := app (W f) (W f)` is an element and `app f (Y f) = Y f`
+                          (`Ycomb_fixed`) — Lawvere's diagonal realized as the trace, concretely. Honest
+                          caveat: `Pω` is the *cartesian* λ-model (the non-cartesian/linear reflexive
+                          object is separate, firewall-constrained). ✅ verified.
+* `Scratch.SparsitySharing` — **sparsity step 2 (cost-sharing):** footprints as `Finset`s of relatings,
+                          cost = card. Sharing lowers spend (`subadditive_spend_le_sum`); the no-sharing
+                          (disjoint) case recovers `≤ β/m` (`disjoint_count_bound`); but **full sharing
+                          breaks** the count bound (`full_sharing_unbounded`) and a **positive private
+                          footprint** is exactly what rescues it (`private_count_bound`). ✅ verified.
+* `Scratch.ConwayTrace`  — the **Conway fixed-point operator on domains** (= the cartesian trace, by
+                          Hasegawa): the parameterized lfp `pfp` with fixpoint/least/parameter-naturality,
+                          the **rolling/dinaturality** rule `lfp (g∘h) = g (lfp (h∘g))` (the trace-slide
+                          shadow; not in mathlib), and the Bekić **diagonal** rule. ✅ verified.
+* `Scratch.ValuationBoundary` — the **valuation boundary:** a *densely-ordered* standing lattice admits
+                          **no** ℕ-valuation (`no_strictMono_to_nat_of_dense`), so a non-unit numeric
+                          per-return cost is *provably* unavailable without discretization — closing the
+                          last sparsity residue as a proved boundary (ACC ⇒ μ; dense ⇒ no μ). ✅ verified.
+* `Scratch.IntConstruction` — the **GoI / `Int` construction** on any traced SMC: the non-cartesian,
+                          fully-dual (compact) arena where a linear reflexive object lives — objects
+                          `(A⁺,A⁻)`, two-way homs, tensor/unit, and the **dual** (wire-swap) proved an
+                          involution, monoidal, unit-fixing. Object-level core; composition-via-trace and
+                          the snake equations are the flagged remainder. ✅ verified.
+* `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
+                          join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
+                          which stays open). ✅ verified.
+* `Scratch.Causation`    — a causality `[reading]` made a theorem: **the missing cause is the other** —
+                          conditioning on the other's hidden state restores determinism; local
+                          indeterminism *is* the un-viewed relational cause. ✅ verified.
+* `Scratch.SparsityPosits` — discharging the two sparsity posits: `d ≥ 2` given structural meaning
+                          (**genuine return** = not-given ∧ not-one-shot, `genuine_return_iff`) and shown
+                          load-bearing (positive floor ⟺ sparse vs dense); and the valuation `μ`
+                          **constructed** as the orbit's return index (the genuine returns are strict
+                          standing increases), discharging it for unit cost. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -119,3 +166,14 @@ import Scratch.Convergence
 import Scratch.Stabilization
 import Scratch.Feeling
 import Scratch.RelationalAppearance
+import Scratch.QuantumSeam
+import Scratch.GraphModel
+import Scratch.DomainTraced
+import Scratch.Causation
+import Scratch.SparsityPosits
+import Scratch.QuantumSeamTrace
+import Scratch.SelfApplication
+import Scratch.SparsitySharing
+import Scratch.ConwayTrace
+import Scratch.ValuationBoundary
+import Scratch.IntConstruction
