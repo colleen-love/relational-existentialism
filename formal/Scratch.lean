@@ -105,6 +105,24 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`Ycomb_fixed`) — Lawvere's diagonal realized as the trace, concretely. Honest
                           caveat: `Pω` is the *cartesian* λ-model (the non-cartesian/linear reflexive
                           object is separate, firewall-constrained). ✅ verified.
+* `Scratch.SparsitySharing` — **sparsity step 2 (cost-sharing):** footprints as `Finset`s of relatings,
+                          cost = card. Sharing lowers spend (`subadditive_spend_le_sum`); the no-sharing
+                          (disjoint) case recovers `≤ β/m` (`disjoint_count_bound`); but **full sharing
+                          breaks** the count bound (`full_sharing_unbounded`) and a **positive private
+                          footprint** is exactly what rescues it (`private_count_bound`). ✅ verified.
+* `Scratch.ConwayTrace`  — the **Conway fixed-point operator on domains** (= the cartesian trace, by
+                          Hasegawa): the parameterized lfp `pfp` with fixpoint/least/parameter-naturality,
+                          the **rolling/dinaturality** rule `lfp (g∘h) = g (lfp (h∘g))` (the trace-slide
+                          shadow; not in mathlib), and the Bekić **diagonal** rule. ✅ verified.
+* `Scratch.ValuationBoundary` — the **valuation boundary:** a *densely-ordered* standing lattice admits
+                          **no** ℕ-valuation (`no_strictMono_to_nat_of_dense`), so a non-unit numeric
+                          per-return cost is *provably* unavailable without discretization — closing the
+                          last sparsity residue as a proved boundary (ACC ⇒ μ; dense ⇒ no μ). ✅ verified.
+* `Scratch.IntConstruction` — the **GoI / `Int` construction** on any traced SMC: the non-cartesian,
+                          fully-dual (compact) arena where a linear reflexive object lives — objects
+                          `(A⁺,A⁻)`, two-way homs, tensor/unit, and the **dual** (wire-swap) proved an
+                          involution, monoidal, unit-fixing. Object-level core; composition-via-trace and
+                          the snake equations are the flagged remainder. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -155,3 +173,7 @@ import Scratch.Causation
 import Scratch.SparsityPosits
 import Scratch.QuantumSeamTrace
 import Scratch.SelfApplication
+import Scratch.SparsitySharing
+import Scratch.ConwayTrace
+import Scratch.ValuationBoundary
+import Scratch.IntConstruction
