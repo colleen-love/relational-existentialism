@@ -37,6 +37,19 @@ dual, `(g∘f)ᵈ = fᵈ∘gᵈ`, likewise waits on that composition.) Compositi
 that wiring provably right (not merely type-correct) is the work left. By `ReflexiveModel`'s duality this
 whole construction is the **construction** side — it would host `Y` as the trace, orthogonal to the seam.
 
+**Why composition + snake are research-grade (the grounded status).** The composition `g ∘ f` permutes
+`A⁺⊗C⁻⊗B⁺⊗B⁻` into `f`'s and `g`'s inputs, applies `f ⊗ g`, re-permutes the outputs, and traces over
+`B⁺⊗B⁻` — a long composite of braids and associators — after which the category laws (`id`, `assoc`)
+and the **snake/triangle** equations must be derived from the seven JSV trace axioms *plus* the
+symmetric-monoidal coherence ([`Coherence`](../RelExist/Coherence.lean)). This is exactly the
+Joyal–Street–Verity / Abramsky–Haghverdi–Scott theorem "`Int(C)` is compact closed", and it is hard
+precisely because the base is **non-strict**: the associators/unitors are honest isomorphisms threaded
+through every equation (even the concrete `Rel` model is non-strict — its `raHom`/`raInv` relate the
+*distinct* types `(X×Y)×Z` and `X×(Y×Z)`). mathlib has no traced/compact-closed scaffolding to inherit.
+Everything verifiable *without* this composition is a single `C`-level conjugation — which is why
+`IntDualHom` and its laws close (above), and why the morphism layer stops exactly there. The composition
+and snake equations are left as the named research-grade remainder rather than asserted.
+
 **Honest scope.** A rederivation (the `Int` construction is standard) mechanized at the object level on
 our bespoke `TracedSMC`. The contribution is exhibiting the compact, fully-dual, *non-cartesian* arena
 concretely on any traced SMC — the home of the linear reflexive object — with the morphism layer
