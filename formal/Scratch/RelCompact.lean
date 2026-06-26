@@ -20,18 +20,22 @@ are in [`Rel`](Rel.lean). We also instantiate the repo's minimal
 [`Compact.CompactClosed`](Compact.lean) (the *name* bijection `(A ⟶ B) ≃ (A ⊗ Bᵈ ⟶ I)`) for `Rel`
 (`relCompactClosed`), so `Rel` is compact closed in the firewall sense *and* the full zigzag sense.
 
-**Honest scope.** This closes the **snake equations** for the canonical compact-closed model concretely
-(`sorry`-free, `aesop`). The fully *abstract* `Int(C)` composition-via-trace for an arbitrary non-strict
-`C`, and the linear *reflexive object* inside it, remain the named research-grade remainder
-([`IntConstruction`](IntConstruction.lean)).
+We also close **composition via the trace** here: the GoI composition `relIntComp` (an `∃` over the
+shared `B`-loop) makes `Int(Rel)` a genuine **category** — identity and associativity laws verified.
+
+**Honest scope.** This closes the **snake equations and the trace-composition** for the canonical
+compact-closed model concretely (`sorry`-free, `aesop`). The fully *abstract* `Int(C)`
+composition-via-trace for an arbitrary non-strict `C`, and the linear *reflexive object* inside it,
+remain the named research-grade remainder ([`IntConstruction`](IntConstruction.lean)).
 -/
 import Aesop
 import Scratch.Rel
 import Scratch.Compact
+import Scratch.IntConstruction
 
 namespace RelExist.RelCompact
 
-open RelExist.RelModel
+open RelExist.RelModel RelExist.Traced
 
 universe u
 
@@ -88,5 +92,47 @@ def relCompactClosed : Compact.CompactClosed.{u+1, u} where
   unit := PUnit
   dual := fun X => X
   name := relName
+
+/-! ### The GoI composition in `Int(Rel)` — composition via the trace, concretely
+
+The `Int`-construction bridge also wanted **composition via the trace**. In the canonical model it is
+the Geometry-of-Interaction "execution" formula made literal: trace out the shared `B`-loop with an
+existential. We verify it forms a **category** — identity and associativity laws — by `aesop`. -/
+
+open RelExist.IntConstruction
+
+/-- **The GoI composition** `g ∘ f` in `Int(Rel)`: feed `f`'s `B⁺` output into `g`'s `B⁺` input and
+`g`'s `B⁻` output into `f`'s `B⁻` input, tracing the shared `B`-loop `∃ b⁺ b⁻`. This *is* the trace
+over `B⁺ ⊗ B⁻` of the rewired `f, g`, written out as a relation. -/
+def relIntComp {X Y Z : IntObj relTracedSMC}
+    (f : IntHom relTracedSMC X Y) (g : IntHom relTracedSMC Y Z) :
+    IntHom relTracedSMC X Z :=
+  fun p q => ∃ b1 b2, f (p.1, b2) (b1, q.2) ∧ g (b1, p.2) (q.1, b2)
+
+/-- **Left identity law** — `IntId ∘ f = f`. -/
+theorem relIntComp_id_left {X Y : IntObj relTracedSMC} (f : IntHom relTracedSMC X Y) :
+    relIntComp (IntId relTracedSMC X) f = f := by
+  funext p q
+  simp only [relIntComp, IntId, relTracedSMC, rid]
+  aesop
+
+/-- **Right identity law** — `f ∘ IntId = f`. -/
+theorem relIntComp_id_right {X Y : IntObj relTracedSMC} (f : IntHom relTracedSMC X Y) :
+    relIntComp f (IntId relTracedSMC Y) = f := by
+  funext p q
+  simp only [relIntComp, IntId, relTracedSMC, rid]
+  aesop
+
+/-- **Associativity** — `(h ∘ g) ∘ f = h ∘ (g ∘ f)`: the two ways of tracing the two loops agree. So
+`Int(Rel)` is a genuine category under the GoI trace composition. -/
+theorem relIntComp_assoc {W X Y Z : IntObj relTracedSMC}
+    (f : IntHom relTracedSMC W X) (g : IntHom relTracedSMC X Y) (h : IntHom relTracedSMC Y Z) :
+    relIntComp (relIntComp f g) h = relIntComp f (relIntComp g h) := by
+  funext p q
+  simp only [relIntComp]
+  apply propext
+  constructor
+  · rintro ⟨b1, b2, ⟨c1, c2, hf, hg⟩, hh⟩; exact ⟨c1, c2, hf, b1, b2, hg, hh⟩
+  · rintro ⟨c1, c2, hf, b1, b2, hg, hh⟩; exact ⟨b1, b2, ⟨c1, c2, hf, hg⟩, hh⟩
 
 end RelExist.RelCompact

@@ -133,13 +133,15 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           **involutive** `(fᵈ)ᵈ = f` over a coherent traced SMC (0 axioms, by `γ∘γ = id`).
                           Composition-via-trace and the snake equations (and the dual's full
                           functoriality) are the flagged remainder. ✅ verified.
-* `Scratch.RelCompact`   — **`Rel` is compact closed, snake equations and all**: the canonical model
-                          closed concretely. Self-dual (`Aᵈ = A`), with the diagonal cup/cap and **both
-                          zigzag / triangle identities** proved `= id` (`rel_snake_right`,
-                          `rel_snake_left`, via `aesop` as for `Rel`'s trace axioms), plus the minimal
-                          `Compact.CompactClosed` name bijection (`relCompactClosed`). The compact-closed
-                          **snake axioms** the `Int` bridge wanted, discharged in the canonical model;
-                          the abstract non-strict `Int(C)` composition stays the named remainder. ✅ verified.
+* `Scratch.RelCompact`   — **`Rel` compact closed + `Int(Rel)` composition**: the canonical model closed
+                          concretely. Self-dual, diagonal cup/cap, **both zigzag / triangle identities**
+                          proved `= id` (`rel_snake_{right,left}`), the `Compact.CompactClosed` name
+                          bijection (`relCompactClosed`), **and the GoI composition-via-trace**
+                          (`relIntComp`, `∃` over the shared loop) making `Int(Rel)` a **category** —
+                          identity + **associativity** laws (`relIntComp_id_{left,right}`,
+                          `relIntComp_assoc`), all `aesop`. The `Int` bridge's composition + snake axioms,
+                          discharged in the canonical model; the abstract non-strict `Int(C)` stays the
+                          named remainder. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
