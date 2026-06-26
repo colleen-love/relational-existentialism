@@ -155,6 +155,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
                           3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
                           extreme (`idempotent_pow`). ✅ verified.
+* `Scratch.PerronFrobenius` — **Perron–Frobenius existence** (the lift's last existence gap): a
+                          column-stochastic map has **eigenvalue 1** (`exists_invariant_vector`, via the
+                          all-ones vector fixed by `Mᵀ` and `det(M-1)=0`), and a *nonnegative* one has a
+                          positive **invariant state** (`exists_invariant_state` — the full
+                          Perron–Frobenius, by the `w = |v|` trick: `Mw ≥ |Mv| = w` with equal total ⇒
+                          `Mw = w`, no Brouwer/Cesàro). The relational **weight** of Decision 1, existence
+                          discharged in general finite dim. ✅ verified.
 * `Scratch.DomainTraced` — the **simplest domains (complete lattices) as a `TracedSMC`** via the
                           join-monoid (the scalar/identity trace; *not* the Hasegawa fixpoint trace,
                           which stays open). ✅ verified.
@@ -233,3 +240,4 @@ import Scratch.IntConstruction
 import Scratch.RelCompact
 import Scratch.ReflexiveCompact
 import Scratch.SpectralDecay
+import Scratch.PerronFrobenius
