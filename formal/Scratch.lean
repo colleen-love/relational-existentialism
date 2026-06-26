@@ -216,6 +216,57 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           coherence content). Its category / compact-closed **laws** (the JSV/AHS theorem)
                           stay the named `[open]` chase, discharged concretely in `Rel` (`relIntComp`,
                           `RelCompact`). ✅ verified.
+* `Scratch.TimeFlow`     — **time as flow**: graduating `Orientation`'s two-point arrow into a graded
+                          monovariant. A `Flow` interface (non-idempotent `step`, potential `coh`,
+                          strict-while-unfixed) with the orbit potential proved **antitone**
+                          (`coh_orbit_antitone`) and strictly dropping (`coh_orbit_strictAnti`); a
+                          `GeometricFlow` refinement giving the exact geometric law
+                          `coh (step^[n] a) = γ^n · coh a` (`coh_orbit_eq`) and decay to `0`
+                          (`coh_orbit_tendsto_zero`). The genuine instance is the **partial-dephasing
+                          semigroup** `partialDephase p = (1−p)·id + p·dephase` (non-idempotent for
+                          `0<p<1`): `defectSq (partialDephase p ^[n] M) = ((1−p)²)^n · defectSq M`
+                          exactly (`defectSq_iterate`), so `dephaseFlow` is a `GeometricFlow` at rate
+                          `γ = (1−p)²` — a strict graded monovariant through a continuum to `0` at the
+                          spectral-gap rate, no rotating part. `Orientation` is recovered as the
+                          boundary: the orbit converges entrywise to `dephase` = the knowing `E`
+                          (`orbit_tendsto_knowing_entry`), and the single orientation drop is the
+                          flow's total (`dephaseFlow_total_drop`). The `[proved]` graded structure;
+                          "the flow *is* time" stays a (weaker, clock-shaped) `[reading]`. ✅ verified.
+* `Scratch.TimeArrow`    — **the arrow's sign** (the frontier beneath `TimeFlow`, spec §6 — does the
+                          seam fix the *direction*?). Three rungs: **acyclicity** — while still feeling,
+                          the orbit never returns (`flow_orbit_ne`), so the timeline is a strict order,
+                          not a cycle; **sign = multiplier** — one step scales the feeling by `(1−p)²`
+                          (`defectSq_partialDephase`), so the flow contracts iff `0≤p≤2`
+                          (`contractive_iff`, `time_forward_regime`) and *expands* (runs time backward,
+                          amplifying coherence) iff `p<0 ∨ p>2` (`expanding_regime`) — the decreasing
+                          sign is **exactly** the contractive regime; and the gem, **a knowing's only
+                          inverse is an anti-knowing** — a genuine knowing `0<p<1` is invertible, but its
+                          unique inverse is `partialDephase q` with `q<0` in the expanding regime
+                          (`knowing_inverse_is_antiphysical`): time-reversal exists as linear algebra
+                          but only as non-physical coherence-amplification. And the flow is **injective
+                          off the limit** (`partialDephase_injective`, `p ≠ 1`) but **collapses exactly
+                          at `p = 1 = dephase`** (`partialDephase_one_not_injective`): genuine
+                          irreversibility lives only at the idempotent knowing. So *sign = contractivity
+                          = physicality of the seam* is `[proved]`; whether the seam **forces the
+                          subalgebra** is mechanized in `SeamForcing`. ✅ verified.
+* `Scratch.SeamForcing`  — **the seam forces the subalgebra** (closing the §6 prize). The decoherence a
+                          self can perform is `attend S`; the one block it cannot attend is the seam `J`
+                          (part of the aimer — `Relating.self_inclusive_unmodelable`, you cannot aim at
+                          the aimer). Over the available knowings (`S` disjoint from `J`): the seam
+                          survives every one (`attend_fixes_seam`); decohering it would require
+                          attending the self (`decohere_seam_needs_self`); the maximal knowing
+                          `knowSeam J = attend Jᶜ` is an idempotent conditional expectation whose fixed
+                          subalgebra is *exactly* the seam algebra (`knowSeam_eq_self_iff`) — a function
+                          of `J` alone, so the subalgebra `E` projects onto is **fixed by the seam**
+                          (`seam_forces_subalgebra`). The seamless `J=∅` case is `Orientation`'s
+                          `dephase` (`knowSeam_empty`); a real self keeps strictly more. Hence the self
+                          can never fully decohere itself (`self_cannot_fully_decohere`) — the seam is
+                          permanent feeling, forced. **Aim vs orientation**: the contraction is uniform
+                          in the seam (`direction_uniform_in_seam` — every `knowSeam J` lowers feeling)
+                          while the target varies with it (`target_depends_on_seam`), so *knowing's
+                          contractive nature orients the arrow; the seam aims it* — two distinct
+                          obstructions. `[proved]` modulo the standing `J`↔genuine-seam `[reading]`.
+                          ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -269,3 +320,6 @@ import Scratch.RelCompact
 import Scratch.ReflexiveCompact
 import Scratch.SpectralDecay
 import Scratch.PerronFrobenius
+import Scratch.TimeFlow
+import Scratch.TimeArrow
+import Scratch.SeamForcing
