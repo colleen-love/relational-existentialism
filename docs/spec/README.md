@@ -94,6 +94,14 @@ backed by its own Lean module:
   (`WeaveGfp`) + no-whole-model; (T) cosmic time is the knowing's tick-support with lapses frozen, not
   dissolved (`Scratch/CosmicTime.lean`). A theorem **relative to one reading** — flow = physical time,
   the 13.8-Gyr clock.
+- [`03.15-band-coincidence.md`](03.15-band-coincidence.md) — **is permanent feeling the same as
+  energy?** Closes the open question of [`03.9-space-energy.md`](03.9-space-energy.md): on one carrier
+  `Matrix A A ℂ`, under an explicit alignment hypothesis `H_align : ker D = J`, the seam-protected
+  (operationally conserved) band **coincides** with the rotating (dynamically conserved, energy) band —
+  collapsing the three-term split *knowing + energy + feeling* to two-term *undifferentiated = knowing +
+  energy*, with the conserved ground proved an internal direct sum `knowing ⊕ energy`. A counter-witness
+  shows `H_align` is necessary (`Scratch/BandCoincidence.lean`, `[proved]` sorry-free). The bet is
+  `H_align`.
 
 ## Status legend
 
