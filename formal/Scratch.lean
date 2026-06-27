@@ -307,9 +307,13 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           (`selves_density_tendsto_zero`) — **independent of `N`**. Yet multiplicity is real: an
                           explicit two-basin map carries **two** genuine attractors (`two_attracting_selves`),
                           non-globally-contracting exactly as uniqueness requires. So selves are `>1`
-                          (contingency) and `o(N)` (sparse): controlled multiplicity, bounded by structure. The
-                          analytic identification of `r`/`m` with the infinite-dim cone spectral gap stays the
-                          named `[reading]`. ✅ verified.
+                          (contingency) and `o(N)` (sparse): controlled multiplicity, bounded by structure.
+                          **The reading is closed too:** the basin `r` is built from the *literal* Fréchet
+                          derivative `A = DΦ_c` with `‖A‖<1` (`attractingFixed_of_hasFDerivAt`, any real Banach
+                          space, rate `(1+‖A‖)/2` set by the gap `1-‖A‖`), and the capacity is the **explicit**
+                          `⌊(b-a)/r⌋+1` (`separated_card_le_of_Icc`), so the self-count is bounded entirely by
+                          the gap (`selves_card_le_gap_capacity`) — only the note that operator norm dominates
+                          the cone spectral radius is a definitional `[reading]`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
