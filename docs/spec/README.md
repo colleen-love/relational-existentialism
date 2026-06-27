@@ -101,7 +101,10 @@ backed by its own Lean module:
   collapsing the three-term split *knowing + energy + feeling* to two-term *undifferentiated = knowing +
   energy*, with the conserved ground proved an internal direct sum `knowing ⊕ energy`. A counter-witness
   shows `H_align` is necessary (`Scratch/BandCoincidence.lean`, `[proved]` sorry-free). The bet is
-  `H_align`.
+  `H_align` — and its **postscript** (`Scratch/BandFromAxioms.lean`) discharges even that: taking the
+  seam to be A3's own "decoherence-free subalgebra" gloss `Peri(Φ_c)` (its off-diagonal block), `H_align`
+  becomes a *theorem* from contractivity + nondegeneracy alone, with **no fourth axiom** — three axioms,
+  said in full.
 
 ## Status legend
 

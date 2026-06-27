@@ -109,6 +109,14 @@ dynamics, not a point. The channel-on-states (Schrödinger) reading, which would
 the level of a state, is the **road not taken** — and it is taken nowhere in the development:
 every self here is the eigenform `νΦ_c`, never an invariant density matrix.
 
+*Note (the gloss vs. the formalization).* "Decoherence-free subalgebra" and the formalized `νΦ_c` are
+**not** the same object: `νΦ_c` is the *strict* fixed point (the `μ = 1`, fixed/known band), while the
+decoherence-free subalgebra is the larger **peripheral** block `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which
+also carries the rotating (`‖μ‖ = 1, μ ≠ 1`, *energy*) band. Reading A3's gloss literally — the self **is**
+`Peri(Φ_c)` — is what closes the band-coincidence bet `H_align` of
+[03.15](03.15-band-coincidence.md#postscript--is-h_align-a-fourth-axiom-scratchbandfromaxiomslean)
+*without a fourth axiom* (`Scratch/BandFromAxioms.lean`): it is already A3, merely written in full.
+
 In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
 [`RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)) this reduces to the threshold
 form: with `loop_R` and budget `β`,

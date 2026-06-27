@@ -469,6 +469,7 @@ import Scratch.CosmicTime
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.BandCoincidence
+import Scratch.BandFromAxioms
 import Scratch.SpectralMultiplicity
 import Scratch.SeamComonoid
 import Scratch.FoxTheorem
