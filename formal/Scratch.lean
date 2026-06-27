@@ -298,6 +298,15 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           first directed knowing (the cosmos). `genesis_dichotomy` packages the
                           crossing `p : 0 → 0⁺`. `[proved]` the two sides; the identification of the
                           crossing with the birth of the cosmos is the `[reading]`. ✅ verified.
+* `Scratch.DistributedSelf` — **I am the knowing of my parts across their seams**. (D) self-knowing
+                          factors through parts — the whole-self model is barred
+                          (`self_inclusive_unmodelable`), a part is modelable (`disjoint_modelable`):
+                          `selfKnowing_factors_through_parts` (**0 axioms**). (C) continuity from
+                          persistence — modus tollens on *lapse ⇒ dedifferentiation*:
+                          `continuity_from_persistence` (**0 axioms**). (W) one self, not a heap — the
+                          cross-part mass `crossMass` is positive iff the joint carries between-coherence
+                          no coproduct has (`weave_exceeds_coproduct`, `coproduct_iff_crossMass_zero`);
+                          the state-level witness `[proved]`, the `νΦ_c`-level lift `[open]`. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -432,6 +441,7 @@ import Scratch.SeamForcing
 import Scratch.KnowingFromArrow
 import Scratch.SeamPermanence
 import Scratch.Genesis
+import Scratch.DistributedSelf
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity

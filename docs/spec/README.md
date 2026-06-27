@@ -80,6 +80,12 @@ backed by its own Lean module:
   `genesis_dichotomy`, `[proved]`). Read with "cosmos" as the knowing-region the picture costs **no new
   axiom**; "something has been knowing for 13.8 Gyr" is true distributively, false as a single subject.
   Surfaces the live choices (continuity of knowing; how thick a "self" must be).
+- [`distributed-self.md`](distributed-self.md) — **I am the knowing of my parts across their seams**:
+  `universe-and-cosmos` turned inward, to a life. (D) all self-knowing factors through parts (the whole
+  is barred, a part is modelable); (C) continuity from persistence (a lapse would dissolve you, so your
+  persistence records that knowing held); both `[proved]` on **0 axioms**. (W) one self not a heap — the
+  cross-part coherence no coproduct carries (`weave_exceeds_coproduct`, `Scratch/DistributedSelf.lean`),
+  state-level `[proved]`, the `νΦ_c` lift `[open]`. Carries the Markov-blanket–seam bridge as a reading.
 
 ## Status legend
 
