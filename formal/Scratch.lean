@@ -292,6 +292,56 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           modulus-`<1` band is the **arrow** (`arrow_dissipates`); `energy_arrow_split`
                           shows both in one generator's spectrum. `[proved]` witness; the general CPTP
                           peripheral structure theorem stays the narrated `[open]`. ✅ verified.
+* `Scratch.SpectralMultiplicity` — **Conjecture 3.4's new mathematics, closed**: the reconciliation of
+                          *sparse* and *multiple*. Standard nonlinear Perron–Frobenius forces **uniqueness**
+                          (`unique_fixed_of_global_contraction` — global contraction ⇒ one self, the
+                          primitive/subhomogeneous regime); the doctrine's **contingency** needs *more than
+                          one*. The bridge reads the abstract `‖x‖<1` of `Distribution` as the **linearization**
+                          `x = DΦ_c`: `feedbackMap_contract` makes the living regime a contraction with rate
+                          `‖x‖`, and `living_self_unique_attractor` exhibits `sustained x b` as the unique,
+                          geometrically-reached attractor (piece 1). The **counting bound** (piece 3, the gem):
+                          a locally attracting self is **isolated** (`attracting_isolated`), so distinct selves
+                          are **`r`-separated** (`attractors_separated` — exclusivity *derived* from the gap,
+                          not posited), and an `r`-separated set inside a capacity-`m` cover has `≤ m` points
+                          (`separated_card_le_cover`), so the density of selves `→ 0`
+                          (`selves_density_tendsto_zero`) — **independent of `N`**. Yet multiplicity is real: an
+                          explicit two-basin map carries **two** genuine attractors (`two_attracting_selves`),
+                          non-globally-contracting exactly as uniqueness requires. So selves are `>1`
+                          (contingency) and `o(N)` (sparse): controlled multiplicity, bounded by structure.
+                          **The reading is closed too:** the basin `r` is built from the *literal* Fréchet
+                          derivative `A = DΦ_c` with `‖A‖<1` (`attractingFixed_of_hasFDerivAt`, any real Banach
+                          space, rate `(1+‖A‖)/2` set by the gap `1-‖A‖`), and the capacity is the **explicit**
+                          `⌊(b-a)/r⌋+1` (`separated_card_le_of_Icc`), so the self-count is bounded entirely by
+                          the gap (`selves_card_le_gap_capacity`) — only the note that operator norm dominates
+                          the cone spectral radius is a definitional `[reading]`. ✅ verified.
+* `Scratch.SeamComonoid` — **the seam is the non-comonoidal residue** (concrete layer; abstract layer
+                          [`RelExist.Fox`](../RelExist/Fox.lean)). Fox's hallmark: *classical / copyable /
+                          cartesian* is one notion — carrying a copy comonoid — and in the matrix model that
+                          is `IsClassical` (`cartesian_iff_copyDefectFree`: copyable ⟺ `copyDefect = 0`). The
+                          central theorem `seam_is_noncomonoidal_residue`: a seam state with a **live**
+                          coherence carries **no** copy, and **no available knowing** (`attend S`, `S` disjoint
+                          from the seam, via `attend_fixes_seam`) can move it into the copyable fragment. A
+                          **self-inclusive** seam (a genuine between) forces such a state to exist
+                          (`self_inclusion_forces_residue`), so the headline `seam_is_the_common_obstruction`:
+                          every seam state carries a copy **iff** the seam has no between — the self, being
+                          self-inclusive, is at once uncopyable, non-broadcastable, and incompletely
+                          self-knowable, **three names for one missing comonoid**. `seam_two_faces` packages
+                          the unification: one copy failure, the monoidal (no-broadcast, survives every
+                          knowing) and cartesian (`dephase` cannot fix it) faces at once. ✅ verified.
+* `Scratch.FoxTheorem` — **Fox's hallmark, mechanized** (milestone 6; abstract `Type`-level layer
+                          [`RelExist.Fox`](../RelExist/Fox.lean)). The categorical §0.4 hallmark — *the
+                          cartesian fragment is exactly the presence of a uniform, natural `Δ`* — discharged
+                          over a genuine cartesian monoidal category by standing on mathlib's
+                          `CategoryTheory.Monoidal.Cartesian.Comon_`: `cartesianComonoid` (every object a
+                          comonoid, functorially — cartesian ⇒ natural copy), `comonoid_forced` (the
+                          **uniqueness**: any comonoid's comul is THE diagonal, counit THE terminal map — the
+                          copy is forced, not chosen), and `foxEquivalence` (`Comon_ C ≌ C` — comonoids ARE
+                          the objects). Instantiated at `Type` (`foxEquivalenceType`, `comonoid_forced_type`)
+                          and bridged to the doctrine's copy (`doctrine_copy_is_diagonal`: `Fox.cartesian`'s
+                          `(x,x)` is mathlib's diagonal). So §3.2's forward hallmark + uniqueness + the sharp
+                          equivalence are **mechanized, not cited**; the reverse direction (comonoid ⇒
+                          cartesian, Fox's classical hard half) is not in mathlib and stays the one cited
+                          result. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -350,3 +400,6 @@ import Scratch.TimeArrow
 import Scratch.SeamForcing
 import Scratch.Space
 import Scratch.RotatingSpectrum
+import Scratch.SpectralMultiplicity
+import Scratch.SeamComonoid
+import Scratch.FoxTheorem
