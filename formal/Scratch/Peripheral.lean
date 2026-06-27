@@ -2,7 +2,7 @@
 # The spectral picture of knowing — `E = dephase` as a peripheral spectral projection
 
 This is the finite-dimensional core of the **conjecture lift's** reconciliation (the relation-algebra
-model's Decisions 1–2, recorded in [03.1 §3.6](../../docs/spec/03.1-sparsity.md)): knowing `E` is a
+model's Decisions 1–2, recorded in [03.7](../../docs/spec/03.7-sparsity.md)): knowing `E` is a
 **spectral projection** onto a distinguished part of attention's spectrum, the weight is the *invariant
 state* (not an external primitive), and one asks whether the peripheral spectrum carries any *rotating*
 coherence (eigenvalue of modulus 1 but `≠ 1`) — coherence that is **sustained but not known**.
@@ -168,7 +168,7 @@ lemma card_diag [Fintype A] :
 self-sustaining relations are the peripheral = fixed = classical ones — the **diagonal** support of `E`.
 There are `card A` of them among `card (A × A) = (card A)²` couplings: a fraction `1/card A` that
 vanishes as the perspective grows. Stated exactly: `(diagonal).card · card A = card (A × A)`. The
-finite-dimensional spectral form of Conjecture 3.4's "few modes self-sustain". -/
+finite-dimensional spectral form of Conjecture 3.7.4's "few modes self-sustain". -/
 theorem peripheral_sparse [Fintype A] :
     (Finset.univ.filter (fun ij : A × A => ij.1 = ij.2)).card * Fintype.card A
       = Fintype.card (A × A) := by

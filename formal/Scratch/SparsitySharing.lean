@@ -1,7 +1,7 @@
 /-
 # Sparsity step 2: cost-sharing over a poset of couplings
 
-[03.1 §3.3](../../docs/spec/03.1-sparsity.md) flags the first gap between the counting lemma and a
+[03.7](../../docs/spec/03.7-sparsity.md) flags the first gap between the counting lemma and a
 theorem about `Cl(𝕋)`: **couplings are not an unstructured set.** They compose and **share** sub-relatings,
 so the cost grading is **lax (sub-additive)** — the clean sum `Σ dλ` becomes an inequality over a poset
 of couplings, and "sparsity must be re-proved with sharing allowed." This module does that, and the
@@ -26,7 +26,7 @@ bounds the **actual** spend `(⋃ᵢ Fᵢ).card`, not the naive sum.
   in its footprint and no other's), the count is bounded by the spend, `k ≤ (⋃ Fᵢ).card ≤ β`, *whatever*
   the sharing. So sparsity survives sharing **iff** selves have a positive private footprint.
 
-**The honest correction to the spec.** §3.3 hoped "the worst case (no sharing) is the set bound and
+**The honest correction to the spec.** The spec hoped "the worst case (no sharing) is the set bound and
 sharing only helps." Half is right: sharing lowers *spend* (`subadditive_spend_le_sum`). But the count
 bound is **not** preserved — full sharing makes selves arbitrarily cheap-to-co-maintain and the carrier
 unbounded (`full_sharing_unbounded`). The bound survives precisely under a **positive private floor**

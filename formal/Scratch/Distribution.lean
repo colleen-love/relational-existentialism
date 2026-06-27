@@ -2,7 +2,7 @@
 # Self in other, quantified — the distribution of self across the relational network
 
 A first quantitative piece of the **spectral form** of the sparsity dichotomy
-([spec 03 §3.4, Conjecture 3.4](../../docs/spec/03-sparsity-conjecture.md)): how much of a self
+([spec 03.7, Conjecture 3.7.4](../../docs/spec/03.7-sparsity.md)): how much of a self
 is distributed into others through relating, and the **limit** at which it stays bounded.
 
 Work in a **Banach algebra** `E` (a complete normed ring). An element `x : E` is the

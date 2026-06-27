@@ -20,7 +20,7 @@ A domain *receives* a functor exactly when it has the structure the theory expor
 The full traced-symmetric-monoidal `Cl(𝕋)` is now a genuine Lean object — the free traced
 SMC on a signature, with its universal functor (§4.6). The domain functors below are also
 exhibited directly at the level of **operative content** — the eigenform/`gfp` structure
-(D1–T2) and the cartesian copy/Lawvere structure (T3) — which is what makes each one a
+(D1–3.2) and the cartesian copy/Lawvere structure (3.3) — which is what makes each one a
 *one-line* theorem (§4.3, §4.8, §4.9).
 
 ## 4.2 The domains, with verdicts
@@ -243,7 +243,7 @@ equations — is a coherent traced SMC (`clCoherentTracedSMC`), with the univers
   construction). The firewall is enforced by the type system, not by willpower.
 - It also confirms the **residues** sit outside the language: a functor preserves only
   structure, and valence / the hard problem / freedom are precisely the non-structural
-  remainder — so no functor reaches them, exactly as [T3](03-theorems.md) predicts of the
+  remainder — so no functor reaches them, exactly as [3.3](03-theorems.md) predicts of the
   σ-move that formalizing itself is.
 
 ## 4.8 AI — recurrence is the trace (mechanized)

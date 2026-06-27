@@ -4,7 +4,7 @@
 The limits-of-knowing obstruction [`Relating.no_complete_view`](../RelExist/Relating.lean) *consumes*
 a registration map `reg : (O → View) → O` — "every view of the self is itself one of the self's
 relata" — and **posits** it as the A2 reading ("viewing is relating"). The open frontier
-([03.2](../../docs/spec/03.2-limits-of-knowing.md)) is to **derive** that map from the co-directed
+([03.4](../../docs/spec/03.4-limits-of-knowing.md)) is to **derive** that map from the co-directed
 dynamics `Φ_c`, rather than assume it: to identify the lattice-level *standing-absorption* proved in
 [`Attention.closed_loop_registers`](Attention.lean) with the `Type`-level `reg`.
 

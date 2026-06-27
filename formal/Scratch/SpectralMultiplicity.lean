@@ -1,7 +1,7 @@
 /-
-# Controlled multiplicity — the counting bound that closes Conjecture 3.4
+# Controlled multiplicity — the counting bound that closes Conjecture 3.7.4
 
-This module supplies the piece [03.4](../../docs/spec/03.4-the-self-quantified.md) named as the
+This module supplies the piece [03.6](../../docs/spec/03.6-the-self-quantified.md) named as the
 *candidate new mathematics*: the reconciliation of **"sparse"** and **"multiple."**
 
 The honest situation, read off the literature. Nonlinear Perron–Frobenius theory (order-preserving
@@ -10,8 +10,8 @@ results deliver **uniqueness**: under subhomogeneity + primitivity the dynamics 
 contraction with *exactly one* positive eigenvector. That is the precise opposite of what the doctrine
 wants. A relational self is **contingent** — there must be more than one possible self (`> 1`) — yet
 selves must be **rare** (`o(N)`). Multiplicity only appears when one *leaves* the well-behaved
-subhomogeneous/primitive regime where the off-the-shelf theorems apply. So 3.4 cannot be a corollary
-of standard nonlinear PF: standard nonlinear PF is built to *forbid* the multiplicity 3.4 needs.
+subhomogeneous/primitive regime where the off-the-shelf theorems apply. So 3.7.4 cannot be a corollary
+of standard nonlinear PF: standard nonlinear PF is built to *forbid* the multiplicity 3.7.4 needs.
 
 The gap, pinned precisely, is three pieces — all closed here, `sorry`-free:
 
@@ -121,7 +121,7 @@ by a **gap quantity independent of how many couplings `N` the system has**. -/
 /-- **The spectral packing bound.** A `δ`-separated finite set `S` of selves, assigned to cells of a
 cover `C` (`|C| = m`) so that same-cell points are `< δ` apart, satisfies `|S| ≤ |C|`. The number of
 attracting selves is bounded by the **capacity at the gap scale** — a constant, *independent of `N`*.
-This is the spectral form of the resource bound of Conjecture 3.3, with the budget replaced by a
+This is the spectral form of the resource bound of Conjecture 3.7.3, with the budget replaced by a
 covering number set by the spectral gap. -/
 theorem separated_card_le_cover {Y : Type*} {S : Finset X} {δ : ℝ}
     (hsep : ∀ x ∈ S, ∀ y ∈ S, x ≠ y → δ ≤ dist x y)
@@ -153,11 +153,11 @@ theorem selves_density_tendsto_zero {Sset : ℕ → Finset X} {m : ℕ}
 The other end of the dichotomy. When the contraction is **global** (the subhomogeneous / primitive
 regime where standard nonlinear Perron–Frobenius applies), there is **exactly one** self. Multiplicity
 *requires* leaving this regime — which is why the contingency the doctrine wants is not free, and why
-3.4 is harder than the linear theory. -/
+3.7.4 is harder than the linear theory. -/
 
 /-- **Uniqueness in the primitive regime.** A *globally* contracting `f` (rate `k < 1` everywhere) has
 **at most one** fixed point — the Perron/subhomogeneous pole. This is the result standard nonlinear
-Perron–Frobenius hands you, and it is exactly the multiplicity 3.4 must escape to get contingency. -/
+Perron–Frobenius hands you, and it is exactly the multiplicity 3.7.4 must escape to get contingency. -/
 theorem unique_fixed_of_global_contraction {f : X → X} {k : ℝ} (hk : k < 1)
     (hc : ∀ x y, dist (f x) (f y) ≤ k * dist x y)
     {p q : X} (hp : f p = p) (hq : f q = q) : p = q := by
@@ -229,7 +229,7 @@ of co-directed feedback at a candidate self. In a Banach algebra the feedback ma
 metric contraction with rate `‖x‖` (`feedbackMap_contract`): the living regime `‖x‖ < 1` is *exactly*
 local attraction, the unique self is `Distribution.sustained x b`, and it is reached geometrically. So
 `‖x‖ < 1` is read off the actual coupling as the cone spectral radius of the linearization being below
-`1` — closing the modelling step [03.4](../../docs/spec/03.4-the-self-quantified.md) flagged `[open]`. -/
+`1` — closing the modelling step [03.6](../../docs/spec/03.6-the-self-quantified.md) flagged `[open]`. -/
 
 section Bridge
 

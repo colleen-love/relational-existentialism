@@ -4,9 +4,9 @@
 Across all four spec pages the *same* open seam recurs: nearly every proved result runs over an
 **abstract proxy** for the co-directed operator, and the identification with the genuine `Φ_c`
 ([`Attention.couplingOp`](Attention.lean)) is the standing open/reading step. In
-[03.1](../../docs/spec/03.1-sparsity.md) it is [`Loop.lean`](../RelExist/Loop.lean)'s abstract endomap
-`σ` and "connect the threshold to the fixed point"; in [03.2](../../docs/spec/03.2-limits-of-knowing.md)
-it is "viewing closes a loop"; in [03.4](../../docs/spec/03.4-the-self-quantified.md) it is "read `x`
+[03.7](../../docs/spec/03.7-sparsity.md) it is [`Loop.lean`](../RelExist/Loop.lean)'s abstract endomap
+`σ` and "connect the threshold to the fixed point"; in [03.4](../../docs/spec/03.4-limits-of-knowing.md)
+it is "viewing closes a loop"; in [03.6](../../docs/spec/03.6-the-self-quantified.md) it is "read `x`
 off the actual `Φ_c`." They are one bridge, between the lattice/`Type`/Banach machinery one can prove
 over and the specific **recurrent, asymmetric, saturating** operator the philosophy commits to.
 
@@ -98,7 +98,7 @@ theorem couplingOp_loopR_isEigen_iff (c : V → V → Prop) (a : Field V α) (d 
 
 /-- The converged orbit value is a genuine self **bounded by `νΦ_c`** (`sustainedField`): from a
 self-reinforcing seed it sits inside the maximal sustained standing, not beside it — tying the
-convergence depth into the eigenstructure of [03.4](../../docs/spec/03.4-the-self-quantified.md). -/
+convergence depth into the eigenstructure of [03.6](../../docs/spec/03.6-the-self-quantified.md). -/
 theorem convergedValue_le_sustained (c : V → V → Prop) {a : Field V α} (d : ℕ)
     (hseed : a ≤ couplingOp c a) :
     (⇑(couplingOp c))^[d] a ≤ sustainedField c := by

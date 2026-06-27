@@ -3,13 +3,13 @@
 ------------------------------------------------------------------------
 -- # Relational Existentialism — topological sparsity in the ν-layer (Agda)
 --
--- **Step 4 of the sparsity proof strategy** ([spec 03 §3.5]) — the *topological*
+-- **Step 4 of the sparsity proof strategy** ([spec 03]) — the *topological*
 -- form of the dichotomy, mechanized in the second proof assistant (the Layer-5 /
 -- §5 ν-layer). The Lean development counts: under a finite attention budget the
 -- carrier of selves `Stab` is finite, so its density `→ 0`
--- (`Scratch.SparsityReal.stab_density_tendsto_zero`). The spec's Conjecture 3.3
+-- (`Scratch.SparsityReal.stab_density_tendsto_zero`). The spec's Conjecture 3.7.3
 -- asks for the *infinite-state* form — that `Stab` is **nowhere dense** in the
--- space of states under "the natural topology on states `I → D`" — and §3.5
+-- space of states under "the natural topology on states `I → D`" — and the proof strategy
 -- names Agda's coinductive ν-layer as the natural host, now that the categorical
 -- infrastructure (`Cl(𝕋)`) it lifts into exists.
 --
@@ -26,7 +26,7 @@
 --                        are **nowhere dense** — sparsity, topological form;
 --   * `trivial→allSelf` — the sharp dichotomy: a *trivial* observation alphabet
 --                        makes **every** state a self (`Stab` dense), exactly as
---                        dropping the budget does (Lemma 3.2). Two distinct
+--                        dropping the budget does (Lemma 3.7.2). Two distinct
 --                        observations is the expressivity hypothesis; without it
 --                        the theory is the universal solvent.
 ------------------------------------------------------------------------
@@ -221,7 +221,7 @@ module _ (_≟_ : DecidableEquality A) (a₀ a₁ : A) (a₀≢a₁ : a₀ ≢ a
 -- **The sharp dichotomy.** Remove the expressivity hypothesis — a *trivial*
 -- observation alphabet (all observations equal) — and **every** behaviour is a
 -- self: `Stab` is the whole space, dense, the theory says nothing. This is the
--- topological mirror of Lemma 3.2 (`β = ⊤ ⇒ Stab = Φ`, density 1): finiteness of
+-- topological mirror of Lemma 3.7.2 (`β = ⊤ ⇒ Stab = Φ`, density 1): finiteness of
 -- the alphabet's discriminating power is *necessary* for sparsity.
 
 trivial→allSelf : (∀ (a b : A) → a ≡ b) → ∀ (x : Behaviour A) → Const x

@@ -27,7 +27,7 @@ Formally we reuse Knaster–Tarski (`OrderHom.gfp`), the same `ν`-modality as `
   self. This is the formal "receiving more increases what you can give".
 
 See `docs/spec/01-signature.md §1.3` for the prose, and
-`docs/spec/03-sparsity-conjecture.md` for why sparsity becomes a spectral/closure
+`docs/spec/03.7-sparsity.md` for why sparsity becomes a spectral/closure
 phenomenon here rather than a budget cap.
 -/
 import Mathlib.Order.FixedPoints

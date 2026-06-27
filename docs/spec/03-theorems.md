@@ -1,133 +1,142 @@
-# 03 — Theorems: what follows from the basis
+# 03 — Theorems: the catalog
 
 > *Given the axioms **A1–A3** and the definition **D1** ([02](02-axioms.md)), what actually
-> follows?* This file holds the three named theorems **T1–T3** and the derived notions; the
-> larger bodies of structural results have their own pages, indexed below — so the
-> [axioms file](02-axioms.md) holds only what is **assumed** and these hold what is **derived**.
+> follows?* This page is the **index and categorized catalog** of Chapter 3. Every result the
+> theory proves is numbered here, sorted into its category, tagged with its proof status, and —
+> where it is a re-proof of established mathematics — cited as such. The detailed per-result
+> ledger is [05 — Provenance](05-provenance.md); this page is the map.
 
-**Status tags**, used on every claim, because the difference matters:
+---
+
+## The numbering scheme
+
+Chapter 3 is organized so that **every result is numbered like every other** — there are no longer
+"named" theorems (the old `T1`/`T2`/`T3`) standing apart from the rest by accident of history.
+
+- **`3.x`** — the **capstone** theorem or conjecture of section `x`, each on its own page.
+- **`3.x.y`** — a **lemma**, sub-conjecture, or property *within* section `x`.
+
+| § | Capstone | Page |
+| --- | --- | --- |
+| **3.1** | To relate is to create | [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md) |
+| **3.2** | Lived identity and the "we" | [`03.2-lived-identity.md`](03.2-lived-identity.md) |
+| **3.3** | Knowing vs feeling | [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md) |
+| **3.4** | The limits of knowing | [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md) |
+| **3.5** | Decoherence and the trace | [`03.5-decoherence.md`](03.5-decoherence.md) |
+| **3.6** | The self quantified | [`03.6-the-self-quantified.md`](03.6-the-self-quantified.md) |
+| **3.7** | Sparsity (the quantitative capstone) | [`03.7-sparsity.md`](03.7-sparsity.md) |
+
+The dependency is one-way: **A1, A2, A3, D1 ⟹ 3.1, 3.2, 3.3 ⟹ 3.4–3.7.**
+
+## Two legends every row carries
+
+**Proof status** — *can a machine check it?*
 
 | Tag | Meaning |
 | --- | --- |
-| `[proved]` | mechanized in Lean (name given); footprint by `#print axioms` |
+| `[proved]` | mechanized in Lean/Agda (name given); footprint by `#print axioms` |
 | `[follows]` | forced by the structure, but not (yet) mechanized |
 | `[reading]` | an interpretation the structure invites but does not compel |
-| `[open]` | a genuine theorem the prose has claimed but the formalization has **not** established |
+| `[open]` | a genuine target the prose has claimed but the formalization has **not** established |
 
-The dependency is one-way: **A1, A2, A3, D1 ⟹ T1, T2, T3 ⟹ everything below.**
+**Provenance tier** — *is the mathematics new?* (full ledger in [05](05-provenance.md))
 
-## The rest of this chapter
+| Tier | Meaning |
+| --- | --- |
+| **R** | **Rederivation** — established mathematics, re-proved here to have it inside the corpus with an audited axiom footprint. Novelty ≈ 0; value is the machine-checked artifact. |
+| **R / S** | Rederivation in content, **synthesis** in framing: the theorem is old, the recognition that it *is* this phenomenon is the contribution. |
+| **S** | **Synthesis** — a non-obvious identification or transport across domains the literature keeps apart. |
+| **N? (reading)** | a philosophical **reading** mounted on a theorem; honest only as a lens, never as proof. |
 
-The structural results split into four pages:
-
-- [`03.1-sparsity.md`](03.1-sparsity.md) — **the sparsity conjecture**: under a finite attention
-  budget, selves are rare. The one place the spec reaches for a quantitative headline theorem;
-  the resource-counting core and the topological form are mechanized, the full lift is the
-  standing conjecture.
-- [`03.2-limits-of-knowing.md`](03.2-limits-of-knowing.md) — **the limits of knowing**: the
-  relational typology (self, part, other, collection), the Lawvere obstruction, and the corrected
-  map — *to relate is to make the other unknowable; to know fully you must not relate.*
-- [`03.3-decoherence.md`](03.3-decoherence.md) — **knowing, attention, and the trace**: what
-  knowing does to a relation (decoherence), directed attention as selective decoherence, the
-  irreducible floor, and decoherence-is-the-partial-trace — *coherence is conserved, only
-  relocated into the relationship you cannot forget.*
-- [`03.4-the-self-quantified.md`](03.4-the-self-quantified.md) — **the self quantified**: how much
-  of a self ends up in others (the Banach-algebra bound), the quantitative eigenform and its
-  uniqueness, the unification of the order-theoretic and quantitative selves under the
-  ν-modality, and the **closing of Conjecture 3.4** — *controlled multiplicity*: selves are more
-  than one (contingency) yet `o(N)` (sparse), the count bounded by a spectral-gap capacity.
+> **The one-sentence honest claim.** The mathematical content of this development is, almost
+> entirely, **rederivation** (bisimulation, Lawvere, traced monoidal categories, the partial
+> trace, Banach/Neumann series, Perron–Frobenius, the GoI/`Int` construction). The contribution is
+> a **synthesis** — one typed identification across decoherence, fixed-point logic, and relational
+> dynamics — plus the **mechanization artifact**. The single *structurally new* theorem the
+> framework's commitments promised, **orientation-from-the-seam** ([3.5](03.5-decoherence.md)), is
+> proved at its structural core. None of it is new mathematics. See [05](05-provenance.md).
 
 ---
 
-## T1 — To relate is to create
+## Category I — the foundational theorems (3.1–3.3)
 
-**Claim.** Iterated self-relation `σ(P) = Tr(P)` (D1) *has* a fixed point; relating produces
-a third thing — the eigenform — that need not have pre-existed.
+The three results the basis forces directly. Each is now a standalone page with parity to the rest.
 
-**What is proved.** `[proved]` In the complete-lattice setting,
-[`Trace.selfTrace`](../../formal/Scratch/Trace.lean)` := νP` with `selfTrace_fixed`
-(`P(νP) = νP`), `le_Tr` (coinduction), `Tr_fixed`, `Tr_mono`. Footprint `propext, Quot.sound`.
+| # | Result | Status | Tier | Prior art (rederivation) | Lean / Agda |
+| --- | --- | --- | --- | --- | --- |
+| **3.1** | To relate is to create — self-relation `σ = Tr` has a fixed point (the eigenform) | `[proved]` | **R** | Knaster–Tarski; Hasegawa/Hyland (trace ↔ Conway operator) | `Trace.{selfTrace, selfTrace_fixed, Tr_fixed, le_Tr, Tr_mono}` |
+| **3.2** | Lived identity `≈ := νΘ`, the shared world `𝔼 := D/≈`, the irreducible seam | `[proved]` | **R / S** | Park, Milner (bisimulation); Aczel; Rutten (coalgebra) | `We.{bisim, bisim_coind, World}`; Agda `Coinductive._≈_` |
+| **3.2** | `≈ ⊊ ≅` — lived identity strictly exceeds observation (soundness + strictness) | `[proved]` | **R / S** | van Glabbeek (branching-time spectrum); Hennessy–Milner | `Identity.{ObsEq, bisim_le_obsEq, bisim_ne_obsEq}` |
+| **3.2.1** | full naturality of the no-master-section beyond point-surjectivity | `[open]` | — | — | — |
+| **3.3** | Knowing vs feeling — the σ-move is Lawvere-obstructed; feeling is type-level exempt | `[proved, 0 ax]` | **R / S** | Lawvere (1969); Yanofsky (survey) | `Mirror.{lawvere, no_complete_selfModel, selfModel_remainder}`; `KnowingFeeling.*` |
 
-**Honest scope.** This is **Knaster–Tarski** — a greatest fixed point of a monotone map on a
-complete lattice. It is *not* the Hasegawa–Hyland trace↔Conway-operator bijection (the Conway
-identities are not verified), and a gfp existing is generic to *every* monotone operator. So
-"to relate is to create" rests, formally, on "monotone maps have greatest fixed points." The
-discriminating content — that the created selves are *rare* — is not here; it is sparsity
-([03.1](03.1-sparsity.md)).
+## Category II — the limits of knowing, and the seam (3.4)
 
----
+What can and cannot be known once relating creates shared constitution. The Lawvere obstruction,
+generalized to the *other* and the *collection*. Full page: [03.4](03.4-limits-of-knowing.md).
 
-## T2 — Lived identity and the "we"
+| Result | Status | Tier | Prior art | Lean |
+| --- | --- | --- | --- | --- |
+| One knowable case (disjoint), three unknowable (other / self / collection) | `[proved, 0 ax]` | **R / S** | Lawvere specialized | `Relating.{disjoint_modelable, related_other_unmodelable, self_inclusive_unmodelable, no_complete_view}` |
+| `reg` derived from the dynamics — registration *is* absorption | `[proved]` | **S** | — (recognition) | `Registration.{Registering, reg_absorbs, no_complete_view_of_registering}` |
+| completeness ⟺ disjointness — the relational floor dominates the branching surplus | `[proved, 0 ax]` | **R / S** | Lawvere/Cantor duality | `Knowing.{knowing_complete_iff_disjoint, witness_disjoint_vs_related}` |
 
-**Claim.** `≈ := νΘ` is the greatest bisimulation; the shared world is `𝔼 := D/≈`; and `𝔼`
-has an **irreducible seam** (no master perspective).
+## Category III — decoherence, the trace, and orientation (3.5)
 
-**What is proved.** `[proved]` [`We.bisim`](../../formal/Scratch/We.lean)` := νΘ` with
-`bisim_unfold` (`Θ≈ = ≈`), `bisim_coind` (coinduction), `bisim_{refl,symm,trans}` (an
-equivalence), and `World := D/≈` (the quotient). Footprint `propext, Quot.sound`.
+What knowing *does* to a relation: it decoheres it, and the coherence is only relocated. The one
+structurally new theorem of the corpus lives here. Full page: [03.5](03.5-decoherence.md).
 
-**The seam, now partly earned.** `[proved]` The "irreducible seam" — that there is no master
-perspective on a whole one belongs to — is the Lawvere obstruction under self-inclusion:
-[`Relating.self_inclusive_unmodelable`](../../formal/RelExist/Relating.lean) (0 axioms). No
-member of a collection holds a complete model of the collection that contains it. (See
-[03.2 — the corrected map](03.2-limits-of-knowing.md) — this is where T2's seam and T3's
-remainder turn out to be one fact, and where it reaches the *other* too, through the shared
-between.)
+| Result | Status | Tier | Prior art | Lean |
+| --- | --- | --- | --- | --- |
+| Knowing decoheres — `dephase` is a conditional expectation `E`; the copy-defect | `[proved]` | **R / S** | Joos–Zeh, Zurek (einselection) | `Decoherence.{dephase, copyDefect, classical_comm}` |
+| Decoherence **is** the partial trace — coherence conserved, relocated | `[proved]` | **R / S** | reduced density matrix | `Conservation.{decoherence_is_partial_trace, trace_conserved}` |
+| The seam — the one trace a self cannot take on itself | `[proved, 0 ax]` | **R / S** | Lawvere at `Env = Self` | `Seam.{self_cannot_trace_relation, self_cannot_view_relation}` |
+| **Orientation from the seam** — the lossy idempotent `E` generates the knower→known arrow | `[proved]` | **R / S** (*the new theorem*) | Tomiyama, Umegaki (conditional expectations) | `Orientation.{Knowing, knows_antisymm, arrow_strictAnti, no_recovery}` |
+| One forgetting, three residues — identity-collapse = dephasing = partial trace | `[proved]` | **S** | — (recognition) | `Forgetting.{Coarsening, not_injective_of_residue, forgettings_have_residue}` |
+| Nondeterminism is a consequence of relation; the missing cause is the other | `[proved, 0 ax]` | **R / S** | open-system / causal factorization | `Marginal.*`, `RelationalMarginal.*`, `Causation.*` |
+| Feeling, *modeled* as a relational decoherence differential | `[proved]` (model) | **N? (reading)** | — | `Feeling.{feel, feel_unshared, feel_le_between, betrayal_feel}` |
 
-**Resolved, by inversion.** `[proved]` The old `[open]` target was that `≈` **coincides** with the
-contextual congruence `≅` (full abstraction). That demand was a *mistake* — proving `≈ = ≅` would
-contradict the theory's limitative core (T3, the seam: the inside of what you relate to cannot be
-completely viewed from outside). So A2 is restated (the inversion): the lived `≈` *is* identity, and
-`≅` is a **strictly lossy projection** of it. Now mechanized in
-[`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean): `≅` is defined (`ObsEq`), **soundness
-`≈ ⊆ ≅`** is proved (`bisim_le_obsEq` — lived sameness ⇒ observed sameness), and **strictness
-`≈ ⊊ ≅`** is proved with a witness (`bisim_ne_obsEq`, `obsEq_and_not_bisim` — states observationally
-identical yet not bisimilar). The full unfolding — and the *identity residue* (the non-injective
-forgetting `D/≈ ↠ D/≅`) — is [03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
+## Category IV — the self quantified (3.6)
 
-**Still open.** `[open]` The *full naturality* of the no-master-section claim (Property "T2.1")
-beyond the point-surjective case remains unmechanized — a real target, not a done deal.
+How much of a self ends up in others, and the spectral reconciliation of *sparse* with *multiple*.
+Full page: [03.6](03.6-the-self-quantified.md).
 
----
+| Result | Status | Tier | Prior art | Lean |
+| --- | --- | --- | --- | --- |
+| Self-in-other bounded iff `‖x‖ < 1`; the quantitative eigenform is unique | `[proved]` | **R / S** | Neumann series; Banach fixed point | `Distribution.{distributed, distributed_bound, total_feedback, sustained_unique}` |
+| Both selves (order-theoretic, quantitative) realize the ν-modality | `[proved]` | **S** | — (recognition) | `Feedback.{CoDirectedSelf, self_iterate, latticeSelf, banachSelf}` |
+| Controlled multiplicity — selves `> 1` (contingency) yet `o(N)` (sparse) | `[proved]` | **R / S** | nonlinear Perron–Frobenius; covering numbers | `SpectralMultiplicity.{attracting_isolated, attractors_separated, two_attracting_selves, selves_density_tendsto_zero}` |
 
-## T3 — Knowing vs feeling
+## Category V — the quantitative capstone: sparsity (3.7)
 
-**Claim.** Knowing (the σ-move, an endomap `D → D`, cartesian) is Lawvere-obstructed and
-leaves a remainder; feeling (the `≈`-relation, one type-level up) is not of the kind that
-obstruction touches.
+The one place the spec reaches for a quantitative headline. Full page: [03.7](03.7-sparsity.md).
 
-**What is proved.** `[proved, 0 axioms]` The σ-side is genuine and fully constructive:
-[`Mirror.lawvere`](../../formal/RelExist/Mirror.lean), `no_complete_selfModel`,
-`selfModel_remainder`, and [`KnowingFeeling.knowing_can_fail_to_close`](../../formal/Scratch/KnowingFeeling.lean),
-`no_complete_boolModel`. Knowing is structurally partial — the contrapositive of a one-line
-diagonal.
-
-**Honest scope of the asymmetry.** The feeling side is `feeling_is_reflexive` `[proved]` —
-`≈` is reflexive (an equivalence). The real asymmetry is **type-level**: knowing has type
-`D → D`, against which the diagonal `g a a` runs; feeling has type `D → D → Prop`, against
-which there is no diagonal to run — the obstruction does not typecheck. We do **not** claim
-"feeling is whole / global / has no remainder": no absence-of-obstruction is proved, and a
-universal negative cannot follow from one positive property. *Knowing is obstructed; feeling
-is simply not the kind of arrow that obstruction applies to.* That is the earned claim.
-
-The full unfolding of T3 — what knowing *does* to a relation, and why the self can never
-completely know itself — is [03.3](03.3-decoherence.md).
+| # | Result | Status | Tier | Prior art | Lean / Agda |
+| --- | --- | --- | --- | --- | --- |
+| **Lemma 3.7.1** | sparsity from a budget — `\|Stab_R\| ≤ β/(d·λ)`, density → 0 | `[proved]` | **R / S** | pigeonhole | `Sparsity.stab_card_bound`; `Real.stab_density_tendsto_zero` |
+| **Lemma 3.7.2** | collapse without a bound — `β = ⊤ ⇒ Stab = Φ`, density 1 | `[proved]` | **R** | — | `Sparsity.unbounded_without_budget` |
+| **Conjecture 3.7** | under a finite attention budget, selves are rare (sparse) | — | — | — | — |
+| **Conjecture 3.7.3** | cost-graded form — sparsity for all of `Cl(𝕋)` | `[proved]` (exclusivity-conditioned) | **R / S** | cylinder topology; inclusion–exclusion | `SparsityCapstone.conjecture_3_7`; Agda `selves-nowhereDense` |
+| **Conjecture 3.7.4** | spectral / closure form — few modes self-sustain; controlled multiplicity | `[proved]` (finite dim) | **R / S** | spectral gap; Perron–Frobenius | `Peripheral.*`, `SpectralDecay.*`, `PerronFrobenius.*`, `SpectralMultiplicity.*` |
 
 ---
 
 ## Derived notions
 
-- **Self / eigenform** — a member of `Stab_R` (A3); a fixed point of funded, deep self-relation.
+- **Self / eigenform** — a member of `Stab_R` ([A3](02-axioms.md)); a fixed point of funded, deep
+  self-relation.
 - **Distributed self** `[reading]` — for `e ∈ Stab_R`, its `≈`-image in `𝔼`; it persists in
-  `≈`-neighbours on the timescale of their returning, even after `e`'s own loop opens. Quantified
-  in [03.4](03.4-the-self-quantified.md).
-- **Birth / death** `[follows]` — a fresh fixed point forced into being already coupled (T1 +
-  A3) / the loop `loop_R(e) = e` ceasing to hold as funding withdraws (A3 negated).
+  `≈`-neighbours on the timescale of their returning, even after `e`'s own loop opens. Quantified in
+  [03.6](03.6-the-self-quantified.md).
+- **Birth / death** `[follows]` — a fresh fixed point forced into being already coupled
+  ([3.1](03.1-to-relate-is-to-create.md) + A3) / the loop `loop_R(e) = e` ceasing to hold as
+  funding withdraws (A3 negated).
 
 ---
 
-→ Back to [02 — The Axioms](02-axioms.md) · onward to [03.1 — Sparsity](03.1-sparsity.md),
-[03.2 — The Limits of Knowing](03.2-limits-of-knowing.md),
-[03.3 — Decoherence and the Trace](03.3-decoherence.md),
-[03.4 — The Self Quantified](03.4-the-self-quantified.md) · the functorial semantics are
-[04](04-functorial-semantics.md).
+→ Back to [02 — The Axioms](02-axioms.md) · the foundational theorems
+[03.1](03.1-to-relate-is-to-create.md) · [03.2](03.2-lived-identity.md) ·
+[03.3](03.3-knowing-vs-feeling.md) · the structural results
+[03.4](03.4-limits-of-knowing.md) · [03.5](03.5-decoherence.md) ·
+[03.6](03.6-the-self-quantified.md) · [03.7](03.7-sparsity.md) · the functorial semantics are
+[04](04-functorial-semantics.md) · the full provenance ledger is [05](05-provenance.md).

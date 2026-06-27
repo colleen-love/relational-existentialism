@@ -4,7 +4,7 @@
 Mathlib-backed formalization, kept out of the default build so the dependency-free
 core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 
-* `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem T2),
+* `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem 3.2),
                           via `OrderHom.gfp` (Knaster–Tarski). ✅ verified.
 * `Scratch.Identity`    — A2 restated: identity is the lived `≈`; observation `≅` is a
                           **strictly lossy** projection. Proves soundness `≈ ⊆ ≅`, strictness
@@ -16,9 +16,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.Attention`   — attention as the co-directed eigenstructure of the relational
                           coupling (a consequence of structure, not a bolted-on budget);
                           the self as an eigenform `νΦ`. ✅ verified.
-* `Scratch.Trace`       — D1/T1: trace as feedback (`selfTrace`) and the Conway
+* `Scratch.Trace`       — D1/3.1: trace as feedback (`selfTrace`) and the Conway
                           parameterized fixed-point operator (`Tr`). ✅ verified.
-* `Scratch.KnowingFeeling` — the T3 contrast: knowing (Lawvere-obstructed) vs feeling
+* `Scratch.KnowingFeeling` — the 3.3 contrast: knowing (Lawvere-obstructed) vs feeling
                           (`≈`, whole). ✅ verified.
 * `Scratch.Chemistry`   — Layer 4, first domain functor: autocatalytic sets as
                           eigenforms (`νΦ`); the functor is definitional. ✅ verified.
@@ -153,12 +153,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           `T = P + N` (peripheral projection `P`, subdominant `N` with `‖N‖<1`,
                           orthogonal). `spectral_pow`: `Tⁿ = P + Nⁿ`; **`spectral_decay`: `Tⁿ → P`** — the
                           subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
-                          3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
+                          3.7.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
                           extreme (`idempotent_pow`). ✅ verified.
-* `Scratch.SparsityCapstone` — **Conjecture 3.3 closed** (the cost-graded sparsity dichotomy): the
+* `Scratch.SparsityCapstone` — **Conjecture 3.7.3 closed** (the cost-graded sparsity dichotomy): the
                           density of selves `→ 0` **with** a private footprint per self
                           (`cost_graded_density_tendsto_zero`), but unboundedly many selves within budget
-                          **without** it (full sharing) — `conjecture_3_3`. So the counting sparsity holds
+                          **without** it (full sharing) — `conjecture_3_7`. So the counting sparsity holds
                           iff a finite budget *and* an exclusive cost per self; the unconditional form is
                           provably false. With the Agda nowhere-dense topological clause, the conjecture is
                           closed in its correct, exclusivity-conditioned form. ✅ verified.
@@ -292,7 +292,7 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           modulus-`<1` band is the **arrow** (`arrow_dissipates`); `energy_arrow_split`
                           shows both in one generator's spectrum. `[proved]` witness; the general CPTP
                           peripheral structure theorem stays the narrated `[open]`. ✅ verified.
-* `Scratch.SpectralMultiplicity` — **Conjecture 3.4's new mathematics, closed**: the reconciliation of
+* `Scratch.SpectralMultiplicity` — **Conjecture 3.7.4's new mathematics, closed**: the reconciliation of
                           *sparse* and *multiple*. Standard nonlinear Perron–Frobenius forces **uniqueness**
                           (`unique_fixed_of_global_contraction` — global contraction ⇒ one self, the
                           primitive/subhomogeneous regime); the doctrine's **contingency** needs *more than

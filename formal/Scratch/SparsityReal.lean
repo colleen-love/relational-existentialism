@@ -2,8 +2,8 @@
 # ℝ-valued sparsity and the density limit — the analytic upgrade of Lemmas 3.1/3.2
 
 The discrete core in `RelExist.Sparsity` is recast over `ℝ` (step 1 of the spec's
-[proof strategy](../../docs/spec/03-sparsity-conjecture.md#35-proof-strategy-for-mechanization)),
-and the "density → 0" claim of Lemma 3.1 is proved as a genuine `Filter.Tendsto`:
+[proof strategy](../../docs/spec/03.7-sparsity.md#proof-strategy-for-mechanization)),
+and the "density → 0" claim of Lemma 3.7.1 is proved as a genuine `Filter.Tendsto`:
 
 * `stab_card_le_div` — under a finite budget `β`, with every stabilized self costing
   at least a positive floor `m`, the number of selves is `≤ β / m` — a constant bound
@@ -30,14 +30,14 @@ theorem card_mul_le_sum (S : Finset ι) (cost : ι → ℝ) (m : ℝ)
   have h1 := Finset.card_nsmul_le_sum S cost m h
   simpa [nsmul_eq_mul] using h1
 
-/-- **Lemma 3.1 (ℝ), division-free.** Finite budget `β`, positive floor `m` ⇒ the
+/-- **Lemma 3.7.1 (ℝ), division-free.** Finite budget `β`, positive floor `m` ⇒ the
 number of selves times `m` is at most `β`. -/
 theorem stab_card_le_budget (S : Finset ι) (cost : ι → ℝ) (m β : ℝ)
     (hcost : ∀ i ∈ S, m ≤ cost i) (hbudget : ∑ i ∈ S, cost i ≤ β) :
     (S.card : ℝ) * m ≤ β :=
   le_trans (card_mul_le_sum S cost m hcost) hbudget
 
-/-- **Lemma 3.1 (ℝ), divided form.** `|Stab| ≤ β / m` — a bound independent of the
+/-- **Lemma 3.7.1 (ℝ), divided form.** `|Stab| ≤ β / m` — a bound independent of the
 total number of couplings. -/
 theorem stab_card_le_div (S : Finset ι) (cost : ι → ℝ) (m β : ℝ) (hm : 0 < m)
     (hcost : ∀ i ∈ S, m ≤ cost i) (hbudget : ∑ i ∈ S, cost i ≤ β) :

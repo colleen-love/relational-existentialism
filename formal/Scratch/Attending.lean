@@ -264,7 +264,7 @@ relationship is *part of both* selves — a bit of you is our relationship, whic
 ([`Distribution.distributed`](Distribution.lean), [`Attention.closed_loop_registers`](Attention.lean)).
 That shared part lives in a block `J` that attention **cannot** be directed at: to dephase it
 would be to dephase part of the aimer, and *you cannot aim at the aimer*
-([`Relating.self_inclusive_unmodelable`](../RelExist/Relating.lean), T3/Lawvere). So the attended
+([`Relating.self_inclusive_unmodelable`](../RelExist/Relating.lean), 3.3/Lawvere). So the attended
 set is barred from `J`, the shared coherence survives every attention, and the copy-defect can
 **never** reach zero while the relationship is live. -/
 

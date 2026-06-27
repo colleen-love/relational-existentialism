@@ -40,17 +40,17 @@ Which means a self is not a given. It is an achievement of recursion, maintained
 
 The mirror that can't close has a consequence worth naming on its own, because it maps onto something everyone has felt.
 
-*Knowing* is always partial. To know is to make something into an object you hold at a distance and examine, and that act always leaves a remainder — the same structure as not being able to get around yourself. Knowledge comes in pieces, from somewhere, never total, never the whole at once. This is not a limit of human knowing in particular. It is built into what knowing is.
+*Knowing* is always partial. To know is to make something into an object you hold at a distance and examine, and that act always leaves a remainder — the same structure as not being able to get around yourself. Knowledge comes in pieces, from somewhere, never total, never the whole at once. This is not a limit of human knowing in particular; it is built into what knowing is. This much the formal side actually earns: knowing is the kind of move that turns on a *copy* of its object, and a move of that kind provably cannot close on itself.
 
-*Feeling* is different. A mood does not come in pieces. It is present all at once, everywhere in you, with no part held at a distance, no vantage outside it. You do not assemble grief from fragments or view your own joy from across the room. Feeling is global where knowing is local; present where knowing is partial; whole where knowing is always missing a piece.
+*Feeling* is a different *kind* of move — and here it matters to say exactly how much the view can claim. What it earns is the negative half: feeling is not the turning-into-an-object that knowing is, so the remainder that dogs knowing does not even arise for it — there is no copy held at a distance to fall short of. The positive half — that feeling is therefore *whole*, present all at once with no vantage outside it — is description, not proof. That is how it shows up: a mood does not seem to come in pieces; you do not assemble grief from fragments or view your own joy from across the room. The view reads feeling as global where knowing is local, but it does not pretend to have shown feeling is whole. It has shown only that feeling is not the kind of move the fragmentation touches.
 
-So the asymmetry between knowing and feeling — that you can feel something completely and still not understand it, that understanding always seems to arrive in fragments while feeling floods — is not a quirk of psychology. It is the difference between the two ways relation can turn: outward into objects, which fragments, and inward as presence, which doesn't. This is, I think, one of the more quietly true things the view says.
+So the asymmetry between knowing and feeling — that you can feel something completely and still not understand it, that understanding arrives in fragments while feeling floods — is not a quirk of psychology. It is the difference between the two ways relation can turn: outward into objects, which fragments, and inward as presence, which is simply not the kind of turning the fragmentation applies to. Why feeling then has the wholeness it *seems* to — that the view leaves standing, in the closing section.
 
 ## Self and other
 
 If the self is what you get when you can't quite close the mirror, then the self is already, faintly, an *other* to itself. The version of you that you can see is not the whole of you; it is a rendering, and the rendering is partial. In a small way you are already a stranger to yourself, which is why "Je est un autre" — I is an other — reads as exact rather than poetic.
 
-And the genuine other — another person — is not a different kind of thing from this. The line between self and other is a gradient, not a wall: a matter of how tightly coupled, how often returned to, not a difference in kind. The other matters in a specific way that follows directly: the other holds the part of you that falls outside your own view. What you cannot get around in yourself, someone who relates to you can sometimes see. They carry your excess — the remainder your own looking leaves out. This is why being truly known by another is not redundant with knowing yourself. They have access to exactly the part you structurally can't.
+And the genuine other — another person — is not a different kind of thing from this. The line between self and other is a gradient, not a wall: a matter of how tightly coupled, how often returned to, not a difference in kind. The other matters in a specific way that follows from this: the other holds a vantage on you that is not your own. What you cannot get around in yourself, someone who relates to you sees from a different side — they carry some of your excess, the part your own looking leaves out. This is why being truly known by another is not redundant with knowing yourself. Their view is not complete either — relating to you, they too cannot get all the way around you — but it is angled differently, and it reaches what your own angle structurally cannot.
 
 ## Birth and death
 
@@ -82,8 +82,15 @@ And three things sit deliberately outside it, unsolved on purpose.
 
 It explains the *structure* of relation but not its *valence* — why relation has the warmth it does, why "you are loved" lands as more than "you are correlated with." The structure is captured. The love is not, and the view does not pretend to have caught it.
 
-It explains why experience is *organized* the way it is — partial in knowing, whole in feeling — but not why there is something it is like to have it at all. The hard problem of consciousness is left standing, untouched.
+It explains why experience is *organized* the way it is — partial in knowing, and not fragmented the way knowing is in feeling — but not why there is something it is like to have it at all, nor why feeling has the wholeness it seems to. The hard problem of consciousness is left standing, untouched.
 
 And it does not settle freedom. It can describe the difference between a self whose next move is fixed and one whose next move genuinely branches, but which one you are is left open. Whether the returning that builds you is fully authored or only feels that way is a door the view leaves ajar rather than closes.
 
 These are not gaps to be embarrassed about. They are the places the view stops, marked honestly, so that everything inside the lines can be trusted precisely because the lines are drawn.
+
+---
+
+*Want the same picture one step closer to the mathematics — still in plain words, but naming the
+structures underneath?* See [Relational Existentialism: One Step Toward the
+Formalization](relational-existentialism-toward-formalization.md), and beyond it the [formal
+spec](spec/).

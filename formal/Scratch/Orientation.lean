@@ -3,7 +3,7 @@
 
 The sequel to [`Decoherence`](Decoherence.lean) / [`QuantumSeam`](QuantumSeam.lean): a correlation is
 *symmetric*; the conditional expectation `E` (here `dephase`,
-[03.3](../../docs/spec/03.3-decoherence.md)) delivers classicality — its image is commutative, a space
+[03.5](../../docs/spec/03.5-decoherence.md)) delivers classicality — its image is commutative, a space
 of copyable functions — but commutativity alone gives *functions, not directed arrows*. The orienting
 principle (*the knower knows the known*) is that the self applying `E` is the **source** and the
 classicalized image is the **target**. "`E` generates a directed structure oriented knower→known, and

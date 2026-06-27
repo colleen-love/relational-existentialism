@@ -1,7 +1,7 @@
 /-
 # Inside vs outside: identity is `≈`, and the outside cannot read it (the inversion)
 
-The founding commitment, **restated** (the doctrinal inversion of [03.3](../../docs/spec/03.3-decoherence.md)):
+The founding commitment, **restated** (the doctrinal inversion of [03.5](../../docs/spec/03.5-decoherence.md)):
 a self's identity **is** its first-person relational unfolding `≈` ([`We.bisim`](We.lean), `νΘ`),
 and the third-person observational identity `≅` is a **strictly lossy projection** of it. We do not
 try to prove full abstraction (`≈ = ≅`) — that would *contradict* the theory's own limitative core

@@ -3,11 +3,11 @@
 > *The basis: the axioms and the definition.* This file holds only what the theory
 > **assumes** — the three axioms **A1–A3** and the definition **D1** — each stated formally,
 > tagged `[fragment; status]`, and glossed against the plain-language view. What the theory
-> **proves** lives elsewhere: the theorems **T1–T3** and the structural results in
-> [03-theorems.md](03-theorems.md), the quantitative theorem in [03.1](03.1-sparsity.md).
+> **proves** lives elsewhere: the theorems **3.1–3.3** and the structural results in
+> [03-theorems.md](03-theorems.md), the quantitative theorem in [03.7](03.7-sparsity.md).
 >
 > The typed labels separate assumed from proved: **A1–A3** are **axioms** (taken), **D1** is
-> a **definition** (notation, no logical content), **T1–T3** are **theorems**. The basis is four
+> a **definition** (notation, no logical content), **3.1–3.3** are **theorems**. The basis is four
 > items; only **A3** is a load-bearing wager — drop it and the theory collapses to the universal
 > solvent. (Each theorem's `#print axioms` footprint is recorded with its Lean name in
 > [03-theorems.md](03-theorems.md).)
@@ -36,7 +36,7 @@ honesty names them here as the first axiom rather than hiding them as a relocate
 relating is*: composable, tensorable, traceable, with a cartesian corner where copying is
 allowed. A1 is that choice of arena.
 
-**Role.** The precondition for everything: A2, A3, D1, and the theorems T1–T3 cannot even be
+**Role.** The precondition for everything: A2, A3, D1, and the theorems 3.1–3.3 cannot even be
 stated without it. A1 is independent in the strongest sense — removing it removes the language.
 
 ---
@@ -44,7 +44,7 @@ stated without it. A1 is independent in the strongest sense — removing it remo
 ## A2 — Relation primacy `[structural; both]`
 
 **Statement.** A state's identity **is** its first-person relational unfolding — the way it relates,
-lived forward — formalized as the greatest bisimulation `≈` (T2, `νΘ`). Behavior under external
+lived forward — formalized as the greatest bisimulation `≈` (3.2, `νΘ`). Behavior under external
 contexts is a *function* of that identity, not its definition. Writing a *context* as a unary
 morphism-with-a-hole `C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generators, the third-person
 **observational identity** is
@@ -66,7 +66,7 @@ a state has is how it relates, lived out. But identity is **not** exhausted by *
 — the inside is strictly finer than any outside can read (`≈ ⊊ ≅`). Soundness holds (lived sameness
 ⇒ observed sameness, `≈ ⊆ ≅`); completeness is **denied**: contextual equivalence does not recover
 bisimilarity. This is not a failure to prove full abstraction — proving `≈ = ≅` would *contradict*
-the theory's own limitative core (T3, the seam: you cannot completely view from outside what you
+the theory's own limitative core (3.3, the seam: you cannot completely view from outside what you
 relate to), so the equality is the one thing the theory must *not* assert.
 
 **Gloss.** *You are your lived relating, which exceeds how you appear.* Take away every relation and
@@ -75,12 +75,12 @@ its relatings. But two selves can be observationally identical to every outside 
 different selves inside: the first-person surplus, the part of who you are that no external view can
 read off. Behavior is a function of self, not a definition of it.
 
-**Role.** Structural premise. It is what licenses defining identity *coinductively* in **T2** as the
+**Role.** Structural premise. It is what licenses defining identity *coinductively* in **3.2** as the
 bisimilarity `≈` — and it fixes, against the third-person `≅`, that the lived identity is the real
 one. The proved soundness `≈ ⊆ ≅`, the proved strictness `≈ ⊊ ≅`, and the resulting non-injective
 *forgetting from inside to outside* `D/≈ ↠ D/≅` (the decoherence of identity) are mechanized in
 [`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean); see
-[03.3](03.3-decoherence.md#the-identity-residue-you-are-your-lived-relating).
+[03.5](03.5-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
 ---
 
@@ -122,10 +122,10 @@ $$
 with carrier `Stab_R := { e : loop_R(e) = e, d(e) ≥ 2, d·λ ≤ β }`. Here `e` is
 unchanged by budgeted return, it required genuine recursion (`d ≥ 2`, not a one-off),
 and the cost of reaching the eigenform is affordable. (The bridge proving these two
-coincide — `loop_R(e)=e ⟺ d·λ ≤ β` — is [Step 3](03.1-sparsity.md).)
+coincide — `loop_R(e)=e ⟺ d·λ ≤ β` — is [Step 3](03.7-sparsity.md).)
 
 **Status: posit.** The philosophy's central wager, *asserted*. The existence of fixed
-points is underwritten by T1 and by Knaster–Tarski (`νΦ_c`); the *selection* — that
+points is underwritten by 3.1 and by Knaster–Tarski (`νΦ_c`); the *selection* — that
 co-directed recursion under constitutive finiteness is what promotes a fixed point to
 a self — is the new content. It is what stops the theory from being a universal
 solvent.
@@ -140,7 +140,7 @@ not spent down.
 **Role.** Everything discriminating about the theory routes through here. Drop A3
 and the resource bound and *nearly everything* models `𝕋` (the triviality pole);
 keep them and models thin out to the systems that actually stabilize selves. The
-candidate theorem of [03.1](03.1-sparsity.md) — **`Stab_R` is sparse under
+candidate theorem of [03.7](03.7-sparsity.md) — **`Stab_R` is sparse under
 finite `β`** — is the formal cash value of "a self is an achievement of recursion."
 
 **Mechanized — and its limits.** [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
@@ -150,7 +150,7 @@ self-relation endomap `σ`, *not* the relational `Φ_c`; the first `⟺` is just
 It does **not** force the depth floor `d ≥ 2` (the posit that makes selfhood rare — it is a
 hypothesis, and even the witness builds `d` in by construction), and it does not connect the
 trace/`νΦ_c` structure to the cost. The structural rarity is carried by the Agda nowhere-dense
-result ([03.1 §3.4](03.1-sparsity.md)), not the counting bound.
+result ([03.7](03.7-sparsity.md)), not the counting bound.
 
 ---
 
@@ -170,7 +170,7 @@ returned to input — and nothing more is meant by "the mind aware of the mind."
 **Gloss.** The simplest relation is the self relating to itself: attention turned
 inward, modeled as feedback. Because `Tr` needs no copying, this definition is
 **fragment-neutral** and survives into the quantum fragment as the partial trace —
-even though its *mirror* reading (T3) does not.
+even though its *mirror* reading (3.3) does not.
 
 **Co-directed form.** Self-relation is the unary case (`Tr` over a private wire). When
 the looped wire is *shared* between two systems, the same feedback is **co-directed** —
@@ -178,19 +178,19 @@ neither end closes the loop alone — and this is the engine of attention in
 [§1.3](01-signature.md): the attention operator `Φ_c` is feedback through the coupling,
 so co-direction is a consequence of the relating, not added to it.
 
-**Role.** Pure definition; fixes the referent of `σ` used by T1, A3, T3, and the
+**Role.** Pure definition; fixes the referent of `σ` used by 3.1, A3, 3.3, and the
 co-directed `Φ_c` of A3.
 
 ---
 
 # The theorems
 
-The theorems that follow from this basis — **T1** (to relate is to create), **T2**
-(lived identity and the "we"), **T3** (knowing vs feeling) — together with the
+The theorems that follow from this basis — **3.1** (to relate is to create), **3.2**
+(lived identity and the "we"), **3.3** (knowing vs feeling) — together with the
 structural results about relating (self, part, other, collection; routing vs directing;
 what knowing does to a relation) live in their own file, with honest status tags and Lean
 names: **[03-theorems.md](03-theorems.md)**. The quantitative theorem (sparsity) is
-[03.1](03.1-sparsity.md). Derived notions (self, distributed self, birth/death) are
+[03.7](03.7-sparsity.md). Derived notions (self, distributed self, birth/death) are
 collected in [03-theorems.md](03-theorems.md) too.
 
 ---
@@ -200,7 +200,7 @@ collected in [03-theorems.md](03-theorems.md) too.
 Valence, the hard problem, and freedom are not unstated axioms. On the doctrine's own
 reading they fall **outside what a structure-preserving functor expresses** — the language
 speaks only of structure functors preserve, and these three are the non-structural
-remainder. By T3, formalizing is itself the σ-move (the objectifying look that leaves a
+remainder. By 3.3, formalizing is itself the σ-move (the objectifying look that leaves a
 remainder), so the language captures the *structure* of feeling (`≈`) and, on this reading,
 not feeling-as-lived.
 
@@ -208,6 +208,6 @@ This is a **stance the doctrine takes, not a proved theorem**: there is no forma
 these three are non-functorial (one cannot even state "valence" to prove it). Held as a
 stance it is the program naming its own boundary; stated as a theorem it would overreach.
 
-→ Continue to [03 — Theorems](03-theorems.md): what follows from the basis (T1–T3 and the
-structural results), including [03.1 — The Sparsity Conjecture](03.1-sparsity.md), the one
+→ Continue to [03 — Theorems](03-theorems.md): what follows from the basis (3.1–3.3 and the
+structural results), including [03.7 — The Sparsity Conjecture](03.7-sparsity.md), the one
 place the spec reaches for a genuine **theorem** rather than a redescription.

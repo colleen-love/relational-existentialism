@@ -1,7 +1,7 @@
 /-
-# Lived identity `≈` and the shared world `𝔼` — theorem T2
+# Lived identity `≈` and the shared world `𝔼` — theorem 3.2
 
-A faithful mechanization of [spec T2](../../docs/spec/03-theorems.md): the lived
+A faithful mechanization of [spec 3.2](../../docs/spec/03-theorems.md): the lived
 identity is the **greatest fixed point of a monotone operator on the complete
 lattice of relations** — i.e. the greatest bisimulation, `≈ := νΘ`. Concretely we use
 mathlib's `OrderHom.gfp` (Knaster–Tarski), which is exactly the `ν`-modality the spec
@@ -12,7 +12,7 @@ We then derive:
 * `bisim_coind` — **coinduction**: every bisimulation is contained in `≈` (the proof
   principle "to show two states share a lived identity (bisimilar), exhibit a bisimulation");
 * `bisim_refl/symm/trans` — `≈` is an equivalence; hence
-* `World := D/≈` — the **shared world `𝔼`** as a quotient (T2).
+* `World := D/≈` — the **shared world `𝔼`** as a quotient (3.2).
 
 This needs only `Mathlib.Order.FixedPoints` (already compiled), so it builds fast.
 -/
@@ -44,7 +44,7 @@ def Step (obs : X → O) (step : X → X → Prop) :
       obtain ⟨a', ha', hr⟩ := hbk b' hb'
       exact ⟨a', ha', hRS a' b' hr⟩
 
-/-- **Lived identity `≈ := νΘ`** — the greatest bisimulation (theorem T2). -/
+/-- **Lived identity `≈ := νΘ`** — the greatest bisimulation (theorem 3.2). -/
 def bisim (obs : X → O) (step : X → X → Prop) : X → X → Prop :=
   (Step obs step).gfp
 
@@ -112,7 +112,7 @@ def bisimSetoid (obs : X → O) (step : X → X → Prop) : Setoid X where
   r := bisim obs step
   iseqv := ⟨bisim_refl obs step, bisim_symm obs step, bisim_trans obs step⟩
 
-/-- **The shared world `𝔼 := D/≈`** (theorem T2): states quotiented by lived
+/-- **The shared world `𝔼 := D/≈`** (theorem 3.2): states quotiented by lived
 identity — the objective world as the overlap of perspectives. -/
 abbrev World (obs : X → O) (step : X → X → Prop) : Type _ :=
   Quotient (bisimSetoid obs step)

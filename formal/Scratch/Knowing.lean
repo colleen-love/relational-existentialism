@@ -37,7 +37,7 @@ the *necessary* relational floor, not the contingent branching one.
 **Inherited frontier.** Like `no_complete_view`, the related pole *posits* the A2 closure `reg`
 (every view is a relatum) rather than deriving it from the `Φ_c` dynamics. The bridge instantiates
 that posit at the trace setting; it does not discharge it. Closing it is the same open frontier
-([03.2](../../docs/spec/03.2-limits-of-knowing.md)).
+([03.4](../../docs/spec/03.4-limits-of-knowing.md)).
 -/
 import Scratch.Identity
 import RelExist.Relating

@@ -1,7 +1,7 @@
 /-
 # Perron–Frobenius existence — the invariant vector and the invariant state
 
-The conjecture lift's one named-open existence ([03.1 §3.6](../../docs/spec/03.1-sparsity.md),
+The conjecture lift's one named-open existence ([03.7](../../docs/spec/03.7-sparsity.md),
 Decision 1–2): that a finite-dimensional **unital / column-stochastic** dynamics `Φ_c` *admits* the
 peripheral data — an eigenvalue-1 eigenvector (a fixed point of the dynamics) and, with positivity, an
 **invariant state** (the relational weight). mathlib has no Perron–Frobenius and no Brouwer / Markov–
