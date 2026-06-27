@@ -192,6 +192,26 @@ cartesian-only domains).
 
 `[structural; both]`
 
+> **Proposition 0.2 (the seam is the non-comonoidal residue — one object, two faces).** Proposition 0.1
+> records the two obstructions as *different proofs*. They are nonetheless **one object**. By **Fox's
+> theorem**, *classical / copyable / cartesian* is a single notion: **carrying a natural copy comonoid**
+> `Δ` (the hallmark of §0.4). So both faces are read off the *same* `Δ`: the cartesian face (Lawvere)
+> **uses** the copy — the escaping diagonal `g a a` is `Δ` fed back in — and the monoidal face
+> (no-cloning) is the **absence** of that copy. The seam is then *defined* as the part of the state space
+> that carries no copy. Mechanized (`sorry`-free): abstractly in
+> [`RelExist/Fox.lean`](../../formal/RelExist/Fox.lean) — `Comonoid`, the cartesian instance, and
+> `faces_share_copy` (Lawvere's remainder and broadcastability over one `Comonoid.copy`, **0 axioms**);
+> concretely in [`Scratch/SeamComonoid.lean`](../../formal/Scratch/SeamComonoid.lean) — the copyable
+> fragment is exactly the diagonal (`IsClassical`) states (`cartesian_iff_copyDefectFree`), a seam state
+> with a live coherence carries **no** copy and **no available knowing recovers it**
+> (`seam_is_noncomonoidal_residue`, via `SeamForcing.attend_fixes_seam`), and a **self-inclusive** seam
+> forces such a state to exist (`self_inclusion_forces_residue`). The headline
+> `seam_is_the_common_obstruction`: every seam state carries a copy **iff** the seam has no genuine
+> between — so the self, being self-inclusive, is at once **uncopyable, non-broadcastable, and
+> incompletely self-knowable: three names for one missing comonoid.** `[proved]` (the structural core);
+> `[reading]` the full Fox biconditional in general `Cl(𝕋)`, and the ontological gloss (cartesian = It,
+> monoidal = Thou, the self straddling).
+
 ---
 
 ## 0.7 What each ingredient buys — summary

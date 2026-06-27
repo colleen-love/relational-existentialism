@@ -314,6 +314,20 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           `⌊(b-a)/r⌋+1` (`separated_card_le_of_Icc`), so the self-count is bounded entirely by
                           the gap (`selves_card_le_gap_capacity`) — only the note that operator norm dominates
                           the cone spectral radius is a definitional `[reading]`. ✅ verified.
+* `Scratch.SeamComonoid` — **the seam is the non-comonoidal residue** (concrete layer; abstract layer
+                          [`RelExist.Fox`](../RelExist/Fox.lean)). Fox's hallmark: *classical / copyable /
+                          cartesian* is one notion — carrying a copy comonoid — and in the matrix model that
+                          is `IsClassical` (`cartesian_iff_copyDefectFree`: copyable ⟺ `copyDefect = 0`). The
+                          central theorem `seam_is_noncomonoidal_residue`: a seam state with a **live**
+                          coherence carries **no** copy, and **no available knowing** (`attend S`, `S` disjoint
+                          from the seam, via `attend_fixes_seam`) can move it into the copyable fragment. A
+                          **self-inclusive** seam (a genuine between) forces such a state to exist
+                          (`self_inclusion_forces_residue`), so the headline `seam_is_the_common_obstruction`:
+                          every seam state carries a copy **iff** the seam has no between — the self, being
+                          self-inclusive, is at once uncopyable, non-broadcastable, and incompletely
+                          self-knowable, **three names for one missing comonoid**. `seam_two_faces` packages
+                          the unification: one copy failure, the monoidal (no-broadcast, survives every
+                          knowing) and cartesian (`dephase` cannot fix it) faces at once. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -373,3 +387,4 @@ import Scratch.SeamForcing
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity
+import Scratch.SeamComonoid

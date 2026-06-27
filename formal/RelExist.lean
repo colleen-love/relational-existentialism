@@ -19,6 +19,7 @@ import RelExist.Sparsity
 import RelExist.Loop
 import RelExist.Mirror
 import RelExist.Relating
+import RelExist.Fox
 import RelExist.Seam
 import RelExist.SeamBridge
 import RelExist.ReflexiveSeam

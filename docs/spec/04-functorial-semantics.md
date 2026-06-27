@@ -109,6 +109,16 @@ exactly what separates it from the cartesian domains: **no-cloning**.
 So the physics/cartesian seam (no-cloning vs free copying) — the doctrine's [§0.6
 seam](00-doctrine.md) and the firewall — is now a theorem on both sides.
 
+**And the two sides are one object** ([Proposition 0.2](00-doctrine.md)). By Fox's theorem
+*cartesian = carries a copy comonoid*, so the cartesian face (Lawvere needs `Δ`) and the monoidal face
+(no-cloning is the absence of `Δ`) are the *same* copy seen twice. Mechanized in
+[`RelExist/Fox.lean`](../../formal/RelExist/Fox.lean) (abstract, **0 axioms**) and
+[`Scratch/SeamComonoid.lean`](../../formal/Scratch/SeamComonoid.lean) (concrete): the copyable fragment
+is the diagonal/`IsClassical` states (`cartesian_iff_copyDefectFree`), the seam with a live coherence is
+the **non-comonoidal residue** that no available knowing recovers (`seam_is_noncomonoidal_residue`), and
+a self-inclusive seam never admits a copy on all its states (`seam_is_the_common_obstruction`) — *the
+self is uncopyable, non-broadcastable, and incompletely self-knowable by one missing comonoid.*
+
 ## 4.6 The traced SMC typeclass, the free category `Cl(𝕋)`, and literal functors
 
 What were once the two research-grade frontier pieces — a real traced-SMC typeclass and a
