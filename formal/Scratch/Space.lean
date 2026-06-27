@@ -63,9 +63,14 @@ variable {A : Type*}
 /-- The length of a **walk** `i → mids → j`: the chain sum of edge lengths along the walk, where
 `mids` is the (possibly empty) list of intermediate sites visited. The empty walk `i → [] → j` is
 the direct edge, of length `len i j`. -/
-def walkLen (len : A → A → ℝ≥0∞) : A → List A → A → ℝ≥0∞
+noncomputable def walkLen (len : A → A → ℝ≥0∞) : A → List A → A → ℝ≥0∞
   | i, [], j => len i j
   | i, x :: xs, j => len i x + walkLen len x xs j
+
+@[simp] lemma walkLen_nil (len : A → A → ℝ≥0∞) (i j : A) : walkLen len i [] j = len i j := rfl
+
+@[simp] lemma walkLen_cons (len : A → A → ℝ≥0∞) (i x : A) (xs : List A) (j : A) :
+    walkLen len i (x :: xs) j = len i x + walkLen len x xs j := rfl
 
 /-- **Walk lengths concatenate.** Splicing a walk `i → m1 → j` with a walk `j → m2 → k` (through the
 shared waypoint `j`) gives a walk `i → (m1 ++ j :: m2) → k` whose length is the sum. This is the
@@ -73,9 +78,9 @@ engine of the triangle inequality. -/
 lemma walkLen_concat (len : A → A → ℝ≥0∞) (i : A) (m1 : List A) (j : A) (m2 : List A) (k : A) :
     walkLen len i (m1 ++ j :: m2) k = walkLen len i m1 j + walkLen len j m2 k := by
   induction m1 generalizing i with
-  | nil => simp [walkLen]
+  | nil => simp
   | cons x xs ih =>
-      simp only [List.cons_append, walkLen]
+      simp only [List.cons_append, walkLen_cons]
       rw [ih x, ← add_assoc]
 
 /-- **A coupling.** The only datum of relational space: a directed edge length `len i j ∈ [0,∞]`
@@ -90,7 +95,8 @@ structure Coupling (A : Type*) where
 /-- **The coupling distance.** `d(i,j)` is the length of the strongest coupling path: the infimum,
 over all walks `i → mids → j`, of the walk length. (Relation-primary: `d` is *defined from* the
 coupling, not a background metric the coupling lives in.) -/
-def Coupling.dist (C : Coupling A) (i j : A) : ℝ≥0∞ := ⨅ mids : List A, walkLen C.len i mids j
+noncomputable def Coupling.dist (C : Coupling A) (i j : A) : ℝ≥0∞ :=
+  ⨅ mids : List A, walkLen C.len i mids j
 
 lemma Coupling.dist_def (C : Coupling A) (i j : A) :
     C.dist i j = ⨅ mids : List A, walkLen C.len i mids j := rfl
@@ -132,13 +138,13 @@ uncoupled (`∞`). This is a feature of relational space — direction matters �
 inductive Site | a | b
 
 /-- An **asymmetric** coupling: `a → b` has length `1`, but `b → a` is uncoupled (`∞`). -/
-def lenAsym : Site → Site → ℝ≥0∞
+noncomputable def lenAsym : Site → Site → ℝ≥0∞
   | .a, .a => 0
   | .b, .b => 0
   | .a, .b => 1
   | .b, .a => ⊤
 
-def couplingAsym : Coupling Site := ⟨lenAsym, fun s => by cases s <;> rfl⟩
+noncomputable def couplingAsym : Coupling Site := ⟨lenAsym, fun s => by cases s <;> rfl⟩
 
 /-- Every walk from `b` to `a` is infinite: to *leave* `b` you must pay the uncoupled edge `b → a = ∞`
 (the only non-`b` step out of `b`), so no finite walk reaches `a`. -/
@@ -146,7 +152,7 @@ lemma walkLen_b_a (mids : List Site) : walkLen lenAsym Site.b mids Site.a = ⊤ 
   induction mids with
   | nil => rfl
   | cons x xs ih =>
-      simp only [walkLen]
+      rw [walkLen_cons]
       cases x with
       | a => rw [show lenAsym Site.b Site.a = (⊤ : ℝ≥0∞) from rfl, top_add]
       | b => rw [show lenAsym Site.b Site.b = (0 : ℝ≥0∞) from rfl, zero_add, ih]
@@ -183,19 +189,19 @@ theorem Coupling.dist_eq_top_iff (C : Coupling A) (i j : A) :
 
 /-- A **fully separated** coupling: the two sites co-exist but have *zero* coupling in either
 direction (`a ↔ b` both `∞`). -/
-def lenSep : Site → Site → ℝ≥0∞
+noncomputable def lenSep : Site → Site → ℝ≥0∞
   | .a, .a => 0
   | .b, .b => 0
   | _, _ => ⊤
 
-def couplingSep : Coupling Site := ⟨lenSep, fun s => by cases s <;> rfl⟩
+noncomputable def couplingSep : Coupling Site := ⟨lenSep, fun s => by cases s <;> rfl⟩
 
 /-- Every walk from `a` to `b` is infinite — there is no finite path through a zero-coupling cut. -/
 lemma walkLen_sep_a_b (mids : List Site) : walkLen lenSep Site.a mids Site.b = ⊤ := by
   induction mids with
   | nil => rfl
   | cons x xs ih =>
-      simp only [walkLen]
+      rw [walkLen_cons]
       cases x with
       | a => rw [show lenSep Site.a Site.a = (0 : ℝ≥0∞) from rfl, zero_add, ih]
       | b => rw [show lenSep Site.a Site.b = (⊤ : ℝ≥0∞) from rfl, top_add]
@@ -232,7 +238,7 @@ lemma copyDefect_wDephase (w : A → A → ℝ) (M : Matrix A A ℝ) (i j : A) :
     copyDefect (wDephase w M) i j = w i j * copyDefect M i j := by
   rcases eq_or_ne i j with e | e
   · subst e; simp [copyDefect_apply]
-  · rw [copyDefect_apply, if_neg e, copyDefect_apply, if_neg e]
+  · simp [copyDefect_apply, wDephase, e]
 
 /-- **The edge-resolved geometric decay.** The `(i,j)` coherence after `n` closures of the loop is
 `(w i j)^n · M i j` exactly — `TimeFlow`'s geometric monovariant, now per edge. (The uniform flow is

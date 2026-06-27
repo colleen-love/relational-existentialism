@@ -4,7 +4,7 @@
 
 | Tag | Meaning |
 | --- | --- |
-| `[written]` | Lean mechanization authored; **compilation/sorry-freeness not yet confirmed** on this branch. |
+| `[written]` | Lean mechanization authored; compilation/sorry-freeness not yet confirmed. (Currently none — all authored items are verified.) |
 | `[proved]` | Mechanized and verified sorry-free against mathlib v4.15.0 (axioms `[propext, Classical.choice, Quot.sound]` only). |
 | `[reading]` | An interpretation laid over proved structure — held as a reading, not a derivation of physics. |
 | `[open]` | Not yet established. |
@@ -15,9 +15,9 @@ Sequel to [`time-flow.md`](time-flow.md).
 
 **Branch:** `claude/space-energy-rotating-spectrum-re9ct1`.
 
-> **Verification note.** The two new modules are authored and self-reviewed against the vendored
-> mathlib API; they are tagged `[written]` until the mathlib build completes and `lake build` confirms
-> them sorry-free, at which point each `[written]` item below is promoted to `[proved]`. The
+> **Verification note.** Both new modules **build sorry-free** against mathlib v4.15.0, and every
+> theorem cited below depends only on the three standard axioms `[propext, Classical.choice,
+> Quot.sound]` (no `sorryAx`) — confirmed by `lake build Scratch` and `#print axioms`. The
 > **Progress ledger** at the foot of this page is the single source of truth for current state.
 
 ---
@@ -95,15 +95,15 @@ shortest-path infimum and the `−log` is absorbed into the edge length. Asymmet
 (a feature to state, not smooth away).
 
 **Targets.**
-- `[written]` `d` is a quasi-pseudometric: `d(i,i)=0` (`Coupling.dist_self`), triangle inequality from
+- `[proved]` `d` is a quasi-pseudometric: `d(i,i)=0` (`Coupling.dist_self`), triangle inequality from
   path concatenation (`Coupling.dist_triangle`, via `walkLen_concat`), and a direct edge bounds it
   (`Coupling.dist_le_len`). Asymmetry is proved, not assumed: `dist_asymmetric` exhibits a two-site
   coupling with `d(a,b) ≠ d(b,a)`. So `dist` is genuinely a *quasi*-pseudometric.
-- `[written]` separability ⟺ infinite distance: `Coupling.dist_eq_top_iff` (`d = ∞` iff every
+- `[proved]` separability ⟺ infinite distance: `Coupling.dist_eq_top_iff` (`d = ∞` iff every
   connecting walk crosses a zero-coupling edge); witness `couplingSep_dist` (⊗-coexisting relata with
   zero coupling are at `d = ∞`). With `dist_le_len` this makes "space = coexistence minus connection" a
   theorem.
-- `[written]` influence bound (the payoff): a weighted dephasing flow `wDephase w` (the edge-resolved
+- `[proved]` influence bound (the payoff): a weighted dephasing flow `wDephase w` (the edge-resolved
   refinement of `TimeFlow.partialDephase`) gives `copyDefect_wDephase_iterate`
   (`(i,j)` coherence after `n` steps `= (w i j)^n · M i j`). Taking `w i j = exp(−len i j)`,
   `influence_bound` shows `|coherence_n(i,j)| ≤ exp(−n · d(i,j)) · |M i j|`: influence propagates no
@@ -125,18 +125,18 @@ none) but, per the `TimeFlow` discipline, as **one genuine instance**.
 ℂ-lift of `Space.wDephase` / `TimeFlow.partialDephase`. Its matrix units are eigen-operators with
 eigenvalue `μ i j`, so `schur_iterate` gives the per-edge geometric law, and the band of an edge is
 read off `‖μ i j‖`:
-- `[written]` **fixed** (`μ i i = 1`): coherence held exactly (`schur_fixed`) — the known/classical/self
+- `[proved]` **fixed** (`μ i i = 1`): coherence held exactly (`schur_fixed`) — the known/classical/self
   band (diagonal);
-- `[written]` **rotating** (`‖μ i j‖ = 1`): magnitude exactly conserved for all `n` (`schur_sustained`)
+- `[proved]` **rotating** (`‖μ i j‖ = 1`): magnitude exactly conserved for all `n` (`schur_sustained`)
   — sustained oscillating coherence;
-- `[written]` **transient** (`‖μ i j‖ < 1`): magnitude `→ 0` (`schur_transient_tendsto`) — the
+- `[proved]` **transient** (`‖μ i j‖ < 1`): magnitude `→ 0` (`schur_transient_tendsto`) — the
   `TimeFlow` arrow.
 
 The concrete witness `quarterMul` on `Matrix (Fin 3) ℂ` carries all three at once: diagonal `1`
 (fixed); `μ_{01} = i = e^{iπ/2}` (rotating — `‖i‖ = 1`, `i ≠ 1`); `μ_{02} = 1/2` (transient). The
 coherence `U = E₀₁` is a **genuine rotating eigen-operator**: `phaseChannel_eigen` (`Φ U = i · U`),
 sustained (`rotating_sustained`: `‖Φ^n U‖ = ‖U‖`) while `transient_decays` shows the `(0,2)` coherence
-decays. `[written]`
+decays. `[proved]`
 
 **Veto-checks (narrated).** A primitive `Φ` has peripheral spectrum exactly `{1}` — rotation requires a
 symmetry/degeneracy (rotating spectrum ⟺ a coupling symmetry ⟺ a conserved quantity, Noether,
@@ -153,7 +153,7 @@ Whether the seam-protected and rotating-protected bands coincide, intersect, or 
 
 ## Part 3 — Energy (reading over the witness) — in `RotatingSpectrum.lean`
 
-- `[written]` **The energy/arrow split is mechanized at two levels.** Write each eigenvalue
+- `[proved]` **The energy/arrow split is mechanized at two levels.** Write each eigenvalue
   `μ = exp(s)`, so `s = log μ` is the per-step **generator** with `Re s = log‖μ‖`, `Im s = arg μ`. At
   the *modulus* level (`energy_arrow_split`): the rotating band has `‖μ₀₁‖ = 1` and `μ₀₁ ≠ 1`
   (conserved, genuinely rotating) while the transient band has `‖μ₀₂‖ < 1` (decaying). At the
@@ -164,11 +164,11 @@ Whether the seam-protected and rotating-protected bands coincide, intersect, or 
   of theorems about one generator, on the witness.
 - `[reading]` That the conserved modulus-one band *is* energy and the rotating phase *is* a physical
   frequency. Conserved (`energy_conserved`, `arrow_dissipates` give the orbit-level conservation/decay).
-- `[written]` **Energy as frequency (`E = ℏω`).** The eigen-operator winds at a constant rate,
+- `[proved]` **Energy as frequency (`E = ℏω`).** The eigen-operator winds at a constant rate,
   `Φ^n U = i^n · U` (`rotating_winds`): a quarter turn `θ = π/2` per closure of the loop. The reading
   identifies that winding rate (frequency) with energy — the rotating mode is a clock and its rate is
   its energy. (Proved: the uniform winding; `[reading]`: that the rate *is* energy.)
-- `[written]` **Energy as reversibility / recurrence.** The rotating eigenvalue has finite order
+- `[proved]` **Energy as reversibility / recurrence.** The rotating eigenvalue has finite order
   (`i⁴ = 1`), so the mode returns to itself: `Φ⁴ U = U` (`rotating_recurs`) — a closed periodic orbit
   (Poincaré recurrence, reversible time), in sharp contrast to the transient's monotone decay. The
   reading: energy is the conserved datum that makes the dynamics time-reversible.
@@ -192,36 +192,36 @@ when the coupling factors across `⊗`, linking energy's additivity to Part 1's 
 
 ## Progress ledger
 
-The single source of truth for current state. `[written]` items are authored and pending the
+The single source of truth for current state. `[proved]` items are authored and pending the
 `lake build` confirmation that promotes them to `[proved]`.
 
 | Item | Lean name(s) | State |
 | --- | --- | --- |
-| **Space** — `d(i,i)=0` | `Coupling.dist_self` | `[written]` |
-| Space — triangle inequality | `Coupling.dist_triangle`, `walkLen_concat` | `[written]` |
-| Space — direct-edge bound | `Coupling.dist_le_len` | `[written]` |
-| Space — asymmetry (quasi-metric) | `dist_asymmetric` | `[written]` |
-| Space — separability ⟺ `d=∞` | `Coupling.dist_eq_top_iff`, `couplingSep_dist` | `[written]` |
-| Space — influence/propagation bound | `influence_bound`, `copyDefect_wDephase_iterate` | `[written]` |
+| **Space** — `d(i,i)=0` | `Coupling.dist_self` | `[proved]` |
+| Space — triangle inequality | `Coupling.dist_triangle`, `walkLen_concat` | `[proved]` |
+| Space — direct-edge bound | `Coupling.dist_le_len` | `[proved]` |
+| Space — asymmetry (quasi-metric) | `dist_asymmetric` | `[proved]` |
+| Space — separability ⟺ `d=∞` | `Coupling.dist_eq_top_iff`, `couplingSep_dist` | `[proved]` |
+| Space — influence/propagation bound | `influence_bound`, `copyDefect_wDephase_iterate` | `[proved]` |
 | Space — graph-Laplacian / resistance distance | — | `[open]` |
 | Space — "the quasi-metric *is* space" | — | `[reading]` |
-| **Rotating** — ℂ phase-damping channel | `schur`, `schur_iterate` | `[written]` |
-| Rotating — fixed band | `schur_fixed`, `fixed_held` | `[written]` |
-| Rotating — sustained rotating band | `schur_sustained`, `rotating_sustained` | `[written]` |
-| Rotating — transient band decays | `schur_transient_tendsto`, `transient_decays` | `[written]` |
-| Rotating — genuine rotating eigen-operator | `phaseChannel_eigen`, `quarterMul_01_ne_one` | `[written]` |
+| **Rotating** — ℂ phase-damping channel | `schur`, `schur_iterate` | `[proved]` |
+| Rotating — fixed band | `schur_fixed`, `fixed_held` | `[proved]` |
+| Rotating — sustained rotating band | `schur_sustained`, `rotating_sustained` | `[proved]` |
+| Rotating — transient band decays | `schur_transient_tendsto`, `transient_decays` | `[proved]` |
+| Rotating — genuine rotating eigen-operator | `phaseChannel_eigen`, `quarterMul_01_ne_one` | `[proved]` |
 | Rotating — CPTP peripheral structure theorem | — | `[open]` |
 | Rotating — `quarterMul` is bona fide CPTP | — | `[open]` |
 | Rotating — seam-band ∩ rotating-band question | — | `[open]` |
-| **Energy** — conserved (modulus-one) band | `energy_conserved` | `[written]` |
-| Energy — dissipative (arrow) band | `arrow_dissipates` | `[written]` |
-| Energy — energy/arrow split (modulus level) | `energy_arrow_split` | `[written]` |
-| Energy — generator pure-imaginary on rotating band | `energy_conserved_generator` | `[written]` |
-| Energy — nonzero frequency `Im(log μ)≠0` | `frequency_nonzero` | `[written]` |
-| Energy — arrow = negative-real generator | `arrow_negative_generator` | `[written]` |
-| Energy — energy/arrow split (generator level) | `energy_arrow_spectrum` | `[written]` |
-| Energy — as frequency (uniform winding `E=ℏω`) | `rotating_winds` | `[written]` |
-| Energy — as reversibility / recurrence (`Φ⁴U=U`) | `rotating_recurs` | `[written]` |
+| **Energy** — conserved (modulus-one) band | `energy_conserved` | `[proved]` |
+| Energy — dissipative (arrow) band | `arrow_dissipates` | `[proved]` |
+| Energy — energy/arrow split (modulus level) | `energy_arrow_split` | `[proved]` |
+| Energy — generator pure-imaginary on rotating band | `energy_conserved_generator` | `[proved]` |
+| Energy — nonzero frequency `Im(log μ)≠0` | `frequency_nonzero` | `[proved]` |
+| Energy — arrow = negative-real generator | `arrow_negative_generator` | `[proved]` |
+| Energy — energy/arrow split (generator level) | `energy_arrow_spectrum` | `[proved]` |
+| Energy — as frequency (uniform winding `E=ℏω`) | `rotating_winds` | `[proved]` |
+| Energy — as reversibility / recurrence (`Φ⁴U=U`) | `rotating_recurs` | `[proved]` |
 | Energy — `L = −i[H,·]+D` generator split (full) | — | `[open]` |
 | Energy — `⊗`-additivity of `H` | — | `[open]` |
 | Energy — "rotating phases *are* energy" | — | `[reading]` |

@@ -128,7 +128,7 @@ lemma schur_transient_tendsto (μ : A → A → ℂ) (M : Matrix A A ℂ) (i j :
 
 /-- The quarter-turn multiplier: diagonal `1` (fixed); `μ_{01} = i`, `μ_{10} = −i` (rotating, `e^{±iπ/2}`);
 everything else `1/2` (transient). -/
-def quarterMul (i j : Fin 3) : ℂ :=
+noncomputable def quarterMul (i j : Fin 3) : ℂ :=
   if i = j then 1
   else if i = 0 ∧ j = 1 then Complex.I
   else if i = 1 ∧ j = 0 then -Complex.I
@@ -154,7 +154,9 @@ lemma norm_quarterMul_01 : ‖quarterMul 0 1‖ = 1 := by
 
 /-- `‖μ_{02}‖ = 1/2 < 1` — the `(0,2)` band is strictly inside the disk (decaying). -/
 lemma norm_quarterMul_02_lt : ‖quarterMul 0 2‖ < 1 := by
-  rw [quarterMul_02, Complex.norm_eq_abs, Complex.abs_ofReal]; norm_num
+  rw [quarterMul_02, Complex.norm_eq_abs, Complex.abs_ofReal,
+      abs_of_pos (by norm_num : (0:ℝ) < 1 / 2)]
+  norm_num
 
 /-- `μ_{01} = i ≠ 1` — the rotating band is genuinely rotating, **not** fixed: it carries a nonzero
 phase (a nonzero frequency). This is what separates *reversible time* (rotating) from the *known* band
