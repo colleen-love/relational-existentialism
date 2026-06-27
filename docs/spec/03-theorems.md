@@ -33,8 +33,9 @@ The structural results split into four pages:
   relocated into the relationship you cannot forget.*
 - [`03.4-the-self-quantified.md`](03.4-the-self-quantified.md) — **the self quantified**: how much
   of a self ends up in others (the Banach-algebra bound), the quantitative eigenform and its
-  uniqueness, and the unification of the order-theoretic and quantitative selves under the
-  ν-modality.
+  uniqueness, the unification of the order-theoretic and quantitative selves under the
+  ν-modality, and the **closing of Conjecture 3.4** — *controlled multiplicity*: selves are more
+  than one (contingency) yet `o(N)` (sparse), the count bounded by a spectral-gap capacity.
 
 ---
 

@@ -292,6 +292,24 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           modulus-`<1` band is the **arrow** (`arrow_dissipates`); `energy_arrow_split`
                           shows both in one generator's spectrum. `[proved]` witness; the general CPTP
                           peripheral structure theorem stays the narrated `[open]`. ✅ verified.
+* `Scratch.SpectralMultiplicity` — **Conjecture 3.4's new mathematics, closed**: the reconciliation of
+                          *sparse* and *multiple*. Standard nonlinear Perron–Frobenius forces **uniqueness**
+                          (`unique_fixed_of_global_contraction` — global contraction ⇒ one self, the
+                          primitive/subhomogeneous regime); the doctrine's **contingency** needs *more than
+                          one*. The bridge reads the abstract `‖x‖<1` of `Distribution` as the **linearization**
+                          `x = DΦ_c`: `feedbackMap_contract` makes the living regime a contraction with rate
+                          `‖x‖`, and `living_self_unique_attractor` exhibits `sustained x b` as the unique,
+                          geometrically-reached attractor (piece 1). The **counting bound** (piece 3, the gem):
+                          a locally attracting self is **isolated** (`attracting_isolated`), so distinct selves
+                          are **`r`-separated** (`attractors_separated` — exclusivity *derived* from the gap,
+                          not posited), and an `r`-separated set inside a capacity-`m` cover has `≤ m` points
+                          (`separated_card_le_cover`), so the density of selves `→ 0`
+                          (`selves_density_tendsto_zero`) — **independent of `N`**. Yet multiplicity is real: an
+                          explicit two-basin map carries **two** genuine attractors (`two_attracting_selves`),
+                          non-globally-contracting exactly as uniqueness requires. So selves are `>1`
+                          (contingency) and `o(N)` (sparse): controlled multiplicity, bounded by structure. The
+                          analytic identification of `r`/`m` with the infinite-dim cone spectral gap stays the
+                          named `[reading]`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -350,3 +368,4 @@ import Scratch.TimeArrow
 import Scratch.SeamForcing
 import Scratch.Space
 import Scratch.RotatingSpectrum
+import Scratch.SpectralMultiplicity
