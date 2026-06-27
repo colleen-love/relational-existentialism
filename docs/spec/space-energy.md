@@ -31,8 +31,10 @@ conserved energy is the modulus-one rotating part; and matter is the fixed band 
 protect. The pieces differ sharply in reach, and the plan is ordered by it: space is mechanizable now
 in the present real model; the rotating spectrum that carries energy lives in a sector the current
 self-adjoint dynamics provably exclude, so reaching it is a model extension to ℂ (the keystone), not a
-lemma; and matter is a reading laid over both. Throughout, the discipline is the framework's usual one
-— prove the structural skeleton, identify the physics as a reading, and never confuse the two.
+lemma. (A fourth aspect, matter — the seam-protected fixed band — is **deferred**: there is no current
+path to its mechanization, so it is dropped from this plan rather than carried as a placeholder.)
+Throughout, the discipline is the framework's usual one — prove the structural skeleton, identify the
+physics as a reading, and never confuse the two.
 
 **Primacy guard:** relation is primary throughout. Space, time, and energy are read off the structure
 of the coupling/generator; none is a background the relations sit inside.
@@ -76,10 +78,12 @@ is likewise independent of the extension.
 - **arrow / dissipation / time** = `Re(spec L) < 0`, the transient band — *done* (`TimeFlow`), with
   its target subalgebra seam-fixed (`SeamForcing`);
 - **energy / reversible time** = `Im(spec L)`, the rotating peripheral band;
-- **matter** = the fixed band as a stable bound eigenform — `SeamForcing` supplies its reason for
-  stability: the fixed band the self cannot decohere is exactly the seam `SeamAlgebra J`;
 - **feeling** = the off-diagonal `(1−E)` mass, with **two distinct permanences**: seam-permanent
   (operational, real-model, proved) and spectrally-permanent (rotating, open).
+
+(The fourth aspect of the frame — **matter**, the seam-protected fixed band — is **deferred**: there is
+no current path to its mechanization beyond what `SeamForcing` already proves about the fixed
+subalgebra, so it is dropped from this plan rather than carried as a placeholder.)
 
 ## Part 1 — Space (present model; near-term) — companion `Space.lean`
 
@@ -149,26 +153,25 @@ Whether the seam-protected and rotating-protected bands coincide, intersect, or 
 
 ## Part 3 — Energy (reading over the witness) — in `RotatingSpectrum.lean`
 
-- `[reading over R]` Write each eigenvalue `μ = exp(s)`. The rotating band has `‖μ‖ = 1`, i.e.
-  `Re s = 0`: pure phase, `s = iθ`, `θ` the **frequency/energy**, conserved (`energy_conserved`). The
-  transient band has `‖μ‖ < 1`, i.e. `Re s < 0`: the gap, the decay, the **arrow**
-  (`arrow_dissipates`). `energy_arrow_split` shows both in one channel's spectrum: **energy = the
-  conserved (modulus-one) band; arrow = the decaying band** — two halves of one generator's spectrum.
+- `[written]` **The energy/arrow split is mechanized at two levels.** Write each eigenvalue
+  `μ = exp(s)`, so `s = log μ` is the per-step **generator** with `Re s = log‖μ‖`, `Im s = arg μ`. At
+  the *modulus* level (`energy_arrow_split`): the rotating band has `‖μ₀₁‖ = 1` and `μ₀₁ ≠ 1`
+  (conserved, genuinely rotating) while the transient band has `‖μ₀₂‖ < 1` (decaying). At the
+  *generator* level (`energy_arrow_spectrum`): `Re(log μ₀₁) = 0` (pure imaginary — no decay,
+  `energy_conserved_generator`) with `Im(log μ₀₁) = π/2 ≠ 0` (a nonzero frequency = energy,
+  `frequency_nonzero`), while `Re(log μ₀₂) < 0` (negative-real — the dissipative arrow,
+  `arrow_negative_generator`). So **energy = `Im(spec L)`; arrow = `Re(spec L) < 0`** is a literal pair
+  of theorems about one generator, on the witness.
+- `[reading]` That the conserved modulus-one band *is* energy and the rotating phase *is* a physical
+  frequency. Conserved (`energy_conserved`, `arrow_dissipates` give the orbit-level conservation/decay).
 - `[reading]` **Two conservations, not conflated.** *Dynamical* (a coupling symmetry → rotating
   spectrum → a conserved charge — this is energy) and *operational* (self-inclusion → the un-attendable
-  seam → permanent feeling — this is the self/matter substrate, **not** energy). Keeping them separate
-  keeps space/time/energy/matter cleanly distinguished.
+  seam → permanent feeling — proved in `SeamForcing`, **not** energy). Keeping them separate keeps
+  space/time/energy cleanly distinguished.
 
 **Scope.** Energy as the conserved spectral data of the generator, with the energy/arrow split. Not
 units, ℏ, or any specific spectrum. The `⊗`-additivity sub-question (`H_total = H_1⊗1 + 1⊗H_2` only
 when the coupling factors across `⊗`, linking energy's additivity to Part 1's separability) is `[open]`.
-
-## Part 4 — Matter (reading)
-
-The fixed band is a bound eigenform; `SeamForcing` supplies its reason for stability (it is the seam,
-the un-attendable protected subalgebra `SeamAlgebra J`). Binding/persistence can be read from the seam
-(operational protection) and/or the spectral gap (dynamical protection); the relation between the two
-protections is itself `[open]`. `[reading]`
 
 ## Ordering and dependencies
 
@@ -176,9 +179,8 @@ protections is itself `[open]`. `[reading]`
    (`Space.lean`).
 2. **R0 + one rotating instance** — the keystone; unlocks energy, reversible time, and
    spectrally-permanent feeling as readings over a single decomposition (`RotatingSpectrum.lean`).
-3. **Energy** — read off the R instance as the conserved (dynamical) half of `L`'s spectrum
-   (`RotatingSpectrum.lean`, §3).
-4. **Matter** — a reading, supported by `SeamForcing`.
+3. **Energy** — read off the R instance as the conserved (dynamical) half of `L`'s spectrum, mechanized
+   at the modulus and generator levels (`RotatingSpectrum.lean`, §3).
 
 ## Progress ledger
 
@@ -205,10 +207,13 @@ The single source of truth for current state. `[written]` items are authored and
 | Rotating — seam-band ∩ rotating-band question | — | `[open]` |
 | **Energy** — conserved (modulus-one) band | `energy_conserved` | `[written]` |
 | Energy — dissipative (arrow) band | `arrow_dissipates` | `[written]` |
-| Energy — energy/arrow spectral split | `energy_arrow_split` | `[written]` |
+| Energy — energy/arrow split (modulus level) | `energy_arrow_split` | `[written]` |
+| Energy — generator pure-imaginary on rotating band | `energy_conserved_generator` | `[written]` |
+| Energy — nonzero frequency `Im(log μ)≠0` | `frequency_nonzero` | `[written]` |
+| Energy — arrow = negative-real generator | `arrow_negative_generator` | `[written]` |
+| Energy — energy/arrow split (generator level) | `energy_arrow_spectrum` | `[written]` |
 | Energy — `L = −i[H,·]+D` generator split (full) | — | `[open]` |
 | Energy — `⊗`-additivity of `H` | — | `[open]` |
 | Energy — "rotating phases *are* energy" | — | `[reading]` |
-| **Matter** — fixed band stability ← seam | `SeamForcing.*` | `[reading]` |
-| Matter — operational vs dynamical protection | — | `[open]` |
+| **Matter** | *deferred — no current mechanization path; dropped from this plan* | — |
 | **Time** (prior branch) — orientation, flow, arrow, seam | `Orientation`, `TimeFlow`, `TimeArrow`, `SeamForcing` | `[proved]` |

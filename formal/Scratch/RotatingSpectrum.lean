@@ -32,11 +32,15 @@ sustained (`rotating_sustained` — `‖Φ^n U‖ = ‖U‖` for all `n`) while 
 
 ## Part 3 — energy, as a reading over the instance (`[reading]`)
 
-Write each eigenvalue as `μ = exp(s)`. The rotating band has `‖μ‖ = 1`, i.e. `Re s = 0`: pure phase,
-`s = iθ` with `θ` the **frequency / energy**, conserved (`energy_conserved`). The transient band has
-`‖μ‖ < 1`, i.e. `Re s < 0`: the gap, the decay, the **arrow** (`arrow_dissipates`). One channel, two
-halves of its spectrum: **energy = the conserved (modulus-one) band; arrow = the decaying band**
-(`energy_arrow_split`). Energy is what relational time is the flow of; the arrow is what it dissipates.
+Write each eigenvalue as `μ = exp(s)`, so `s = log μ` is the per-step **generator** with `Re s = log‖μ‖`
+and `Im s = arg μ`. The rotating band has `‖μ‖ = 1`, i.e. `Re s = 0`: pure phase, `s = iθ` with `θ` the
+**frequency / energy**, conserved (`energy_conserved`; `energy_conserved_generator` —
+`Re(log μ₀₁) = 0`; `frequency_nonzero` — `Im(log μ₀₁) = π/2 ≠ 0`). The transient band has `‖μ‖ < 1`,
+i.e. `Re s < 0`: the gap, the decay, the **arrow** (`arrow_dissipates`; `arrow_negative_generator` —
+`Re(log μ₀₂) < 0`). One channel, two halves of its spectrum: **energy = `Im(spec L)` (the conserved,
+modulus-one band); arrow = `Re(spec L) < 0` (the decaying band)** — a literal pair of theorems about
+the generator `L = log μ` (`energy_arrow_split` at the modulus level, `energy_arrow_spectrum` at the
+generator level). Energy is what relational time is the flow of; the arrow is what it dissipates.
 
 ## Honest scope
 
@@ -51,6 +55,7 @@ as `TimeFlow`'s `partialDephase` needed none of the general decay theory.
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Complex.Abs
 import Mathlib.Analysis.Complex.Basic
+import Mathlib.Analysis.SpecialFunctions.Complex.Log
 import Mathlib.Analysis.SpecificLimits.Normed
 
 namespace RelExist.RotatingSpectrum
@@ -231,5 +236,40 @@ energy = the modulus-one (imaginary-spectrum) rotating part, both in the spectru
 theorem energy_arrow_split :
     ‖quarterMul 0 1‖ = 1 ∧ quarterMul 0 1 ≠ 1 ∧ ‖quarterMul 0 2‖ < 1 :=
   ⟨norm_quarterMul_01, quarterMul_01_ne_one, norm_quarterMul_02_lt⟩
+
+/-! ### The generator `L = log μ` — energy is `Im(spec)`, the arrow is `Re(spec)`
+
+Write the per-step multiplier as the exponential of a generator, `μ = exp(s)`. Then `s = log μ`, and
+`Re s = log‖μ‖`, `Im s = arg μ`. The three lemmas below make the spec's "**energy = Im(spec L); arrow
+= Re(spec L)**" literal, on the witness: the rotating band's generator is **pure imaginary** (`Re = 0`,
+no decay) with a **nonzero frequency** (`Im ≠ 0` — the energy), while the transient band's generator has
+**negative real part** (`Re < 0` — the dissipative arrow). Two halves of one generator's spectrum. -/
+
+/-- **Energy is conserved: the rotating generator is pure imaginary** (`Re(log μ₀₁) = 0`). Since
+`‖μ₀₁‖ = 1`, its generator has no real (decaying) part — the modulus-one band does not dissipate. -/
+theorem energy_conserved_generator : (Complex.log (quarterMul 0 1)).re = 0 := by
+  rw [Complex.log_re, quarterMul_01, Complex.abs_I, Real.log_one]
+
+/-- **A genuine frequency: the rotating generator's imaginary part is nonzero** (`Im(log μ₀₁) = arg i =
+π/2 ≠ 0`). The rotating band carries a real oscillation — a nonzero energy/frequency — distinguishing
+*reversible time* from the static fixed (known) band. -/
+theorem frequency_nonzero : (Complex.log (quarterMul 0 1)).im ≠ 0 := by
+  rw [Complex.log_im, quarterMul_01, Complex.arg_I]
+  positivity
+
+/-- **The arrow is the negative-real part: the transient generator has `Re(log μ₀₂) < 0`** (`log(1/2) =
+−log 2 < 0`). The dissipative half of the spectrum — the `TimeFlow` arrow — read off the same generator. -/
+theorem arrow_negative_generator : (Complex.log (quarterMul 0 2)).re < 0 := by
+  rw [Complex.log_re, quarterMul_02, Complex.abs_ofReal, abs_of_pos (by norm_num : (0:ℝ) < 1 / 2)]
+  exact Real.log_neg (by norm_num) (by norm_num)
+
+/-- **Energy = `Im(spec L)`, arrow = `Re(spec L)` — the two halves of one generator's spectrum.** The
+rotating band's generator is pure imaginary with a nonzero frequency (conserved energy); the transient
+band's generator is negative-real (the dissipative arrow). The spec's unifying frame, now a literal pair
+of theorems about `L = log μ` on the concrete witness. -/
+theorem energy_arrow_spectrum :
+    (Complex.log (quarterMul 0 1)).re = 0 ∧ (Complex.log (quarterMul 0 1)).im ≠ 0
+      ∧ (Complex.log (quarterMul 0 2)).re < 0 :=
+  ⟨energy_conserved_generator, frequency_nonzero, arrow_negative_generator⟩
 
 end RelExist.RotatingSpectrum
