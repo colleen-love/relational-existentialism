@@ -328,6 +328,20 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           self-knowable, **three names for one missing comonoid**. `seam_two_faces` packages
                           the unification: one copy failure, the monoidal (no-broadcast, survives every
                           knowing) and cartesian (`dephase` cannot fix it) faces at once. ✅ verified.
+* `Scratch.FoxTheorem` — **Fox's hallmark, mechanized** (milestone 6; abstract `Type`-level layer
+                          [`RelExist.Fox`](../RelExist/Fox.lean)). The categorical §0.4 hallmark — *the
+                          cartesian fragment is exactly the presence of a uniform, natural `Δ`* — discharged
+                          over a genuine cartesian monoidal category by standing on mathlib's
+                          `CategoryTheory.Monoidal.Cartesian.Comon_`: `cartesianComonoid` (every object a
+                          comonoid, functorially — cartesian ⇒ natural copy), `comonoid_forced` (the
+                          **uniqueness**: any comonoid's comul is THE diagonal, counit THE terminal map — the
+                          copy is forced, not chosen), and `foxEquivalence` (`Comon_ C ≌ C` — comonoids ARE
+                          the objects). Instantiated at `Type` (`foxEquivalenceType`, `comonoid_forced_type`)
+                          and bridged to the doctrine's copy (`doctrine_copy_is_diagonal`: `Fox.cartesian`'s
+                          `(x,x)` is mathlib's diagonal). So §3.2's forward hallmark + uniqueness + the sharp
+                          equivalence are **mechanized, not cited**; the reverse direction (comonoid ⇒
+                          cartesian, Fox's classical hard half) is not in mathlib and stays the one cited
+                          result. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -388,3 +402,4 @@ import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity
 import Scratch.SeamComonoid
+import Scratch.FoxTheorem

@@ -208,9 +208,14 @@ cartesian-only domains).
 > forces such a state to exist (`self_inclusion_forces_residue`). The headline
 > `seam_is_the_common_obstruction`: every seam state carries a copy **iff** the seam has no genuine
 > between — so the self, being self-inclusive, is at once **uncopyable, non-broadcastable, and
-> incompletely self-knowable: three names for one missing comonoid.** `[proved]` (the structural core);
-> `[reading]` the full Fox biconditional in general `Cl(𝕋)`, and the ontological gloss (cartesian = It,
-> monoidal = Thou, the self straddling).
+> incompletely self-knowable: three names for one missing comonoid.** `[proved]` (the structural core).
+> The **categorical hallmark** itself — *cartesian ⇒ the natural copy `Δ` exists and is unique (forced to
+> be the diagonal), with `Comon_ C ≌ C`* — is now mechanized over a genuine monoidal category in
+> [`Scratch/FoxTheorem.lean`](../../formal/Scratch/FoxTheorem.lean) (`cartesianComonoid`,
+> `comonoid_forced`, `foxEquivalence`, via mathlib's categorical-quantum library), so §3.2's forward
+> direction is **proved, not cited**. `[reading]`: only the **reverse** Fox direction (a symmetric
+> monoidal category with a natural comonoid on every object is cartesian — the classical hard half, not in
+> mathlib) stays cited, and the ontological gloss (cartesian = It, monoidal = Thou, the self straddling).
 
 ---
 

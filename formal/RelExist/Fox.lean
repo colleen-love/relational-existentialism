@@ -16,8 +16,12 @@ What this module adds is the **keystone abstraction**: the cartesian self-model 
 seam — is at once non-self-modelable and non-broadcastable: **one missing comonoid, two faces.**
 
 `[proved]` here: the comonoid structure, that the cartesian diagonal is one (Fox forward), that Lawvere's
-diagonal *is* the copy, and the faces-share-copy keystone. `[reading]`: the full Fox biconditional in
-general `Cl(𝕋)` (the reverse direction) is cited, not mechanized — it is not load-bearing for the
+diagonal *is* the copy, and the faces-share-copy keystone. The **categorical** hallmark — cartesian ⇒ the
+natural comonoid exists, is *unique* (forced to be the diagonal), and `Comon_ C ≌ C` — is now mechanized
+over a genuine monoidal category in [`Scratch/FoxTheorem.lean`](../Scratch/FoxTheorem.lean) (standing on
+mathlib's categorical-quantum library), so §3.2's forward direction is **proved, not cited**. `[reading]`:
+only the **reverse** direction (a symmetric monoidal category with a natural comonoid on every object is
+cartesian — Fox's classical hard half) stays cited; it is not in mathlib and is not load-bearing for the
 unification, which is concrete (§4).
 -/
 import RelExist.Firewall
