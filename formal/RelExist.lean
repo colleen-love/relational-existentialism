@@ -1,31 +1,20 @@
--- Relational Existentialism — formal development (root module).
+-- Relational Existentialism — formal core (dependency-free root module).
 --
--- Layer-by-layer mechanization of docs/spec. Currently:
---   * RelExist.Sparsity — the discrete core of Lemmas 3.7.1 & 3.7.2 (sparsity of Stab).
---   * RelExist.Loop     — step 3: the loop bridge from resource threshold to the
---                         A3 fixed-point definition of a self.
---   * RelExist.Mirror   — 3.3 (σ-side): Lawvere's theorem, the mirror that can't close.
---   * RelExist.Firewall — Layer 4: the cartesian-side firewall (no entanglement in
---                         social/mental-health domains).
---   * RelExist.Traced   — the traced symmetric monoidal category typeclass and literal
---                         (structure-preserving) functors.
---   * RelExist.Free      — the free traced SMC Cl(𝕋) over a signature, and the universal
---                         (literal) functor out of it into any model.
---   * RelExist.Coherence — the monoidal-coherence refinement (CoherentTracedSMC) layered on
---                         top, with the trivial and scalar models shown coherent.
---   * RelExist.FreeCoherent — the free *coherent* traced SMC Cl_coh(𝕋) and its universal
---                         functor into any coherent model.
-import RelExist.Sparsity
-import RelExist.Loop
+-- This core is deliberately mathlib-free: it builds and checks in seconds. It carries the
+-- order-theoretic / categorical spine of paper one's headline (see docs/spec/paper-one.md):
+--
+--   * RelExist.Mirror     — 3.3 (σ-side): Lawvere's theorem, the mirror that can't close.
+--   * RelExist.Relating   — the relational typology; the self-inclusive block is unmodelable.
+--   * RelExist.Seam       — the seam: a self cannot completely trace what includes it (0 ax).
+--   * RelExist.SeamBridge — the bridge tying the seam to the decohering remainder.
+--   * RelExist.Traced     — the traced symmetric monoidal category typeclass (A1's arena).
+--
+-- The rest of the former core (Sparsity/Loop — paper three; Fox/Reflexive*/Firewall/Free/
+-- Coherence/FreeCoherent — the functorial-semantics and free-Cl(𝕋) scaffolding) has been moved
+-- to Archive/RelExist/ (quarantined, not built). The keep set is the computed import closure of
+-- paper one's anchors, not a hand-picked list.
 import RelExist.Mirror
 import RelExist.Relating
-import RelExist.Fox
 import RelExist.Seam
 import RelExist.SeamBridge
-import RelExist.ReflexiveSeam
-import RelExist.ReflexiveModel
-import RelExist.Firewall
 import RelExist.Traced
-import RelExist.Free
-import RelExist.Coherence
-import RelExist.FreeCoherent
