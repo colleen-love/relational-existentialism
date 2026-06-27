@@ -10,5 +10,17 @@
         ]
       }
     ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "lakecache.blob.core.windows.net",
+        "objects.githubusercontent.com",
+        "release-assets.githubusercontent.com",
+        "codeload.github.com",
+        "raw.githubusercontent.com",
+        "github.com"
+      ]
+    }
   }
 }
