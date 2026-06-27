@@ -4,7 +4,7 @@
 Mathlib-backed formalization, kept out of the default build so the dependency-free
 core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 
-* `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem T2),
+* `Scratch.We`          — `≈ := νΘ` and the shared world `𝔼 := D/≈` (theorem 3.2),
                           via `OrderHom.gfp` (Knaster–Tarski). ✅ verified.
 * `Scratch.Identity`    — A2 restated: identity is the lived `≈`; observation `≅` is a
                           **strictly lossy** projection. Proves soundness `≈ ⊆ ≅`, strictness
@@ -16,9 +16,9 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
 * `Scratch.Attention`   — attention as the co-directed eigenstructure of the relational
                           coupling (a consequence of structure, not a bolted-on budget);
                           the self as an eigenform `νΦ`. ✅ verified.
-* `Scratch.Trace`       — D1/T1: trace as feedback (`selfTrace`) and the Conway
+* `Scratch.Trace`       — D1/3.1: trace as feedback (`selfTrace`) and the Conway
                           parameterized fixed-point operator (`Tr`). ✅ verified.
-* `Scratch.KnowingFeeling` — the T3 contrast: knowing (Lawvere-obstructed) vs feeling
+* `Scratch.KnowingFeeling` — the 3.3 contrast: knowing (Lawvere-obstructed) vs feeling
                           (`≈`, whole). ✅ verified.
 * `Scratch.Chemistry`   — Layer 4, first domain functor: autocatalytic sets as
                           eigenforms (`νΦ`); the functor is definitional. ✅ verified.
@@ -153,12 +153,12 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           `T = P + N` (peripheral projection `P`, subdominant `N` with `‖N‖<1`,
                           orthogonal). `spectral_pow`: `Tⁿ = P + Nⁿ`; **`spectral_decay`: `Tⁿ → P`** — the
                           subdominant modes decay, only the peripheral eigenforms self-sustain. Conjecture
-                          3.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
+                          3.7.4's decay mechanism, in any normed ring; the `E`/idempotent case is the `N=0`
                           extreme (`idempotent_pow`). ✅ verified.
-* `Scratch.SparsityCapstone` — **Conjecture 3.3 closed** (the cost-graded sparsity dichotomy): the
+* `Scratch.SparsityCapstone` — **Conjecture 3.7.3 closed** (the cost-graded sparsity dichotomy): the
                           density of selves `→ 0` **with** a private footprint per self
                           (`cost_graded_density_tendsto_zero`), but unboundedly many selves within budget
-                          **without** it (full sharing) — `conjecture_3_3`. So the counting sparsity holds
+                          **without** it (full sharing) — `conjecture_3_7`. So the counting sparsity holds
                           iff a finite budget *and* an exclusive cost per self; the unconditional form is
                           provably false. With the Agda nowhere-dense topological clause, the conjecture is
                           closed in its correct, exclusivity-conditioned form. ✅ verified.
@@ -267,6 +267,67 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           contractive nature orients the arrow; the seam aims it* — two distinct
                           obstructions. `[proved]` modulo the standing `J`↔genuine-seam `[reading]`.
                           ✅ verified.
+* `Scratch.KnowingFromArrow` — **the converse**: from the arrow back to the knowing. Dual of
+                          `TimeFlow`/`Orientation` — the `Arrow` interface carries `Flow`'s fields read
+                          `V ⊢ E`, and on the genuine instance `partialDephase p` the orbit converges
+                          entrywise to `dephase`, the knowing map `E` of `Orientation.dephaseKnowing`
+                          (`arrow_limit_is_knowing`), which is idempotent (`limit_idempotent`), is the
+                          seam-forced conditional expectation `knowSeam ∅` (`limit_is_seam_CE`), and
+                          annihilates the very monovariant `defectSq` that defined the arrow
+                          (`limit_annihilates_potential`) — *an arrow's limit is a knowing*, by
+                          re-export. The general lift (every contractive arrow with trivial peripheral
+                          spectrum) is `Scratch.MeanErgodic` (Conjecture R, `[open]`, gated out of this
+                          build). `[proved]` instance. ✅ verified.
+* `Scratch.SeamPermanence` — **the knowing never completes**. The quantitative, permanent lift of
+                          `SeamForcing.self_cannot_fully_decohere`: the seam-respecting flow
+                          `seamFlow J p = (1−p)·id + p·attend Jᶜ` fixes the seam coherences and decays
+                          the complement, so for a *live* seam coherence the potential is strictly
+                          positive at **every** return-depth (`seam_permanence`, `never_completes`),
+                          with closed form `defectSq = seamMass + ((1−p)²)ⁿ·compMass`
+                          (`defectSq_seamFlow_iterate`) descending geometrically to a positive floor
+                          `seamMass` it never reaches (`defectSq_seamFlow_tendsto`, `seamMass_pos`).
+                          Knowing-as-process runs forever toward a seam it cannot dissolve. `[proved]`
+                          the conditional; the antecedent (the cosmos is such a whole) is the spec's
+                          stated premise, not the operator's. ✅ verified.
+* `Scratch.Genesis`     — **the universe/cosmos boundary**: feeling as the atemporal ground, the first
+                          self as the genesis of time. On the genuine instance the hinge is a fork in
+                          `p`: at `p = 0` the flow is `id` (`partialDephase_zero`) and the feeling is
+                          *constant* for all `n` (`coh_const_at_zero`) — no descent, no arrow, no time
+                          (the universe, pure ownerless feeling); for every `0 < p < 1` the *first*
+                          step strictly drops the feeling (`first_tick_pos`) — time ignites with the
+                          first directed knowing (the cosmos). `genesis_dichotomy` packages the
+                          crossing `p : 0 → 0⁺`. `[proved]` the two sides; the identification of the
+                          crossing with the birth of the cosmos is the `[reading]`. ✅ verified.
+* `Scratch.DistributedSelf` — **I am the knowing of my parts across their seams**. (D) self-knowing
+                          factors through parts — the whole-self model is barred
+                          (`self_inclusive_unmodelable`), a part is modelable (`disjoint_modelable`):
+                          `selfKnowing_factors_through_parts` (**0 axioms**). (C) continuity from
+                          persistence — modus tollens on *lapse ⇒ dedifferentiation*:
+                          `continuity_from_persistence` (**0 axioms**). (W) one self, not a heap — the
+                          cross-part mass `crossMass` is positive iff the joint carries between-coherence
+                          no coproduct has (`weave_exceeds_coproduct`, `coproduct_iff_crossMass_zero`);
+                          the state-level witness `[proved]`; the `νΦ_c`-level lift is closed in
+                          `Scratch.WeaveGfp`. ✅ verified.
+* `Scratch.WeaveGfp`    — **the weave at the greatest fixed point** — closes (W) at the gfp level, where
+                          `νΦ` lives, natively in the lattice (no matrix↔lattice bridge). A live,
+                          non-redundant cross seam forces the joint self strictly above the coproduct of
+                          its parts' selves (`weave_gfp_exceeds_coproduct`), via gfp-monotone-in-coupling
+                          (`gfp_mono_in_coupling`), a foreign-vertex `⊥` (`sustainedField_foreign_bot`),
+                          and `Attention.relating_absorbs`. *One self, woven at the seam, not a heap* —
+                          a theorem in the model where the self lives. `[proved]` (`[propext, Quot.sound]`
+                          only). The matrix model demotes to a satisfiability witness. ✅ verified.
+* `Scratch.Learning`    — **self-knowledge strictly accumulates** (clause L of the cosmos statement).
+                          Over the `Flow` interface, `learned := coh a − coh(orbit n)` is monotone
+                          (`self_knowledge_monotone`) and strictly increases while feeling remains
+                          (`self_knowledge_strict`) — the converse face of `coh_orbit_antitone`/
+                          `strictAnti`: an endless learner. `[proved]`. ✅ verified.
+* `Scratch.CosmicTime`  — **cosmic time as the knowing's tick-support** (clause T). `IsTick` (a strict
+                          drop = a knowing-event); `knowing_throughout` (every not-yet-fixed depth is a
+                          tick — analytic); and the **freeze**: a lapse (`p = 0`) leaves the substrate
+                          unchanged (`lapse_freezes`), cannot dissolve a live coherence
+                          (`lapse_cannot_dissolve`), preserves feeling (`lapse_preserves_feeling`) —
+                          pause, not redissolution, because decay needs the time a lapse lacks.
+                          `[proved]`. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -292,7 +353,7 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           modulus-`<1` band is the **arrow** (`arrow_dissipates`); `energy_arrow_split`
                           shows both in one generator's spectrum. `[proved]` witness; the general CPTP
                           peripheral structure theorem stays the narrated `[open]`. ✅ verified.
-* `Scratch.SpectralMultiplicity` — **Conjecture 3.4's new mathematics, closed**: the reconciliation of
+* `Scratch.SpectralMultiplicity` — **Conjecture 3.7.4's new mathematics, closed**: the reconciliation of
                           *sparse* and *multiple*. Standard nonlinear Perron–Frobenius forces **uniqueness**
                           (`unique_fixed_of_global_contraction` — global contraction ⇒ one self, the
                           primitive/subhomogeneous regime); the doctrine's **contingency** needs *more than
@@ -398,6 +459,13 @@ import Scratch.PerronFrobenius
 import Scratch.TimeFlow
 import Scratch.TimeArrow
 import Scratch.SeamForcing
+import Scratch.KnowingFromArrow
+import Scratch.SeamPermanence
+import Scratch.Genesis
+import Scratch.DistributedSelf
+import Scratch.WeaveGfp
+import Scratch.Learning
+import Scratch.CosmicTime
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity

@@ -1,15 +1,15 @@
 /-
-# Sparsity of `Stab` — discrete core (Lemmas 3.1 & 3.2)
+# Sparsity of `Stab` — discrete core (Lemmas 3.7.1 & 3.7.2)
 
 Machine-checked, dependency-free (Lean 4 core, **no mathlib**) formalization of the
 combinatorial heart of the sparsity conjecture in
-`docs/spec/03-sparsity-conjecture.md`:
+`docs/spec/03.7-sparsity.md`:
 
-* **Lemma 3.1 (sparsity from a budget).** Under a finite attention budget `β`, with
+* **Lemma 3.7.1 (sparsity from a budget).** Under a finite attention budget `β`, with
   every stabilized self costing at least a positive floor `m`, the number of selves
   times `m` is at most `β`; equivalently the count is `≤ β / m` — a bound
   **independent of how many couplings exist**.
-* **Lemma 3.2 (collapse without a bound).** Absent the budget the count is
+* **Lemma 3.7.2 (collapse without a bound).** Absent the budget the count is
   unbounded, so finiteness of the budget is *necessary* for sparsity.
 
 A collection of stabilized selves is modeled as a `List Nat` of their per-self
@@ -57,7 +57,7 @@ theorem min_mul_length_le_totalSpend (cs : Selves) (m : Nat)
         _ ≤ totalSpend cs + c := Nat.add_le_add hlen hc
         _ = totalSpend (c :: cs) := by rw [totalSpend_cons, Nat.add_comm]
 
-/-- **Lemma 3.1 (sparsity from a budget), division-free form.** With a finite budget
+/-- **Lemma 3.7.1 (sparsity from a budget), division-free form.** With a finite budget
 `β` and a positive cost floor `m`, the number of stabilized selves times `m` is at
 most `β`. Hence the count is bounded by a constant depending only on `β` and `m` —
 independent of the total number of couplings. -/
@@ -66,7 +66,7 @@ theorem stab_card_bound (cs : Selves) (m β : Nat)
     m * cs.length ≤ β :=
   Nat.le_trans (min_mul_length_le_totalSpend cs m hcost) hbudget
 
-/-- **Lemma 3.1, divided form.** `cs.length ≤ β / m` when `m > 0`. -/
+/-- **Lemma 3.7.1, divided form.** `cs.length ≤ β / m` when `m > 0`. -/
 theorem stab_card_le_div (cs : Selves) (m β : Nat) (hm : 0 < m)
     (hcost : ∀ c ∈ cs, m ≤ c) (hbudget : totalSpend cs ≤ β) :
     cs.length ≤ β / m := by
@@ -92,7 +92,7 @@ private theorem eq_of_mem_replicate {a b : Nat} :
       · exact h
       · exact eq_of_mem_replicate h
 
-/-- **Lemma 3.2 (collapse without a bound).** Absent a finite budget, the number of
+/-- **Lemma 3.7.2 (collapse without a bound).** Absent a finite budget, the number of
 stabilized selves is unbounded: for every `N` there is a valid collection of exactly
 `N` selves, each meeting the cost floor `m`. Hence finiteness of the budget is
 *necessary* for sparsity — contrast `stab_card_bound`. -/

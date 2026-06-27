@@ -51,7 +51,7 @@ complete knowledge; it **guarantees perpetual feeling**.
 **The line, held — two residues, nested.** What is proved is the *dynamics* of the model. Untouched
 are **two** posits, not one: that *this* structure is the right model of feeling at all (the
 **identification** — #3 above), and, one layer in, that the modeled structure is *felt* (phenomenality
-— why there is something it is like, barred by T3's reflexivity). The formalism settles neither — only
+— why there is something it is like, barred by 3.3's reflexivity). The formalism settles neither — only
 what follows from adopting the model. It gives the *seat and dynamics* of feeling on the modeling
 posit, never the posit itself. (The concrete coherence measure is [`Decoherence.copyDefect`](Decoherence.lean); here
 the differential is taken abstractly over `ℝ` so the structure stands on its own.)

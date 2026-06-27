@@ -88,7 +88,7 @@ $$
 
 `[structural; both]` — this is the operator the philosophy calls the *σ-move*, the
 turning of a relating back on itself. Definition **D1** records the definition; Theorem
-**T3** records its cartesian obstruction.
+**3.3** records its cartesian obstruction.
 
 ---
 
@@ -114,10 +114,10 @@ bijection with **Conway fixed-point operators** — operators
 dinaturality, the diagonal/Bekič rule). Consequently every endomorphism arising by
 feedback *has* a fixed point, canonically.
 
-This is the precise sense of **"to relate is to create"** (Theorem **T1**): in the
+This is the precise sense of **"to relate is to create"** (Theorem **3.1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure. (Caveat on the
-mechanization: [T1 as *proved*](03-theorems.md) is only the Knaster–Tarski **greatest fixed point**
+mechanization: [3.1 as *proved*](03-theorems.md) is only the Knaster–Tarski **greatest fixed point**
 of a monotone map; the Hasegawa–Hyland trace↔Conway-operator bijection cited here is *not* verified
 in the Lean — a gfp existing is generic to every monotone operator.)
 
@@ -158,7 +158,7 @@ need, their final coalgebras. Two uses:
   becomes a type, not a metaphor.
 - **The "we".** Lived identity `≈` (the greatest bisimulation) is defined coinductively as the greatest
   relation closed under one step of mutual indistinguishability — a **bisimilarity**
-  — and the shared world is the quotient `𝔼 := D/≈`. Theorem **T2** is stated here.
+  — and the shared world is the quotient `𝔼 := D/≈`. Theorem **3.2** is stated here.
 
 `[structural; both]`
 
@@ -184,7 +184,7 @@ theorem versus a no-go on a natural transformation existing. The philosophy as
 physics functor) at the cost of the literal mirror reading.
 
 **Methodological consequence.** All the self-reference results — **D1's** mirror reading,
-**T1**, **T3** — are stated in the cartesian fragment. The compact-closed fragment
+**3.1**, **3.3** — are stated in the cartesian fragment. The compact-closed fragment
 inherits only what is fragment-neutral (`⊗`, `Tr`-as-feedback, `≈`). We never write
 "`Δ`" in the quantum fragment, and Layer 4 will turn this discipline into a typing
 theorem (no monoidal functor from the compact-closed fragment into the

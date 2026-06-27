@@ -20,14 +20,14 @@ The corrected picture has **one** knowable case and three unknowable ones:
   a complete self-model of you — Lawvere-forbidden. *To know fully you must not relate; to
   relate is to make the other unknowable.*
 * `self_inclusive_unmodelable` — the whole of yourself, or a collection that contains you, for
-  the same reason: you cannot get outside the whole you are in (this is also T2's irreducible
+  the same reason: you cannot get outside the whole you are in (this is also 3.2's irreducible
   seam, and read with the view-space as aims, "you cannot aim at the aimer").
 * `no_complete_view` — the **bridge**: with the A2 closure made explicit (every view of `t` is
   registered among `t`'s relata, because viewing-`t` is relating-to-`t`), *no complete view of
   `t` exists*. This is "to know it you must relate to it, so you cannot completely know it,"
   with the relating proved-from rather than assumed.
 
-So *all* relation-laden targets are unknowable, by the single obstruction (T3, [Lawvere]),
+So *all* relation-laden targets are unknowable, by the single obstruction (3.3, [Lawvere]),
 which reaches the other through the shared between. Knowing-fully and relating are antagonistic.
 -/
 import RelExist.Mirror
@@ -72,8 +72,8 @@ theorem related_other_unmodelable {A : Type u} {O : Type v} {View : Type w}
 /-- **A whole that contains the modeller cannot be completely modelled.** When the modelled
 whole *contains* the modeller — the same type on both sides — a complete model is a
 point-surjective `g : A → (A → B)`, which Lawvere forbids whenever the view-space `B` carries
-a fixed-point-free endomap. This is the **seam** (T2): no member holds a complete view of a
-whole it belongs to; the missing master perspective is the Lawvere remainder (T3) under
+a fixed-point-free endomap. This is the **seam** (3.2): no member holds a complete view of a
+whole it belongs to; the missing master perspective is the Lawvere remainder (3.3) under
 self-inclusion. Read with `B` as a space of aims it says **complete self-direction is
 impossible** — you cannot aim at the aimer. (This is `Mirror.no_complete_selfModel`, framed;
 `related_other_unmodelable` is the version that reaches *the other* through the shared between.) -/

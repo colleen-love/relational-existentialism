@@ -1,7 +1,7 @@
 /-
 # The general spectral form of the conjecture — subdominant modes decay to the peripheral self
 
-Conjecture 3.4 ([03.1 §3.6](../../docs/spec/03.1-sparsity.md)) in its **general** form: *under iterated
+Conjecture 3.7.4 ([03.7](../../docs/spec/03.7-sparsity.md)) in its **general** form: *under iterated
 co-directed feedback, only the eigenforms near the spectral radius self-sustain; the subdominant modes
 decay.* This module mechanizes that **dynamical mechanism** in any normed ring, `sorry`-free.
 
@@ -17,7 +17,7 @@ orthogonal (`P·N = N·P = 0`). Then:
   rest decay.* This is the general spectral statement, for any such decomposition.
 
 Combined with [`Peripheral.peripheral_sparse`](Peripheral.lean) (the peripheral set is sparse — `1/n`
-density) this is Conjecture 3.4's content: **few modes self-sustain, the rest decay**. The peripheral
+density) this is Conjecture 3.7.4's content: **few modes self-sustain, the rest decay**. The peripheral
 projection's *existence* is discharged at finite dimension by the idempotent `E = dephase`
 ([`Peripheral`](Peripheral.lean), the `N = 0` extreme); that an *arbitrary* unital CP `Φ_c` admits the
 decomposition with a commutative peripheral subalgebra (the full Perron–Frobenius) stays the named
@@ -48,7 +48,7 @@ theorem spectral_pow (P N : R) (hP : P * P = P) (hPN : P * N = 0) (hNP : N * P =
 
 /-- **Subdominant modes decay to the peripheral self.** If the subdominant part is a strict contraction
 (`‖N‖ < 1`), the iterated dynamics `Tⁿ = (P + N)ⁿ` converge to the peripheral projection `P`: only the
-peripheral eigenforms self-sustain, the rest decay. The general spectral form of Conjecture 3.4's
+peripheral eigenforms self-sustain, the rest decay. The general spectral form of Conjecture 3.7.4's
 "few modes self-sustain". -/
 theorem spectral_decay (P N : R) (hP : P * P = P) (hPN : P * N = 0) (hNP : N * P = 0)
     (hN : ‖N‖ < 1) :

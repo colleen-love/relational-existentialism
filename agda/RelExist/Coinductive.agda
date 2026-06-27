@@ -7,12 +7,12 @@
 -- development mechanizes the doctrine's greatest-fixed-point modality `ν`
 -- through `OrderHom.gfp` (Knaster–Tarski on a complete lattice). Agda hosts the
 -- *same* content with **native coinduction** — coinductive records and
--- copatterns — which is the idiom the doctrine's ≈ (T2) and looped self (D1)
+-- copatterns — which is the idiom the doctrine's ≈ (3.2) and looped self (D1)
 -- were reaching for all along.
 --
 -- This module builds, from scratch (only the standard library):
 --   * `Behaviour`   — a system as the final coalgebra of the observation functor;
---   * `_≈_`         — T2: the **lived identity** `≈` (the greatest bisimulation);
+--   * `_≈_`         — 3.2: the **lived identity** `≈` (the greatest bisimulation);
 --   * `_≅_`         — **observational equality** (the bounded outside view: same
 --                     observation stream), with the deterministic collapse `≈ ⟺ ≅`;
 --   * `≈-refl/sym/trans`, `SharedWorld` — ≈ is an equivalence; `𝔼 := D/≈` is a Setoid;
@@ -45,7 +45,7 @@ record Behaviour (A : Set) : Set where
 open Behaviour public
 
 ------------------------------------------------------------------------
--- T2 — the **lived identity** `≈`, the GREATEST bisimulation.
+-- 3.2 — the **lived identity** `≈`, the GREATEST bisimulation.
 --
 -- Two systems share a lived identity when they agree now and stay so
 -- forever. As a coinductive record this *is* the ν-closure: there is no
@@ -78,7 +78,7 @@ step≈ (≈-trans p q) = ≈-trans (step≈ p) (step≈ q)
 ≈-isEquivalence : IsEquivalence (_≈_ {A})
 ≈-isEquivalence = record { refl = ≈-refl ; sym = ≈-sym ; trans = ≈-trans }
 
--- 𝔼 := D/≈ — the **shared world** (T2): behaviours up to lived
+-- 𝔼 := D/≈ — the **shared world** (3.2): behaviours up to lived
 -- identity, as a setoid. The "between" is the quotient, not the points.
 SharedWorld : (A : Set) → Setoid 0ℓ 0ℓ
 SharedWorld A = record

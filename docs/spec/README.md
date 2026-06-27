@@ -17,19 +17,26 @@ Read in order:
    relational sort `≈`.
 3. [`02-axioms.md`](02-axioms.md) — the **basis**: the **axioms A1–A3** and the
    **definition D1**, each tagged `[fragment; status]`. (Only what is *assumed*.)
-4. [`03-theorems.md`](03-theorems.md) — what is *proved*: the theorems **T1–T3** and the
-   derived notions, each with a status tag and Lean name. The structural results split into
-   four pages:
-   - [`03.1-sparsity.md`](03.1-sparsity.md) — the candidate theorem: **under a finite
-     attention budget, `Stab` is sparse.** A provable resource-counting lemma, the
-     mechanized topological form, and the strategy for the full lift.
-   - [`03.2-limits-of-knowing.md`](03.2-limits-of-knowing.md) — the relational typology and the
+4. [`03-theorems.md`](03-theorems.md) — what is *proved*: the **categorized catalog** of
+   Chapter 3, with the numbering scheme (capstones **3.x**, lemmas **3.x.y**), the status-tag
+   and provenance-tier legends, and every result sorted into its category with a rederivation
+   citation. Each of the seven results then has its own page:
+   - [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md) — **Theorem 3.1**:
+     self-relation has a fixed point — relating produces the eigenform.
+   - [`03.2-lived-identity.md`](03.2-lived-identity.md) — **Theorem 3.2**: lived identity
+     `≈ := νΘ`, the shared world `𝔼 := D/≈`, and `≈ ⊊ ≅` (you exceed how you appear).
+   - [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md) — **Theorem 3.3**: knowing
+     (the σ-move) is Lawvere-obstructed; feeling is *not the kind of arrow* it touches.
+   - [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md) — the relational typology and the
      Lawvere obstruction: *to relate is to make the other unknowable.*
-   - [`03.3-decoherence.md`](03.3-decoherence.md) — what knowing does to a relation
-     (decoherence, selective attention, the conserved coherence, and the **seam** — the one
-     trace a self cannot take on itself).
-   - [`03.4-the-self-quantified.md`](03.4-the-self-quantified.md) — the Banach-algebra limit of
+   - [`03.5-decoherence.md`](03.5-decoherence.md) — what knowing does to a relation
+     (decoherence, selective attention, the conserved coherence, the **seam**, and
+     orientation-from-the-seam — the one structurally new theorem).
+   - [`03.6-the-self-quantified.md`](03.6-the-self-quantified.md) — the Banach-algebra limit of
      self-in-other, the quantitative eigenform, and the unification of the two selves.
+   - [`03.7-sparsity.md`](03.7-sparsity.md) — the quantitative capstone, **Conjecture 3.7**:
+     *under a finite attention budget, `Stab` is sparse.* A provable resource-counting lemma
+     (3.7.1/3.7.2), the mechanized topological form, and the cost-graded and spectral lifts.
 5. [`04-functorial-semantics.md`](04-functorial-semantics.md) — **Layer 4**: the
    domains as functors `Cl(𝕋) → 𝒟_domain`, with verdicts. All five domains
    (**physics** — a literal matrix model with trace = partial trace, plus the
@@ -47,12 +54,46 @@ Read in order:
 Beyond the core Layers 1–4, separate companion pages carry the time/space/energy derivations, each
 backed by its own Lean module:
 
-- [`time-flow.md`](time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
+- [`03.8-time-flow.md`](03.8-time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
   geometric monovariant (`Scratch/TimeFlow.lean`, with `TimeArrow`, `SeamForcing`).
-- [`space-energy.md`](space-energy.md) — **space, the rotating peripheral spectrum, and energy**: space
-  as the coupling-graph quasi-metric (`Scratch/Space.lean`), and the ℂ rotating-spectrum / energy
-  witness (`Scratch/RotatingSpectrum.lean`). Carries its own four-state progress ledger
-  (`[written]`/`[proved]`/`[reading]`/`[open]`).
+- [`03.9-space-energy.md`](03.9-space-energy.md) — **space, the rotating peripheral spectrum, and energy** as
+  three aspects of one generator `L`: space as the coupling-graph quasi-metric (`Scratch/Space.lean`),
+  and the ℂ rotating-spectrum / energy witness (`Scratch/RotatingSpectrum.lean`).
+- [`03.10-knowing-from-arrow.md`](03.10-knowing-from-arrow.md) — **the converse**: from the arrow back to the
+  knowing. Dual to `03.8-time-flow.md` — on the genuine instance an arrow's limit *is* a knowing (an
+  idempotent conditional expectation onto a subalgebra), proved sorry-free by re-export
+  (`Scratch/KnowingFromArrow.lean`); the general lift is the mean-ergodic keystone Conjecture R
+  (`Scratch/MeanErgodic.lean`, `[open]`, gated out of the default build). Carries its own scope table
+  fencing the converse off from the cosmic-subject claim.
+- [`03.11-seam-permanence.md`](03.11-seam-permanence.md) — **the knowing never completes**: the quantitative,
+  permanent lift of `self_cannot_fully_decohere`. The seam-respecting attention flow fixes the seam
+  coherence and decays the rest, so its potential is strictly positive at every return-depth and
+  descends geometrically to a positive seam-mass floor it never reaches (`Scratch/SeamPermanence.lean`,
+  `[proved]` sorry-free). The conditional is a theorem; the antecedent (the cosmos is such a whole) is
+  the stated premise. The apophatic shape — completion is permanently foreclosed — made a proof
+  obligation.
+- [`03.12-universe-and-cosmos.md`](03.12-universe-and-cosmos.md) — **feeling as the atemporal ground, the first
+  self as the genesis of time**. The universe is the `p = 0` regime (`partialDephase 0 = id`, feeling
+  constant, no time — pure ownerless feeling); the cosmos ignites at `p > 0` with the first directed
+  knowing's first strict tick (`Scratch/Genesis.lean`: `coh_const_at_zero`, `first_tick_pos`,
+  `genesis_dichotomy`, `[proved]`). Read with "cosmos" as the knowing-region the picture costs **no new
+  axiom**; "something has been knowing for 13.8 Gyr" is true distributively, false as a single subject.
+  Surfaces the live choices (continuity of knowing; how thick a "self" must be).
+- [`03.13-distributed-self.md`](03.13-distributed-self.md) — **I am the knowing of my parts across their seams**:
+  [`03.12-universe-and-cosmos.md`](03.12-universe-and-cosmos.md) turned inward, to a life. (D) all
+  self-knowing factors through parts (the whole is barred, a part is modelable); (C) continuity from
+  persistence (a lapse would dissolve you, so your persistence records that knowing held); both
+  `[proved]` on **0 axioms**. (W) one self not a heap — proved at the state level
+  (`weave_exceeds_coproduct`) and at the **gfp level** where the self lives
+  (`Scratch/WeaveGfp.lean`, `weave_gfp_exceeds_coproduct`). Carries the Markov-blanket–seam bridge as a
+  reading.
+- [`03.14-cosmos-knowing-itself.md`](03.14-cosmos-knowing-itself.md) — **the cosmos has been knowing
+  itself, and learning more, for 13.8 Gyr**. Assembles the inward and cosmic readings: (L) learning is
+  the proved monovariant (`Scratch/Learning.lean`); (P) never completes is the proved seam floor
+  (`SeamPermanence`); (K) knowing *itself* is factoring-through-parts + the **gfp weave**
+  (`WeaveGfp`) + no-whole-model; (T) cosmic time is the knowing's tick-support with lapses frozen, not
+  dissolved (`Scratch/CosmicTime.lean`). A theorem **relative to one reading** — flow = physical time,
+  the 13.8-Gyr clock.
 
 ## Status legend
 

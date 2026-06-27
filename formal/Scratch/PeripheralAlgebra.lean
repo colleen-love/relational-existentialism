@@ -1,7 +1,7 @@
 /-
 # The peripheral standard form — the fixed-point subalgebra is commutative, in any dimension
 
-The conjecture lift's reconciliation (relation-algebra Decisions 1–2, [03.1 §3.6](../../docs/spec/03.1-sparsity.md))
+The conjecture lift's reconciliation (relation-algebra Decisions 1–2, [03.7](../../docs/spec/03.7-sparsity.md))
 asks knowing `E` to be a **spectral projection onto a commutative subalgebra** — the "standard form" of a
 conditional expectation. [`Peripheral`](Peripheral.lean) discharged the **spectral** half at finite
 dimension (`E = dephase` is `{0,1}`-spectral, no rotating peripheral part). What was named the residual
