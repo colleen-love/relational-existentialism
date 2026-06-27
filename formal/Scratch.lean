@@ -306,7 +306,28 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           `continuity_from_persistence` (**0 axioms**). (W) one self, not a heap — the
                           cross-part mass `crossMass` is positive iff the joint carries between-coherence
                           no coproduct has (`weave_exceeds_coproduct`, `coproduct_iff_crossMass_zero`);
-                          the state-level witness `[proved]`, the `νΦ_c`-level lift `[open]`. ✅ verified.
+                          the state-level witness `[proved]`; the `νΦ_c`-level lift is closed in
+                          `Scratch.WeaveGfp`. ✅ verified.
+* `Scratch.WeaveGfp`    — **the weave at the greatest fixed point** — closes (W) at the gfp level, where
+                          `νΦ` lives, natively in the lattice (no matrix↔lattice bridge). A live,
+                          non-redundant cross seam forces the joint self strictly above the coproduct of
+                          its parts' selves (`weave_gfp_exceeds_coproduct`), via gfp-monotone-in-coupling
+                          (`gfp_mono_in_coupling`), a foreign-vertex `⊥` (`sustainedField_foreign_bot`),
+                          and `Attention.relating_absorbs`. *One self, woven at the seam, not a heap* —
+                          a theorem in the model where the self lives. `[proved]` (`[propext, Quot.sound]`
+                          only). The matrix model demotes to a satisfiability witness. ✅ verified.
+* `Scratch.Learning`    — **self-knowledge strictly accumulates** (clause L of the cosmos statement).
+                          Over the `Flow` interface, `learned := coh a − coh(orbit n)` is monotone
+                          (`self_knowledge_monotone`) and strictly increases while feeling remains
+                          (`self_knowledge_strict`) — the converse face of `coh_orbit_antitone`/
+                          `strictAnti`: an endless learner. `[proved]`. ✅ verified.
+* `Scratch.CosmicTime`  — **cosmic time as the knowing's tick-support** (clause T). `IsTick` (a strict
+                          drop = a knowing-event); `knowing_throughout` (every not-yet-fixed depth is a
+                          tick — analytic); and the **freeze**: a lapse (`p = 0`) leaves the substrate
+                          unchanged (`lapse_freezes`), cannot dissolve a live coherence
+                          (`lapse_cannot_dissolve`), preserves feeling (`lapse_preserves_feeling`) —
+                          pause, not redissolution, because decay needs the time a lapse lacks.
+                          `[proved]`. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -442,6 +463,9 @@ import Scratch.KnowingFromArrow
 import Scratch.SeamPermanence
 import Scratch.Genesis
 import Scratch.DistributedSelf
+import Scratch.WeaveGfp
+import Scratch.Learning
+import Scratch.CosmicTime
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity

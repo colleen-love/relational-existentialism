@@ -2,7 +2,7 @@
 # The mean-ergodic keystone — Conjecture R (the general lift of the converse)
 
 `[open]`. This module carries the **one open step** of the converse direction
-([`KnowingFromArrow`](KnowingFromArrow.lean), [`knowing-from-arrow.md`](../../docs/spec/knowing-from-arrow.md)).
+([`KnowingFromArrow`](KnowingFromArrow.lean), [`03.10-knowing-from-arrow.md`](../../docs/spec/03.10-knowing-from-arrow.md)).
 On the genuine instance `partialDephase p` the converse is **proved** (`KnowingFromArrow`,
 sorry-free, footprint `[propext, Classical.choice, Quot.sound]`): an arrow's orbit converges to
 `dephase`, the knowing map `E`. This module states the lift of that fact to *every* contractive arrow.

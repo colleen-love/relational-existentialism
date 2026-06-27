@@ -1,7 +1,7 @@
 /-
 # Seam Permanence — the knowing never completes
 
-The keystone of [`seam-permanence.md`](../../docs/spec/seam-permanence.md), sequel to
+The keystone of [`03.11-seam-permanence.md`](../../docs/spec/03.11-seam-permanence.md), sequel to
 [`TimeFlow`](TimeFlow.lean) / [`SeamForcing`](SeamForcing.lean). `SeamForcing.self_cannot_fully_decohere`
 proved the **qualitative** floor: while the seam carries a live coherence, *every* available knowing
 leaves positive feeling. This module makes it **quantitative and permanent**: the seam-respecting

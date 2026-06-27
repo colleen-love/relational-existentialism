@@ -28,6 +28,19 @@ Chapter 3 is organized so that **every result is numbered like every other** —
 
 The dependency is one-way: **A1, A2, A3, D1 ⟹ 3.1, 3.2, 3.3 ⟹ 3.4–3.7.**
 
+The **derivation sequels** (`3.8+`) carry the time/space/energy/cosmos developments, each numbered like
+the rest and backed by its own Lean module:
+
+| § | Capstone | Page |
+| --- | --- | --- |
+| **3.8** | Time as flow | [`03.8-time-flow.md`](03.8-time-flow.md) |
+| **3.9** | Space and energy (one generator, three aspects) | [`03.9-space-energy.md`](03.9-space-energy.md) |
+| **3.10** | From the arrow back to the knowing (the converse) | [`03.10-knowing-from-arrow.md`](03.10-knowing-from-arrow.md) |
+| **3.11** | Seam permanence (the knowing never completes) | [`03.11-seam-permanence.md`](03.11-seam-permanence.md) |
+| **3.12** | Universe and cosmos (the genesis of time) | [`03.12-universe-and-cosmos.md`](03.12-universe-and-cosmos.md) |
+| **3.13** | The distributed self | [`03.13-distributed-self.md`](03.13-distributed-self.md) |
+| **3.14** | The cosmos has been knowing itself | [`03.14-cosmos-knowing-itself.md`](03.14-cosmos-knowing-itself.md) |
+
 ## Two legends every row carries
 
 **Proof status** — *can a machine check it?*

@@ -1,7 +1,7 @@
 /-
 # Genesis — the universe/cosmos boundary, mechanized at the two endpoints
 
-The companion to [`universe-and-cosmos.md`](../../docs/spec/universe-and-cosmos.md). The spec's
+The companion to [`03.12-universe-and-cosmos.md`](../../docs/spec/03.12-universe-and-cosmos.md). The spec's
 ontology has a sharp formal hinge, and this module pins down its two `[proved]` endpoints on the
 genuine `TimeFlow.partialDephase` instance:
 
@@ -15,7 +15,7 @@ genuine `TimeFlow.partialDephase` instance:
 `genesis_dichotomy` packages the boundary: at `p = 0` the orbit never ticks; for every `p > 0` it ticks
 at once. The birth of the cosmos is the crossing `p : 0 → 0⁺`. What is `[proved]` here is the
 boundary's two sides; the *identification* of the crossing with genesis (and of the flow with physical
-time) is the standing `[reading]` ([`time-flow.md`](../../docs/spec/time-flow.md) §5), and the
+time) is the standing `[reading]` ([`03.8-time-flow.md`](../../docs/spec/03.8-time-flow.md) §5), and the
 coinductive (atemporal) closure of the first self that dissolves the bootstrap is the gfp `νΦ_c` of
 [`Attention.lean`](Attention.lean), not re-proved here.
 -/

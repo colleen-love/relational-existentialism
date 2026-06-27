@@ -1,8 +1,8 @@
 /-
 # The distributed self — I am the knowing of my parts across their seams
 
-The companion to [`distributed-self.md`](../../docs/spec/distributed-self.md):
-[`universe-and-cosmos.md`](../../docs/spec/universe-and-cosmos.md) §8 turned inward, to the one scale
+The companion to [`03.13-distributed-self.md`](../../docs/spec/03.13-distributed-self.md):
+[`03.12-universe-and-cosmos.md`](../../docs/spec/03.12-universe-and-cosmos.md) §8 turned inward, to the one scale
 where the prover has first-person access to the data — a life. Three sub-claims, with three proof
 shapes:
 
@@ -12,7 +12,7 @@ shapes:
   through parts — `selfKnowing_factors_through_parts`, a re-export packaging the bar and the permission.
 * **(C) Coextensive with my life `[proved]`.** Continuity-from-persistence as modus tollens: given the
   premise *a lapse in knowing dissolves differentiation* (the `p → 0` regime of
-  [`universe-and-cosmos.md`](../../docs/spec/universe-and-cosmos.md) §9), your *persistence* (no
+  [`03.12-universe-and-cosmos.md`](../../docs/spec/03.12-universe-and-cosmos.md) §9), your *persistence* (no
   dissolution) is a witness that knowing *did not lapse* — `continuity_from_persistence`. Continuity is
   recorded, not assumed.
 * **(W) One self, not a heap `[proved (concrete) / open (abstract)]`.** The parts are bound into one

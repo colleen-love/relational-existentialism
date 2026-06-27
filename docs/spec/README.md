@@ -54,37 +54,46 @@ Read in order:
 Beyond the core Layers 1–4, separate companion pages carry the time/space/energy derivations, each
 backed by its own Lean module:
 
-- [`time-flow.md`](time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
+- [`03.8-time-flow.md`](03.8-time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
   geometric monovariant (`Scratch/TimeFlow.lean`, with `TimeArrow`, `SeamForcing`).
-- [`space-energy.md`](space-energy.md) — **space, the rotating peripheral spectrum, and energy** as
+- [`03.9-space-energy.md`](03.9-space-energy.md) — **space, the rotating peripheral spectrum, and energy** as
   three aspects of one generator `L`: space as the coupling-graph quasi-metric (`Scratch/Space.lean`),
   and the ℂ rotating-spectrum / energy witness (`Scratch/RotatingSpectrum.lean`).
-- [`knowing-from-arrow.md`](knowing-from-arrow.md) — **the converse**: from the arrow back to the
-  knowing. Dual to `time-flow.md` — on the genuine instance an arrow's limit *is* a knowing (an
+- [`03.10-knowing-from-arrow.md`](03.10-knowing-from-arrow.md) — **the converse**: from the arrow back to the
+  knowing. Dual to `03.8-time-flow.md` — on the genuine instance an arrow's limit *is* a knowing (an
   idempotent conditional expectation onto a subalgebra), proved sorry-free by re-export
   (`Scratch/KnowingFromArrow.lean`); the general lift is the mean-ergodic keystone Conjecture R
   (`Scratch/MeanErgodic.lean`, `[open]`, gated out of the default build). Carries its own scope table
   fencing the converse off from the cosmic-subject claim.
-- [`seam-permanence.md`](seam-permanence.md) — **the knowing never completes**: the quantitative,
+- [`03.11-seam-permanence.md`](03.11-seam-permanence.md) — **the knowing never completes**: the quantitative,
   permanent lift of `self_cannot_fully_decohere`. The seam-respecting attention flow fixes the seam
   coherence and decays the rest, so its potential is strictly positive at every return-depth and
   descends geometrically to a positive seam-mass floor it never reaches (`Scratch/SeamPermanence.lean`,
   `[proved]` sorry-free). The conditional is a theorem; the antecedent (the cosmos is such a whole) is
   the stated premise. The apophatic shape — completion is permanently foreclosed — made a proof
   obligation.
-- [`universe-and-cosmos.md`](universe-and-cosmos.md) — **feeling as the atemporal ground, the first
+- [`03.12-universe-and-cosmos.md`](03.12-universe-and-cosmos.md) — **feeling as the atemporal ground, the first
   self as the genesis of time**. The universe is the `p = 0` regime (`partialDephase 0 = id`, feeling
   constant, no time — pure ownerless feeling); the cosmos ignites at `p > 0` with the first directed
   knowing's first strict tick (`Scratch/Genesis.lean`: `coh_const_at_zero`, `first_tick_pos`,
   `genesis_dichotomy`, `[proved]`). Read with "cosmos" as the knowing-region the picture costs **no new
   axiom**; "something has been knowing for 13.8 Gyr" is true distributively, false as a single subject.
   Surfaces the live choices (continuity of knowing; how thick a "self" must be).
-- [`distributed-self.md`](distributed-self.md) — **I am the knowing of my parts across their seams**:
-  `universe-and-cosmos` turned inward, to a life. (D) all self-knowing factors through parts (the whole
-  is barred, a part is modelable); (C) continuity from persistence (a lapse would dissolve you, so your
-  persistence records that knowing held); both `[proved]` on **0 axioms**. (W) one self not a heap — the
-  cross-part coherence no coproduct carries (`weave_exceeds_coproduct`, `Scratch/DistributedSelf.lean`),
-  state-level `[proved]`, the `νΦ_c` lift `[open]`. Carries the Markov-blanket–seam bridge as a reading.
+- [`03.13-distributed-self.md`](03.13-distributed-self.md) — **I am the knowing of my parts across their seams**:
+  [`03.12-universe-and-cosmos.md`](03.12-universe-and-cosmos.md) turned inward, to a life. (D) all
+  self-knowing factors through parts (the whole is barred, a part is modelable); (C) continuity from
+  persistence (a lapse would dissolve you, so your persistence records that knowing held); both
+  `[proved]` on **0 axioms**. (W) one self not a heap — proved at the state level
+  (`weave_exceeds_coproduct`) and at the **gfp level** where the self lives
+  (`Scratch/WeaveGfp.lean`, `weave_gfp_exceeds_coproduct`). Carries the Markov-blanket–seam bridge as a
+  reading.
+- [`03.14-cosmos-knowing-itself.md`](03.14-cosmos-knowing-itself.md) — **the cosmos has been knowing
+  itself, and learning more, for 13.8 Gyr**. Assembles the inward and cosmic readings: (L) learning is
+  the proved monovariant (`Scratch/Learning.lean`); (P) never completes is the proved seam floor
+  (`SeamPermanence`); (K) knowing *itself* is factoring-through-parts + the **gfp weave**
+  (`WeaveGfp`) + no-whole-model; (T) cosmic time is the knowing's tick-support with lapses frozen, not
+  dissolved (`Scratch/CosmicTime.lean`). A theorem **relative to one reading** — flow = physical time,
+  the 13.8-Gyr clock.
 
 ## Status legend
 
