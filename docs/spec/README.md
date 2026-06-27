@@ -60,6 +60,12 @@ backed by its own Lean module:
   as the coupling-graph quasi-metric (`Scratch/Space.lean`), and the ℂ rotating-spectrum / energy
   witness (`Scratch/RotatingSpectrum.lean`). Carries its own four-state progress ledger
   (`[written]`/`[proved]`/`[reading]`/`[open]`).
+- [`knowing-from-arrow.md`](knowing-from-arrow.md) — **the converse**: from the arrow back to the
+  knowing. Dual to `time-flow.md` — on the genuine instance an arrow's limit *is* a knowing (an
+  idempotent conditional expectation onto a subalgebra), proved sorry-free by re-export
+  (`Scratch/KnowingFromArrow.lean`); the general lift is the mean-ergodic keystone Conjecture R
+  (`Scratch/MeanErgodic.lean`, `[open]`, gated out of the default build). Carries its own scope table
+  fencing the converse off from the cosmic-subject claim.
 
 ## Status legend
 

@@ -267,6 +267,17 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           contractive nature orients the arrow; the seam aims it* — two distinct
                           obstructions. `[proved]` modulo the standing `J`↔genuine-seam `[reading]`.
                           ✅ verified.
+* `Scratch.KnowingFromArrow` — **the converse**: from the arrow back to the knowing. Dual of
+                          `TimeFlow`/`Orientation` — the `Arrow` interface carries `Flow`'s fields read
+                          `V ⊢ E`, and on the genuine instance `partialDephase p` the orbit converges
+                          entrywise to `dephase`, the knowing map `E` of `Orientation.dephaseKnowing`
+                          (`arrow_limit_is_knowing`), which is idempotent (`limit_idempotent`), is the
+                          seam-forced conditional expectation `knowSeam ∅` (`limit_is_seam_CE`), and
+                          annihilates the very monovariant `defectSq` that defined the arrow
+                          (`limit_annihilates_potential`) — *an arrow's limit is a knowing*, by
+                          re-export. The general lift (every contractive arrow with trivial peripheral
+                          spectrum) is `Scratch.MeanErgodic` (Conjecture R, `[open]`, gated out of this
+                          build). `[proved]` instance. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -398,6 +409,7 @@ import Scratch.PerronFrobenius
 import Scratch.TimeFlow
 import Scratch.TimeArrow
 import Scratch.SeamForcing
+import Scratch.KnowingFromArrow
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity
