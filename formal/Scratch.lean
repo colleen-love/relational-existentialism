@@ -278,6 +278,17 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           re-export. The general lift (every contractive arrow with trivial peripheral
                           spectrum) is `Scratch.MeanErgodic` (Conjecture R, `[open]`, gated out of this
                           build). `[proved]` instance. ✅ verified.
+* `Scratch.SeamPermanence` — **the knowing never completes**. The quantitative, permanent lift of
+                          `SeamForcing.self_cannot_fully_decohere`: the seam-respecting flow
+                          `seamFlow J p = (1−p)·id + p·attend Jᶜ` fixes the seam coherences and decays
+                          the complement, so for a *live* seam coherence the potential is strictly
+                          positive at **every** return-depth (`seam_permanence`, `never_completes`),
+                          with closed form `defectSq = seamMass + ((1−p)²)ⁿ·compMass`
+                          (`defectSq_seamFlow_iterate`) descending geometrically to a positive floor
+                          `seamMass` it never reaches (`defectSq_seamFlow_tendsto`, `seamMass_pos`).
+                          Knowing-as-process runs forever toward a seam it cannot dissolve. `[proved]`
+                          the conditional; the antecedent (the cosmos is such a whole) is the spec's
+                          stated premise, not the operator's. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -410,6 +421,7 @@ import Scratch.TimeFlow
 import Scratch.TimeArrow
 import Scratch.SeamForcing
 import Scratch.KnowingFromArrow
+import Scratch.SeamPermanence
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity

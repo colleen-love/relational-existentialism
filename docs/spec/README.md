@@ -66,6 +66,13 @@ backed by its own Lean module:
   (`Scratch/KnowingFromArrow.lean`); the general lift is the mean-ergodic keystone Conjecture R
   (`Scratch/MeanErgodic.lean`, `[open]`, gated out of the default build). Carries its own scope table
   fencing the converse off from the cosmic-subject claim.
+- [`seam-permanence.md`](seam-permanence.md) — **the knowing never completes**: the quantitative,
+  permanent lift of `self_cannot_fully_decohere`. The seam-respecting attention flow fixes the seam
+  coherence and decays the rest, so its potential is strictly positive at every return-depth and
+  descends geometrically to a positive seam-mass floor it never reaches (`Scratch/SeamPermanence.lean`,
+  `[proved]` sorry-free). The conditional is a theorem; the antecedent (the cosmos is such a whole) is
+  the stated premise. The apophatic shape — completion is permanently foreclosed — made a proof
+  obligation.
 
 ## Status legend
 
