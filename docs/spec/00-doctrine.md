@@ -117,7 +117,7 @@ feedback *has* a fixed point, canonically.
 This is the precise sense of **"to relate is to create"** (Theorem **3.1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure. (Caveat on the
-mechanization: [3.1 as *proved*](03-theorems.md) is only the Knaster–Tarski **greatest fixed point**
+mechanization: [3.1 as *proved*](paper-one.md) is only the Knaster–Tarski **greatest fixed point**
 of a monotone map; the Hasegawa–Hyland trace↔Conway-operator bijection cited here is *not* verified
 in the Lean — a gfp existing is generic to every monotone operator.)
 
@@ -199,9 +199,9 @@ cartesian-only domains).
 > **uses** the copy — the escaping diagonal `g a a` is `Δ` fed back in — and the monoidal face
 > (no-cloning) is the **absence** of that copy. The seam is then *defined* as the part of the state space
 > that carries no copy. Mechanized (`sorry`-free): abstractly in
-> [`RelExist/Fox.lean`](../../formal/RelExist/Fox.lean) — `Comonoid`, the cartesian instance, and
+> [`RelExist/Fox.lean`](../../formal/Archive/RelExist/Fox.lean) — `Comonoid`, the cartesian instance, and
 > `faces_share_copy` (Lawvere's remainder and broadcastability over one `Comonoid.copy`, **0 axioms**);
-> concretely in [`Scratch/SeamComonoid.lean`](../../formal/Scratch/SeamComonoid.lean) — the copyable
+> concretely in [`Scratch/SeamComonoid.lean`](../../formal/Archive/Scratch/SeamComonoid.lean) — the copyable
 > fragment is exactly the diagonal (`IsClassical`) states (`cartesian_iff_copyDefectFree`), a seam state
 > with a live coherence carries **no** copy and **no available knowing recovers it**
 > (`seam_is_noncomonoidal_residue`, via `SeamForcing.attend_fixes_seam`), and a **self-inclusive** seam
@@ -211,7 +211,7 @@ cartesian-only domains).
 > incompletely self-knowable: three names for one missing comonoid.** `[proved]` (the structural core).
 > The **categorical hallmark** itself — *cartesian ⇒ the natural copy `Δ` exists and is unique (forced to
 > be the diagonal), with `Comon_ C ≌ C`* — is now mechanized over a genuine monoidal category in
-> [`Scratch/FoxTheorem.lean`](../../formal/Scratch/FoxTheorem.lean) (`cartesianComonoid`,
+> [`Scratch/FoxTheorem.lean`](../../formal/Archive/Scratch/FoxTheorem.lean) (`cartesianComonoid`,
 > `comonoid_forced`, `foxEquivalence`, via mathlib's categorical-quantum library), so §3.2's forward
 > direction is **proved, not cited**. `[reading]`: only the **reverse** Fox direction (a symmetric
 > monoidal category with a natural comonoid on every object is cartesian — the classical hard half, not in
