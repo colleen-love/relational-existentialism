@@ -40,7 +40,11 @@ i.e. `Re s < 0`: the gap, the decay, the **arrow** (`arrow_dissipates`; `arrow_n
 `Re(log μ₀₂) < 0`). One channel, two halves of its spectrum: **energy = `Im(spec L)` (the conserved,
 modulus-one band); arrow = `Re(spec L) < 0` (the decaying band)** — a literal pair of theorems about
 the generator `L = log μ` (`energy_arrow_split` at the modulus level, `energy_arrow_spectrum` at the
-generator level). Energy is what relational time is the flow of; the arrow is what it dissipates.
+generator level). Energy is what relational time is the flow of; the arrow is what it dissipates. Two
+further readings sit over the eigen-operator's orbit: **energy as frequency** — the phase winds at a
+constant rate `Φ^n U = i^n U` (`rotating_winds`, the `E = ℏω` reading) — and **energy as reversibility /
+recurrence** — the mode runs a closed periodic orbit `Φ⁴ U = U` (`rotating_recurs`), unlike the
+transient's monotone decay.
 
 ## Honest scope
 
@@ -271,5 +275,33 @@ theorem energy_arrow_spectrum :
     (Complex.log (quarterMul 0 1)).re = 0 ∧ (Complex.log (quarterMul 0 1)).im ≠ 0
       ∧ (Complex.log (quarterMul 0 2)).re < 0 :=
   ⟨energy_conserved_generator, frequency_nonzero, arrow_negative_generator⟩
+
+/-! ### Two further energy readings (`[reading]` over the witness)
+
+Beyond the modulus/generator split, the rotating band supports two more readings of energy, each laid
+over a proved fact about the eigen-operator's orbit. -/
+
+/-- **Energy as frequency — the phase winds at a constant rate** (`E = ℏω`). The rotating eigen-operator
+advances by a fixed phase factor `i` (a quarter turn, `θ = π/2`) at *every* return-depth:
+`Φ^n U = i^n · U`. The winding rate `θ` per closure of the loop is a frequency, and the reading
+identifies that frequency with energy — the rotating mode is a clock, and its rate is its energy. (Proved
+fact: the uniform winding `Φ^n U = i^n U`; `[reading]`: that the winding rate *is* energy.) -/
+theorem rotating_winds (n : ℕ) : (schur quarterMul)^[n] Ucoh = Complex.I ^ n • Ucoh := by
+  ext i j
+  rw [schur_iterate, Matrix.smul_apply, smul_eq_mul]
+  by_cases h : i = 0 ∧ j = 1
+  · obtain ⟨hi, hj⟩ := h; subst hi; subst hj
+    rw [quarterMul_01]
+  · have hU : Ucoh i j = 0 := if_neg h
+    rw [hU, mul_zero, mul_zero]
+
+/-- **Energy as reversibility / recurrence — a closed periodic orbit.** Because the rotating eigenvalue
+`i` has finite order (`i⁴ = 1`), the eigen-operator **returns to itself** after a finite period:
+`Φ⁴ U = U`. The energy-carrying mode runs a *closed* orbit — Poincaré recurrence, reversible time — in
+sharp contrast to the transient band, whose magnitude decays monotonically and never returns
+(`transient_decays`). (Proved fact: the period-4 recurrence `Φ⁴ U = U`; `[reading]`: that this
+reversibility is the mark of energy — the conserved datum that makes the dynamics time-reversible.) -/
+theorem rotating_recurs : (schur quarterMul)^[4] Ucoh = Ucoh := by
+  rw [rotating_winds, Complex.I_pow_four, one_smul]
 
 end RelExist.RotatingSpectrum

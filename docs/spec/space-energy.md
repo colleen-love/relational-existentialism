@@ -164,6 +164,14 @@ Whether the seam-protected and rotating-protected bands coincide, intersect, or 
   of theorems about one generator, on the witness.
 - `[reading]` That the conserved modulus-one band *is* energy and the rotating phase *is* a physical
   frequency. Conserved (`energy_conserved`, `arrow_dissipates` give the orbit-level conservation/decay).
+- `[written]` **Energy as frequency (`E = ℏω`).** The eigen-operator winds at a constant rate,
+  `Φ^n U = i^n · U` (`rotating_winds`): a quarter turn `θ = π/2` per closure of the loop. The reading
+  identifies that winding rate (frequency) with energy — the rotating mode is a clock and its rate is
+  its energy. (Proved: the uniform winding; `[reading]`: that the rate *is* energy.)
+- `[written]` **Energy as reversibility / recurrence.** The rotating eigenvalue has finite order
+  (`i⁴ = 1`), so the mode returns to itself: `Φ⁴ U = U` (`rotating_recurs`) — a closed periodic orbit
+  (Poincaré recurrence, reversible time), in sharp contrast to the transient's monotone decay. The
+  reading: energy is the conserved datum that makes the dynamics time-reversible.
 - `[reading]` **Two conservations, not conflated.** *Dynamical* (a coupling symmetry → rotating
   spectrum → a conserved charge — this is energy) and *operational* (self-inclusion → the un-attendable
   seam → permanent feeling — proved in `SeamForcing`, **not** energy). Keeping them separate keeps
@@ -212,6 +220,8 @@ The single source of truth for current state. `[written]` items are authored and
 | Energy — nonzero frequency `Im(log μ)≠0` | `frequency_nonzero` | `[written]` |
 | Energy — arrow = negative-real generator | `arrow_negative_generator` | `[written]` |
 | Energy — energy/arrow split (generator level) | `energy_arrow_spectrum` | `[written]` |
+| Energy — as frequency (uniform winding `E=ℏω`) | `rotating_winds` | `[written]` |
+| Energy — as reversibility / recurrence (`Φ⁴U=U`) | `rotating_recurs` | `[written]` |
 | Energy — `L = −i[H,·]+D` generator split (full) | — | `[open]` |
 | Energy — `⊗`-additivity of `H` | — | `[open]` |
 | Energy — "rotating phases *are* energy" | — | `[reading]` |
