@@ -43,36 +43,42 @@ export PATH="$ELAN_BIN:$PATH"
 
 log() { echo "[bootstrap] $*"; }
 
-# --- 0. Route git's github traffic through the agent HTTPS proxy --------------
-# The session rewrites github.com git → a scoped git proxy that 403s every repo
-# but this one, so lake's mathlib clone fails. $HTTPS_PROXY allows github.com, so
-# point git there for dep fetching. Scoped to this script's lake invocations via a
-# throwaway global git config; the project repo's own remote is untouched.
+# --- 0. Make git able to clone the (public) mathlib repo ----------------------
+# The remote environment injects a *scoped* git config that limits git to THIS
+# repo, so lake's clone of mathlib is 403'd -> "git exited 128". In an agent
+# session the workaround was to route git through $HTTPS_PROXY (which allows
+# github broadly); in the SETUP-script context that var isn't set. So instead we
+# drop the injected system/global git config and let git reach github.com
+# directly through the transparent egress proxy (the same path curl used to pull
+# elan + the toolchain). A public clone needs no credential.
 setup_git_proxy() {
-  local proxy ca
-  proxy="${HTTPS_PROXY:-${https_proxy:-}}"
-  if [ -z "$proxy" ]; then
-    log "no HTTPS_PROXY set — leaving git config as-is (assuming direct github access)"
-    return 0
-  fi
-  # Discover the proxy's CA bundle (TLS is re-terminated at the proxy); fall back
-  # to the documented default path.
-  ca="$(curl -s --max-time 10 "$proxy/__agentproxy/status" 2>/dev/null \
-        | sed -n 's/.*"caBundlePath" *: *"\([^"]*\)".*/\1/p')"
-  [ -n "$ca" ] && [ -f "$ca" ] || ca="/root/.ccr/ca-bundle.crt"
-  local cfg; cfg="$(mktemp)"
-  {
-    echo "[http]"
-    echo "    proxy = $proxy"
-    [ -f "$ca" ] && echo "    sslCAInfo = $ca"
-  } > "$cfg"
-  export GIT_CONFIG_GLOBAL="$cfg"      # replaces ~/.gitconfig (drops the scoped-proxy rewrite)
-  export GIT_CONFIG_SYSTEM=/dev/null   # and /etc/gitconfig, for good measure
+  export GIT_CONFIG_SYSTEM=/dev/null              # ignore /etc/gitconfig (the scoped rewrite)
   export GIT_TERMINAL_PROMPT=0
-  if git ls-remote https://github.com/leanprover-community/mathlib4 v4.15.0 >/dev/null 2>&1; then
-    log "git dep-fetch routed via $proxy (ca: $ca) — mathlib reachable"
+  local cfg; cfg="$(mktemp)"; : > "$cfg"          # start from an empty global config
+  export GIT_CONFIG_GLOBAL="$cfg"
+
+  # If an explicit proxy var exists under any common name, prefer it (covers
+  # contexts where egress isn't transparent).
+  local proxy="${HTTPS_PROXY:-${https_proxy:-${HTTP_PROXY:-${http_proxy:-${ALL_PROXY:-${all_proxy:-}}}}}}"
+  if [ -n "$proxy" ]; then
+    local ca
+    ca="$(curl -s --max-time 10 "$proxy/__agentproxy/status" 2>/dev/null \
+          | sed -n 's/.*"caBundlePath" *: *"\([^"]*\)".*/\1/p')"
+    [ -n "$ca" ] && [ -f "$ca" ] || ca="/root/.ccr/ca-bundle.crt"
+    { echo "[http]"; echo "    proxy = $proxy"; [ -f "$ca" ] && echo "    sslCAInfo = $ca"; } > "$cfg"
+    log "git routed via explicit proxy: $proxy"
   else
-    log "WARNING: github still unreachable for git after reroute; mathlib fetch may fail"
+    log "no proxy var; dropped injected git config, using direct github via transparent egress"
+  fi
+
+  if git ls-remote https://github.com/leanprover-community/mathlib4 v4.15.0 >/dev/null 2>&1; then
+    log "mathlib reachable via git."
+  else
+    log "WARNING: mathlib still unreachable for git. Diagnostics:"
+    log "  git/proxy env : $(env | grep -iE 'proxy|git_config|ccr' | paste -sd' ' - )"
+    log "  /etc/gitconfig: $(tr '\n' ';' < /etc/gitconfig 2>/dev/null)"
+    log "  ~/.gitconfig  : $(tr '\n' ';' < "$HOME/.gitconfig" 2>/dev/null)"
+    log "  ls-remote err : $(git ls-remote https://github.com/leanprover-community/mathlib4 v4.15.0 2>&1 | head -3 | tr '\n' ' ')"
   fi
 }
 setup_git_proxy
