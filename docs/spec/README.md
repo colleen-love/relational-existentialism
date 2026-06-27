@@ -42,6 +42,18 @@ Read in order:
    (the one candidate-novel theorem is Bridge B, the quantum-seam obstruction — *open*). Read this
    first if you are reviewing the claims.
 
+## Derivations (sequels)
+
+Beyond the core Layers 1–4, separate companion pages carry the time/space/energy derivations, each
+backed by its own Lean module:
+
+- [`time-flow.md`](time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
+  geometric monovariant (`Scratch/TimeFlow.lean`, with `TimeArrow`, `SeamForcing`).
+- [`space-energy.md`](space-energy.md) — **space, the rotating peripheral spectrum, and energy**: space
+  as the coupling-graph quasi-metric (`Scratch/Space.lean`), and the ℂ rotating-spectrum / energy
+  witness (`Scratch/RotatingSpectrum.lean`). Carries its own four-state progress ledger
+  (`[written]`/`[proved]`/`[reading]`/`[open]`).
+
 ## Status legend
 
 Every formal claim carries a tag:

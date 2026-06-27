@@ -267,6 +267,31 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           contractive nature orients the arrow; the seam aims it* — two distinct
                           obstructions. `[proved]` modulo the standing `J`↔genuine-seam `[reading]`.
                           ✅ verified.
+* `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
+                          From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
+                          path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
+                          `dist_le_len`, `dist_triangle`; asymmetry a *theorem*, `dist_asymmetric`);
+                          **separability ⟺ `d = ∞`** (`dist_eq_top_iff`, witness `couplingSep_dist` —
+                          "space = coexistence minus connection"); and the **influence bound**
+                          (`influence_bound`): reusing the `TimeFlow` decay engine on a weighted
+                          dephasing flow, coherence between `i,j` after `n` closures is
+                          `≤ exp(−n·d(i,j))·|Mᵢⱼ|` — influence propagates no faster than the coupling
+                          distance permits. A weighted quasi-metric pre-geometry, not a manifold; the
+                          "lightcone" is a propagation bound only. `[proved]` core, `[reading]` that it
+                          *is* space. ✅ verified.
+* `Scratch.RotatingSpectrum` — Parts 2–3 (the keystone): the **rotating peripheral spectrum** and
+                          **energy**, on one concrete `ℂ` instance. `schur μ` is the phase-damping
+                          channel (the `ℂ`-lift of `Space.wDephase`); `schur_iterate` gives the
+                          per-edge geometric law, and the band of an edge is read off `‖μ i j‖`:
+                          conserved (`schur_sustained`, `=1`) vs decaying (`schur_transient_tendsto`,
+                          `<1`). The witness `quarterMul` on `Matrix (Fin 3) ℂ` carries all three bands
+                          at once — fixed (diagonal), **rotating** (`μ₀₁ = i = e^{iπ/2}`, a genuine
+                          rotating eigen-operator `Φ U = i·U`, `phaseChannel_eigen`, sustained
+                          `rotating_sustained`), and transient (`transient_decays`). Part 3 (`[reading]`):
+                          the modulus-one band is **energy** (conserved, `energy_conserved`), the
+                          modulus-`<1` band is the **arrow** (`arrow_dissipates`); `energy_arrow_split`
+                          shows both in one generator's spectrum. `[proved]` witness; the general CPTP
+                          peripheral structure theorem stays the narrated `[open]`. ✅ verified.
 -/
 import Scratch.We
 import Scratch.Identity
@@ -323,3 +348,5 @@ import Scratch.PerronFrobenius
 import Scratch.TimeFlow
 import Scratch.TimeArrow
 import Scratch.SeamForcing
+import Scratch.Space
+import Scratch.RotatingSpectrum
