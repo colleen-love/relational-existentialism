@@ -56,10 +56,9 @@ backed by its own Lean module:
 
 - [`time-flow.md`](time-flow.md) — **time as flow**: the orientation arrow graduated into a graded
   geometric monovariant (`Scratch/TimeFlow.lean`, with `TimeArrow`, `SeamForcing`).
-- [`space-energy.md`](space-energy.md) — **space, the rotating peripheral spectrum, and energy**: space
-  as the coupling-graph quasi-metric (`Scratch/Space.lean`), and the ℂ rotating-spectrum / energy
-  witness (`Scratch/RotatingSpectrum.lean`). Carries its own four-state progress ledger
-  (`[written]`/`[proved]`/`[reading]`/`[open]`).
+- [`space-energy.md`](space-energy.md) — **space, the rotating peripheral spectrum, and energy** as
+  three aspects of one generator `L`: space as the coupling-graph quasi-metric (`Scratch/Space.lean`),
+  and the ℂ rotating-spectrum / energy witness (`Scratch/RotatingSpectrum.lean`).
 - [`knowing-from-arrow.md`](knowing-from-arrow.md) — **the converse**: from the arrow back to the
   knowing. Dual to `time-flow.md` — on the genuine instance an arrow's limit *is* a knowing (an
   idempotent conditional expectation onto a subalgebra), proved sorry-free by re-export
