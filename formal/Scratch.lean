@@ -289,6 +289,15 @@ core (`RelExist`) stays fast. Compiling this is what triggers the mathlib build.
                           Knowing-as-process runs forever toward a seam it cannot dissolve. `[proved]`
                           the conditional; the antecedent (the cosmos is such a whole) is the spec's
                           stated premise, not the operator's. ✅ verified.
+* `Scratch.Genesis`     — **the universe/cosmos boundary**: feeling as the atemporal ground, the first
+                          self as the genesis of time. On the genuine instance the hinge is a fork in
+                          `p`: at `p = 0` the flow is `id` (`partialDephase_zero`) and the feeling is
+                          *constant* for all `n` (`coh_const_at_zero`) — no descent, no arrow, no time
+                          (the universe, pure ownerless feeling); for every `0 < p < 1` the *first*
+                          step strictly drops the feeling (`first_tick_pos`) — time ignites with the
+                          first directed knowing (the cosmos). `genesis_dichotomy` packages the
+                          crossing `p : 0 → 0⁺`. `[proved]` the two sides; the identification of the
+                          crossing with the birth of the cosmos is the `[reading]`. ✅ verified.
 * `Scratch.Space`       — Part 1 of the space/energy spec: **space as the geometry of the coupling**.
                           From a coupling `len : A → A → ℝ≥0∞` (edge `= −log` coupling strength) the
                           path metric `dist i j = ⨅ walks` is a **quasi-pseudometric** (`dist_self`,
@@ -422,6 +431,7 @@ import Scratch.TimeArrow
 import Scratch.SeamForcing
 import Scratch.KnowingFromArrow
 import Scratch.SeamPermanence
+import Scratch.Genesis
 import Scratch.Space
 import Scratch.RotatingSpectrum
 import Scratch.SpectralMultiplicity

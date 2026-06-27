@@ -73,6 +73,13 @@ backed by its own Lean module:
   `[proved]` sorry-free). The conditional is a theorem; the antecedent (the cosmos is such a whole) is
   the stated premise. The apophatic shape — completion is permanently foreclosed — made a proof
   obligation.
+- [`universe-and-cosmos.md`](universe-and-cosmos.md) — **feeling as the atemporal ground, the first
+  self as the genesis of time**. The universe is the `p = 0` regime (`partialDephase 0 = id`, feeling
+  constant, no time — pure ownerless feeling); the cosmos ignites at `p > 0` with the first directed
+  knowing's first strict tick (`Scratch/Genesis.lean`: `coh_const_at_zero`, `first_tick_pos`,
+  `genesis_dichotomy`, `[proved]`). Read with "cosmos" as the knowing-region the picture costs **no new
+  axiom**; "something has been knowing for 13.8 Gyr" is true distributively, false as a single subject.
+  Surfaces the live choices (continuity of knowing; how thick a "self" must be).
 
 ## Status legend
 
