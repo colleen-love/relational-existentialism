@@ -36,6 +36,15 @@ name = "Theory"
 srcDir = "../theory/formal"
 roots = ["Theory"]
 
+# `paper-2/` — the modular self-relation paper: the frozen fork of the modular slice
+# from `theory/` (six modules, `Theory.* → Paper2.*`, handoff XVII). Self-contained:
+# imports only `Paper2.*` + mathlib (the modular slice is mathlib-direct). Cites paper
+# one's seam→arrow result in prose, never imports `paper-1/`.
+[[lean_lib]]
+name = "Paper2"
+srcDir = "../paper-2/formal"
+roots = ["Paper2"]
+
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"

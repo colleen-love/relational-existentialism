@@ -1,6 +1,11 @@
 # paper-2 — the modular self-relation paper
 
-Frozen once shipped, self-contained. Scope: [`spec/paper-two.md`](spec/paper-two.md). `formal/` is empty
-until the **modular slice** is forked from `theory/` (lazy fork-and-freeze) — it forks the modular slice
-only, not the A2-priority or A3-generative work. Imports only `paper-2/` + `foundation/`; cites paper one's
-arrow result rather than importing it. See [`../STRUCTURE.md`](../STRUCTURE.md).
+Frozen, self-contained. Manuscript: [`spec/paper-two.md`](spec/paper-two.md); provenance:
+[`spec/AXIOM-PROVENANCE.md`](spec/AXIOM-PROVENANCE.md). `formal/` (library `Paper2`) is the **modular slice**
+forked frozen from `theory/` at `fca792d` (handoff XVII, `Theory.* → Paper2.*`): six modules —
+`Paper2.{ModularFlow, RotatingSpectrum, BandCoincidence, BandFromAxioms, OneGenerator, Einselection}` — the
+modular reading of A1, the conserved band, the equilibrium one generator, and the einselection principle +
+presence. Not forked: the A2-priority / A3-generative work (`We`, `Priority`, `MutualCoupling`), which serves
+the conservation and sparsity papers. Imports only `Paper2.*` + mathlib (the modular slice is mathlib-direct,
+**no** `foundation/`, **no** `paper-1/`); cites paper one's arrow result in prose rather than importing it.
+See [`../STRUCTURE.md`](../STRUCTURE.md).
