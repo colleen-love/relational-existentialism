@@ -3,7 +3,7 @@
 
 [`Convergence`](Convergence.lean) closed the "abstract `σ`" costume of the sparsity bridge for the
 **depth**: the convergence depth of the genuine `Φ_c` orbit *is* `Loop`'s `StabilizesAt`. It then
-flagged two residues as still open ([03.7 step 3](../../docs/spec/03.7-sparsity.md)):
+flagged two residues as still open ([03.7 step 3](../../docs/archive/03.7-sparsity.md)):
 
 1. **A forced, non-trivial floor `d ≥ 2`** — "a self needs *genuine* return, not a one-off." Supplied
    as a hypothesis everywhere; even the witness `matarN_stabilizesAt` builds `d` in by construction.

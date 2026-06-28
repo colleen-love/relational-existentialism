@@ -2,7 +2,7 @@
 # The spectral picture of knowing — `E = dephase` as a peripheral spectral projection
 
 This is the finite-dimensional core of the **conjecture lift's** reconciliation (the relation-algebra
-model's Decisions 1–2, recorded in [03.7](../../docs/spec/03.7-sparsity.md)): knowing `E` is a
+model's Decisions 1–2, recorded in [03.7](../../docs/archive/03.7-sparsity.md)): knowing `E` is a
 **spectral projection** onto a distinguished part of attention's spectrum, the weight is the *invariant
 state* (not an external primitive), and one asks whether the peripheral spectrum carries any *rotating*
 coherence (eigenvalue of modulus 1 but `≠ 1`) — coherence that is **sustained but not known**.

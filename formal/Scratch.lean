@@ -26,6 +26,8 @@ The kept closure (15 Scratch modules over 5 `RelExist` core modules):
 * `Scratch.RotatingSpectrum` — energy as the rotating band (03.9).
 * `Scratch.BandCoincidence` / `Scratch.BandFromAxioms` — the conserved remainder coincides with energy,
   from A1–A3 (03.15).
+* `Scratch.SeamForcingC` — clause A's operational seam re-exhibited over **ℂ**, so it shares one model
+  with clause B's energy band (03.8 two-models note). Co-locates the clauses; the bridge stays open.
 -/
 import Scratch.Trace
 import Scratch.KnowingFeeling
@@ -33,3 +35,4 @@ import Scratch.TimeFlow
 import Scratch.KnowingFromArrow
 import Scratch.RotatingSpectrum
 import Scratch.BandFromAxioms
+import Scratch.SeamForcingC

@@ -1,7 +1,7 @@
 /-
 # Conjecture 3.7.3, closed — the cost-graded sparsity dichotomy
 
-[03.7](../../docs/spec/03.7-sparsity.md) states **Conjecture 3.7.3**: under a finite attention budget
+[03.7](../../docs/archive/03.7-sparsity.md) states **Conjecture 3.7.3**: under a finite attention budget
 `β`, the stabilized selves `Stab_R` are **sparse** in `Cl(𝕋)` — nowhere dense, density `→ 0` — *with the
 bound degrading gracefully under cost-sharing*; and dropping the budget makes them dense (the sharp
 dichotomy). Its proof strategy has four steps, all mechanized: the counting lemmas (Lean

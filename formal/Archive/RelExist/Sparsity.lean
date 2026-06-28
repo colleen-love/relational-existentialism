@@ -3,7 +3,7 @@
 
 Machine-checked, dependency-free (Lean 4 core, **no mathlib**) formalization of the
 combinatorial heart of the sparsity conjecture in
-`docs/spec/03.7-sparsity.md`:
+`docs/archive/03.7-sparsity.md`:
 
 * **Lemma 3.7.1 (sparsity from a budget).** Under a finite attention budget `β`, with
   every stabilized self costing at least a positive floor `m`, the number of selves

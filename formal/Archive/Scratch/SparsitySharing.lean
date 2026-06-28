@@ -1,7 +1,7 @@
 /-
 # Sparsity step 2: cost-sharing over a poset of couplings
 
-[03.7](../../docs/spec/03.7-sparsity.md) flags the first gap between the counting lemma and a
+[03.7](../../docs/archive/03.7-sparsity.md) flags the first gap between the counting lemma and a
 theorem about `Cl(𝕋)`: **couplings are not an unstructured set.** They compose and **share** sub-relatings,
 so the cost grading is **lax (sub-additive)** — the clean sum `Σ dλ` becomes an inequality over a poset
 of couplings, and "sparsity must be re-proved with sharing allowed." This module does that, and the
