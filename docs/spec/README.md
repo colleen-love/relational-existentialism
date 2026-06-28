@@ -29,22 +29,24 @@ clean and `sorry`-free; the headline footprints sit at the corpus norm
 
 4. [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md) — self-relation is the trace
    `σ = Tr`; relating produces an eigenform (3.1).
-5. [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
+5. [`03.2-lived-identity.md`](03.2-lived-identity.md) — lived identity `≈ := νΘ` and the shared world;
+   you are your relating, not a bare carrier (3.2).
+6. [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
    the remainder `(1−E)` (3.3). *"Feeling" means exactly this remainder, nothing phenomenal.*
-6. [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md) — the Lawvere obstruction: to relate is to
-   make the other unknowable.
-7. [`03.5-decoherence.md`](03.5-decoherence.md) — what knowing does to a relation; the **seam** (the
-   self-inclusive block attention cannot reach); the irreversible knower→known arrow.
-8. [`03.8-time-flow.md`](03.8-time-flow.md) — the arrow graduated into a graded geometric monovariant;
-   that arrow is time.
-9. [`03.10-knowing-from-arrow.md`](03.10-knowing-from-arrow.md) — the instance converse: an arrow's limit
-   *is* a knowing (a conditional expectation onto the seam subalgebra).
-10. [`03.9-space-energy.md`](03.9-space-energy.md) — energy as the rotating band of the phase channel
-    (the sustained, never-known remainder).
-11. [`03.15-band-coincidence.md`](03.15-band-coincidence.md) — the conserved remainder coincides with the
-    energy band, **derived from A1–A3** (no fourth axiom).
+7. [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md) — the Lawvere obstruction: to relate is to
+   make the other unknowable (3.4).
+8. [`03.5-decoherence.md`](03.5-decoherence.md) — what knowing does to a relation; the **seam** (the
+   self-inclusive block attention cannot reach); the irreversible knower→known arrow (3.5).
+9. [`03.6-time-flow.md`](03.6-time-flow.md) — the arrow graduated into a graded geometric monovariant;
+   that arrow is time (3.6).
+10. [`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md) — the instance converse: an arrow's limit
+    *is* a knowing (a conditional expectation onto the seam subalgebra) (3.7).
+11. [`03.8-space-energy.md`](03.8-space-energy.md) — energy as the rotating band of the phase channel
+    (the sustained, never-known remainder) (3.8).
+12. [`03.9-band-coincidence.md`](03.9-band-coincidence.md) — the conserved remainder coincides with the
+    energy band, **derived from A1–A3** (no fourth axiom) (3.9).
 
-**Provenance.** [`05-provenance.md`](05-provenance.md) — the honest accounting, per kept result:
+**Provenance.** [`04-provenance.md`](04-provenance.md) — the honest accounting, per kept result:
 rederivation vs synthesis, and the open frontiers in one place.
 
 ## The supporting development is archived, not foregrounded

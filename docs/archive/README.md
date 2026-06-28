@@ -10,8 +10,8 @@ the prose of a later paper.
   conservation framing.
 - **Paper three — sparsity:** `03.6-the-self-quantified`, `03.7-sparsity`.
 - **Functorial semantics:** `04-functorial-semantics`.
-- **The full catalog** these were indexed from: `03-theorems`; and the lived-identity surplus page
-  `03.2-lived-identity`.
+- **The full catalog** these were indexed from: `03-theorems`. *(The lived-identity page
+  `03.2-lived-identity` has been **restored** to `../spec/` as theorem 3.2 — it is part of paper one.)*
 
 These pages are **quarantined**: their internal cross-links (to each other, to kept `../spec/` pages, and
 to Lean modules) are *not* maintained and may be stale. Kept pages reference them only as future work,

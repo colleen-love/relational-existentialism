@@ -1,7 +1,7 @@
 /-
 # The band-coincidence conjecture — does permanent feeling coincide with energy?
 
-The open question named in [`03.9-space-energy.md`](../../docs/spec/03.9-space-energy.md)'s honest scope:
+The open question named in [`03.8-space-energy.md`](../../docs/spec/03.8-space-energy.md)'s honest scope:
 *"whether the seam-protected and rotating-protected bands coincide."* Two conservations were kept
 strictly distinct there — **dynamical** (a coupling symmetry → the rotating spectrum → a conserved
 charge, *energy*: [`RotatingSpectrum`](RotatingSpectrum.lean)) and **operational** (self-inclusion →
@@ -63,7 +63,7 @@ about which *edges* each band occupies.
 *is* the genuine un-attendable seam of `Relating.self_inclusive_unmodelable`; and the headline
 `Align = "energy is exactly un-attendable feeling."` `[open]` (narrated, **not** built): the general
 CPTP peripheral **structure theorem** (rotating unitaries normalize `Fix`; crossed-product) and the full
-`L = −i[H,·] + D` generator split — the same `[open]` items already in `03.9`; the deep residue is
+`L = −i[H,·] + D` generator split — the same `[open]` items already in `03.8`; the deep residue is
 whether the *genuine* decohering channel `Φ_c` satisfies `Align`, which stays a bet. Provenance **R / S**:
 decoherence-free subspaces and spectral splits are standard; the synthesis is identifying the
 *un-attendable* subspace with the *conserved-charge* subspace.

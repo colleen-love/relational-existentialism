@@ -1,4 +1,4 @@
-# 05 — Provenance Ledger
+# 04 — Provenance Ledger
 
 > Part of the [Formalization Spec](README.md). *The honest accounting a referee reads first.* Every
 > other page argues the theory; this one states, per result, **what is rederived, what is synthesis,
