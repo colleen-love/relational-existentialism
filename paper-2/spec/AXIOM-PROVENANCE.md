@@ -41,3 +41,29 @@ reconcile, any *deliberate* one is this paper's divergence and belongs in the li
 **Footprints.** The headline theorems depend only on `[propext, Classical.choice, Quot.sound]` — no `sorryAx`
 (verified via `#print axioms` on `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation`,
 `combinedFlow_add`, `stationary_eq_diagonal_real`).
+
+## Canonical axiom layer — pin (handoff XX)
+
+Handoff XX reframed A3 as a **process** and derived the per-paper readings of the self as theorems of that one
+process, in the **canonical axiom layer** [`Theory.Axioms`](../../theory/formal/Theory/Axioms.lean) (prose:
+[`theory/spec/AXIOMS.md`](../../theory/spec/AXIOMS.md)). Paper two's **modular self** is one of the derived
+readings: the modular flow of a diagonal state is a modulus-one Schur multiplier, so it **maps the conserved
+band (the self) into itself**, **sustains** it edge-for-edge (the rotating sub-band carrying the modular
+energies as phases), and **commutes** with the co-direction channel — the *same* fixed point, read under the
+modular flow (`Theory.Axioms.modular_preserves_self` / `modular_sustains_self` / `modular_is_symmetry`,
+distilled from this paper's own `OneGenerator`).
+
+- **Pin.** Paper two is proved against the **canonical axiom layer** `Theory.Axioms` as of **handoff XX**
+  (branch `claude/normalize-canonical-axioms-wyg8xq`). The layer changes **only backward-compatibly**
+  (generalization, never redefinition), so this pin keeps meaning what it meant.
+
+- **Consumed by citation + pin, not import.** Paper two's forks are `Paper2.*` (a *distinct* namespace, so —
+  unlike paper one — a literal `import Theory.Axioms` would not collide). Today paper two nonetheless stays
+  mathlib-direct and self-contained (no `Theory.*`/`Foundation.*` import), consuming the canonical reading by
+  citation + this pin; the `scripts/gate.sh` allowance for `Theory.Axioms` makes a future direct import
+  available should the modular slice be re-based onto the shared layer.
+
+- **Reversal of the freeze (handoff XX, Part C).** Spec XIII protected a per-paper A3 *divergence* by frozen
+  duplication; that divergence is gone (the readings are one process's consequences). The freeze shifts from
+  *duplication* to **version-pinning**: paper two keeps its byte-identical `Paper2.*` fork as the pinned copy
+  and pins the canonical layer here.

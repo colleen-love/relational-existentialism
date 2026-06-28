@@ -18,7 +18,7 @@ The repository proves, and shows its work for, **one result**:
 The repository is organized into six **roots** — a root is exactly a top-level directory with `formal/` (Lean) + `spec/` (prose) + `README.md`, governed by the import gates; see [`STRUCTURE.md`](STRUCTURE.md) for the full discipline.
 
 - [`foundation/`](foundation) — stable, mathlib-bound shared infrastructure (the traced-SMC typeclass). Imported by everything; destined for an eventual mathlib PR.
-- [`theory/`](theory) — the living, theory-specific frontier already beyond paper one (the modular A1, generative A3, A2-priority). The only root that moves freely.
+- [`theory/`](theory) — the living, theory-specific frontier already beyond paper one (the modular A1, generative A3, A2-priority). The only root that moves freely. It is also the **legible canonical home of the one shared axiomatization** `{A1, A2, A3, D1}`: handoff XX reframed **A3 as a process** and *derived* the per-paper readings of the self as theorems of it — stated plainly for an outside reader in [`theory/spec/AXIOMS.md`](theory/spec/AXIOMS.md), mechanized in [`theory/formal/Theory/Axioms.lean`](theory/formal/Theory/Axioms.lean).
 - [`paper-1/`](paper-1) — frozen, self-contained: paper one's spec + its kept formal closure. Imports only itself + `foundation/`.
 - [`paper-2/`](paper-2) — the modular self-relation paper; the modular slice forked frozen from `theory/` (`Paper2.*`).
 - [`scratch/`](scratch) — live staging.

@@ -2,9 +2,9 @@
 
 Every artifact answers one question: **does it diverge per paper, or is it stable-and-shared?**
 
-- **Diverges per paper, or evolves** (axioms A1–A3/D1, theory-specific lemmas) → lives canonically in
-  `theory/`; papers **fork a frozen copy**. The freeze is the value: a paper must mean exactly what it meant
-  at review.
+- **Diverges per paper, or evolves** (theory-specific lemmas) → lives canonically in `theory/`; papers
+  **fork a frozen copy**. The freeze is the value: a paper must mean exactly what it meant at review.
+  **(Amended by handoff XX for the axioms — see "The axioms are one canonical layer" below.)**
 - **Stable, shared, mathlib-bound** (the traced-SMC machinery, general infrastructure) → lives in
   `foundation/`; papers **import** it. Safe because `foundation` only moves *toward generality* (an eventual
   mathlib PR), which is backward-compatible.
@@ -56,6 +56,35 @@ duplication is deliberately deferred until paper two's construction makes specif
 
 Provenance / drift notes: [`paper-1/spec/AXIOM-PROVENANCE.md`](paper-1/spec/AXIOM-PROVENANCE.md),
 [`theory/spec/PROVENANCE.md`](theory/spec/PROVENANCE.md).
+
+## The axioms are one canonical layer (handoff XX — reverses the per-paper freeze, for the axioms)
+
+The fork-and-freeze above protected a per-paper **A3 divergence**: paper one read A3 as the synchronic
+eigenform `νΦ_c`, paper two as phase-bearing/modular, paper three as generative — three "readings" that a
+frozen copy kept from contaminating one another. **Handoff XX collapsed that divergence.** Reframing **A3 as
+a process** — *relations co-direct attention asymmetrically in the relata*, with per-relatum capacity `α`,
+the self its **derived** fixed point — makes the three readings **consequences of one process**, proved as
+theorems in the canonical axiom layer [`theory/Theory/Axioms.lean`](theory/formal/Theory/Axioms.lean) (prose:
+[`theory/spec/AXIOMS.md`](theory/spec/AXIOMS.md)). With the divergence gone, the axioms `{A1, A2, A3, D1}` are
+**one canonical, stable, version-pinned layer**, not per-paper forks.
+
+**This reverses spec XIII's per-paper frozen duplication — correctly, because the divergence the duplication
+protected is now gone.** The mechanism shifts from *duplication* to **version-pinning**:
+
+- `Theory.Axioms` is a **stable shared layer** (like `foundation/`): it changes **only backward-compatibly**
+  (generalization, never redefinition), so a paper's pinned version keeps meaning what it meant.
+- Each paper **pins** the canonical-layer commit it was proved against, in its
+  `spec/AXIOM-PROVENANCE.md`. The closure gate ([`scripts/gate.sh`](scripts/gate.sh)) now allows a paper to
+  import `Theory.Axioms` (only that module, not arbitrary `Theory.*`) and checks the pin.
+- **The four `theory/` axiom-base forks** (`We`, `RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`) are
+  now *confirmed* non-divergent — their byte-identity with paper one's `Scratch.*` is the **content** of the
+  collapse, not a coincidence awaiting divergence.
+- **Namespace exception (paper one).** The XIII forks carry paper-one's own `RelExist.*` namespace (so they
+  stay byte-identical), which *blocks* a literal `import Theory.Axioms` into paper one (the transitive
+  `Theory.*` forks collide with `Scratch.*`). Paper one therefore keeps its byte-identical forks as the
+  version-pinned copy and consumes the canonical layer by **citation + pin** (re-proving the eigenform's
+  state-half locally in [`Scratch.CanonicalEigenform`](paper-1/formal/Scratch/CanonicalEigenform.lean)) — the
+  same citation discipline by which paper two cites paper one's arrow.
 
 ## Cross-paper dependency: cite, don't import
 
