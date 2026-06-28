@@ -1,7 +1,7 @@
 /-
 # The general spectral form of the conjecture — subdominant modes decay to the peripheral self
 
-Conjecture 3.7.4 ([03.7](../../docs/spec/03.7-sparsity.md)) in its **general** form: *under iterated
+Conjecture 3.7.4 ([03.7](../../docs/archive/03.7-sparsity.md)) in its **general** form: *under iterated
 co-directed feedback, only the eigenforms near the spectral radius self-sustain; the subdominant modes
 decay.* This module mechanizes that **dynamical mechanism** in any normed ring, `sorry`-free.
 

@@ -2,7 +2,7 @@
 # ℝ-valued sparsity and the density limit — the analytic upgrade of Lemmas 3.1/3.2
 
 The discrete core in `RelExist.Sparsity` is recast over `ℝ` (step 1 of the spec's
-[proof strategy](../../docs/spec/03.7-sparsity.md#proof-strategy-for-mechanization)),
+[proof strategy](../../docs/archive/03.7-sparsity.md#proof-strategy-for-mechanization)),
 and the "density → 0" claim of Lemma 3.7.1 is proved as a genuine `Filter.Tendsto`:
 
 * `stab_card_le_div` — under a finite budget `β`, with every stabilized self costing

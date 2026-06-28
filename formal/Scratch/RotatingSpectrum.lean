@@ -394,7 +394,7 @@ theorem arrow_of_genReal_neg (μ : A → A → ℂ) (M : Matrix A A ℂ) (i j : 
 
 /-- **The energy band, as a constructed spectral object.** The off-diagonal edges where the generator's
 real part vanishes exactly — `ker(genReal)` off the diagonal. On the witness this is exactly the rotating
-band / `decoherenceFreeSeam` (proved in `BandFromAxioms`). -/
+band / `conservedOffdiag` (proved in `BandFromAxioms`). -/
 def energyEdge (μ : A → A → ℂ) (i j : A) : Prop := genReal μ i j = 0 ∧ i ≠ j
 
 /-- **Energy** — the imaginary spectrum of the single generator, on the band where it is purely unitary

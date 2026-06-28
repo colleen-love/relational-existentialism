@@ -24,6 +24,7 @@ The standard basis is the **classical structure**. From it:
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Real.Basic
+import Mathlib.Analysis.Complex.Basic
 import Scratch.MatrixModel
 
 namespace RelExist.Decoherence
@@ -203,5 +204,57 @@ lemma defectSq_plus_pos : 0 < defectSq plus := by
   · exact absurd (defectSq_eq_zero_iff.1 h.symm) plus_not_classical
 
 end Witness
+
+/-! ### The coherence measure over ℂ — putting the spine in one field
+
+`defectSq` is ℝ-valued (`∑ (copyDefect)²`), which over ℂ would be complex and could not support `0 ≤`.
+The ℂ analogue sums **squared moduli** `‖copyDefect M i j‖²`. This is the one genuinely new definition
+that lets the seam, the arrow, and the energy band (`RotatingSpectrum`, already over ℂ) share a single
+model. The real `defectSq` is its energy-free restriction. `dephase`, `copyDefect`, `IsClassical`,
+`dephase_idem`, `dephase_eq_self_iff` are already ring-generic (above), so they apply over ℂ unchanged. -/
+
+section ComplexCoh
+
+/-- **The copy-defect potential over ℂ.** The total squared modulus of off-diagonal coherence — the
+ℂ analogue of `defectSq`. -/
+noncomputable def defectSqC [Fintype A] (M : Matrix A A ℂ) : ℝ := ∑ i, ∑ j, ‖copyDefect M i j‖ ^ 2
+
+lemma defectSqC_nonneg [Fintype A] (M : Matrix A A ℂ) : 0 ≤ defectSqC M :=
+  Finset.sum_nonneg fun _ _ => Finset.sum_nonneg fun _ _ => sq_nonneg _
+
+/-- **Bottoms out exactly at the classical fragment** — `defectSqC M = 0 ↔ IsClassical M`. The ℂ
+counterpart of `defectSq_eq_zero_iff`: a sum of squared moduli is zero iff every off-diagonal entry is. -/
+lemma defectSqC_eq_zero_iff [Fintype A] {M : Matrix A A ℂ} : defectSqC M = 0 ↔ IsClassical M := by
+  rw [defectSqC]
+  constructor
+  · intro h i j hij
+    have hi : ∑ j', ‖copyDefect M i j'‖ ^ 2 = 0 :=
+      (Finset.sum_eq_zero_iff_of_nonneg
+        (fun k _ => Finset.sum_nonneg fun _ _ => sq_nonneg _)).1 h i (Finset.mem_univ i)
+    have hj : ‖copyDefect M i j‖ ^ 2 = 0 :=
+      (Finset.sum_eq_zero_iff_of_nonneg fun _ _ => sq_nonneg _).1 hi j (Finset.mem_univ j)
+    have hz : copyDefect M i j = 0 :=
+      norm_eq_zero.1 (pow_eq_zero_iff (n := 2) (by norm_num) |>.1 hj)
+    rwa [copyDefect_apply, if_neg hij] at hz
+  · intro h
+    apply Finset.sum_eq_zero; intro i _
+    apply Finset.sum_eq_zero; intro j _
+    by_cases e : i = j
+    · simp [copyDefect_apply, e]
+    · rw [copyDefect_apply, if_neg e, h i j e, norm_zero]; norm_num
+
+/-- A genuine ℂ superposition: the all-ones `2×2` state. -/
+def plusC : Matrix (Fin 2) (Fin 2) ℂ := fun _ _ => 1
+
+lemma plusC_not_classical : ¬ IsClassical plusC := by
+  intro h; exact one_ne_zero (h 0 1 (by decide))
+
+/-- The ℂ superposition sits at **positive** defect — the arrow's source is non-vacuous over ℂ. -/
+lemma defectSqC_plusC_pos : 0 < defectSqC plusC := by
+  rcases lt_or_eq_of_le (defectSqC_nonneg plusC) with h | h
+  · exact h
+  · exact absurd (defectSqC_eq_zero_iff.1 h.symm) plusC_not_classical
+
+end ComplexCoh
 
 end RelExist.Decoherence

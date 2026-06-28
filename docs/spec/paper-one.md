@@ -2,6 +2,24 @@
 
 > **The result, in one sentence.** *The arrow of time is the orientation active self-relating cannot
 > escape; and the conserved remainder of self-relating — what never becomes known — is exactly energy.*
+>
+> *Status of that sentence.* It is **not** itself one `[proved]` badge. The proved skeleton (below) is
+> `[proved]`; the *time* and *energy* identifications are `[reading]`s; the **operational-seam ↔
+> energy-band joint** is `[proved]` *under two named readings* (Lindblad + nondegeneracy — §5 step three),
+> the cross-channel `Align` posit having been removed by reading A3 with a phase-bearing `Φ_c`.
+
+> **Proved skeleton `[proved]`.** A lossy self-relating projection forces a structural remainder, orders
+> an irreversible arrow, and conserves exactly its `genReal = 0` band — on a genuine CPTP witness. That
+> much is mechanized, `sorry`-free; everything the headline says *beyond* it is a named reading or a named
+> open joint, below.
+
+> **The headline rests on:** **A1–A3** (with A3 read at the strength of its text — the self is
+> `Peri(Φ_c)` under a *phase-bearing* `Φ_c`, so **C1** is now A3's *definition*, not a fourth posit, §5
+> step three), **B1** (the preferred/"classical" basis; einselection `[open]`), and two `[reading]`s the
+> energy joint rests on — the **Lindblad** reading (`Φ_c`'s dissipator *is* attention) and
+> **nondegeneracy** (only the diagonal record is held) — plus the standing *flow = physical time* reading.
+> Only A1–A3 are the doctrine's wager (`02`); B1 and the two §5 readings are load-bearing for the energy
+> half specifically, named here so the premise count sits beside the claim rather than three files away.
 
 This page is the single linear walk through that result: each step is tagged with its status and named by
 the Lean theorem that carries it. A referee should be able to see the arc *and* its boundary in one read.
@@ -35,9 +53,10 @@ mechanized here is exactly **gfp-existence** (Knaster–Tarski) — generic to a
 created selves are *rare* (the discriminating content that keeps this from being a universal solvent) is
 paper three's sparsity, **not** claimed in this step. Identity itself is the greatest bisimulation
 `≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are your lived relating, not a bare carrier
-beneath it. (Load-bearing here is the *soundness* `≈ ⊆ ≅` together with the seam below; the strict
-first-person surplus `≈ ⊊ ≅` is mechanized in archived `Identity.lean` and is paper-two material, not part
-of this headline path.)
+beneath it. (What the headline path actually uses is *only* this `≈ = νΘ` — the kept `We.bisim`. The
+soundness/strictness inversion `≈ ⊆ ≅ ⊊` is **not** load-bearing here: it is mechanized only in archived
+`Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at all. An
+earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
 
 → detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md),
 [`03.2-lived-identity.md`](03.2-lived-identity.md).
@@ -88,7 +107,13 @@ the *instance* converse (a re-export of the forward `partialDephase` limit); the
 → detail: [`03.6-time-flow.md`](03.6-time-flow.md),
 [`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md).
 
-## 5. The conserved remainder is exactly energy `[proved]`
+## 5. The conserved remainder is exactly energy — `[proved]` (`genReal = 0`, on the witness) · `[reading]` (= energy) · `[open]` (the joint)
+
+> **What carries which tag here.** `[proved]`: that the `genReal = 0` band is conserved *exactly* (magnitude
+> held), on the genuine CPTP witness. `[reading]`: that this conserved band *is* energy (the unitary
+> spectrum of the time generator, given flow = time). `[open]`: that the conserved band is the **operational**
+> seam of §3 — the un-attendable, self-inclusion-forced block — i.e. the operational-seam ↔ energy-band
+> joint. The bare `[proved]` that once tagged this whole section overreached; this is the split.
 
 Not all of the remainder behaves alike. Over ℂ the dynamics is the phase-damping channel `schur μ`, and
 each off-diagonal coherence falls in one of two bands by `‖μ i j‖`:
@@ -113,29 +138,57 @@ each off-diagonal coherence falls in one of two bands by `‖μ i j‖`:
   winding. On the witness the generator band is exactly the rotating/energy band
   (`BandFromAxioms.energyBand_eq_rotating_quarterMul`).
 
-That the conserved remainder coincides with the rotating/energy band is **A3 read at the strength of its
-own text** — *not* a fourth posit. A3 names the self the *"greatest sustainable field"*
-`Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`; that field, now mechanized as **exactly** the conserved (modulus-one)
-band (`BandFromAxioms.peri_iff_mem_conservedBand`), *includes* the rotating band, and the seam is its
-off-diagonal part (`decoherenceFreeSeam_iff_offdiag_conserved`), with `νΦ_c` (the known/diagonal record)
-its `μ = 1` sub-band (`fixedBand_le_conservedBand`). With the seam so read, and given only that the channel
-is contractive (attention never amplifies) and nondegenerate, the alignment is a one-line consequence
+That the conserved remainder coincides with the rotating/energy band turns on **one identification, C1**:
+that the self *is* A3's *"greatest sustainable field"* `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, not the strict
+`νΦ_c` the axiom formalizes. That field is now mechanized as **exactly** the conserved (modulus-one) band
+(`BandFromAxioms.peri_iff_mem_conservedBand`), *including* the rotating band, with the seam its off-diagonal
+part (`conservedOffdiag_iff_offdiag_conserved`) and `νΦ_c` (the known/diagonal record) its `μ = 1`
+sub-band (`fixedBand_le_conservedBand`). With the seam *so read*, and given only that the channel is
+contractive (attention never amplifies) and nondegenerate, the alignment is a one-line consequence
 (`BandFromAxioms.align_of_contractive`, `band_coincidence_from_axioms`) and the seam-protection is
 phase-blind — it covers the energy band exactly as the known record (`BandFromAxioms.seam_energy_sustained`).
-**The one load-bearing move is the `[reading]` C1** — that the self *is* `Peri(Φ_c)` rather than the strict
-`νΦ_c` — but C1 is A3's own gloss, *already* an axiom (see [Honest scope](#honest-scope) ¶3): three axioms
-said in full, not a fourth. The further identification of this conserved band with **energy** is itself a
-standing `[reading]` (below).
+But note what carries the weight: `align_of_contractive` is a near-tautology once the seam is *defined* as
+the modulus-one off-diagonal block; **all** the content sits in C1. **C1 is a disclosed `[reading]`/posit** —
+the self = `Peri(Φ_c)`, an identification *beyond* A3's formalized `νΦ_c` (which carries only the fixed
+band). We read it as A3's "decoherence-free subalgebra" gloss made precise; a reader may instead count it as
+a fourth posit. Either way it is named and tagged here, and the reader judges. The further identification of
+this conserved band with **energy** is itself a standing `[reading]` (below).
 
 **What clause B rests on — and what it does not.** Clause B rests on **A3-read-as-`Peri`** (exact
-magnitude conservation, `genReal = 0`) plus the generator split — **not** on the operational seam.
-`band_coincidence` relates the *spectral* seam `decoherenceFreeSeam` (defined by `‖μ‖ = 1`) to the
-rotating band; it does **not** connect the *operational*, un-attendable seam of
-`SeamForcing.self_cannot_fully_decohere` to the energy band. Those are two kinds of "conserved":
-`Peri`/`genReal = 0` is **exact** (the magnitude is held), while the operational seam gives only a
-**positive floor** (the coherence never fully vanishes — a clause-A fact, the arrow never completing).
-The identification *operational seam = energy band* is the **open unifier**, stated and not proved; the
-energy clause does not borrow the seam's `[proved, 0 ax]` weight.
+magnitude conservation, `genReal = 0`) plus the generator split. `band_coincidence` relates the
+*spectral* conserved band `conservedOffdiag` (defined by `‖μ‖ = 1`) to the rotating band; it does **not**
+by itself connect the *operational*, un-attendable seam to the energy band.
+
+**Step two — what the bridge test found (and the spine now lives in one ℂ field).** Two earlier gaps are
+closed. *Different models:* the operational seam, the arrow, the flow, and the energy band now all live
+over ℂ (`SeamForcing.self_cannot_fully_decohereC`, `Orientation.dephaseKnowingC`,
+`TimeFlow.dephaseFlowC`, `RotatingSpectrum`) — the real shadow's *absence* of a rotating band
+(`dephase_no_rotating_peripheral`) is now just a remark about the ℝ-restriction, not a model boundary the
+headline straddles. *Floor vs exact:* the operational seam is in fact **exactly** conserved, entrywise,
+and is **exactly** the operationally-conserved band — a theorem characterized *from attention alone, with
+no `‖μ‖`*: `SeamConserved.offdiag_conserved_iff_seam` proves an off-diagonal edge is fixed by *every*
+available knowing **iff** it lies in the seam `J`. So **operational seam = operationally-conserved band**
+is now `[proved]`, structural and exact — not a floor, not a reading.
+
+**Step three — the phase-bearing self earns it; the joint becomes `[proved]` under two named readings.**
+Step two's obstruction was an *artifact of the 0/1 gate*, not of self-inclusion. Read A3 at the strength
+of its text — the self is the **greatest sustainable field** `Peri(Φ_c)` under a *phase-bearing* `Φ_c`
+(`schur μ`: modulus-contracting, phase-free), not the strict fixed point `νΦ_c` of a phaseless gate
+([`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)). The obstruction is then
+**phase-blind**: un-attendability forces only *modulus* (un-damped, `‖μ‖ = 1`), and under a
+**nondegenerate** map (`μ = 1 ↔ i = j`: only the diagonal classical record is held) an un-damped
+off-diagonal edge has nowhere to be but the **rotating** band (`undamped_offdiag_rotates`). So the
+un-attendable seam *carries phase = energy* — `seam_carries_phase : seamBand J ≤ rotatingBand μ` — and it
+needs **no `Align`**: that subset is exactly the one direction "the conserved remainder *is* energy"
+asserts. The phaselessness of step two was the gate **violating nondegeneracy** (it holds off-diagonal
+coherence at `1`, `attend_fixes_are_identity`); A3-at-strength restores it. **So clause B's joint is
+upgraded from `[open]` to `[proved]`, under two named `[reading]`s** — the **Lindblad** reading
+(`UnitaryBaseline.seam_undamped`: the dissipator *is* attention, so un-attendable ⟹ un-damped) and
+**nondegeneracy** (`fixed_eq_diagonal`: A3-at-strength) — and with the cross-channel `Align` posit
+**removed**, not merely named. C1 (self = `Peri`) is now the *definition* of A3, the rotating band's
+membership a theorem (`rotating_mem_peri`), not a posit. And the self is **non-inert**: the rotating seam
+is sustained at every depth (`seam_sustained`) — A3's "sustained by looping." *Whether looping enlarges
+the self ("grown") is a separate creation term, left `[open]`, not claimed here.*
 
 → detail: [`03.8-space-energy.md`](03.8-space-energy.md),
 [`03.9-band-coincidence.md`](03.9-band-coincidence.md).
@@ -147,9 +200,11 @@ energy clause does not borrow the seam's `[proved, 0 ax]` weight.
 > energy (§5).** The transient remainder decays into the known (the arrow); the conserved remainder does
 > not, and that conserved remainder is the energy band.
 
-All steps are `[proved]`, `sorry`-free; the headline footprints sit at the corpus norm
+Every *mechanized* step is `[proved]`, `sorry`-free; the headline footprints sit at the corpus norm
 `[propext, Classical.choice, Quot.sound]`, with the seam (`Seam.self_cannot_trace_relation`) depending on
-**no axioms**.
+**no axioms**. What is **not** `[proved]` is named, not buried: the *energy* identification and *flow =
+time* are `[reading]`s, and the operational-seam ↔ energy-band joint is `[open]` (§5, Honest scope). The
+proved skeleton stated under the headline is the part that carries the badge.
 
 ---
 
@@ -163,20 +218,33 @@ Three frontiers stay open, stated plainly rather than buried:
 2. **The general-CPTP placement of `Φ_c`'s spectrum.** That an arbitrary primitive channel places its
    modulus-1 spectrum into a commutative decoherence-free subalgebra is `[open]`; §5 discharges the
    coincidence on the finite-dim ℂ witness, not in general.
-3. **C1 — that the self is `Peri(Φ_c)`.** The coincidence reads the seam as A3's "decoherence-free
-   subalgebra" gloss. This is A3 *taken literally*, asserted — **not a fourth axiom**, but a `[reading]`
-   of A3, not a derivation of it (see [`03.9`](03.9-band-coincidence.md) postscript).
+3. **C1 — the self is `Peri(Φ_c)` — is now A3's *definition*, not a fourth posit.** Reading A3 at the
+   strength of its text (the self is the *greatest sustainable field* under a **phase-bearing** `Φ_c`,
+   [`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)) makes `self := Peri(Φ_c)` the
+   definition, with the rotating (energy) band's membership a *theorem* (`rotating_mem_peri`). The earlier
+   "fourth-posit" worry was an artifact of formalizing A3 as the phaseless strict `νΦ_c`. What remains
+   `[reading]` is *not* C1 but the two modeling inputs of §5 step three — the **Lindblad** reading and
+   **nondegeneracy** (see below).
 
 And **one standing reading-cluster** — *flow = physical time / `Φ_c` = the actual decohering physics*. With
 it, **energy is not a second reading**: the generator of the flow is the Hamiltonian, the arrow is its
 dissipative part (`genReal < 0`) and energy its unitary spectrum (`genImag` on `ker genReal`), so "the
 conserved band = energy" follows by the definition of energy as the conserved charge of time-translation
-(Noether/Stone), not by a fresh analogy. What stays genuinely open beside it is the **unifier** —
-*operational seam = energy band* — relating the un-attendable seam (`SeamForcing`, a positive floor) to the
-exactly-conserved generator band (`genReal = 0`); these are two senses of "conserved," kept apart. Strip
-the reading and what remains is the proved skeleton: a lossy self-relating projection forces a structural
-remainder, orders an irreversible arrow, and conserves exactly its rotating (`genReal = 0`) band, whose
-imaginary spectrum is energy.
+(Noether/Stone), not by a fresh analogy. The **unifier** — *operational seam = energy band* — was the
+standing open joint; the phase-bearing reading of A3 (§5 step three,
+[`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)) **closes it**, and the path there
+is instructive. *Step two* (`SeamConserved`) proved the operational seam *is* the operationally-conserved
+band, exactly and structurally (`offdiag_conserved_iff_seam`, seam from attention with no `‖μ‖`), but its
+conserved edges were *fixed* (`μ = 1`) because the 0/1 attention gate carries no phase
+(`attend_fixes_are_identity`). *Step three* removes that: the gate's phaselessness was its **degeneracy**
+(it holds off-diagonal coherence at `1`), not the obstruction's. Under a nondegenerate phase-bearing `Φ_c`
+the obstruction is **phase-blind** — un-attendable ⟹ un-damped (`‖μ‖ = 1`), and off the diagonal that is
+*rotation* (`undamped_offdiag_rotates`), so the seam ⊆ the rotating energy band (`seam_carries_phase`),
+**with no `Align`**. The joint is `[proved]` under two `[reading]`s — Lindblad (the dissipator is
+attention) and nondegeneracy (A3-at-strength) — the cross-channel posit *removed*, not merely named. Strip
+those readings and what remains is the proved skeleton: a lossy self-relating projection forces a
+structural remainder, orders an irreversible arrow, and conserves exactly its rotating (`genReal = 0`)
+band, whose imaginary spectrum is energy.
 
 ## What is not in this paper
 

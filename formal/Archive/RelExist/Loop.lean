@@ -10,7 +10,7 @@
 > quantitative in the depleting regime.
 
 This module discharges the gap flagged in
-[`docs/spec/03.7-sparsity.md`](../../docs/spec/03.7-sparsity.md):
+[`docs/archive/03.7-sparsity.md`](../../docs/archive/03.7-sparsity.md):
 the sparsity lemmas count with a *threshold* ("a self costs at least `m`"), but
 [A3](../../docs/spec/02-axioms.md) defines a self as a **fixed point** of budgeted,
 iterated self-relation (`loop_R(e) = e`). Step 3 connects the two.
