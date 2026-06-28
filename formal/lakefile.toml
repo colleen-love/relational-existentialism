@@ -1,20 +1,43 @@
 name = "RelExist"
-defaultTargets = ["RelExist"]
+defaultTargets = ["Foundation"]
 
-# `RelExist` (the core) is deliberately dependency-free (no mathlib): it builds and
-# checks in seconds, even in sessions where mathlib's prebuilt cache is unreachable.
-# It is the default target, so `lake build` stays fast.
-[[lean_lib]]
-name = "RelExist"
+# ── Six-root layout (handoff XIII) ───────────────────────────────────────────
+# The lake package stays here in `formal/` (so the mathlib cache under
+# `formal/.lake` is untouched); each root is a repo-level directory holding its
+# own `formal/` (Lean) and `spec/` (prose). Libraries reach their root via
+# `srcDir = "../<root>/formal"`. Module names are kept stable in `paper-1/`
+# (`Scratch.*`, `RelExist.*`) and root-prefixed in `theory/` (`Theory.*`), so the
+# closure gate resolves by file location: a paper imports only itself + foundation.
 
-# `Scratch` holds mathlib-dependent work (the ℝ-valued sparsity upgrade, the
-# gfp/Knaster–Tarski formalization of `≈ := νΘ`, the monoidal-category layer). It is
-# NOT a default target, so it is only compiled on explicit `lake build Scratch`,
-# which is what triggers the (one-time, slow-without-cache) mathlib build.
+# `foundation/` — stable, mathlib-bound infrastructure (the traced-SMC typeclass +
+# JSV axioms). Dependency-free today, so it is the fast default target. Held to
+# mathlib standards; destined to leave for a mathlib PR (not yet).
 [[lean_lib]]
-name = "Scratch"
+name = "Foundation"
+srcDir = "../foundation/formal"
+roots = ["Foundation"]
+
+# `paper-1/` — frozen, self-contained: paper one's axiom spine (`RelExist.*`, minus
+# the hoisted `Traced`) + its kept mathlib closure (`Scratch.*`). Imports only
+# `paper-1/` + `foundation/`. Module names deliberately unchanged from the
+# pre-reorg tree (content byte-identical, only relocated).
+[[lean_lib]]
+name = "Paper1"
+srcDir = "../paper-1/formal"
+roots = ["RelExist", "Scratch"]
+
+# `theory/` — the living frontier that is already *not* paper one: the modular A1
+# (`Theory.ModularFlow`), the generative A3 (`Theory.MutualCoupling`), A2-priority
+# (`Theory.Priority`), plus the shared base they consume, forked up on genuine
+# demand (`Theory.We`, `Theory.RotatingSpectrum`, `Theory.BandCoincidence`,
+# `Theory.BandFromAxioms`). Imports only `theory/` + `foundation/`.
+[[lean_lib]]
+name = "Theory"
+srcDir = "../theory/formal"
+roots = ["Theory"]
 
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.15.0"
+
