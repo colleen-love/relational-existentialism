@@ -67,7 +67,7 @@ phenomenon is the contribution. Most of the corpus is exactly this. We mark such
 ## 2. The ledger
 
 Grouped by area. "Prior art" cites the result being rederived or transported; it is representative, not
-exhaustive. Lean/Agda names are the audited artifacts (see [`formal/README.md`](../../formal/README.md)).
+exhaustive. Lean/Agda names are the audited artifacts (see [`lake/README.md`](../../lake/README.md)).
 
 ### 2.1 Identity, bisimulation, the first-person surplus
 
@@ -226,7 +226,7 @@ is the correction of record.**
 
 ### Cross-references
 
-- The mechanization index and axiom footprints: [`formal/README.md`](../../formal/README.md).
+- The mechanization index and axiom footprints: [`lake/README.md`](../../lake/README.md).
 - The seam and its bridges: [`03.5-decoherence.md`](03.5-decoherence.md).
 - The sparsity posits, the spectral lift, and its decisions: [`03.7-sparsity.md`](../../archive/spec/03.7-sparsity.md).
 

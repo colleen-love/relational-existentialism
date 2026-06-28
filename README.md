@@ -11,18 +11,20 @@ The repository proves, and shows its work for, **one result**:
 - **One step toward the formalization (plain words, structures named):** [`paper-1/spec/relational-existentialism-toward-formalization.md`](paper-1/spec/relational-existentialism-toward-formalization.md)
 - **The formal spec (doctrine, signature, axioms, theorems):** [`paper-1/spec/`](paper-1/spec/) — foundation (`00`/`01`/`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`paper-1/spec/README.md`](paper-1/spec/README.md) for the reading order.
 - **The mechanized development (Lean 4):** machine-checked and `sorry`-free. Paper one's closure lives in [`paper-1/formal/`](paper-1/formal/) (`Scratch.*`, `RelExist.*`); shared infrastructure in [`foundation/formal/`](foundation/formal/) (`Foundation.Traced`); the living frontier in [`theory/formal/`](theory/formal/) (`Theory.*`). All build clean; the headline footprints sit at the corpus norm, with the seam depending on no axioms.
-- **The coinductive ν-layer (Agda):** [`agda/`](agda/) — a parallel `--safe --guardedness` mechanization of the identity/`ν` material (lived identity `≈`, theorem 3.2, with native coinduction); not part of paper one.
+- **The coinductive ν-layer (Agda):** [`agda/`](agda/) — a parallel `--safe --guardedness` mechanization of paper one's identity/`ν` material with native coinduction (lived identity `≈`, theorem 3.2; the first-person surplus `≈ ⊊ ≅`, proved in both assistants). Infrastructure, a second proof assistant — not a root.
 
 ## Layout — six roots
 
-The repository is organized into six roots, each holding its own Lean (`formal/`) and prose (`spec/`); see [`STRUCTURE.md`](STRUCTURE.md) for the full discipline and gates.
+The repository is organized into six **roots** — a root is exactly a top-level directory with `formal/` (Lean) + `spec/` (prose) + `README.md`, governed by the import gates; see [`STRUCTURE.md`](STRUCTURE.md) for the full discipline.
 
 - [`foundation/`](foundation) — stable, mathlib-bound shared infrastructure (the traced-SMC typeclass). Imported by everything; destined for an eventual mathlib PR.
 - [`theory/`](theory) — the living, theory-specific frontier already beyond paper one (the modular A1, generative A3, A2-priority). The only root that moves freely.
 - [`paper-1/`](paper-1) — frozen, self-contained: paper one's spec + its kept formal closure. Imports only itself + `foundation/`.
-- [`paper-2/`](paper-2) — the modular self-relation paper (scoped); forked from `theory/` once shipped.
+- [`paper-2/`](paper-2) — the modular self-relation paper; the modular slice forked frozen from `theory/` (`Paper2.*`).
 - [`scratch/`](scratch) — live staging.
 - [`archive/`](archive) — the supporting development kept, not foregrounded: the conservation law and cosmos readings (paper two), the sparsity of selfhood (paper three), the functorial-semantics layer, and the route-1 scaffolding — referenced as future work rather than as the headline.
+
+Everything else at top level is **infrastructure**, not a root: [`lake/`](lake) (the Lean package home + mathlib cache, so `formal/` only ever means a root's Lean sources), [`agda/`](agda) (the parallel coinductive ν-layer — a second proof assistant), [`papers/`](papers) (the final manuscripts, all rights reserved), [`scripts/`](scripts) (the gate + environment setup), and the top-level docs.
 
 ## Licensing
 

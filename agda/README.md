@@ -1,7 +1,8 @@
-# `agda/` — the coinductive ν-layer
+# `agda/` — the coinductive ν-layer (infrastructure, not a root)
 
-A **parallel proof assistant**, not part of [paper one](../paper-1/spec/paper-one.md). The
-[`formal/`](../formal/) Lean development mechanizes the
+A **parallel proof assistant** — a *second* mechanization, infrastructure like [`lake/`](../lake), not a
+root. Its live modules are dual witnesses for [paper one](../paper-1/spec/paper-one.md). The
+[`lake/`](../lake/) Lean development mechanizes the
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom Agda is cleanest for, and the
@@ -11,10 +12,14 @@ point of a lattice operator but the **final coalgebra** itself: a proof of `x �
 infinite, productive agreement, and the coinduction principle is one guarded definition
 rather than a call to `le_gfp`.
 
-Two modules, both from scratch over only the standard library:
-[`RelExist/Coinductive.agda`](RelExist/Coinductive.agda) — the ν-layer proper — and
-[`RelExist/Sparsity.agda`](RelExist/Sparsity.agda) — the **topological** form of the
-sparsity dichotomy ([spec 03.7](../archive/spec/03.7-sparsity.md), step 4).
+Two **live** modules, both from scratch over only the standard library, witnessing **paper one**:
+[`RelExist/Coinductive.agda`](RelExist/Coinductive.agda) — the ν-layer proper (theorem
+[3.2](../paper-1/spec/03.2-lived-identity.md), the lived identity `≈`) — and
+[`RelExist/Inversion.agda`](RelExist/Inversion.agda) — the first-person surplus `≈ ⊊ ≅` (the
+[3.5](../paper-1/spec/03.5-decoherence.md) inversion), proved in *both* assistants (cf. Lean
+`bisim_ne_obsEq`). The third witness — **topological sparsity** — is paper-**three** material and lives in the
+archive: [`archive/agda/RelExist/Sparsity.agda`](../archive/agda/RelExist/Sparsity.agda) (it imports the live
+`RelExist.Coinductive`).
 
 ## Status — `RelExist.Coinductive` (the ν-layer)
 
@@ -42,43 +47,26 @@ choice as Lean's `Scratch/Identity.lean`, so both proof assistants prove the fir
 | **strictness** `≈ ⊊ ≅` — the first-person surplus | `surplus` (`p0≅q0` ∧ `¬p0≈q0`) | [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ proved (matches Lean `bisim_ne_obsEq`) |
 | **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../paper-1/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
 
-## Status — `RelExist.Sparsity` (topological sparsity, step 4)
+## Archived — `RelExist.Sparsity` (topological sparsity, paper three)
 
-The spec's [Conjecture 3.7.3](../archive/spec/03.7-sparsity.md#34-the-conjecture) asks
-for the *infinite-state* form of "selves are rare": that the carrier of selves `Stab` is
-**nowhere dense** in the space of states under "the natural topology on states `I → D`."
-[the proof-strategy step](../archive/spec/03.7-sparsity.md#proof-strategy-for-mechanization)
-names Agda's ν-layer as the host. States are **behaviours in the final coalgebra**; the
-natural topology is the **cylinder topology** (basic opens are finite-prefix determined);
-the looped selves (D1) are exactly the *constant* behaviours `repeat a`.
+The topological form of "selves are rare" — the carrier of selves `Stab` is **nowhere dense** in the cylinder
+topology on behaviours (`selves-nowhereDense`), with the sharp dichotomy `trivial→allSelf` — is **paper-three**
+material. It has been moved to [`archive/agda/RelExist/Sparsity.agda`](../archive/agda/RelExist/Sparsity.agda)
+so the live Agda layer holds only paper-one witnesses, matching the Lean side (sparsity lives in `archive/`).
+It imports the live `RelExist.Coinductive` and is itself `--safe --guardedness`; details in
+[`archive/spec/03.7-sparsity.md`](../archive/spec/03.7-sparsity.md).
 
-| Result | Agda name | Meaning | State |
-| --- | --- | --- | --- |
-| topological "Stab" *is* the doctrine's self | `Const→isSelf` / `isSelf→Const` | the constant behaviours are exactly the D1 selves | ✅ proved |
-| **closed** — the non-selves are open | `nonConst-open` | one moment of difference is finite-prefix witnessed ⇒ `Stab` is closed | ✅ proved |
-| **empty interior** — every cylinder meets the non-selves | `selves-emptyInterior` | no observation prefix forces selfhood | ✅ proved |
-| **nowhere dense** — sparsity, topological form | `selves-nowhereDense` | given two distinct observations, `Stab` is closed with empty interior | ✅ proved |
-| **sharp dichotomy** — trivial alphabet ⇒ all selves | `trivial→allSelf` | one observation ⇒ every state is a self (`Stab` dense), mirroring Lemma 3.7.2 (`β = ⊤`) | ✅ proved |
-
-This is the lift the spec flagged once `Cl(𝕋)` existed: the Lean side *counts* (`Stab`
-finite, density `→ 0` — `Scratch.SparsityReal.stab_density_tendsto_zero`); the Agda side
-gives the topological statement Conjecture 3.7.3 actually asks for, with the same sharp
-dichotomy — "two distinct observations" is the expressivity hypothesis (the avatar of
-`ε > 1`), and dropping it collapses the theory to the universal solvent.
-
-Both modules are checked with `--safe --guardedness`: no postulates, no escape hatches —
-every coinductive proof is machine-verified productive. `RelExist.Coinductive` is the
-constructive, final-coalgebra counterpart of `formal/`'s lattice-theoretic `RelExist.We`
-(`νΘ`), so the doctrine's `≈` now has **two independent mechanizations** that agree;
-`RelExist.Sparsity` discharges the topological clause of the sparsity conjecture that the
-Lean counting bound cannot reach.
+Both live modules are checked with `--safe --guardedness`: no postulates, no escape hatches — every
+coinductive proof is machine-verified productive. `RelExist.Coinductive` is the constructive, final-coalgebra
+counterpart of the Lean side's lattice-theoretic `RelExist.We` (`νΘ`), so the doctrine's `≈` now has **two
+independent mechanizations** that agree.
 
 ## Build / check
 
 ```sh
 cd agda
-agda RelExist/Coinductive.agda   # the ν-layer
-agda RelExist/Sparsity.agda      # topological sparsity (imports Coinductive)
+agda RelExist/Coinductive.agda   # the ν-layer (theorem 3.2)
+agda RelExist/Inversion.agda     # the first-person surplus ≈ ⊊ ≅
 ```
 
 Requires Agda (2.6.x) and the standard library, registered as a default library. A

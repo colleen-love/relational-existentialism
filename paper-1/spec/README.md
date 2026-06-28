@@ -8,7 +8,7 @@ This repository proves, and shows its work for, **one result**:
 **Start here:** [`paper-one.md`](paper-one.md) — the single linear walk through the result, each step
 status-tagged and named by its Lean theorem. Everything below is its supporting development.
 
-The prose + math here settle the mathematics; [`formal/`](../../formal) carries the Lean mechanization
+The prose + math here settle the mathematics; [`formal/`](../../lake) carries the Lean mechanization
 (libraries `RelExist` — the dependency-free core — and `Scratch` — the mathlib-backed half). Both build
 clean and `sorry`-free; the headline footprints sit at the corpus norm
 `[propext, Classical.choice, Quot.sound]`, with the seam depending on **no axioms**.

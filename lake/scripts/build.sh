@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Everyday build for formal/. Assumes the environment Setup script already
+# Everyday build for lake/. Assumes the environment Setup script already
 # planted the toolchain and warmed mathlib (snapshotted), so this NEVER builds
 # mathlib from source:
 #
@@ -18,7 +18,7 @@
 #   NO_CACHE_GET=1 scripts/build.sh  # skip the cache refresh (offline / fast)
 set -euo pipefail
 
-cd "$(dirname "${BASH_SOURCE[0]}")/.."          # -> formal/
+cd "$(dirname "${BASH_SOURCE[0]}")/.."          # -> lake/
 export PATH="$HOME/.elan/bin:$PATH"
 
 TARGETS=("$@"); [ ${#TARGETS[@]} -eq 0 ] && TARGETS=(RelExist Scratch)

@@ -1,6 +1,6 @@
 # Modular self-relation — mathlib gap audit (handoff X, Stage 0)
 
-What mathlib (pinned `v4.15.0`, see [`formal/lakefile`](../../formal)) provides versus what each later stage
+What mathlib (pinned `v4.15.0`, see [`formal/lakefile`](../../lake)) provides versus what each later stage
 of [the modular-frontier program](modular-frontier.md) needs. The point is to plan Stages 1–3
 against reality. **Verdict: Stages 1–2 (finite-dimensional modular flow, modular Hamiltonian, KMS) are
 fully achievable in-repo on mathlib as-is; Stage 3 (type III, non-inner flow, crossed products) has

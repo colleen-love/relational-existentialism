@@ -18,7 +18,7 @@ PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # --- Lean 4 + mathlib (fatal: the formal development depends on it) -----------
 echo "[setup] bootstrapping Lean + mathlib (this is the slow, one-time step)..."
-if "$PROJECT_DIR/formal/scripts/bootstrap.sh" > "$LOG" 2>&1; then
+if "$PROJECT_DIR/lake/scripts/bootstrap.sh" > "$LOG" 2>&1; then
   echo "[setup] Lean ready: $("$HOME/.elan/bin/lean" --version 2>/dev/null | head -1)"
 else
   echo "[setup] Lean bootstrap FAILED — tail of $LOG:"; tail -30 "$LOG"; exit 1

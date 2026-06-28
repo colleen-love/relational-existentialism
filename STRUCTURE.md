@@ -20,15 +20,29 @@ everything. **A paper imports only itself + `foundation/`** — never `theory` (
 | [`foundation/`](foundation) | stable, mathlib-bound shared infrastructure (traced-SMC typeclass + JSV axioms) | `Foundation.*` | mathlib only |
 | [`theory/`](theory) | the living, theory-specific frontier already beyond paper one | `Theory.*` | `theory/` + `foundation/` |
 | [`paper-1/`](paper-1) | frozen, self-contained: paper one's spec + kept formal closure | `Scratch.*`, `RelExist.*` | `paper-1/` + `foundation/` |
-| [`paper-2/`](paper-2) | the modular self-relation paper (scoped); forked from `theory/` once shipped | `Paper2.*` | `paper-2/` + `foundation/` |
+| [`paper-2/`](paper-2) | the modular self-relation paper; the modular slice forked frozen from `theory/` | `Paper2.*` | `paper-2/` (+ `foundation/`; mathlib-direct) |
 | [`scratch/`](scratch) | live staging | (free) | `foundation/` + `theory/` |
 | [`archive/`](archive) | frozen, superseded/set-aside; cross-links unmaintained | (as moved) | not built |
 
-Each root holds its own `formal/` (Lean) and `spec/` (prose). The lake package and the mathlib cache stay in
-[`formal/`](formal); libraries reach each root via `srcDir = "../<root>/formal"` (see
-[`formal/lakefile.toml`](formal/lakefile.toml)). `paper-1/` keeps the pre-reorg module names (`Scratch.*`,
+Each root holds its own `formal/` (Lean), `spec/` (prose), and `README.md`. The Lake package and the mathlib
+cache live in the infrastructure directory [`lake/`](lake) (renamed out of its old collision with the per-root
+`formal/`, so `formal/` now only ever means "a root's Lean sources"); the libraries reach each root via
+`srcDir = "../<root>/formal"` (see [`lake/lakefile.toml`](lake/lakefile.toml)). `paper-1/` keeps the pre-reorg
+module names (`Scratch.*`,
 `RelExist.*`) so its content is byte-identical; `theory/` is root-prefixed (`Theory.*`) so the four shared
 modules it forked do not collide with paper-1's originals.
+
+## Roots vs. infrastructure
+
+The convention is exact: **a root is a top-level directory with `formal/` + `spec/` + `README.md`**, governed
+by the import gates. Anything at top level without that shape is **infrastructure**, not a root.
+
+- **Roots (6):** [`foundation/`](foundation), [`theory/`](theory), [`paper-1/`](paper-1),
+  [`paper-2/`](paper-2), [`scratch/`](scratch), [`archive/`](archive).
+- **Infrastructure (not roots):** [`lake/`](lake) — the Lean package home + mathlib cache (so `formal/` only
+  ever names a root's Lean sources); [`agda/`](agda) — the parallel coinductive ν-layer, a *second* proof
+  assistant; [`papers/`](papers) — the final manuscripts (all-rights-reserved); [`scripts/`](scripts) — the
+  gate and environment setup; and the top-level docs ([`README.md`](README.md), this file, the licenses).
 
 ## Fork-and-freeze, applied lazily
 
@@ -60,8 +74,8 @@ nothing; import couples fates.
 - **Theory:** `theory/` imports only `Theory.*`/`Foundation.*`; references no paper.
 - **Foundation:** `foundation/` imports only `Foundation.*` (+ mathlib).
 
-Build: `cd formal && lake build Foundation Paper1 Theory` (green). `lake build` alone builds `Foundation`
-(fast, dependency-free, mathlib not triggered).
+Build: `cd lake && lake build Foundation Paper1 Theory Paper2` (green). `lake build` alone builds
+`Foundation` (fast, dependency-free, mathlib not triggered).
 
 ## mathlib destiny of `foundation/`
 
