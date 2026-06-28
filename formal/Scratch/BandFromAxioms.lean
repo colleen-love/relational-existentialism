@@ -54,7 +54,7 @@ so the coincidence holds on it *without* the bet (`quarterMul_coincidence_from_a
   at the band level by `rotatingBand_sustained` (the rotating coherences in the seam are sustained,
   i.e. protected). The bridge between the ℝ attention model and the ℂ phase channel stays the
   standing `[open]` functor — discharged here only at witness level.
-* `[open]` (unchanged from `03.9`/`03.15`): the general CPTP peripheral structure theorem (that an
+* `[open]` (unchanged from `03.8`/`03.9`): the general CPTP peripheral structure theorem (that an
   arbitrary primitive `Φ_c` places its modulus-1 spectrum into a commutative decoherence-free subalgebra
   — `SpectralDecay`/`PeripheralAlgebra`'s narrated gap), and the full `L = −i[H,·] + D` split.
 

@@ -1,10 +1,11 @@
 # `agda/` — the coinductive ν-layer
 
-Layer 5: a **second proof assistant**. The [`formal/`](../formal/) Lean development mechanizes the
+A **parallel proof assistant**, not part of [paper one](../docs/spec/paper-one.md). The
+[`formal/`](../formal/) Lean development mechanizes the
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom Agda is cleanest for, and the
-one that theorem [3.2](../docs/spec/03-theorems.md) (the "we") and definition [D1](../docs/spec/02-axioms.md)
+one that theorem [3.2](../docs/spec/03.2-lived-identity.md) (the "we") and definition [D1](../docs/spec/02-axioms.md)
 (the looped self) were reaching for all along. Here `≈` is not the greatest *post*-fixed
 point of a lattice operator but the **final coalgebra** itself: a proof of `x ≈ y` is an
 infinite, productive agreement, and the coinduction principle is one guarded definition
@@ -13,17 +14,17 @@ rather than a call to `le_gfp`.
 Two modules, both from scratch over only the standard library:
 [`RelExist/Coinductive.agda`](RelExist/Coinductive.agda) — the ν-layer proper — and
 [`RelExist/Sparsity.agda`](RelExist/Sparsity.agda) — the **topological** form of the
-sparsity dichotomy ([spec 03.7](../docs/spec/03.7-sparsity.md), step 4).
+sparsity dichotomy ([spec 03.7](../docs/archive/03.7-sparsity.md), step 4).
 
 ## Status — `RelExist.Coinductive` (the ν-layer)
 
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
 | a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../docs/spec/00-doctrine.md) | ✅ defined (coinductive record) |
-| **3.2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [3.2](../docs/spec/03-theorems.md) | ✅ defined (coinductive record) |
-| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [3.2](../docs/spec/03-theorems.md) | ✅ proved (copattern corecursion) |
-| **shared world** `𝔼 := D/≈` | `SharedWorld` | [3.2](../docs/spec/03-theorems.md) | ✅ defined (`Setoid`) |
-| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [3.2](../docs/spec/03-theorems.md) | ✅ proved (one guarded definition) |
+| **3.2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [3.2](../docs/spec/03.2-lived-identity.md) | ✅ defined (coinductive record) |
+| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [3.2](../docs/spec/03.2-lived-identity.md) | ✅ proved (copattern corecursion) |
+| **shared world** `𝔼 := D/≈` | `SharedWorld` | [3.2](../docs/spec/03.2-lived-identity.md) | ✅ defined (`Setoid`) |
+| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [3.2](../docs/spec/03.2-lived-identity.md) | ✅ proved (one guarded definition) |
 | **observational equality** `≅` (the outside view) | `_≅_` | [02 A2](../docs/spec/02-axioms.md), [03.5](../docs/spec/03.5-decoherence.md) | ✅ defined (same observation stream) |
 | **deterministic collapse** `≈ ⟺ ≅` (the *boundary* case) | `≈⇒≅` / `≅⇒≈` | [03.5](../docs/spec/03.5-decoherence.md) | ✅ proved — a clockwork has *no surplus*; the gap is `RelExist.Inversion` below |
 
@@ -43,10 +44,10 @@ choice as Lean's `Scratch/Identity.lean`, so both proof assistants prove the fir
 
 ## Status — `RelExist.Sparsity` (topological sparsity, step 4)
 
-The spec's [Conjecture 3.7.3](../docs/spec/03.7-sparsity.md#34-the-conjecture) asks
+The spec's [Conjecture 3.7.3](../docs/archive/03.7-sparsity.md#34-the-conjecture) asks
 for the *infinite-state* form of "selves are rare": that the carrier of selves `Stab` is
 **nowhere dense** in the space of states under "the natural topology on states `I → D`."
-[the proof-strategy step](../docs/spec/03.7-sparsity.md#proof-strategy-for-mechanization)
+[the proof-strategy step](../docs/archive/03.7-sparsity.md#proof-strategy-for-mechanization)
 names Agda's ν-layer as the host. States are **behaviours in the final coalgebra**; the
 natural topology is the **cylinder topology** (basic opens are finite-prefix determined);
 the looped selves (D1) are exactly the *constant* behaviours `repeat a`.

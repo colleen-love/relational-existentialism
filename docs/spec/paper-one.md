@@ -27,7 +27,8 @@ greatest fixed point of the self-relating map — *relating produces an eigenfor
 itself is the greatest bisimulation `≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are
 your lived relating, not a bare carrier beneath it.
 
-→ detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md).
+→ detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md),
+[`03.2-lived-identity.md`](03.2-lived-identity.md).
 
 ## 2. Knowing is the σ-move: a lossy projection, leaving a remainder `[proved]`
 
@@ -70,8 +71,8 @@ monovariant: coherence is antitone along the orbit and tends to zero off the fix
 knowing — an idempotent conditional expectation onto the seam subalgebra
 (`KnowingFromArrow.arrow_limit_is_knowing`, `limit_is_seam_CE`, `Scratch/KnowingFromArrow.lean`).
 
-→ detail: [`03.8-time-flow.md`](03.8-time-flow.md),
-[`03.10-knowing-from-arrow.md`](03.10-knowing-from-arrow.md).
+→ detail: [`03.6-time-flow.md`](03.6-time-flow.md),
+[`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md).
 
 ## 5. The conserved remainder is exactly energy `[proved]`
 
@@ -94,8 +95,8 @@ channel is contractive (attention never amplifies) and nondegenerate, the alignm
 phase-blind — it covers the energy band exactly as it covers the known record
 (`BandFromAxioms.seam_energy_sustained`).
 
-→ detail: [`03.9-space-energy.md`](03.9-space-energy.md),
-[`03.15-band-coincidence.md`](03.15-band-coincidence.md).
+→ detail: [`03.8-space-energy.md`](03.8-space-energy.md),
+[`03.9-band-coincidence.md`](03.9-band-coincidence.md).
 
 ## 6. The headline
 
@@ -122,7 +123,7 @@ Three frontiers stay open, stated plainly rather than buried:
    coincidence on the finite-dim ℂ witness, not in general.
 3. **C1 — that the self is `Peri(Φ_c)`.** The coincidence reads the seam as A3's "decoherence-free
    subalgebra" gloss. This is A3 *taken literally*, asserted — **not a fourth axiom**, but a `[reading]`
-   of A3, not a derivation of it (see [`03.15`](03.15-band-coincidence.md) postscript).
+   of A3, not a derivation of it (see [`03.9`](03.9-band-coincidence.md) postscript).
 
 And three standing **readings** — identifications the development asserts but does not prove: *flow =
 physical time* (§4), *the conserved modulus-1 band = energy* (§5), and *`Φ_c` = the actual decohering
@@ -140,4 +141,4 @@ says one thing and shows its work.
 ---
 
 → Foundation: [`00-doctrine.md`](00-doctrine.md) · [`01-signature.md`](01-signature.md) ·
-[`02-axioms.md`](02-axioms.md). Provenance: [`05-provenance.md`](05-provenance.md).
+[`02-axioms.md`](02-axioms.md). Provenance: [`04-provenance.md`](04-provenance.md).
