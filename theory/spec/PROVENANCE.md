@@ -4,7 +4,11 @@
 references no paper, and is the only root that moves freely.
 
 - **New here (no fork):** `Theory.ModularFlow` (modular A1), `Theory.MutualCoupling` (generative A3),
-  `Theory.Priority` (A2-priority / no-bare-carrier). These are already *not* paper one.
+  `Theory.Priority` (A2-priority / no-bare-carrier), `Theory.OneGenerator` (handoff XV — the open-system
+  capstone: assembles the GKLS generator `𝓛 = -i[(1/β)K,·] + 𝒟` from the modular `K` (state) and paper one's
+  dissipator `𝒟` (arrow), and proves they are **one generator at equilibrium** via the KMS bridge and the
+  preferred-basis Schur-commutation; consumes `Theory.ModularFlow` and `Theory.RotatingSpectrum`). These are
+  already *not* paper one.
 - **Forked from `paper-1/` on demand at `fe935a6`** (genuine second consumer = the frontier modules above):
   `Theory.We` (for `Priority`), and `Theory.{RotatingSpectrum,BandCoincidence,BandFromAxioms}` (for
   `MutualCoupling`). Frozen copies of paper-1's `Scratch.{We,RotatingSpectrum,BandCoincidence,BandFromAxioms}`,
