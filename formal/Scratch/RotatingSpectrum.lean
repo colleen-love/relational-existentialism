@@ -316,6 +316,107 @@ theorem energy_arrow_spectrum :
       ∧ (Complex.log (quarterMul 0 2)).re < 0 :=
   ⟨energy_conserved_generator, frequency_nonzero, arrow_negative_generator⟩
 
+/-! ### The single generator as one object — arrow = `Re`, energy = `Im`
+
+The spec-VI **collapse**: rather than two stories (a dissipative arrow and a conserved energy), there is
+*one* generator `L = log μ` whose real and imaginary parts are the arrow and the energy. `genReal =
+Re(log μ) = log‖μ‖ ≤ 0` is the per-step decay rate; `genImag = Im(log μ) = arg μ` is the frequency. The
+iterate-magnitude law `‖Φ^n M i j‖ = exp(n · genReal) · ‖M i j‖` makes the dichotomy **exact**:
+`genReal < 0` is the decaying arrow (clause A); `genReal = 0` is *exact* magnitude conservation — clause
+B's `Peri`, not a positive floor — and on that band the generator is purely imaginary, so **energy is its
+imaginary spectrum** (`genImag` on `ker genReal`), the standard energy-as-spectrum-of-the-unitary-generator,
+not an `i^n` analogy. This is what lets energy descend from the *single* time reading: arrow and energy are
+`Re` and `Im` of `log Φ_c`. -/
+
+/-- **The generator's real part** — the per-step decay rate `Re(log μ) = log‖μ‖ ≤ 0`. The dissipative
+(arrow) half of the single generator `log μ`. -/
+noncomputable def genReal (μ : A → A → ℂ) (i j : A) : ℝ := (Complex.log (μ i j)).re
+
+/-- **The generator's imaginary part** — the per-step frequency `Im(log μ) = arg μ`. The unitary
+(energy) half of the single generator `log μ`. -/
+noncomputable def genImag (μ : A → A → ℂ) (i j : A) : ℝ := (Complex.log (μ i j)).im
+
+/-- The decay rate **is** the log-modulus: `genReal μ i j = log‖μ i j‖`. -/
+lemma genReal_eq_log_norm (μ : A → A → ℂ) (i j : A) :
+    genReal μ i j = Real.log ‖μ i j‖ := by
+  rw [genReal, Complex.log_re, ← Complex.norm_eq_abs]
+
+/-- **The iterate-magnitude law, from the generator.** For a live edge (`μ i j ≠ 0`), the `(i,j)`
+coherence's magnitude after `n` closures is `exp(n · genReal) · ‖M i j‖` — geometric in `n` at the rate
+fixed by the generator's real part. The one law behind both bands: the *sign* of `genReal` decides arrow
+vs. conservation. -/
+theorem schur_iterate_norm_exp (μ : A → A → ℂ) (M : Matrix A A ℂ) (n : ℕ) (i j : A)
+    (h : μ i j ≠ 0) :
+    ‖(schur μ)^[n] M i j‖ = Real.exp (n * genReal μ i j) * ‖M i j‖ := by
+  have hpos : 0 < ‖μ i j‖ := norm_pos_iff.mpr h
+  rw [schur_transient_norm, genReal_eq_log_norm, ← Real.log_pow,
+      Real.exp_log (pow_pos hpos n)]
+
+/-- **Exact conservation ⟺ vanishing decay rate.** On a live edge the magnitude is conserved iff the
+generator's real part is exactly zero: `genReal = 0 ↔ ‖μ‖ = 1`. This is clause B's `Peri` read through the
+generator — *exact* conservation (`genReal = 0`), distinct from the operational positive-floor of
+`SeamForcing.self_cannot_fully_decohere` (which only forbids reaching `0`). -/
+theorem genReal_eq_zero_iff (μ : A → A → ℂ) (i j : A) (h : μ i j ≠ 0) :
+    genReal μ i j = 0 ↔ ‖μ i j‖ = 1 := by
+  rw [genReal_eq_log_norm]
+  constructor
+  · intro h0
+    have hpos : 0 < ‖μ i j‖ := norm_pos_iff.mpr h
+    have hx := Real.exp_log hpos
+    rw [h0, Real.exp_zero] at hx
+    exact hx.symm
+  · intro h1; rw [h1, Real.log_one]
+
+/-- **Arrow ⟺ negative decay rate.** On a live edge the magnitude decays (`‖μ‖ < 1`) iff the generator's
+real part is negative. The dissipative band — clause A. -/
+theorem genReal_neg_iff (μ : A → A → ℂ) (i j : A) (h : μ i j ≠ 0) :
+    genReal μ i j < 0 ↔ ‖μ i j‖ < 1 := by
+  rw [genReal_eq_log_norm]
+  constructor
+  · intro hlt
+    by_contra hge
+    push_neg at hge
+    exact absurd (Real.log_nonneg hge) (not_le.mpr hlt)
+  · intro hlt
+    exact Real.log_neg (norm_pos_iff.mpr h) hlt
+
+/-- **Clause B from the generator: `genReal = 0` ⟹ exact magnitude conservation at every depth.** -/
+theorem conserved_of_genReal_zero (μ : A → A → ℂ) (M : Matrix A A ℂ) (i j : A)
+    (h : μ i j ≠ 0) (hz : genReal μ i j = 0) (n : ℕ) :
+    ‖(schur μ)^[n] M i j‖ = ‖M i j‖ :=
+  schur_sustained μ M n i j ((genReal_eq_zero_iff μ i j h).mp hz)
+
+/-- **Clause A from the generator: `genReal < 0` ⟹ the magnitude decays to `0`.** -/
+theorem arrow_of_genReal_neg (μ : A → A → ℂ) (M : Matrix A A ℂ) (i j : A)
+    (h : μ i j ≠ 0) (hneg : genReal μ i j < 0) :
+    Tendsto (fun n => ‖(schur μ)^[n] M i j‖) atTop (𝓝 0) :=
+  schur_transient_tendsto μ M i j ((genReal_neg_iff μ i j h).mp hneg)
+
+/-- **The energy band, as a constructed spectral object.** The off-diagonal edges where the generator's
+real part vanishes exactly — `ker(genReal)` off the diagonal. On the witness this is exactly the rotating
+band / `decoherenceFreeSeam` (proved in `BandFromAxioms`). -/
+def energyEdge (μ : A → A → ℂ) (i j : A) : Prop := genReal μ i j = 0 ∧ i ≠ j
+
+/-- **Energy** — the imaginary spectrum of the single generator, on the band where it is purely unitary
+(`genReal = 0`). Not a label on `i^n`: `Im(log Φ_c) = arg μ`, the standard energy-as-spectrum of the
+generator of unitary evolution. -/
+noncomputable def energy (μ : A → A → ℂ) (i j : A) : ℝ := genImag μ i j
+
+/-- **The witness is everywhere live.** Every entry of `quarterMul` is nonzero (the diagonal `1`, the
+rotating `±i`, the transient `½` and phase-locked `±i·½`), so the generator `log(quarterMul i j)` is
+well-behaved on every edge. -/
+theorem quarterMul_ne_zero (i j : Fin 3) : quarterMul i j ≠ 0 := by
+  fin_cases i <;> fin_cases j <;> simp [quarterMul, Complex.ext_iff]
+
+/-- **The rotating edge is an energy edge**, with energy `π/2`: `genReal = 0` (conserved) and the energy
+`genImag = arg i = π/2` is a genuine frequency. The `(0,1)` band inhabits `energyEdge`. -/
+theorem quarterMul_energyEdge_01 : energyEdge quarterMul 0 1 :=
+  ⟨energy_conserved_generator, by decide⟩
+
+/-- **The witness energy is `π/2`** — the imaginary spectrum of the generator on the rotating band. -/
+theorem energy_quarterMul_01 : energy quarterMul 0 1 = Real.pi / 2 := by
+  rw [energy, genImag, quarterMul_01, Complex.log_im, Complex.arg_I]
+
 /-! ### Two further energy readings (`[reading]` over the witness)
 
 Beyond the modulus/generator split, the rotating band supports two more readings of energy, each laid
