@@ -1,7 +1,11 @@
-# docs/archive — quarantined spec pages (later papers)
+# archive/spec — quarantined spec pages (later papers)
+
+> **Note.** This directory is quarantined supporting material (future-paper scaffolding). Cross-links here
+> are historical and may not resolve after the six-root reorg; they are intentionally unmaintained. For the
+> current layout see [`../../STRUCTURE.md`](../../STRUCTURE.md).
 
 These specification pages are **not** part of paper one (see
-[`../spec/paper-one.md`](../spec/paper-one.md)). They were moved here by the same rule that scoped the
+[`../../paper-1/spec/paper-one.md`](../../paper-1/spec/paper-one.md)). They were moved here by the same rule that scoped the
 Lean: *keep what the headline needs; archive the complement.* They are **kept, not deleted** — each is
 the prose of a later paper.
 
