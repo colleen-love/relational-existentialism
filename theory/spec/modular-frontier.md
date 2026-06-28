@@ -1,7 +1,7 @@
 # The modular frontier — genuinely intrinsic time (handoff X, Stage 3)
 
 > **Status:** scoping and build-order, **not a mechanization**. The finite-dimensional core (Stages 1–2) is
-> built and `sorry`-free in [`formal/Scratch/ModularFlow.lean`](../../formal/Scratch/ModularFlow.lean); this
+> built and `sorry`-free in [`formal/Scratch/ModularFlow.lean`](../formal/Theory/ModularFlow.lean); this
 > page maps the deep end it deliberately stops short of. Paper one's headline is untouched — this is
 > foundation work for the sequels. **In-repo only; no mathlib PRs** (those are gated on finalizing here and on
 > the pending traced-SMC consolidation).
@@ -54,7 +54,7 @@ is the **modular operator of a non-tracial state on `R`** (e.g. an infinite tens
 
 ## mathlib build-order implied by the audit
 
-From [`docs/notes/modular-mathlib-audit.md`](../notes/modular-mathlib-audit.md), the dependency chain
+From [`docs/notes/modular-mathlib-audit.md`](modular-mathlib-audit.md), the dependency chain
 mathlib needs (each gating the next), none of which currently exists:
 
 1. **States and GNS** on C\*-algebras (positive linear functionals → `H_φ`, `π_φ`, `Ω`). *Foundational; unblocks

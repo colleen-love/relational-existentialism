@@ -53,7 +53,7 @@ rederivation vs synthesis, and the open frontiers in one place.
 
 The repository was scoped to paper one by a mechanical rule: *keep the transitive import-closure of the
 headline theorems; archive the complement.* The complement — kept, not deleted — is in
-[`docs/archive/`](../archive) and [`formal/Archive/`](../../formal/Archive), organized by the paper it
+[`docs/archive/`](../../archive/spec) and [`formal/Archive/`](../../archive/formal/Archive), organized by the paper it
 seeds:
 
 - **paper two** — the conservation law (`undifferentiated = knowing + energy`, the internal direct sum),

@@ -61,7 +61,7 @@ self spends down, finiteness imposed from outside. That quietly smuggled in a
 exactly what relation-primacy denies. This section replaces it. Attention is a
 **consequence of the relational structure**: co-directed, generative, and finite *by
 constitution* rather than by allowance. Everything below is mechanized in
-[`formal/Archive/Scratch/Attention.lean`](../../formal/Archive/Scratch/Attention.lean).
+[`formal/Archive/Scratch/Attention.lean`](../../archive/formal/Archive/Scratch/Attention.lean).
 
 ### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
@@ -137,7 +137,7 @@ The old budget model is not *wrong*; it is the **uniform, conserved, depleting**
 — attention treated as one conserved scalar drawn down at a fixed per-return cost.
 There, "how many times can I return to this one relation" collapses to `N = ⌊β/λ⌋` and
 the eigenform condition collapses to a threshold `d·λ ≤ β`. That regime is the subject of
-[`formal/Archive/RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean) — though the file works with an
+[`formal/Archive/RelExist/Loop.lean`](../../archive/formal/Archive/RelExist/Loop.lean) — though the file works with an
 **abstract** self-relation endomap, and identifying *its* `σ` and depth `d` with `Φ_c` and the
 *convergence depth* of the orbit `Φ_c^{\,n}` is a **modeling reading, not mechanized**. The depth
 floor `d ≥ 2` — a self needs genuine return, not a one-off — is the posit that keeps selfhood rare;
@@ -177,7 +177,7 @@ domain has:
   mental-health framings, which have copying but no entanglement);
 - preserving the coupling and capacity `α` (the co-directed attention operator `Φ_c`
   of §1.3) → a model that **carries attention**, in which the sparsity statement of
-  [03.7](../archive/03.7-sparsity.md) can even be asked.
+  [03.7](../../archive/spec/03.7-sparsity.md) can even be asked.
 
 The **firewall theorem** previewed in the plan lives exactly here: because the
 cartesian-only domains have a natural `Δ` and the compact-closed fragment provably

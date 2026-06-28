@@ -25,7 +25,7 @@ This page is the single linear walk through that result: each step is tagged wit
 the Lean theorem that carries it. A referee should be able to see the arc *and* its boundary in one read.
 The supporting development lives in [`formal/`](../../formal) (libraries `RelExist` — the
 dependency-free core — and `Scratch` — the mathlib-backed half); everything not load-bearing for this
-result has been moved to [`Archive/`](../../formal/Archive) and [`docs/archive/`](../archive), referenced
+result has been moved to [`Archive/`](../../archive/formal/Archive) and [`docs/archive/`](../../archive/spec), referenced
 below as future work, never as a load-bearing citation.
 
 **Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, 0 ax]` — and
@@ -176,7 +176,7 @@ is now `[proved]`, structural and exact — not a floor, not a reading.
 Step two's obstruction was an *artifact of the 0/1 gate*, not of self-inclusion. Read A3 at the strength
 of its text — the self is the **greatest sustainable field** `Peri(Φ_c)` under a *phase-bearing* `Φ_c`
 (`schur μ`: modulus-contracting, phase-free), not the strict fixed point `νΦ_c` of a phaseless gate
-([`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)). The obstruction is then
+([`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)). The obstruction is then
 **phase-blind**: un-attendability forces only *modulus* (un-damped, `‖μ‖ = 1`), and under a
 **nondegenerate** map (`μ = 1 ↔ i = j`: only the diagonal classical record is held) an un-damped
 off-diagonal edge has nowhere to be but the **rotating** band (`undamped_offdiag_rotates`). So the
@@ -222,7 +222,7 @@ Three frontiers stay open, stated plainly rather than buried:
    coincidence on the finite-dim ℂ witness, not in general.
 3. **C1 — the self is `Peri(Φ_c)` — is now A3's *definition*, not a fourth posit.** Reading A3 at the
    strength of its text (the self is the *greatest sustainable field* under a **phase-bearing** `Φ_c`,
-   [`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)) makes `self := Peri(Φ_c)` the
+   [`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)) makes `self := Peri(Φ_c)` the
    definition, with the rotating (energy) band's membership a *theorem* (`rotating_mem_peri`). The earlier
    "fourth-posit" worry was an artifact of formalizing A3 as the phaseless strict `νΦ_c`. What remains
    `[reading]` is *not* C1 but the two modeling inputs of §5 step three — the **Lindblad** reading and
@@ -234,7 +234,7 @@ dissipative part (`genReal < 0`) and energy its unitary spectrum (`genImag` on `
 conserved band = energy" follows by the definition of energy as the conserved charge of time-translation
 (Noether/Stone), not by a fresh analogy. The **unifier** — *operational seam = energy band* — was the
 standing open joint; the phase-bearing reading of A3 (§5 step three,
-[`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)) **closes it**, and the path there
+[`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)) **closes it**, and the path there
 is instructive. *Step two* (`SeamConserved`) proved the operational seam *is* the operationally-conserved
 band, exactly and structurally (`offdiag_conserved_iff_seam`, seam from attention with no `‖μ‖`), but its
 conserved edges were *fixed* (`μ = 1`) because the 0/1 attention gate carries no phase
@@ -253,7 +253,7 @@ band, whose imaginary spectrum is energy.
 The conservation law as a *whole* (`undifferentiated = knowing + energy`, the internal direct sum), the
 cosmos / distributed-self readings, the sparsity of selfhood, and the functorial-semantics layer are all
 mechanized but belong to later papers; they are archived (see
-[`formal/Archive/README.md`](../../formal/Archive/README.md)) and **not** load-bearing here. This paper
+[`formal/Archive/README.md`](../../archive/formal/Archive/README.md)) and **not** load-bearing here. This paper
 says one thing and shows its work.
 
 ---

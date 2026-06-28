@@ -6,14 +6,23 @@ The repository proves, and shows its work for, **one result**:
 
 > *The arrow of time is the orientation active self-relating cannot escape; and the conserved remainder of self-relating — what never becomes known — is exactly energy.*
 
-- **Start here — the result:** [`docs/spec/paper-one.md`](docs/spec/paper-one.md), a single linear walk through it, each step status-tagged and named by its Lean theorem.
-- **The view, in plain language:** [`docs/relational-existentialism.md`](docs/relational-existentialism.md)
-- **One step toward the formalization (plain words, structures named):** [`docs/relational-existentialism-toward-formalization.md`](docs/relational-existentialism-toward-formalization.md)
-- **The formal spec (doctrine, signature, axioms, theorems):** [`docs/spec/`](docs/spec/) — foundation (`00`/`01`/`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`docs/spec/README.md`](docs/spec/README.md) for the reading order.
-- **The mechanized development (Lean 4):** [`formal/`](formal/) — machine-checked and `sorry`-free, in two libraries: `RelExist` (the dependency-free core) and `Scratch` (the mathlib-backed half). Both build clean; the headline footprints sit at the corpus norm, with the seam depending on no axioms.
+- **Start here — the result:** [`paper-1/spec/paper-one.md`](paper-1/spec/paper-one.md), a single linear walk through it, each step status-tagged and named by its Lean theorem.
+- **The view, in plain language:** [`paper-1/spec/relational-existentialism.md`](paper-1/spec/relational-existentialism.md)
+- **One step toward the formalization (plain words, structures named):** [`paper-1/spec/relational-existentialism-toward-formalization.md`](paper-1/spec/relational-existentialism-toward-formalization.md)
+- **The formal spec (doctrine, signature, axioms, theorems):** [`paper-1/spec/`](paper-1/spec/) — foundation (`00`/`01`/`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`paper-1/spec/README.md`](paper-1/spec/README.md) for the reading order.
+- **The mechanized development (Lean 4):** machine-checked and `sorry`-free. Paper one's closure lives in [`paper-1/formal/`](paper-1/formal/) (`Scratch.*`, `RelExist.*`); shared infrastructure in [`foundation/formal/`](foundation/formal/) (`Foundation.Traced`); the living frontier in [`theory/formal/`](theory/formal/) (`Theory.*`). All build clean; the headline footprints sit at the corpus norm, with the seam depending on no axioms.
 - **The coinductive ν-layer (Agda):** [`agda/`](agda/) — a parallel `--safe --guardedness` mechanization of the identity/`ν` material (lived identity `≈`, theorem 3.2, with native coinduction); not part of paper one.
 
-The supporting development — the conservation law and cosmos readings (paper two), the sparsity of selfhood (paper three), the functorial-semantics layer, and the route-1 scaffolding — is **kept, not foregrounded**, under [`docs/archive/`](docs/archive) and [`formal/Archive/`](formal/Archive), referenced as future work rather than as the headline.
+## Layout — six roots
+
+The repository is organized into six roots, each holding its own Lean (`formal/`) and prose (`spec/`); see [`STRUCTURE.md`](STRUCTURE.md) for the full discipline and gates.
+
+- [`foundation/`](foundation) — stable, mathlib-bound shared infrastructure (the traced-SMC typeclass). Imported by everything; destined for an eventual mathlib PR.
+- [`theory/`](theory) — the living, theory-specific frontier already beyond paper one (the modular A1, generative A3, A2-priority). The only root that moves freely.
+- [`paper-1/`](paper-1) — frozen, self-contained: paper one's spec + its kept formal closure. Imports only itself + `foundation/`.
+- [`paper-2/`](paper-2) — the modular self-relation paper (scoped); forked from `theory/` once shipped.
+- [`scratch/`](scratch) — live staging.
+- [`archive/`](archive) — the supporting development kept, not foregrounded: the conservation law and cosmos readings (paper two), the sparsity of selfhood (paper three), the functorial-semantics layer, and the route-1 scaffolding — referenced as future work rather than as the headline.
 
 ## Licensing
 
@@ -29,7 +38,7 @@ This covers everything that is software: scripts, proof-assistant developments (
 
 All **prose, philosophy, and other written/creative material** is licensed under CC BY 4.0. The full text is in [`LICENSE-docs`](LICENSE-docs).
 
-This covers everything in the [`/docs`](docs) and `/writing` directories — the philosophy itself, explanatory essays, notes, diagrams-as-exposition, and the formalization write-up — plus any prose documentation elsewhere in the repository (such as this `README.md`).
+This covers everything in the per-root `spec/` directories (and any `/writing`) — the philosophy itself, explanatory essays, notes, diagrams-as-exposition, and the formalization write-up — plus any prose documentation elsewhere in the repository (such as this `README.md`).
 
 Under CC BY 4.0 you are free to share and adapt this material for any purpose, including commercially, provided you give appropriate credit, link to the license, and indicate if changes were made.
 
@@ -38,7 +47,7 @@ Under CC BY 4.0 you are free to share and adapt this material for any purpose, i
 | Material | License | File |
 | --- | --- | --- |
 | Source code (anywhere in the tree) | Apache 2.0 | [`LICENSE`](LICENSE) |
-| Prose / philosophy / docs in `/docs` and `/writing` | CC BY 4.0 | [`LICENSE-docs`](LICENSE-docs) |
+| Prose / philosophy / docs in per-root `spec/` and `/writing` | CC BY 4.0 | [`LICENSE-docs`](LICENSE-docs) |
 | This README and other prose docs | CC BY 4.0 | [`LICENSE-docs`](LICENSE-docs) |
 | Final manuscripts in `/papers` | All rights reserved | [`papers/README.md`](papers/README.md) |
 
