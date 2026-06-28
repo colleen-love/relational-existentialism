@@ -99,8 +99,19 @@ each off-diagonal coherence falls in one of two bands by `‖μ i j‖`:
 - **conserved / rotating** (`‖μ i j‖ = 1, μ i j ≠ 1`) — its magnitude is **exactly sustained** at every
   depth; it rotates forever and never collapses into the known
   (`RotatingSpectrum.schur_sustained`, `phaseChannel_eigen`; `BandFromAxioms.conservedBand_sustained`).
-  This sustained, never-known remainder **is energy** `[reading]` — the conserved oscillating charge,
-  `energy_arrow_spectrum` reading it off one generator's spectrum.
+  This sustained, never-known remainder **is energy** — and energy here is **not a second analogy**. The
+  dynamics carries one generator `L = log Φ_c`, split entrywise into `genReal = Re(log μ) = log‖μ‖` (the
+  decay rate) and `genImag = Im(log μ) = arg μ` (the frequency). The single iterate-magnitude law
+  `‖Φ^n M i j‖ = exp(n · genReal)·‖M i j‖` (`RotatingSpectrum.schur_iterate_norm_exp`) makes the split
+  **exact**: the **arrow** is `genReal < 0` (decay, clause A; `arrow_of_genReal_neg`), the **conserved
+  band** is `genReal = 0` — magnitude held *exactly*, not merely floored
+  (`conserved_of_genReal_zero`, `genReal_eq_zero_iff`) — and on that band `L` is purely imaginary, so
+  **energy is its imaginary spectrum** `energy := genImag` on `ker(genReal)` (`energyEdge`, `energy`;
+  `energy_quarterMul_01 = π/2`). Arrow and energy are the real and imaginary parts of *one* generator, so
+  energy is **downstream of the single time reading** (flow = the generator of time-translation), not an
+  independent posit — its name is Noether/Stone, the conserved charge of the unitary part, not the `i^n`
+  winding. On the witness the generator band is exactly the rotating/energy band
+  (`BandFromAxioms.energyBand_eq_rotating_quarterMul`).
 
 That the conserved remainder coincides with the rotating/energy band is **A3 read at the strength of its
 own text** — *not* a fourth posit. A3 names the self the *"greatest sustainable field"*
@@ -115,6 +126,16 @@ phase-blind — it covers the energy band exactly as the known record (`BandFrom
 `νΦ_c` — but C1 is A3's own gloss, *already* an axiom (see [Honest scope](#honest-scope) ¶3): three axioms
 said in full, not a fourth. The further identification of this conserved band with **energy** is itself a
 standing `[reading]` (below).
+
+**What clause B rests on — and what it does not.** Clause B rests on **A3-read-as-`Peri`** (exact
+magnitude conservation, `genReal = 0`) plus the generator split — **not** on the operational seam.
+`band_coincidence` relates the *spectral* seam `decoherenceFreeSeam` (defined by `‖μ‖ = 1`) to the
+rotating band; it does **not** connect the *operational*, un-attendable seam of
+`SeamForcing.self_cannot_fully_decohere` to the energy band. Those are two kinds of "conserved":
+`Peri`/`genReal = 0` is **exact** (the magnitude is held), while the operational seam gives only a
+**positive floor** (the coherence never fully vanishes — a clause-A fact, the arrow never completing).
+The identification *operational seam = energy band* is the **open unifier**, stated and not proved; the
+energy clause does not borrow the seam's `[proved, 0 ax]` weight.
 
 → detail: [`03.8-space-energy.md`](03.8-space-energy.md),
 [`03.9-band-coincidence.md`](03.9-band-coincidence.md).
@@ -146,10 +167,16 @@ Three frontiers stay open, stated plainly rather than buried:
    subalgebra" gloss. This is A3 *taken literally*, asserted — **not a fourth axiom**, but a `[reading]`
    of A3, not a derivation of it (see [`03.9`](03.9-band-coincidence.md) postscript).
 
-And three standing **readings** — identifications the development asserts but does not prove: *flow =
-physical time* (§4), *the conserved modulus-1 band = energy* (§5), and *`Φ_c` = the actual decohering
-physics*. Strip the readings and what remains is the proved skeleton: a lossy self-relating projection
-forces a structural remainder, orders an irreversible arrow, and conserves exactly its rotating band.
+And **one standing reading-cluster** — *flow = physical time / `Φ_c` = the actual decohering physics*. With
+it, **energy is not a second reading**: the generator of the flow is the Hamiltonian, the arrow is its
+dissipative part (`genReal < 0`) and energy its unitary spectrum (`genImag` on `ker genReal`), so "the
+conserved band = energy" follows by the definition of energy as the conserved charge of time-translation
+(Noether/Stone), not by a fresh analogy. What stays genuinely open beside it is the **unifier** —
+*operational seam = energy band* — relating the un-attendable seam (`SeamForcing`, a positive floor) to the
+exactly-conserved generator band (`genReal = 0`); these are two senses of "conserved," kept apart. Strip
+the reading and what remains is the proved skeleton: a lossy self-relating projection forces a structural
+remainder, orders an irreversible arrow, and conserves exactly its rotating (`genReal = 0`) band, whose
+imaginary spectrum is energy.
 
 ## What is not in this paper
 

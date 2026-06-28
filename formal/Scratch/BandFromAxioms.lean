@@ -291,4 +291,47 @@ theorem seam_energy_sustained {μ : A → A → ℂ} (hnd : ∀ i j, μ i j = 1 
     ‖(schur μ)^[n] M i j‖ = ‖M i j‖ :=
   rotatingBand_sustained (seam_eq_rotating hnd ▸ hM) n i j
 
+/-! ## §5 The energy band as the generator's `ker(genReal)` — arrow and energy, one generator
+
+`RotatingSpectrum`'s `energyEdge μ := genReal μ i j = 0 ∧ i ≠ j` reads the energy band off the *single*
+generator `log μ` (its real part vanishing off the diagonal), rather than off the modulus directly. On the
+witness this coincides — edge for edge — with both the rotating band and the decoherence-free seam, so the
+"energy = conserved band" identification is now stated through the generator the arrow also lives in. The
+two senses of "conserved" stay distinct: `energyEdge`/`Peri` is *exact* (`genReal = 0`); the operational
+seam's `self_cannot_fully_decohere` is only a positive floor — kept apart deliberately. -/
+
+/-- **The generator-defined energy band is the rotating band, on the witness.** `genReal = 0` ⟺ `‖μ‖ = 1`
+(a live edge, `quarterMul_ne_zero`) and `i ≠ j` ⟺ `μ ≠ 1` (nondegeneracy), so the edge predicates agree. -/
+theorem energyEdge_iff_rotatingEdge_quarterMul (i j : Fin 3) :
+    energyEdge quarterMul i j ↔ rotatingEdge quarterMul i j := by
+  unfold energyEdge rotatingEdge
+  rw [genReal_eq_zero_iff quarterMul i j (quarterMul_ne_zero i j)]
+  constructor
+  · rintro ⟨h1, h2⟩
+    exact ⟨h1, fun he => h2 ((quarterMul_fixed_eq_diagonal i j).mp he)⟩
+  · rintro ⟨h1, h2⟩
+    exact ⟨h1, fun he => h2 ((quarterMul_fixed_eq_diagonal i j).mpr he)⟩
+
+/-- **The generator-defined energy band is the decoherence-free seam, on the witness.** `genReal = 0` ⟺
+`‖μ‖ = 1` collapses `energyEdge` onto `decoherenceFreeSeam = (‖μ‖ = 1 ∧ i ≠ j)` directly. -/
+theorem energyEdge_iff_decoherenceFreeSeam_quarterMul (i j : Fin 3) :
+    energyEdge quarterMul i j ↔ decoherenceFreeSeam quarterMul i j := by
+  unfold energyEdge decoherenceFreeSeam
+  rw [genReal_eq_zero_iff quarterMul i j (quarterMul_ne_zero i j)]
+
+/-- **`energyBand = rotatingBand` on the witness** — the generator's `ker(genReal)` off-diagonal block is
+exactly the rotating (energy) band. The energy reading, stated through the one generator the arrow lives
+in. -/
+theorem energyBand_eq_rotating_quarterMul :
+    bandOn (energyEdge quarterMul) = rotatingBand quarterMul :=
+  bandOn_congr energyEdge_iff_rotatingEdge_quarterMul
+
+/-- **`energyBand = seamBand (decoherenceFreeSeam)` on the witness** — the generator-defined energy band is
+A3's decoherence-free off-diagonal block. (This relates the *spectral* seam `decoherenceFreeSeam`, defined
+by `‖μ‖ = 1`, to the generator band; the **operational** seam of `SeamForcing` is a separate object — the
+open unifier — not this.) -/
+theorem energyBand_eq_seam_quarterMul :
+    bandOn (energyEdge quarterMul) = seamBand (decoherenceFreeSeam quarterMul) :=
+  bandOn_congr energyEdge_iff_decoherenceFreeSeam_quarterMul
+
 end RelExist.BandFromAxioms
