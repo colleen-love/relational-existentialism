@@ -1,7 +1,7 @@
 /-
 # The mirror that can't close — Lawvere's diagonal (theorem 3.3, σ-side)
 
-Mechanizes the *knowing* side of [3.3](../../docs/spec/03-theorems.md) and the cartesian
+Mechanizes the *knowing* side of [3.3](../../docs/spec/03.3-knowing-vs-feeling.md) and the cartesian
 "mirror that can't close" of [00 §0.4.2](../../docs/spec/00-doctrine.md): **Lawvere's
 fixed-point theorem** and its contrapositive. The whole content is the diagonal
 argument — `Type`-level, no mathlib — which is exactly the point: the obstruction is

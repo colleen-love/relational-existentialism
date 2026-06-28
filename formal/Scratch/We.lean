@@ -1,7 +1,7 @@
 /-
 # Lived identity `≈` and the shared world `𝔼` — theorem 3.2
 
-A faithful mechanization of [spec 3.2](../../docs/spec/03-theorems.md): the lived
+A faithful mechanization of [spec 3.2](../../docs/spec/03.2-lived-identity.md): the lived
 identity is the **greatest fixed point of a monotone operator on the complete
 lattice of relations** — i.e. the greatest bisimulation, `≈ := νΘ`. Concretely we use
 mathlib's `OrderHom.gfp` (Knaster–Tarski), which is exactly the `ν`-modality the spec

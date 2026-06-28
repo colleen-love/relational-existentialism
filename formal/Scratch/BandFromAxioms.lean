@@ -87,6 +87,73 @@ def Contractive (μ : A → A → ℂ) : Prop := ∀ i j, ‖μ i j‖ ≤ 1
 the self read as `Peri(Φ_c)` rather than the strict `νΦ_c`. -/
 def decoherenceFreeSeam (μ : A → A → ℂ) (i j : A) : Prop := ‖μ i j‖ = 1 ∧ i ≠ j
 
+/-! ## §0 A3's sustainable field `Peri(Φ_c)`, and the seam as its off-diagonal
+
+A3 names the self the **greatest sustainable field** — *"a self is an eigenform of the co-directed
+attention operator `Φ_c` … the carrier of selves being its greatest sustainable field."* Read literally,
+that field is `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, the forms the loop returns unchanged in magnitude —
+which **includes the rotating band** (`‖μ‖ = 1, μ ≠ 1`), not only the strict fixed band (`νΦ_c`, `μ = 1`).
+This section makes that precise: `Peri` *is* the conserved band, `decoherenceFreeSeam` is its off-diagonal
+part, and `νΦ_c` (the fixed band) is its `μ = 1` sub-band. So `decoherenceFreeSeam` is **A3's own self
+minus its diagonal record**, not a free definition — which is exactly why the band coincidence below
+*unfolds* A3's text rather than positing a fourth axiom. -/
+
+/-- **A3's sustainable field, entrywise.** `Peri μ M` holds when one closure of the loop returns `M`
+unchanged in magnitude at every entry: `‖schur μ M i j‖ = ‖M i j‖` for all `i, j`. This is A3's "greatest
+sustainable field" — the forms reproduced up to magnitude — read entrywise, the same reading under which
+`schur_sustained` / `conservedBand_sustained` already state sustainedness (so no choice of matrix norm is
+smuggled in). -/
+def Peri (μ : A → A → ℂ) (M : Matrix A A ℂ) : Prop := ∀ i j, ‖schur μ M i j‖ = ‖M i j‖
+
+/-- **A3's sustainable field is exactly the conserved band.** `M` is sustained (entrywise
+magnitude-preserved under one loop) iff every nonzero coherence sits on a modulus-one edge — i.e. iff
+`M ∈ conservedBand μ`. So `Peri`, A3's self, carries the rotating (energy) band *beside* the fixed (known)
+one; it is **not** the strict fixed point `νΦ_c` alone. -/
+theorem peri_iff_mem_conservedBand (μ : A → A → ℂ) (M : Matrix A A ℂ) :
+    Peri μ M ↔ M ∈ conservedBand μ := by
+  constructor
+  · intro h
+    simp only [conservedBand, mem_bandOn]
+    intro i j hcons
+    have hij := h i j
+    rw [schur_apply, norm_mul] at hij
+    rcases mul_left_eq_self₀.mp hij with h1 | h0
+    · exact absurd h1 hcons
+    · exact norm_eq_zero.mp h0
+  · intro hM i j
+    simp only [conservedBand, mem_bandOn] at hM
+    by_cases hc : ‖μ i j‖ = 1
+    · rw [schur_apply, norm_mul, hc, one_mul]
+    · rw [schur_apply, hM i j hc, mul_zero]
+
+/-- **The seam is the off-diagonal part of A3's sustainable field.** `decoherenceFreeSeam` selects exactly
+the *off-diagonal* edges of `Peri` (= `conservedBand`): the self read as `Peri(Φ_c)`, minus its diagonal
+(known) record. (`Iff.rfl`: `decoherenceFreeSeam` and `conservedEdge ∧ off-diagonal` are the same
+predicate.) -/
+theorem decoherenceFreeSeam_iff_offdiag_conserved (μ : A → A → ℂ) (i j : A) :
+    decoherenceFreeSeam μ i j ↔ (conservedEdge μ i j ∧ i ≠ j) := Iff.rfl
+
+/-- **`νΦ_c` is the `μ = 1` sub-band of A3's sustainable field.** The strict fixed band (the known /
+diagonal record) sits inside `Peri = conservedBand` as its non-rotating part: `fixedBand μ ≤
+conservedBand μ`. So A3's self is the sustainable field; `νΦ_c` is one half of it (knowing), the rotating
+(energy) band the other. -/
+theorem fixedBand_le_conservedBand (μ : A → A → ℂ) : fixedBand μ ≤ conservedBand μ :=
+  bandOn_mono fun i j h => by
+    have h' : μ i j = 1 := h
+    show ‖μ i j‖ = 1
+    rw [h', norm_one]
+
+/-- **The eigenoperator anchor.** A single off-diagonal coherence `Eunit i j` lies in A3's sustainable
+field iff its channel eigenvalue is a phase: `Peri μ (Eunit i j) ↔ ‖μ i j‖ = 1`. (The matrix unit is the
+eigen-operator with eigenvalue `μ i j`; it is sustained exactly when `‖μ i j‖ = 1`.) So the rotating
+(energy) edges are literally the off-diagonal eigen-directions A3 calls the self. -/
+theorem Eunit_peri_iff (μ : Fin 3 → Fin 3 → ℂ) (i j : Fin 3) :
+    Peri μ (Eunit i j) ↔ ‖μ i j‖ = 1 := by
+  rw [peri_iff_mem_conservedBand]
+  constructor
+  · intro hmem; by_contra hc; exact Eunit_not_mem_bandOn (P := conservedEdge μ) hc hmem
+  · intro hc; exact Eunit_mem_bandOn (P := conservedEdge μ) hc
+
 /-! ## §2 C2 — exhaustiveness: only the peripheral self persists
 
 The dynamical content (`SpectralDecay.spectral_decay`, entrywise `schur_transient_tendsto`): off the
@@ -141,25 +208,35 @@ theorem align_of_contractive {μ : A → A → ℂ} (hc : Contractive μ) :
   have hne : ‖μ i j‖ ≠ 1 := fun h => hns ⟨h, hij⟩
   exact lt_of_le_of_ne (hc i j) hne
 
-/-- **The seam band and the rotating band coincide — with no `H_align`.** Under nondegeneracy alone the
-decoherence-free off-diagonal block *is* the rotating band (`rotatingEdge_iff_decoherenceFree`). The
+/-- **The seam band and the rotating band coincide — A3 unfolded, not a fourth posit.** Under
+nondegeneracy alone the decoherence-free off-diagonal block *is* the rotating band
+(`rotatingEdge_iff_decoherenceFree`). This is **not** "deriving `H_align`": with the seam read as the
+off-diagonal of A3's sustainable field `Peri` (`decoherenceFreeSeam_iff_offdiag_conserved`,
+`peri_iff_mem_conservedBand`), the two bands are the *same predicate* once `μ = 1 ↔ i = j` identifies the
+held band with the diagonal. The content is A3's own "greatest sustainable field," written out — the
 structural half of the reconciliation. -/
 theorem seam_eq_rotating {μ : A → A → ℂ} (hnd : ∀ i j, μ i j = 1 ↔ i = j) :
     seamBand (decoherenceFreeSeam μ) = rotatingBand μ :=
   bandOn_congr (fun i j => (rotatingEdge_iff_decoherenceFree hnd i j).symm)
 
-/-- **T4 — the bet derived.** `rotatingBand μ ⊆ seamBand (decoherenceFreeSeam μ)` from the two baseline
-facts (contractive + nondegenerate), **replacing spec I's `H_align` hypothesis with a proof.** Energy is
-at most permanent feeling — now a theorem of the axioms' own gloss, not a fourth wager. -/
+/-- **T4 — the bet, as A3 unfolded.** `rotatingBand μ ⊆ seamBand (decoherenceFreeSeam μ)` from the two
+baseline facts (contractive + nondegenerate), **replacing spec I's `H_align` hypothesis with a proof** once
+the seam is read as the off-diagonal of A3's own sustainable field `Peri` (`peri_iff_mem_conservedBand`).
+Energy is at most permanent feeling — A3 written in full, not a fourth wager. -/
 theorem rotating_subset_seamBand_from_axioms {μ : A → A → ℂ}
     (hnd : ∀ i j, μ i j = 1 ↔ i = j) (hc : Contractive μ) :
     rotatingBand μ ≤ seamBand (decoherenceFreeSeam μ) :=
   rotating_subset_seamBand ⟨fun _ _ h => h.1, hnd⟩ (align_of_contractive hc)
 
-/-- **The coincidence, from the axioms.** `seamBand (decoherenceFreeSeam μ) = rotatingBand μ` from
-contractivity + nondegeneracy — `band_coincidence` with the bet **discharged**. The conservation law
-`undifferentiated = knowing + energy` thus rests, on this witness model, on no `H_align` beyond A3's own
-"decoherence-free subalgebra" gloss. -/
+/-- **The coincidence, by unfolding A3 (no fourth posit).** `seamBand (decoherenceFreeSeam μ) =
+rotatingBand μ` from contractivity + nondegeneracy. This is **not** a fourth axiom and not "the bet
+derived as a theorem of A1–A3": with the seam *read* as the off-diagonal of A3's own sustainable field
+`Peri` (`peri_iff_mem_conservedBand`) — i.e. C1, A3 taken at the strength of its text — the alignment is a
+one-line consequence of the channel being a contraction (`align_of_contractive`), and the coincidence is
+then near-definitional (`seam_eq_rotating`). What stays a `[reading]` is **C1 itself** — that the self is
+`Peri(Φ_c)` rather than the strict `νΦ_c` — but C1 is A3's gloss, *already* an axiom, so nothing is added.
+*Three axioms, said completely, are already three.* The conservation law `undifferentiated = knowing +
+energy` thus rests, on this witness model, on no `H_align` beyond A3 written in full. -/
 theorem band_coincidence_from_axioms {μ : A → A → ℂ}
     (hnd : ∀ i j, μ i j = 1 ↔ i = j) (hc : Contractive μ) :
     seamBand (decoherenceFreeSeam μ) = rotatingBand μ :=
@@ -182,7 +259,7 @@ theorem undifferentiated_two_term_from_axioms {μ : A → A → ℂ}
 band coincidence holds *without* assuming `H_align` — the bet was never load-bearing on the witness. -/
 
 /-- `quarterMul` is **contractive**: every entry has norm `≤ 1` (diagonal `1`; rotating `±i`, norm `1`;
-transient `1/2`). -/
+phase-locked `∓i·½` and transient `½`, norm `½`). -/
 theorem quarterMul_contractive : Contractive quarterMul := by
   intro i j
   unfold quarterMul
@@ -190,6 +267,12 @@ theorem quarterMul_contractive : Contractive quarterMul := by
   · exact le_of_eq norm_one
   · exact le_of_eq (by rw [Complex.norm_eq_abs, Complex.abs_I])
   · exact le_of_eq (by rw [norm_neg, Complex.norm_eq_abs, Complex.abs_I])
+  · refine le_of_lt ?_
+    rw [norm_mul, norm_neg, Complex.norm_eq_abs, Complex.abs_I, one_mul]
+    exact half_norm_lt
+  · refine le_of_lt ?_
+    rw [norm_mul, Complex.norm_eq_abs, Complex.abs_I, one_mul]
+    exact half_norm_lt
   · exact le_of_lt half_norm_lt
 
 /-- **The witness coincidence, with the bet discharged.** On the genuine `quarterMul` channel, with the
