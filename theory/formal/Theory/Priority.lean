@@ -50,7 +50,7 @@ The premise Part C needs — `≅` is lossy (not a bisimulation) — is exactly 
 one claim. Outcome **2 (clarified-as-two)**, with the bridge named: `≈ ⊊ ≅` is sourced from the seam, never
 from priority. See [`docs/spec/02-axioms.md`](../../docs/spec/02-axioms.md) for the A2a/A2b split.
 -/
-import Scratch.We
+import Theory.We
 
 namespace RelExist.Priority
 

@@ -17,7 +17,7 @@ So the marked frontier — a concrete `FdHilb`/`FGModuleCat`-style `TracedSMC` i
 -/
 import Mathlib.Data.Matrix.Kronecker
 import Mathlib.LinearAlgebra.Matrix.Trace
-import RelExist.Traced
+import Foundation.Traced
 import Scratch.PartialTrace
 
 namespace RelExist.MatrixModel

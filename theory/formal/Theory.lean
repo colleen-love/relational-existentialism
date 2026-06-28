@@ -1,0 +1,12 @@
+/-
+# `theory/` — the living frontier (handoff XIII)
+
+The canonical, theory-specific development that is already *not* paper one: the modular A1
+(`Theory.ModularFlow`), the generative A3 (`Theory.MutualCoupling`), A2-priority (`Theory.Priority`), plus
+the shared base they consume, forked up from `paper-1` on genuine demand (`Theory.We`,
+`Theory.RotatingSpectrum`, `Theory.BandCoincidence`, `Theory.BandFromAxioms`). Imports only `theory/` +
+`foundation/`; references no paper. The only root that moves freely.
+-/
+import Theory.ModularFlow
+import Theory.MutualCoupling
+import Theory.Priority

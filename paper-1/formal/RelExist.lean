@@ -17,4 +17,4 @@ import RelExist.Mirror
 import RelExist.Relating
 import RelExist.Seam
 import RelExist.SeamBridge
-import RelExist.Traced
+import Foundation.Traced

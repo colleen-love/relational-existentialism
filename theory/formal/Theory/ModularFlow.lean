@@ -43,8 +43,8 @@ variable {n : Type*} [Fintype n] [DecidableEq n]
 
 /-! ## Stage 1 — modular flow `ρ^{it} · M · ρ^{-it}` and the modular Hamiltonian `-log ρ` -/
 
-/-- A constant-diagonal matrix is a scalar: `diag(λ i. k) = k • 1`. -/
 omit [Fintype n] in
+/-- A constant-diagonal matrix is a scalar: `diag(λ i. k) = k • 1`. -/
 private lemma diagonal_const (k : ℂ) :
     diagonal (fun _ : n => k) = k • (1 : Matrix n n ℂ) := by
   ext i j

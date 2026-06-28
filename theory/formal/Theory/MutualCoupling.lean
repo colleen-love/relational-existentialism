@@ -96,7 +96,7 @@ none of it. Open frontier: **dynamical capacity** `α` (falling under depletion)
 for genuine extraction/depletion — the one outcome this constant-`α` law cannot, and honestly does not,
 produce.
 -/
-import Scratch.BandFromAxioms
+import Theory.BandFromAxioms
 import Mathlib.Algebra.GeomSum
 import Mathlib.Analysis.SpecificLimits.Basic
 
