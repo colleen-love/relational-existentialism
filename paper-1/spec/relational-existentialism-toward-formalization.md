@@ -1,13 +1,13 @@
 # Relational Existentialism: One Step Toward the Formalization
 
 > **Scope note.** This page describes the **broader program**. The mechanized, scoped result is **paper
-> one** in [`docs/spec/`](spec/) ([`paper-one.md`](spec/paper-one.md)); the rest of what this page sketches
+> one** in [`docs/spec/`](.) ([`paper-one.md`](paper-one.md)); the rest of what this page sketches
 > — the sparsity dichotomy (Conjecture 3.7), the cosmos readings, the functorial semantics — is supporting
-> development, archived under [`docs/archive/`](archive/) for later papers, not part of paper one.
+> development, archived under [`docs/archive/`](../../archive/spec/) for later papers, not part of paper one.
 
 This is the middle rung of a ladder. Below it is [the view in plain
 language](relational-existentialism.md) — the philosophy with no machinery showing. Above it is the
-[formal spec](spec/) and the [Lean and Agda proofs](../formal/) — the philosophy as checkable
+[formal spec](.) and the [Lean and Agda proofs](../formal/) — the philosophy as checkable
 mathematics. This page stands between them. It keeps the plain language, but it names the
 *mathematical bones* under each idea, so that when you open the spec the words there are already
 familiar. There are no symbols here, only the shapes the symbols stand for.
@@ -175,7 +175,7 @@ of the usual humanities move of borrowing physics as metaphor.
 
 ## 9. What is proved, what is a reading, what is typed out
 
-The reason to climb the next rung — into the [spec](spec/) and the [proofs](../formal/) — is that
+The reason to climb the next rung — into the [spec](.) and the [proofs](../formal/) — is that
 every claim there wears its status openly, and the statuses are not equal:
 
 - **Theorems** carry a machine-checked proof and an audited list of exactly which logical
@@ -198,10 +198,10 @@ Almost none of the mathematics is new — it is a careful re-proof of establishe
 The contribution is the **synthesis**: the recognition that one structure — the objectifying,
 copyable move against the entangled, uncopyable one — runs through identity, decoherence,
 causation, and selfhood alike, with a single wall between the two faces. The full honest accounting
-is the [provenance ledger](spec/04-provenance.md), which a reviewer should read first.
+is the [provenance ledger](04-provenance.md), which a reviewer should read first.
 
 ---
 
 → The pure-prose version is [the view in plain language](relational-existentialism.md). The rigorous
-version begins at [the doctrine](spec/00-doctrine.md) and the scoped result in
-[paper one](spec/paper-one.md) (the broader catalog is archived under [`docs/archive/`](archive/)).
+version begins at [the doctrine](00-doctrine.md) and the scoped result in
+[paper one](paper-one.md) (the broader catalog is archived under [`docs/archive/`](../../archive/spec/)).

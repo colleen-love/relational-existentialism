@@ -93,4 +93,4 @@ These are not gaps to be embarrassed about. They are the places the view stops, 
 *Want the same picture one step closer to the mathematics — still in plain words, but naming the
 structures underneath?* See [Relational Existentialism: One Step Toward the
 Formalization](relational-existentialism-toward-formalization.md), and beyond it the [formal
-spec](spec/).
+spec](.).
