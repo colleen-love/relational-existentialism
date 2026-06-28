@@ -49,22 +49,27 @@ transient's monotone decay.
 ## Honest scope
 
 `[proved]`: a concrete `ℂ` channel with a genuine rotating eigen-operator (sustained) and a transient
-one (decaying) coexisting — the three-way split, witnessed. `[reading]`: that the rotating phase *is*
-energy and its conservation *is* energy conservation. `[open]` (narrated, not built): the general
-peripheral **structure theorem** for CPTP maps (the rotating unitaries normalize `Fix`, a
-crossed-product structure); that `quarterMul` is a bona fide CPTP map for a positive-semidefinite
-multiplier; and the `L = −i[H,·] + D` generator split in full. The witness needs none of it — exactly
-as `TimeFlow`'s `partialDephase` needed none of the general decay theory.
+one (decaying) coexisting — the three-way split, witnessed; **and** that the witness multiplier is
+positive semidefinite (`quarterMul_posSemidef`), hence a *bona fide* completely-positive (Schur product
+theorem), unit-diagonal channel — so the energy band sits inside genuine physics. `[reading]`: that the
+rotating phase *is* energy and its conservation *is* energy conservation (PSD earns *"physical channel,"*
+not *"= energy"*). `[open]` (narrated, not built): the general peripheral **structure theorem** for CPTP
+maps (the rotating unitaries normalize `Fix`, a crossed-product structure), and the `L = −i[H,·] + D`
+generator split in full. The witness needs none of it — exactly as `TimeFlow`'s `partialDephase` needed
+none of the general decay theory.
 -/
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.Complex.Abs
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
 import Mathlib.Analysis.SpecificLimits.Normed
+import Mathlib.LinearAlgebra.Matrix.PosDef
+import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 namespace RelExist.RotatingSpectrum
 
 open Matrix Filter Topology
+open scoped ComplexOrder
 
 /-! ## §1 The phase-damping channel — the `ℂ`-lift of the dephasing flow -/
 
@@ -127,11 +132,17 @@ lemma schur_transient_tendsto (μ : A → A → ℂ) (M : Matrix A A ℂ) (i j :
 `(0,1)` coherence, and a **transient** band (`1/2`) on the rest. All three coexist under one channel. -/
 
 /-- The quarter-turn multiplier: diagonal `1` (fixed); `μ_{01} = i`, `μ_{10} = −i` (rotating, `e^{±iπ/2}`);
-everything else `1/2` (transient). -/
+the `(1,2)`/`(2,1)` coherences **phase-locked** at `∓i·½` and the `(0,2)`/`(2,0)` ones at `½` (all
+transient, modulus `½`). The phase-lock is **not** cosmetic: it is exactly what makes the multiplier a
+positive-semidefinite (hence completely positive — `quarterMul_posSemidef`) channel. With the naive `½` on
+`(1,2)` the multiplier fails to be PSD, so the conserved relative phase of the `(0,1)` band *disciplines*
+how the remaining coherences may decohere — a decoherence-free-subspace constraint, not a free choice. -/
 noncomputable def quarterMul (i j : Fin 3) : ℂ :=
   if i = j then 1
   else if i = 0 ∧ j = 1 then Complex.I
   else if i = 1 ∧ j = 0 then -Complex.I
+  else if i = 1 ∧ j = 2 then -Complex.I * ((1 / 2 : ℝ) : ℂ)
+  else if i = 2 ∧ j = 1 then Complex.I * ((1 / 2 : ℝ) : ℂ)
   else ((1 / 2 : ℝ) : ℂ)
 
 lemma quarterMul_diag (i : Fin 3) : quarterMul i i = 1 := by
@@ -146,7 +157,34 @@ lemma quarterMul_02 : quarterMul 0 2 = ((1 / 2 : ℝ) : ℂ) := by
   unfold quarterMul
   rw [if_neg (show ¬((0 : Fin 3) = 2) by decide),
       if_neg (show ¬((0 : Fin 3) = 0 ∧ (2 : Fin 3) = 1) by decide),
-      if_neg (show ¬((0 : Fin 3) = 1 ∧ (2 : Fin 3) = 0) by decide)]
+      if_neg (show ¬((0 : Fin 3) = 1 ∧ (2 : Fin 3) = 0) by decide),
+      if_neg (show ¬((0 : Fin 3) = 1 ∧ (2 : Fin 3) = 2) by decide),
+      if_neg (show ¬((0 : Fin 3) = 2 ∧ (2 : Fin 3) = 1) by decide)]
+
+lemma quarterMul_12 : quarterMul 1 2 = -Complex.I * ((1 / 2 : ℝ) : ℂ) := by
+  unfold quarterMul
+  rw [if_neg (show ¬((1 : Fin 3) = 2) by decide),
+      if_neg (show ¬((1 : Fin 3) = 0 ∧ (2 : Fin 3) = 1) by decide),
+      if_neg (show ¬((1 : Fin 3) = 1 ∧ (2 : Fin 3) = 0) by decide),
+      if_pos (show (1 : Fin 3) = 1 ∧ (2 : Fin 3) = 2 by decide)]
+
+lemma quarterMul_21 : quarterMul 2 1 = Complex.I * ((1 / 2 : ℝ) : ℂ) := by
+  unfold quarterMul
+  rw [if_neg (show ¬((2 : Fin 3) = 1) by decide),
+      if_neg (show ¬((2 : Fin 3) = 0 ∧ (1 : Fin 3) = 1) by decide),
+      if_neg (show ¬((2 : Fin 3) = 1 ∧ (1 : Fin 3) = 0) by decide),
+      if_neg (show ¬((2 : Fin 3) = 1 ∧ (1 : Fin 3) = 2) by decide),
+      if_pos (show (2 : Fin 3) = 2 ∧ (1 : Fin 3) = 1 by decide)]
+
+/-- `‖μ_{12}‖ = ½ < 1` — the phase-locked `(1,2)` coherence is transient. -/
+lemma norm_quarterMul_12 : ‖quarterMul 1 2‖ = 1 / 2 := by
+  rw [quarterMul_12, norm_mul, norm_neg, Complex.norm_eq_abs, Complex.abs_I, one_mul,
+      Complex.norm_eq_abs, Complex.abs_ofReal, abs_of_pos (by norm_num : (0 : ℝ) < 1 / 2)]
+
+/-- `‖μ_{21}‖ = ½ < 1` — the phase-locked `(2,1)` coherence is transient. -/
+lemma norm_quarterMul_21 : ‖quarterMul 2 1‖ = 1 / 2 := by
+  rw [quarterMul_21, norm_mul, Complex.norm_eq_abs, Complex.abs_I, one_mul,
+      Complex.norm_eq_abs, Complex.abs_ofReal, abs_of_pos (by norm_num : (0 : ℝ) < 1 / 2)]
 
 /-- `‖μ_{01}‖ = ‖i‖ = 1` — the `(0,1)` band is on the unit circle (conserved). -/
 lemma norm_quarterMul_01 : ‖quarterMul 0 1‖ = 1 := by
@@ -305,5 +343,41 @@ sharp contrast to the transient band, whose magnitude decays monotonically and n
 reversibility is the mark of energy — the conserved datum that makes the dynamics time-reversible.) -/
 theorem rotating_recurs : (schur quarterMul)^[4] Ucoh = Ucoh := by
   rw [rotating_winds, Complex.I_pow_four, one_smul]
+
+/-! ## §4 The witness is a genuine channel — a positive-semidefinite multiplier (`[proved]`)
+
+A Schur multiplier `schur μ` is **completely positive** — a legitimate quantum channel, by the Schur
+product theorem — exactly when the multiplier matrix `μ` is positive semidefinite; and it is unital /
+trace-preserving when `μ` has unit diagonal (which `quarterMul` does, `quarterMul_diag`). We discharge the
+PSD condition here, so the energy witness is **physical dynamics**, not merely a linear map. The proof
+exhibits `quarterMul` as a Gram matrix `qBᴴ * qB`: its rows are the vectors whose Hermitian inner products
+*are* the entries of `quarterMul`. The third coordinate `(√3/2)` and the `(1,2)` phase-lock `−i·½` are
+exactly what let the third Gram vector close — the conserved phase of the `(0,1)` band **disciplines** the
+transient coherences, a decoherence-free-subspace constraint rather than a free addition. -/
+
+/-- A Gram factor for `quarterMul`: two rows over `Fin 3`. The columns are the vectors whose Hermitian
+inner products are the entries of `quarterMul`; the only irrational entry, `(2,2) = ¼ + (√3/2)² = 1`,
+uses `√3·√3 = 3`. -/
+noncomputable def qB : Matrix (Fin 2) (Fin 3) ℂ :=
+  !![1, Complex.I, ((1 / 2 : ℝ) : ℂ); 0, 0, ((Real.sqrt 3 / 2 : ℝ) : ℂ)]
+
+set_option linter.unnecessarySeqFocus false in
+/-- **`quarterMul` is a Gram matrix** `qBᴴ * qB`. The nine entries check out by the inner products of the
+two rows of `qB`; the `(2,2)` entry `¼ + (√3/2)² = ¼ + ¾ = 1` uses `√3·√3 = 3`. -/
+theorem quarterMul_eq_gram :
+    (quarterMul : Matrix (Fin 3) (Fin 3) ℂ) = qB.conjTranspose * qB := by
+  have key : Real.sqrt 3 * Real.sqrt 3 = 3 := Real.mul_self_sqrt (by norm_num)
+  ext i j
+  rw [Matrix.mul_apply, Fin.sum_univ_two, Matrix.conjTranspose_apply, Matrix.conjTranspose_apply]
+  fin_cases i <;> fin_cases j <;>
+    simp [quarterMul, qB, Complex.ext_iff, Complex.div_re, Complex.div_im, Complex.normSq] <;>
+    norm_num [div_mul_div_comm, key]
+
+/-- **The witness channel is positive semidefinite** — hence completely positive (Schur product theorem),
+and with unit diagonal a genuine unital/trace-preserving quantum channel. So the rotating "energy" band
+lives inside *bona fide* physics, not a merely formal linear map. (This earns *"physical channel,"* not
+*"= energy"*: the energy identification stays the standing `[reading]`.) -/
+theorem quarterMul_posSemidef : Matrix.PosSemidef (quarterMul : Matrix (Fin 3) (Fin 3) ℂ) := by
+  rw [quarterMul_eq_gram]; exact Matrix.posSemidef_conjTranspose_mul_self qB
 
 end RelExist.RotatingSpectrum

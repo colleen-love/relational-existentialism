@@ -7,10 +7,12 @@
 > [paper one](paper-one.md), the quantitative theorem in [03.7](../archive/03.7-sparsity.md).
 >
 > The typed labels separate assumed from proved: **A1–A3** are **axioms** (taken), **D1** is
-> a **definition** (notation, no logical content), **3.1–3.3** are **theorems**. The basis is four
-> items; only **A3** is a load-bearing wager — drop it and the theory collapses to the universal
-> solvent. (Each theorem's `#print axioms` footprint is recorded with its Lean name in
-> [paper one](paper-one.md).)
+> a **definition** (notation, no logical content), **3.1–3.3** are **theorems**. The doctrinal basis is
+> four items; only **A3** is a load-bearing wager — drop it and the theory collapses to the universal
+> solvent. The concrete *matrix model* adds one further standing assumption, **B1** (a preferred /
+> "classical" basis), named below — below the headline, but load-bearing for the model's knowing/feeling
+> readings and so disclosed rather than left implicit. (Each theorem's `#print axioms` footprint is
+> recorded with its Lean name in [paper one](paper-one.md).)
 
 Throughout, `𝒞 = Cl(𝕋)`, `σ = Tr` is the self-relation operator (D1), `γ` is the
 symmetry, `Δ` the diagonal (cartesian fragment only), and `(R, ·, 1, ≤, β, c, ε)`
@@ -116,13 +118,18 @@ dynamics, not a point. The channel-on-states (Schrödinger) reading, which would
 the level of a state, is the **road not taken** — and it is taken nowhere in the development:
 every self here is the eigenform `νΦ_c`, never an invariant density matrix.
 
-*Note (the gloss vs. the formalization).* "Decoherence-free subalgebra" and the formalized `νΦ_c` are
-**not** the same object: `νΦ_c` is the *strict* fixed point (the `μ = 1`, fixed/known band), while the
-decoherence-free subalgebra is the larger **peripheral** block `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which
-also carries the rotating (`‖μ‖ = 1, μ ≠ 1`, *energy*) band. Reading A3's gloss literally — the self **is**
-`Peri(Φ_c)` — is what closes the band-coincidence bet `H_align` of
+*Note (the gloss vs. the formalization).* "Decoherence-free subalgebra" / "greatest sustainable field" and
+the formalized strict `νΦ_c` are **not** the same object: `νΦ_c` is the *strict* fixed point (the `μ = 1`,
+fixed/known band), while the sustainable field is the larger **peripheral** block
+`Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which also carries the rotating (`‖μ‖ = 1, μ ≠ 1`, *energy*) band.
+This is now **mechanized**: `Scratch/BandFromAxioms.lean` defines `Peri` (entrywise) and proves
+`peri_iff_mem_conservedBand` — A3's sustainable field *is* exactly the conserved (modulus-one) band — with
+the seam its off-diagonal part (`decoherenceFreeSeam_iff_offdiag_conserved`) and `νΦ_c` its `μ = 1`
+sub-band (`fixedBand_le_conservedBand`). Reading A3's gloss literally — the self **is** `Peri(Φ_c)` — is
+what closes the band-coincidence bet `H_align` of
 [03.9](03.9-band-coincidence.md#postscript--is-h_align-a-fourth-axiom-scratchbandfromaxiomslean)
-*without a fourth axiom* (`Scratch/BandFromAxioms.lean`): it is already A3, merely written in full.
+*without a fourth axiom* (`band_coincidence_from_axioms`): the coincidence is A3 read at the strength of
+its own text, merely written in full — **not** a derivation of something beyond the three axioms.
 
 In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
 [`RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean)) this reduces to the threshold
@@ -195,6 +202,36 @@ so co-direction is a consequence of the relating, not added to it.
 
 **Role.** Pure definition; fixes the referent of `σ` used by 3.1, A3, 3.3, and the
 co-directed `Φ_c` of A3.
+
+---
+
+# The standing assumption of the matrix model
+
+## B1 — The classical structure / preferred basis `[posit; matrix model only]`
+
+**Statement.** The concrete mechanization (the matrix model of `Scratch/Decoherence.lean` onward) fixes a
+**distinguished basis** — the "classical structure" — relative to which *knowing* is the projection onto
+the **diagonal** (`dephase`), *feeling* is the off-diagonal **copy-defect** (`defectSq`), and the spectral
+**bands** (fixed / rotating / transient) are read edge by edge. Concretely: `IsClassical M :⇔ M` is
+diagonal *in this basis*, and `dephase` keeps that diagonal and kills the rest.
+
+**Assumption.** *Which* basis counts as classical is **posited**, not derived. The arrow of §3–4, the
+knowing/feeling split of §2, and the energy band of §5 are all stated **relative to** this basis; a change
+of basis changes what is "known" and what is "felt." In physical decoherence the preferred (pointer) basis
+is *selected* by the system–environment interaction (**einselection**); the model takes it as given.
+
+**Gloss.** Before the σ-move can "objectify onto the classical fragment," there must be a fragment that
+counts as classical. B1 is that choice. It is below the headline — none of A1–A3 mention a basis — but it
+is genuinely load-bearing for the matrix-model readings, so it is named here rather than left implicit in
+the definitions.
+
+**Status.** `[posit; matrix model]`, and **`[open]`** as future work: *deriving* the preferred basis
+(einselection — the pointer basis as the one the interaction leaves un-decohered) rather than positing it.
+The development does **not** claim this derivation; it discloses the basis as an input.
+
+**Role.** Fixes the referent of "diagonal / known" vs "off-diagonal / felt" throughout
+[03.5](03.5-decoherence.md)–[03.9](03.9-band-coincidence.md). Strictly weaker than an axiom about selves:
+it is a coordinate choice the model makes explicit.
 
 ---
 

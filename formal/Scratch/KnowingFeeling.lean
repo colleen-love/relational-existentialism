@@ -1,7 +1,7 @@
 /-
 # Knowing vs feeling — the 3.3 contrast, mechanized
 
-[3.3](../../docs/spec/03-theorems.md) says the two ways relation turns are different *kinds of
+[3.3](../../docs/spec/03.3-knowing-vs-feeling.md) says the two ways relation turns are different *kinds of
 arrow*. The honest, mechanized content is a **type-level asymmetry**, not a proof of
 "wholeness":
 

@@ -14,7 +14,14 @@ below as future work, never as a load-bearing citation.
 depending on *no* axioms; `[reading]` — an identification of the formal object with the lived/physical
 one, asserted, not proved; `[open]` — named and not built. The foundation A1–A3 / D1 is in
 [`02-axioms.md`](02-axioms.md); A1 (the traced symmetric monoidal arena) and A2 (relation primacy) are
-structural, A3 (recursion constitutes the self) the one load-bearing posit.
+structural, A3 (recursion constitutes the self) the one load-bearing posit. The matrix model also makes one
+standing **assumption**, **B1** — a *preferred ("classical") basis* fixing what counts as diagonal/known vs
+off-diagonal/felt; the arrow, the knowing/feeling split, and the bands are all relative to it (deriving it
+by einselection is `[open]`). A note on the `[proved, 0 ax]` badge: the axiom-free results below (the seam,
+the limits of knowing) *are* Lawvere's diagonal and nothing more — their **force as claims about selves**
+rests on the `[reading]`s of their hypotheses (that the lossy restriction *is* self-inclusion, that the
+trace agent *is* the actual forgetting). The badge certifies the mathematics; the readings carry the
+philosophy.
 
 ---
 
@@ -23,9 +30,14 @@ structural, A3 (recursion constitutes the self) the one load-bearing posit.
 The simplest relation is a system relating to itself: feedback, output returned to input. **D1** fixes
 this as the trace, `σ := Tr` ([`02-axioms.md`](02-axioms.md)). Over the order-theoretic arena it is the
 greatest fixed point of the self-relating map — *relating produces an eigenform*, theorem **3.1**:
-`Trace.selfTrace_fixed` / `Trace.Tr_fixed` (`Scratch/Trace.lean`, the `gfp` of an `OrderHom`). Identity
-itself is the greatest bisimulation `≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are
-your lived relating, not a bare carrier beneath it.
+`Trace.selfTrace_fixed` / `Trace.Tr_fixed` (`Scratch/Trace.lean`, the `gfp` of an `OrderHom`). What is
+mechanized here is exactly **gfp-existence** (Knaster–Tarski) — generic to any monotone map; that the
+created selves are *rare* (the discriminating content that keeps this from being a universal solvent) is
+paper three's sparsity, **not** claimed in this step. Identity itself is the greatest bisimulation
+`≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are your lived relating, not a bare carrier
+beneath it. (Load-bearing here is the *soundness* `≈ ⊆ ≅` together with the seam below; the strict
+first-person surplus `≈ ⊊ ≅` is mechanized in archived `Identity.lean` and is paper-two material, not part
+of this headline path.)
 
 → detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md),
 [`03.2-lived-identity.md`](03.2-lived-identity.md).
@@ -67,9 +79,11 @@ antisymmetrically (`Orientation.Knowing.knows_antisymm`); the induced arrow stri
 `Orientation.Knowing.no_recovery` (`Scratch/Orientation.lean`). Iterated, this is a graded geometric
 monovariant: coherence is antitone along the orbit and tends to zero off the fixed set
 (`TimeFlow.coh_orbit_antitone`, `coh_orbit_strictAnti`, `coh_orbit_tendsto_zero`, `Scratch/TimeFlow.lean`).
-**That arrow is time** `[reading]`. On the genuine instance it runs *both ways*: an arrow's limit *is* a
-knowing — an idempotent conditional expectation onto the seam subalgebra
-(`KnowingFromArrow.arrow_limit_is_knowing`, `limit_is_seam_CE`, `Scratch/KnowingFromArrow.lean`).
+**That arrow is time** `[reading]`. On the genuine instance the converse also holds — an arrow's limit
+*is* a knowing, an idempotent conditional expectation onto the seam subalgebra
+(`KnowingFromArrow.arrow_limit_is_knowing`, `limit_is_seam_CE`, `Scratch/KnowingFromArrow.lean`). This is
+the *instance* converse (a re-export of the forward `partialDephase` limit); the **general** lift
+(arrow ⇒ knowing for any contractive arrow) is Conjecture R, `[open]` — see [Honest scope](#honest-scope) ¶1.
 
 → detail: [`03.6-time-flow.md`](03.6-time-flow.md),
 [`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md).
@@ -88,12 +102,19 @@ each off-diagonal coherence falls in one of two bands by `‖μ i j‖`:
   This sustained, never-known remainder **is energy** `[reading]` — the conserved oscillating charge,
   `energy_arrow_spectrum` reading it off one generator's spectrum.
 
-That the conserved remainder coincides with the rotating/energy band is a **theorem of A1–A3**, not a
-fourth posit: taking the seam to be A3's own "decoherence-free subalgebra" gloss, and given only that the
-channel is contractive (attention never amplifies) and nondegenerate, the alignment is forced
-(`BandFromAxioms.align_of_contractive`, `band_coincidence_from_axioms`), and the protection is
-phase-blind — it covers the energy band exactly as it covers the known record
-(`BandFromAxioms.seam_energy_sustained`).
+That the conserved remainder coincides with the rotating/energy band is **A3 read at the strength of its
+own text** — *not* a fourth posit. A3 names the self the *"greatest sustainable field"*
+`Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`; that field, now mechanized as **exactly** the conserved (modulus-one)
+band (`BandFromAxioms.peri_iff_mem_conservedBand`), *includes* the rotating band, and the seam is its
+off-diagonal part (`decoherenceFreeSeam_iff_offdiag_conserved`), with `νΦ_c` (the known/diagonal record)
+its `μ = 1` sub-band (`fixedBand_le_conservedBand`). With the seam so read, and given only that the channel
+is contractive (attention never amplifies) and nondegenerate, the alignment is a one-line consequence
+(`BandFromAxioms.align_of_contractive`, `band_coincidence_from_axioms`) and the seam-protection is
+phase-blind — it covers the energy band exactly as the known record (`BandFromAxioms.seam_energy_sustained`).
+**The one load-bearing move is the `[reading]` C1** — that the self *is* `Peri(Φ_c)` rather than the strict
+`νΦ_c` — but C1 is A3's own gloss, *already* an axiom (see [Honest scope](#honest-scope) ¶3): three axioms
+said in full, not a fourth. The further identification of this conserved band with **energy** is itself a
+standing `[reading]` (below).
 
 → detail: [`03.8-space-energy.md`](03.8-space-energy.md),
 [`03.9-band-coincidence.md`](03.9-band-coincidence.md).

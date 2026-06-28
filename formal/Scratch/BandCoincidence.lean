@@ -297,12 +297,14 @@ lemma quarterMul_10 : quarterMul 1 0 = -Complex.I := by
       if_neg (show ¬((1 : Fin 3) = 0 ∧ (0 : Fin 3) = 1) by decide),
       if_pos (show (1 : Fin 3) = 1 ∧ (0 : Fin 3) = 0 by decide)]
 
-/-- Off the diagonal and off the two named rotating edges, `quarterMul` is `1/2` (the transient value). -/
+/-- Off the diagonal and off **all four** named non-transient/phase-locked edges, `quarterMul` is `1/2`
+(the transient value on `(0,2)`/`(2,0)`). -/
 lemma quarterMul_eq_half {i j : Fin 3} (hij : i ≠ j)
-    (h2 : ¬(i = 0 ∧ j = 1)) (h3 : ¬(i = 1 ∧ j = 0)) :
+    (h2 : ¬(i = 0 ∧ j = 1)) (h3 : ¬(i = 1 ∧ j = 0))
+    (h4 : ¬(i = 1 ∧ j = 2)) (h5 : ¬(i = 2 ∧ j = 1)) :
     quarterMul i j = ((1 / 2 : ℝ) : ℂ) := by
   unfold quarterMul
-  rw [if_neg hij, if_neg h2, if_neg h3]
+  rw [if_neg hij, if_neg h2, if_neg h3, if_neg h4, if_neg h5]
 
 lemma norm_quarterMul_10 : ‖quarterMul 1 0‖ = 1 := by
   rw [quarterMul_10, norm_neg, Complex.norm_eq_abs, Complex.abs_I]
@@ -324,6 +326,18 @@ lemma quarterMul_10_ne_one : quarterMul 1 0 ≠ 1 := by
   rw [Complex.neg_re, Complex.I_re, Complex.one_re] at this
   norm_num at this
 
+/-- The phase-locked `(1,2)` coherence is not the held value `1` — its modulus is `½`, not `1`. -/
+lemma quarterMul_12_ne_one : quarterMul 1 2 ≠ 1 := by
+  intro h
+  have hn : ‖quarterMul 1 2‖ = 1 := by rw [h, norm_one]
+  rw [norm_quarterMul_12] at hn; norm_num at hn
+
+/-- The phase-locked `(2,1)` coherence is not the held value `1` — its modulus is `½`, not `1`. -/
+lemma quarterMul_21_ne_one : quarterMul 2 1 ≠ 1 := by
+  intro h
+  have hn : ‖quarterMul 2 1‖ = 1 := by rw [h, norm_one]
+  rw [norm_quarterMul_21] at hn; norm_num at hn
+
 /-- The witness's coupling is **nondegenerate**: `quarterMul i j = 1 ↔ i = j`. The diagonal is held; every
 off-diagonal edge (`i`, `−i`, or `1/2`) is genuinely `≠ 1`. -/
 lemma quarterMul_fixed_eq_diagonal (i j : Fin 3) : quarterMul i j = 1 ↔ i = j := by
@@ -334,7 +348,11 @@ lemma quarterMul_fixed_eq_diagonal (i j : Fin 3) : quarterMul i j = 1 ↔ i = j 
     · obtain ⟨rfl, rfl⟩ := h2; exact quarterMul_01_ne_one h
     · by_cases h3 : (i = 1 ∧ j = 0)
       · obtain ⟨rfl, rfl⟩ := h3; exact quarterMul_10_ne_one h
-      · rw [quarterMul_eq_half hij h2 h3] at h; exact half_ne_one h
+      · by_cases h4 : (i = 1 ∧ j = 2)
+        · obtain ⟨rfl, rfl⟩ := h4; exact quarterMul_12_ne_one h
+        · by_cases h5 : (i = 2 ∧ j = 1)
+          · obtain ⟨rfl, rfl⟩ := h5; exact quarterMul_21_ne_one h
+          · rw [quarterMul_eq_half hij h2 h3 h4 h5] at h; exact half_ne_one h
   · rintro rfl; exact quarterMul_diag i
 
 /-- The coincidence witness satisfies the **unitary baseline**. -/
@@ -357,8 +375,11 @@ theorem quarterMul_align : Align quarterMul Jq := by
   intro i j hJ hij
   have h2 : ¬(i = 0 ∧ j = 1) := fun h => hJ (Or.inl h)
   have h3 : ¬(i = 1 ∧ j = 0) := fun h => hJ (Or.inr h)
-  rw [quarterMul_eq_half hij h2 h3]
-  exact half_norm_lt
+  by_cases h4 : (i = 1 ∧ j = 2)
+  · obtain ⟨rfl, rfl⟩ := h4; rw [norm_quarterMul_12]; norm_num
+  · by_cases h5 : (i = 2 ∧ j = 1)
+    · obtain ⟨rfl, rfl⟩ := h5; rw [norm_quarterMul_21]; norm_num
+    · rw [quarterMul_eq_half hij h2 h3 h4 h5]; exact half_norm_lt
 
 /-- **The coincidence, witnessed.** On the finite-dim `ℂ` model `quarterMul` with the seam `Jq`, all three
 hypotheses hold — *including the bet* — so the seam-protected band and the rotating band genuinely
