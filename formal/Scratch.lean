@@ -32,6 +32,10 @@ The kept closure (15 Scratch modules over 5 `RelExist` core modules):
 * `Scratch.SeamConserved` — **step two, the bridge test**: the operational seam *is* the operationally
   conserved band, exactly and structurally (`offdiag_conserved_iff_seam`); the energy identification stays
   open, with the obstruction named (attention is a 0/1 channel, no rotating spectrum).
+* `Scratch.PhaseBearing` — **A3 at the strength of its text**: the self as `Peri(Φ_c)` under a
+  phase-bearing `Φ_c`. The phase experiment returns *earned* — the self-inclusion obstruction is
+  phase-blind, so the un-attendable seam carries energy (`seam_carries_phase`), the 0/1 gate's
+  phaselessness being its degeneracy. Clause B's joint upgraded under two named readings.
 -/
 import Scratch.Trace
 import Scratch.KnowingFeeling
@@ -41,3 +45,4 @@ import Scratch.RotatingSpectrum
 import Scratch.BandFromAxioms
 import Scratch.SeamForcingC
 import Scratch.SeamConserved
+import Scratch.PhaseBearing

@@ -125,13 +125,21 @@ fixed/known band), while the sustainable field is the larger **peripheral** bloc
 This is now **mechanized**: `Scratch/BandFromAxioms.lean` defines `Peri` (entrywise) and proves
 `peri_iff_mem_conservedBand` — A3's sustainable field *is* exactly the conserved (modulus-one) band — with
 the seam its off-diagonal part (`conservedOffdiag_iff_offdiag_conserved`) and `νΦ_c` its `μ = 1`
-sub-band (`fixedBand_le_conservedBand`). The identification the self **is** `Peri(Φ_c)` — call it **C1** —
-is what closes the band-coincidence bet `H_align` of
-[03.9](03.9-band-coincidence.md#postscript--is-h_align-a-fourth-axiom-scratchbandfromaxiomslean)
-(`band_coincidence_from_axioms`). **C1 is a disclosed posit/reading**, not a derivation: it identifies the
-self with `Peri(Φ_c)` rather than the strict `νΦ_c` A3 formalizes (the two are *not* the same object, as
-just noted). We read it as A3's "sustainable field" gloss made precise; a reader may instead count it as a
-fourth posit. We no longer argue the point either way — C1 is named and tagged, and the reader judges.
+sub-band (`fixedBand_le_conservedBand`).
+
+**A3 at the strength of its text — `self := Peri(Φ_c)` under a phase-bearing `Φ_c` (resolved).** The
+right formalization of A3 takes the operative self-relating operator to be **phase-bearing** (`schur μ`:
+modulus-contracting, phase-free) and the self to be its sustainable field `self := Peri(Φ_c)` — *not* the
+strict, phaseless fixed point `νΦ_c`. Under that reading the identification **C1** (self = `Peri`) is A3's
+**definition**, and the rotating (energy) band's membership in the self is a *theorem*
+(`PhaseBearing.rotating_mem_peri`), not a posit. The earlier "is C1 a fourth axiom?" worry
+([03.9](03.9-band-coincidence.md) postscript) was an artifact of formalizing A3 as the phaseless `νΦ_c`:
+once the operative map carries phase, `νΦ_c` is recognized as the **degenerate (`θ = 0`) restriction** of
+`Peri`. What remains genuinely a `[reading]` is then *not* C1 but two modeling inputs (see
+[03.9](03.9-band-coincidence.md) / [`Scratch/PhaseBearing.lean`](../../formal/Scratch/PhaseBearing.lean)):
+the **Lindblad** reading (the dissipator of `Φ_c` *is* attention) and **nondegeneracy** (only the diagonal
+record is held). Under those, the un-attendable seam carries phase = energy as a theorem
+(`PhaseBearing.seam_carries_phase`), with no `Align`.
 
 In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
 [`RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean)) this reduces to the threshold

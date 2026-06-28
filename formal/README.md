@@ -56,6 +56,7 @@ fitting, since the mirror's incompleteness is the contrapositive of a one-line d
 | **Band coincidence (spectral)** — on one carrier, the conserved-band predicate = rotating (energy) band; the witness and the counter-witness | `BandCoincidence.{seamBand, rotatingBand, band_coincidence, coincidence_witness, three_term_without_alignment}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (under the C1 reading) |
 | **…from A1–A3** — A3's `Peri(Φ_c)` *is* the conserved band; alignment follows from contractivity + nondegeneracy once the spectral band is read as C1 | `BandFromAxioms.{Peri, peri_iff_mem_conservedBand, conservedOffdiag, conservedOffdiag_iff_offdiag_conserved, align_of_contractive, band_coincidence_from_axioms, seam_energy_sustained}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (C1 a disclosed reading) |
 | **Step two — the bridge test** — operational seam *is* the operationally-conserved band, **exactly & structurally** (seam pinned from attention, no `‖μ‖`); `= energy` stays open, obstruction named (the 0/1 attention channel has no rotating spectrum, so its conserved edges are *fixed*, not energy) | `SeamConserved.{offdiag_conserved_iff_seam, seam_edge_exact, attend_fixes_are_identity}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (theorem + named obstruction) |
+| **Step three — A3 at the strength of its text** — `self := Peri(Φ_c)` under a *phase-bearing* `Φ_c`; the obstruction is **phase-blind** (un-attendable ⟹ un-damped; nondegenerate ⟹ off-diagonal *rotates*), so the un-attendable seam ⊆ the rotating energy band **with no `Align`**. C1 becomes A3's definition; the self is non-inert (sustained). Step two's phaselessness was the gate's *degeneracy* | `PhaseBearing.{rotating_mem_peri, undamped_offdiag_rotates, seam_carries_phase, quarterMul_seam_carries_phase, seam_sustained}` | [03.9](../docs/spec/03.9-band-coincidence.md), [02 A3](../docs/spec/02-axioms.md) | ✅ proved (energy joint earned, under 2 named readings) |
 
 `Scratch.We` formalizes **theorem 3.2** as `νΘ = OrderHom.gfp Θ`, with coinduction, the equivalence
 proof, and the shared world `𝔼 := D/≈`. This lattice-theoretic reading has a second, independent
@@ -63,14 +64,15 @@ mechanization in the [`agda/`](../agda/) layer (native coinduction / copatterns)
 doctrine's lived identity.
 
 **What the kept tags do — and do not — claim** (see [paper one](../docs/spec/paper-one.md) honest scope):
-the proved skeleton is `[proved]`; that the conserved band *is* energy, and that the flow *is* physical
-time, are `[reading]`s. The seam↔energy joint was *tested* in step two (`SeamConserved`): **proved** that
-the operational seam *is* the operationally-conserved band, exactly and structurally
-(`offdiag_conserved_iff_seam`, seam pinned from attention with no `‖μ‖`); **still `[open]`** that this is
-the *rotating energy* band, with a named obstruction — the attention channel is 0/1, so its conserved
-edges are *fixed*, never rotating, and linking it to the phase channel `schur μ` is a single cross-channel
-posit (`Align`). **C1** (self = `Peri(Φ_c)`, beyond A3's formalized `νΦ_c`) is a disclosed posit/reading,
-not a derivation.
+the proved skeleton is `[proved]`; that the flow *is* physical time is a `[reading]`. The seam↔energy
+joint, `[open]` through step two, is **closed at step three** by reading A3 at the strength of its text
+(`self := Peri(Φ_c)` under a phase-bearing `Φ_c`, `PhaseBearing`): the obstruction is **phase-blind**, so
+the un-attendable seam carries phase = energy (`seam_carries_phase`) **with no `Align`** — the
+cross-channel posit removed. The joint is `[proved]` **under two named `[reading]`s** — the Lindblad
+reading (dissipator = attention) and nondegeneracy (only the diagonal record is held). **C1** (self =
+`Peri(Φ_c)`) is now A3's *definition*, not a posit; step two's phaselessness was the 0/1 gate's
+*degeneracy*, not the obstruction's. *Sustained* (the rotating self does not decay) is proved;
+*grown* (looping enlarges the self) is a separate creation term, left `[open]`.
 
 ---
 
