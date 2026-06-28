@@ -23,7 +23,7 @@
 
 This page is the single linear walk through that result: each step is tagged with its status and named by
 the Lean theorem that carries it. A referee should be able to see the arc *and* its boundary in one read.
-The supporting development lives in [`formal/`](../../formal) (libraries `RelExist` — the
+The supporting development lives in [`formal/`](../../lake) (libraries `RelExist` — the
 dependency-free core — and `Scratch` — the mathlib-backed half); everything not load-bearing for this
 result has been moved to [`Archive/`](../../archive/formal/Archive) and [`docs/archive/`](../../archive/spec), referenced
 below as future work, never as a load-bearing citation.

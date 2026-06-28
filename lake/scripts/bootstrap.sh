@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Bootstrap the Lean 4 (+ mathlib) environment for formal/.
+# Bootstrap the Lean 4 (+ mathlib) environment for lake/.
 #
 # Idempotent and non-interactive. Designed for the network policy in our remote
 # sessions, which allows github.com (over HTTPS) + pypi.org but blocks
@@ -38,7 +38,7 @@ LEAN_VER="4.15.0"
 ELAN_BIN="$HOME/.elan/bin"
 TC_LINK="$HOME/.elan/toolchains/leanprover--lean4---v${LEAN_VER}"
 TC_CACHE="$HOME/.cache/lean-toolchains"
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"   # the formal/ directory
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"   # the lake/ package home
 export PATH="$ELAN_BIN:$PATH"
 
 log() { echo "[bootstrap] $*"; }
