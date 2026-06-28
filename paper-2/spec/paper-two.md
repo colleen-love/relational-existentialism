@@ -38,8 +38,17 @@ and the mathlib-gap audit in [`theory/spec/modular-mathlib-audit.md`](../../theo
    anchor. The joint semigroup's law `combinedFlow_add` *consumes* this commutation. **The headline upgrades
    from "located as the unitary and dissipative parts" to "proved one generator" — at equilibrium, under the
    named alignment `B1 = eigenbasis(ρ)`.** `[proved, at equilibrium; out-of-equilibrium = Connes–Rovelli, open]`.
-6. **Positioning** vs thermal time (Connes–Rovelli) + named frontiers (out-of-equilibrium thermal time, the
-   conservation law, whether the framework *forces* einselection onto the modular eigenbasis, type III — the
+6. **Einselection forces the alignment; presence, derived** (`Theory.Einselection`, foundation for paper
+   three). Spec XV's `B1 = eigenbasis(ρ)` is no longer assumed: it follows from the modular state being the
+   dissipator's **rest-state** (`𝒟(ρ) = 0 ⟹ ρ` diagonal, `stationary_eq_diagonal_real`). The einselected
+   conserved band `Peri` splits into fixed (knowing) ⊕ rotating (energy), and **presence** := its HS weight is
+   *conserved* (`presence_conserved`) and *Pythagorean* (`presence² = knowing² + energy²`, `pythagorean`).
+   The honest negative: the arrow is **loss, not relocation** (`arrow_is_loss_not_relocation`) — pure
+   phase-damping erases the transient rather than feeding the record, so paper three's conservation law needs
+   a population-transfer dissipator. `[presence: proved at equilibrium; relocation: refuted for the minimal
+   generator]`.
+7. **Positioning** vs thermal time (Connes–Rovelli) + named frontiers (out-of-equilibrium thermal time; the
+   conservation law as a *continuity equation* with population transfer, not pure conservation; type III — the
    last scoped in `modular-frontier.md`).
 
 ## Reading to flag, not assert
