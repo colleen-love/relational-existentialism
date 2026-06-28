@@ -1,0 +1,6 @@
+# Stale Lean build cache left at the old package home before the handoff-XVIII
+# `formal/` → `lake/` rename. The live package home is `lake/` (its `.lake/` is
+# ignored by `lake/.gitignore`); `formal/` here only ever holds regenerable build
+# artifacts and must never be committed.
+/formal/
+/lake/.lake

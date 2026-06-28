@@ -23,3 +23,32 @@ references no paper, and is the only root that moves freely.
 **Lazy-hoist rule:** the canonical home of a shared module is wherever it currently lives; hoisting to
 `theory/` happens *per-lemma, at first second-consumer*, not eagerly. The other ~14 paper-one modules have
 no `theory` consumer and remain paper-1-only — not duplicated here.
+
+## The canonical axiom layer (handoff XX)
+
+`Theory.Axioms` is the **canonical axiomatization** `{A1, A2, A3-process, D1}` the three papers share. It
+reframes **A3 as a process** — *relations co-direct attention asymmetrically in the relata*, with per-relatum
+capacity `α` (the `MutualCoupling.jointStep` co-direction step) — and **derives**, as theorems, the per-paper
+*readings* that were previously posited separately:
+
+- **Existence** (`self_exists`, `self_exists_stable`) — the process has fixed points, and a stable one is
+  reached generatively.
+- **The eigenform / `Peri`** (paper one) — `eigenform_of_fixed`, `self_is_periBand`, `energy_in_self`.
+- **The generative engine** (paper three) — `generative_law` (`orbit_engine2`), `generative_bounded`.
+- **The phase-bearing / modular self** (paper two) — `modular_preserves_self`, `modular_sustains_self`,
+  `modular_is_symmetry` (the modular flow is a modulus-one Schur multiplier that maps the self into itself,
+  sustains it, and commutes with the co-direction channel).
+
+Plus the supporting normalizations: `A1_dimension_generic` (finite vs infinite is the same A1 instantiated),
+`A2_priority` (`Priority.priority_universal`), `D1_trace_is_modular_limit`
+(`ModularFlow.modularFlow_maximally_mixed`). All carry the corpus-norm footprint
+`[propext, Classical.choice, Quot.sound]` — no `sorryAx`. Prose for an outside reader:
+[`AXIOMS.md`](AXIOMS.md).
+
+**Reversal of the freeze (Part C).** With the A3 divergence collapsed, the freeze that spec XIII protected by
+*duplication* shifts to **version-pinning**: `Theory.Axioms` is a *stable shared layer* (like `foundation/`,
+changing only backward-compatibly), papers **import or cite + pin** it rather than fork it, and the four
+`theory/` forks (`We`, `RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`) are now *confirmed*
+non-divergent — the byte-identity with paper one is no accident but the content of the collapse. `Theory.Axioms`
+itself adds **no** name to the shared `RelExist.*` namespace (it is namespaced `Theory.Axioms`), so it names
+the existing objects without redeclaring them.
