@@ -4,17 +4,24 @@
 > **assumes** — the three axioms **A1–A3** and the definition **D1** — each stated formally,
 > tagged `[fragment; status]`, and glossed against the plain-language view. What the theory
 > **proves** lives elsewhere: the theorems **3.1–3.3** and the structural results in
-> [03-theorems.md](03-theorems.md), the quantitative theorem in [03.7](03.7-sparsity.md).
+> [paper one](paper-one.md), the quantitative theorem in [03.7](../archive/03.7-sparsity.md).
 >
 > The typed labels separate assumed from proved: **A1–A3** are **axioms** (taken), **D1** is
 > a **definition** (notation, no logical content), **3.1–3.3** are **theorems**. The basis is four
 > items; only **A3** is a load-bearing wager — drop it and the theory collapses to the universal
 > solvent. (Each theorem's `#print axioms` footprint is recorded with its Lean name in
-> [03-theorems.md](03-theorems.md).)
+> [paper one](paper-one.md).)
 
 Throughout, `𝒞 = Cl(𝕋)`, `σ = Tr` is the self-relation operator (D1), `γ` is the
 symmetry, `Δ` the diagonal (cartesian fragment only), and `(R, ·, 1, ≤, β, c, ε)`
 the attention data of [§1.3](01-signature.md).
+
+> **Paper-one scope.** Paper one (see [`paper-one.md`](paper-one.md)) consumes A1–A3 **abstractly** — as
+> the baseline of its energy theorem (`Scratch/BandFromAxioms`: the channel is contractive and
+> nondegenerate, A3 read as the decoherence-free subalgebra). The *gfp mechanization* of A3 below
+> (`Attention.lean`, `Loop.lean`) and the sparsity that is its quantitative cash value are **archived** as
+> the foundation of papers two and three; they are linked here for completeness, not as load-bearing
+> citations for paper one.
 
 ---
 
@@ -79,7 +86,7 @@ read off. Behavior is a function of self, not a definition of it.
 bisimilarity `≈` — and it fixes, against the third-person `≅`, that the lived identity is the real
 one. The proved soundness `≈ ⊆ ≅`, the proved strictness `≈ ⊊ ≅`, and the resulting non-injective
 *forgetting from inside to outside* `D/≈ ↠ D/≅` (the decoherence of identity) are mechanized in
-[`Scratch/Identity.lean`](../../formal/Scratch/Identity.lean); see
+[`Scratch/Identity.lean`](../../formal/Archive/Scratch/Identity.lean); see
 [03.5](03.5-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
 ---
@@ -89,7 +96,7 @@ one. The proved soundness `≈ ⊆ ≅`, the proved strictness `≈ ⊊ ≅`, an
 **The discriminating axiom.** A **self / eigenform** is a state that is a fixed point
 of **co-directed attention-feedback** — equivalently, that is sustained by the
 relations it keeps looping. In the structural form ([§1.3](01-signature.md),
-[`Scratch/Attention.lean`](../../formal/Scratch/Attention.lean)): a self is an
+[`Scratch/Attention.lean`](../../formal/Archive/Scratch/Attention.lean)): a self is an
 eigenform of the co-directed attention operator `Φ_c` induced by the coupling, the
 carrier of selves being its greatest sustainable field,
 
@@ -109,8 +116,16 @@ dynamics, not a point. The channel-on-states (Schrödinger) reading, which would
 the level of a state, is the **road not taken** — and it is taken nowhere in the development:
 every self here is the eigenform `νΦ_c`, never an invariant density matrix.
 
+*Note (the gloss vs. the formalization).* "Decoherence-free subalgebra" and the formalized `νΦ_c` are
+**not** the same object: `νΦ_c` is the *strict* fixed point (the `μ = 1`, fixed/known band), while the
+decoherence-free subalgebra is the larger **peripheral** block `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which
+also carries the rotating (`‖μ‖ = 1, μ ≠ 1`, *energy*) band. Reading A3's gloss literally — the self **is**
+`Peri(Φ_c)` — is what closes the band-coincidence bet `H_align` of
+[03.15](03.15-band-coincidence.md#postscript--is-h_align-a-fourth-axiom-scratchbandfromaxiomslean)
+*without a fourth axiom* (`Scratch/BandFromAxioms.lean`): it is already A3, merely written in full.
+
 In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
-[`RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)) this reduces to the threshold
+[`RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean)) this reduces to the threshold
 form: with `loop_R` and budget `β`,
 
 $$
@@ -122,7 +137,7 @@ $$
 with carrier `Stab_R := { e : loop_R(e) = e, d(e) ≥ 2, d·λ ≤ β }`. Here `e` is
 unchanged by budgeted return, it required genuine recursion (`d ≥ 2`, not a one-off),
 and the cost of reaching the eigenform is affordable. (The bridge proving these two
-coincide — `loop_R(e)=e ⟺ d·λ ≤ β` — is [Step 3](03.7-sparsity.md).)
+coincide — `loop_R(e)=e ⟺ d·λ ≤ β` — is [Step 3](../archive/03.7-sparsity.md).)
 
 **Status: posit.** The philosophy's central wager, *asserted*. The existence of fixed
 points is underwritten by 3.1 and by Knaster–Tarski (`νΦ_c`); the *selection* — that
@@ -140,17 +155,17 @@ not spent down.
 **Role.** Everything discriminating about the theory routes through here. Drop A3
 and the resource bound and *nearly everything* models `𝕋` (the triviality pole);
 keep them and models thin out to the systems that actually stabilize selves. The
-candidate theorem of [03.7](03.7-sparsity.md) — **`Stab_R` is sparse under
+candidate theorem of [03.7](../archive/03.7-sparsity.md) — **`Stab_R` is sparse under
 finite `β`** — is the formal cash value of "a self is an achievement of recursion."
 
-**Mechanized — and its limits.** [`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean)
+**Mechanized — and its limits.** [`formal/Archive/RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean)
 proves `loop_R(e) = e ⟺ N(e) ≥ d(e) ⟺ d·λ ≤ β` (`loopR_isEigen_iff`) — but for an **abstract**
 self-relation endomap `σ`, *not* the relational `Φ_c`; the first `⟺` is just `StabilizesAt` unfolded
 (definitional), the second one arithmetic lemma. So it ties an abstract fixed point to a threshold.
 It does **not** force the depth floor `d ≥ 2` (the posit that makes selfhood rare — it is a
 hypothesis, and even the witness builds `d` in by construction), and it does not connect the
 trace/`νΦ_c` structure to the cost. The structural rarity is carried by the Agda nowhere-dense
-result ([03.7](03.7-sparsity.md)), not the counting bound.
+result ([03.7](../archive/03.7-sparsity.md)), not the counting bound.
 
 ---
 
@@ -189,9 +204,9 @@ The theorems that follow from this basis — **3.1** (to relate is to create), *
 (lived identity and the "we"), **3.3** (knowing vs feeling) — together with the
 structural results about relating (self, part, other, collection; routing vs directing;
 what knowing does to a relation) live in their own file, with honest status tags and Lean
-names: **[03-theorems.md](03-theorems.md)**. The quantitative theorem (sparsity) is
-[03.7](03.7-sparsity.md). Derived notions (self, distributed self, birth/death) are
-collected in [03-theorems.md](03-theorems.md) too.
+names: **[paper one](paper-one.md)**. The quantitative theorem (sparsity) is
+[03.7](../archive/03.7-sparsity.md). Derived notions (self, distributed self, birth/death) are
+collected in [paper one](paper-one.md) too.
 
 ---
 
@@ -208,6 +223,6 @@ This is a **stance the doctrine takes, not a proved theorem**: there is no forma
 these three are non-functorial (one cannot even state "valence" to prove it). Held as a
 stance it is the program naming its own boundary; stated as a theorem it would overreach.
 
-→ Continue to [03 — Theorems](03-theorems.md): what follows from the basis (3.1–3.3 and the
-structural results), including [03.7 — The Sparsity Conjecture](03.7-sparsity.md), the one
+→ Continue to [paper one](paper-one.md): what follows from the basis (3.1–3.3 and the
+structural results), including [03.7 — The Sparsity Conjecture](../archive/03.7-sparsity.md), the one
 place the spec reaches for a genuine **theorem** rather than a redescription.

@@ -5,6 +5,11 @@
 > the generating morphisms, and the one piece of genuinely added structure —
 > **attention as a bounded resource** — that the philosophy needs and the doctrine
 > does not supply for free.
+>
+> **Paper-one scope.** Paper one uses the signature's sorts, the trace, and the relational sort `≈`. The
+> *bounded-resource* machinery (`(R, ·, 1, ≤, β)`, mechanized in the **archived** `Attention.lean` /
+> `Loop.lean`) is the quantitative substrate of paper three (sparsity); it is presented here but is not
+> load-bearing for paper one's headline.
 
 We present a theory `𝕋`. Its **classifying category** `Cl(𝕋)` is the free
 traced-symmetric-monoidal-with-`ν` category on the data below, quotiented by the
@@ -56,12 +61,12 @@ self spends down, finiteness imposed from outside. That quietly smuggled in a
 exactly what relation-primacy denies. This section replaces it. Attention is a
 **consequence of the relational structure**: co-directed, generative, and finite *by
 constitution* rather than by allowance. Everything below is mechanized in
-[`formal/Scratch/Attention.lean`](../../formal/Scratch/Attention.lean).
+[`formal/Archive/Scratch/Attention.lean`](../../formal/Archive/Scratch/Attention.lean).
 
 ### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
 A perspective is finite *by definition* — bounded integration capacity is part of what
-being a located someone *is*, the same un-closable mirror as [3.3](03-theorems.md). We
+being a located someone *is*, the same un-closable mirror as [3.3](paper-one.md). We
 encode it as a **bounded capacity** `α` (a complete lattice, with top `⊤`); an
 attention **field** assigns each relatum a standing, `att : V → α`. The only bound is
 `⊤` of `α` — the perspective's own limit — and there is **no budget parameter `β`
@@ -111,7 +116,7 @@ $$
 $$
 
 via the same `ν`-modality (Knaster–Tarski / `OrderHom.gfp`) used for `≈` in
-[3.2](03-theorems.md): the self is *the most attention that can be co-sustained*. Two
+[3.2](paper-one.md): the self is *the most attention that can be co-sustained*. Two
 mechanized consequences make this **generative**, not allocative:
 
 - **Accumulation** (`orbit_ascending`, `orbit_le_gfp`): from a self-reinforcing seed
@@ -124,7 +129,7 @@ This is where **Mozart** lives: a node whose biological substrate is gone still 
 weight in `νΦ_c`, because the edges — scores, recordings, each listener's return — keep
 the coupling live; he radiates attention *through the fabric*. Death is those edges
 decaying, the weight fading *on the timescale of others' returning* — the same
-distributed-self story as [3.2](03-theorems.md)'s `𝔼`.
+distributed-self story as [3.2](paper-one.md)'s `𝔼`.
 
 ### 1.3.4 The resource budget as a special case `[reduction]`
 
@@ -132,7 +137,7 @@ The old budget model is not *wrong*; it is the **uniform, conserved, depleting**
 — attention treated as one conserved scalar drawn down at a fixed per-return cost.
 There, "how many times can I return to this one relation" collapses to `N = ⌊β/λ⌋` and
 the eigenform condition collapses to a threshold `d·λ ≤ β`. That regime is the subject of
-[`formal/RelExist/Loop.lean`](../../formal/RelExist/Loop.lean) — though the file works with an
+[`formal/Archive/RelExist/Loop.lean`](../../formal/Archive/RelExist/Loop.lean) — though the file works with an
 **abstract** self-relation endomap, and identifying *its* `σ` and depth `d` with `Φ_c` and the
 *convergence depth* of the orbit `Φ_c^{\,n}` is a **modeling reading, not mechanized**. The depth
 floor `d ≥ 2` — a self needs genuine return, not a one-off — is the posit that keeps selfhood rare;
@@ -172,7 +177,7 @@ domain has:
   mental-health framings, which have copying but no entanglement);
 - preserving the coupling and capacity `α` (the co-directed attention operator `Φ_c`
   of §1.3) → a model that **carries attention**, in which the sparsity statement of
-  [03.7](03.7-sparsity.md) can even be asked.
+  [03.7](../archive/03.7-sparsity.md) can even be asked.
 
 The **firewall theorem** previewed in the plan lives exactly here: because the
 cartesian-only domains have a natural `Δ` and the compact-closed fragment provably
