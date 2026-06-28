@@ -52,11 +52,25 @@ stated without it. A1 is independent in the strongest sense — removing it remo
 
 ## A2 — Relation primacy `[structural; both]`
 
-**Statement.** A state's identity **is** its first-person relational unfolding — the way it relates,
-lived forward — formalized as the greatest bisimulation `≈` (3.2, `νΘ`). Behavior under external
-contexts is a *function* of that identity, not its definition. Writing a *context* as a unary
-morphism-with-a-hole `C[-] : 𝒞(I, D) → 𝒞(I, X)` built from the generators, the third-person
-**observational identity** is
+**A2's text bundles two distinct claims, on opposite sides of `≈`.** Keeping them apart is the honest
+frame; the framework's mechanization has historically carried only the second.
+
+- **A2a — priority / no bare carrier (*below* `≈`).** Nothing individuates a state *beneath* its full
+  relational unfolding. The object **is** its relating, with no residue — the Yoneda commitment, "relation
+  is prior to the related." This is a claim about the *bottom*: relation is fundamental.
+- **A2b — surplus / first-person excess (*above* `≈`).** The lived relating `≈` strictly exceeds any
+  *restricted* outside view `≅`: `≈ ⊊ ≅`. This is a claim about the *gap above*: observation
+  under-determines identity.
+
+A2a is about what lies below `≈`; A2b about the gap above it. They are **independent** (Part C below), and a
+prior framing conflated them — `≈ ⊊ ≅` was treated *as* relation-primacy, but it is only a downstream
+*signature* of priority, one step removed, and is even compatible with the metaphysics A2a denies (a bare
+carrier finer than `≈` reads the strictness as "behaviour under-determines identity," the opposite of
+no-bare-carrier).
+
+**Statement.** A state's identity **is** its first-person relational unfolding — the way it relates, lived
+forward — formalized as the greatest bisimulation `≈` (3.2, `νΘ`). Writing a *context* as a unary
+morphism-with-a-hole `C[-] : 𝒞(I, D) → 𝒞(I, X)`, the third-person **observational identity** is
 
 $$
 s \;\cong\; t
@@ -64,32 +78,45 @@ s \;\cong\; t
 \forall\, C[-].\ C[s] = C[t],
 $$
 
-and the commitment is that `≈` is the real identity, of which `≅` is a **strictly lossy
-projection**: `≈ ⊊ ≅`. (The mechanization realizes `≅` concretely as *trace* equivalence — one
-particular observational equivalence; whether it coincides with the full *contextual* `≅` defined
-above is the open context-lemma question, deliberately left open, since proving it would be the full
-abstraction the inversion denies.)
+(mechanized concretely as *trace* equivalence — whether it coincides with the full *contextual* `≅` is the
+open context-lemma question, deliberately left open, since proving it would be the full abstraction the
+inversion denies).
 
-**Axiom.** There is **no bare carrier** *below* the relational unfolding `≈`: the only individuation
-a state has is how it relates, lived out. But identity is **not** exhausted by *external* observation
-— the inside is strictly finer than any outside can read (`≈ ⊊ ≅`). Soundness holds (lived sameness
-⇒ observed sameness, `≈ ⊆ ≅`); completeness is **denied**: contextual equivalence does not recover
-bisimilarity. This is not a failure to prove full abstraction — proving `≈ = ≅` would *contradict*
-the theory's own limitative core (3.3, the seam: you cannot completely view from outside what you
-relate to), so the equality is the one thing the theory must *not* assert.
+**A2a, mechanized (priority itself, not its signature).** No-bare-carrier is formalized **directly** as the
+**strong extensionality** of the world of selves `𝔼 = D/≈`: on `𝔼`, bisimilarity *is* equality
+(`Priority.bisim_quotient_eq`, [`Scratch/Priority.lean`](../../formal/Scratch/Priority.lean)). A self is
+exactly its behaviour, with no residue beneath `≈`; this is the **final-coalgebra** property — `𝔼` is the
+minimal realization, kernel exactly `≈`. Its **status** is honest: priority is *(a) definitional* — taking
+`𝔼 = D/≈` as the space of selves already **is** the commitment (states identified with behaviours) — *and
+(b) derivable* — that choice is *canonical*, proved by `bisim_quotient_eq` and holding for **every** system
+(`priority_universal`); it is **not** *(c) an extra posit*. Yoneda made into a theorem, not asserted beside
+its shadow.
 
-**Gloss.** *You are your lived relating, which exceeds how you appear.* Take away every relation and
-no bare self remains underneath (no carrier below `≈`) — Yoneda made into a commitment, an object is
-its relatings. But two selves can be observationally identical to every outside probe and still be
-different selves inside: the first-person surplus, the part of who you are that no external view can
-read off. Behavior is a function of self, not a definition of it.
+**A2b, mechanized (the surplus, sourced from the seam — Parts C & D).** The strictness `≈ ⊊ ≅` does **not**
+follow from A2a. Priority (A2a) holds *universally*, yet `≈ ⊊ ≅` *fails* for deterministic systems
+(`Identity.deterministic_bisim_iff_obsEq`: there `≈ = ≅`) — a claim that holds always cannot entail one that
+sometimes fails. The surplus needs an **independent premise**: that `≅` fails to be a bisimulation
+(`Identity.surplus_iff_obsEq_not_isBisimulation`). That premise is exactly the **seam** (3.3,
+`KnowingFeeling`): *you cannot completely view from outside what you relate to* = restricted observation
+cannot recover `≈`. So `≈ ⊊ ≅` is forced from *above* by the seam, never by priority. Soundness `≈ ⊆ ≅`
+(lived sameness ⇒ observed sameness) and the strictness `≈ ⊊ ≅`, with the resulting non-injective *forgetting*
+`D/≈ ↠ D/≅`, are mechanized in [`Scratch/Identity.lean`](../../formal/Archive/Scratch/Identity.lean) (archived,
+paper-two material); see [03.5](03.5-decoherence.md#the-identity-residue-you-are-your-lived-relating).
 
-**Role.** Structural premise. It is what licenses defining identity *coinductively* in **3.2** as the
-bisimilarity `≈` — and it fixes, against the third-person `≅`, that the lived identity is the real
-one. The proved soundness `≈ ⊆ ≅`, the proved strictness `≈ ⊊ ≅`, and the resulting non-injective
-*forgetting from inside to outside* `D/≈ ↠ D/≅` (the decoherence of identity) are mechanized in
-[`Scratch/Identity.lean`](../../formal/Archive/Scratch/Identity.lean); see
-[03.5](03.5-decoherence.md#the-identity-residue-you-are-your-lived-relating).
+**Outcome — clarified-as-two (handoff XII, outcome 2), bridge named.** A2 is honestly **two** axioms:
+priority **A2a** (now mechanized as no-bare-carrier, `Priority.lean`) and surplus **A2b** (`≈ ⊊ ≅`,
+`Identity.lean`), bridged by the seam — not one. This matters before the conservation paper leans on "relation
+primacy": that premise is **A2a**, which until now was the half *least* mechanized (carried only by its
+signature `≈ ⊊ ≅`); it is now formalized in its own right.
+
+**Gloss.** *You are your lived relating, which exceeds how you appear.* Take away every relation and no bare
+self remains underneath (A2a, no carrier below `≈`). But two selves can be observationally identical to every
+outside probe and still differ inside (A2b, the first-person surplus the seam protects). Behavior is a
+function of self, not a definition of it.
+
+**Role.** Structural premise. A2a licenses defining identity *coinductively* in **3.2** as the bisimilarity
+`≈ := νΘ` (the priority `≈` paper one's spine actually uses); A2b fixes, against the third-person `≅`, that
+the lived identity is the real one (the surplus, sequel material).
 
 ---
 

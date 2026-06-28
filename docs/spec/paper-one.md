@@ -53,10 +53,12 @@ mechanized here is exactly **gfp-existence** (Knaster–Tarski) — generic to a
 created selves are *rare* (the discriminating content that keeps this from being a universal solvent) is
 paper three's sparsity, **not** claimed in this step. Identity itself is the greatest bisimulation
 `≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are your lived relating, not a bare carrier
-beneath it. (What the headline path actually uses is *only* this `≈ = νΘ` — the kept `We.bisim`. The
-soundness/strictness inversion `≈ ⊆ ≅ ⊊` is **not** load-bearing here: it is mechanized only in archived
-`Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at all. An
-earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
+beneath it. (What the headline path actually uses is *only* this `≈ = νΘ` — the kept `We.bisim` — i.e. A2's
+**priority** half, **A2a** (no bare carrier; see [`02-axioms.md`](02-axioms.md)), now mechanized directly as
+the strong extensionality of `𝔼 = D/≈` in `Scratch/Priority.lean` (`bisim_quotient_eq`). The **surplus** half,
+**A2b** — the soundness/strictness inversion `≈ ⊆ ≅ ⊊` — is **not** load-bearing here: it is mechanized only
+in archived `Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at
+all. An earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
 
 → detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md),
 [`03.2-lived-identity.md`](03.2-lived-identity.md).
