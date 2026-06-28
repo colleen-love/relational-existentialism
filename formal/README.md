@@ -47,14 +47,15 @@ fitting, since the mirror's incompleteness is the contrapositive of a one-line d
 | **Knowing decoheres** — the σ-move retracts onto the classical shadow; the copy-defect | `Decoherence.{dephase, copyDefect, copyDefect_eq_zero_iff, defectSq, classical_comm}` | [03.5](../docs/spec/03.5-decoherence.md) | ✅ proved |
 | **Directed attention** — selective decoherence; the defect only drops | `Decoherence.{attend, defectSq_attend_le, defectSq_attend_mono, defectSq_attend_plus_lt, defectSq_attend_shared_pos}` | [03.5](../docs/spec/03.5-decoherence.md) | ✅ proved |
 | **The seam forces the subalgebra** — the un-attendable block survives every available knowing (operational seam, over ℝ) | `SeamForcing.{attend_fixes_seam, knowSeam, self_cannot_fully_decohere, seam_forces_subalgebra, direction_uniform_in_seam, target_depends_on_seam}` | [03.5](../docs/spec/03.5-decoherence.md), [03.6](../docs/spec/03.6-time-flow.md) | ✅ proved |
-| **The operational seam over ℂ** — same positivity argument with `‖·‖²`, so clause A and clause B share one model (the bridge stays open) | `SeamForcing.{defectSqC, self_cannot_fully_decohereC}` | [03.8](../docs/spec/03.8-space-energy.md) | ✅ proved |
+| **The spine in one ℂ field** — operational seam, arrow, flow, and energy band all over ℂ (with the `‖·‖²` coherence `defectSqC`); the ℝ shadow's missing rotating band is now a remark, not a model boundary | `Decoherence.{defectSqC, defectSqC_eq_zero_iff}`, `SeamForcing.self_cannot_fully_decohereC` | [03.8](../docs/spec/03.8-space-energy.md) | ✅ proved |
 | **The quantum seam (route 2, first cut)** — the seam on the actual `dephase`: lossy, irreversible, via no-broadcasting | `QuantumSeam.{dephase_not_injective, no_dephase_recovery, dephase_fixes_iff_copyable}` | [03.5](../docs/spec/03.5-decoherence.md) | ✅ proved |
-| **Orientation from the seam** — the lossy idempotent `E` generates the directed, temporal, irreversible knower→known arrow | `Orientation.{Knowing, knows_antisymm, arrow_strictAnti, no_recovery, dephaseKnowing}` | [03.5](../docs/spec/03.5-decoherence.md), [03.6](../docs/spec/03.6-time-flow.md) | ✅ proved |
-| **Time as flow** — the graded monovariant: coherence antitone, strictly dropping, geometric decay to the fixed set | `TimeFlow.{Flow, Flow.coh_orbit_antitone, Flow.coh_orbit_strictAnti, GeometricFlow.coh_orbit_tendsto_zero, dephaseFlow}` | [03.6](../docs/spec/03.6-time-flow.md) | ✅ proved |
+| **Orientation from the seam** — the lossy idempotent `E` generates the directed, temporal, irreversible knower→known arrow (ℝ *and* ℂ) | `Orientation.{Knowing, knows_antisymm, arrow_strictAnti, no_recovery, dephaseKnowing, dephaseKnowingC, dephaseC_arrow_plusC_strictAnti, dephaseC_no_recovery}` | [03.5](../docs/spec/03.5-decoherence.md), [03.6](../docs/spec/03.6-time-flow.md) | ✅ proved |
+| **Time as flow** — the graded monovariant: coherence antitone, strictly dropping, geometric decay to the fixed set (ℝ *and* ℂ) | `TimeFlow.{Flow, Flow.coh_orbit_antitone, Flow.coh_orbit_strictAnti, GeometricFlow.coh_orbit_tendsto_zero, dephaseFlow, dephaseFlowC, defectSqC_iterate, defectSqC_plusC_tendsto_zero}` | [03.6](../docs/spec/03.6-time-flow.md) | ✅ proved |
 | **An arrow's limit is a knowing** (instance converse) | `KnowingFromArrow.{arrow_limit_is_knowing, limit_idempotent, limit_is_seam_CE, limit_annihilates_potential}` | [03.7](../docs/spec/03.7-knowing-from-arrow.md) | ✅ proved |
 | **Energy = the rotating band** — the phase-damping channel splits into fixed / rotating / transient; one generator `L = log μ`, energy its imaginary spectrum | `RotatingSpectrum.{schur, schur_fixed, schur_sustained, schur_transient_tendsto, phaseChannel_eigen, schur_iterate_norm_exp, genReal, genImag, energy}` | [03.8](../docs/spec/03.8-space-energy.md) | ✅ proved |
-| **Band coincidence** — on one carrier, seam-protected band = rotating (energy) band; the witness and the counter-witness | `BandCoincidence.{seamBand, rotatingBand, band_coincidence, coincidence_witness, three_term_without_alignment}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (under the C1 reading) |
-| **…from A1–A3** — A3's `Peri(Φ_c)` *is* the conserved band; alignment follows from contractivity + nondegeneracy once the seam is read as C1 | `BandFromAxioms.{Peri, peri_iff_mem_conservedBand, decoherenceFreeSeam_iff_offdiag_conserved, align_of_contractive, band_coincidence_from_axioms, seam_energy_sustained}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (C1 a disclosed reading) |
+| **Band coincidence (spectral)** — on one carrier, the conserved-band predicate = rotating (energy) band; the witness and the counter-witness | `BandCoincidence.{seamBand, rotatingBand, band_coincidence, coincidence_witness, three_term_without_alignment}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (under the C1 reading) |
+| **…from A1–A3** — A3's `Peri(Φ_c)` *is* the conserved band; alignment follows from contractivity + nondegeneracy once the spectral band is read as C1 | `BandFromAxioms.{Peri, peri_iff_mem_conservedBand, conservedOffdiag, conservedOffdiag_iff_offdiag_conserved, align_of_contractive, band_coincidence_from_axioms, seam_energy_sustained}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (C1 a disclosed reading) |
+| **Step two — the bridge test** — operational seam *is* the operationally-conserved band, **exactly & structurally** (seam pinned from attention, no `‖μ‖`); `= energy` stays open, obstruction named (the 0/1 attention channel has no rotating spectrum, so its conserved edges are *fixed*, not energy) | `SeamConserved.{offdiag_conserved_iff_seam, seam_edge_exact, attend_fixes_are_identity}` | [03.9](../docs/spec/03.9-band-coincidence.md) | ✅ proved (theorem + named obstruction) |
 
 `Scratch.We` formalizes **theorem 3.2** as `νΘ = OrderHom.gfp Θ`, with coinduction, the equivalence
 proof, and the shared world `𝔼 := D/≈`. This lattice-theoretic reading has a second, independent
@@ -63,10 +64,13 @@ doctrine's lived identity.
 
 **What the kept tags do — and do not — claim** (see [paper one](../docs/spec/paper-one.md) honest scope):
 the proved skeleton is `[proved]`; that the conserved band *is* energy, and that the flow *is* physical
-time, are `[reading]`s; that the *operational* seam (`self_cannot_fully_decohere{,C}`) *is* the spectral
-energy band is the **`[open]` unifier** — the two are now co-located in one ℂ model
-(`self_cannot_fully_decohereC`) but their identity is unproved. **C1** (self = `Peri(Φ_c)`, beyond A3's
-formalized `νΦ_c`) is a disclosed posit/reading, not a derivation.
+time, are `[reading]`s. The seam↔energy joint was *tested* in step two (`SeamConserved`): **proved** that
+the operational seam *is* the operationally-conserved band, exactly and structurally
+(`offdiag_conserved_iff_seam`, seam pinned from attention with no `‖μ‖`); **still `[open]`** that this is
+the *rotating energy* band, with a named obstruction — the attention channel is 0/1, so its conserved
+edges are *fixed*, never rotating, and linking it to the phase channel `schur μ` is a single cross-channel
+posit (`Align`). **C1** (self = `Peri(Φ_c)`, beyond A3's formalized `νΦ_c`) is a disclosed posit/reading,
+not a derivation.
 
 ---
 

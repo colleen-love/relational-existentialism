@@ -397,4 +397,75 @@ theorem dephaseFlow_total_drop (p : ℝ) (hp0 : 0 < p) (hp1 : p ≤ 1) (M : Matr
   (dephaseFlow' (A := A) p hp0 hp1).total_drop M
     ((dephaseFlow (A := A) p hp0 hp1).coh_orbit_tendsto_zero M)
 
+/-! ## §5 The graded arrow over ℂ — the flow in the energy band's field
+
+`Flow`/`GeometricFlow` carry a *real* potential `coh`, so they are field-agnostic: only the channel and
+the coherence measure change. The partial-dephasing semigroup and its geometric decay port to ℂ with
+`Decoherence.defectSqC`, so the graded arrow lives in the **same field** as `RotatingSpectrum`'s energy
+band. (`partialDephase`'s real shadow has no rotating spectrum — `dephase_no_rotating_peripheral`; the
+point of ℂ is that the rotating/energy band can coexist with the arrow here, no longer in a separate
+model.) -/
+
+/-- The partial-dephasing flow over ℂ: `(1−p)·id + p·dephase`, a real-combination channel on
+ℂ-matrices (the ℂ counterpart of `partialDephase`). -/
+noncomputable def partialDephaseC (p : ℝ) (M : Matrix A A ℂ) : Matrix A A ℂ :=
+  (1 - p) • M + p • dephase M
+
+omit [Fintype A] in
+/-- One step scales the felt (off-diagonal) mass by `(1−p)`, entrywise — over ℂ. -/
+lemma copyDefect_partialDephaseC (p : ℝ) (M : Matrix A A ℂ) (i j : A) :
+    copyDefect (partialDephaseC p M) i j = (1 - p) • copyDefect M i j := by
+  rcases eq_or_ne i j with e | e
+  · simp [copyDefect_apply, e]
+  · have hd : dephase M i j = 0 := by rw [dephase_apply, if_neg e]
+    rw [copyDefect_apply, if_neg e, copyDefect_apply, if_neg e]
+    show ((1 - p) • M + p • dephase M) i j = (1 - p) • M i j
+    rw [add_apply, smul_apply, smul_apply, hd, smul_zero, add_zero]
+
+omit [Fintype A] in
+/-- The felt mass after `n` steps: `(1−p)^n` times the original, entrywise — over ℂ. -/
+lemma copyDefect_iterateC (p : ℝ) (M : Matrix A A ℂ) (n : ℕ) (i j : A) :
+    copyDefect ((partialDephaseC p)^[n] M) i j = (1 - p) ^ n • copyDefect M i j := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', copyDefect_partialDephaseC, ih, smul_smul, ← pow_succ']
+
+/-- **The graded monovariant, exactly — over ℂ.** `defectSqC (partialDephaseC p ^[n] M) =
+((1−p)²)^n · defectSqC M`: the squared-modulus off-diagonal mass decays geometrically along the orbit,
+rate `(1−p)²`, in the energy band's field. -/
+theorem defectSqC_iterate (p : ℝ) (M : Matrix A A ℂ) (n : ℕ) :
+    defectSqC ((partialDephaseC p)^[n] M) = ((1 - p) ^ 2) ^ n * defectSqC M := by
+  have hnorm : ∀ z : ℂ, ‖((1:ℝ) - p) ^ n • z‖ ^ 2 = ((1 - p) ^ 2) ^ n * ‖z‖ ^ 2 := by
+    intro z
+    rw [norm_smul, mul_pow, Real.norm_eq_abs, sq_abs, ← pow_mul, ← pow_mul, Nat.mul_comm]
+  unfold defectSqC
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun i _ => ?_)
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl (fun j _ => ?_)
+  rw [copyDefect_iterateC]
+  exact hnorm (copyDefect M i j)
+
+/-- **The genuine geometric flow over ℂ.** `partialDephaseC p` (`0 < p ≤ 1`) with potential `defectSqC`
+is a `GeometricFlow` at rate `γ = (1−p)²`. So all of §1–§2 fire over ℂ: the copy-defect is a strict
+graded monovariant converging to `0` at geometric rate `(1−p)²` — the arrow as a flow, in the field that
+also carries the energy band. -/
+noncomputable def dephaseFlowC (p : ℝ) (hp0 : 0 < p) (hp1 : p ≤ 1) : GeometricFlow (Matrix A A ℂ) where
+  step := partialDephaseC p
+  coh := defectSqC
+  coh_nonneg := defectSqC_nonneg
+  rate := (1 - p) ^ 2
+  rate_nonneg := sq_nonneg _
+  rate_lt_one := by nlinarith [mul_pos hp0 (show (0:ℝ) < 2 - p by linarith)]
+  coh_step_eq := fun M => by
+    have h := defectSqC_iterate p M 1
+    rwa [Function.iterate_one, pow_one] at h
+
+/-- **The feeling decays to `0`** along the ℂ orbit of `plusC`: the geometric-rate convergence of
+T-flow, over ℂ. -/
+theorem defectSqC_plusC_tendsto_zero (p : ℝ) (hp0 : 0 < p) (hp1 : p ≤ 1) :
+    Tendsto (fun n => defectSqC ((partialDephaseC p)^[n] plusC)) atTop (𝓝 0) :=
+  (dephaseFlowC (A := Fin 2) p hp0 hp1).coh_orbit_tendsto_zero plusC
+
 end RelExist.TimeFlow

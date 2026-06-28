@@ -186,4 +186,41 @@ theorem dephase_no_recovery :
   (dephaseKnowing (Fin 2)).no_recovery
     ⟨plus, dephase plus, (fun h => dephase_plus_ne h.symm), (dephase_idem plus).symm⟩
 
+/-! ### The arrow over ℂ — one field for the seam, the arrow, and the energy band
+
+`Knowing` is field-agnostic: `knows_antisymm`, `arrow_strictAnti`, `no_recovery` need only an idempotent
+`E` and a real coherence functional vanishing exactly on the fixed points. So the arrow ports to ℂ by a
+single new *instance* — `E = dephase` (ring-generic), `coh = defectSqC` (`Decoherence`'s ℂ measure) —
+with every arrow theorem above carrying over unchanged. This is what puts the knower→known arrow in the
+*same* model as `RotatingSpectrum`'s energy band. -/
+
+/-- **The knowing structure realized by decoherence, over ℂ.** `E = dephase`, `coh = defectSqC`. The
+abstract `Knowing` theorems (`knows_antisymm`, `arrow_strictAnti`, `no_recovery`) hold for it verbatim. -/
+noncomputable def dephaseKnowingC (A : Type) [Fintype A] [DecidableEq A] : Knowing (Matrix A A ℂ) where
+  E := dephase
+  idem := dephase_idem
+  coh := defectSqC
+  coh_nonneg := defectSqC_nonneg
+  coh_zero_iff_fixed := fun _ => defectSqC_eq_zero_iff.trans dephase_eq_self_iff.symm
+
+/-- The ℂ orientation is **non-vacuous**: the ℂ superposition `plusC` is a strict source, known as its
+decohered shadow, distinct from it. -/
+theorem dephaseC_arrow_plusC :
+    (dephaseKnowingC (Fin 2)).Arrow plusC (dephase plusC) :=
+  ⟨rfl, fun h => (fun h' => plusC_not_classical (dephase_eq_self_iff.1 h')) h.symm⟩
+
+/-- **The arrow of relational time over ℂ**: knowing `plusC` strictly drops its feeling to zero. -/
+theorem dephaseC_arrow_plusC_strictAnti :
+    (dephaseKnowingC (Fin 2)).coh (dephase plusC) < (dephaseKnowingC (Fin 2)).coh plusC :=
+  (dephaseKnowingC (Fin 2)).arrow_strictAnti dephaseC_arrow_plusC
+
+/-- **Irreversibility over ℂ.** On the genuine `dephase` over ℂ no recovery map exists — the arrow
+cannot run back, in the same field as the energy band. -/
+theorem dephaseC_no_recovery :
+    ¬ ∃ R : Matrix (Fin 2) (Fin 2) ℂ → Matrix (Fin 2) (Fin 2) ℂ,
+      ∀ M, R (dephase M) = M :=
+  (dephaseKnowingC (Fin 2)).no_recovery
+    ⟨plusC, dephase plusC, (fun h => (fun h' => plusC_not_classical (dephase_eq_self_iff.1 h')) h.symm),
+      (dephase_idem plusC).symm⟩
+
 end RelExist.Orientation

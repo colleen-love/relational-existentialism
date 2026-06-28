@@ -26,8 +26,12 @@ The kept closure (15 Scratch modules over 5 `RelExist` core modules):
 * `Scratch.RotatingSpectrum` — energy as the rotating band (03.9).
 * `Scratch.BandCoincidence` / `Scratch.BandFromAxioms` — the conserved remainder coincides with energy,
   from A1–A3 (03.15).
-* `Scratch.SeamForcingC` — clause A's operational seam re-exhibited over **ℂ**, so it shares one model
-  with clause B's energy band (03.8 two-models note). Co-locates the clauses; the bridge stays open.
+* `Scratch.SeamForcingC` — clause A's operational seam re-exhibited over **ℂ**, so the seam, the arrow
+  (`Orientation.dephaseKnowingC`), the flow (`TimeFlow.dephaseFlowC`), and the energy band share one
+  ℂ model (03.8 two-models note).
+* `Scratch.SeamConserved` — **step two, the bridge test**: the operational seam *is* the operationally
+  conserved band, exactly and structurally (`offdiag_conserved_iff_seam`); the energy identification stays
+  open, with the obstruction named (attention is a 0/1 channel, no rotating spectrum).
 -/
 import Scratch.Trace
 import Scratch.KnowingFeeling
@@ -36,3 +40,4 @@ import Scratch.KnowingFromArrow
 import Scratch.RotatingSpectrum
 import Scratch.BandFromAxioms
 import Scratch.SeamForcingC
+import Scratch.SeamConserved

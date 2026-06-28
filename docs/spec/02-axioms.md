@@ -124,7 +124,7 @@ fixed/known band), while the sustainable field is the larger **peripheral** bloc
 `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which also carries the rotating (`‖μ‖ = 1, μ ≠ 1`, *energy*) band.
 This is now **mechanized**: `Scratch/BandFromAxioms.lean` defines `Peri` (entrywise) and proves
 `peri_iff_mem_conservedBand` — A3's sustainable field *is* exactly the conserved (modulus-one) band — with
-the seam its off-diagonal part (`decoherenceFreeSeam_iff_offdiag_conserved`) and `νΦ_c` its `μ = 1`
+the seam its off-diagonal part (`conservedOffdiag_iff_offdiag_conserved`) and `νΦ_c` its `μ = 1`
 sub-band (`fixedBand_le_conservedBand`). The identification the self **is** `Peri(Φ_c)` — call it **C1** —
 is what closes the band-coincidence bet `H_align` of
 [03.9](03.9-band-coincidence.md#postscript--is-h_align-a-fourth-axiom-scratchbandfromaxiomslean)

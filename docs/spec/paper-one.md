@@ -140,7 +140,7 @@ That the conserved remainder coincides with the rotating/energy band turns on **
 that the self *is* A3's *"greatest sustainable field"* `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, not the strict
 `νΦ_c` the axiom formalizes. That field is now mechanized as **exactly** the conserved (modulus-one) band
 (`BandFromAxioms.peri_iff_mem_conservedBand`), *including* the rotating band, with the seam its off-diagonal
-part (`decoherenceFreeSeam_iff_offdiag_conserved`) and `νΦ_c` (the known/diagonal record) its `μ = 1`
+part (`conservedOffdiag_iff_offdiag_conserved`) and `νΦ_c` (the known/diagonal record) its `μ = 1`
 sub-band (`fixedBand_le_conservedBand`). With the seam *so read*, and given only that the channel is
 contractive (attention never amplifies) and nondegenerate, the alignment is a one-line consequence
 (`BandFromAxioms.align_of_contractive`, `band_coincidence_from_axioms`) and the seam-protection is
@@ -153,26 +153,30 @@ a fourth posit. Either way it is named and tagged here, and the reader judges. T
 this conserved band with **energy** is itself a standing `[reading]` (below).
 
 **What clause B rests on — and what it does not.** Clause B rests on **A3-read-as-`Peri`** (exact
-magnitude conservation, `genReal = 0`) plus the generator split — **not** on the operational seam.
-`band_coincidence` relates the *spectral* seam `decoherenceFreeSeam` (defined by `‖μ‖ = 1`) to the
-rotating band; it does **not** connect the *operational*, un-attendable seam of
-`SeamForcing.self_cannot_fully_decohere` to the energy band. Those are two kinds of "conserved":
-`Peri`/`genReal = 0` is **exact** (the magnitude is held), while the operational seam gives only a
-**positive floor** (the coherence never fully vanishes — a clause-A fact, the arrow never completing).
-The identification *operational seam = energy band* is the **open unifier**, stated and not proved; the
-energy clause does not borrow the seam's `[proved, 0 ax]` weight.
+magnitude conservation, `genReal = 0`) plus the generator split. `band_coincidence` relates the
+*spectral* conserved band `conservedOffdiag` (defined by `‖μ‖ = 1`) to the rotating band; it does **not**
+by itself connect the *operational*, un-attendable seam to the energy band.
 
-**A model note — the mismatch removed, the joint still open.** The operational seam was first exhibited
-over `Matrix A A ℝ` (`SeamForcing.self_cannot_fully_decohere`), while the energy/rotating band lives over
-ℂ — and the real self-adjoint model *provably carries no rotating band*
-(`RotatingSpectrum`/`dephase_no_rotating_peripheral`); energy appears only after extending to ℂ. So the
-two clauses once sat in **different, at-the-relevant-point mutually exclusive** models, joined across an
-unmechanized gap. That mismatch is now gone: `SeamForcing.self_cannot_fully_decohereC`
-(`Scratch/SeamForcingC.lean`) re-exhibits the operational seam **over ℂ** (the same positivity argument —
-attention cannot aim at the aimer — with the squared modulus `‖·‖²` in place of the square), so **both
-clauses now live in one ℂ model**. This does **not** prove the joint — whether that un-attendable block
-*is* the rotating band is still the open unifier — it only **co-locates** the two, leaving the joint as the
-single remaining gap rather than a gap-plus-a-model-mismatch.
+**Step two — what the bridge test found (and the spine now lives in one ℂ field).** Two earlier gaps are
+closed. *Different models:* the operational seam, the arrow, the flow, and the energy band now all live
+over ℂ (`SeamForcing.self_cannot_fully_decohereC`, `Orientation.dephaseKnowingC`,
+`TimeFlow.dephaseFlowC`, `RotatingSpectrum`) — the real shadow's *absence* of a rotating band
+(`dephase_no_rotating_peripheral`) is now just a remark about the ℝ-restriction, not a model boundary the
+headline straddles. *Floor vs exact:* the operational seam is in fact **exactly** conserved, entrywise,
+and is **exactly** the operationally-conserved band — a theorem characterized *from attention alone, with
+no `‖μ‖`*: `SeamConserved.offdiag_conserved_iff_seam` proves an off-diagonal edge is fixed by *every*
+available knowing **iff** it lies in the seam `J`. So **operational seam = operationally-conserved band**
+is now `[proved]`, structural and exact — not a floor, not a reading.
+
+**But "= energy" stays `[open]`, now with a sharp obstruction — not a vague gap.** That operational
+conservation is conservation under the **0/1 attention gates** `attend S`, which carry no phase: a
+conserved edge is *fixed* (`μ = 1`), never rotating (`SeamConserved.attend_fixes_are_identity`). The
+rotating/energy band (`‖μ‖ = 1, μ ≠ 1`) belongs to the *continuous phase channel* `schur μ`, a different
+dynamics whose modulus-one set is an independent datum. Identifying the operational seam with `schur μ`'s
+rotating band — that the genuine phase-damping physics damps *exactly* the attendable edges (`Align`) —
+links two channels and is **not** forced by the attention structure (forcing it by defining the seam
+spectrally is the barred tautology). So clause B's energy joint is **not** upgraded: *operational seam =
+energy band* remains the open unifier, but the gap is now a single, named, cross-channel posit.
 
 → detail: [`03.8-space-energy.md`](03.8-space-energy.md),
 [`03.9-band-coincidence.md`](03.9-band-coincidence.md).
@@ -214,14 +218,17 @@ it, **energy is not a second reading**: the generator of the flow is the Hamilto
 dissipative part (`genReal < 0`) and energy its unitary spectrum (`genImag` on `ker genReal`), so "the
 conserved band = energy" follows by the definition of energy as the conserved charge of time-translation
 (Noether/Stone), not by a fresh analogy. What stays genuinely open beside it is the **unifier** —
-*operational seam = energy band* — relating the un-attendable seam (`SeamForcing`, a positive floor) to the
-exactly-conserved generator band (`genReal = 0`); these are two senses of "conserved," kept apart. (The two
-were also exhibited in *different models* — the operational seam over `Matrix A A ℝ`, the energy band over
-ℂ, with the real self-adjoint model carrying **no** rotating band; `SeamForcing.self_cannot_fully_decohereC`
-now re-exhibits the operational seam over ℂ, so the unifier is the **only** remaining gap, not a gap plus a
-model mismatch.) Strip the reading and what remains is the proved skeleton: a lossy self-relating projection
-forces a structural remainder, orders an irreversible arrow, and conserves exactly its rotating
-(`genReal = 0`) band, whose imaginary spectrum is energy.
+*operational seam = energy band*. The step-two test (`Scratch/SeamConserved.lean`) sharpened this from a
+vague gap to a precise one. **Proved:** the operational seam *is* the operationally-conserved band, exactly
+and structurally — `offdiag_conserved_iff_seam` characterizes the seam from attention alone (no `‖μ‖`), and
+the spine is now one ℂ field (`self_cannot_fully_decohereC`, `dephaseKnowingC`, `dephaseFlowC`). **Still
+open:** that this band is the *rotating energy* band. The obstruction is exact: operational conservation is
+conservation under the 0/1 attention gates (no phase — conserved means *fixed*, `μ = 1`,
+`attend_fixes_are_identity`), whereas energy needs the continuous phase channel `schur μ` (`‖μ‖ = 1, μ ≠ 1`);
+linking the two channels (that the physics damps exactly the attendable edges, `Align`) is a single
+cross-channel posit the attention structure does not force. Strip the reading and what remains is the proved
+skeleton: a lossy self-relating projection forces a structural remainder, orders an irreversible arrow, and
+conserves exactly its rotating (`genReal = 0`) band, whose imaginary spectrum is energy.
 
 ## What is not in this paper
 
