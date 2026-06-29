@@ -2,8 +2,8 @@
 
 > *The arena ([`00-domain.md`](00-domain.md)) fixed the kind of structure. This page fixes the **specific
 > language** — and fixes the language only.* **It does not name the self.** The self is the *derived* fixed
-> relation of the co-direction dynamics ([`02-axioms.md`](02-axioms.md)); a signature that named it would
-> posit the paper's conclusion and make the derivation circular.
+> relation of the dynamics ([`02-foundation.md`](02-foundation.md)); a signature that named it would posit the
+> paper's conclusion and make the derivation circular.
 
 ## Sorts
 
@@ -22,14 +22,16 @@
 | `≤`, `⨆`, `∧` | order on `A ⇸ B` | inclusion, joins (completeness), meets |
 
 No further relating generators are primitive. Specific relations enter per-model; the content of the theory
-is in the **two axioms** and the **one definition**, not in a stock of named arrows.
+is in the **one definition** (D1) on the seam-chosen arena — **there are no axioms** — not in a stock of named
+arrows.
 
 ## Attention is not a separate object
 
 There is **no attention field** and no separate "attention" generator. **Attention is the relation's own
 `Q`-weight, read at each end:** the weight `R` carries bears on one end, the weight of its converse `R°` on
-the other. "Co-directed attention" is just this two-endedness of a single relation (A2) — it needs no agent,
-no field, and nothing added to the vocabulary above.
+the other. "Co-directed attention" is just this two-endedness of a single relation — it needs no agent, no
+field, and nothing added to the vocabulary above. (Whether the two-endedness is *load-bearing* — the former
+A2 — is **open**, [`10-open-questions.md`](10-open-questions.md); the signature only fixes the language.)
 
 ## No self-definition — on purpose
 

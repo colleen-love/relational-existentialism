@@ -1,10 +1,16 @@
 # 03 — The theorem debt: an exploration
 
 > *The deliverable is the **truth** — theorem or obstruction — not a green checkmark.* Each theorem of the
-> debt ([`02-axioms.md`](02-axioms.md)) was attempted relationally, to find out **whether it is true** on the
+> debt ([`02-foundation.md`](02-foundation.md)) was attempted relationally, to find out **whether it is true** on the
 > new arena. This page records, per theorem: **holds / obstructed / collapsed**, the **axioms it actually
 > invoked** (how we find the minimal set), and — for obstructions — the **precise blocker**. Nothing was
 > forced; the Lean carries no `sorry`.
+
+> **Current state (handoff I.IX).** The minimal-set question resolved: the headline cluster (existence,
+> feedback trace, seam, the arrow's irreversibility) stands on **`{arena, D1, completeness}` — no axioms**
+> ([`02-foundation.md`](02-foundation.md), [`04-provenance.md`](04-provenance.md)). The sections and stacked
+> per-handoff updates below are the **honest exploration record** that got there; read them as the trail, the
+> foundation doc as the destination. Open items live in [`10-open-questions.md`](10-open-questions.md).
 
 ## Summary
 

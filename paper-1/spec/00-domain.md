@@ -1,9 +1,9 @@
 # 00 — Domain: the relational arena
 
 > *Paper one derives a self; it does not define one.* This page fixes the arena in plain language — a
-> **quantaloid / allegory in which relations are the primitive arrow** — and flags the three **open seams**
-> the arena rests on, to be tested by the exploration ([`03-theorem-debt.md`](03-theorem-debt.md)), not
-> assumed.
+> **quantaloid / allegory in which relations are the primitive arrow**, with `Q` the hyperfinite **type III₁
+> factor**, chosen by the **seam** (opacity ⇒ tracelessness ⇒ type III) — **never** by asymmetry. The
+> foundation that sits on it is a **single definition, no axioms** ([`02-foundation.md`](02-foundation.md)).
 
 ## The arena: relations are the primitive
 
@@ -17,7 +17,8 @@ there is simply nothing more basic than a relation to choose against.
 The arena carries, **natively** (these are structure the quantaloid/allegory has, not things we posit):
 
 - **Converse** `R° : B ⇸ A` — a free involution `(R°)° = R`. It is **not** identified with `R`: a relation
-  and its reverse are different arrows. (This is what lets asymmetry be stated — A1.)
+  and its reverse are different arrows. (Native structure — the "other end" of every relation; the
+  operator-world analogue is the modular conjugation `J`.)
 - **Relational composition** `R ; S : A ⇸ C` (for `R : A ⇸ B`, `S : B ⇸ C`) — relating through, with an
   identity relation `1_A : A ⇸ A` as unit.
 - **The inclusion order** `R ≤ S` with **meets and joins**, and **completeness**: arbitrary suprema exist, so
@@ -28,47 +29,44 @@ The arena carries, **natively** (these are structure the quantaloid/allegory has
   rather than two unrelated structures.
 
 Attention is **not a separate object** added on top. It is the relation's own **`Q`-weight, read at each
-end** — `R` bears its weight on one end, `R°` on the other. Two-endedness *is* co-direction (A2); there is no
-field of attention over the relata and no agent who "has" it.
+end** — `R` bears its weight on one end, `R°` on the other. (Whether this two-endedness is *load-bearing* —
+the former "co-direction" reading — is an **open question**, [`10-open-questions.md`](10-open-questions.md); it
+is not assumed here.)
 
-## The value-object `Q` — the hyperfinite II₁ factor
+## The value-object `Q` — the hyperfinite type III₁ factor, chosen by the seam
 
-The values relations take live in **`Q`**, chosen to be the **hyperfinite II₁ factor**. Two reasons, and one
-honest caveat:
+The values relations take live in **`Q`**, the **hyperfinite type III₁ factor**. The justification is the
+**seam / opacity**, and *only* that — never asymmetry (anchoring the arena in asymmetry would make the
+dissolution of A1 circular):
 
-- **Self-similarity, made honest.** The II₁ factor is **self-similar**: `Q ≅ Q ⊗ M₂` (matrix amplification
-  leaves it unchanged) — "relations all the way down," a relation that contains a scaled copy of the whole
-  relational world. This is what lets *"nothing below"* be a structural fact about the value-object, not a
-  slogan.
-- **A native trace and modular flow.** The II₁ factor carries a **canonical (finite) trace** and a **modular
-  flow** intrinsically. That is the bridge to the archived operator work: D1's self-relation-as-trace, and
-  the later modular/thermal material (papers two–four), have a home in `Q` without bolting on extra
-  structure.
-- **Caveat (a seam, below).** That `Q` *is* the II₁ factor, and that its operator structure genuinely matches
-  the order/relational structure, is a **bet** — load-bearing for the philosophy, not (yet) for the
-  theorems. The exploration treats it as open.
+- **The seam forces tracelessness.** The headline opacity result (Lawvere; [`02-foundation.md`](02-foundation.md))
+  is that a self **provably cannot fully account for the relation that includes it** — its self-accounting
+  **never closes**. "No complete accounting" is exactly the **defining property of a type III factor**: it has
+  **no trace** (no semifinite normal "how much"). The von Neumann types make this a dichotomy — type I has
+  atoms (a non-relational floor, rejected by "nothing below"); type II has no atoms *but a finite trace* (the
+  accounting *can* close); **type III has no atoms and no trace** (the accounting never closes). The seam votes
+  type III. **III₁** specifically is the generic, unique hyperfinite case (modular spectrum all of `ℝ₊`).
+- **Tracelessness is not "no measure ever."** Quantity is recovered on the **type II∞ core** of the Takesaki
+  decomposition, not from a (non-existent) global trace — see [`06-type-III-modular.md`](06-type-III-modular.md).
+- **The modular flow comes for free.** A faithful normal state on `Q` generates a modular automorphism group
+  `σ` (reversible time) — the substrate the interface assumes ([`07-interface.md`](07-interface.md)).
 
-## The three arena seams — open, to be tested
+## Open joints (tested across the exploration, not assumed)
 
-The arena is not asserted to be sound; three joints are **open**, flagged here and probed by the exploration.
-They are confined to paper one (the archived downstream papers do not depend on them).
+The arena was **not** asserted sound; its joints were probed:
 
-1. **The trace in the quantaloid.** Does the arena carry the **traced / feedback** structure D1 needs
-   *natively*, or does it need an added condition, or does it **fight** the quantaloid structure? If it
-   fights, the arena itself reshapes — this is the **highest-priority** seam. *(Settled to **B / conditional**
-   in [`05-trace-seam.md`](05-trace-seam.md): the feedback trace `Tr` is real and `τ`-free; it connects to the
-   factor trace `τ` via the dimension function under an orthogonality side condition — with a residual tension
-   that ties into seam 2.)*
-2. **Order vs. operator.** Does the relational/order structure (joins, fixed points) genuinely **match** the
-   operator structure of `Q` (the II₁ factor's trace, modular flow, comparison of projections)? The two could
-   come apart.
-3. **`Q` self-similarity.** Is `Q ≅ Quantaloid(Q)` real, and **faithfully realized** by `R ≅ R ⊗ M₂`? This is
-   the deepest bet — load-bearing for the *philosophy*, not for the theorems, so it is left to fall out or
-   not rather than assumed.
+- **The trace in the quantaloid** — *settled* **B / conditional** ([`05-trace-seam.md`](05-trace-seam.md)): the
+  feedback trace `Tr` is real and `τ`-free; it connects to a measure via the dimension function under an
+  orthogonality side condition. The type III move **dissolved** the residual order-vs-operator tension (no
+  global trace to conflict with `Tr`).
+- **Order vs. operator** — the same question; partly resolved by the type III choice, the operator-level parts
+  paper-level (the mathlib gap, [`06-type-III-modular.md`](06-type-III-modular.md) Part D).
+- **`Q` self-similarity** (`Q ≅ Q ⊗ M₂`, "relations all the way down") — the deepest bet, **load-bearing for the
+  philosophy, not for the theorems**; left to fall out or not.
 
 ## What the arena is for
 
-It is the self-free ground on which paper one derives a self: an arena (this page), with two relations-only
-axioms and one definition ([`02-axioms.md`](02-axioms.md)), from which the self **condenses out** as a fixed
-relation of the co-direction dynamics. The next file fixes the **vocabulary** — relation, converse,
-composition, order — and is careful to name **no self**.
+It is the self-free ground on which paper one derives a self: this arena, plus the **single definition** D1
+([`02-foundation.md`](02-foundation.md)) — **no axioms** — from which the headline cluster (existence, the
+seam, the arrow's irreversibility) follows `τ`-free. The next file fixes the **vocabulary** — relation,
+converse, composition, order — and names **no self**.
