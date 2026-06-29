@@ -1,59 +1,43 @@
-# paper-1 — a self arises from one definition, no axioms
+# paper-1 — self-relation generates the irreversibility of time
 
-**The finding.** On a **seam-chosen arena** — a quantaloid/allegory in which relations are primitive, with
-`Q` the hyperfinite **type III₁ factor** (chosen because the **seam/opacity** forces tracelessness, never
-because of asymmetry) — a **single definition** generates the core results, **with no axioms**:
+> **The result, in one line.** A relation that refers to itself — **self-relation, the diagonal**
+> `reenter S = S ⨾ S` — is **irreversible**: it loses information, so it cannot be run backward. That
+> one-way-ness *is* the irreversibility of time, and it falls out of **a single definition on a seam-chosen
+> arena, with no axioms.**
 
-> **D1 — self-relation is the trace** (the diagonal, `reenter S = S ⨾ S`). That is the whole foundation.
+## The whole paper, in four pages
 
-From `{arena, D1, completeness}` alone — **τ-free, no A1, no A2, no self, no interface** — the headline
-cluster follows, all mechanized:
+1. [`spec/00-domain.md`](spec/00-domain.md) — **the arena.** A quantaloid/allegory where relations are
+   primitive (no carrier underneath), with the value-object the hyperfinite **type III₁ factor**, chosen by
+   the **seam** (a self whose accounting never closes ⇒ no trace ⇒ type III) — never by asymmetry.
+2. [`spec/01-signature.md`](spec/01-signature.md) — **the vocabulary.** Relation, converse, composition,
+   order. **No self is named** — the self is what the diagonal turns out to be, not a primitive.
+3. [`spec/02-foundation.md`](spec/02-foundation.md) — **the one definition and the one theorem.**
+   **D1:** self-relation is the trace, the diagonal `reenter S = S ⨾ S`. **There are no axioms.** From it:
+   **self-relation is irreversible** (`reenter` is non-injective — a relation cannot be recovered from its
+   self-composition; a semigroup, not a group). Mechanized, `τ`-free.
+4. **The proof** — [`formal/Paper1/Arrow.lean`](formal/Paper1/Arrow.lean) (the theorem) on
+   [`formal/Paper1/Arena.lean`](formal/Paper1/Arena.lean) (the arena). Two files, `lake build` green.
 
-| Result | Lean | Footprint |
-|---|---|---|
-| **Existence** of a fixed self-relation | `self_exists` | `[propext, Quot.sound]` |
-| **Feedback trace `Tr = D1`** | `TraceSeam.ptrace` (+ axioms) | `[propext, Quot.sound]` |
-| **The seam / opacity** (a self can't fully trace what includes it; Lawvere) | `Seam.reflexive_opacity` | **0 axioms** |
-| **The arrow's irreversibility** (self-composition non-invertible; a semigroup, not a group) | `Arrow.reenter_not_injective` | upstream of the self |
+```
+Paper1.Arrow.reenter_not_injective   —   self-relation is irreversible
+   depends on axioms: [propext, Classical.choice, Quot.sound]   (no custom axioms, no self, no operator theory)
+```
 
-**The headline, stated at the strength it earns:** *self-reference creates the arrow's **irreversibility***
-— intrinsically, below the self. Its **orientation** (which way is the future) is *not* derived from
-self-reference; that needs the modular/KMS structure of `σ` and may **not** be imported
-([`spec/09-arrow.md`](spec/09-arrow.md)). We do not overclaim "the arrow of time."
+## What is claimed — and what is not
 
-## The foundation (read these first)
+- **Claimed (proved):** self-relation creates the arrow's **irreversibility** — that there is a forward-only
+  direction, intrinsic to self-reference, below any notion of "a self."
+- **Not claimed:** the arrow's **orientation** (which way is the future). That self-composition runs forward
+  is shown; *which* end we call the future is **not** fixed by self-reference alone, and we do **not** import a
+  thermodynamic arrow to decide it. We say "the irreversibility of time," **not** "the arrow of time." (The
+  honest edge is spelled out in [`spec/02-foundation.md`](spec/02-foundation.md).)
 
-- [`spec/00-domain.md`](spec/00-domain.md) — the **type III₁ relational arena**, justified by the **seam**
-  (opacity ⇒ tracelessness ⇒ type III), never by asymmetry.
-- [`spec/01-signature.md`](spec/01-signature.md) — the vocabulary, **no self named**.
-- [`spec/02-foundation.md`](spec/02-foundation.md) — **D1, the one definition; no axioms.** A1 (asymmetry)
-  **dissolves into the arena** (type III has no tracial = symmetric self; grounding flagged paper-level); A2
-  (co-direction) is **parked as open**, not deleted.
+## The full exploration (archived)
 
-## Results by strength
-
-- **Tier 1 — τ-free, from `{arena, D1, completeness}`** (the table above): existence, feedback trace,
-  seam/opacity, the arrow's irreversibility. No interface, no self.
-- **Tier 2 — relative to the assumed modular interface** ([`spec/07-interface.md`](spec/07-interface.md)):
-  time = the reversible modular flow `σ` a state generates; the arrow's **orientation**; `A3 = σ ⊕ arrow`
-  given the passivity/`CoDirection` bridge (flagged as the paper-level residual). The assumed/constructed
-  boundary is surfaced via `#print axioms` and a disclosure table; the τ-free core needs none of it.
-- **Collapses (established):** the re-entry **dynamics** is derived interface-free (selves are idempotents),
-  so A3 is **not** an axiom ([`spec/08-raising.md`](spec/08-raising.md)); **selectivity ≡ differentiation**;
-  **orthogonality ⇔ selfhood-selection**; the **stability dichotomy** holds **by absence** (type III has no
-  symmetric self), with the dynamical-repeller form left open and falsifiable.
-
-The full graded ledger is [`spec/03-theorem-debt.md`](spec/03-theorem-debt.md); the exploration that got here
-runs [`05-trace-seam`](spec/05-trace-seam.md) → [`06-type-III-modular`](spec/06-type-III-modular.md) →
-[`07-interface`](spec/07-interface.md) → [`08-raising`](spec/08-raising.md) → [`09-arrow`](spec/09-arrow.md).
-Open questions are consolidated in [`spec/10-open-questions.md`](spec/10-open-questions.md).
-[`spec/04-provenance.md`](spec/04-provenance.md) is the short provenance.
-
-## The arc
-
-The foundational paper the others build on: **paper-1** (*a self arises*) → paper-2 (the self **in time**:
-arrow, energy, seam) → paper-3 (the self's **modular / thermal** structure) → paper-4
-(**conservation / presence**). Papers 2–4 currently exist only in the archived (traced-SMC) representation
-([`../archive/archived/`](../archive/archived)); they will be re-grounded on the relational arena after paper
-one lands. See [`../STRUCTURE.md`](../STRUCTURE.md) and
-[`../archive/archived/INDEX.md`](../archive/archived/INDEX.md) (the shapes mined here).
+This focused result was found by a longer exploration — existence of a fixed self, the seam (Lawvere), the
+type III modular identification `A3 = σ ⊕ arrow`, the assumed modular-theory interface and its disclosure.
+That work is preserved as structural reference, not deleted, in
+[`../archive/archived/paper-1-exploration/`](../archive/archived/paper-1-exploration/) (see its
+[`README.md`](../archive/archived/paper-1-exploration/README.md)). Paper one itself stands on the single
+theorem above.

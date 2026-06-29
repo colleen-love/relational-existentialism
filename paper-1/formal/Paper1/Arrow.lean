@@ -1,20 +1,21 @@
 /-
-# Part 1 — self-reference is irreversible (handoff I.VIII)
+# The headline: self-relation generates the irreversibility of time
 
-**Upstream of the self.** This file isolates the irreversibility of **self-reference** — the diagonal
-`reenter S = S ⨾ S` (D1) — with **no self, no selectivity, no interface**: only D1 + completeness, and one
-concrete model to witness non-invertibility. The claim under test (settled in `spec/09-arrow.md`) is whether
-*this* irreversibility is the arrow of time.
+**The result.** Self-relation — the diagonal `reenter S = S ⨾ S` (D1) — is **irreversible**: it is
+**information-losing**, so it **cannot be run backward**. This is the precise, intrinsic sense in which
+self-reference has a direction: a reversible flow is a *group* (runs both ways); self-relation is a
+*semigroup* (forward only). The whole paper turns on this one theorem, proved on the canonical relational
+model with **only `{relations, the diagonal, completeness}`** — no axioms, no self, no operator theory.
 
-**The sharp form.** The modular flow `σ` is a *group* (extends to `t ∈ ℝ`, reversible). Self-reference is a
-*semigroup*: `S ↦ S ⨾ S` composes **forward only** and is **information-losing**, so it **cannot be run
-backward**. Here we prove that non-invertibility on the canonical relational model — distinct relations
-self-compose to the same relation, so `S` is **not recoverable** from `S ⨾ S`.
+**The proof, in one line.** The identity and the swap are **distinct** relations that **self-compose to the
+same** relation (the identity) — so the relation that was squared cannot be recovered. *Going and coming back
+is standing still; the direction is lost.*
 
-**Upstream-of-self audit:** this file uses neither `derivedSelf`/`gfp`-as-self, selectivity, nor the modular
-interface. (Grep: no `derivedSelf`, no `ModularInterface`, no selfhood lemmas.)
+**The honest boundary.** This establishes the arrow's *irreversibility* — that there is a forward-only
+direction. It does **not** by itself fix the arrow's *orientation* (which way is the future); that is the
+honest open edge (see `spec/02-foundation.md`). We do not overclaim "the arrow of time."
 -/
-import Paper1.RaisingDynamics
+import Paper1.Arena
 
 namespace Paper1.Arrow
 

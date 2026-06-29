@@ -1,15 +1,15 @@
 /-
-# The relational arena (handoff I.III)
+# The relational arena
 
-The new-arena scaffolding: a **quantaloid / allegory** in which a `Q`-valued **relation** is the primitive
-arrow. This file fixes the *vocabulary* — relations, converse, composition, the inclusion order — over an
-abstract value-object `Q`. It names **no self** (the self is derived; see `Existence`).
+A **quantaloid / allegory** in which a `Q`-valued **relation** is the primitive arrow. This file fixes the
+*vocabulary* — relations, converse, composition, the inclusion order — over an abstract value-object `Q`, and
+defines **self-relation** and its **re-entry** (the diagonal, D1). It names **no self**.
 
-**Intended models of `Q`.** `Q = Prop` is the ordinary allegory of sets and relations (the cleanest concrete
-model: `*` is `∧`, `⨆` is `∃`). The philosophy's intended `Q` is the **hyperfinite II₁ factor** — self-similar
-(`Q ≅ Q ⊗ M₂`) and carrying a native trace/modular flow. That `Q` *is* the II₁ factor, and that its operator
-structure matches this order structure, is an **open arena seam** (see `spec/00-domain.md`); we do not assume
-it here, so the arena is kept abstract and the quantitative content is flagged where it is needed.
+**The value-object.** `Q = Prop` is the ordinary allegory of sets and relations (the cleanest concrete model:
+`*` is `∧`, `⨆` is `∃`) — used to witness the headline result. The philosophy's intended `Q` is the
+hyperfinite **type III₁ factor**, chosen by the **seam** (a self whose accounting never closes ⇒ no trace ⇒
+type III; see `spec/00-domain.md`). The arena is kept abstract; the headline (`Arrow`) needs only
+`{relations, the diagonal, completeness}`.
 -/
 import Mathlib.Order.FixedPoints
 
@@ -22,8 +22,8 @@ abbrev Rel (Q : Type*) (A B : Type*) : Type _ := A → B → Q
 namespace Rel
 variable {Q : Type*} {A B C : Type*}
 
-/-- **Converse** `R°` — a free involution, **not** identified with `R`. (A1's asymmetry is the statement that
-`R` and `R°` may differ.) -/
+/-- **Converse** `R°` — a free involution, **not** identified with `R`. (The "other end" of a relation; the
+operator-world analogue is the modular conjugation `J`.) -/
 def conv (R : Rel Q A B) : Rel Q B A := fun b a => R a b
 
 @[simp] theorem conv_conv (R : Rel Q A B) : R.conv.conv = R := rfl
@@ -39,16 +39,19 @@ def comp [CompleteLattice Q] [Mul Q] (R : Rel Q A B) (S : Rel Q B C) : Rel Q A C
 
 @[inherit_doc] infixr:62 " ⨾ " => Rel.comp
 
-/-- The **modular law** of the allegory (composition / converse / meet compatibility), stated as a predicate
-to be *tested*, not assumed — it is one of the arena seams. -/
+/-- The **modular law** of the allegory (composition / converse / meet compatibility), stated as a predicate. -/
 def ModularLaw (Q : Type*) [CompleteLattice Q] [Mul Q] : Prop :=
   ∀ {A B C : Type} (R : Rel Q A B) (S : Rel Q B C) (T : Rel Q A C),
     (R ⨾ S) ⊓ T ≤ R ⨾ (S ⊓ (R.conv ⨾ T))
 
 end Rel
 
-/-- A **self-relation** is a relation `A ⇸ A`. (D1: self-relation as feedback is the trace of such a
-relation; the trace is an arena seam — see `spec/03-theorem-debt.md`.) -/
+/-- A **self-relation** is a relation `A ⇸ A`. -/
 abbrev SelfRel (Q : Type*) (A : Type*) : Type _ := Rel Q A A
+
+/-- **Self-relation as the trace — the diagonal (D1).** A self-relation **re-enters itself**: `reenter S =
+S ⨾ S`, the relation routed back through itself. This is the *one definition* paper one stands on; the
+headline is that **it is irreversible** (`Arrow`). -/
+def reenter [CompleteLattice Q] [Mul Q] {A : Type*} (S : SelfRel Q A) : SelfRel Q A := S ⨾ S
 
 end Paper1
