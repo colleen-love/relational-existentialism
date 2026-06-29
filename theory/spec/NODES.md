@@ -37,16 +37,19 @@ theorems (handoff XX). It is the A-layer plus the canonical `T`-derivations (eig
 | A3 | the co-direction **process**; self = its fixed point | `Theory.Axioms.IsSelf`, `self_exists` |
 | D1 | self-relation = trace ⇝ modular flow | `Theory.Axioms.D1_trace_is_modular_limit` |
 | — | eigenform (paper one) derived | `Theory.Axioms.eigenform_of_fixed` |
-| — | generative engine (paper three) derived | `Theory.Axioms.generative_law` |
 | — | modular self (paper two) derived | `Theory.Axioms.modular_preserves_self` |
+
+*(The **generative** reading is **not** derived in the axioms — it is paper-three frontier, derived from the
+canonical process in `scratch/` (`GenerativeEngine.generative_law`); see P3.)*
 
 ## T — theory theorems (the stable shared layer, `Theory.*`)
 
 In topological order, grouped by sub-argument. **Double-imported** (paper-1 *and* paper-2): T.01–T.03 (the
-band layer) — the mechanical reason they are `T`, not `P1`. T.04 (`ModularFlow`) is **axiom-supporting**
-(the canonical axioms derive the modular self from its `modPow_diagonal`, handoff XXII) and also imported by
-paper two; T.05–T.06 support `A`; T.07 is the generative engine. *(Handoff XXII returned `OneGenerator` and
-`Einselection` to paper two — see P2 — since only paper two imports them.)*
+band layer) — the mechanical reason they are `T`, not `P1`. T.04 (`ModularFlow`) is **axiom-supporting** (the
+canonical axioms derive the modular self from its `modPow_diagonal`) and also imported by paper two; T.05–T.06
+support `A`; T.07 is the **A3 co-direction process** that defines the self (`IsSelf := JointFixed`), imported
+by `A`. *(The growth-*analysis* of the process — the ignition/spend-down engine — is **not** here: it is
+unused by any shipped paper, so it is paper-three frontier in `scratch/` — see P3.)*
 
 | # | Node | Module | Imports | Headline it carries |
 |---|---|---|---|---|
@@ -56,7 +59,7 @@ paper two; T.05–T.06 support `A`; T.07 is the generative engine. *(Handoff XXI
 | T.04 | modular self-relation (D1's modular form); spectral machinery | `Theory.ModularFlow` | — | `modularFlow`, `modularFlow_maximally_mixed`, `modPow_diagonal` |
 | T.05 | lived-identity coinduction `≈ := νΘ` | `Theory.We` | — | (theory's copy, supporting T.06) |
 | T.06 | A2 priority / no-bare-carrier | `Theory.Priority` | T.05 | `priority_universal` |
-| T.07 | the generative A3 engine | `Theory.MutualCoupling` | T.03 | `engine_ignition`, `orbit_engine2` |
+| T.07 | the A3 co-direction process (self-definition) | `Theory.MutualCoupling` | T.03 | `jointStep`, `JointFixed` (`= Axioms.IsSelf`) |
 
 ## P1 — paper one's own nodes (`paper-1/`, `Scratch.*` / `RelExist.*`)
 
@@ -105,16 +108,42 @@ Paper two imports the band layer + `ModularFlow` (T.01–T.04) from `theory/` an
 
 ## P3 — paper three's own nodes (`scratch/`, the living frontier)
 
-| # | Node | Module | Status |
-|---|---|---|---|
-| P3.1 | decoherence conserves coherence (it relocates it) | `scratch/formal/Conservation.lean` | **frontier seed**, not gated |
+Unnumbered until promotion (scratch convention); listed here for the inventory.
 
-*Recorded hoist-item (P3.1), not a violation.* `Conservation` *imports* paper one's `Scratch.Decoherence`
+| Node | Module | Status |
+|---|---|---|
+| decoherence conserves coherence (it relocates it) | `scratch/formal/Conservation.lean` | **frontier seed**, not gated |
+| the generative engine (ignition / spend-down analysis of the A3 process) | `scratch/formal/GenerativeEngine.lean` | **frontier**, not gated; derived on `Theory.MutualCoupling` (T.07). Doc: [`../../scratch/spec/generative-engine.md`](../../scratch/spec/generative-engine.md) |
+
+*Recorded hoist-item, not a violation.* `Conservation` *imports* paper one's `Scratch.Decoherence`
 (P1.08). Because `scratch/` is a **free workbench** (XXII), this is **fine now** — the gate exempts scratch and
 enforces cite-don't-import only at the **promotion event** (when scratch becomes paper three). At promotion,
 resolve it by citing P1.08 in prose or hoisting the needed lemma to `theory/`.
 
 ---
+
+## Boundary = node — audit
+
+**Split done.** `Theory.MutualCoupling` was two nodes under one name. It is split at the clean DAG seam
+(`JointFixed`): the **self-definition** stays in `theory/` (T.07, load-bearing for the axioms — `IsSelf :=
+JointFixed`); the **growth-analysis** (the `Engine`/ignition/spend-down verdict) — *unused by any shipped
+paper* — moved to `scratch/formal/GenerativeEngine.lean` (P3 frontier). Footprint-gated: paper one's
+headline footprints are identical. *(The named "character" lemmas — `frozen_no_growth`, `asymmetry_emerges`,
+`capacity_rate_limits` — are stated over the `Engine2` abstraction, so they moved to scratch with it; keeping
+them in `theory/` would have forced a `theory→scratch` import. The self stays generative **by definition**
+either way.)*
+
+**Reported, not split (axiom-touching — needs a second look before a footprint-affecting change):**
+`Theory.ModularFlow` arguably holds two clusters at a one-way edge — the modular-flow automorphism group +
+D1-limit + thermal time, and the **spectral machinery** (`specFun_diagonal`/`modPow_diagonal`, which depends
+on `modPow`). Both are theory/load-bearing (the axioms import `modPow_diagonal`), so a split is two theory
+files, not a relocation; deferred as a cosmetic within-theory refinement, reported here rather than forced.
+
+**One node (left as-is).** The remaining large files are single coherent result-clusters with rich support,
+not separable bundles (`RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`, `TimeFlow`, `Decoherence`,
+`OneGenerator`, `Orientation`). `P1.12` deliberately groups three tightly-coupled modules
+(`SeamForcing`/`SeamConserved`/`SeamForcingC`) as one node. `Paper2.Einselection` (einselection → presence)
+is a single chain, kept as `P2.02`.
 
 ## On physical file numbering
 

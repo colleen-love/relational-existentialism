@@ -13,3 +13,5 @@ lemma is **hoisted to `theory/`** once a second paper imports it), and the per-n
 assigned then — not before. Until promotion, scratch stays **unnumbered**.
 
 - **The conservation thread:** [`conservation-seed.md`](conservation-seed.md).
+- **The generative engine** (ignition / spend-down analysis of the A3 process):
+  [`generative-engine.md`](generative-engine.md) — Lean: [`../formal/GenerativeEngine.lean`](../formal/GenerativeEngine.lean).

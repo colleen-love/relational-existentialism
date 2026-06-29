@@ -1,14 +1,18 @@
-# T.07 — The generative self (the A3 engine)
+# The generative engine (paper-three frontier)
 
-> *Node `T.07` of the proof DAG ([`NODES.md`](NODES.md)).* Lean: `Theory.MutualCoupling`
-> (`theory/formal/Theory/MutualCoupling.lean`); imports **T.03** (`Theory.BandFromAxioms`).
+> *Scratch / paper-three frontier — unnumbered until promotion.* Lean:
+> [`../formal/GenerativeEngine.lean`](../formal/GenerativeEngine.lean) (not gated); imports the canonical
+> process `Theory.MutualCoupling`. The node inventory is [`../../theory/spec/NODES.md`](../../theory/spec/NODES.md).
 
-The canonical A3-process **derives** the generative engine: a self is a fixed point of co-directed attention
-(`MutualCoupling.JointFixed`), and this node is the process's own modulus dynamics
-(`Theory.Axioms.generative_law` / `orbit_engine2`). A3's text — *"sustained generatively, not spent down;
-being attended-to raises the attention one can give"* — is a **creation term**, which cannot live in a single
-channel with a *fixed* coupling, so the coupling is **dynamical and mutual**. The one question that is not
-free: does creation balance dissipation at a *stable, bounded, larger* self, or run away, or collapse?
+The canonical A3-process (`Theory.MutualCoupling`) is generative **by definition** — a self is a fixed point
+of co-directed attention (`JointFixed`, with the capacity-limited raising `stepMu` baked in). This frontier
+node is the **analysis** of that process's modulus dynamics: whether it *ignites or spends down*. It is
+**unused by any shipped paper** (paper one's eigenform takes the self as a hypothesis; it never needs the
+growth verdict), so it lives here, derived on the canonical process — not in the canonical layer. A3's text —
+*"sustained generatively, not spent down; being attended-to raises the attention one can give"* — is a
+**creation term**, which cannot live in a single channel with a *fixed* coupling, so the coupling is
+**dynamical and mutual**. The one question that is not free: does creation balance dissipation at a *stable,
+bounded, larger* self, or run away, or collapse?
 
 ## The law
 
@@ -52,5 +56,5 @@ of growth. All `[proved]`:
 couples their fates). The capacity bound `α` turns growth into a finite **achievement** of selfhood;
 **dynamical `α`** is the open frontier for genuine depletion/extraction.
 
-Canonical axioms: [`AXIOMS.md`](AXIOMS.md). The existence/stability of the fixed point is
-`Theory.Axioms.self_exists` / `self_exists_stable`.
+Canonical axioms: [`AXIOMS.md`](../../theory/spec/AXIOMS.md). The existence/stability of the fixed point is
+`Theory.Axioms.self_exists` (existence) and `GenerativeEngine.self_exists_stable` (reached generatively).

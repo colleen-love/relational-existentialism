@@ -15,25 +15,23 @@ while each relatum raises its coupling toward the conserved band at its **own** 
 `α i · mutualAttn`. The step is **diachronic** (the same tense as A1's flow and A2's coinduction); the
 **self is the fixed point** of this process (`MutualCoupling.JointFixed`), *derived*, not posited.
 
-We then prove, as theorems of the one process:
+We then prove, as theorems of the one process, the **two shipped readings**:
 
-* **Existence first** (`self_exists`, `self_exists_stable`): the process *has* fixed points (else no self
-  ever forms), and a *stable* one is *reached* generatively from the strong-attention basin.
+* **Existence** (`self_exists`): the process *has* fixed points — a self can form.
 * **The eigenform / `Peri`** (paper one), `eigenform_of_fixed` / `self_is_periBand`: the self of a fixed
   point is exactly A3's sustainable field `Peri(Φ_c)` = the conserved band, with `νΦ_c` its `μ = 1`
   (knowing) sub-band — paper one's self, now a *consequence*.
-* **The generative engine** (paper three), `generative_law` / `generative_ignition`: the per-edge modulus
-  law of the genuine process orbit *is* `MutualCoupling.Engine2 (α i) (α j)` (`orbit_engine2`), and from the
-  strong-attention basin it ignites a stable, bounded self — the same process *with capacity*.
 * **The phase-bearing / modular self** (paper two), `modular_preserves_self` / `modular_sustains_self` /
   `modular_is_symmetry`: the modular flow of a diagonal state is a modulus-one Schur multiplier, so it maps
   the self (the conserved band) into itself, **sustains** it edge-for-edge (the rotating sub-band carrying
   the modular energies as its phases), and **commutes** with the co-direction channel — the *same* fixed
   point, read under the modular flow.
 
-Each derivation either closes (a theorem below) or would be reported as an obstruction; **all four close**,
-so the collapse is total (handoff XX, outcome 1). The supporting `A1`/`A2`/`D1` normalizations are recorded
-in [`§B`](#) below and in `AXIOMS.md`.
+Both shipped readings derive here. The **generative** reading (whether the process ignites or spends down)
+is **paper-three frontier**, derived from this same process in
+[`scratch/formal/GenerativeEngine.lean`](../../../scratch/formal/GenerativeEngine.lean) — not in the
+canonical layer, since no shipped paper consumes it. The supporting `A1`/`A2`/`D1` normalizations are
+recorded in [`§B`](#) below and in `AXIOMS.md`.
 
 **Namespace.** `Theory.Axioms`, within the uniformly-`Theory.*` stable layer (handoff XXI normalized
 theory's namespaces off the old `RelExist.*`). The canonical statements *name* the existing `Theory.*`
@@ -69,13 +67,14 @@ noncomputable abbrev A3process (α : Capacity A) :
 under mutual raising. Derived, not posited: `MutualCoupling.JointFixed`. -/
 abbrev IsSelf (α : Capacity A) (μ : A → A → ℂ) (M : Matrix A A ℂ) : Prop := JointFixed α μ M
 
-/-! ## Part A — existence: the process has (stable) fixed points -/
+/-! ## Part A — existence: the process has fixed points -/
 
 /-- **Existence of a self (the first risk, discharged).** The fully-conserved coupling `μ ≡ 1` (the maximal
 band, where every coherence is held) is a fixed point of the A3 process for *every* state `M` and *every*
 capacity `α`: the channel returns `M` unchanged (`schur 1 M = M`) and the coupling, already on the band, is
 unmoved by raising (`raise 1 _ = 1`, `phaseOf 1 = 1`). So the process *has* fixed points — a self can form.
-(`self_exists_stable` upgrades this to a self *reached* generatively, with live coherence.) -/
+(That a *stable* one is *reached generatively* from a strong-attention basin is the paper-three frontier
+result `GenerativeEngine.self_exists_stable`.) -/
 theorem self_exists (α : Capacity A) (M : Matrix A A ℂ) :
     IsSelf α (fun _ _ => (1 : ℂ)) M := by
   refine ⟨fun i j => ?_, fun i j => ?_⟩
@@ -85,18 +84,6 @@ theorem self_exists (α : Capacity A) (M : Matrix A A ℂ) :
       rw [norm_one]; unfold raise; ring
     have hp : phaseOf (1 : ℂ) = 1 := by rw [phaseOf, if_neg one_ne_zero, norm_one]; norm_num
     rw [hr, hp]; push_cast; ring
-
-/-- **A stable self is *reached*, generatively (existence, the substantive form).** On the equal-capacity
-slice (`Engine`, the genuine symmetric process orbit), from the strong-attention basin
-`1 − r 0 ≤ (x 0)²/8` the coupling reaches the conserved band (`r n → 1` — the edge *joins* the self) while
-the coherence is **not** spent (`x n ≥ x 0/2 > 0` forever). So the process does not merely *have* a fixed
-point; it *forms a stable, bounded one carrying live coherence*. This is `MutualCoupling.engine_ignition`,
-recorded as the existence-of-a-stable-self half of A3. -/
-theorem self_exists_stable {x r : ℕ → ℝ} (E : Engine x r)
-    (hx0pos : 0 < x 0) (hx1 : x 0 ≤ 1) (hr0nn : 0 ≤ r 0) (hr1 : r 0 ≤ 1)
-    (hign : 1 - r 0 ≤ (x 0) ^ 2 / 8) :
-    (∀ n, x 0 / 2 ≤ x n) ∧ Tendsto r atTop (𝓝 1) :=
-  engine_ignition E hx0pos hx1 hr0nn hr1 hign
 
 /-! ## Part A — the eigenform (paper one) as a consequence -/
 
@@ -124,31 +111,6 @@ phase-bearing reading of A3, as a consequence. The strict fixed point (`schur μ
 the full self, additionally carries the energy that *rotates* under the flow (next section). -/
 theorem energy_in_self (μ : A → A → ℂ) : rotatingBand μ ≤ conservedBand μ :=
   bandOn_mono (fun _ _ hr => hr.1)
-
-/-! ## Part A — the generative engine (paper three) as the same process with capacity -/
-
-/-- **The generative law is the process's own modulus dynamics.** The per-edge moduli of a *genuine*
-`A3process α` orbit (state and coupling evolving together) satisfy `MutualCoupling.Engine2 (α i) (α j)` —
-the two-sided capacity-bearing engine. So paper three's growth law is not a separate axiom; it is the A3
-process, read on moduli. (`MutualCoupling.orbit_engine2`.) -/
-theorem generative_law (α : Capacity A) (p : (A → A → ℂ) × Matrix A A ℂ) (i j : A)
-    (hαi0 : 0 ≤ α i) (hαi1 : α i ≤ 1) (hαj0 : 0 ≤ α j) (hαj1 : α j ≤ 1)
-    (hx0 : ‖p.2 i j‖ ≤ 1) (hy0 : ‖p.2 j i‖ ≤ 1) (hr0 : ‖p.1 i j‖ ≤ 1) (hs0 : ‖p.1 j i‖ ≤ 1) :
-    Engine2 (α i) (α j)
-            (fun n => ‖((A3process α)^[n] p).2 i j‖) (fun n => ‖((A3process α)^[n] p).2 j i‖)
-            (fun n => ‖((A3process α)^[n] p).1 i j‖) (fun n => ‖((A3process α)^[n] p).1 j i‖) :=
-  orbit_engine2 α p i j hαi0 hαi1 hαj0 hαj1 hx0 hy0 hr0 hs0
-
-/-- **Bounded and finite — capacity is the brake.** With admissible capacities (`α ∈ [0,1]`) the generative
-orbit stays in `[0,1]⁴` forever: the divergent outcome is *structurally excluded*, `α` the regulator. The
-generative growth of paper three is a finite achievement, not a runaway — a consequence of the same process.
-(`MutualCoupling.engine2_bounded`.) -/
-theorem generative_bounded {cr cs : ℝ} {x y r s : ℕ → ℝ} (E : Engine2 cr cs x y r s)
-    (hcr0 : 0 ≤ cr) (hcr1 : cr ≤ 1) (hcs0 : 0 ≤ cs) (hcs1 : cs ≤ 1)
-    (hx0 : 0 ≤ x 0) (hx1 : x 0 ≤ 1) (hy0 : 0 ≤ y 0) (hy1 : y 0 ≤ 1)
-    (hr0 : 0 ≤ r 0) (hr1 : r 0 ≤ 1) (hs0 : 0 ≤ s 0) (hs1 : s 0 ≤ 1) :
-    ∀ n, (0 ≤ x n ∧ x n ≤ 1) ∧ (0 ≤ y n ∧ y n ≤ 1) ∧ (0 ≤ r n ∧ r n ≤ 1) ∧ (0 ≤ s n ∧ s n ≤ 1) :=
-  engine2_bounded E hcr0 hcr1 hcs0 hcs1 hx0 hx1 hy0 hy1 hr0 hr1 hs0 hs1
 
 /-! ## Part A — the phase-bearing / modular self (paper two) as the same fixed point under the modular flow
 
@@ -248,7 +210,7 @@ difference**. Every result of `§A` above is stated over an *arbitrary* index ty
 co-direction process, the eigenform, the conserved band are all polymorphic. Paper one instantiates the
 **finite** case (`A = Fin n`); papers two/three the **infinite** general `n`. The finite results are the
 dimension-restricted reading of the one general statement, not a separate axiom — witnessed here by the fact
-that `eigenform_of_fixed`, `self_is_periBand`, `generative_law` carry no finiteness hypothesis on `A`. -/
+that `eigenform_of_fixed` and `self_is_periBand` carry no finiteness hypothesis on `A`. -/
 
 /-- **A1, dimension-generic (the witness).** The eigenform derivation holds at an *arbitrary* index type
 `A`, with no finiteness assumption — finite (paper one) vs infinite (papers two/three) is the same A1
