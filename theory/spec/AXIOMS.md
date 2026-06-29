@@ -1,5 +1,12 @@
 # The canonical axioms — `{A1, A2, A3, D1}`
 
+> **Transitional (handoff I.I).** This page remains the **canonical mechanized-layer** reference (the pin
+> target, mirroring `Theory.Axioms`). The **authoritative plain-language** statement of the four axioms —
+> decoupled and self-free, with **A3 stated as an abstract four-property character** (engine demoted to one
+> instance) and **A2 as the greatest-fixed-point choice** — is now
+> [`paper-1/spec/02-axioms.md`](../../paper-1/spec/02-axioms.md). This page is to be **dissolved/realigned in
+> the formalization pass**; where the prose differs, paper one governs.
+
 > *One axiomatization, shared by all three papers.* This file states the four canonical commitments of the
 > theory plainly, for a reader who has never seen the repository, and lists for each the per-paper
 > *consequences* that were once separate "readings" and are now **derived theorems**. The mechanization is

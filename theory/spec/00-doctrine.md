@@ -1,5 +1,11 @@
 # 00 — The Doctrine
 
+> **Transitional (handoff I.I).** With paper one now the foundation, the **authoritative** plain-language
+> statement of the arena is [`paper-1/spec/00-domain.md`](../../paper-1/spec/00-domain.md) (the arena + the
+> decoupling that lets a self be *derived*). This essay is retained as the fuller transitional reference and
+> will be **dissolved into paper one in the formalization pass**; do not extend it. Read it through paper
+> one's derive-don't-define stance.
+
 > **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
 > axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
 > (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,

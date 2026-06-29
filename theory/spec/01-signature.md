@@ -1,5 +1,12 @@
 # 01 — The Signature
 
+> **Transitional (handoff I.I).** The **authoritative** plain-language signature is now
+> [`paper-1/spec/01-signature.md`](../../paper-1/spec/01-signature.md) — which **removes the smuggled
+> self-definition** (`self := νΦ_c`): the signature fixes the language and must **not** name the self (the
+> self is the *derived* fixed point). This essay still carries §1.3.3's `self := νΦ_c` as vocabulary; it is
+> retained as a transitional reference, to be **dissolved into paper one in the formalization pass**. Where
+> they differ, paper one governs.
+
 > **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
 > axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
 > (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,
