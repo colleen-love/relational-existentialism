@@ -25,7 +25,7 @@ archive: [`archive/agda/RelExist/Sparsity.agda`](../archive/agda/RelExist/Sparsi
 
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
-| a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../paper-1/spec/00-doctrine.md) | ✅ defined (coinductive record) |
+| a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../theory/spec/00-doctrine.md) | ✅ defined (coinductive record) |
 | **3.2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ defined (coinductive record) |
 | `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ proved (copattern corecursion) |
 | **shared world** `𝔼 := D/≈` | `SharedWorld` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ defined (`Setoid`) |

@@ -37,9 +37,18 @@ Status: every lemma here is `[proved]`. That this matrix construction *is* "the 
 cannot forget" is the standing `[reading]` — the same concrete toy as `Scratch/Decoherence.lean`,
 not a derivation of physical decoherence. What is load-bearing: the conserved-globally /
 absent-locally split is a *theorem* of the model, exactly the shape the doctrine predicts.
+
+**Status (handoff XXI).** Moved here from `archive/` as the **paper-three seed** — the living
+frontier (`theory/` is now stable; the frontier is `scratch/`). It is **not** in the gated build
+yet. **Coupling to resolve first:** it currently *imports* paper one's `Scratch.Decoherence`
+(the matrix decoherence model). Under the cite-vs-import rule a cross-paper *result* must be a
+**prose citation**, not a Lean import — so wiring paper three into the gate means either citing
+paper one's decoherence in prose, or (if a genuine second importer makes it load-bearing)
+promoting the needed lemma to `theory/`. Until then this is staging, the substrate import already
+re-pointed to its new `foundation/` home.
 -/
 import Scratch.Decoherence
-import Scratch.PartialTrace
+import Foundation.PartialTrace
 
 namespace RelExist.Conservation
 

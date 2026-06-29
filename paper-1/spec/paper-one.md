@@ -258,5 +258,5 @@ says one thing and shows its work.
 
 ---
 
-→ Foundation: [`00-doctrine.md`](00-doctrine.md) · [`01-signature.md`](01-signature.md) ·
+→ Foundation: [`00-doctrine.md`](../../theory/spec/00-doctrine.md) · [`01-signature.md`](../../theory/spec/01-signature.md) ·
 [`02-axioms.md`](02-axioms.md). Provenance: [`04-provenance.md`](04-provenance.md).

@@ -17,9 +17,9 @@ clean and `sorry`-free; the headline footprints sit at the corpus norm
 
 **Foundation.**
 
-1. [`00-doctrine.md`](00-doctrine.md) — the ambient language: a **traced symmetric monoidal category**
+1. [`00-doctrine.md`](../../theory/spec/00-doctrine.md) — the ambient language: a **traced symmetric monoidal category**
    with greatest fixed points and a distinguished cartesian fragment (A1's arena).
-2. [`01-signature.md`](01-signature.md) — the presented theory `𝕋`: sorts, generators, and the
+2. [`01-signature.md`](../../theory/spec/01-signature.md) — the presented theory `𝕋`: sorts, generators, and the
    relational sort `≈`.
 3. [`02-axioms.md`](02-axioms.md) — the **basis**: axioms **A1–A3** and definition **D1**. A1, A2
    structural; A3 (recursion constitutes the self) the one load-bearing posit. Paper one takes A1–A3 as

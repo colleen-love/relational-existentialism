@@ -16,7 +16,7 @@
 
 Throughout, `𝒞 = Cl(𝕋)`, `σ = Tr` is the self-relation operator (D1), `γ` is the
 symmetry, `Δ` the diagonal (cartesian fragment only), and `(R, ·, 1, ≤, β, c, ε)`
-the attention data of [§1.3](01-signature.md).
+the attention data of [§1.3](../../theory/spec/01-signature.md).
 
 > **Paper-one scope.** Paper one (see [`paper-one.md`](paper-one.md)) consumes A1–A3 **abstractly** — as
 > the baseline of its energy theorem (`Scratch/BandFromAxioms`: the channel is contractive and
@@ -33,7 +33,7 @@ the attention data of [§1.3](01-signature.md).
 
 **Statement.** The doctrine works in a **traced symmetric monoidal category** `𝒞 = Cl(𝕋)`
 with a distinguished **cartesian fragment** `𝒞_×` and a **ν-modality** (greatest fixed
-points / final coalgebras), as set out in [00 — The Doctrine](00-doctrine.md).
+points / final coalgebras), as set out in [00 — The Doctrine](../../theory/spec/00-doctrine.md).
 
 **Axiom.** This structure is *assumed*, not derived — it is the language in which every
 other commitment is stated. In Lean it appears as a hypothesis (the `TracedSMC` typeclass
@@ -124,7 +124,7 @@ the lived identity is the real one (the surplus, sequel material).
 
 **The discriminating axiom.** A **self / eigenform** is a state that is a fixed point
 of **co-directed attention-feedback** — equivalently, that is sustained by the
-relations it keeps looping. In the structural form ([§1.3](01-signature.md),
+relations it keeps looping. In the structural form ([§1.3](../../theory/spec/01-signature.md),
 [`Scratch/Attention.lean`](../../archive/formal/Archive/Scratch/Attention.lean)): a self is an
 eigenform of the co-directed attention operator `Φ_c` induced by the coupling, the
 carrier of selves being its greatest sustainable field,
@@ -168,7 +168,7 @@ the **Lindblad** reading (the dissipator of `Φ_c` *is* attention) and **nondege
 record is held). Under those, the un-attendable seam carries phase = energy as a theorem
 (`PhaseBearing.seam_carries_phase`), with no `Align`.
 
-In the **uniform, depleting special case** ([§1.3.4](01-signature.md),
+In the **uniform, depleting special case** ([§1.3.4](../../theory/spec/01-signature.md),
 [`RelExist/Loop.lean`](../../archive/formal/Archive/RelExist/Loop.lean)) this reduces to the threshold
 form: with `loop_R` and budget `β`,
 
@@ -234,7 +234,7 @@ even though its *mirror* reading (3.3) does not.
 **Co-directed form.** Self-relation is the unary case (`Tr` over a private wire). When
 the looped wire is *shared* between two systems, the same feedback is **co-directed** —
 neither end closes the loop alone — and this is the engine of attention in
-[§1.3](01-signature.md): the attention operator `Φ_c` is feedback through the coupling,
+[§1.3](../../theory/spec/01-signature.md): the attention operator `Φ_c` is feedback through the coupling,
 so co-direction is a consequence of the relating, not added to it.
 
 **Role.** Pure definition; fixes the referent of `σ` used by 3.1, A3, 3.3, and the
