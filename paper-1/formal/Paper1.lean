@@ -21,5 +21,6 @@ import Paper1.Frontier
 import Paper1.TraceSeam
 import Paper1.TypeIII
 import Paper1.RaisingDynamics
+import Paper1.Arrow
 import Paper1.ModularInterface
 import Paper1.ModularBuild

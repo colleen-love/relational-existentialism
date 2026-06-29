@@ -36,6 +36,12 @@ name a self, and shows the self **condenses out** as a fixed relation of the co-
   ≡ differentiation (collapsed); the stability dichotomy **collapses into the type III choice** (symmetric
   selves don't exist) with the repeller form left open. A2 has still not been load-bearing — possibly
   definitional.
+- [`spec/09-arrow.md`](spec/09-arrow.md) — **self-reference and the arrow of time** (isolated, upstream of the
+  self). **Verdict: MONOTONE-BUT-NOT-TEMPORAL** — self-reference (`reenter S = S ⨾ S`) is **irreversible**
+  (mechanized τ-free, no self: `reenter` is non-injective, a semigroup not a group), so it creates *a*
+  direction intrinsically; but its **orientation** (which way is the future) needs `σ`'s modular/KMS sign and
+  may **not** be imported. Flagged collapse: the arrow's irreversibility and the seam's opacity are plausibly
+  **one diagonal, two faces**.
 - [`spec/04-provenance.md`](spec/04-provenance.md) — provenance.
 
 ## The arc

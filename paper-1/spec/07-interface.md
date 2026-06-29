@@ -55,6 +55,7 @@ interface and bridge as axiom names.
 | The seam (reflexive opacity) | **constructed** (0 axioms) | `Seam.reflexive_opacity` |
 | The self is an equilibrium | **constructed** (τ-free) | `TypeIII.self_isEquilibrium` |
 | The re-entry **dynamics** exists; the self is **idempotent** (1a) | **constructed**, interface-free (`[propext, Quot.sound]`; uses D1's composition, **not** the interface) | `reentry_self_exists`, `reentry_self_idempotent` |
+| Self-reference is **irreversible** (`reenter` non-injective) — the arrow's irreversibility | **constructed**, interface-free, **upstream of the self** (no self, no `σ`) | `Arrow.reenter_not_injective` |
 
 **Assumed — the modular substrate (operator algebra; standard; cited; unmechanized here):**
 

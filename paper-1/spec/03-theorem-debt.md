@@ -64,6 +64,19 @@ gate**; pass it (honestly, via `Q` = the II₁ factor or otherwise) and 2 unlock
 > - **Minimal set:** A2 (co-direction) has **still not been load-bearing** in any mechanized proof — open
 >   question whether it is definitional. A1 enters via type III (no symmetric self).
 
+> **Update (handoff I.VIII) — self-reference and the arrow (upstream of the self).** Full verdict:
+> [`09-arrow.md`](09-arrow.md); Lean: [`../formal/Paper1/Arrow.lean`](../formal/Paper1/Arrow.lean).
+> **Verdict: MONOTONE-BUT-NOT-TEMPORAL (sharpened).** Self-reference `reenter S = S ⨾ S` is **irreversible** —
+> mechanized **τ-free, no self**: the identity and the swap self-compose to the same relation, so `reenter` is
+> **non-injective** (`reenter_not_injective`) — `S` is unrecoverable from `S ⨾ S` (a semigroup, not a group).
+> So self-reference creates **a direction** intrinsically and **upstream of the self** (D1 + completeness
+> only; no A1, no A2). **But its _orientation_ (which way is the future) is _not_ derivable from
+> self-reference alone** — that needs `σ`'s modular/KMS sign (interface), and may **not** be imported
+> thermodynamically (no-import discipline honored). Honest headline: *self-reference creates the arrow's
+> **irreversibility**, not (by itself) the arrow of time.* **Seam collapse flagged:** the diagonal's
+> non-invertibility (arrow) and its untraceability (seam) are plausibly **one fact, two faces** — recorded,
+> not engineered.
+
 ---
 
 ## 1. Existence — **HOLDS**
