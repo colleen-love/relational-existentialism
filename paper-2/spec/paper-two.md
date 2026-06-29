@@ -19,7 +19,7 @@
 > invariant and splits Pythagoreanly. All `sorry`-free; footprints `[propext, Classical.choice, Quot.sound]`.
 
 > **The headline rests on:** the **modular reading of A1** (the finite, type I, maximally-traceable arena of
-> [`02-axioms.md`](../../paper-1/spec/02-axioms.md) read at its deep end — the intrinsic dynamics a state
+> [`02-axioms.md`](../../theory/spec/AXIOMS.md) read at its deep end — the intrinsic dynamics a state
 > induces); the **equilibrium / KMS** condition (`ρ = e^{-βH}/Z`); the **alignment** `B1 = eigenbasis(ρ)` —
 > the decoherence/pointer basis is the state's eigenbasis, now **derived** from "the clock-state is the
 > rest-state" (§6), not posited; and the **cited** arrow result of paper one (the seam as the
@@ -30,7 +30,7 @@
 This page is the single linear walk through that result: each step is tagged with its status and named by the
 Lean theorem that carries it; a referee should see the arc *and* its boundary in one read. The development is
 the frozen fork [`paper-2/formal/`](../formal) (library `Paper2`, six modules, forked from `theory/` at
-`fca792d` — [`AXIOM-PROVENANCE.md`](AXIOM-PROVENANCE.md)). The type III program the finite core stops short of
+`fca792d` — [`04-provenance.md`](04-provenance.md)). The type III program the finite core stops short of
 is scoped in [`theory/spec/modular-frontier.md`](../../theory/spec/modular-frontier.md).
 
 **Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, at equilibrium]` —
@@ -51,7 +51,7 @@ maximally-mixed `ρ = c·I` the flow is the identity for all `t` (`modularFlow_m
 time is off*. So `σ = Tr` is the infinite-temperature limit of modular self-relation; departing from
 maximally-mixed turns the flow on.
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
 
 ## 2. The trace as infinite-temperature time — the bridge to paper one `[proved]`
 
@@ -61,7 +61,7 @@ exactly the `β → 0` (infinite-temperature) face of the modular flow (`modular
 degeneracy of a structure whose general form *is* time. Lead with this: the modular paper does not overturn
 paper one, it locates it.
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
 
 ## 3. Energy is the modular Hamiltonian; the arrow is what the flow cannot supply `[proved]` / `[reading]`
 
@@ -80,8 +80,8 @@ quantitative half of that arrow is the conserved-band layer carried here: `genRe
 rotating/conserved spectral bands (`Paper2.RotatingSpectrum`, the forked interface — `energy_arrow_spectrum`,
 `genReal_neg_iff`, the PSD witness `quarterMul_posSemidef`).
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean),
-[`Paper2.RotatingSpectrum`](../formal/Paper2/RotatingSpectrum.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean),
+[`Paper2.RotatingSpectrum`](../../theory/formal/Theory/RotatingSpectrum.lean).
 
 ## 4. The conserved band: knowing ⊕ energy `[proved]`
 
@@ -93,8 +93,8 @@ the conserved oscillating coherence — *energy*). The band coincidence makes th
 A3 at the strength of its text — the alignment of the seam band with the rotating band is forced by
 contractivity + nondegeneracy, no fourth posit (`band_coincidence_from_axioms`).
 
-→ [`Paper2.BandCoincidence`](../formal/Paper2/BandCoincidence.lean),
-[`Paper2.BandFromAxioms`](../formal/Paper2/BandFromAxioms.lean).
+→ [`Paper2.BandCoincidence`](../../theory/formal/Theory/BandCoincidence.lean),
+[`Paper2.BandFromAxioms`](../../theory/formal/Theory/BandFromAxioms.lean).
 
 ## 5. Two faces of one generator — at equilibrium `[proved, at equilibrium]`
 
@@ -191,4 +191,4 @@ interface — `genReal`, the conserved band — is the band layer forked frozen 
 lossy self-relating projection *orders* the arrow, the seam as the un-decohereable floor
 (`SeamForcing.self_cannot_fully_decohere`) — is honored here in prose, **"by the arrow result of paper
 one"**, and not forked. So `paper-2/` imports no `paper-1/` path; the citation carries the meaning (see
-[`AXIOM-PROVENANCE.md`](AXIOM-PROVENANCE.md), [`../../STRUCTURE.md`](../../STRUCTURE.md)).
+[`04-provenance.md`](04-provenance.md), [`../../STRUCTURE.md`](../../STRUCTURE.md)).

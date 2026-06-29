@@ -1,20 +1,22 @@
 /-
-# `paper-2/` — the modular self-relation paper (frozen fork)
+# `paper-2/` — the modular self-relation paper (handoff XXII)
 
-The materialized modular slice of paper two: the lazy fork-and-freeze of six modules from `theory/`
-(`Theory.* → Paper2.*`, handoff XVII), forked at `fca792d`. Self-contained: imports only `Paper2.*` +
-mathlib — **no** `paper-1/`, **no** `foundation/`. Paper one's seam→arrow result (`SeamForcing`) is **cited
-in prose** in the manuscript, not forked; paper two's quantitative dependence on the arrow is the forked band
-layer (`Paper2.RotatingSpectrum`/`BandFromAxioms` — `genReal`, the conserved band).
+Paper two **imports** the shared `T.x` it uses from the stable `theory/` and proves its **own** `P2.x`:
 
-The slice (the modular reading of A1, the conserved band, the equilibrium one generator, the einselection
-principle + presence): `Paper2.{ModularFlow, RotatingSpectrum, BandCoincidence, BandFromAxioms, OneGenerator,
-Einselection}`. The A2-priority / A3-generative work (`We`, `Priority`, `MutualCoupling`) is **not** forked —
-it serves the conservation and sparsity papers, not the modular slice.
+- **Imported (`T.x`, from `theory/`):** `Theory.ModularFlow` (the modular reading of A1) and the band layer
+  `Theory.{RotatingSpectrum, BandCoincidence, BandFromAxioms}` (genuinely double-imported with paper one).
+- **Its own (`P2.x`):** `Paper2.OneGenerator` = **P2.1** (the equilibrium one-generator capstone,
+  `combinedFlow_add`) and `Paper2.Einselection` = **P2.2** (einselection + presence — paper two's headline:
+  `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation`). Handoff XXII returned these from
+  `theory/` to paper two: only paper two imports them, so by the promotion rule (`T.x` iff ≥2 papers import)
+  they are `P2.x`. They import the band/`ModularFlow` from `theory/`.
+
+Paper one's seam→arrow result is a **prose citation** in the manuscript, never imported. The pinned `theory/`
+commit is recorded in [`../spec/AXIOM-PROVENANCE.md`](../spec/AXIOM-PROVENANCE.md).
 -/
-import Paper2.ModularFlow
-import Paper2.RotatingSpectrum
-import Paper2.BandCoincidence
-import Paper2.BandFromAxioms
+import Theory.ModularFlow
+import Theory.RotatingSpectrum
+import Theory.BandCoincidence
+import Theory.BandFromAxioms
 import Paper2.OneGenerator
 import Paper2.Einselection

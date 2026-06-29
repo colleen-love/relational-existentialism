@@ -18,7 +18,7 @@ This needs only `Mathlib.Order.FixedPoints` (already compiled), so it builds fas
 -/
 import Mathlib.Order.FixedPoints
 
-namespace RelExist.We
+namespace Theory.We
 
 variable {X O : Type*}
 
@@ -117,4 +117,4 @@ identity — the objective world as the overlap of perspectives. -/
 abbrev World (obs : X → O) (step : X → X → Prop) : Type _ :=
   Quotient (bisimSetoid obs step)
 
-end RelExist.We
+end Theory.We

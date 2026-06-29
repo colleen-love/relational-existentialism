@@ -1,7 +1,21 @@
 # theory — fork provenance
 
-`theory/` is the living, theory-specific frontier. It imports only `theory/` + `foundation/` (closure gate),
-references no paper, and is the only root that moves freely.
+**Status (handoff XXI): `theory/` is now the STABLE shared layer (not the frontier).** The proof-DAG reorg
+flipped theory's role (reversing spec XIII): because papers are thin layers that import it, `theory/` changes
+**only backward-compatibly** (generalization, never redefinition); the living frontier moved to `scratch/`
+(paper three). Two structural changes landed:
+- **Namespaces normalized** `RelExist.* → Theory.*` — `theory/` is uniformly `Theory.*`, so papers import the
+  shared `T.x` with clean names and no collision (the spec-XX block is gone).
+- **The forks were unified into theory and the papers un-forked them**: the band layer is one canonical copy
+  imported by both papers; paper two's six `Paper2.*` forks are gone. Drift-checked byte-identical first, so
+  no meaning shifted; paper one's headline footprints diffed identical at the checkpoint.
+
+The node inventory (the proof DAG as `A/F/T/P`-numbered nodes) is [`NODES.md`](NODES.md). The historical
+fork-provenance below is retained.
+
+---
+
+`theory/` imports only `theory/` + `foundation/` (closure gate) and references no paper.
 
 - **New here (no fork):** `Theory.ModularFlow` (modular A1), `Theory.MutualCoupling` (generative A3),
   `Theory.Priority` (A2-priority / no-bare-carrier), `Theory.OneGenerator` (handoff XV — the open-system

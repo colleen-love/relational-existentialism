@@ -6,7 +6,7 @@ root. Its live modules are dual witnesses for [paper one](../paper-1/spec/paper-
 doctrine's greatest-fixed-point modality `ν` through `OrderHom.gfp` (Knaster–Tarski on a
 complete lattice). Agda hosts the *same* content with **native coinduction** — coinductive
 records and copatterns — which is the idiom Agda is cleanest for, and the
-one that theorem [3.2](../paper-1/spec/03.2-lived-identity.md) (the "we") and definition [D1](../paper-1/spec/02-axioms.md)
+one that theorem [3.2](../paper-1/spec/P1.05-lived-identity.md) (the "we") and definition [D1](../theory/spec/AXIOMS.md)
 (the looped self) were reaching for all along. Here `≈` is not the greatest *post*-fixed
 point of a lattice operator but the **final coalgebra** itself: a proof of `x ≈ y` is an
 infinite, productive agreement, and the coinduction principle is one guarded definition
@@ -14,9 +14,9 @@ rather than a call to `le_gfp`.
 
 Two **live** modules, both from scratch over only the standard library, witnessing **paper one**:
 [`RelExist/Coinductive.agda`](RelExist/Coinductive.agda) — the ν-layer proper (theorem
-[3.2](../paper-1/spec/03.2-lived-identity.md), the lived identity `≈`) — and
+[3.2](../paper-1/spec/P1.05-lived-identity.md), the lived identity `≈`) — and
 [`RelExist/Inversion.agda`](RelExist/Inversion.agda) — the first-person surplus `≈ ⊊ ≅` (the
-[3.5](../paper-1/spec/03.5-decoherence.md) inversion), proved in *both* assistants (cf. Lean
+[3.5](../paper-1/spec/P1.08-decoherence.md) inversion), proved in *both* assistants (cf. Lean
 `bisim_ne_obsEq`). The third witness — **topological sparsity** — is paper-**three** material and lives in the
 archive: [`archive/agda/RelExist/Sparsity.agda`](../archive/agda/RelExist/Sparsity.agda) (it imports the live
 `RelExist.Coinductive`).
@@ -25,13 +25,13 @@ archive: [`archive/agda/RelExist/Sparsity.agda`](../archive/agda/RelExist/Sparsi
 
 | Result | Agda name | Spec | State |
 | --- | --- | --- | --- |
-| a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../paper-1/spec/00-doctrine.md) | ✅ defined (coinductive record) |
-| **3.2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ defined (coinductive record) |
-| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ proved (copattern corecursion) |
-| **shared world** `𝔼 := D/≈` | `SharedWorld` | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ defined (`Setoid`) |
-| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [3.2](../paper-1/spec/03.2-lived-identity.md) | ✅ proved (one guarded definition) |
-| **observational equality** `≅` (the outside view) | `_≅_` | [02 A2](../paper-1/spec/02-axioms.md), [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ defined (same observation stream) |
-| **deterministic collapse** `≈ ⟺ ≅` (the *boundary* case) | `≈⇒≅` / `≅⇒≈` | [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ proved — a clockwork has *no surplus*; the gap is `RelExist.Inversion` below |
+| a system as a behaviour (final coalgebra of the observation functor) | `Behaviour` | [00](../theory/spec/00-doctrine.md) | ✅ defined (coinductive record) |
+| **3.2** — `≈` (the **lived identity**) as the greatest bisimulation | `_≈_` | [3.2](../paper-1/spec/P1.05-lived-identity.md) | ✅ defined (coinductive record) |
+| `≈` is an equivalence | `≈-refl` / `≈-sym` / `≈-trans` / `≈-isEquivalence` | [3.2](../paper-1/spec/P1.05-lived-identity.md) | ✅ proved (copattern corecursion) |
+| **shared world** `𝔼 := D/≈` | `SharedWorld` | [3.2](../paper-1/spec/P1.05-lived-identity.md) | ✅ defined (`Setoid`) |
+| **coinduction** — every bisimulation `⊆ ≈` | `coinduction` (from `Bisimulation`) | [3.2](../paper-1/spec/P1.05-lived-identity.md) | ✅ proved (one guarded definition) |
+| **observational equality** `≅` (the outside view) | `_≅_` | [02 A2](../theory/spec/AXIOMS.md), [03.5](../paper-1/spec/P1.08-decoherence.md) | ✅ defined (same observation stream) |
+| **deterministic collapse** `≈ ⟺ ≅` (the *boundary* case) | `≈⇒≅` / `≅⇒≈` | [03.5](../paper-1/spec/P1.08-decoherence.md) | ✅ proved — a clockwork has *no surplus*; the gap is `RelExist.Inversion` below |
 
 ## Status — `RelExist.Inversion` (the inversion `≈ ⊊ ≅`, nondeterministic)
 
@@ -40,12 +40,12 @@ choice as Lean's `Scratch/Identity.lean`, so both proof assistants prove the fir
 
 | Result | Agda name | Spec source | State |
 | --- | --- | --- | --- |
-| nondeterministic transition system (the early/late witness) | `Step` (one constructor per edge) | [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ defined |
-| lived identity `≈` (relational bisimulation) | `_≈_` (coinductive, `fwd`/`bwd`) | [02 A2](../paper-1/spec/02-axioms.md) | ✅ defined |
-| observational equality `≅` (trace equivalence) | `_≅_`, `HasTrace` | [02 A2](../paper-1/spec/02-axioms.md) | ✅ defined |
-| **soundness** `≈ ⊆ ≅` | `≈⇒≅` | [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ proved |
-| **strictness** `≈ ⊊ ≅` — the first-person surplus | `surplus` (`p0≅q0` ∧ `¬p0≈q0`) | [03.5](../paper-1/spec/03.5-decoherence.md) | ✅ proved (matches Lean `bisim_ne_obsEq`) |
-| **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../paper-1/spec/02-axioms.md) | ✅ proved (via `coinduction`) |
+| nondeterministic transition system (the early/late witness) | `Step` (one constructor per edge) | [03.5](../paper-1/spec/P1.08-decoherence.md) | ✅ defined |
+| lived identity `≈` (relational bisimulation) | `_≈_` (coinductive, `fwd`/`bwd`) | [02 A2](../theory/spec/AXIOMS.md) | ✅ defined |
+| observational equality `≅` (trace equivalence) | `_≅_`, `HasTrace` | [02 A2](../theory/spec/AXIOMS.md) | ✅ defined |
+| **soundness** `≈ ⊆ ≅` | `≈⇒≅` | [03.5](../paper-1/spec/P1.08-decoherence.md) | ✅ proved |
+| **strictness** `≈ ⊊ ≅` — the first-person surplus | `surplus` (`p0≅q0` ∧ `¬p0≈q0`) | [03.5](../paper-1/spec/P1.08-decoherence.md) | ✅ proved (matches Lean `bisim_ne_obsEq`) |
+| **D1** — a fixed point of the dynamics is a stationary self (the eigenform `νΦ`) | `fixpoint-isStationary` / `fixpoint-isSelf` | [D1](../theory/spec/AXIOMS.md) | ✅ proved (via `coinduction`) |
 
 ## Archived — `RelExist.Sparsity` (topological sparsity, paper three)
 

@@ -71,9 +71,9 @@ decoherence-free subspaces and spectral splits are standard; the synthesis is id
 import Theory.RotatingSpectrum
 import Mathlib.LinearAlgebra.Span.Basic
 
-namespace RelExist.BandCoincidence
+namespace Theory.BandCoincidence
 
-open RelExist.RotatingSpectrum
+open Theory.RotatingSpectrum
 open Matrix
 
 variable {A : Type*}
@@ -470,4 +470,4 @@ theorem alignment_fails : ¬ Align twoRotMul Jq := by
   rw [norm_twoRotMul_I twoRotMul_02] at hlt
   exact lt_irrefl 1 hlt
 
-end RelExist.BandCoincidence
+end Theory.BandCoincidence

@@ -8,7 +8,7 @@
 
 The theory has one philosophical wager: **relation comes first, and the self is what relation produces.** Four
 commitments make that precise. Three are structural scaffolding (`A1`, `A2`, `D1`); one — **A3** — is the
-load-bearing bet. Handoff XX's move was to state A3 as a **process** and show the rest of the theory's
+load-bearing bet. The move is to state A3 as a **process** and show the rest of the theory's
 pictures of the self *fall out of it*. What was three papers' worth of separately-posited "readings" of the
 self is now one process with three consequences.
 
@@ -63,7 +63,7 @@ a self is `MutualCoupling.JointFixed` (`Theory.Axioms.IsSelf`).
 
 **Why it matters.** A3 is the one wager that stops the theory being a universal solvent — drop it and nearly
 everything trivially "is a self." Stating it as a process, with the finite capacity `α` built in, is what makes
-selfhood *selective* and *achievable*. **The collapse is total** (handoff XX, outcome 1): every reading
+selfhood *selective* and *achievable*. **The collapse is total**: every reading
 derives; none stays forked.
 
 **Gloss.** A relation builds a persisting self only when it loops — returned to, re-entered, lived again until
@@ -160,9 +160,9 @@ home of the one shared axiom layer.
   top-level docs.
 - **The canonical axiom layer is stable and version-pinned.** `Theory.Axioms` changes **only
   backward-compatibly** (generalization, never redefinition), exactly like `foundation/`. Papers **import (or
-  cite) and pin** it — they do not fork it. Each paper records its pin in `spec/AXIOM-PROVENANCE.md`; the gate
-  enforces both the import allowance and the pin. This **reverses** spec XIII's per-paper frozen duplication
-  of the axioms, which is correct now that the divergence it protected has collapsed.
+  cite) and pin** it — they do not fork it. Each paper records its pin in `spec/04-provenance.md`; the gate
+  enforces both the import allowance and the pin. The axioms are **one shared layer**, not per-paper forks —
+  there is no divergence to protect, because the readings are consequences of the one process.
 
 **Build.** `cd lake && lake build Foundation Paper1 Theory Paper2` (green). The canonical layer is
 `Theory.Axioms`; its prose is this file.

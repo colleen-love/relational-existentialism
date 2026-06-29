@@ -52,9 +52,9 @@ from priority. See [`docs/spec/02-axioms.md`](../../docs/spec/02-axioms.md) for 
 -/
 import Theory.We
 
-namespace RelExist.Priority
+namespace Theory.Priority
 
-open RelExist.We
+open Theory.We
 
 variable {X O : Type*}
 
@@ -152,4 +152,4 @@ theorem priority_universal (obs : X → O) (step : X → X → Prop) :
     ∀ p q : World obs step, bisim (obsQ obs step) (stepQ obs step) p q ↔ p = q :=
   bisim_quotient_eq obs step
 
-end RelExist.Priority
+end Theory.Priority

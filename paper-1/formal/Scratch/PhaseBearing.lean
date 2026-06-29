@@ -49,12 +49,12 @@ is the one-directional `seamBand ⊆ rotatingBand`, exactly what "the conserved 
 asserts. The exact set-equality `seam = rotatingBand` (the converse) still needs `Align`, but clause B
 does not.
 -/
-import Scratch.BandFromAxioms
+import Theory.BandFromAxioms
 import Scratch.SeamConserved
 
 namespace RelExist.PhaseBearing
 
-open RelExist.BandCoincidence RelExist.BandFromAxioms RelExist.RotatingSpectrum
+open Theory.BandCoincidence Theory.BandFromAxioms Theory.RotatingSpectrum
 open Matrix
 
 variable {A : Type} [Fintype A] [DecidableEq A]

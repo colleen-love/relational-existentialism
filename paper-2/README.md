@@ -1,11 +1,18 @@
 # paper-2 — the modular self-relation paper
 
-Frozen, self-contained. Manuscript: [`spec/paper-two.md`](spec/paper-two.md); provenance:
-[`spec/AXIOM-PROVENANCE.md`](spec/AXIOM-PROVENANCE.md). `formal/` (library `Paper2`) is the **modular slice**
-forked frozen from `theory/` at `fca792d` (handoff XVII, `Theory.* → Paper2.*`): six modules —
-`Paper2.{ModularFlow, RotatingSpectrum, BandCoincidence, BandFromAxioms, OneGenerator, Einselection}` — the
-modular reading of A1, the conserved band, the equilibrium one generator, and the einselection principle +
-presence. Not forked: the A2-priority / A3-generative work (`We`, `Priority`, `MutualCoupling`), which serves
-the conservation and sparsity papers. Imports only `Paper2.*` + mathlib (the modular slice is mathlib-direct,
-**no** `foundation/`, **no** `paper-1/`); cites paper one's arrow result in prose rather than importing it.
-See [`../STRUCTURE.md`](../STRUCTURE.md).
+A **thin layer** over the stable `theory/`. Manuscript: [`spec/paper-two.md`](spec/paper-two.md); provenance +
+pin: [`spec/04-provenance.md`](spec/04-provenance.md); node docs: [`spec/P2.01-one-generator.md`](spec/P2.01-one-generator.md),
+[`spec/P2.02-einselection-presence.md`](spec/P2.02-einselection-presence.md).
+
+`formal/` (library `Paper2`) **imports** the shared `T.x` it uses and proves its **own** `P2.x`:
+
+- **Imported (from `theory/`):** `Theory.ModularFlow` (the modular reading of A1) and the band layer
+  `Theory.{RotatingSpectrum, BandCoincidence, BandFromAxioms}` — the conserved band and the `genReal` arrow it
+  cites quantitatively.
+- **Its own (`P2.x`):** `Paper2.OneGenerator` (**P2.01** — `combinedFlow_add`, the two faces of one generator
+  at equilibrium) and `Paper2.Einselection` (**P2.02** — `presence_conserved`, `pythagorean`,
+  `arrow_is_loss_not_relocation`).
+
+It imports only `theory/` (+ mathlib) — **no** `paper-1/`; paper one's arrow is a **prose citation**. Pins the
+`theory/` commit in its provenance. The node inventory is [`../theory/spec/NODES.md`](../theory/spec/NODES.md);
+the layout discipline is [`../STRUCTURE.md`](../STRUCTURE.md).

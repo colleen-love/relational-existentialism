@@ -36,18 +36,17 @@ The kept closure (15 Scratch modules over 5 `RelExist` core modules):
   phase-bearing `Φ_c`. The phase experiment returns *earned* — the self-inclusion obstruction is
   phase-blind, so the un-attendable seam carries energy (`seam_carries_phase`), the 0/1 gate's
   phaselessness being its degeneracy. Clause B's joint upgraded under two named readings.
-* `Scratch.CanonicalEigenform` — **handoff XX, Part D**: paper one's self `Peri(Φ_c)` as a *derived* theorem
-  of the canonical A3 *process* (`Theory.Axioms`), not the posited `C1` reading. The state-half mirrored in
-  paper one's own namespace from its (byte-identical) definitions; the full process cited + version-pinned
-  ([`AXIOM-PROVENANCE.md`](../spec/AXIOM-PROVENANCE.md)). Purely additive — headline footprints untouched.
+
+The eigenform-as-process-fixed-point is the canonical `Theory.Axioms.eigenform_of_fixed` (imported from the
+stable layer); paper one cites it. (The handoff-XX `Scratch.CanonicalEigenform` mirror — a workaround for the
+spec-XX namespace collision — was deleted in handoff XXII once XXI dissolved the collision.)
 -/
 import Scratch.Trace
 import Scratch.KnowingFeeling
 import Scratch.TimeFlow
 import Scratch.KnowingFromArrow
-import Scratch.RotatingSpectrum
-import Scratch.BandFromAxioms
+import Theory.RotatingSpectrum
+import Theory.BandFromAxioms
 import Scratch.SeamForcingC
 import Scratch.SeamConserved
 import Scratch.PhaseBearing
-import Scratch.CanonicalEigenform

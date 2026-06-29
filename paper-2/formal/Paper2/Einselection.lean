@@ -60,13 +60,13 @@ is presence — finding it conserved and split into knowing/energy, but the arro
 relocation paper three's conservation law would need.
 -/
 import Paper2.OneGenerator
-import Paper2.BandFromAxioms
+import Theory.BandFromAxioms
 
 namespace Paper2.Einselection
 
 open Matrix Complex Filter Topology
-open Paper2.OneGenerator Paper2.ModularFlow Paper2.RotatingSpectrum
-open Paper2.BandCoincidence Paper2.BandFromAxioms
+open Paper2.OneGenerator Theory.ModularFlow Theory.RotatingSpectrum
+open Theory.BandCoincidence Theory.BandFromAxioms
 open scoped ComplexConjugate
 
 variable {n : Type*} [Fintype n] [DecidableEq n]

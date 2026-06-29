@@ -64,9 +64,9 @@ literally, already contains the energy band, hence already contains the bet.
 -/
 import Theory.BandCoincidence
 
-namespace RelExist.BandFromAxioms
+namespace Theory.BandFromAxioms
 
-open RelExist.BandCoincidence RelExist.RotatingSpectrum
+open Theory.BandCoincidence Theory.RotatingSpectrum
 open Matrix Filter Topology
 
 variable {A : Type*}
@@ -336,4 +336,4 @@ theorem energyBand_eq_seam_quarterMul :
     bandOn (energyEdge quarterMul) = seamBand (conservedOffdiag quarterMul) :=
   bandOn_congr energyEdge_iff_conservedOffdiag_quarterMul
 
-end RelExist.BandFromAxioms
+end Theory.BandFromAxioms
