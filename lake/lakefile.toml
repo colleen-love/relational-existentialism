@@ -1,52 +1,24 @@
 name = "RelExist"
-defaultTargets = ["Foundation"]
+defaultTargets = ["Paper1"]
 
-# ── Six-root layout (handoff XIII) ───────────────────────────────────────────
-# The lake package stays here in `formal/` (so the mathlib cache under
-# `formal/.lake` is untouched); each root is a repo-level directory holding its
-# own `formal/` (Lean) and `spec/` (prose). Libraries reach their root via
-# `srcDir = "../<root>/formal"`. Module names are kept stable in `paper-1/`
-# (`Scratch.*`, `RelExist.*`) and root-prefixed in `theory/` (`Theory.*`), so the
-# closure gate resolves by file location: a paper imports only itself + foundation.
+# ── Layout (handoff I.II — the arena reset) ──────────────────────────────────
+# The project moved to a new foundation (a quantaloid / allegory with relations
+# as the primitive arrow). The prior edifice — the traced-SMC papers, the theory
+# and foundation layers, the conservation/sparsity frontier — is archived under
+# `archive/archived/` as structural reference and is **not** built or gated. Only
+# `paper-1/` is live, as a buildable skeleton; spec II.1 grows it (and the build
+# targets) back on the new arena.
 
-# `foundation/` — stable, mathlib-bound infrastructure (the traced-SMC typeclass +
-# JSV axioms). Dependency-free today, so it is the fast default target. Held to
-# mathlib standards; destined to leave for a mathlib PR (not yet).
-[[lean_lib]]
-name = "Foundation"
-srcDir = "../foundation/formal"
-roots = ["Foundation"]
-
-# `paper-1/` — frozen, self-contained: paper one's axiom spine (`RelExist.*`, minus
-# the hoisted `Traced`) + its kept mathlib closure (`Scratch.*`). Imports only
-# `paper-1/` + `foundation/`. Module names deliberately unchanged from the
-# pre-reorg tree (content byte-identical, only relocated).
+# `paper-1/` — *a self arises from the axioms*, rebuilt on the new relational
+# arena. A skeleton for now: an empty `Paper1` root (no theorems yet).
 [[lean_lib]]
 name = "Paper1"
 srcDir = "../paper-1/formal"
-roots = ["RelExist", "Scratch"]
+roots = ["Paper1"]
 
-# `theory/` — the living frontier that is already *not* paper one: the modular A1
-# (`Theory.ModularFlow`), the generative A3 (`Theory.MutualCoupling`), A2-priority
-# (`Theory.Priority`), plus the shared base they consume, forked up on genuine
-# demand (`Theory.We`, `Theory.RotatingSpectrum`, `Theory.BandCoincidence`,
-# `Theory.BandFromAxioms`). Imports only `theory/` + `foundation/`.
-[[lean_lib]]
-name = "Theory"
-srcDir = "../theory/formal"
-roots = ["Theory"]
-
-# `paper-2/` — the modular self-relation paper: the frozen fork of the modular slice
-# from `theory/` (six modules, `Theory.* → Paper2.*`, handoff XVII). Self-contained:
-# imports only `Paper2.*` + mathlib (the modular slice is mathlib-direct). Cites paper
-# one's seam→arrow result in prose, never imports `paper-1/`.
-[[lean_lib]]
-name = "Paper2"
-srcDir = "../paper-2/formal"
-roots = ["Paper2"]
-
+# mathlib is retained (cache present under `.lake`) so the dependency is in place
+# when the new-arena development needs it; the empty skeleton imports none of it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.15.0"
-

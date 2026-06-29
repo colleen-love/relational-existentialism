@@ -2,30 +2,37 @@
 
 A philosophy — relation comes first, and the self is what relation produces — together with a mechanized formalization of it.
 
-The repository proves, and shows its work for, **one result**:
+The repository's thesis: **relation comes first, and the self is what relation produces** — a self **arises**
+from axioms that never name it.
 
-> *The arrow of time is the orientation active self-relating cannot escape; and the conserved remainder of self-relating — what never becomes known — is exactly energy.*
+> **The arena reset (handoff I.II).** The project has moved to a **new foundation** — a **quantaloid /
+> allegory in which relations are the primitive arrow** and `Q` is the value-object — replacing the earlier
+> traced-SMC + operator-representation arena. **Paper one is being rebuilt from scratch** on it. The prior
+> edifice (the rotated papers, the shared theory/foundation layers, the conservation frontier, the Agda
+> layer) is **not deleted** — it is the same theory in a representation we outgrew, **archived as structural
+> reference** under [`archive/archived/`](archive/archived) and catalogued in
+> [`archive/archived/INDEX.md`](archive/archived/INDEX.md), to be mined and re-grounded relationally.
 
-- **Start here — the result:** [`paper-1/spec/paper-one.md`](paper-1/spec/paper-one.md), a single linear walk through it, each step status-tagged and named by its Lean theorem.
-- **The view, in plain language:** [`theory/spec/relational-existentialism.md`](theory/spec/relational-existentialism.md)
-- **One step toward the formalization (plain words, structures named):** [`theory/spec/relational-existentialism-toward-formalization.md`](theory/spec/relational-existentialism-toward-formalization.md)
-- **The canonical axioms (for an outside reader):** [`theory/spec/AXIOMS.md`](theory/spec/AXIOMS.md), with the doctrine and signature ([`00`](theory/spec/00-doctrine.md)/[`01`](theory/spec/01-signature.md)) now alongside them in `theory/spec/`; the proof-DAG node inventory is [`theory/spec/NODES.md`](theory/spec/NODES.md).
-- **The formal spec (paper one's theorems):** [`paper-1/spec/`](paper-1/spec/) — the axioms page (`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`paper-1/spec/README.md`](paper-1/spec/README.md) for the reading order.
-- **The mechanized development (Lean 4):** machine-checked and `sorry`-free. Paper one's closure lives in [`paper-1/formal/`](paper-1/formal/) (`Scratch.*`, `RelExist.*`); shared infrastructure in [`foundation/formal/`](foundation/formal/) (`Foundation.Traced`); the living frontier in [`theory/formal/`](theory/formal/) (`Theory.*`). All build clean; the headline footprints sit at the corpus norm, with the seam depending on no axioms.
-- **The coinductive ν-layer (Agda):** [`agda/`](agda/) — a parallel `--safe --guardedness` mechanization of paper one's identity/`ν` material with native coinduction (lived identity `≈`, theorem 3.2; the first-person surplus `≈ ⊊ ≅`, proved in both assistants). Infrastructure, a second proof assistant — not a root.
+- **Start here — what paper one is:** [`paper-1/README.md`](paper-1/README.md) and its spec stubs
+  ([`paper-1/spec/`](paper-1/spec)). It is a **skeleton**; spec II.1 defines it on the new arena.
+- **The turn, and the layout:** [`STRUCTURE.md`](STRUCTURE.md) — the arena change recorded plainly, and what
+  is live versus archived.
+- **The archived edifice (what was proved, and where):** [`archive/archived/INDEX.md`](archive/archived/INDEX.md)
+  — theorem-by-theorem, with what each depended on, so a result's *shape* can be ported into the new arena.
 
-## Layout — six roots
+## Layout
 
-The repository is organized into six **roots** — a root is exactly a top-level directory with `formal/` (Lean) + `spec/` (prose) + `README.md`, governed by the import gates; see [`STRUCTURE.md`](STRUCTURE.md) for the full discipline.
+The repository is now minimal while paper one is rebuilt:
 
-- [`foundation/`](foundation) — stable, mathlib-bound shared infrastructure (the traced-SMC typeclass). Imported by everything; destined for an eventual mathlib PR.
-- [`theory/`](theory) — the living, theory-specific frontier already beyond paper one (the modular A1, generative A3, A2-priority). The only root that moves freely. It is also the **legible canonical home of the one shared axiomatization** `{A1, A2, A3, D1}`: handoff XX reframed **A3 as a process** and *derived* the per-paper readings of the self as theorems of it — stated plainly for an outside reader in [`theory/spec/AXIOMS.md`](theory/spec/AXIOMS.md), mechanized in [`theory/formal/Theory/Axioms.lean`](theory/formal/Theory/Axioms.lean).
-- [`paper-1/`](paper-1) — frozen, self-contained: paper one's spec + its kept formal closure. Imports only itself + `foundation/`.
-- [`paper-2/`](paper-2) — the modular self-relation paper; the modular slice forked frozen from `theory/` (`Paper2.*`).
-- [`scratch/`](scratch) — live staging.
-- [`archive/`](archive) — the supporting development kept, not foregrounded: the conservation law and cosmos readings (paper two), the sparsity of selfhood (paper three), the functorial-semantics layer, and the route-1 scaffolding — referenced as future work rather than as the headline.
-
-Everything else at top level is **infrastructure**, not a root: [`lake/`](lake) (the Lean package home + mathlib cache, so `formal/` only ever means a root's Lean sources), [`agda/`](agda) (the parallel coinductive ν-layer — a second proof assistant), [`papers/`](papers) (the final manuscripts, all rights reserved), [`scripts/`](scripts) (the gate + environment setup), and the top-level docs.
+- [`paper-1/`](paper-1) — *a self arises from the axioms*, on the new relational arena. A **live skeleton**:
+  spec stubs + an empty `Paper1` Lean root. Spec II.1 fills it.
+- [`archive/archived/`](archive/archived) — the prior edifice, **structural reference** (not built, not
+  gated): the rotated papers, the `theory/` and `foundation/` layers, the `scratch/` frontier, and the Agda
+  layer; with [`prior-archive/`](archive/archived/prior-archive) holding the work outgrown earlier. Indexed
+  in [`INDEX.md`](archive/archived/INDEX.md).
+- [`lake/`](lake), [`scripts/`](scripts), [`papers/`](papers) — infrastructure: the Lean package home
+  (lakefile stripped to the single `Paper1` library), the gate (reduced to `paper-1/`), and the final
+  manuscripts. See [`STRUCTURE.md`](STRUCTURE.md).
 
 ## Licensing
 

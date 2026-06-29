@@ -2,27 +2,22 @@
 
 `lake/` is **only the build home**: it holds the Lake package ([`lakefile.toml`](lakefile.toml)), the
 [`lean-toolchain`](lean-toolchain), the manifest, and the (large, git-ignored) mathlib cache under `.lake`.
-**No Lean sources live here** — they live in each *root*'s `formal/`, which the libraries reach via
-`srcDir = "../<root>/formal"`:
+**No Lean sources live here** — they live in the live root's `formal/`, which the library reaches via
+`srcDir = "../<root>/formal"`. After the arena reset (handoff I.II), only one library is live:
 
-- [`foundation/formal/`](../foundation/formal) — `Foundation.*` (the traced-SMC typeclass)
-- [`paper-1/formal/`](../paper-1/formal) — paper one's closure (`Scratch.*`, `RelExist.*`)
-- [`theory/formal/`](../theory/formal) — the living frontier (`Theory.*`)
-- [`paper-2/formal/`](../paper-2/formal) — the modular slice (`Paper2.*`)
-- `scratch/formal/` — staging
+- [`paper-1/formal/`](../paper-1/formal) — `Paper1.*`, the new-arena skeleton (an empty root; spec II.1
+  grows it).
 
-See [`lakefile.toml`](lakefile.toml) for the targets and [`../STRUCTURE.md`](../STRUCTURE.md) for the layout,
-the closure gates, the fork-and-freeze discipline, and the roots-vs-infrastructure distinction (`lake/` is
-infrastructure — `formal/` now only ever means "a root's Lean sources").
+The prior edifice's Lean (`Foundation.*`, `Theory.*`, the paper closures, `scratch/`) is archived under
+[`../archive/archived/`](../archive/archived) as structural reference and is **not** built. See
+[`lakefile.toml`](lakefile.toml) for the live target and [`../STRUCTURE.md`](../STRUCTURE.md) for the turn.
 
 ## Build
 
 ```
 cd lake
-lake build Foundation Paper1 Theory Paper2   # all libraries, green and sorry-free
-lake build                                   # default: Foundation only (fast, no mathlib)
+lake build        # builds Paper1 (the only live library); an empty skeleton, green instantly
 ```
 
-The per-module status ledger that used to live here is **not** reproduced: each headline theorem is already
-named with its Lean module in [`../paper-1/spec/paper-one.md`](../paper-1/spec/paper-one.md) and
-[`../paper-2/spec/paper-two.md`](../paper-2/spec/paper-two.md), the single linear walks through the results.
+The archived development is not on the build path; to read what it proved, see
+[`../archive/archived/INDEX.md`](../archive/archived/INDEX.md).
