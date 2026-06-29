@@ -20,3 +20,5 @@ import Paper1.Seam
 import Paper1.Frontier
 import Paper1.TraceSeam
 import Paper1.TypeIII
+import Paper1.ModularInterface
+import Paper1.ModularBuild

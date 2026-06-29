@@ -187,6 +187,12 @@ The operator-algebra machinery this verdict runs on is **not in mathlib** (as of
 frontier** — the one place where a specialist or new mathlib development genuinely earns its keep, not as
 deferral but because the formalization frontier is real. We do **not** fake mechanization of absent theory.
 
+> **Operationalized (handoff I.VI).** The assumed modular substrate is now a clean, cited **interface**
+> (`ModularInterface`), and the unification `A3 = σ ⊕ arrow` is **proved on top of it** — fully mechanized
+> *relative to the interface*, with the assumed/constructed boundary surfaced via `#print axioms` and a
+> disclosure table. See [`07-interface.md`](07-interface.md). The KMS-uniqueness lever of Step 2 is the
+> interface field `kms_unique`; the trace-scaling of Part B is `trace_scaling`.
+
 **Bottom line.** The phenomenology motivated type III; the mathematics **confirms** III admits the modular
 flow and that **A3 is it — in its reversible core, by KMS uniqueness — with the irreversible remainder the
 arrow**, unifying paper one's foundation with papers 2–4 through the same KMS bridge. The verdict is **YES,

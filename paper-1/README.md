@@ -25,6 +25,11 @@ name a self, and shows the self **condenses out** as a fixed relation of the co-
   `σ_t`** in its reversible core (forced by KMS uniqueness at the equilibrium self) ⊕ the dissipative arrow
   — conditional, paper-level at the operator frontier (type III modular theory is not in mathlib), with the
   `τ`-free skeleton mechanized and ported.
+- [`spec/07-interface.md`](spec/07-interface.md) — **the modular-theory interface** and the **assumed /
+  constructed boundary**. The modular substrate is assumed as a clean, cited, *non-relational* interface; the
+  unification (`A3 = σ ⊕ arrow`) is **proved on top of it**, with the boundary surfaced via `#print axioms`
+  and a disclosure table. The relational results are *fully mechanized relative to the interface*; the
+  `τ`-free core needs none of it.
 - [`spec/04-provenance.md`](spec/04-provenance.md) — provenance.
 
 ## The arc
