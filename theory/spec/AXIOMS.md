@@ -42,19 +42,19 @@ a self is `MutualCoupling.JointFixed` (`Theory.Axioms.IsSelf`).
 
 | Reading (paper) | What it says | Derived as |
 |---|---|---|
-| **Eigenform `νΦ_c` / `Peri`** (paper one) | the self is the sustainable field the loop returns unchanged | `eigenform_of_fixed`, `self_is_periBand`, `energy_in_self` |
-| **Generative engine** (paper three) | mutually-attended self-relating *makes more self*, finitely (capacity `α` is the brake) | `generative_law` (`orbit_engine2`), `generative_bounded` |
-| **Phase-bearing / modular self** (paper two) | the self rotates at the modular (energy) frequencies, sustained, the modular flow a symmetry | `modular_preserves_self`, `modular_sustains_self`, `modular_is_symmetry` |
+| **Eigenform `νΦ_c` / `Peri`** (paper two) | the self is the sustainable field the loop returns unchanged | `eigenform_of_fixed`, `self_is_periBand`, `energy_in_self` |
+| **Generative engine** (paper four) | mutually-attended self-relating *makes more self*, finitely (capacity `α` is the brake) | `generative_law` (`orbit_engine2`), `generative_bounded` |
+| **Phase-bearing / modular self** (paper three) | the self rotates at the modular (energy) frequencies, sustained, the modular flow a symmetry | `modular_preserves_self`, `modular_sustains_self`, `modular_is_symmetry` |
 
-- **Eigenform (paper one).** A self's state is returned unchanged by the channel, so it lies in A3's
+- **Eigenform (paper two).** A self's state is returned unchanged by the channel, so it lies in A3's
   *sustainable field* `Peri(Φ_c)` = the conserved (modulus-one) band — which carries the rotating **energy**
-  band beside the fixed **knowing** band `νΦ_c`. Paper one's "self `:= Peri`" was once *A3 read at the
+  band beside the fixed **knowing** band `νΦ_c`. Paper two's "self `:= Peri`" was once *A3 read at the
   strength of its text*; it is now a theorem (`eigenform_of_fixed`).
-- **Generative engine (paper three).** The per-edge moduli of a genuine process orbit obey the two-sided
+- **Generative engine (paper four).** The per-edge moduli of a genuine process orbit obey the two-sided
   capacity-bearing engine `Engine2 (α i) (α j)` (`generative_law`); with admissible capacities the orbit stays
   bounded forever (`generative_bounded`) — growth is a *finite achievement*, `α` the regulator, divergence
   structurally excluded.
-- **Modular self (paper two).** For a state diagonal in the preferred basis, the modular flow is a
+- **Modular self (paper three).** For a state diagonal in the preferred basis, the modular flow is a
   **modulus-one Schur multiplier**: it **maps the self into itself** (`modular_preserves_self`), **sustains**
   every coherence edge-for-edge — the rotating sub-band cycling at the modular energies forever
   (`modular_sustains_self`) — and **commutes** with the co-direction channel (`modular_is_symmetry`). The
@@ -79,8 +79,8 @@ relating" is a composable, tensorable, traceable thing). The mechanized core is 
 `Foundation.Traced`.
 
 **Dimension is an instantiation parameter, not an axiom.** Every result of A3 above is stated over an
-*arbitrary* index type — the process, the eigenform, the conserved band are all polymorphic. Paper one
-instantiates the **finite** case; papers two/three the **infinite** general case. *Finite vs infinite is not
+*arbitrary* index type — the process, the eigenform, the conserved band are all polymorphic. Paper two
+instantiates the **finite** case; papers three/four the **infinite** general case. *Finite vs infinite is not
 an axiom difference — it is the same A1 instantiated.* Witnessed by `A1_dimension_generic`: the eigenform
 derivation carries no finiteness hypothesis.
 
@@ -112,7 +112,7 @@ intrinsic dynamics the state `ρ` induces, of which the trace is the **infinite-
 
 **Same definition, generalized.** At the maximally-mixed state the modular flow is the identity — internal
 time is *off* and `σ = Tr` is recovered (`D1_trace_is_modular_limit`,
-`ModularFlow.modularFlow_maximally_mixed`). Paper one instantiates the trace (time off); papers two/three the
+`ModularFlow.modularFlow_maximally_mixed`). Paper two instantiates the trace (time off); papers three/four the
 modular flow (time on). `σ = Tr ⇝ σ = modularFlow ρ`.
 
 **Co-directed form.** Self-relation is the unary case (a private feedback wire). When the looped wire is
@@ -137,23 +137,23 @@ At the deep end, that feedback *is* the flow of internal (thermal) time.
           ├──────────────┬───────────────────────┐
           ▼              ▼                        ▼
    eigenform/Peri   generative engine      phase-bearing / modular self
-     (paper one)      (paper three)              (paper two)
+     (paper two)      (paper four)              (paper three)
 ```
 
-Three papers, one axiomatization. The differences between the papers are **instantiations** (A1's dimension,
+Three readings, one axiomatization. The differences between the papers are **instantiations** (A1's dimension,
 D1's trace-vs-modular) and **derived consequences** (A3's three readings), not different axioms.
 
 ---
 
 ## Where this lives — the legible canonical home (directory convention)
 
-`theory/` is the **canonical home of the theory** — the living frontier already beyond paper one, and now the
+`theory/` is the **canonical home of the theory** — the transitional shared layer beyond paper two, and the
 home of the one shared axiom layer.
 
 - **A root** is exactly a top-level directory with `formal/` (Lean) + `spec/` (prose) + `README.md`, governed
-  by the import gates ([`scripts/gate.sh`](../../scripts/gate.sh)). The six roots: `foundation/`, `theory/`,
-  `paper-1/`, `paper-2/`, `scratch/`, `archive/`. See [`STRUCTURE.md`](../../STRUCTURE.md) for the full
-  discipline and the roots-vs-infrastructure split.
+  by the import gates ([`scripts/gate.sh`](../../scripts/gate.sh)). The seven roots: `foundation/`, `theory/`,
+  `paper-1/`, `paper-2/`, `paper-3/`, `scratch/`, `archive/`. See [`STRUCTURE.md`](../../STRUCTURE.md) for the
+  full discipline and the roots-vs-infrastructure split.
 - **Infrastructure** (not roots): [`lake/`](../../lake) — the Lean package home + mathlib cache, renamed out
   of the old `formal/` collision so `formal/` only ever names a root's Lean sources; [`agda/`](../../agda) —
   the parallel coinductive ν-layer; [`papers/`](../../papers) — the final manuscripts; `scripts/` and the

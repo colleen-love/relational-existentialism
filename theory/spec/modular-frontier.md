@@ -90,8 +90,8 @@ finite instance and no leverage. **Recorded as the shape to grow into, not built
   limit; energy is the modular Hamiltonian; thermal time recovered finite-dimensionally.
 - **Arrow boundary found** (Stage 2): the modular (reversible) flow does **not** yield the arrow — the
   inherited thermal-time open problem, now located precisely. Real, publishable.
-- **One generator, at equilibrium** (handoff XV, [`Theory.OneGenerator`](../../paper-2/formal/Paper2/OneGenerator.lean)):
-  the modular clock `K` (from the state) and paper one's dissipator `𝒟` (the arrow) assemble into a single
+- **One generator, at equilibrium** (handoff XV, [`Paper3.OneGenerator`](../../paper-3/formal/Paper3/OneGenerator.lean)):
+  the modular clock `K` (from the state) and paper two's dissipator `𝒟` (the arrow) assemble into a single
   GKLS generator `𝓛 = -i[(1/β)K,·] + 𝒟` whose unitary and dissipative faces **commute** — *derived* from
   `B1 = eigenbasis(ρ)`, not imposed — so "two faces of one generator" is earned in the **equilibrium** case.
   The *out-of-equilibrium* identification (modular time = physical time, no equilibrium assumption) is the

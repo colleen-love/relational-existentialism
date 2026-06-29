@@ -7,7 +7,7 @@ presence. Lean namespace `Theory.*` (sources in [`formal/`](formal), prose in [`
 
 **Stable, not the frontier (handoff XXI).** Because papers are thin layers that **import** `theory/`, it now
 changes **only backward-compatibly** (like `foundation/`), so a paper's pinned version keeps its meaning. The
-living frontier moved to [`scratch/`](../scratch) (paper three). The proof-DAG node inventory is
+living frontier moved to [`scratch/`](../scratch) (paper four). The proof-DAG node inventory is
 [`spec/NODES.md`](spec/NODES.md). See [`../STRUCTURE.md`](../STRUCTURE.md).
 
 ## The canonical axioms (handoff XX)

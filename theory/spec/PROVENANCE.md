@@ -1,9 +1,14 @@
 # theory — fork provenance
 
+> **Renumbering note (handoff I.O).** The papers were rotated back one slot (a new foundational paper one — a
+> skeleton — now leads). In the per-reading prose below, read the **eigenform** as paper two, the **modular**
+> self as paper three, and the **generative** engine / conservation frontier as paper four; the historical
+> fork narrative keeps its original wording. See [`../../STRUCTURE.md`](../../STRUCTURE.md).
+
 **Status (handoff XXI): `theory/` is now the STABLE shared layer (not the frontier).** The proof-DAG reorg
 flipped theory's role (reversing spec XIII): because papers are thin layers that import it, `theory/` changes
 **only backward-compatibly** (generalization, never redefinition); the living frontier moved to `scratch/`
-(paper three). Two structural changes landed:
+(paper four). Two structural changes landed:
 - **Namespaces normalized** `RelExist.* → Theory.*` — `theory/` is uniformly `Theory.*`, so papers import the
   shared `T.x` with clean names and no collision (the spec-XX block is gone).
 - **The forks were unified into theory and the papers un-forked them**: the band layer is one canonical copy
@@ -27,7 +32,7 @@ fork-provenance below is retained.
   rotating`, and defines **presence** as its HS weight: conserved and Pythagorean-split into knowing ⊕ energy,
   but with the arrow shown to be *loss, not relocation* — a precisely-located negative for paper three;
   consumes `Theory.OneGenerator` and `Theory.BandFromAxioms`). These are already *not* paper one.
-- **Forked from `paper-1/` on demand at `fe935a6`** (genuine second consumer = the frontier modules above):
+- **Forked from `paper-2/` on demand at `fe935a6`** (genuine second consumer = the frontier modules above):
   `Theory.We` (for `Priority`), and `Theory.{RotatingSpectrum,BandCoincidence,BandFromAxioms}` (for
   `MutualCoupling`). Frozen copies of paper-1's `Scratch.{We,RotatingSpectrum,BandCoincidence,BandFromAxioms}`,
   byte-identical at the fork hash except their import lines (re-pointed to `Theory.*`). **Intended identical**
@@ -47,9 +52,9 @@ capacity `α` (the `MutualCoupling.jointStep` co-direction step) — and **deriv
 
 - **Existence** (`self_exists`, `self_exists_stable`) — the process has fixed points, and a stable one is
   reached generatively.
-- **The eigenform / `Peri`** (paper one) — `eigenform_of_fixed`, `self_is_periBand`, `energy_in_self`.
-- **The generative engine** (paper three) — `generative_law` (`orbit_engine2`), `generative_bounded`.
-- **The phase-bearing / modular self** (paper two) — `modular_preserves_self`, `modular_sustains_self`,
+- **The eigenform / `Peri`** (paper two) — `eigenform_of_fixed`, `self_is_periBand`, `energy_in_self`.
+- **The generative engine** (paper four) — `generative_law` (`orbit_engine2`), `generative_bounded`.
+- **The phase-bearing / modular self** (paper three) — `modular_preserves_self`, `modular_sustains_self`,
   `modular_is_symmetry` (the modular flow is a modulus-one Schur multiplier that maps the self into itself,
   sustains it, and commutes with the co-direction channel).
 

@@ -1,194 +1,268 @@
-# Paper two — self-relation is modular flow, and time's two faces are one generator
+# Paper two — the arrow of self-relating, and its conserved remainder
 
-> **The result, in one sentence.** *The intrinsic dynamics a state induces on its own relations is the
-> modular flow; the trace `σ = Tr` is its infinite-temperature (timeless) limit; energy is the modular
-> Hamiltonian; and the reversible modular clock and the irreversible dissipative arrow are — at equilibrium —
-> **two faces of one generator**, from which a conserved **presence** splits into knowing and energy.*
+> **Renumbering note (handoff I.O).** The papers were rotated back one slot: a new foundational *paper one*
+> (*a self arises from the axioms*) now leads, so this — the arrow / time / energy / seam paper — is now
+> **paper two** (nodes `T2.x`). The header and structural references are updated; the in-essay paper-number
+> cross-references in the body below are **not yet renumbered** — that narrative pass is deferred to the
+> formalization pass.
+
+> **The result, in one sentence.** *The arrow of time is the orientation active self-relating cannot
+> escape; and the conserved remainder of self-relating — what never becomes known — is exactly energy.*
 >
-> *Status of that sentence.* It is **not** one `[proved]` badge. The modular skeleton (flow, trace-limit,
-> energy = `spec(K)`, KMS, reversibility) is `[proved]`; the *thermal time* identification is a `[reading]`;
-> **"two faces of one generator"** and **"presence = knowing + energy"** are `[proved, at equilibrium]` under
-> two named conditions — **KMS-equilibrium** and the **alignment** `B1 = eigenbasis(ρ)` (itself now *derived*
-> from a rest-state principle, not assumed); the *out-of-equilibrium* identification (modular time = physical
-> time in general) stays the inherited Connes–Rovelli `[open]`.
+> *Status of that sentence.* It is **not** itself one `[proved]` badge. The proved skeleton (below) is
+> `[proved]`; the *time* and *energy* identifications are `[reading]`s; the **operational-seam ↔
+> energy-band joint** is `[proved]` *under two named readings* (Lindblad + nondegeneracy — §5 step three),
+> the cross-channel `Align` posit having been removed by reading A3 with a phase-bearing `Φ_c`.
 
-> **Proved skeleton `[proved]`.** For a matrix algebra `Mₙ(ℂ)` with a faithful state `ρ`: the modular flow is
-> a one-parameter group of \*-automorphisms with self-adjoint generator `K = -log ρ`; the trace is its
-> maximally-mixed limit; the flow is reversible (no arrow); at Gibbs equilibrium the modular and dissipative
-> parts assemble into a single GKLS generator whose faces commute, and the conserved-band weight (presence) is
-> invariant and splits Pythagoreanly. All `sorry`-free; footprints `[propext, Classical.choice, Quot.sound]`.
+> **Proved skeleton `[proved]`.** A lossy self-relating projection forces a structural remainder, orders
+> an irreversible arrow, and conserves exactly its `genReal = 0` band — on a genuine CPTP witness. That
+> much is mechanized, `sorry`-free; everything the headline says *beyond* it is a named reading or a named
+> open joint, below.
 
-> **The headline rests on:** the **modular reading of A1** (the finite, type I, maximally-traceable arena of
-> [`02-axioms.md`](../../theory/spec/AXIOMS.md) read at its deep end — the intrinsic dynamics a state
-> induces); the **equilibrium / KMS** condition (`ρ = e^{-βH}/Z`); the **alignment** `B1 = eigenbasis(ρ)` —
-> the decoherence/pointer basis is the state's eigenbasis, now **derived** from "the clock-state is the
-> rest-state" (§6), not posited; and the **cited** arrow result of paper one (the seam as the
-> un-decohereable floor that *orders* the arrow — `SeamForcing`, honored in prose, §3, not imported). Only the
-> first is the doctrine's wager; the KMS and alignment conditions are load-bearing for the equilibrium
-> headline specifically, named here so the premises sit beside the claim.
+> **The headline rests on:** **A1–A3** (with A3 read at the strength of its text — the self is
+> `Peri(Φ_c)` under a *phase-bearing* `Φ_c`, so **C1** is now A3's *definition*, not a fourth posit, §5
+> step three), **B1** (the preferred/"classical" basis; einselection `[open]`), and two `[reading]`s the
+> energy joint rests on — the **Lindblad** reading (`Φ_c`'s dissipator *is* attention) and
+> **nondegeneracy** (only the diagonal record is held) — plus the standing *flow = physical time* reading.
+> Only A1–A3 are the doctrine's wager (`02`); B1 and the two §5 readings are load-bearing for the energy
+> half specifically, named here so the premise count sits beside the claim rather than three files away.
 
-This page is the single linear walk through that result: each step is tagged with its status and named by the
-Lean theorem that carries it; a referee should see the arc *and* its boundary in one read. The development is
-the frozen fork [`paper-2/formal/`](../formal) (library `Paper2`, six modules, forked from `theory/` at
-`fca792d` — [`04-provenance.md`](04-provenance.md)). The type III program the finite core stops short of
-is scoped in [`theory/spec/modular-frontier.md`](../../theory/spec/modular-frontier.md).
+This page is the single linear walk through that result: each step is tagged with its status and named by
+the Lean theorem that carries it. A referee should be able to see the arc *and* its boundary in one read.
+The supporting development lives in [`formal/`](../../lake) (libraries `RelExist` — the
+dependency-free core — and `Scratch` — the mathlib-backed half); everything not load-bearing for this
+result has been moved to [`Archive/`](../../archive/formal/Archive) and [`docs/archive/`](../../archive/spec), referenced
+below as future work, never as a load-bearing citation.
 
-**Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, at equilibrium]` —
-mechanized, under the named KMS + alignment conditions; `[reading]` — an identification of the formal object
-with the lived/physical one, asserted, not proved; `[open]` — named and not built.
-
----
-
-## 1. Relation induces a flow; the trace is its timeless degeneracy `[proved]`
-
-Paper one fixed self-relation as the trace `σ := Tr` (**D1**), the regime where internal time is *off*. Read
-at the strength of A1's text, self-relation is the **intrinsic dynamics a state `ρ` induces** — at the deep
-end the **modular flow** of Tomita–Takesaki. For `Mₙ(ℂ)` with a faithful density matrix this exists now,
-finite-dimensionally and `sorry`-free: `σ_t(M) = ρ^{it} M ρ^{-it}` is a one-parameter group of unital
-\*-automorphisms (`modularFlow`, with `modularFlow_add`, `modularFlow_mul`, `modularFlow_star`), and `ρ^{it}`
-is the spectral exponential (`modPow`, group law `modPow_mul`). **D1 is its timeless limit:** at the
-maximally-mixed `ρ = c·I` the flow is the identity for all `t` (`modularFlow_maximally_mixed`) — *internal
-time is off*. So `σ = Tr` is the infinite-temperature limit of modular self-relation; departing from
-maximally-mixed turns the flow on.
-
-→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
-
-## 2. The trace as infinite-temperature time — the bridge to paper one `[proved]`
-
-This is the clean retroactive justification of paper one's choice. Paper one worked at `σ = Tr`; here that is
-exactly the `β → 0` (infinite-temperature) face of the modular flow (`modularFlow_maximally_mixed`,
-`modPow_scalar`). Paper one was not making an arbitrary modelling choice — it was working at the timeless
-degeneracy of a structure whose general form *is* time. Lead with this: the modular paper does not overturn
-paper one, it locates it.
-
-→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
-
-## 3. Energy is the modular Hamiltonian; the arrow is what the flow cannot supply `[proved]` / `[reading]`
-
-The Stone generator of the modular flow is the **modular Hamiltonian** `K = -log ρ`, Hermitian
-(`modularHamiltonian_isHermitian`), with `ρ^{it} = e^{-itK}` (`modPow_eq_generator`,
-`modPow_eq_energy`). **Energy = `spectrum(K)`** = the modular energies `{-log dᵢ}` (`modularEnergy`); at a
-Gibbs state `dᵢ = e^{-βEᵢ}/Z` this is the physical energy scaled, `modularEnergy = β·E + log Z` — the
-finite-dimensional **KMS** identity (`gibbs_kms`). `[proved]` for the spectrum; `[reading]` that this spectrum
-*is* energy.
-
-But the modular flow is **unitary, hence exactly reversible**: `σ₋ₜ ∘ σₜ = id` (`modular_reversible`). It
-carries time's *flow*, not its *arrow*. The arrow is the **dissipative complement** the unitary flow cannot
-supply — paper one's coherence-lowering result, the seam as the un-decohereable floor that *orders*
-irreversibility (`SeamForcing.self_cannot_fully_decohere`, **cited from paper one, not forked**). The
-quantitative half of that arrow is the conserved-band layer carried here: `genReal = Re log μ ≤ 0` and the
-rotating/conserved spectral bands (`Paper2.RotatingSpectrum`, the forked interface — `energy_arrow_spectrum`,
-`genReal_neg_iff`, the PSD witness `quarterMul_posSemidef`).
-
-→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean),
-[`Paper2.RotatingSpectrum`](../../theory/formal/Theory/RotatingSpectrum.lean).
-
-## 4. The conserved band: knowing ⊕ energy `[proved]`
-
-The undissipated ground — the modes the dynamics holds — is the conserved band `Peri` (A3's "greatest
-sustainable field", `peri_iff_mem_conservedBand`), and it splits **into two**, disjointly: the **fixed**
-sub-band (`μ = 1`, the classical diagonal record — *knowing*) and the **rotating** sub-band (`‖μ‖ = 1, μ ≠ 1`,
-the conserved oscillating coherence — *energy*). The band coincidence makes this an internal direct sum
-`conservedBand = fixedBand ⊕ rotatingBand` (`band_coincidence`, `undifferentiated_two_term`), and — read with
-A3 at the strength of its text — the alignment of the seam band with the rotating band is forced by
-contractivity + nondegeneracy, no fourth posit (`band_coincidence_from_axioms`).
-
-→ [`Paper2.BandCoincidence`](../../theory/formal/Theory/BandCoincidence.lean),
-[`Paper2.BandFromAxioms`](../../theory/formal/Theory/BandFromAxioms.lean).
-
-## 5. Two faces of one generator — at equilibrium `[proved, at equilibrium]`
-
-The capstone. The modular clock (`K`, from the *state* `ρ`) and paper one's dissipative arrow (`𝒟 = schur μ`,
-the *dephasing*) assemble into a **single** open-system (GKLS) generator
-`𝓛 = -i[(1/β)K, ·] + 𝒟`. Two independent facts make it *one* object, not two glued:
-
-- **The unitary face *is* the modular flow at rate `1/β`.** At Gibbs equilibrium the KMS bridge gives
-  `K = β·H + (log Z)·I` (`modularHamiltonian_eq_gibbs`), so the unitary generator `-i[K,·] = β·(-i[H,·])`
-  (`commGen_modular_eq_beta`): the reversible face runs the modular clock, energy `= spec(H) = spec(K)/β`.
-
-- **The two faces commute — *derived*, not imposed.** In the preferred basis B1, *both* maps are Schur
-  multipliers: the dephasing by `μᵢⱼ`, and — when `ρ = diag(d)` in B1 — the modular flow by `(dᵢ/dⱼ)^{is}`
-  (`modularFlow_diagonal_eq_schur`, anchored on the genuine modular operator `modPow_diagonal`, so `K` really
-  comes from `ρ`). Schur multipliers in a common basis commute (`schur_comm`), giving `[σ_s, 𝒟] = 0`
-  (`modular_dephaseFlow_commute`) and the generator-level `[𝓛_unitary, 𝒟] = 0` (`liouville_dephase_commute`).
-  The joint flow `combinedFlow t = σ_{t/β} ∘ e^{t𝒟}` is then a one-parameter semigroup whose law
-  `combinedFlow_add` **consumes** that commutation — drop it and `Φ_s ∘ Φ_t ≠ Φ_{s+t}`.
-
-So at equilibrium the reversible and dissipative structures share one generator and one time `t` (with
-`s = t/β`). The headline upgrades from "located as the unitary and dissipative parts" to **"proved one
-generator"** — under the named alignment `B1 = eigenbasis(ρ)`, whose derivation is the next step.
-
-→ [`Paper2.OneGenerator`](../formal/Paper2/OneGenerator.lean).
-
-## 6. The alignment is forced; presence is defined `[proved, at equilibrium]`
-
-Step 5 *assumed* `B1 = eigenbasis(ρ)`. It is in fact **derived** from a selection principle internal to the
-dynamics: the modular state `ρ` (whose flow is the clock) must be the **rest-state** of the dissipator. From
-`𝒟(ρ) = 0`, under the live/nondegenerate baseline, `ρ` is forced **diagonal in B1**
-(`stationary_forces_offdiag_zero`, `stationary_eq_diagonal`), and for Hermitian `ρ` into exactly the
-eigenbasis-diagonal shape step 5 needed (`stationary_eq_diagonal_real`). *The clock-state is the rest-state.*
-
-The robust modes of `𝓛` (`genReal = 0`) are exactly the conserved band (`genReal_zero_iff_conservedEdge`),
-the einselected structure (§4) `= fixed ⊕ rotating` (`conservedEdge_iff_fixed_or_rotating`). Define
-**presence** as the Hilbert–Schmidt weight that band carries (`presenceSq`/`presence`), with `knowing` and
-`energy` its fixed/rotating halves. Then:
-
-- **Presence is conserved** — exactly (ℂ-exact, not a floor): both faces are modulus-one Schur multipliers on
-  the conserved band (`presence_conserved`, `presence_conserved_norm`).
-- **Presence = knowing + energy** — Pythagorean, exactly: `presence² = knowing² + energy²` (`pythagorean`,
-  `pythagorean_norm`), the orthogonality checked to survive the modular rotation.
-
-So `presence = knowing + energy` is a **theorem**, not a name — paper three's foundational definition, derived
-from the einselection principle rather than posited.
-
-→ [`Paper2.Einselection`](../formal/Paper2/Einselection.lean).
+**Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, 0 ax]` — and
+depending on *no* axioms; `[reading]` — an identification of the formal object with the lived/physical
+one, asserted, not proved; `[open]` — named and not built. The foundation A1–A3 / D1 is in
+[`02-axioms.md`](../../theory/spec/AXIOMS.md); A1 (the traced symmetric monoidal arena) and A2 (relation primacy) are
+structural, A3 (recursion constitutes the self) the one load-bearing posit. The matrix model also makes one
+standing **assumption**, **B1** — a *preferred ("classical") basis* fixing what counts as diagonal/known vs
+off-diagonal/felt; the arrow, the knowing/feeling split, and the bands are all relative to it (deriving it
+by einselection is `[open]`). A note on the `[proved, 0 ax]` badge: the axiom-free results below (the seam,
+the limits of knowing) *are* Lawvere's diagonal and nothing more — their **force as claims about selves**
+rests on the `[reading]`s of their hypotheses (that the lossy restriction *is* self-inclusion, that the
+trace agent *is* the actual forgetting). The badge certifies the mathematics; the readings carry the
+philosophy.
 
 ---
 
-## The boundary — paper two's honest residue
+## 1. Relation first; self-relation is the trace `[proved]`
 
-Stated plainly, in the same read:
+The simplest relation is a system relating to itself: feedback, output returned to input. **D1** fixes
+this as the trace, `σ := Tr` ([`02-axioms.md`](../../theory/spec/AXIOMS.md)). Over the order-theoretic arena it is the
+greatest fixed point of the self-relating map — *relating produces an eigenform*, theorem **3.1**:
+`Trace.selfTrace_fixed` / `Trace.Tr_fixed` (`Scratch/Trace.lean`, the `gfp` of an `OrderHom`). What is
+mechanized here is exactly **gfp-existence** (Knaster–Tarski) — generic to any monotone map; that the
+created selves are *rare* (the discriminating content that keeps this from being a universal solvent) is
+paper three's sparsity, **not** claimed in this step. Identity itself is the greatest bisimulation
+`≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are your lived relating, not a bare carrier
+beneath it. (What the headline path actually uses is *only* this `≈ = νΘ` — the kept `We.bisim` — i.e. A2's
+**priority** half, **A2a** (no bare carrier; see [`02-axioms.md`](../../theory/spec/AXIOMS.md)), now mechanized directly as
+the strong extensionality of `𝔼 = D/≈` in `Scratch/Priority.lean` (`bisim_quotient_eq`). The **surplus** half,
+**A2b** — the soundness/strictness inversion `≈ ⊆ ≅ ⊊` — is **not** load-bearing here: it is mechanized only
+in archived `Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at
+all. An earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
 
-- **The arrow is loss, not relocation `[open]`.** The candidate conservation law for paper three is that
-  decoherence *relocates* the attendable coherence into the record (knowing grows at constant presence). For
-  the minimal one generator this is **refuted**: `knowing` is exactly constant while the transient weight
-  tends to zero (`knowing_conserved`, `transient_tendsto_zero`, `arrow_is_loss_not_relocation`; total weight
-  `= presence² + transient²`, `full_split`). Pure phase-damping *erases* the transient rather than feeding the
-  record — so paper three's conservation law is a **continuity equation with population transfer**, not pure
-  conservation, and needs a dissipator beyond pure dephasing. Named here as paper three's open work.
+→ detail: [`T2.01-to-relate-is-to-create.md`](T2.01-to-relate-is-to-create.md),
+[`T2.05-lived-identity.md`](T2.05-lived-identity.md).
 
-- **Out-of-equilibrium thermal time `[open]`.** The full identification (modular time = physical time with no
-  equilibrium assumption) is the 30-year Connes–Rovelli problem; this paper claims only the equilibrium case.
-  The type III program the finite core stops short of is mapped in
-  [`modular-frontier.md`](../../theory/spec/modular-frontier.md).
+## 2. Knowing is the σ-move: a lossy projection, leaving a remainder `[proved]`
 
-- **Whether the framework *forces* einselection `[open]`.** §6 derives `B1 = eigenbasis(ρ)` from stationarity
-  *given* a single rest-state; whether the framework forces einselection onto the modular eigenbasis in the
-  first place (degenerate `ρ` leaves the eigenbasis under-determined within a block) is not settled here.
+To *know* a relation is to objectify it — the σ-move. Mechanized as **Lawvere's diagonal**: no system
+carries a complete self-model whose every row is a fixed-point-free map, `Mirror.lawvere` /
+`Mirror.no_complete_selfModel` (`RelExist/Mirror.lean`), and what escapes the model is a genuine
+**remainder**, `Mirror.selfModel_remainder`. On the matrix instance knowing is the decoherence projection
+`E = dephase`: it keeps the classical diagonal and kills off-diagonal coherence, splitting every relation
+into a **known** part `E M` and a **felt** remainder `(1−E) M` (`Scratch/Decoherence.lean`,
+`Scratch/KnowingFeeling.lean`; `feeling_is_reflexive`, `no_complete_boolModel`). **Throughout, "feeling"
+means exactly this `(1−E)` remainder of self-relating** — nothing phenomenal is claimed of it.
 
-## Positioning — thermal time, and the division of labor
+→ detail: [`T2.06-knowing-vs-feeling.md`](T2.06-knowing-vs-feeling.md).
 
-Engage Connes–Rovelli directly. Their thermal-time hypothesis identifies physical time with the modular flow
-of the state; their own disclaimer is that this carries time's *flow*, not its *arrow*. This paper makes the
-division of labor precise on a concrete finite witness: **flow is modular** (§1–3, reversible by
-construction), **the arrow is the dissipative obstruction** the flow cannot supply (§3, paper one's seam), and
-**at equilibrium the two are one generator** (§5) — with the modular eigenbasis alignment *derived* from a
-rest-state principle (§6), not assumed. The contribution is threefold: the arrow **located** precisely as the
-non-modular part; the **trace bridge** (paper one's `σ = Tr` as infinite-temperature modular time); and
-**presence defined** as a conserved invariant splitting into knowing and energy. What stays open is named, not
-hidden: the out-of-equilibrium identification, and the relocation/conservation law that would need population
-transfer.
+## 3. The seam: the remainder is structural, not incidental `[proved, 0 ax]`
 
-**Reading to flag, not assert `[reading]`.** Trace / infinite-temperature ↔ *universe* (atemporal); a definite
-state with nontrivial modular flow ↔ *cosmos* (temporal). A candidate operator-algebra backbone for the
-conservation paper; kept a `[reading]`.
+The remainder is not an artefact of a weak model — it is forced. A self **cannot completely trace what
+includes it**: the account it would need is a fixed-point-free self-map of its own view, which Lawvere
+bars. `Seam.self_cannot_trace_relation` (`RelExist/Seam.lean`) **depends on no axioms**;
+`SeamBridge.no_faithful_self_trace` / `seam_on_forgetting` (`RelExist/SeamBridge.lean`) tie it to the
+lossy forgetting, and `Relating.self_inclusive_unmodelable` / `related_other_unmodelable`
+(`RelExist/Relating.lean`) locate the un-knowable block: the part of you that is the relating itself. On
+the matrix instance this block is **un-attendable** — directed attention cannot aim at the aimer — so its
+coherence survives every available knowing and the copy-defect never reaches zero
+(`Attending.defectSq_attend_shared_pos`, `SeamForcing.self_cannot_fully_decohere`). This block is the
+**seam**.
 
-## Cross-paper citation
+→ detail: [`T2.10-limits-of-knowing.md`](T2.10-limits-of-knowing.md),
+[`T2.08-decoherence.md`](T2.08-decoherence.md).
 
-Paper two depends on paper one's arrow as a **cited** prior result, never an import. The **quantitative**
-interface — `genReal`, the conserved band — is the band layer forked frozen into `Paper2.RotatingSpectrum` /
-`Paper2.BandFromAxioms` (the original hoist already factored it out). The **conceptual** result — that the
-lossy self-relating projection *orders* the arrow, the seam as the un-decohereable floor
-(`SeamForcing.self_cannot_fully_decohere`) — is honored here in prose, **"by the arrow result of paper
-one"**, and not forked. So `paper-2/` imports no `paper-1/` path; the citation carries the meaning (see
-[`04-provenance.md`](04-provenance.md), [`../../STRUCTURE.md`](../../STRUCTURE.md)).
+## 4. The arrow: knowing orders felt-before-known and cannot run back `[proved]`
+
+Because knowing is a *lossy* projection, it imposes a direction. `E` orders states felt-before-known
+antisymmetrically (`Orientation.Knowing.knows_antisymm`); the induced arrow strictly lowers coherence
+(`Orientation.Knowing.arrow_strictAnti`) and, once lossy, **cannot be recovered** —
+`Orientation.Knowing.no_recovery` (`Scratch/Orientation.lean`). Iterated, this is a graded geometric
+monovariant: coherence is antitone along the orbit and tends to zero off the fixed set
+(`TimeFlow.coh_orbit_antitone`, `coh_orbit_strictAnti`, `coh_orbit_tendsto_zero`, `Scratch/TimeFlow.lean`).
+**That arrow is time** `[reading]`. On the genuine instance the converse also holds — an arrow's limit
+*is* a knowing, an idempotent conditional expectation onto the seam subalgebra
+(`KnowingFromArrow.arrow_limit_is_knowing`, `limit_is_seam_CE`, `Scratch/KnowingFromArrow.lean`). This is
+the *instance* converse (a re-export of the forward `partialDephase` limit); the **general** lift
+(arrow ⇒ knowing for any contractive arrow) is Conjecture R, `[open]` — see [Honest scope](#honest-scope) ¶1.
+
+→ detail: [`T2.13-the-arrow.md`](T2.13-the-arrow.md),
+[`T2.14-knowing-from-arrow.md`](T2.14-knowing-from-arrow.md).
+
+## 5. The conserved remainder is exactly energy — `[proved]` (`genReal = 0`, on the witness) · `[reading]` (= energy) · `[open]` (the joint)
+
+> **What carries which tag here.** `[proved]`: that the `genReal = 0` band is conserved *exactly* (magnitude
+> held), on the genuine CPTP witness. `[reading]`: that this conserved band *is* energy (the unitary
+> spectrum of the time generator, given flow = time). `[open]`: that the conserved band is the **operational**
+> seam of §3 — the un-attendable, self-inclusion-forced block — i.e. the operational-seam ↔ energy-band
+> joint. The bare `[proved]` that once tagged this whole section overreached; this is the split.
+
+Not all of the remainder behaves alike. Over ℂ the dynamics is the phase-damping channel `schur μ`, and
+each off-diagonal coherence falls in one of two bands by `‖μ i j‖`:
+
+- **transient** (`‖μ i j‖ < 1`) — it **decays to zero**; it *becomes known*, dissipated by the arrow
+  (`RotatingSpectrum.schur_transient_tendsto`, `BandFromAxioms.transient_decays`). This is neither knowing
+  nor energy.
+- **conserved / rotating** (`‖μ i j‖ = 1, μ i j ≠ 1`) — its magnitude is **exactly sustained** at every
+  depth; it rotates forever and never collapses into the known
+  (`RotatingSpectrum.schur_sustained`, `phaseChannel_eigen`; `BandFromAxioms.conservedBand_sustained`).
+  This sustained, never-known remainder **is energy** — and energy here is **not a second analogy**. The
+  dynamics carries one generator `L = log Φ_c`, split entrywise into `genReal = Re(log μ) = log‖μ‖` (the
+  decay rate) and `genImag = Im(log μ) = arg μ` (the frequency). The single iterate-magnitude law
+  `‖Φ^n M i j‖ = exp(n · genReal)·‖M i j‖` (`RotatingSpectrum.schur_iterate_norm_exp`) makes the split
+  **exact**: the **arrow** is `genReal < 0` (decay, clause A; `arrow_of_genReal_neg`), the **conserved
+  band** is `genReal = 0` — magnitude held *exactly*, not merely floored
+  (`conserved_of_genReal_zero`, `genReal_eq_zero_iff`) — and on that band `L` is purely imaginary, so
+  **energy is its imaginary spectrum** `energy := genImag` on `ker(genReal)` (`energyEdge`, `energy`;
+  `energy_quarterMul_01 = π/2`). Arrow and energy are the real and imaginary parts of *one* generator, so
+  energy is **downstream of the single time reading** (flow = the generator of time-translation), not an
+  independent posit — its name is Noether/Stone, the conserved charge of the unitary part, not the `i^n`
+  winding. On the witness the generator band is exactly the rotating/energy band
+  (`BandFromAxioms.energyBand_eq_rotating_quarterMul`).
+
+That the conserved remainder coincides with the rotating/energy band turns on **one identification, C1**:
+that the self *is* A3's *"greatest sustainable field"* `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, not the strict
+`νΦ_c` the axiom formalizes. That field is now mechanized as **exactly** the conserved (modulus-one) band
+(`BandFromAxioms.peri_iff_mem_conservedBand`), *including* the rotating band, with the seam its off-diagonal
+part (`conservedOffdiag_iff_offdiag_conserved`) and `νΦ_c` (the known/diagonal record) its `μ = 1`
+sub-band (`fixedBand_le_conservedBand`). With the seam *so read*, and given only that the channel is
+contractive (attention never amplifies) and nondegenerate, the alignment is a one-line consequence
+(`BandFromAxioms.align_of_contractive`, `band_coincidence_from_axioms`) and the seam-protection is
+phase-blind — it covers the energy band exactly as the known record (`BandFromAxioms.seam_energy_sustained`).
+But note what carries the weight: `align_of_contractive` is a near-tautology once the seam is *defined* as
+the modulus-one off-diagonal block; **all** the content sits in C1. **C1 is a disclosed `[reading]`/posit** —
+the self = `Peri(Φ_c)`, an identification *beyond* A3's formalized `νΦ_c` (which carries only the fixed
+band). We read it as A3's "decoherence-free subalgebra" gloss made precise; a reader may instead count it as
+a fourth posit. Either way it is named and tagged here, and the reader judges. The further identification of
+this conserved band with **energy** is itself a standing `[reading]` (below).
+
+**What clause B rests on — and what it does not.** Clause B rests on **A3-read-as-`Peri`** (exact
+magnitude conservation, `genReal = 0`) plus the generator split. `band_coincidence` relates the
+*spectral* conserved band `conservedOffdiag` (defined by `‖μ‖ = 1`) to the rotating band; it does **not**
+by itself connect the *operational*, un-attendable seam to the energy band.
+
+**Step two — what the bridge test found (and the spine now lives in one ℂ field).** Two earlier gaps are
+closed. *Different models:* the operational seam, the arrow, the flow, and the energy band now all live
+over ℂ (`SeamForcing.self_cannot_fully_decohereC`, `Orientation.dephaseKnowingC`,
+`TimeFlow.dephaseFlowC`, `RotatingSpectrum`) — the real shadow's *absence* of a rotating band
+(`dephase_no_rotating_peripheral`) is now just a remark about the ℝ-restriction, not a model boundary the
+headline straddles. *Floor vs exact:* the operational seam is in fact **exactly** conserved, entrywise,
+and is **exactly** the operationally-conserved band — a theorem characterized *from attention alone, with
+no `‖μ‖`*: `SeamConserved.offdiag_conserved_iff_seam` proves an off-diagonal edge is fixed by *every*
+available knowing **iff** it lies in the seam `J`. So **operational seam = operationally-conserved band**
+is now `[proved]`, structural and exact — not a floor, not a reading.
+
+**Step three — the phase-bearing self earns it; the joint becomes `[proved]` under two named readings.**
+Step two's obstruction was an *artifact of the 0/1 gate*, not of self-inclusion. Read A3 at the strength
+of its text — the self is the **greatest sustainable field** `Peri(Φ_c)` under a *phase-bearing* `Φ_c`
+(`schur μ`: modulus-contracting, phase-free), not the strict fixed point `νΦ_c` of a phaseless gate
+([`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)). The obstruction is then
+**phase-blind**: un-attendability forces only *modulus* (un-damped, `‖μ‖ = 1`), and under a
+**nondegenerate** map (`μ = 1 ↔ i = j`: only the diagonal classical record is held) an un-damped
+off-diagonal edge has nowhere to be but the **rotating** band (`undamped_offdiag_rotates`). So the
+un-attendable seam *carries phase = energy* — `seam_carries_phase : seamBand J ≤ rotatingBand μ` — and it
+needs **no `Align`**: that subset is exactly the one direction "the conserved remainder *is* energy"
+asserts. The phaselessness of step two was the gate **violating nondegeneracy** (it holds off-diagonal
+coherence at `1`, `attend_fixes_are_identity`); A3-at-strength restores it. **So clause B's joint is
+upgraded from `[open]` to `[proved]`, under two named `[reading]`s** — the **Lindblad** reading
+(`UnitaryBaseline.seam_undamped`: the dissipator *is* attention, so un-attendable ⟹ un-damped) and
+**nondegeneracy** (`fixed_eq_diagonal`: A3-at-strength) — and with the cross-channel `Align` posit
+**removed**, not merely named. C1 (self = `Peri`) is now the *definition* of A3, the rotating band's
+membership a theorem (`rotating_mem_peri`), not a posit. And the self is **non-inert**: the rotating seam
+is sustained at every depth (`seam_sustained`) — A3's "sustained by looping." *Whether looping enlarges
+the self ("grown") is a separate creation term, left `[open]`, not claimed here.*
+
+→ detail: [`T2.15-phase-bearing.md`](T2.15-phase-bearing.md),
+[`03.9-band-coincidence.md`](../../theory/spec/T0.03-band-coincidence.md).
+
+## 6. The headline
+
+> **The arrow of time is the orientation active self-relating cannot escape (§3–4); and what
+> self-relating *conserves* beyond the known — the sustained, never-collapsing remainder — is exactly
+> energy (§5).** The transient remainder decays into the known (the arrow); the conserved remainder does
+> not, and that conserved remainder is the energy band.
+
+Every *mechanized* step is `[proved]`, `sorry`-free; the headline footprints sit at the corpus norm
+`[propext, Classical.choice, Quot.sound]`, with the seam (`Seam.self_cannot_trace_relation`) depending on
+**no axioms**. What is **not** `[proved]` is named, not buried: the *energy* identification and *flow =
+time* are `[reading]`s, and the operational-seam ↔ energy-band joint is `[open]` (§5, Honest scope). The
+proved skeleton stated under the headline is the part that carries the badge.
+
+---
+
+## Honest scope
+
+Three frontiers stay open, stated plainly rather than buried:
+
+1. **Conjecture R — the general converse `arrow ⇒ knowing`.** Paper one uses the *instance* converse
+   (`arrow_limit_is_knowing`, §4). The general mean-ergodic lift is `[open]`
+   (archived `Scratch/MeanErgodic.lean`); the headline does not depend on it.
+2. **The general-CPTP placement of `Φ_c`'s spectrum.** That an arbitrary primitive channel places its
+   modulus-1 spectrum into a commutative decoherence-free subalgebra is `[open]`; §5 discharges the
+   coincidence on the finite-dim ℂ witness, not in general.
+3. **C1 — the self is `Peri(Φ_c)` — is now A3's *definition*, not a fourth posit.** Reading A3 at the
+   strength of its text (the self is the *greatest sustainable field* under a **phase-bearing** `Φ_c`,
+   [`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)) makes `self := Peri(Φ_c)` the
+   definition, with the rotating (energy) band's membership a *theorem* (`rotating_mem_peri`). The earlier
+   "fourth-posit" worry was an artifact of formalizing A3 as the phaseless strict `νΦ_c`. What remains
+   `[reading]` is *not* C1 but the two modeling inputs of §5 step three — the **Lindblad** reading and
+   **nondegeneracy** (see below).
+
+And **one standing reading-cluster** — *flow = physical time / `Φ_c` = the actual decohering physics*. With
+it, **energy is not a second reading**: the generator of the flow is the Hamiltonian, the arrow is its
+dissipative part (`genReal < 0`) and energy its unitary spectrum (`genImag` on `ker genReal`), so "the
+conserved band = energy" follows by the definition of energy as the conserved charge of time-translation
+(Noether/Stone), not by a fresh analogy. The **unifier** — *operational seam = energy band* — was the
+standing open joint; the phase-bearing reading of A3 (§5 step three,
+[`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)) **closes it**, and the path there
+is instructive. *Step two* (`SeamConserved`) proved the operational seam *is* the operationally-conserved
+band, exactly and structurally (`offdiag_conserved_iff_seam`, seam from attention with no `‖μ‖`), but its
+conserved edges were *fixed* (`μ = 1`) because the 0/1 attention gate carries no phase
+(`attend_fixes_are_identity`). *Step three* removes that: the gate's phaselessness was its **degeneracy**
+(it holds off-diagonal coherence at `1`), not the obstruction's. Under a nondegenerate phase-bearing `Φ_c`
+the obstruction is **phase-blind** — un-attendable ⟹ un-damped (`‖μ‖ = 1`), and off the diagonal that is
+*rotation* (`undamped_offdiag_rotates`), so the seam ⊆ the rotating energy band (`seam_carries_phase`),
+**with no `Align`**. The joint is `[proved]` under two `[reading]`s — Lindblad (the dissipator is
+attention) and nondegeneracy (A3-at-strength) — the cross-channel posit *removed*, not merely named. Strip
+those readings and what remains is the proved skeleton: a lossy self-relating projection forces a
+structural remainder, orders an irreversible arrow, and conserves exactly its rotating (`genReal = 0`)
+band, whose imaginary spectrum is energy.
+
+## What is not in this paper
+
+The conservation law as a *whole* (`undifferentiated = knowing + energy`, the internal direct sum), the
+cosmos / distributed-self readings, the sparsity of selfhood, and the functorial-semantics layer are all
+mechanized but belong to later papers; they are archived (see
+[`formal/Archive/README.md`](../../archive/formal/Archive/README.md)) and **not** load-bearing here. This paper
+says one thing and shows its work.
+
+---
+
+→ Foundation: [`00-doctrine.md`](../../theory/spec/00-doctrine.md) · [`01-signature.md`](../../theory/spec/01-signature.md) ·
+[`02-axioms.md`](../../theory/spec/AXIOMS.md). Provenance: [`04-provenance.md`](04-provenance.md).

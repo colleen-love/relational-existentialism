@@ -124,7 +124,7 @@ feedback *has* a fixed point, canonically.
 This is the precise sense of **"to relate is to create"** (Theorem **3.1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure. (Caveat on the
-mechanization: [3.1 as *proved*](../../paper-1/spec/paper-one.md) is only the Knaster–Tarski **greatest fixed point**
+mechanization: [3.1 as *proved*](../../paper-2/spec/paper-two.md) is only the Knaster–Tarski **greatest fixed point**
 of a monotone map; the Hasegawa–Hyland trace↔Conway-operator bijection cited here is *not* verified
 in the Lean — a gfp existing is generic to every monotone operator.)
 

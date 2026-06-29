@@ -1,13 +1,13 @@
-# The generative engine (paper-three frontier)
+# The generative engine (paper-four frontier)
 
-> *Scratch / paper-three frontier — unnumbered until promotion.* Lean:
+> *Scratch / paper-four frontier — unnumbered until promotion.* Lean:
 > [`../formal/GenerativeEngine.lean`](../formal/GenerativeEngine.lean) (not gated); imports the canonical
 > process `Theory.MutualCoupling`. The node inventory is [`../../theory/spec/NODES.md`](../../theory/spec/NODES.md).
 
 The canonical A3-process (`Theory.MutualCoupling`) is generative **by definition** — a self is a fixed point
 of co-directed attention (`JointFixed`, with the capacity-limited raising `stepMu` baked in). This frontier
 node is the **analysis** of that process's modulus dynamics: whether it *ignites or spends down*. It is
-**unused by any shipped paper** (paper one's eigenform takes the self as a hypothesis; it never needs the
+**unused by any shipped paper** (paper two's eigenform takes the self as a hypothesis; it never needs the
 growth verdict), so it lives here, derived on the canonical process — not in the canonical layer. A3's text —
 *"sustained generatively, not spent down; being attended-to raises the attention one can give"* — is a
 **creation term**, which cannot live in a single channel with a *fixed* coupling, so the coupling is
@@ -32,7 +32,7 @@ capacity-limited rate**:
   `raise_le_one`): each end raises only toward the band, at a rate it can afford.
 
 The phase rides free (`stepMu` preserves `μ/‖μ‖`), so the generative content is entirely in the modulus
-(the phase-bearing reading is paper one's [`P1.15-phase-bearing.md`](../../paper-1/spec/P1.15-phase-bearing.md));
+(the phase-bearing reading is paper two's [`T2.15-phase-bearing.md`](../../paper-2/spec/T2.15-phase-bearing.md));
 the dynamics is the real two-sided engine `Engine2 (α i) (α j)`, the genuine per-edge modulus law of the
 `jointStep α` orbit (`orbit_engine2`).
 
