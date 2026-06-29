@@ -1,5 +1,12 @@
 # 00 — The Doctrine
 
+> **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
+> axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
+> (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,
+> not a posited eigenform; **D1** generalizes `σ = Tr` to the **modular flow** (the trace its
+> infinite-temperature limit); **A1** is one dimension-generic arena. The four axioms are one canonical,
+> version-pinned layer in `theory/`.
+
 > *What the language is allowed to say.* Before any axiom, we fix the ambient
 > mathematical universe in which "relating" is a primitive and "self" is a derived
 > notion. This is the **doctrine**: a traced symmetric monoidal category extended
@@ -117,7 +124,7 @@ feedback *has* a fixed point, canonically.
 This is the precise sense of **"to relate is to create"** (Theorem **3.1**): in the
 cartesian fragment, looping does not merely rearrange — it *produces* a fixed
 point that need not have pre-existed. Self-relation manufactures structure. (Caveat on the
-mechanization: [3.1 as *proved*](paper-one.md) is only the Knaster–Tarski **greatest fixed point**
+mechanization: [3.1 as *proved*](../../paper-1/spec/paper-one.md) is only the Knaster–Tarski **greatest fixed point**
 of a monotone map; the Hasegawa–Hyland trace↔Conway-operator bijection cited here is *not* verified
 in the Lean — a gfp existing is generic to every monotone operator.)
 

@@ -1,5 +1,12 @@
 # Relational Existentialism: The View in Plain Language
 
+> **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
+> axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
+> (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,
+> not a posited eigenform; **D1** generalizes `σ = Tr` to the **modular flow** (the trace its
+> infinite-temperature limit); **A1** is one dimension-generic arena. The four axioms are one canonical,
+> version-pinned layer in `theory/`.
+
 ## The starting move
 
 Most pictures of a person start with a self and then add relationships to it. There is a you, sitting behind your eyes, and then there are the people and things you relate to. The self comes first; the relating comes after.

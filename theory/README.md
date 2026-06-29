@@ -1,10 +1,14 @@
-# theory — the living frontier
+# theory — the stable shared layer
 
-The theory-specific development already *beyond* paper one: the modular reading of A1, the generative A3, the
-A2-priority work, the equilibrium one generator, and the einselection principle + presence. Lean namespace
-`Theory.*` (sources in [`formal/`](formal), prose in [`spec/`](spec)). Imports only `theory/` +
-`foundation/`; references no paper. The only root that moves freely — papers **fork a frozen copy** of the
-slice they need. See [`../STRUCTURE.md`](../STRUCTURE.md).
+The canonical axioms + the `T.x` theorems imported by the papers: the band layer, the modular reading of A1,
+the generative A3, the A2-priority work, the equilibrium one generator, and the einselection principle +
+presence. Lean namespace `Theory.*` (sources in [`formal/`](formal), prose in [`spec/`](spec)). Imports only
+`theory/` + `foundation/`; references no paper.
+
+**Stable, not the frontier (handoff XXI).** Because papers are thin layers that **import** `theory/`, it now
+changes **only backward-compatibly** (like `foundation/`), so a paper's pinned version keeps its meaning. The
+living frontier moved to [`scratch/`](../scratch) (paper three). The proof-DAG node inventory is
+[`spec/NODES.md`](spec/NODES.md). See [`../STRUCTURE.md`](../STRUCTURE.md).
 
 ## The canonical axioms (handoff XX)
 

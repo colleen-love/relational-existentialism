@@ -1,9 +1,24 @@
 # paper-1 — axiom & lemma provenance
 
-**Status: canonical home of its own closure.** Under the lazy-fork discipline (handoff XIII), paper one's
-modules are *not* forked from `theory/` — they live here canonically, frozen, and `theory/` forks *forward*
-from here when (and only when) it first diverges. So today there is nothing "forked in" to drift-check; the
-provenance is the inverse of the eager template.
+**Status (handoff XXI): thin layer over `theory/`.** The proof-DAG reorg made paper one a thin layer: the
+band layer (`RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`) was genuinely double-imported (paper one
+**and** paper two), so it **promoted** into clean `Theory.*` and paper one now **imports** it (the import that
+spec XX found namespace-blocked — that block is now gone). The matrix substrate (`MatrixModel`,
+`PartialTrace`) moved to `foundation/`. Paper one keeps its own `P1.x` (the seam, lived identity, the arrow);
+its energy headline (`band_coincidence_from_axioms`, `undifferentiated_two_term_from_axioms`) now lives at
+its canonical `Theory.BandFromAxioms.*` address. **Footprint-checked identical** to pre-reorg at the Phase-2
+checkpoint. Node inventory: [`theory/spec/NODES.md`](../../theory/spec/NODES.md). The historical "canonical
+home" framing below is retained for provenance.
+
+> *Note (`CanonicalEigenform`).* It was the spec-XX collision workaround; Phase 2 dissolved the collision, so
+> it is now **redundant** with `Theory.Axioms.eigenform_of_fixed` and is a candidate for deletion (paper one
+> importing `Theory.Axioms` directly). Kept this phase to preserve the green+footprint baseline.
+
+---
+
+**Historical (handoff XIII): canonical home of its own closure.** Under the lazy-fork discipline, paper one's
+modules were *not* forked from `theory/` — they lived here canonically, frozen, and `theory/` forked *forward*
+from here. (Superseded by XXI's unification, above.)
 
 - **Canonical here (frozen):** paper one's axiom spine (`RelExist.Mirror/Relating/Seam/SeamBridge`,
   aggregator `RelExist`) and its kept mathlib closure (`Scratch.*`, aggregator `Scratch`). Module names are

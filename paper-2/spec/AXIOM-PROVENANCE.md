@@ -1,9 +1,19 @@
 # paper-2 — axiom & lemma provenance
 
-**Status: frozen fork of the modular slice.** Under the lazy fork-and-freeze discipline (handoff XIII), paper
-two materializes when it is built (handoff XVII): the six modular modules are forked frozen from `theory/`,
-namespace and module path `Theory.* → Paper2.*`, content otherwise byte-identical. The fork is the value — a
-paper must mean exactly what it meant at review.
+**Status (handoff XXI): thin layer importing `theory/`.** The proof-DAG reorg **un-forked** paper two. Its
+six `Paper2.*` modules — confirmed byte-identical to `theory/`'s, so unifying shifted no meaning — were
+deleted; `paper-2/formal/Paper2.lean` now **imports** the clean `Theory.{ModularFlow, RotatingSpectrum,
+BandCoincidence, BandFromAxioms, OneGenerator, Einselection}`. Paper two has **no `P2.x` Lean nodes of its
+own**; its headline theorems (`presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation`,
+`combinedFlow_add`, `stationary_eq_diagonal_real`) live at their canonical `T` addresses (`Theory.Einselection.*`,
+`Theory.OneGenerator.*`), which the manuscript cites. The freeze is now a **version-pin** on the `theory/`
+commit (below), not a duplicated copy. The historical fork description below is retained for provenance.
+
+---
+
+**Historical (handoff XVII): frozen fork of the modular slice.** Under the lazy fork-and-freeze discipline
+(handoff XIII), paper two materialized when it was built (handoff XVII): the six modular modules were forked
+frozen from `theory/`, namespace and module path `Theory.* → Paper2.*`, content otherwise byte-identical.
 
 - **Forked from `theory/` at `fca792d`** (the six-module modular closure, verified by imports):
   `Paper2.{ModularFlow, RotatingSpectrum, BandCoincidence, BandFromAxioms, OneGenerator, Einselection}`.

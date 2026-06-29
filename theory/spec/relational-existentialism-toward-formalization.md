@@ -1,7 +1,14 @@
 # Relational Existentialism: One Step Toward the Formalization
 
+> **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
+> axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
+> (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,
+> not a posited eigenform; **D1** generalizes `σ = Tr` to the **modular flow** (the trace its
+> infinite-temperature limit); **A1** is one dimension-generic arena. The four axioms are one canonical,
+> version-pinned layer in `theory/`.
+
 > **Scope note.** This page describes the **broader program**. The mechanized, scoped result is **paper
-> one** in [`docs/spec/`](.) ([`paper-one.md`](paper-one.md)); the rest of what this page sketches
+> one** in [`docs/spec/`](.) ([`paper-one.md`](../../paper-1/spec/paper-one.md)); the rest of what this page sketches
 > — the sparsity dichotomy (Conjecture 3.7), the cosmos readings, the functorial semantics — is supporting
 > development, archived under [`docs/archive/`](../../archive/spec/) for later papers, not part of paper one.
 
@@ -198,10 +205,10 @@ Almost none of the mathematics is new — it is a careful re-proof of establishe
 The contribution is the **synthesis**: the recognition that one structure — the objectifying,
 copyable move against the entangled, uncopyable one — runs through identity, decoherence,
 causation, and selfhood alike, with a single wall between the two faces. The full honest accounting
-is the [provenance ledger](04-provenance.md), which a reviewer should read first.
+is the [provenance ledger](../../paper-1/spec/04-provenance.md), which a reviewer should read first.
 
 ---
 
 → The pure-prose version is [the view in plain language](relational-existentialism.md). The rigorous
 version begins at [the doctrine](00-doctrine.md) and the scoped result in
-[paper one](paper-one.md) (the broader catalog is archived under [`docs/archive/`](../../archive/spec/)).
+[paper one](../../paper-1/spec/paper-one.md) (the broader catalog is archived under [`docs/archive/`](../../archive/spec/)).

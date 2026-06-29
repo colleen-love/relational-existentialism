@@ -51,7 +51,7 @@ maximally-mixed `ρ = c·I` the flow is the identity for all `t` (`modularFlow_m
 time is off*. So `σ = Tr` is the infinite-temperature limit of modular self-relation; departing from
 maximally-mixed turns the flow on.
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
 
 ## 2. The trace as infinite-temperature time — the bridge to paper one `[proved]`
 
@@ -61,7 +61,7 @@ exactly the `β → 0` (infinite-temperature) face of the modular flow (`modular
 degeneracy of a structure whose general form *is* time. Lead with this: the modular paper does not overturn
 paper one, it locates it.
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean).
 
 ## 3. Energy is the modular Hamiltonian; the arrow is what the flow cannot supply `[proved]` / `[reading]`
 
@@ -80,8 +80,8 @@ quantitative half of that arrow is the conserved-band layer carried here: `genRe
 rotating/conserved spectral bands (`Paper2.RotatingSpectrum`, the forked interface — `energy_arrow_spectrum`,
 `genReal_neg_iff`, the PSD witness `quarterMul_posSemidef`).
 
-→ [`Paper2.ModularFlow`](../formal/Paper2/ModularFlow.lean),
-[`Paper2.RotatingSpectrum`](../formal/Paper2/RotatingSpectrum.lean).
+→ [`Paper2.ModularFlow`](../../theory/formal/Theory/ModularFlow.lean),
+[`Paper2.RotatingSpectrum`](../../theory/formal/Theory/RotatingSpectrum.lean).
 
 ## 4. The conserved band: knowing ⊕ energy `[proved]`
 
@@ -93,8 +93,8 @@ the conserved oscillating coherence — *energy*). The band coincidence makes th
 A3 at the strength of its text — the alignment of the seam band with the rotating band is forced by
 contractivity + nondegeneracy, no fourth posit (`band_coincidence_from_axioms`).
 
-→ [`Paper2.BandCoincidence`](../formal/Paper2/BandCoincidence.lean),
-[`Paper2.BandFromAxioms`](../formal/Paper2/BandFromAxioms.lean).
+→ [`Paper2.BandCoincidence`](../../theory/formal/Theory/BandCoincidence.lean),
+[`Paper2.BandFromAxioms`](../../theory/formal/Theory/BandFromAxioms.lean).
 
 ## 5. Two faces of one generator — at equilibrium `[proved, at equilibrium]`
 
@@ -118,7 +118,7 @@ So at equilibrium the reversible and dissipative structures share one generator 
 `s = t/β`). The headline upgrades from "located as the unitary and dissipative parts" to **"proved one
 generator"** — under the named alignment `B1 = eigenbasis(ρ)`, whose derivation is the next step.
 
-→ [`Paper2.OneGenerator`](../formal/Paper2/OneGenerator.lean).
+→ [`Paper2.OneGenerator`](../../theory/formal/Theory/OneGenerator.lean).
 
 ## 6. The alignment is forced; presence is defined `[proved, at equilibrium]`
 
@@ -141,7 +141,7 @@ the einselected structure (§4) `= fixed ⊕ rotating` (`conservedEdge_iff_fixed
 So `presence = knowing + energy` is a **theorem**, not a name — paper three's foundational definition, derived
 from the einselection principle rather than posited.
 
-→ [`Paper2.Einselection`](../formal/Paper2/Einselection.lean).
+→ [`Paper2.Einselection`](../../theory/formal/Theory/Einselection.lean).
 
 ---
 

@@ -1,36 +1,40 @@
-# Repository structure — the six roots (handoff XIII)
+# Repository structure — the six roots (handoff XIII, reorganized in XXI)
 
-Every artifact answers one question: **does it diverge per paper, or is it stable-and-shared?**
+> **The proof DAG is the file structure** (handoff XXI). Each Lean file is one **node** (a result); the
+> `import` edges are the "uses" edges; walk imports back from a headline and you read its proof. The node
+> inventory — every node, its `A/F/T/P` number, its address — is [`theory/spec/NODES.md`](theory/spec/NODES.md).
 
-- **Diverges per paper, or evolves** (theory-specific lemmas) → lives canonically in `theory/`; papers
-  **fork a frozen copy**. The freeze is the value: a paper must mean exactly what it meant at review.
-  **(Amended by handoff XX for the axioms — see "The axioms are one canonical layer" below.)**
-- **Stable, shared, mathlib-bound** (the traced-SMC machinery, general infrastructure) → lives in
-  `foundation/`; papers **import** it. Safe because `foundation` only moves *toward generality* (an eventual
-  mathlib PR), which is backward-compatible.
+Every artifact answers one question: **is it stable-and-shared, or is it this-paper's-own?**
 
-Flow is one-directional: `scratch → theory → paper` for divergent material; `foundation` sits below
-everything. **A paper imports only itself + `foundation/`** — never `theory` (it moves), never another paper
-(couples fates).
+- **Stable and shared** → lives in a stable layer that papers **import**: `foundation/` (substrate,
+  mathlib-bound) or `theory/` (the axioms + the `T.x` theorems imported by ≥2 papers). Safe because both
+  change **only backward-compatibly** (generalization, never redefinition), so a paper's pinned version keeps
+  meaning what it meant.
+- **This-paper's-own** (`P*.x`) → lives in the paper root; promotes to `theory/` (`T.x`) the day a **second
+  paper's Lean imports it**, never by narrative feel.
+
+Flow is one-directional: `scratch` (the living frontier) `→ theory → paper`; `foundation` sits below
+everything. **A paper imports only itself + `theory/` + `foundation/`** — never another paper (citation, not
+import, couples nothing). Papers **pin** the `theory/` commit they were proved against in
+`<paper>/spec/AXIOM-PROVENANCE.md`.
 
 ## The roots
 
 | Root | What | Lean namespace | Imports |
 |---|---|---|---|
-| [`foundation/`](foundation) | stable, mathlib-bound shared infrastructure (traced-SMC typeclass + JSV axioms) | `Foundation.*` | mathlib only |
-| [`theory/`](theory) | the living, theory-specific frontier already beyond paper one | `Theory.*` | `theory/` + `foundation/` |
-| [`paper-1/`](paper-1) | frozen, self-contained: paper one's spec + kept formal closure | `Scratch.*`, `RelExist.*` | `paper-1/` + `foundation/` |
-| [`paper-2/`](paper-2) | the modular self-relation paper; the modular slice forked frozen from `theory/` | `Paper2.*` | `paper-2/` (+ `foundation/`; mathlib-direct) |
-| [`scratch/`](scratch) | live staging | (free) | `foundation/` + `theory/` |
+| [`foundation/`](foundation) | stable substrate: traced-SMC typeclass + JSV axioms, the matrix arena, the partial-trace operation | `Foundation.*` (`RelExist.*` ns) | mathlib only |
+| [`theory/`](theory) | **stable shared layer**: the canonical axioms + the `T.x` theorems | `Theory.*` | `theory/` + `foundation/` |
+| [`paper-1/`](paper-1) | thin layer: paper one's own `P1.x` (seam, lived identity, the arrow) | `Scratch.*`, `RelExist.*` | `paper-1/` + `theory/` + `foundation/` |
+| [`paper-2/`](paper-2) | thin layer: imports the modular slice from `theory/`; no `P2.x` of its own | `Paper2.*` | `paper-2/` + `theory/` |
+| [`scratch/`](scratch) | **the living frontier** (paper three: `Conservation` + seed) | (free) | `foundation/` + `theory/` |
 | [`archive/`](archive) | frozen, superseded/set-aside; cross-links unmaintained | (as moved) | not built |
 
 Each root holds its own `formal/` (Lean), `spec/` (prose), and `README.md`. The Lake package and the mathlib
-cache live in the infrastructure directory [`lake/`](lake) (renamed out of its old collision with the per-root
-`formal/`, so `formal/` now only ever means "a root's Lean sources"); the libraries reach each root via
-`srcDir = "../<root>/formal"` (see [`lake/lakefile.toml`](lake/lakefile.toml)). `paper-1/` keeps the pre-reorg
-module names (`Scratch.*`,
-`RelExist.*`) so its content is byte-identical; `theory/` is root-prefixed (`Theory.*`) so the four shared
-modules it forked do not collide with paper-1's originals.
+cache live in the infrastructure directory [`lake/`](lake), so `formal/` only ever means "a root's Lean
+sources"; the libraries reach each root via `srcDir = "../<root>/formal"` (see
+[`lake/lakefile.toml`](lake/lakefile.toml)). `theory/` is uniformly `Theory.*` (handoff XXI normalized its
+namespaces off the old `RelExist.*`), so a paper imports the shared `T.x` with **clean `Theory.*` names** and
+no collision — the spec-XX namespace block is gone.
 
 ## Roots vs. infrastructure
 
@@ -44,17 +48,28 @@ by the import gates. Anything at top level without that shape is **infrastructur
   assistant; [`papers/`](papers) — the final manuscripts (all-rights-reserved); [`scripts/`](scripts) — the
   gate and environment setup; and the top-level docs ([`README.md`](README.md), this file, the licenses).
 
-## Fork-and-freeze, applied lazily
+## Theory becomes stable; scratch becomes the frontier (handoff XXI — reverses XIII)
 
-The fork-and-freeze is **not** materialized eagerly. Today `paper-1/` is the **canonical home of its own
-closure**; `theory/` holds only what is genuinely already *not* paper one, and **forks forward on demand** —
-when a `theory/` module gains a real second consumer of a paper-1 lemma, *that* lemma is forked to `theory/`
-(frozen), and the two may then diverge. Four modules have been forked so far
-(`Theory.{We,RotatingSpectrum,BandCoincidence,BandFromAxioms}`, consumed by `Priority`/`MutualCoupling`); the
-other ~14 paper-one modules have no `theory/` consumer and are **not** duplicated. The eager 22-module
-duplication is deliberately deferred until paper two's construction makes specific forks load-bearing.
+Spec XIII made `theory/` the **living frontier** and had papers **fork frozen copies** of the slices they
+needed. Handoff XXI **reverses that role**, because papers are now thin layers that *import* `theory/`: for a
+paper's pinned version to keep meaning what it meant, **`theory/` must be stable** (backward-compatible
+changes only, like `foundation/`). So:
 
-Provenance / drift notes: [`paper-1/spec/AXIOM-PROVENANCE.md`](paper-1/spec/AXIOM-PROVENANCE.md),
+- **`theory/` is now stable** — the canonical axioms + the `T.x` theorems, changed only by generalization.
+- **`scratch/` is now the living frontier** — paper three (`Conservation` + the seed) develops here.
+- **The forks are unified.** The band layer (`RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`) was
+  genuinely double-imported (paper-1 **and** paper-2), so it promoted into clean `Theory.*` and both papers
+  now **import** it. Paper two's six `Paper2.*` forks are gone — it imports `theory/`'s modular slice. Paper
+  one dropped its three band forks. Each unification was **drift-checked byte-identical first**, so it shifted
+  no meaning, and paper one's headline footprints were diffed identical to pre-reorg at the checkpoint.
+- **What stays `P1.x`** (single-importer today): the seam spine, lived identity, knowing-is-lossy, and the
+  arrow. They promote the day a second paper's Lean imports them — not by feel. `Theory.We` is a deliberate
+  byte-identical fork of paper one's lived-identity `We`, kept because `theory/`'s `Priority`/`Axioms` need it
+  and `theory/` cannot import a paper.
+
+Provenance / drift notes: [`theory/spec/NODES.md`](theory/spec/NODES.md) (the node inventory),
+[`paper-1/spec/AXIOM-PROVENANCE.md`](paper-1/spec/AXIOM-PROVENANCE.md),
+[`paper-2/spec/AXIOM-PROVENANCE.md`](paper-2/spec/AXIOM-PROVENANCE.md),
 [`theory/spec/PROVENANCE.md`](theory/spec/PROVENANCE.md).
 
 ## The axioms are one canonical layer (handoff XX — reverses the per-paper freeze, for the axioms)

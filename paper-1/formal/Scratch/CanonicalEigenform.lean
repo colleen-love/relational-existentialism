@@ -15,24 +15,16 @@ as a derived theorem rather than a posit:
 > state-half of the canonical `Theory.Axioms.IsSelf` = `MutualCoupling.JointFixed`) lies in A3's sustainable
 > field `Peri(Φ_c)`. The eigenform is the fixed point of the process, not a separate posit.
 
-## Why a *local mirror* rather than an `import` of the canonical layer
+## Update (handoff XXI): the collision is gone — this module is now redundant
 
-The canonical derivation is `Theory.Axioms.eigenform_of_fixed`, stated about
-`RelExist.BandFromAxioms.Peri`/`RotatingSpectrum.schur`. Those definitions are **byte-identical** to paper
-one's `Scratch.BandFromAxioms.Peri`/`Scratch.RotatingSpectrum.schur` (the `theory/` forks were taken from
-this root and have not diverged — confirmed by the drift check), so the canonical theorem certifies *this*
-root's exact eigenform object.
-
-A *direct* `import Theory.Axioms` into paper one is, however, **structurally blocked**: the `theory/` forks
-share paper one's `RelExist.*` namespace (the fork-and-freeze gave them paper-one's names so they would stay
-byte-identical), so importing both `Scratch.*` and the transitively-required `Theory.*` forks collides
-(`environment already contains 'RelExist.RotatingSpectrum.Ucoh'`). Paper one therefore consumes the canonical
-result the same way it consumes paper-one's arrow in paper two — by **citation and version-pin** (see
-[`AXIOM-PROVENANCE.md`](../spec/AXIOM-PROVENANCE.md)) — and re-proves the state-half here in its own namespace
-from its own identical definitions. The *full* process (the co-direction with per-relatum capacity `α`,
-existence, the generative and modular readings) lives in `Theory.Axioms`; only its paper-one consequence is
-mirrored here. This module is **purely additive**: it changes no existing theorem, so paper one's headline
-arrow/energy footprints are untouched.
+When this was written (spec XX), a *direct* `import Theory.Axioms` into paper one was **namespace-blocked**:
+the `theory/` band forks shared paper one's `RelExist.*` names, so importing both collided. The proof-DAG
+reorg **dissolved that block** — it promoted the band layer into clean `Theory.*` and paper one now imports
+`Theory.BandFromAxioms` directly (this very file does). So paper one **could** now simply
+`import Theory.Axioms` and use `Theory.Axioms.eigenform_of_fixed`, making this local mirror **redundant**. It
+is kept for now to preserve the green+footprint baseline across the reorg; deleting it (and importing
+`Theory.Axioms` directly) is a flagged follow-up. The state-half re-proved below is identical to the
+canonical `Theory.Axioms.eigenform_of_fixed`; the full process lives in `Theory.Axioms`.
 -/
 import Theory.BandFromAxioms
 

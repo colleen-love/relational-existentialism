@@ -7,9 +7,10 @@ The repository proves, and shows its work for, **one result**:
 > *The arrow of time is the orientation active self-relating cannot escape; and the conserved remainder of self-relating — what never becomes known — is exactly energy.*
 
 - **Start here — the result:** [`paper-1/spec/paper-one.md`](paper-1/spec/paper-one.md), a single linear walk through it, each step status-tagged and named by its Lean theorem.
-- **The view, in plain language:** [`paper-1/spec/relational-existentialism.md`](theory/spec/relational-existentialism.md)
-- **One step toward the formalization (plain words, structures named):** [`paper-1/spec/relational-existentialism-toward-formalization.md`](theory/spec/relational-existentialism-toward-formalization.md)
-- **The formal spec (doctrine, signature, axioms, theorems):** [`paper-1/spec/`](paper-1/spec/) — foundation (`00`/`01`/`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`paper-1/spec/README.md`](paper-1/spec/README.md) for the reading order.
+- **The view, in plain language:** [`theory/spec/relational-existentialism.md`](theory/spec/relational-existentialism.md)
+- **One step toward the formalization (plain words, structures named):** [`theory/spec/relational-existentialism-toward-formalization.md`](theory/spec/relational-existentialism-toward-formalization.md)
+- **The canonical axioms (for an outside reader):** [`theory/spec/AXIOMS.md`](theory/spec/AXIOMS.md), with the doctrine and signature ([`00`](theory/spec/00-doctrine.md)/[`01`](theory/spec/01-signature.md)) now alongside them in `theory/spec/`; the proof-DAG node inventory is [`theory/spec/NODES.md`](theory/spec/NODES.md).
+- **The formal spec (paper one's theorems):** [`paper-1/spec/`](paper-1/spec/) — the axioms page (`02`), the theorems `3.1 … 3.9` one page each, and the provenance ledger; see [`paper-1/spec/README.md`](paper-1/spec/README.md) for the reading order.
 - **The mechanized development (Lean 4):** machine-checked and `sorry`-free. Paper one's closure lives in [`paper-1/formal/`](paper-1/formal/) (`Scratch.*`, `RelExist.*`); shared infrastructure in [`foundation/formal/`](foundation/formal/) (`Foundation.Traced`); the living frontier in [`theory/formal/`](theory/formal/) (`Theory.*`). All build clean; the headline footprints sit at the corpus norm, with the seam depending on no axioms.
 - **The coinductive ν-layer (Agda):** [`agda/`](agda/) — a parallel `--safe --guardedness` mechanization of paper one's identity/`ν` material with native coinduction (lived identity `≈`, theorem 3.2; the first-person surplus `≈ ⊊ ≅`, proved in both assistants). Infrastructure, a second proof assistant — not a root.
 

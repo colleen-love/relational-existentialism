@@ -35,9 +35,9 @@ Each derivation either closes (a theorem below) or would be reported as an obstr
 so the collapse is total (handoff XX, outcome 1). The supporting `A1`/`A2`/`D1` normalizations are recorded
 in [`§B`](#) below and in `AXIOMS.md`.
 
-**Namespace.** Distinct (`Theory.Axioms`), so this layer adds *no* name to the `Theory.*` namespace the
-paper-one closure and its `theory/` forks share — the canonical statements name the existing objects, they
-do not redeclare them.
+**Namespace.** `Theory.Axioms`, within the uniformly-`Theory.*` stable layer (handoff XXI normalized
+theory's namespaces off the old `RelExist.*`). The canonical statements *name* the existing `Theory.*`
+objects — they do not redeclare them — and papers import this layer with clean names and no collision.
 -/
 import Theory.MutualCoupling
 import Theory.OneGenerator

@@ -1,5 +1,12 @@
 # 01 — The Signature
 
+> **Normalized axioms (handoff XX/XXI) — read alongside [`AXIOMS.md`](AXIOMS.md).** This essay predates the
+> axiom normalization; read its axiom references through the canonical four: **A3 is now a *process***
+> (relations co-direct attention asymmetrically in the relata), with the **self its *derived* fixed point**,
+> not a posited eigenform; **D1** generalizes `σ = Tr` to the **modular flow** (the trace its
+> infinite-temperature limit); **A1** is one dimension-generic arena. The four axioms are one canonical,
+> version-pinned layer in `theory/`.
+
 > *The philosophy as a presented theory.* The doctrine ([00](00-doctrine.md)) fixes
 > the *kind* of language. The signature fixes the *specific* language: the sorts,
 > the generating morphisms, and the one piece of genuinely added structure —
@@ -13,7 +20,7 @@
 
 We present a theory `𝕋`. Its **classifying category** `Cl(𝕋)` is the free
 traced-symmetric-monoidal-with-`ν` category on the data below, quotiented by the
-axioms of [02](02-axioms.md). A **model** is a structure-preserving functor
+axioms of [02](../../paper-1/spec/02-axioms.md). A **model** is a structure-preserving functor
 `Cl(𝕋) → 𝒟` into some semantic category `𝒟` (Layer 4).
 
 ---
@@ -66,7 +73,7 @@ constitution* rather than by allowance. Everything below is mechanized in
 ### 1.3.1 Finiteness is constitutive, not imposed `[structural]`
 
 A perspective is finite *by definition* — bounded integration capacity is part of what
-being a located someone *is*, the same un-closable mirror as [3.3](paper-one.md). We
+being a located someone *is*, the same un-closable mirror as [3.3](../../paper-1/spec/paper-one.md). We
 encode it as a **bounded capacity** `α` (a complete lattice, with top `⊤`); an
 attention **field** assigns each relatum a standing, `att : V → α`. The only bound is
 `⊤` of `α` — the perspective's own limit — and there is **no budget parameter `β`
@@ -116,7 +123,7 @@ $$
 $$
 
 via the same `ν`-modality (Knaster–Tarski / `OrderHom.gfp`) used for `≈` in
-[3.2](paper-one.md): the self is *the most attention that can be co-sustained*. Two
+[3.2](../../paper-1/spec/paper-one.md): the self is *the most attention that can be co-sustained*. Two
 mechanized consequences make this **generative**, not allocative:
 
 - **Accumulation** (`orbit_ascending`, `orbit_le_gfp`): from a self-reinforcing seed
@@ -129,7 +136,7 @@ This is where **Mozart** lives: a node whose biological substrate is gone still 
 weight in `νΦ_c`, because the edges — scores, recordings, each listener's return — keep
 the coupling live; he radiates attention *through the fabric*. Death is those edges
 decaying, the weight fading *on the timescale of others' returning* — the same
-distributed-self story as [3.2](paper-one.md)'s `𝔼`.
+distributed-self story as [3.2](../../paper-1/spec/paper-one.md)'s `𝔼`.
 
 ### 1.3.4 The resource budget as a special case `[reduction]`
 
