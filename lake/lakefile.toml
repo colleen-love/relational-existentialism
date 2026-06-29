@@ -1,55 +1,23 @@
 name = "RelExist"
-defaultTargets = ["Foundation"]
+defaultTargets = ["Paper1"]
 
-# ── Layout (handoff XIII; papers rotated in I.O) ─────────────────────────────
-# The lake package stays here in `formal/` (so the mathlib cache under
-# `formal/.lake` is untouched); each root is a repo-level directory holding its
-# own `formal/` (Lean) and `spec/` (prose). Libraries reach their root via
-# `srcDir = "../<root>/formal"`. The second cycle rotated the papers back one
-# slot: a new foundational `paper-1/` (*a self arises from the axioms*) goes at
-# the front (skeleton for now); the old paper-1 (time/arrow/energy/seam) is now
-# `paper-2/`; the old paper-2 (modular/thermal) is now `paper-3/`. `theory/`
-# remains the transitional shared layer (dissolution deferred to the
-# formalization pass).
+# ── Layout (handoff I.II — the arena reset) ──────────────────────────────────
+# The project moved to a new foundation (a quantaloid / allegory with relations
+# as the primitive arrow). The prior edifice — the traced-SMC papers, the theory
+# and foundation layers, the conservation/sparsity frontier — is archived under
+# `archive/archived/` as structural reference and is **not** built or gated. Only
+# `paper-1/` is live, as a buildable skeleton; spec II.1 grows it (and the build
+# targets) back on the new arena.
 
-# `foundation/` — stable, mathlib-bound infrastructure (the traced-SMC typeclass +
-# JSV axioms, the matrix arena, the partial-trace operation). The fast default
-# target; held to mathlib standards.
-[[lean_lib]]
-name = "Foundation"
-srcDir = "../foundation/formal"
-roots = ["Foundation"]
-
-# `paper-1/` — *a self arises from the axioms* (the new foundational paper). A
-# **skeleton** for now: spec stubs + an empty formal root. Its theorems (`T1.<n>`)
-# are deferred to the formalization pass.
+# `paper-1/` — *a self arises from the axioms*, rebuilt on the new relational
+# arena. A skeleton for now: an empty `Paper1` root (no theorems yet).
 [[lean_lib]]
 name = "Paper1"
 srcDir = "../paper-1/formal"
 roots = ["Paper1"]
 
-# `paper-2/` — the time / arrow / energy / seam paper (was paper-1). Module names
-# kept stable (`RelExist.*`, `Scratch.*`), so proofs are byte-identical across the
-# rotation. Imports only itself + `theory/` + `foundation/`.
-[[lean_lib]]
-name = "Paper2"
-srcDir = "../paper-2/formal"
-roots = ["RelExist", "Scratch"]
-
-# `theory/` — the transitional shared layer: the canonical axioms + the `T0.<n>`
-# theorems the papers import. Imports only `theory/` + `foundation/`.
-[[lean_lib]]
-name = "Theory"
-srcDir = "../theory/formal"
-roots = ["Theory"]
-
-# `paper-3/` — the modular / thermal-time paper (was paper-2). Imports the modular
-# slice from `theory/` and proves its own `Paper3.*` (`T3.<n>`).
-[[lean_lib]]
-name = "Paper3"
-srcDir = "../paper-3/formal"
-roots = ["Paper3"]
-
+# mathlib is retained (cache present under `.lake`) so the dependency is in place
+# when the new-arena development needs it; the empty skeleton imports none of it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"

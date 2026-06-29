@@ -1,10 +1,9 @@
 /-
-# `paper-1/` — *a self arises from the axioms* (skeleton)
+# `paper-1/` — a self arises from the axioms (skeleton, new arena)
 
-The new foundational paper one: the **emergence of a self** from the canonical axioms `{A1, A2, A3, D1}`.
-Its formalization is **deferred to the formalization pass** — this root is a skeleton (no theorems yet). The
-canonical axioms it will build on are `Theory.Axioms` (prose: `theory/spec/AXIOMS.md`); the self is the
-fixed point of the A3 co-direction process (`Theory.MutualCoupling.JointFixed`).
+Paper one is being rebuilt from scratch on a new foundation — a quantaloid / allegory in which relations are
+the primitive arrow and `Q` is the value-object. This root is an **empty skeleton**: no theorems yet, defined
+in spec II.1. The prior (traced-SMC) edifice is archived under `archive/archived/` as structural reference.
 -/
 namespace Paper1
 end Paper1
