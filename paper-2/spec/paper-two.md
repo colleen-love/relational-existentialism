@@ -30,7 +30,7 @@
 This page is the single linear walk through that result: each step is tagged with its status and named by the
 Lean theorem that carries it; a referee should see the arc *and* its boundary in one read. The development is
 the frozen fork [`paper-2/formal/`](../formal) (library `Paper2`, six modules, forked from `theory/` at
-`fca792d` — [`AXIOM-PROVENANCE.md`](AXIOM-PROVENANCE.md)). The type III program the finite core stops short of
+`fca792d` — [`04-provenance.md`](04-provenance.md)). The type III program the finite core stops short of
 is scoped in [`theory/spec/modular-frontier.md`](../../theory/spec/modular-frontier.md).
 
 **Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, at equilibrium]` —
@@ -191,4 +191,4 @@ interface — `genReal`, the conserved band — is the band layer forked frozen 
 lossy self-relating projection *orders* the arrow, the seam as the un-decohereable floor
 (`SeamForcing.self_cannot_fully_decohere`) — is honored here in prose, **"by the arrow result of paper
 one"**, and not forked. So `paper-2/` imports no `paper-1/` path; the citation carries the meaning (see
-[`AXIOM-PROVENANCE.md`](AXIOM-PROVENANCE.md), [`../../STRUCTURE.md`](../../STRUCTURE.md)).
+[`04-provenance.md`](04-provenance.md), [`../../STRUCTURE.md`](../../STRUCTURE.md)).

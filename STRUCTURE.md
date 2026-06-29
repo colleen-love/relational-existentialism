@@ -16,7 +16,7 @@ Every artifact answers one question: **is it stable-and-shared, or is it this-pa
 Flow is one-directional: `scratch` (the living frontier) `→ theory → paper`; `foundation` sits below
 everything. **A paper imports only itself + `theory/` + `foundation/`** — never another paper (citation, not
 import, couples nothing). Papers **pin** the `theory/` commit they were proved against in
-`<paper>/spec/AXIOM-PROVENANCE.md`.
+`<paper>/spec/04-provenance.md`.
 
 ## The roots
 
@@ -68,8 +68,8 @@ changes only, like `foundation/`). So:
   and `theory/` cannot import a paper.
 
 Provenance / drift notes: [`theory/spec/NODES.md`](theory/spec/NODES.md) (the node inventory),
-[`paper-1/spec/AXIOM-PROVENANCE.md`](paper-1/spec/AXIOM-PROVENANCE.md),
-[`paper-2/spec/AXIOM-PROVENANCE.md`](paper-2/spec/AXIOM-PROVENANCE.md),
+[`paper-1/spec/04-provenance.md`](paper-1/spec/04-provenance.md),
+[`paper-2/spec/04-provenance.md`](paper-2/spec/04-provenance.md),
 [`theory/spec/PROVENANCE.md`](theory/spec/PROVENANCE.md).
 
 ## The axioms are one canonical layer (handoff XX — reverses the per-paper freeze, for the axioms)
@@ -89,7 +89,7 @@ protected is now gone.** The mechanism shifts from *duplication* to **version-pi
 - `Theory.Axioms` is a **stable shared layer** (like `foundation/`): it changes **only backward-compatibly**
   (generalization, never redefinition), so a paper's pinned version keeps meaning what it meant.
 - Each paper **pins** the canonical-layer commit it was proved against, in its
-  `spec/AXIOM-PROVENANCE.md`. The closure gate ([`scripts/gate.sh`](scripts/gate.sh)) now allows a paper to
+  `spec/04-provenance.md`. The closure gate ([`scripts/gate.sh`](scripts/gate.sh)) now allows a paper to
   import `Theory.Axioms` (only that module, not arbitrary `Theory.*`) and checks the pin.
 - **The band-layer forks were unified (handoff XXI).** `RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`
   were genuinely double-imported, so they promoted to one canonical `Theory.*` copy that **both papers import**;

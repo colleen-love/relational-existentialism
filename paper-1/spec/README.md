@@ -28,15 +28,15 @@ clean and `sorry`-free; the headline footprints sit at the corpus norm
 
 **The result** ([`paper-one.md`](paper-one.md)) walks these in order:
 
-4. [`P1.1-to-relate-is-to-create.md`](P1.1-to-relate-is-to-create.md) — self-relation is the trace
+4. [`P1.01-to-relate-is-to-create.md`](P1.01-to-relate-is-to-create.md) — self-relation is the trace
    `σ = Tr`; relating produces an eigenform (3.1).
-5. [`P1.5-lived-identity.md`](P1.5-lived-identity.md) — lived identity `≈ := νΘ` and the shared world;
+5. [`P1.05-lived-identity.md`](P1.05-lived-identity.md) — lived identity `≈ := νΘ` and the shared world;
    you are your relating, not a bare carrier (3.2).
-6. [`P1.6-knowing-vs-feeling.md`](P1.6-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
+6. [`P1.06-knowing-vs-feeling.md`](P1.06-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
    the remainder `(1−E)` (3.3). *"Feeling" means exactly this remainder, nothing phenomenal.*
 7. [`P1.10-limits-of-knowing.md`](P1.10-limits-of-knowing.md) — the Lawvere obstruction: to relate is to
    make the other unknowable (3.4).
-8. [`P1.8-decoherence.md`](P1.8-decoherence.md) — what knowing does to a relation; the **seam** (the
+8. [`P1.08-decoherence.md`](P1.08-decoherence.md) — what knowing does to a relation; the **seam** (the
    self-inclusive block attention cannot reach); the irreversible knower→known arrow (3.5).
 9. [`P1.13-the-arrow.md`](P1.13-the-arrow.md) — the arrow graduated into a graded geometric monovariant;
    that arrow is time (3.6).
@@ -44,8 +44,8 @@ clean and `sorry`-free; the headline footprints sit at the corpus norm
     *is* a knowing (a conditional expectation onto the seam subalgebra) (3.7).
 11. [`P1.15-phase-bearing.md`](P1.15-phase-bearing.md) — energy as the rotating band of the phase channel
     (the sustained, never-known remainder) (3.8).
-12. [`T.3-band-coincidence.md`](../../theory/spec/T.3-band-coincidence.md) — the conserved remainder coincides
-    with the energy band, **derived from A1–A3** (no fourth axiom). *(Now a `theory/` node, `T.3`, since the
+12. [`T.03-band-coincidence.md`](../../theory/spec/T.03-band-coincidence.md) — the conserved remainder coincides
+    with the energy band, **derived from A1–A3** (no fourth axiom). *(Now a `theory/` node, `T.03`, since the
     band layer is shared by papers one and two.)*
 
 **Provenance.** [`04-provenance.md`](04-provenance.md) — the honest accounting, per kept result:

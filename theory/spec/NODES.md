@@ -6,7 +6,7 @@
 
 **Layers.** `F` = foundation substrate · `A` = the canonical axioms · `T` = theory theorems (the stable
 shared layer, imported by ≥1 paper or load-bearing for `A`) · `P1/P2/P3` = each paper's own nodes. A
-manuscript step reads e.g. *"by `A3`, `T.3` (eigenform), `T.3` (band coincidence) we obtain `P1.13` (the
+manuscript step reads e.g. *"by `A3`, `T.03` (eigenform), `T.03` (band coincidence) we obtain `P1.13` (the
 arrow)"* — the prefix names the layer, the number orders by position in that layer's argument.
 
 **Granularity (the split, confirmed).** The rule is *one file per node, unless that forces an import cycle*
@@ -42,21 +42,21 @@ theorems (handoff XX). It is the A-layer plus the canonical `T`-derivations (eig
 
 ## T — theory theorems (the stable shared layer, `Theory.*`)
 
-In topological order, grouped by sub-argument. **Double-imported** (paper-1 *and* paper-2): T.1–T.3 (the
-band layer) — the mechanical reason they are `T`, not `P1`. T.4 (`ModularFlow`) is **axiom-supporting**
+In topological order, grouped by sub-argument. **Double-imported** (paper-1 *and* paper-2): T.01–T.03 (the
+band layer) — the mechanical reason they are `T`, not `P1`. T.04 (`ModularFlow`) is **axiom-supporting**
 (the canonical axioms derive the modular self from its `modPow_diagonal`, handoff XXII) and also imported by
-paper two; T.5–T.6 support `A`; T.7 is the generative engine. *(Handoff XXII returned `OneGenerator` and
+paper two; T.05–T.06 support `A`; T.07 is the generative engine. *(Handoff XXII returned `OneGenerator` and
 `Einselection` to paper two — see P2 — since only paper two imports them.)*
 
 | # | Node | Module | Imports | Headline it carries |
 |---|---|---|---|---|
-| T.1 | energy = the rotating band | `Theory.RotatingSpectrum` | — | the `schur` channel, `genReal` arrow |
-| T.2 | the band lattice; seam = rotating | `Theory.BandCoincidence` | T.1 | `band_coincidence` |
-| T.3 | eigenform `Peri`; band coincidence from axioms | `Theory.BandFromAxioms` | T.2 | **paper one's energy**: `band_coincidence_from_axioms`, `undifferentiated_two_term_from_axioms` |
-| T.4 | modular self-relation (D1's modular form); spectral machinery | `Theory.ModularFlow` | — | `modularFlow`, `modularFlow_maximally_mixed`, `modPow_diagonal` |
-| T.5 | lived-identity coinduction `≈ := νΘ` | `Theory.We` | — | (theory's copy, supporting T.6) |
-| T.6 | A2 priority / no-bare-carrier | `Theory.Priority` | T.5 | `priority_universal` |
-| T.7 | the generative A3 engine | `Theory.MutualCoupling` | T.3 | `engine_ignition`, `orbit_engine2` |
+| T.01 | energy = the rotating band | `Theory.RotatingSpectrum` | — | the `schur` channel, `genReal` arrow |
+| T.02 | the band lattice; seam = rotating | `Theory.BandCoincidence` | T.01 | `band_coincidence` |
+| T.03 | eigenform `Peri`; band coincidence from axioms | `Theory.BandFromAxioms` | T.02 | **paper one's energy**: `band_coincidence_from_axioms`, `undifferentiated_two_term_from_axioms` |
+| T.04 | modular self-relation (D1's modular form); spectral machinery | `Theory.ModularFlow` | — | `modularFlow`, `modularFlow_maximally_mixed`, `modPow_diagonal` |
+| T.05 | lived-identity coinduction `≈ := νΘ` | `Theory.We` | — | (theory's copy, supporting T.06) |
+| T.06 | A2 priority / no-bare-carrier | `Theory.Priority` | T.05 | `priority_universal` |
+| T.07 | the generative A3 engine | `Theory.MutualCoupling` | T.03 | `engine_ignition`, `orbit_engine2` |
 
 ## P1 — paper one's own nodes (`paper-1/`, `Scratch.*` / `RelExist.*`)
 
@@ -71,21 +71,21 @@ this table so files and DAG cannot drift.
 
 | # | Node | Module | Imports |
 |---|---|---|---|
-| P1.1 | the mirror | `RelExist.Mirror` | — |
-| P1.2 | relating | `RelExist.Relating` | P1.1 |
-| P1.3 | the seam | `RelExist.Seam` | P1.2 |
-| P1.4 | seam bridge | `RelExist.SeamBridge` | P1.3 |
-| P1.5 | lived identity `≈ := νΘ` (3.2) | `Scratch.We` | — |
-| P1.6 | knowing is the lossy σ-move (3.3) | `Scratch.KnowingFeeling` | P1.5, P1.1 |
-| P1.7 | `σ = Tr` as gfp (D1 realization) | `Scratch.Trace` | — |
-| P1.8 | decoherence in the matrix model | `Scratch.Decoherence` | F.3 |
-| P1.9 | directed attention | `Scratch.Attending` | P1.8 |
-| P1.10 | the quantum seam | `Scratch.QuantumSeam` | P1.8 |
+| P1.01 | the mirror | `RelExist.Mirror` | — |
+| P1.02 | relating | `RelExist.Relating` | P1.01 |
+| P1.03 | the seam | `RelExist.Seam` | P1.02 |
+| P1.04 | seam bridge | `RelExist.SeamBridge` | P1.03 |
+| P1.05 | lived identity `≈ := νΘ` (3.2) | `Scratch.We` | — |
+| P1.06 | knowing is the lossy σ-move (3.3) | `Scratch.KnowingFeeling` | P1.05, P1.01 |
+| P1.07 | `σ = Tr` as gfp (D1 realization) | `Scratch.Trace` | — |
+| P1.08 | decoherence in the matrix model | `Scratch.Decoherence` | F.3 |
+| P1.09 | directed attention | `Scratch.Attending` | P1.08 |
+| P1.10 | the quantum seam | `Scratch.QuantumSeam` | P1.08 |
 | P1.11 | the knower→known orientation | `Scratch.Orientation` | P1.10 |
-| P1.12 | seam protection (forcing / conserved / ℂ) | `Scratch.SeamForcing` · `SeamConserved` · `SeamForcingC` | P1.9 |
+| P1.12 | seam protection (forcing / conserved / ℂ) | `Scratch.SeamForcing` · `SeamConserved` · `SeamForcingC` | P1.09 |
 | P1.13 | **the arrow** = time (3.8) | `Scratch.TimeFlow` | P1.11 | **paper one's arrow**: `coh_orbit_antitone` |
 | P1.14 | the instance converse (3.10) | `Scratch.KnowingFromArrow` | P1.13, P1.12 |
-| P1.15 | A3 at the strength of its text (3.9) | `Scratch.PhaseBearing` | T.3, P1.12 |
+| P1.15 | A3 at the strength of its text (3.9) | `Scratch.PhaseBearing` | T.03, P1.12 |
 
 *Note (former P1.16).* `Scratch.CanonicalEigenform` (the spec-XX collision workaround) was **deleted in
 handoff XXII** — XXI dissolved the collision, making it redundant with `Theory.Axioms.eigenform_of_fixed`,
@@ -94,14 +94,14 @@ unchanged. P1 therefore ends at **P1.15**.
 
 ## P2 — paper two's own nodes (`paper-2/`)
 
-Paper two imports the band layer + `ModularFlow` (T.1–T.4) from `theory/` and proves its **own** `P2.x`
+Paper two imports the band layer + `ModularFlow` (T.01–T.04) from `theory/` and proves its **own** `P2.x`
 (handoff XXII returned these from `theory/`: only paper two imports them, so by the promotion rule they are
 `P2.x`, not `T.x`). Paper one's arrow is a **prose citation**, never imported.
 
 | # | Node | Module | Imports | Headline it carries |
 |---|---|---|---|---|
-| P2.1 | two faces of one generator (equilibrium) | `Paper2.OneGenerator` | T.4, T.1 | `combinedFlow_add` |
-| P2.2 | einselection; presence | `Paper2.Einselection` | P2.1, T.3 | **paper two's headline**: `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation` |
+| P2.01 | two faces of one generator (equilibrium) | `Paper2.OneGenerator` | T.04, T.01 | `combinedFlow_add` |
+| P2.02 | einselection; presence | `Paper2.Einselection` | P2.01, T.03 | **paper two's headline**: `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation` |
 
 ## P3 — paper three's own nodes (`scratch/`, the living frontier)
 
@@ -110,9 +110,9 @@ Paper two imports the band layer + `ModularFlow` (T.1–T.4) from `theory/` and 
 | P3.1 | decoherence conserves coherence (it relocates it) | `scratch/formal/Conservation.lean` | **frontier seed**, not gated |
 
 *Recorded hoist-item (P3.1), not a violation.* `Conservation` *imports* paper one's `Scratch.Decoherence`
-(P1.8). Because `scratch/` is a **free workbench** (XXII), this is **fine now** — the gate exempts scratch and
+(P1.08). Because `scratch/` is a **free workbench** (XXII), this is **fine now** — the gate exempts scratch and
 enforces cite-don't-import only at the **promotion event** (when scratch becomes paper three). At promotion,
-resolve it by citing P1.8 in prose or hoisting the needed lemma to `theory/`.
+resolve it by citing P1.08 in prose or hoisting the needed lemma to `theory/`.
 
 ---
 
@@ -121,6 +121,6 @@ resolve it by citing P1.8 in prose or hoisting the needed lemma to `theory/`.
 The numbering above is the **authoritative ordering**; the modules keep their **descriptive** names
 (`Theory.BandFromAxioms`, not `Theory.T03`) because after Phase 2 the import graph *already* realizes the
 proof DAG with legible names — the descriptive name carries the meaning, this index carries the order. A
-manuscript cites *"`T.3` (eigenform / band coincidence, `Theory.BandFromAxioms`)"*: number for position, name
+manuscript cites *"`T.03` (eigenform / band coincidence, `Theory.BandFromAxioms`)"*: number for position, name
 for content. (A future pass may prefix the files `T03_BandFromAxioms.lean` for a self-ordering listing; the
 DAG and the addresses are unchanged by such a rename, so it is deferred as cosmetic ordering, not structure.)

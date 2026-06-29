@@ -1,4 +1,4 @@
-# 03.9 — Is the conserved remainder of self-relating energy?
+# T.03 — Band coincidence: the conserved remainder is energy
 
 > Paper one's step 5 (see [`paper-one.md`](../../paper-1/spec/paper-one.md) and the [spec index](../../paper-1/spec/README.md)), closing
 > the open question named in [`P1.15-phase-bearing.md`](../../paper-1/spec/P1.15-phase-bearing.md)'s honest scope:
@@ -187,5 +187,5 @@ commutative decoherence-free subalgebra (`SpectralDecay` / `PeripheralAlgebra`'s
 
 → Back to [paper one](../../paper-1/spec/paper-one.md) · the energy half this closes over is
 [`P1.15-phase-bearing.md`](../../paper-1/spec/P1.15-phase-bearing.md) · the seam it identifies energy with is
-[`P1.8-decoherence.md`](../../paper-1/spec/P1.8-decoherence.md) (the quantitative seam-permanence lift is archived,
+[`P1.08-decoherence.md`](../../paper-1/spec/P1.08-decoherence.md) (the quantitative seam-permanence lift is archived,
 paper two — [`../archive/03.11-seam-permanence.md`](../../archive/spec/03.11-seam-permanence.md)).

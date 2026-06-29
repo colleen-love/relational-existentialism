@@ -60,8 +60,8 @@ the strong extensionality of `𝔼 = D/≈` in `Scratch/Priority.lean` (`bisim_q
 in archived `Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at
 all. An earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
 
-→ detail: [`P1.1-to-relate-is-to-create.md`](P1.1-to-relate-is-to-create.md),
-[`P1.5-lived-identity.md`](P1.5-lived-identity.md).
+→ detail: [`P1.01-to-relate-is-to-create.md`](P1.01-to-relate-is-to-create.md),
+[`P1.05-lived-identity.md`](P1.05-lived-identity.md).
 
 ## 2. Knowing is the σ-move: a lossy projection, leaving a remainder `[proved]`
 
@@ -74,7 +74,7 @@ into a **known** part `E M` and a **felt** remainder `(1−E) M` (`Scratch/Decoh
 `Scratch/KnowingFeeling.lean`; `feeling_is_reflexive`, `no_complete_boolModel`). **Throughout, "feeling"
 means exactly this `(1−E)` remainder of self-relating** — nothing phenomenal is claimed of it.
 
-→ detail: [`P1.6-knowing-vs-feeling.md`](P1.6-knowing-vs-feeling.md).
+→ detail: [`P1.06-knowing-vs-feeling.md`](P1.06-knowing-vs-feeling.md).
 
 ## 3. The seam: the remainder is structural, not incidental `[proved, 0 ax]`
 
@@ -90,7 +90,7 @@ coherence survives every available knowing and the copy-defect never reaches zer
 **seam**.
 
 → detail: [`P1.10-limits-of-knowing.md`](P1.10-limits-of-knowing.md),
-[`P1.8-decoherence.md`](P1.8-decoherence.md).
+[`P1.08-decoherence.md`](P1.08-decoherence.md).
 
 ## 4. The arrow: knowing orders felt-before-known and cannot run back `[proved]`
 
@@ -193,7 +193,7 @@ is sustained at every depth (`seam_sustained`) — A3's "sustained by looping." 
 the self ("grown") is a separate creation term, left `[open]`, not claimed here.*
 
 → detail: [`P1.15-phase-bearing.md`](P1.15-phase-bearing.md),
-[`03.9-band-coincidence.md`](../../theory/spec/T.3-band-coincidence.md).
+[`03.9-band-coincidence.md`](../../theory/spec/T.03-band-coincidence.md).
 
 ## 6. The headline
 

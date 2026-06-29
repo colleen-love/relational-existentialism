@@ -40,7 +40,7 @@ check () { # <root> <allowed-egrep>
 
 pin () { # <root> — a paper must pin the canonical axiom layer it was proved against
   local root="$1"
-  local f="$root/spec/AXIOM-PROVENANCE.md"
+  local f="$root/spec/04-provenance.md"
   if grep -qiE "canonical axiom|Theory\.Axioms" "$f" 2>/dev/null; then
     echo "OK   $root/ — pins the canonical axiom layer ($f)"
   else
