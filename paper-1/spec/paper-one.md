@@ -31,7 +31,7 @@ below as future work, never as a load-bearing citation.
 **Status legend.** `[proved]` — mechanized, `sorry`-free (footprint reported); `[proved, 0 ax]` — and
 depending on *no* axioms; `[reading]` — an identification of the formal object with the lived/physical
 one, asserted, not proved; `[open]` — named and not built. The foundation A1–A3 / D1 is in
-[`02-axioms.md`](02-axioms.md); A1 (the traced symmetric monoidal arena) and A2 (relation primacy) are
+[`02-axioms.md`](../../theory/spec/AXIOMS.md); A1 (the traced symmetric monoidal arena) and A2 (relation primacy) are
 structural, A3 (recursion constitutes the self) the one load-bearing posit. The matrix model also makes one
 standing **assumption**, **B1** — a *preferred ("classical") basis* fixing what counts as diagonal/known vs
 off-diagonal/felt; the arrow, the knowing/feeling split, and the bands are all relative to it (deriving it
@@ -46,7 +46,7 @@ philosophy.
 ## 1. Relation first; self-relation is the trace `[proved]`
 
 The simplest relation is a system relating to itself: feedback, output returned to input. **D1** fixes
-this as the trace, `σ := Tr` ([`02-axioms.md`](02-axioms.md)). Over the order-theoretic arena it is the
+this as the trace, `σ := Tr` ([`02-axioms.md`](../../theory/spec/AXIOMS.md)). Over the order-theoretic arena it is the
 greatest fixed point of the self-relating map — *relating produces an eigenform*, theorem **3.1**:
 `Trace.selfTrace_fixed` / `Trace.Tr_fixed` (`Scratch/Trace.lean`, the `gfp` of an `OrderHom`). What is
 mechanized here is exactly **gfp-existence** (Knaster–Tarski) — generic to any monotone map; that the
@@ -54,14 +54,14 @@ created selves are *rare* (the discriminating content that keeps this from being
 paper three's sparsity, **not** claimed in this step. Identity itself is the greatest bisimulation
 `≈ := νΘ` (theorem **3.2**, `We.bisim`, `Scratch/We.lean`): you are your lived relating, not a bare carrier
 beneath it. (What the headline path actually uses is *only* this `≈ = νΘ` — the kept `We.bisim` — i.e. A2's
-**priority** half, **A2a** (no bare carrier; see [`02-axioms.md`](02-axioms.md)), now mechanized directly as
+**priority** half, **A2a** (no bare carrier; see [`02-axioms.md`](../../theory/spec/AXIOMS.md)), now mechanized directly as
 the strong extensionality of `𝔼 = D/≈` in `Scratch/Priority.lean` (`bisim_quotient_eq`). The **surplus** half,
 **A2b** — the soundness/strictness inversion `≈ ⊆ ≅ ⊊` — is **not** load-bearing here: it is mechanized only
 in archived `Identity.lean`, as paper-two material, and the seam→arrow→energy spine references no `obsEq` at
 all. An earlier draft called the soundness `≈ ⊆ ≅` load-bearing here; that was a mis-scoping, corrected.)
 
-→ detail: [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md),
-[`03.2-lived-identity.md`](03.2-lived-identity.md).
+→ detail: [`P1.1-to-relate-is-to-create.md`](P1.1-to-relate-is-to-create.md),
+[`P1.5-lived-identity.md`](P1.5-lived-identity.md).
 
 ## 2. Knowing is the σ-move: a lossy projection, leaving a remainder `[proved]`
 
@@ -74,7 +74,7 @@ into a **known** part `E M` and a **felt** remainder `(1−E) M` (`Scratch/Decoh
 `Scratch/KnowingFeeling.lean`; `feeling_is_reflexive`, `no_complete_boolModel`). **Throughout, "feeling"
 means exactly this `(1−E)` remainder of self-relating** — nothing phenomenal is claimed of it.
 
-→ detail: [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md).
+→ detail: [`P1.6-knowing-vs-feeling.md`](P1.6-knowing-vs-feeling.md).
 
 ## 3. The seam: the remainder is structural, not incidental `[proved, 0 ax]`
 
@@ -89,8 +89,8 @@ coherence survives every available knowing and the copy-defect never reaches zer
 (`Attending.defectSq_attend_shared_pos`, `SeamForcing.self_cannot_fully_decohere`). This block is the
 **seam**.
 
-→ detail: [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md),
-[`03.5-decoherence.md`](03.5-decoherence.md).
+→ detail: [`P1.10-limits-of-knowing.md`](P1.10-limits-of-knowing.md),
+[`P1.8-decoherence.md`](P1.8-decoherence.md).
 
 ## 4. The arrow: knowing orders felt-before-known and cannot run back `[proved]`
 
@@ -106,8 +106,8 @@ monovariant: coherence is antitone along the orbit and tends to zero off the fix
 the *instance* converse (a re-export of the forward `partialDephase` limit); the **general** lift
 (arrow ⇒ knowing for any contractive arrow) is Conjecture R, `[open]` — see [Honest scope](#honest-scope) ¶1.
 
-→ detail: [`03.6-time-flow.md`](03.6-time-flow.md),
-[`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md).
+→ detail: [`P1.13-the-arrow.md`](P1.13-the-arrow.md),
+[`P1.14-knowing-from-arrow.md`](P1.14-knowing-from-arrow.md).
 
 ## 5. The conserved remainder is exactly energy — `[proved]` (`genReal = 0`, on the witness) · `[reading]` (= energy) · `[open]` (the joint)
 
@@ -192,8 +192,8 @@ membership a theorem (`rotating_mem_peri`), not a posit. And the self is **non-i
 is sustained at every depth (`seam_sustained`) — A3's "sustained by looping." *Whether looping enlarges
 the self ("grown") is a separate creation term, left `[open]`, not claimed here.*
 
-→ detail: [`03.8-space-energy.md`](03.8-space-energy.md),
-[`03.9-band-coincidence.md`](03.9-band-coincidence.md).
+→ detail: [`P1.15-phase-bearing.md`](P1.15-phase-bearing.md),
+[`03.9-band-coincidence.md`](../../theory/spec/T.3-band-coincidence.md).
 
 ## 6. The headline
 
@@ -259,4 +259,4 @@ says one thing and shows its work.
 ---
 
 → Foundation: [`00-doctrine.md`](../../theory/spec/00-doctrine.md) · [`01-signature.md`](../../theory/spec/01-signature.md) ·
-[`02-axioms.md`](02-axioms.md). Provenance: [`04-provenance.md`](04-provenance.md).
+[`02-axioms.md`](../../theory/spec/AXIOMS.md). Provenance: [`04-provenance.md`](04-provenance.md).

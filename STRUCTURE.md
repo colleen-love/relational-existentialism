@@ -91,15 +91,15 @@ protected is now gone.** The mechanism shifts from *duplication* to **version-pi
 - Each paper **pins** the canonical-layer commit it was proved against, in its
   `spec/AXIOM-PROVENANCE.md`. The closure gate ([`scripts/gate.sh`](scripts/gate.sh)) now allows a paper to
   import `Theory.Axioms` (only that module, not arbitrary `Theory.*`) and checks the pin.
-- **The four `theory/` axiom-base forks** (`We`, `RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`) are
-  now *confirmed* non-divergent — their byte-identity with paper one's `Scratch.*` is the **content** of the
-  collapse, not a coincidence awaiting divergence.
-- **Namespace exception (paper one).** The XIII forks carry paper-one's own `RelExist.*` namespace (so they
-  stay byte-identical), which *blocks* a literal `import Theory.Axioms` into paper one (the transitive
-  `Theory.*` forks collide with `Scratch.*`). Paper one therefore keeps its byte-identical forks as the
-  version-pinned copy and consumes the canonical layer by **citation + pin** (re-proving the eigenform's
-  state-half locally in [`Scratch.CanonicalEigenform`](paper-1/formal/Scratch/CanonicalEigenform.lean)) — the
-  same citation discipline by which paper two cites paper one's arrow.
+- **The band-layer forks were unified (handoff XXI).** `RotatingSpectrum`, `BandCoincidence`, `BandFromAxioms`
+  were genuinely double-imported, so they promoted to one canonical `Theory.*` copy that **both papers import**;
+  paper one dropped its `Scratch.*` band forks. `Theory.We` remains a deliberate byte-identical fork of paper
+  one's lived-identity `We` (theory's `Priority`/`Axioms` need it and theory cannot import a paper).
+- **Namespace collision — resolved (XXI), workaround deleted (XXII).** The spec-XX collision that once blocked
+  `import Theory.Axioms` into paper one (the `theory/` forks shared paper-one's `RelExist.*` names) was
+  dissolved when XXI normalized `theory/` to clean `Theory.*`. Paper one now imports the shared `Theory.*`
+  directly and cites `Theory.Axioms.eigenform_of_fixed`; the XX-era local mirror `Scratch.CanonicalEigenform`
+  was deleted in XXII (redundant, footprint-gated).
 
 ## Cross-paper dependency: cite, don't import
 

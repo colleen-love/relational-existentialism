@@ -10,9 +10,9 @@ its canonical `Theory.BandFromAxioms.*` address. **Footprint-checked identical**
 checkpoint. Node inventory: [`theory/spec/NODES.md`](../../theory/spec/NODES.md). The historical "canonical
 home" framing below is retained for provenance.
 
-> *Note (`CanonicalEigenform`).* It was the spec-XX collision workaround; Phase 2 dissolved the collision, so
-> it is now **redundant** with `Theory.Axioms.eigenform_of_fixed` and is a candidate for deletion (paper one
-> importing `Theory.Axioms` directly). Kept this phase to preserve the green+footprint baseline.
+> *Note (`CanonicalEigenform`).* The spec-XX collision workaround was **deleted in handoff XXII** — XXI
+> dissolved the collision, making it redundant with `Theory.Axioms.eigenform_of_fixed`, which paper one cites
+> directly. The deletion was footprint-gated (headline footprints unchanged).
 
 ---
 
@@ -52,25 +52,21 @@ eigenform (this paper), the generative engine, and the modular self all derive (
   makes `foundation/` safe.
 
 - **The eigenform is now *derived*, not posited.** Paper one's self `νΦ_c` / `Peri(Φ_c)` was previously **A3
-  read at the strength of its text** (the `C1` reading — *"the self **is** `Peri`"*, [`02-axioms.md`](02-axioms.md)
-  §A3). Under the reframe it is the **fixed point of a faithful A3 process** — a theorem
-  (`Theory.Axioms.eigenform_of_fixed`), mirrored in this root's own namespace as
-  [`Scratch.CanonicalEigenform.eigenform_of_sustained`](../formal/Scratch/CanonicalEigenform.lean). **C1's
-  status moves from `[reading]` to `[derived]`; the last faithfulness caveat closes.**
+  read at the strength of its text** (the `C1` reading — *"the self **is** `Peri`"*). Under the reframe it is
+  the **fixed point of a faithful A3 process** — a theorem,
+  [`Theory.Axioms.eigenform_of_fixed`](../../theory/formal/Theory/Axioms.lean), which paper one **imports and
+  cites directly**. **C1's status moves from `[reading]` to `[derived]`; the last faithfulness caveat closes.**
 
-- **Consumed by citation + pin, not import — the namespace exception.** A literal `import Theory.Axioms` into
-  this root is **structurally blocked**: the `theory/` forks share this root's `RelExist.*` namespace (the
-  fork-and-freeze gave them paper-one's names so they would stay byte-identical), so importing both `Scratch.*`
-  and the transitively-required `Theory.*` forks collides (`environment already contains
-  'RelExist.RotatingSpectrum.Ucoh'`). Because the forks are **byte-identical** to this root's modules (drift
-  check above), the canonical theorem certifies *this* root's exact eigenform object; paper one therefore
-  consumes it by citation + pin and re-proves the state-half locally in `Scratch.CanonicalEigenform` — the
-  same way paper two cites paper one's arrow. The change is **purely additive**: no existing theorem is
-  touched, so the headline arrow/energy footprints are **unchanged** (still `[propext, Classical.choice,
-  Quot.sound]` — verified on `TimeFlow.Flow.coh_orbit_antitone`,
-  `BandFromAxioms.band_coincidence_from_axioms`, `BandFromAxioms.undifferentiated_two_term_from_axioms`).
+- **Consumed by direct import (handoffs XXI/XXII).** The spec-XX namespace collision that once blocked
+  `import Theory.Axioms` here was **dissolved in XXI** — `theory/` was normalized to clean `Theory.*`, so paper
+  one now imports the shared `Theory.*` band layer directly and cites the canonical eigenform. The XX-era local
+  mirror `Scratch.CanonicalEigenform` (a workaround for that collision) was therefore **deleted in XXII**,
+  redundant with `Theory.Axioms.eigenform_of_fixed`. The deletion was footprint-gated: paper one's headline
+  arrow/energy footprints are **unchanged** (still `[propext, Classical.choice, Quot.sound]` — verified on
+  `TimeFlow.Flow.coh_orbit_antitone`, `Theory.BandFromAxioms.band_coincidence_from_axioms`,
+  `Theory.BandFromAxioms.undifferentiated_two_term_from_axioms`).
 
-- **Reversal of the freeze (handoff XX, Part C).** Spec XIII protected a per-paper A3 *divergence* by frozen
-  duplication. That divergence is now **gone** (the readings are one process's consequences), so the freeze
-  shifts from *duplication* to **version-pinning**: this root keeps its byte-identical forks as the pinned
-  copy (the namespace exception above blocks unifying them by import), and pins the canonical layer here.
+- **Reversal of the freeze (handoff XX → XXI).** Spec XIII protected a per-paper A3 *divergence* by frozen
+  duplication. That divergence is **gone** (the readings are one process's consequences), so the freeze shifted
+  from *duplication* to **version-pinning**, and XXI **unified the forks**: the band layer is one canonical
+  `Theory.*` copy that paper one imports. Paper one pins the `theory/` commit here.

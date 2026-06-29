@@ -20,7 +20,7 @@
 
 We present a theory `𝕋`. Its **classifying category** `Cl(𝕋)` is the free
 traced-symmetric-monoidal-with-`ν` category on the data below, quotiented by the
-axioms of [02](../../paper-1/spec/02-axioms.md). A **model** is a structure-preserving functor
+axioms of [02](AXIOMS.md). A **model** is a structure-preserving functor
 `Cl(𝕋) → 𝒟` into some semantic category `𝒟` (Layer 4).
 
 ---

@@ -1,13 +1,13 @@
 # 03.9 — Is the conserved remainder of self-relating energy?
 
-> Paper one's step 5 (see [`paper-one.md`](paper-one.md) and the [spec index](README.md)), closing
-> the open question named in [`03.8-space-energy.md`](03.8-space-energy.md)'s honest scope:
+> Paper one's step 5 (see [`paper-one.md`](../../paper-1/spec/paper-one.md) and the [spec index](../../paper-1/spec/README.md)), closing
+> the open question named in [`P1.15-phase-bearing.md`](../../paper-1/spec/P1.15-phase-bearing.md)'s honest scope:
 > *"whether the seam-protected and rotating-protected bands coincide."* Mechanized in
 > [`Scratch/BandCoincidence.lean`](../../theory/formal/Theory/BandCoincidence.lean) and
 > [`Scratch/BandFromAxioms.lean`](../../theory/formal/Theory/BandFromAxioms.lean), building on
 > [`Scratch/RotatingSpectrum.lean`](../../theory/formal/Theory/RotatingSpectrum.lean) (energy) and
-> [`Scratch/SeamForcing.lean`](../formal/Scratch/SeamForcing.lean) (the seam). Status tags as in
-> [paper one](paper-one.md).
+> [`Scratch/SeamForcing.lean`](../../paper-1/formal/Scratch/SeamForcing.lean) (the seam). Status tags as in
+> [paper one](../../paper-1/spec/paper-one.md).
 
 ---
 
@@ -101,7 +101,7 @@ the submodule level, that `rotatingBand μ` is exactly the entrywise magnitude-c
 - `[reading]` (the standing identifications, same status as "‖μ‖ = 1 = energy" and "flow = time"): that
   the formal block `J` *is* the genuine un-attendable seam of `Relating.self_inclusive_unmodelable`; and
   the headline reading of the bet — **`Align` = "energy is exactly un-attendable feeling."**
-- **The unifier, after the step-two test ([`Scratch/SeamConserved.lean`](../formal/Scratch/SeamConserved.lean)).**
+- **The unifier, after the step-two test ([`Scratch/SeamConserved.lean`](../../paper-1/formal/Scratch/SeamConserved.lean)).**
   What `band_coincidence` relates is the **spectral** conserved band `conservedOffdiag` (defined by
   `‖μ‖ = 1`) to the rotating/energy band — restated through the *single generator* in
   `BandFromAxioms.energyBand_eq_seam_quarterMul` / `energyBand_eq_rotating_quarterMul`. The step-two test
@@ -115,7 +115,7 @@ the submodule level, that `rotatingBand μ` is exactly the entrywise magnitude-c
   - **`= the rotating energy band` — `[open]` at step two, `[proved]` at step three.** Step two's
     conserved edges were *fixed* (`μ = 1`) because the 0/1 attention gate carries no phase
     (`attend_fixes_are_identity`); identifying them with rotating energy then needed a cross-channel
-    `Align`. **Step three ([`Scratch/PhaseBearing.lean`](../formal/Scratch/PhaseBearing.lean)) closes
+    `Align`. **Step three ([`Scratch/PhaseBearing.lean`](../../paper-1/formal/Scratch/PhaseBearing.lean)) closes
     it.** That phaselessness was the gate's *degeneracy* (it holds off-diagonal coherence at `1`), not the
     obstruction's. Read A3 at the strength of its text — `self := Peri(Φ_c)` under a *phase-bearing* `Φ_c`
     — and the obstruction is **phase-blind**: un-attendable ⟹ un-damped (`‖μ‖ = 1`), and under
@@ -131,7 +131,7 @@ the submodule level, that `rotatingBand μ` is exactly the entrywise magnitude-c
 
 **Provenance.** `R / S` — decoherence-free subspaces and spectral splits are standard; the synthesis is
 identifying the *un-attendable* subspace (operational conservation) with the *conserved-charge* subspace
-(dynamical conservation). See [04 — Provenance](04-provenance.md).
+(dynamical conservation). See [04 — Provenance](../../paper-1/spec/04-provenance.md).
 
 ---
 
@@ -143,7 +143,7 @@ identification, **C1** — and disclose C1 as a posit/reading, tagged. The recon
 (`sorry`-free, footprint `[propext, Classical.choice, Quot.sound]`, **no added `H_align`**); what the
 mechanization shows is that *given C1*, the alignment is a near-tautology, so C1 carries the whole weight.
 
-The finding: [`02-axioms.md`](02-axioms.md) A3 formalizes the self as the *strict* fixed point `νΦ_c`
+The finding: [`02-axioms.md`](AXIOMS.md) A3 formalizes the self as the *strict* fixed point `νΦ_c`
 (the `μ = 1`, fixed/known band — `Attention.sustainedField`), but its prose names the self the
 **decoherence-free subalgebra** of `Φ_c`. That algebra is the **peripheral** block
 `Peri(Φ_c) = { X : ‖Φ_c X‖ = ‖X‖ }`, which carries the rotating (energy) band *beside* the fixed one.
@@ -185,7 +185,7 @@ commutative decoherence-free subalgebra (`SpectralDecay` / `PeripheralAlgebra`'s
 
 ---
 
-→ Back to [paper one](paper-one.md) · the energy half this closes over is
-[`03.8-space-energy.md`](03.8-space-energy.md) · the seam it identifies energy with is
-[`03.5-decoherence.md`](03.5-decoherence.md) (the quantitative seam-permanence lift is archived,
+→ Back to [paper one](../../paper-1/spec/paper-one.md) · the energy half this closes over is
+[`P1.15-phase-bearing.md`](../../paper-1/spec/P1.15-phase-bearing.md) · the seam it identifies energy with is
+[`P1.8-decoherence.md`](../../paper-1/spec/P1.8-decoherence.md) (the quantitative seam-permanence lift is archived,
 paper two — [`../archive/03.11-seam-permanence.md`](../../archive/spec/03.11-seam-permanence.md)).

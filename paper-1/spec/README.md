@@ -21,30 +21,32 @@ clean and `sorry`-free; the headline footprints sit at the corpus norm
    with greatest fixed points and a distinguished cartesian fragment (A1's arena).
 2. [`01-signature.md`](../../theory/spec/01-signature.md) — the presented theory `𝕋`: sorts, generators, and the
    relational sort `≈`.
-3. [`02-axioms.md`](02-axioms.md) — the **basis**: axioms **A1–A3** and definition **D1**. A1, A2
-   structural; A3 (recursion constitutes the self) the one load-bearing posit. Paper one takes A1–A3 as
-   the abstract baseline of its energy theorem; A3's gfp *mechanization* lives in the archive (paper two).
+3. [`AXIOMS.md`](../../theory/spec/AXIOMS.md) — the **canonical basis** (now in `theory/spec/`): axioms
+   **A1–A3** and definition **D1**, with **A3 reframed as a process** and the self its *derived* fixed point
+   (handoff XX). Paper one cites these; the per-node map of paper one's own development is
+   [`NODES.md`](../../theory/spec/NODES.md) (the `P1.x` nodes).
 
 **The result** ([`paper-one.md`](paper-one.md)) walks these in order:
 
-4. [`03.1-to-relate-is-to-create.md`](03.1-to-relate-is-to-create.md) — self-relation is the trace
+4. [`P1.1-to-relate-is-to-create.md`](P1.1-to-relate-is-to-create.md) — self-relation is the trace
    `σ = Tr`; relating produces an eigenform (3.1).
-5. [`03.2-lived-identity.md`](03.2-lived-identity.md) — lived identity `≈ := νΘ` and the shared world;
+5. [`P1.5-lived-identity.md`](P1.5-lived-identity.md) — lived identity `≈ := νΘ` and the shared world;
    you are your relating, not a bare carrier (3.2).
-6. [`03.3-knowing-vs-feeling.md`](03.3-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
+6. [`P1.6-knowing-vs-feeling.md`](P1.6-knowing-vs-feeling.md) — knowing is the lossy σ-move `E`, leaving
    the remainder `(1−E)` (3.3). *"Feeling" means exactly this remainder, nothing phenomenal.*
-7. [`03.4-limits-of-knowing.md`](03.4-limits-of-knowing.md) — the Lawvere obstruction: to relate is to
+7. [`P1.10-limits-of-knowing.md`](P1.10-limits-of-knowing.md) — the Lawvere obstruction: to relate is to
    make the other unknowable (3.4).
-8. [`03.5-decoherence.md`](03.5-decoherence.md) — what knowing does to a relation; the **seam** (the
+8. [`P1.8-decoherence.md`](P1.8-decoherence.md) — what knowing does to a relation; the **seam** (the
    self-inclusive block attention cannot reach); the irreversible knower→known arrow (3.5).
-9. [`03.6-time-flow.md`](03.6-time-flow.md) — the arrow graduated into a graded geometric monovariant;
+9. [`P1.13-the-arrow.md`](P1.13-the-arrow.md) — the arrow graduated into a graded geometric monovariant;
    that arrow is time (3.6).
-10. [`03.7-knowing-from-arrow.md`](03.7-knowing-from-arrow.md) — the instance converse: an arrow's limit
+10. [`P1.14-knowing-from-arrow.md`](P1.14-knowing-from-arrow.md) — the instance converse: an arrow's limit
     *is* a knowing (a conditional expectation onto the seam subalgebra) (3.7).
-11. [`03.8-space-energy.md`](03.8-space-energy.md) — energy as the rotating band of the phase channel
+11. [`P1.15-phase-bearing.md`](P1.15-phase-bearing.md) — energy as the rotating band of the phase channel
     (the sustained, never-known remainder) (3.8).
-12. [`03.9-band-coincidence.md`](03.9-band-coincidence.md) — the conserved remainder coincides with the
-    energy band, **derived from A1–A3** (no fourth axiom) (3.9).
+12. [`T.3-band-coincidence.md`](../../theory/spec/T.3-band-coincidence.md) — the conserved remainder coincides
+    with the energy band, **derived from A1–A3** (no fourth axiom). *(Now a `theory/` node, `T.3`, since the
+    band layer is shared by papers one and two.)*
 
 **Provenance.** [`04-provenance.md`](04-provenance.md) — the honest accounting, per kept result:
 rederivation vs synthesis, and the open frontiers in one place.

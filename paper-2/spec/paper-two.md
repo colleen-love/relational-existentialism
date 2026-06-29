@@ -19,7 +19,7 @@
 > invariant and splits Pythagoreanly. All `sorry`-free; footprints `[propext, Classical.choice, Quot.sound]`.
 
 > **The headline rests on:** the **modular reading of A1** (the finite, type I, maximally-traceable arena of
-> [`02-axioms.md`](../../paper-1/spec/02-axioms.md) read at its deep end — the intrinsic dynamics a state
+> [`02-axioms.md`](../../theory/spec/AXIOMS.md) read at its deep end — the intrinsic dynamics a state
 > induces); the **equilibrium / KMS** condition (`ρ = e^{-βH}/Z`); the **alignment** `B1 = eigenbasis(ρ)` —
 > the decoherence/pointer basis is the state's eigenbasis, now **derived** from "the clock-state is the
 > rest-state" (§6), not posited; and the **cited** arrow result of paper one (the seam as the
@@ -118,7 +118,7 @@ So at equilibrium the reversible and dissipative structures share one generator 
 `s = t/β`). The headline upgrades from "located as the unitary and dissipative parts" to **"proved one
 generator"** — under the named alignment `B1 = eigenbasis(ρ)`, whose derivation is the next step.
 
-→ [`Paper2.OneGenerator`](../../theory/formal/Theory/OneGenerator.lean).
+→ [`Paper2.OneGenerator`](../formal/Paper2/OneGenerator.lean).
 
 ## 6. The alignment is forced; presence is defined `[proved, at equilibrium]`
 
@@ -141,7 +141,7 @@ the einselected structure (§4) `= fixed ⊕ rotating` (`conservedEdge_iff_fixed
 So `presence = knowing + energy` is a **theorem**, not a name — paper three's foundational definition, derived
 from the einselection principle rather than posited.
 
-→ [`Paper2.Einselection`](../../theory/formal/Theory/Einselection.lean).
+→ [`Paper2.Einselection`](../formal/Paper2/Einselection.lean).
 
 ---
 

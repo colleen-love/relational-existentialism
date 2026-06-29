@@ -43,25 +43,31 @@ theorems (handoff XX). It is the A-layer plus the canonical `T`-derivations (eig
 ## T — theory theorems (the stable shared layer, `Theory.*`)
 
 In topological order, grouped by sub-argument. **Double-imported** (paper-1 *and* paper-2): T.1–T.3 (the
-band layer) — the mechanical reason they are `T`, not `P1`. T.4–T.6, T.9 are theory-native, imported by
-paper two; T.7–T.8 support `A`.
+band layer) — the mechanical reason they are `T`, not `P1`. T.4 (`ModularFlow`) is **axiom-supporting**
+(the canonical axioms derive the modular self from its `modPow_diagonal`, handoff XXII) and also imported by
+paper two; T.5–T.6 support `A`; T.7 is the generative engine. *(Handoff XXII returned `OneGenerator` and
+`Einselection` to paper two — see P2 — since only paper two imports them.)*
 
 | # | Node | Module | Imports | Headline it carries |
 |---|---|---|---|---|
 | T.1 | energy = the rotating band | `Theory.RotatingSpectrum` | — | the `schur` channel, `genReal` arrow |
 | T.2 | the band lattice; seam = rotating | `Theory.BandCoincidence` | T.1 | `band_coincidence` |
 | T.3 | eigenform `Peri`; band coincidence from axioms | `Theory.BandFromAxioms` | T.2 | **paper one's energy**: `band_coincidence_from_axioms`, `undifferentiated_two_term_from_axioms` |
-| T.4 | modular self-relation (D1's modular form) | `Theory.ModularFlow` | — | `modularFlow`, `modularFlow_maximally_mixed` |
-| T.5 | two faces of one generator | `Theory.OneGenerator` | T.4, T.1 | `combinedFlow_add` |
-| T.6 | einselection; presence | `Theory.Einselection` | T.5, T.3 | **paper two's** `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation` |
-| T.7 | lived-identity coinduction `≈ := νΘ` | `Theory.We` | — | (theory's copy, supporting T.8) |
-| T.8 | A2 priority / no-bare-carrier | `Theory.Priority` | T.7 | `priority_universal` |
-| T.9 | the generative A3 engine | `Theory.MutualCoupling` | T.3 | `engine_ignition`, `orbit_engine2` |
+| T.4 | modular self-relation (D1's modular form); spectral machinery | `Theory.ModularFlow` | — | `modularFlow`, `modularFlow_maximally_mixed`, `modPow_diagonal` |
+| T.5 | lived-identity coinduction `≈ := νΘ` | `Theory.We` | — | (theory's copy, supporting T.6) |
+| T.6 | A2 priority / no-bare-carrier | `Theory.Priority` | T.5 | `priority_universal` |
+| T.7 | the generative A3 engine | `Theory.MutualCoupling` | T.3 | `engine_ignition`, `orbit_engine2` |
 
 ## P1 — paper one's own nodes (`paper-1/`, `Scratch.*` / `RelExist.*`)
 
 Single-importer today, so they stay `P1` (promote the day a second paper's Lean imports them). The seam spine,
 lived identity, the knowing-is-lossy passage, and **the arrow**.
+
+**Narrative (handoff XXII):** each surviving P1 node has **one narrative doc** in
+[`../../paper-1/spec/`](../../paper-1/spec/), named `P1.<n>-<descriptive>.md` to match this table (e.g.
+`P1.13-the-arrow.md`); the consolidated walk is [`paper-one.md`](../../paper-1/spec/paper-one.md). The stale
+`02-axioms.md` was removed — the canonical axioms are [`AXIOMS.md`](AXIOMS.md). Drive any further rename from
+this table so files and DAG cannot drift.
 
 | # | Node | Module | Imports |
 |---|---|---|---|
@@ -88,10 +94,14 @@ unchanged. P1 therefore ends at **P1.15**.
 
 ## P2 — paper two's own nodes (`paper-2/`)
 
-**None.** Paper two is now a **thin layer** (handoff XXI): it imports the modular slice `T.4, T.5, T.6` (+
-the band layer `T.1–T.3`) from `theory/` and proves nothing of its own in Lean. Its headline theorems live at
-their canonical `T` addresses (T.6 `Theory.Einselection.*`, T.5 `Theory.OneGenerator.combinedFlow_add`); the
-manuscript cites them there. Paper one's arrow is a **prose citation**, never imported.
+Paper two imports the band layer + `ModularFlow` (T.1–T.4) from `theory/` and proves its **own** `P2.x`
+(handoff XXII returned these from `theory/`: only paper two imports them, so by the promotion rule they are
+`P2.x`, not `T.x`). Paper one's arrow is a **prose citation**, never imported.
+
+| # | Node | Module | Imports | Headline it carries |
+|---|---|---|---|---|
+| P2.1 | two faces of one generator (equilibrium) | `Paper2.OneGenerator` | T.4, T.1 | `combinedFlow_add` |
+| P2.2 | einselection; presence | `Paper2.Einselection` | P2.1, T.3 | **paper two's headline**: `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation` |
 
 ## P3 — paper three's own nodes (`scratch/`, the living frontier)
 
