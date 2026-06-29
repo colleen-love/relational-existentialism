@@ -30,6 +30,12 @@ name a self, and shows the self **condenses out** as a fixed relation of the co-
   unification (`A3 = σ ⊕ arrow`) is **proved on top of it**, with the boundary surfaced via `#print axioms`
   and a disclosure table. The relational results are *fully mechanized relative to the interface*; the
   `τ`-free core needs none of it.
+- [`spec/08-raising.md`](spec/08-raising.md) — **deriving A3 (gated), and the downstream theorems.** The
+  co-direction **dynamics is derived interface-free** (re-entry through the trace; selves are idempotents), so
+  A3 is **not** re-axiomatized; the modular-group form is **reduced** to a complete-passivity bridge. Sparsity
+  ≡ differentiation (collapsed); the stability dichotomy **collapses into the type III choice** (symmetric
+  selves don't exist) with the repeller form left open. A2 has still not been load-bearing — possibly
+  definitional.
 - [`spec/04-provenance.md`](spec/04-provenance.md) — provenance.
 
 ## The arc

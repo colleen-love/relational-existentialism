@@ -43,6 +43,27 @@ gate**; pass it (honestly, via `Q` = the II₁ factor or otherwise) and 2 unlock
 > papers 2–4. Operator-level steps are **paper-level** (type III modular theory is not in mathlib). Quantity
 > now routes through the **II∞ core**; next: re-ground **Theorem 2's rate** as the core's trace-scaling.
 
+> **Update (handoff I.VII) — the raising dynamics, gated.** Full analysis: [`08-raising.md`](08-raising.md);
+> Lean: [`../formal/Paper1/RaisingDynamics.lean`](../formal/Paper1/RaisingDynamics.lean).
+> - **Theorem 2 (raising / dynamics) — DYNAMICS DERIVED (interface-free); group-form REDUCED, conditional.**
+>   The re-entry process `S ↦ S ⨾ S` (D1) is a non-trivial monotone dynamics with an **idempotent** fixed self
+>   (`reentry_self_exists`, `[propext, Quot.sound]`) — using **D1 + completeness only, no A1/A2.** So A3 does
+>   **not** return to the axiom list. *But* the greatest fixed point is **degenerate** (`gfp = ⊤`), so the
+>   genuine self is **selected by the measure**, not by maximality (→ Theorem 3). The modular-group form is
+>   **reduced** from assumed-KMS to assumed-**complete-passivity** (`coDirectionOfPassive`, via the new cited
+>   interface field `passive_kms` = Pusz–Woronowicz), leaving one flagged paper-level gap (the fixed point is
+>   *completely* passive).
+> - **Theorems 3 ≡ 4 — collapsed, conditional.** Selectivity and differentiation are **one fact** (bounded
+>   capacity ⇒ few, differentiated strong relations); obstructed pending the core measure + arena↔core bridge.
+>   **Collapse test result:** *orthogonality (I.IV) ⇔ selfhood-selection* — the side condition is plausibly the
+>   selectivity criterion, not an input.
+> - **Theorem 5 — collapses into the type III choice (absence form); repeller form open.** Type III has **no
+>   tracial (symmetric) state**, so symmetric selves **don't exist** — "stable selves are asymmetric" holds by
+>   **absence**, not as a dynamical repeller (the stronger, still-open, falsifiable form). Not engineered.
+> - **Theorem 7 (recovery) — conditional; asymmetry half now strongly grounded** by type III.
+> - **Minimal set:** A2 (co-direction) has **still not been load-bearing** in any mechanized proof — open
+>   question whether it is definitional. A1 enters via type III (no symmetric self).
+
 ---
 
 ## 1. Existence — **HOLDS**

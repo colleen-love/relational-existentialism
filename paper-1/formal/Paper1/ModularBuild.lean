@@ -40,6 +40,25 @@ theorem a3_core_is_modular [inst : ModularInterface M] (cd : CoDirection M) :
     cd.core = inst.sigma :=
   inst.kms_unique cd.core cd.core_oneParam cd.core_kms
 
+/-- **Phase 1b — the bridge reduces from KMS to _passivity_ `[proved, relative to the interface]`.** A
+one-parameter core for which the self is **completely passive** yields a `CoDirection` — the KMS claim is
+*derived* (Pusz–Woronowicz, `passive_kms`), not assumed. This **shrinks the relational hypothesis** from
+"the self is KMS for the core" to "the self is a **passive equilibrium** for the core" — which is far closer to
+the *proved* fact that the self is a **fixed point** (`TypeIII.self_isEquilibrium`). The residual gap (that
+the equilibrium fixed point is *completely* passive) is the only relational input left, and it is flagged
+paper-level in `spec/08-raising.md`. -/
+def coDirectionOfPassive [inst : ModularInterface M]
+    (core : ℝ → (M → M)) (hgrp : IsOneParam core) (hpass : inst.CompletelyPassive core) :
+    CoDirection M :=
+  ⟨core, hgrp, inst.passive_kms core hgrp hpass⟩
+
+/-- **The reversible core is `σ`, from passivity alone `[proved, relative to the interface]`.** Chaining the
+1b reduction with KMS-uniqueness: a passive one-parameter co-direction core **is** the modular flow. -/
+theorem a3_core_is_modular_of_passive [inst : ModularInterface M]
+    (core : ℝ → (M → M)) (hgrp : IsOneParam core) (hpass : inst.CompletelyPassive core) :
+    core = inst.sigma :=
+  a3_core_is_modular (coDirectionOfPassive core hgrp hpass)
+
 /-- **Unification — arrow half `[proved, relative to the interface]`.** The irreversible remainder is the
 **trace-scaling** of the core: `τ_N(θ_s n) = e^{−s} τ_N(n)`. A3's raising is the dissipative arrow, read off
 the dual flow's non-conservation of the trace. -/
