@@ -34,6 +34,15 @@ gate**; pass it (honestly, via `Q` = the II₁ factor or otherwise) and 2 unlock
 > full verdict: [`05-trace-seam.md`](05-trace-seam.md). **The gate is _ajar_:** quantitative theorems are now
 > approachable through `dim` (carrying the orthogonality condition) — **attempt Theorem 3 (sparsity) first**.
 
+> **Update (handoff I.V) — the arena moved to type III₁.** `Q` is now the hyperfinite **type III₁ factor**
+> (trace-lessness = the limits-of-knowing; [`06-type-III-modular.md`](06-type-III-modular.md)). The I.IV
+> residual tension **dissolves** (no global trace to conflict with `Tr`). The `τ`-free results (existence,
+> feedback trace, seam) **port unchanged** ([`../formal/Paper1/TypeIII.lean`](../formal/Paper1/TypeIII.lean)).
+> **Central finding:** A3's co-direction = the **modular flow `σ_t`** in its reversible core (forced by **KMS
+> uniqueness** at the equilibrium self), ⊕ the **dissipative arrow** (Takesaki trace-scaling) — unifying with
+> papers 2–4. Operator-level steps are **paper-level** (type III modular theory is not in mathlib). Quantity
+> now routes through the **II∞ core**; next: re-ground **Theorem 2's rate** as the core's trace-scaling.
+
 ---
 
 ## 1. Existence — **HOLDS**

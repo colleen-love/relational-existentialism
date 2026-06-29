@@ -20,6 +20,11 @@ name a self, and shows the self **condenses out** as a fixed relation of the co-
   with `Q`'s factor trace `τ`? Verdict **B (connect), conditionally** — they are not the same structure; they
   bridge through the II₁ dimension function under an orthogonality side condition, with a residual tension
   flagged.
+- [`spec/06-type-III-modular.md`](spec/06-type-III-modular.md) — **the arena moves to type III₁** (the
+  trace-less type that matches the limits-of-knowing). Verdict: **A3's co-direction _is_ the modular flow
+  `σ_t`** in its reversible core (forced by KMS uniqueness at the equilibrium self) ⊕ the dissipative arrow
+  — conditional, paper-level at the operator frontier (type III modular theory is not in mathlib), with the
+  `τ`-free skeleton mechanized and ported.
 - [`spec/04-provenance.md`](spec/04-provenance.md) — provenance.
 
 ## The arc

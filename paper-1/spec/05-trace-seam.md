@@ -145,3 +145,10 @@ through the II₁ dimension function under an orthogonality side condition (**B*
 instance. What remains open — and what could still force the arena to reshape — is whether **one** value-object
 carries both the measure and the composition. The gate is **ajar**: enough to attempt sparsity, not yet enough
 to bank the headline.
+
+> **Resolution (handoff I.V).** The residual tension above **dissolves** when `Q` is moved to a **type III₁
+> factor** ([`06-type-III-modular.md`](06-type-III-modular.md)): a type III factor has **no global trace** at
+> all, so the *measure horn* of the conflict is removed — `Tr` stands alone on the lattice, with no `τ` to
+> reconcile it with. The I.IV obstruction was the **symptom of forcing a global trace where the arena does
+> not admit one**. Quantity is recovered not from a global `τ` but from the **II∞ core** of the Takesaki
+> decomposition; see `06`.
