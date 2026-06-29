@@ -35,7 +35,7 @@ Each derivation either closes (a theorem below) or would be reported as an obstr
 so the collapse is total (handoff XX, outcome 1). The supporting `A1`/`A2`/`D1` normalizations are recorded
 in [`§B`](#) below and in `AXIOMS.md`.
 
-**Namespace.** Distinct (`Theory.Axioms`), so this layer adds *no* name to the `RelExist.*` namespace the
+**Namespace.** Distinct (`Theory.Axioms`), so this layer adds *no* name to the `Theory.*` namespace the
 paper-one closure and its `theory/` forks share — the canonical statements name the existing objects, they
 do not redeclare them.
 -/
@@ -45,8 +45,8 @@ import Theory.Priority
 
 namespace Theory.Axioms
 
-open RelExist.RotatingSpectrum RelExist.BandCoincidence RelExist.BandFromAxioms
-open RelExist.MutualCoupling RelExist.ModularFlow RelExist.OneGenerator
+open Theory.RotatingSpectrum Theory.BandCoincidence Theory.BandFromAxioms
+open Theory.MutualCoupling Theory.ModularFlow Theory.OneGenerator
 open Matrix Filter Topology
 
 /-! ## A3-process — the canonical statement
@@ -241,10 +241,10 @@ the priority claim itself. -/
 for *every* `(obs, step)`: no individuation finer than the lived relating `≈`. The canonical A2.
 (`Priority.priority_universal`.) -/
 theorem A2_priority {X O : Type*} (obs : X → O) (step : X → X → Prop) :
-    ∀ p q : RelExist.We.World obs step,
-      RelExist.We.bisim (RelExist.Priority.obsQ obs step)
-        (RelExist.Priority.stepQ obs step) p q ↔ p = q :=
-  RelExist.Priority.priority_universal obs step
+    ∀ p q : Theory.We.World obs step,
+      Theory.We.bisim (Theory.Priority.obsQ obs step)
+        (Theory.Priority.stepQ obs step) p q ↔ p = q :=
+  Theory.Priority.priority_universal obs step
 
 /-! ### D1 — self-relation = the trace, generalized to the modular flow
 

@@ -62,11 +62,11 @@ relocation paper three's conservation law would need.
 import Theory.OneGenerator
 import Theory.BandFromAxioms
 
-namespace RelExist.Einselection
+namespace Theory.Einselection
 
 open Matrix Complex Filter Topology
-open RelExist.OneGenerator RelExist.ModularFlow RelExist.RotatingSpectrum
-open RelExist.BandCoincidence RelExist.BandFromAxioms
+open Theory.OneGenerator Theory.ModularFlow Theory.RotatingSpectrum
+open Theory.BandCoincidence Theory.BandFromAxioms
 open scoped ComplexConjugate
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
@@ -446,4 +446,4 @@ theorem arrow_is_loss_not_relocation (d : n → ℝ)
       ∧ Tendsto (fun t => transientSq μ (dephaseFlow μ t M)) atTop (𝓝 0) :=
   ⟨fun t => knowing_conserved d hρ μ β t M, transient_tendsto_zero μ M hlive⟩
 
-end RelExist.Einselection
+end Theory.Einselection

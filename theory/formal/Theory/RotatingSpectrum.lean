@@ -66,7 +66,7 @@ import Mathlib.Analysis.SpecificLimits.Normed
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 
-namespace RelExist.RotatingSpectrum
+namespace Theory.RotatingSpectrum
 
 open Matrix Filter Topology
 open scoped ComplexOrder
@@ -481,4 +481,4 @@ lives inside *bona fide* physics, not a merely formal linear map. (This earns *"
 theorem quarterMul_posSemidef : Matrix.PosSemidef (quarterMul : Matrix (Fin 3) (Fin 3) ℂ) := by
   rw [quarterMul_eq_gram]; exact Matrix.posSemidef_conjTranspose_mul_self qB
 
-end RelExist.RotatingSpectrum
+end Theory.RotatingSpectrum

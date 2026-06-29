@@ -45,8 +45,8 @@ import Scratch.Trace
 import Scratch.KnowingFeeling
 import Scratch.TimeFlow
 import Scratch.KnowingFromArrow
-import Scratch.RotatingSpectrum
-import Scratch.BandFromAxioms
+import Theory.RotatingSpectrum
+import Theory.BandFromAxioms
 import Scratch.SeamForcingC
 import Scratch.SeamConserved
 import Scratch.PhaseBearing

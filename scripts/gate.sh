@@ -26,9 +26,10 @@ set -u
 cd "$(dirname "$0")/.." || exit 2
 fail=0
 
-# The canonical axiom layer a paper may import (handoff XX). Exactly `Theory.Axioms`, not any
-# other `Theory.*` fork.
-CANON='(^import Theory\.Axioms\b)'
+# The stable shared theory layer a paper may import (handoff XXI): any `Theory.*` node. The
+# proof-DAG reorg promoted the double-imported nodes (the band layer, etc.) into clean `Theory.*`
+# names, so a paper is now a THIN layer importing the `T.x` it uses + foundation + its own `P*.x`.
+CANON='(^import Theory\.)'
 
 check () { # <root> <allowed-egrep>
   local root="$1" allowed="$2"

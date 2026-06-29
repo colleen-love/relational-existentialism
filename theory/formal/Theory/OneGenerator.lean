@@ -71,10 +71,10 @@ import Theory.ModularFlow
 import Theory.RotatingSpectrum
 import Mathlib.LinearAlgebra.Lagrange
 
-namespace RelExist.OneGenerator
+namespace Theory.OneGenerator
 
 open Matrix Complex
-open RelExist.ModularFlow RelExist.RotatingSpectrum
+open Theory.ModularFlow Theory.RotatingSpectrum
 open scoped ComplexConjugate
 
 /-! ## §0 Spectral-function machinery — a function of a *diagonal* state is diagonal
@@ -499,4 +499,4 @@ noncomputable def oneGenerator (d : n → ℝ)
   -Complex.I • commGen ((1 / β : ℂ) • modularHamiltonian (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ) M
     + dissipatorGen μ M
 
-end RelExist.OneGenerator
+end Theory.OneGenerator

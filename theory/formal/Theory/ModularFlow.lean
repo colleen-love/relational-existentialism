@@ -34,7 +34,7 @@ import Mathlib.LinearAlgebra.Matrix.Spectrum
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.SpecialFunctions.Complex.Log
 
-namespace RelExist.ModularFlow
+namespace Theory.ModularFlow
 
 open Matrix Complex
 open scoped ComplexConjugate
@@ -288,4 +288,4 @@ theorem modular_reversible (ρ : Matrix n n ℂ) (hρ : ρ.IsHermitian) (t : ℝ
     modularFlow ρ hρ (-t) (modularFlow ρ hρ t M) = M := by
   rw [modularFlow_add, neg_add_cancel, modularFlow_zero]
 
-end RelExist.ModularFlow
+end Theory.ModularFlow

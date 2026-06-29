@@ -34,11 +34,11 @@ existence, the generative and modular readings) lives in `Theory.Axioms`; only i
 mirrored here. This module is **purely additive**: it changes no existing theorem, so paper one's headline
 arrow/energy footprints are untouched.
 -/
-import Scratch.BandFromAxioms
+import Theory.BandFromAxioms
 
 namespace RelExist.CanonicalEigenform
 
-open RelExist.RotatingSpectrum RelExist.BandCoincidence RelExist.BandFromAxioms
+open Theory.RotatingSpectrum Theory.BandCoincidence Theory.BandFromAxioms
 open Matrix
 
 variable {A : Type*}

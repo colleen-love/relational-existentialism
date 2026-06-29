@@ -100,9 +100,9 @@ import Theory.BandFromAxioms
 import Mathlib.Algebra.GeomSum
 import Mathlib.Analysis.SpecificLimits.Basic
 
-namespace RelExist.MutualCoupling
+namespace Theory.MutualCoupling
 
-open RelExist.RotatingSpectrum RelExist.BandCoincidence RelExist.BandFromAxioms
+open Theory.RotatingSpectrum Theory.BandCoincidence Theory.BandFromAxioms
 open Matrix Filter Topology
 open scoped BigOperators
 
@@ -668,4 +668,4 @@ theorem engine_spend_down {x r : ℕ → ℝ} (E : Engine x r)
     refine squeeze_zero (fun n => ?_) (fun n => (inv n).2) hb
     exact (engine_bounded E hx0nn hx1 hr0nn hr1 n).1
 
-end RelExist.MutualCoupling
+end Theory.MutualCoupling
