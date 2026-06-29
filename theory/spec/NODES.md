@@ -80,12 +80,11 @@ lived identity, the knowing-is-lossy passage, and **the arrow**.
 | P1.13 | **the arrow** = time (3.8) | `Scratch.TimeFlow` | P1.11 | **paper one's arrow**: `coh_orbit_antitone` |
 | P1.14 | the instance converse (3.10) | `Scratch.KnowingFromArrow` | P1.13, P1.12 |
 | P1.15 | A3 at the strength of its text (3.9) | `Scratch.PhaseBearing` | T.3, P1.12 |
-| P1.16 | eigenform as a process fixed point | `Scratch.CanonicalEigenform` | T.3 |
 
-*Note (P1.16).* `CanonicalEigenform` was the spec-XX collision workaround (paper one could not `import` the
-canonical eigenform). Phase 2 dissolved the collision — paper one now imports `Theory.*` cleanly — so P1.16
-is **redundant** with `Theory.Axioms.eigenform_of_fixed` and is a candidate for deletion (paper one importing
-`Theory.Axioms` directly). Kept this phase to preserve the green+footprint baseline; flagged for prose/Phase 4.
+*Note (former P1.16).* `Scratch.CanonicalEigenform` (the spec-XX collision workaround) was **deleted in
+handoff XXII** — XXI dissolved the collision, making it redundant with `Theory.Axioms.eigenform_of_fixed`,
+which paper one now cites directly. The deletion was footprint-gated: paper one's headline footprints are
+unchanged. P1 therefore ends at **P1.15**.
 
 ## P2 — paper two's own nodes (`paper-2/`)
 
