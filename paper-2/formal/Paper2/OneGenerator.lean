@@ -69,120 +69,24 @@ out-of-equilibrium identification named as the frontier it remains.
 -/
 import Theory.ModularFlow
 import Theory.RotatingSpectrum
-import Mathlib.LinearAlgebra.Lagrange
 
-namespace Theory.OneGenerator
+namespace Paper2.OneGenerator
 
 open Matrix Complex
 open Theory.ModularFlow Theory.RotatingSpectrum
 open scoped ComplexConjugate
 
-/-! ## §0 Spectral-function machinery — a function of a *diagonal* state is diagonal
+/-! ## §0 Spectral-function machinery — moved to `ModularFlow` (handoff XXII)
 
-The anti-tautology bridge of Part C needs the genuine modular operator `modPow` (from `ModularFlow`, built
-out of `ρ`'s eigendata) to be *computable* when `ρ` is diagonal: `ρ^{is} = diag(dᵢ^{is})`. We get there by a
-general fact — a spectral function `U·diag(g∘λ)·Uᴴ` of a diagonal Hermitian matrix is `diag(g∘d)` — proved
-via polynomial interpolation (the function sees only the eigenvalues, which for a diagonal matrix *are* its
-diagonal entries, with no eigenvector ambiguity). These are general matrix utilities. -/
+The "a function of a diagonal state is diagonal" utilities (`aeval_diagonal`, `conjAlgHom`, `aeval_conj`,
+`specFun_diagonal`, `modPow_diagonal`, `modularHamiltonian_diagonal`) are **general modular-flow structure**,
+not part of paper two's equilibrium assembly, so handoff XXII relocated them to
+[`Theory.ModularFlow`](ModularFlow.lean) — where the canonical axioms use `modPow_diagonal` to derive the
+modular reading of the self *without* importing this (paper-two) module. They are in scope below via
+`open Theory.ModularFlow`. -/
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- `aeval` of a diagonal matrix is the diagonal of the pointwise polynomial evaluation. -/
-theorem aeval_diagonal (p : Polynomial ℂ) (v : n → ℂ) :
-    Polynomial.aeval (diagonal v) p = diagonal (fun i => p.eval (v i)) := by
-  induction p using Polynomial.induction_on with
-  | h_C a =>
-      rw [Polynomial.aeval_C, Algebra.algebraMap_eq_smul_one]
-      ext i j
-      by_cases h : i = j <;>
-        simp [Matrix.smul_apply, Matrix.one_apply, diagonal_apply, h, Polynomial.eval_C]
-  | h_add p q hp hq => simp [hp, hq, ← diagonal_add]
-  | h_monomial k a _ =>
-      rw [_root_.map_mul, Polynomial.aeval_C, _root_.map_pow, Polynomial.aeval_X, diagonal_pow,
-        Algebra.algebraMap_eq_smul_one, smul_mul_assoc, one_mul]
-      ext i j
-      by_cases h : i = j <;>
-        simp [Matrix.smul_apply, diagonal_apply, h, Polynomial.eval_mul, Polynomial.eval_C,
-          Polynomial.eval_pow, Polynomial.eval_X, Pi.pow_apply]
-
-/-- Conjugation `M ↦ U·M·Uᴴ` by a unitary `U` as an algebra homomorphism. -/
-noncomputable def conjAlgHom (U : Matrix n n ℂ) (hU : star U * U = 1) (hU' : U * star U = 1) :
-    Matrix n n ℂ →ₐ[ℂ] Matrix n n ℂ where
-  toFun M := U * M * star U
-  map_one' := by show U * 1 * star U = 1; rw [mul_one, hU']
-  map_mul' x y := by
-    show U * (x * y) * star U = U * x * star U * (U * y * star U)
-    rw [show U * x * star U * (U * y * star U) = U * x * (star U * U) * y * star U from by
-      noncomm_ring, hU]
-    noncomm_ring
-  map_zero' := by show U * 0 * star U = 0; simp
-  map_add' x y := by show U * (x + y) * star U = _; rw [mul_add, add_mul]
-  commutes' r := by
-    show U * (algebraMap ℂ (Matrix n n ℂ) r) * star U = algebraMap ℂ (Matrix n n ℂ) r
-    rw [Algebra.algebraMap_eq_smul_one, mul_smul_comm, smul_mul_assoc, mul_one, hU']
-
-/-- `aeval` commutes with unitary conjugation. -/
-theorem aeval_conj (p : Polynomial ℂ) (U D : Matrix n n ℂ) (hU : star U * U = 1)
-    (hU' : U * star U = 1) :
-    Polynomial.aeval (U * D * star U) p = U * Polynomial.aeval D p * star U :=
-  Polynomial.aeval_algHom_apply (conjAlgHom U hU hU') D p
-
-/-- **A spectral function of a diagonal Hermitian matrix is diagonal.** For `ρ = diag(d)`, the spectral
-function `U·diag(g∘eigenvalues)·Uᴴ` equals `diag(g∘d)` — the function sees only the spectrum, which for a
-diagonal matrix *is* the diagonal, regardless of the eigenvector unitary's permutation freedom. (Proof: a
-complex polynomial `p` interpolating `g` on the finite eigenvalue set turns the conjugation into
-`aeval`, which commutes with both `diagonal` and unitary conjugation.) -/
-theorem specFun_diagonal (d : n → ℝ) (g : ℝ → ℂ)
-    (hD : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) :
-    (hD.eigenvectorUnitary : Matrix n n ℂ) * diagonal (g ∘ hD.eigenvalues)
-      * star (hD.eigenvectorUnitary : Matrix n n ℂ) = diagonal (g ∘ d) := by
-  set U : Matrix n n ℂ := (hD.eigenvectorUnitary : Matrix n n ℂ) with hU
-  have hUU : star U * U = 1 := unitary.coe_star_mul_self _
-  have hUU' : U * star U = 1 := unitary.coe_mul_star_self _
-  set s : Finset ℝ := (Finset.univ.image d) ∪ (Finset.univ.image hD.eigenvalues) with hs
-  have hinj : Set.InjOn (fun r : ℝ => (r : ℂ)) ↑s :=
-    fun x _ y _ h => Complex.ofReal_injective h
-  set p : Polynomial ℂ := Lagrange.interpolate s (fun r : ℝ => (r : ℂ)) g with hp
-  have hpd : ∀ i, p.eval ((d i : ℂ)) = g (d i) := fun i =>
-    Lagrange.eval_interpolate_at_node g hinj
-      (Finset.mem_union_left _ (Finset.mem_image_of_mem d (Finset.mem_univ i)))
-  have hpe : ∀ k, p.eval ((hD.eigenvalues k : ℂ)) = g (hD.eigenvalues k) := fun k =>
-    Lagrange.eval_interpolate_at_node g hinj
-      (Finset.mem_union_right _ (Finset.mem_image_of_mem _ (Finset.mem_univ k)))
-  have e1 : diagonal (g ∘ d) = Polynomial.aeval (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) p := by
-    rw [aeval_diagonal]
-    exact congrArg diagonal (funext fun i => (hpd i).symm)
-  have hA2 : Polynomial.aeval (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) p
-      = Polynomial.aeval (U * diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ hD.eigenvalues) * star U) p := by
-    rw [hU, ← hD.spectral_theorem]
-  have e2 : Polynomial.aeval (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) p
-      = U * diagonal (g ∘ hD.eigenvalues) * star U := by
-    rw [hA2, aeval_conj p U _ hUU hUU', aeval_diagonal]
-    exact congrArg (fun D => U * D * star U) (congrArg diagonal (funext fun k => hpe k))
-  rw [e1, e2]
-
-/-- **The genuine modular operator of a diagonal state is diagonal** — `ρ^{is} = diag(dᵢ^{is})` for
-`ρ = diag(d)`. This is the anti-tautology anchor of Part C: the `modPow` here is *literally* `ModularFlow`'s
-operator built from `ρ`'s spectral data, not a fresh diagonal definition chosen to commute. -/
-theorem modPow_diagonal (d : n → ℝ)
-    (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) (s : ℝ) :
-    modPow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s
-      = diagonal (fun i => Complex.exp (Complex.I * s * Real.log (d i))) := by
-  rw [modPow]
-  have hmd : modDiag (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s
-      = (fun x : ℝ => Complex.exp (Complex.I * s * Real.log x)) ∘ hρ.eigenvalues := by
-    funext i; rfl
-  rw [hmd]
-  exact specFun_diagonal d (fun x : ℝ => Complex.exp (Complex.I * s * Real.log x)) hρ
-
-/-- **The modular Hamiltonian of a diagonal state is diagonal** — `K = -log ρ = diag(-log dᵢ)` for
-`ρ = diag(d)`. The energy-basis is the state-basis, with no eigenvector ambiguity. -/
-theorem modularHamiltonian_diagonal (d : n → ℝ)
-    (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) :
-    modularHamiltonian (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ
-      = diagonal (fun i => ((- Real.log (d i) : ℝ) : ℂ)) := by
-  rw [modularHamiltonian]
-  exact specFun_diagonal d (fun x : ℝ => ((- Real.log x : ℝ) : ℂ)) hρ
 
 /-! ## §1 Schur multipliers compose and commute — the algebraic heart of Part C
 
@@ -499,4 +403,4 @@ noncomputable def oneGenerator (d : n → ℝ)
   -Complex.I • commGen ((1 / β : ℂ) • modularHamiltonian (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ) M
     + dissipatorGen μ M
 
-end Theory.OneGenerator
+end Paper2.OneGenerator

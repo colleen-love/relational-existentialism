@@ -4,7 +4,7 @@
 Two open questions, resolved here as one. The **einselection residue** (does the framework *force* the
 decoherence basis B1 to be the modular eigenbasis, or is it assumed?) and the **presence definition** (is
 there a quantity with `presence = knowing + energy` as a *theorem*, not a name?) are the same question — the
-knowing/energy split is only well-defined when the two bases coincide. Building on `Theory.OneGenerator` (the
+knowing/energy split is only well-defined when the two bases coincide. Building on `Paper2.OneGenerator` (the
 equilibrium one generator) and the band machinery (`BandFromAxioms`). Finite-dimensional; paper one untouched.
 
 ## What is built
@@ -59,13 +59,13 @@ rest-state," reading the conserved band as the einselected structure, and *check
 is presence — finding it conserved and split into knowing/energy, but the arrow a pure loss, not the
 relocation paper three's conservation law would need.
 -/
-import Theory.OneGenerator
+import Paper2.OneGenerator
 import Theory.BandFromAxioms
 
-namespace Theory.Einselection
+namespace Paper2.Einselection
 
 open Matrix Complex Filter Topology
-open Theory.OneGenerator Theory.ModularFlow Theory.RotatingSpectrum
+open Paper2.OneGenerator Theory.ModularFlow Theory.RotatingSpectrum
 open Theory.BandCoincidence Theory.BandFromAxioms
 open scoped ComplexConjugate
 
@@ -125,7 +125,7 @@ theorem isHermitian_diag_real (ρ : Matrix n n ℂ) (hHerm : ρ.IsHermitian) (i 
 omit [Fintype n] in
 /-- **B1 = eigenbasis(ρ), derived.** For a Hermitian stationary state `ρ`, stationarity under the arrow
 forces `ρ = diag(d)` with `dᵢ = (ρ i i).re` real — precisely the `diagonal (RCLike.ofReal ∘ d)` shape that
-`Theory.OneGenerator` (spec XV) *assumed*. So spec XV's alignment is a **consequence** of "one generator with
+`Paper2.OneGenerator` (spec XV) *assumed*. So spec XV's alignment is a **consequence** of "one generator with
 one rest-state," not a posit — in the non-degenerate equilibrium case. **Boundaries:** for *degenerate* `ρ`
 the eigenbasis within a degenerate block is under-determined (diagonality still holds, so the commutation
 result stands; the unique knowing/energy frame does not); *out of equilibrium* there is no single stationary
@@ -446,4 +446,4 @@ theorem arrow_is_loss_not_relocation (d : n → ℝ)
       ∧ Tendsto (fun t => transientSq μ (dephaseFlow μ t M)) atTop (𝓝 0) :=
   ⟨fun t => knowing_conserved d hρ μ β t M, transient_tendsto_zero μ M hlive⟩
 
-end Theory.Einselection
+end Paper2.Einselection

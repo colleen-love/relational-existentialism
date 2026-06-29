@@ -100,10 +100,10 @@ manuscript cites them there. Paper one's arrow is a **prose citation**, never im
 |---|---|---|---|
 | P3.1 | decoherence conserves coherence (it relocates it) | `scratch/formal/Conservation.lean` | **frontier seed**, not gated |
 
-*Coupling to resolve (P3.1).* `Conservation` currently *imports* paper one's `Scratch.Decoherence` (P1.8).
-Under cite-vs-import a cross-paper *result* must be a prose citation; wiring paper three into the gate means
-either citing P1.8 in prose or promoting the needed lemma to `theory/` once a genuine second importer makes
-it load-bearing.
+*Recorded hoist-item (P3.1), not a violation.* `Conservation` *imports* paper one's `Scratch.Decoherence`
+(P1.8). Because `scratch/` is a **free workbench** (XXII), this is **fine now** — the gate exempts scratch and
+enforces cite-don't-import only at the **promotion event** (when scratch becomes paper three). At promotion,
+resolve it by citing P1.8 in prose or hoisting the needed lemma to `theory/`.
 
 ---
 

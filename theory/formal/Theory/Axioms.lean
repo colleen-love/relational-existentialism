@@ -40,13 +40,13 @@ theory's namespaces off the old `RelExist.*`). The canonical statements *name* t
 objects — they do not redeclare them — and papers import this layer with clean names and no collision.
 -/
 import Theory.MutualCoupling
-import Theory.OneGenerator
+import Theory.ModularFlow
 import Theory.Priority
 
 namespace Theory.Axioms
 
 open Theory.RotatingSpectrum Theory.BandCoincidence Theory.BandFromAxioms
-open Theory.MutualCoupling Theory.ModularFlow Theory.OneGenerator
+open Theory.MutualCoupling Theory.ModularFlow
 open Matrix Filter Topology
 
 /-! ## A3-process — the canonical statement
@@ -152,15 +152,38 @@ theorem generative_bounded {cr cs : ℝ} {x y r s : ℕ → ℝ} (E : Engine2 cr
 
 /-! ## Part A — the phase-bearing / modular self (paper two) as the same fixed point under the modular flow
 
-The modular flow of a diagonal state `ρ = diag(d)` is, in the preferred basis, a Schur multiplier with the
-modulus-one symbol `modularMul d s` (`OneGenerator.modularFlow_diagonal_eq_schur`). Two consequences make
-the modular self the *same* self read under the modular flow: it **maps the conserved band into itself**
-(the self is modular-flow-invariant) and **sustains** every coherence edge-for-edge (the rotating sub-band
-carries the modular energies as phases); and it **commutes** with the co-direction channel `Φ_c = schur μ`,
-so it is a symmetry of the A3 process. -/
+**Re-grounded on `Theory.ModularFlow` alone (handoff XXII)** — never on paper two's one-generator assembly
+(`OneGenerator`). By the spectral structure `ModularFlow.modPow_diagonal`, the modular flow of a diagonal
+state `ρ = diag(d)` is conjugation by the diagonal phase `diag(e^{i s log dᵢ})`, hence a Schur multiplier with
+the **modulus-one** symbol `modularMul d s` (`modularFlow_eq_schur`, proved here from `modPow_diagonal`). Two
+consequences make the modular self the *same* self read under the modular flow: it **maps the conserved band
+into itself** and **sustains** every coherence edge-for-edge (the rotating sub-band carrying the modular
+energies as phases); and it **commutes** with the co-direction channel `Φ_c = schur μ`, a symmetry of the A3
+process. -/
 
 section Modular
 variable {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- The modular-flow Schur symbol of a diagonal state: `(dᵢ/dⱼ)^{is} = exp(i·s·(log dᵢ − log dⱼ))`. -/
+noncomputable def modularMul (d : n → ℝ) (s : ℝ) (i j : n) : ℂ :=
+  Complex.exp (Complex.I * s * ((Real.log (d i) : ℂ) - (Real.log (d j) : ℂ)))
+
+/-- **The modular flow of a diagonal state is a Schur multiplier — from `modPow_diagonal` alone.** For
+`ρ = diag(d)`, `σ_s(M)ᵢⱼ = (dᵢ/dⱼ)^{is} · Mᵢⱼ`, derived from `ModularFlow.modPow_diagonal` (the genuine
+modular operator of a diagonal state is diagonal) — no `OneGenerator`, no equilibrium assembly. -/
+theorem modularFlow_eq_schur (d : n → ℝ)
+    (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) (s : ℝ) (M : Matrix n n ℂ) :
+    modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s M = schur (modularMul d s) M := by
+  rw [modularFlow, modPow_diagonal, modPow_diagonal]
+  ext i j
+  rw [Matrix.mul_assoc, Matrix.diagonal_mul, Matrix.mul_diagonal, schur_apply, modularMul]
+  rw [show Complex.exp (Complex.I * (s : ℂ) * (Real.log (d i) : ℂ))
+        * (M i j * Complex.exp (Complex.I * ((-s : ℝ) : ℂ) * (Real.log (d j) : ℂ)))
+        = (Complex.exp (Complex.I * (s : ℂ) * (Real.log (d i) : ℂ))
+            * Complex.exp (Complex.I * ((-s : ℝ) : ℂ) * (Real.log (d j) : ℂ))) * M i j from by ring,
+    ← Complex.exp_add]
+  congr 2
+  push_cast; ring
 
 omit [Fintype n] [DecidableEq n] in
 /-- **The modular symbol is a phase** — `‖modularMul d s i j‖ = 1`. The modular flow neither amplifies nor
@@ -171,6 +194,12 @@ theorem norm_modularMul (d : n → ℝ) (s : ℝ) (i j : n) : ‖modularMul d s 
     simp [Complex.mul_re, Complex.mul_im]
   rw [hre, Real.exp_zero]
 
+omit [Fintype n] [DecidableEq n] in
+/-- **Schur multipliers commute** — the entrywise multipliers of a common basis commute. -/
+theorem schur_comm (a b : n → n → ℂ) (M : Matrix n n ℂ) :
+    schur a (schur b M) = schur b (schur a M) := by
+  ext i j; simp only [schur_apply]; ring
+
 /-- **The modular flow maps the self into itself.** For a diagonal state, the modular flow `σ_s` carries the
 conserved band `Peri(Φ_c)` to itself: it multiplies each coherence by the nonzero phase `modularMul d s`, so
 it cannot move a coherence onto a transient edge. The modular self is the *same* self — modular-flow
@@ -179,7 +208,7 @@ theorem modular_preserves_self (d : n → ℝ)
     (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) (s : ℝ) (μ : n → n → ℂ)
     {M : Matrix n n ℂ} (hM : M ∈ conservedBand μ) :
     modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s M ∈ conservedBand μ := by
-  rw [modularFlow_diagonal_eq_schur]
+  rw [modularFlow_eq_schur]
   intro i j hP
   rw [schur_apply, hM i j hP, mul_zero]
 
@@ -191,19 +220,19 @@ self the co-direction process fixes. -/
 theorem modular_sustains_self (d : n → ℝ)
     (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) (s : ℝ) (M : Matrix n n ℂ) (i j : n) :
     ‖modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s M i j‖ = ‖M i j‖ := by
-  rw [modularFlow_diagonal_eq_schur, schur_apply, norm_mul, norm_modularMul, one_mul]
+  rw [modularFlow_eq_schur, schur_apply, norm_mul, norm_modularMul, one_mul]
 
 /-- **The modular flow is a symmetry of the A3 process.** For a diagonal state, `σ_s` commutes with the
-co-direction channel `Φ_c = schur μ`: `σ_s ∘ schur μ = schur μ ∘ σ_s`. So the modular flow and the
-dissipative co-direction are two faces of one generator (handoff XV), and the modular self is the *same*
-fixed point, read under the modular flow rather than the dissipative one. (`OneGenerator`'s
-`modular_dephase_commute`.) -/
+co-direction channel `Φ_c = schur μ`: `σ_s ∘ schur μ = schur μ ∘ σ_s` (both are Schur multipliers in the
+preferred basis). So the modular flow and the dissipative co-direction are two faces of one generator
+(handoff XV), and the modular self is the *same* fixed point, read under the modular flow rather than the
+dissipative one. -/
 theorem modular_is_symmetry (d : n → ℝ)
     (hρ : (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)).IsHermitian) (s : ℝ) (μ : n → n → ℂ)
     (M : Matrix n n ℂ) :
     modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s (schur μ M)
-      = schur μ (modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s M) :=
-  modular_dephase_commute d hρ s μ M
+      = schur μ (modularFlow (diagonal ((RCLike.ofReal : ℝ → ℂ) ∘ d)) hρ s M) := by
+  rw [modularFlow_eq_schur, modularFlow_eq_schur, schur_comm]
 
 end Modular
 

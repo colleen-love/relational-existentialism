@@ -1,23 +1,22 @@
 /-
-# `paper-2/` — the modular self-relation paper (thin layer, handoff XXI)
+# `paper-2/` — the modular self-relation paper (handoff XXII)
 
-Paper two is now a **thin version-pinned layer**: it **imports** the modular slice from the stable
-`theory/` (clean `Theory.*` names) rather than forking it. The proof-DAG reorg (handoff XXI) un-forked the
-six byte-identical `Paper2.*` copies — they were confirmed identical to `theory/`'s, so unifying them shifts
-no meaning — and paper two reads off the canonical `T.x` nodes:
+Paper two **imports** the shared `T.x` it uses from the stable `theory/` and proves its **own** `P2.x`:
 
-`Theory.{ModularFlow, RotatingSpectrum, BandCoincidence, BandFromAxioms, OneGenerator, Einselection}` — the
-modular reading of A1, the conserved band, the equilibrium one generator, and the einselection principle +
-presence. Paper two's headline theorems (`presence_conserved`, `pythagorean`,
-`arrow_is_loss_not_relocation`, `combinedFlow_add`, `stationary_eq_diagonal_real`) now live at their
-canonical `Theory.*` addresses; the manuscript cites them there.
+- **Imported (`T.x`, from `theory/`):** `Theory.ModularFlow` (the modular reading of A1) and the band layer
+  `Theory.{RotatingSpectrum, BandCoincidence, BandFromAxioms}` (genuinely double-imported with paper one).
+- **Its own (`P2.x`):** `Paper2.OneGenerator` = **P2.1** (the equilibrium one-generator capstone,
+  `combinedFlow_add`) and `Paper2.Einselection` = **P2.2** (einselection + presence — paper two's headline:
+  `presence_conserved`, `pythagorean`, `arrow_is_loss_not_relocation`). Handoff XXII returned these from
+  `theory/` to paper two: only paper two imports them, so by the promotion rule (`T.x` iff ≥2 papers import)
+  they are `P2.x`. They import the band/`ModularFlow` from `theory/`.
 
-Paper one's seam→arrow result is **cited in prose** in the manuscript, never imported. The pinned `theory/`
+Paper one's seam→arrow result is a **prose citation** in the manuscript, never imported. The pinned `theory/`
 commit is recorded in [`../spec/AXIOM-PROVENANCE.md`](../spec/AXIOM-PROVENANCE.md).
 -/
 import Theory.ModularFlow
 import Theory.RotatingSpectrum
 import Theory.BandCoincidence
 import Theory.BandFromAxioms
-import Theory.OneGenerator
-import Theory.Einselection
+import Paper2.OneGenerator
+import Paper2.Einselection

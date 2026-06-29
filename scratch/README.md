@@ -6,6 +6,8 @@ The living frontier (handoff XXI: `theory/` became stable, so the *living* work 
 result is paper-bound and frozen, it moves to a paper root.
 
 - **Paper three seed:** [`formal/Conservation.lean`](formal/Conservation.lean) — *decoherence conserves
-  coherence; it only relocates it into what you traced out.* Not yet gated. **Coupling to resolve:** it
-  currently *imports* paper one's `Scratch.Decoherence`; under cite-vs-import that must become a prose
-  citation (or the needed lemma promotes to `theory/`) before paper three joins the gated build.
+  coherence; it only relocates it into what you traced out.* Not yet gated. **Recorded hoist-item (not a
+  violation):** because `scratch/` is a free workbench (XXII), its import of paper one's `Scratch.Decoherence`
+  is **fine now**. It resolves at the **promotion event** — when this becomes paper three — by either citing
+  paper one's decoherence in prose or hoisting the needed lemma to `theory/`. The gate enforces cite-don't-
+  import *only at promotion*, not on the workbench.
