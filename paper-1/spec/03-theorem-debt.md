@@ -24,6 +24,16 @@ missing structure: a **trace / measure on `Q`**. The abstract arena gives the *o
 raises, how many relations clear a threshold). So the real shape of the debt is: **the trace seam is the
 gate**; pass it (honestly, via `Q` = the II₁ factor or otherwise) and 2 unlocks 3, 4, 5, 7 in turn.
 
+> **Update (handoff I.IV) — the trace seam settled to _B (connect), conditionally_.** The categorical
+> feedback trace `Tr` D1 needs is **not** the factor trace `τ` (different types: `Tr` is relation-valued and
+> contracts by **join**, `τ`-free; `τ` is number-valued and contracts by **sum**). They **connect** through
+> the II₁ **dimension function** `dim = τ|_proj`, which turns *orthogonal* joins into sums — an **equality
+> only under an orthogonality side condition** (submodular otherwise). A **residual tension** is flagged (the
+> measure is natural on the projection lattice, the composition wants a quantale — possibly *not the same
+> object*), which could still force **C** downstream. Mechanized: [`../formal/Paper1/TraceSeam.lean`](../formal/Paper1/TraceSeam.lean);
+> full verdict: [`05-trace-seam.md`](05-trace-seam.md). **The gate is _ajar_:** quantitative theorems are now
+> approachable through `dim` (carrying the orthogonality condition) — **attempt Theorem 3 (sparsity) first**.
+
 ---
 
 ## 1. Existence — **HOLDS**

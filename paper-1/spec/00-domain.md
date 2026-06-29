@@ -55,7 +55,10 @@ They are confined to paper one (the archived downstream papers do not depend on 
 
 1. **The trace in the quantaloid.** Does the arena carry the **traced / feedback** structure D1 needs
    *natively*, or does it need an added condition, or does it **fight** the quantaloid structure? If it
-   fights, the arena itself reshapes — this is the **highest-priority** seam.
+   fights, the arena itself reshapes — this is the **highest-priority** seam. *(Settled to **B / conditional**
+   in [`05-trace-seam.md`](05-trace-seam.md): the feedback trace `Tr` is real and `τ`-free; it connects to the
+   factor trace `τ` via the dimension function under an orthogonality side condition — with a residual tension
+   that ties into seam 2.)*
 2. **Order vs. operator.** Does the relational/order structure (joins, fixed points) genuinely **match** the
    operator structure of `Q` (the II₁ factor's trace, modular flow, comparison of projections)? The two could
    come apart.

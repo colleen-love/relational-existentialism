@@ -18,3 +18,4 @@ import Paper1.Arena
 import Paper1.Existence
 import Paper1.Seam
 import Paper1.Frontier
+import Paper1.TraceSeam

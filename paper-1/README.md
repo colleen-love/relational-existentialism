@@ -16,6 +16,10 @@ name a self, and shows the self **condenses out** as a fixed relation of the co-
   definition** (D1 self-relation = trace); **A3 / generativity is demoted to a theorem to derive**.
 - [`spec/03-theorem-debt.md`](spec/03-theorem-debt.md) — the exploration ledger: each theorem's status
   (**holds / obstructed / collapsed**) and the axioms it actually invoked.
+- [`spec/05-trace-seam.md`](spec/05-trace-seam.md) — **the gate**: does D1's feedback trace `Tr` coincide
+  with `Q`'s factor trace `τ`? Verdict **B (connect), conditionally** — they are not the same structure; they
+  bridge through the II₁ dimension function under an orthogonality side condition, with a residual tension
+  flagged.
 - [`spec/04-provenance.md`](spec/04-provenance.md) — provenance.
 
 ## The arc
