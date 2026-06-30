@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Closure gate — reset to paper-1 only (handoff I.II, the arena change).
+# Closure gate — reset to scratch only (handoff I.II, the arena change).
 #
 # The project moved to a new foundation (a quantaloid / allegory with relations as the primitive arrow). The
-# prior edifice (paper-2/paper-3/scratch/foundation/theory) is archived under `archive/archived/` as
-# structural reference; archived code is **not** gated. Only `paper-1/` is live, and while it is a skeleton
+# prior edifice (paper-2/paper-3/scratch/foundation/theory) is archived under `archive/traceable-smt/` as
+# structural reference; archived code is **not** gated. Only `scratch/` is live, and while it is a skeleton
 # the check is trivial: its (empty) `Paper1` root imports nothing outside itself. The cross-root closure
 # rules will grow back here with the new arena (spec II.1+).
 set -u
@@ -22,10 +22,10 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# paper-1 is the new relational skeleton: it may import only its own `Paper1.*` root (+ mathlib).
-check paper-1 "^import Paper1\."
+# scratch is the new relational skeleton: it may import only its own `Paper1.*` root (+ mathlib).
+check scratch "^import Paper1\."
 
 # archive/ — NOT gated (structural reference, not built).
-echo "EXEMPT archive/archived/ — prior edifice kept as structural reference, not built or gated"
+echo "EXEMPT archive/traceable-smt/ — prior edifice kept as structural reference, not built or gated"
 
 exit $fail

@@ -47,5 +47,5 @@ for.
 ## Prior representation
 
 The traced-SMC edifice is archived as structural reference:
-[`../../archive/archived/INDEX.md`](../../archive/archived/INDEX.md). Shapes were mined (the seam); no
+[`../../archive/traceable-smt/INDEX.md`](../../archive/traceable-smt/INDEX.md). Shapes were mined (the seam); no
 old-arena proof was imported as new-arena truth.
