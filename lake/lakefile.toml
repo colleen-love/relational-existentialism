@@ -5,15 +5,15 @@ defaultTargets = ["Paper1"]
 # The project moved to a new foundation (a quantaloid / allegory with relations
 # as the primitive arrow). The prior edifice — the traced-SMC papers, the theory
 # and foundation layers, the conservation/sparsity frontier — is archived under
-# `archive/archived/` as structural reference and is **not** built or gated. Only
-# `paper-1/` is live, as a buildable skeleton; spec II.1 grows it (and the build
+# `archive/traceable-smt/` as structural reference and is **not** built or gated. Only
+# `scratch/` is live, as a buildable skeleton; spec II.1 grows it (and the build
 # targets) back on the new arena.
 
-# `paper-1/` — *a self arises from the axioms*, rebuilt on the new relational
+# `scratch/` — *a self arises from the axioms*, rebuilt on the new relational
 # arena. A skeleton for now: an empty `Paper1` root (no theorems yet).
 [[lean_lib]]
 name = "Paper1"
-srcDir = "../paper-1/formal"
+srcDir = "../scratch/formal"
 roots = ["Paper1"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place

@@ -6,7 +6,7 @@
 > kept *navigable*. This index maps **what was proved and where**, so a future reader can find a result in one
 > move and port its **shape** into the new arena.
 >
-> **Two layers, kept distinct.** This directory (`archive/archived/`) holds the edifice we *just* outgrew
+> **Two layers, kept distinct.** This directory (`archive/traceable-smt/`) holds the edifice we *just* outgrew
 > (the rotated papers, the theory/foundation layers, the scratch frontier, and the Agda layer). The work we
 > outgrew *earlier* is nested under [`prior-archive/`](prior-archive) (the older deprecated development —
 > functorial semantics, the `Int`/GoI scaffolding, the sparsity capstones, etc.). Nothing here is on the

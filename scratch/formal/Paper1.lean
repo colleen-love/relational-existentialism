@@ -1,5 +1,5 @@
 /-
-# `paper-1/` — self-relation generates the irreversibility of time
+# `scratch/` — self-relation generates the irreversibility of time
 
 The whole formal content of paper one, focused on its single headline:
 
@@ -10,7 +10,7 @@ The whole formal content of paper one, focused on its single headline:
 
 The broader exploration that established this arena and surrounds it (existence of a fixed self, the seam, the
 type III modular identification, the assumed modular interface and its disclosure) is archived as structural
-reference under `archive/archived/paper-1-exploration/`.
+reference under `archive/quantaloid-allegory/`.
 -/
 import Paper1.Arena
 import Paper1.Arrow

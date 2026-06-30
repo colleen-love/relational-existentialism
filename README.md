@@ -2,36 +2,33 @@
 
 A philosophy — relation comes first, and the self is what relation produces — together with a mechanized formalization of it.
 
-The repository's thesis: **relation comes first, and the self is what relation produces** — a self **arises**
-from axioms that never name it.
-
 > **The arena reset (handoff I.II).** The project has moved to a **new foundation** — a **quantaloid /
 > allegory in which relations are the primitive arrow** and `Q` is the value-object — replacing the earlier
-> traced-SMC + operator-representation arena. **Paper one is being rebuilt from scratch** on it. The prior
+> traced-SMC + operator-representation arena. **Scratch is being rebuilt from scratch** on it. The prior
 > edifice (the rotated papers, the shared theory/foundation layers, the conservation frontier, the Agda
 > layer) is **not deleted** — it is the same theory in a representation we outgrew, **archived as structural
-> reference** under [`archive/archived/`](archive/archived) and catalogued in
-> [`archive/archived/INDEX.md`](archive/archived/INDEX.md), to be mined and re-grounded relationally.
+> reference** under [`archive/traceable-smt/`](archive/traceable-smt) and catalogued in
+> [`archive/traceable-smt/INDEX.md`](archive/traceable-smt/INDEX.md), to be mined and re-grounded relationally.
 
-- **Start here — what paper one is:** [`paper-1/README.md`](paper-1/README.md) and its spec stubs
-  ([`paper-1/spec/`](paper-1/spec)). It is a **skeleton**; spec II.1 defines it on the new arena.
+- **Start here — what scratch is:** [`scratch/README.md`](scratch/README.md) and its spec stubs
+  ([`scratch/spec/`](scratch/spec)). It is a **skeleton**; spec II.1 defines it on the new arena.
 - **The turn, and the layout:** [`STRUCTURE.md`](STRUCTURE.md) — the arena change recorded plainly, and what
   is live versus archived.
-- **The archived edifice (what was proved, and where):** [`archive/archived/INDEX.md`](archive/archived/INDEX.md)
-  — theorem-by-theorem, with what each depended on, so a result's *shape* can be ported into the new arena.
+- **The archived edifice (and where it lives):** [`archive/traceable-smt/INDEX.md`](archive/traceable-smt/INDEX.md)
+  — file-by-file, with what each depended on, so a result's *shape* can be ported into the new arena.
 
 ## Layout
 
-The repository is now minimal while paper one is rebuilt:
+The repository is now minimal while scratch is rebuilt:
 
-- [`paper-1/`](paper-1) — *a self arises from the axioms*, on the new relational arena. A **live skeleton**:
-  spec stubs + an empty `Paper1` Lean root. Spec II.1 fills it.
-- [`archive/archived/`](archive/archived) — the prior edifice, **structural reference** (not built, not
+- [`scratch/`](scratch) — *a self arises from the axioms*, on the new relational arena. A **live skeleton**:
+  spec stubs + a `Paper1` Lean root. Spec II.1 fills it.
+- [`archive/traceable-smt/`](archive/traceable-smt) — the prior edifice, **structural reference** (not built, not
   gated): the rotated papers, the `theory/` and `foundation/` layers, the `scratch/` frontier, and the Agda
-  layer; with [`prior-archive/`](archive/archived/prior-archive) holding the work outgrown earlier. Indexed
-  in [`INDEX.md`](archive/archived/INDEX.md).
+  layer; with [`prior-archive/`](archive/traceable-smt/prior-archive) holding the work outgrown earlier. Indexed
+  in [`INDEX.md`](archive/traceable-smt/INDEX.md).
 - [`lake/`](lake), [`scripts/`](scripts), [`papers/`](papers) — infrastructure: the Lean package home
-  (lakefile stripped to the single `Paper1` library), the gate (reduced to `paper-1/`), and the final
+  (lakefile stripped to the single `Paper1` library), the gate (reduced to `scratch/`), and the final
   manuscripts. See [`STRUCTURE.md`](STRUCTURE.md).
 
 ## Licensing

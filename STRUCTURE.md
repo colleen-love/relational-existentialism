@@ -12,11 +12,11 @@ The earlier development is **not wrong** — it is the same theory in a represen
 Lawvere either way; conservation is conservation either way). So it was **archived as structural reference**,
 with history preserved (`git mv`), and left navigable so we can mine it.
 
-- [`archive/archived/`](archive/archived) — the edifice we **just** outgrew: the rotated papers
+- [`archive/traceable-smt/`](archive/traceable-smt) — the edifice we **just** outgrew: the rotated papers
   (`paper-2/`, `paper-3/`), the shared `theory/` and `foundation/` layers, the `scratch/` frontier, and the
-  Agda layer. Catalogued in [`archive/archived/INDEX.md`](archive/archived/INDEX.md) — theorem-by-theorem,
+  Agda layer. Catalogued in [`archive/traceable-smt/INDEX.md`](archive/traceable-smt/INDEX.md) — file-by-file,
   with what each depended on, so a result's *shape* can be ported into the new arena.
-- [`archive/archived/prior-archive/`](archive/archived/prior-archive) — the work we outgrew **earlier** (the
+- [`archive/traceable-smt/prior-archive/`](archive/traceable-smt/prior-archive) — the work we outgrew **earlier** (the
   older deprecated development: functorial semantics, the `Int`/GoI scaffolding, the sparsity capstones).
   Kept distinct from the just-outgrown layer, not flattened into it.
 
@@ -27,15 +27,15 @@ re-grounded relationally where relevant — never resurrected wholesale.
 
 | Path | What | Status |
 |---|---|---|
-| [`paper-1/`](paper-1) | *a self arises from the axioms*, on the new relational arena | **live skeleton** — spec stubs + an empty `Paper1` Lean root; spec II.1 fills it |
+| [`scratch/`](scratch) | *a self arises from the axioms*, on the new relational arena | **live skeleton** — spec stubs + a `Paper1` Lean root; spec II.1 fills it |
 | [`lake/`](lake) | the Lean package home + mathlib cache | infrastructure; lakefile stripped to the single `Paper1` library |
-| [`scripts/`](scripts) | the gate + environment setup | `gate.sh` reduced to checking `paper-1/` (trivial while it is a skeleton); grows back with the new arena |
+| [`scripts/`](scripts) | the gate + environment setup | `gate.sh` reduced to checking `scratch/` (trivial while it is a skeleton); grows back with the new arena |
 | [`papers/`](papers) | the final manuscripts (all rights reserved) | unchanged |
 | [`archive/`](archive) | the prior edifice (see above) | reference only, not built |
 
-`paper-1/` keeps its name deliberately — the lakefile, `gate.sh`, and build targets already point at it, so
-renaming would buy nothing. `lake build` is green with only `Paper1` present (an empty library builds);
-`gate.sh` passes trivially.
+`paper-1/` has been renamed to `scratch/` to reflect its status as the rebuild's working skeleton; the
+lakefile (`srcDir`), `gate.sh`, and build targets were updated to point at it. The Lean library is still
+named `Paper1`. `lake build` is green with only `Paper1` present; `gate.sh` passes trivially.
 
 ## The derive-don't-define through-line carries over
 
