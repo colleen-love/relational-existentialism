@@ -14,7 +14,9 @@ defaultTargets = ["Paper1"]
 [[lean_lib]]
 name = "Paper1"
 srcDir = "../scratch/formal"
-roots = ["Paper1"]
+# `Paper1` is the arena-reset root; `Spec200` mechanizes Spec 2.00's unblocked
+# theorem group (T1, P0–P3). Both are roots of the one live library.
+roots = ["Paper1", "Spec200"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.
