@@ -1,30 +1,3 @@
-Licensing
-This repository is dual-licensed, with a deliberate split between code and writing. The boundary is drawn explicitly so there is no ambiguity about which file falls under which license.
-
-Code — Apache License 2.0
-All source code is licensed under the Apache License, Version 2.0. The full text is in LICENSE at the repository root.
-
-This covers everything that is software: scripts, proof-assistant developments (Lean / Agda / Rocq), Julia and Python sources, configuration, build tooling, and any other executable or machine-readable code, wherever it sits in the tree (including any code embedded in or shipped under /docs or /writing — e.g. runnable example files).
-
-Writing — Creative Commons Attribution 4.0 International (CC BY 4.0)
-All prose, philosophy, and other written/creative material is licensed under CC BY 4.0. The full text is in LICENSE-docs.
-
-This covers everything in the per-root spec/ directories (and any /writing) — the philosophy itself, explanatory essays, notes, diagrams-as-exposition, and the formalization write-up — plus any prose documentation elsewhere in the repository (such as this README.md).
-
-Under CC BY 4.0 you are free to share and adapt this material for any purpose, including commercially, provided you give appropriate credit, link to the license, and indicate if changes were made.
-
-Where the line falls
-Material	License	File
-Source code (anywhere in the tree)	Apache 2.0	LICENSE
-Prose / philosophy / docs in per-root spec/ and /writing	CC BY 4.0	LICENSE-docs
-This README and other prose docs	CC BY 4.0	LICENSE-docs
-Final manuscripts in /papers	All rights reserved	papers/README.md
-Exception — /papers (all rights reserved). The /papers directory is expressly excluded from the CC BY 4.0 grant. Its contents are © 2026 Colleen Love, all rights reserved; no license is granted. The "prose elsewhere in the repository is CC BY 4.0" rule does not reach into /papers, so copyright in the final manuscripts stays free to assign at submission.
-
-The governing rule when a directory or file contains both kinds of material: code is Apache 2.0; the surrounding prose is CC BY 4.0. When in doubt, the nature of the file decides — a .lean, .jl, .py, or other source file is code (Apache 2.0); a .md or other prose document is writing (CC BY 4.0). The one exception is /papers, above, which is all rights reserved.
-
-© 2026 Colleen Love. Code under Apache-2.0; written material under CC BY 4.0.
-
 # Spec II.0 — Ontology, Arena, and Axioms
 
 > *Before there was voice, / there was turning — / a soft curve of awareness folding inward, / touching its own skin for the first time.*
@@ -301,3 +274,30 @@ Ordered by dependency and by usefulness-if-later-targets-slip. Mechanization in 
 ---
 
 *Document history: II.0 is the foundational spec of Series II and supersedes all Series I material. Revision history is tracked in the repository log.*
+
+Licensing
+This repository is dual-licensed, with a deliberate split between code and writing. The boundary is drawn explicitly so there is no ambiguity about which file falls under which license.
+
+Code — Apache License 2.0
+All source code is licensed under the Apache License, Version 2.0. The full text is in LICENSE at the repository root.
+
+This covers everything that is software: scripts, proof-assistant developments (Lean / Agda / Rocq), Julia and Python sources, configuration, build tooling, and any other executable or machine-readable code, wherever it sits in the tree (including any code embedded in or shipped under /docs or /writing — e.g. runnable example files).
+
+Writing — Creative Commons Attribution 4.0 International (CC BY 4.0)
+All prose, philosophy, and other written/creative material is licensed under CC BY 4.0. The full text is in LICENSE-docs.
+
+This covers everything in the per-root spec/ directories (and any /writing) — the philosophy itself, explanatory essays, notes, diagrams-as-exposition, and the formalization write-up — plus any prose documentation elsewhere in the repository (such as this README.md).
+
+Under CC BY 4.0 you are free to share and adapt this material for any purpose, including commercially, provided you give appropriate credit, link to the license, and indicate if changes were made.
+
+Where the line falls
+Material	License	File
+Source code (anywhere in the tree)	Apache 2.0	LICENSE
+Prose / philosophy / docs in per-root spec/ and /writing	CC BY 4.0	LICENSE-docs
+This README and other prose docs	CC BY 4.0	LICENSE-docs
+Final manuscripts in /papers	All rights reserved	papers/README.md
+Exception — /papers (all rights reserved). The /papers directory is expressly excluded from the CC BY 4.0 grant. Its contents are © 2026 Colleen Love, all rights reserved; no license is granted. The "prose elsewhere in the repository is CC BY 4.0" rule does not reach into /papers, so copyright in the final manuscripts stays free to assign at submission.
+
+The governing rule when a directory or file contains both kinds of material: code is Apache 2.0; the surrounding prose is CC BY 4.0. When in doubt, the nature of the file decides — a .lean, .jl, .py, or other source file is code (Apache 2.0); a .md or other prose document is writing (CC BY 4.0). The one exception is /papers, above, which is all rights reserved.
+
+© 2026 Colleen Love. Code under Apache-2.0; written material under CC BY 4.0.
