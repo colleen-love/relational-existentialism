@@ -1,7 +1,7 @@
 /-
 Spec 2.00 — mechanization of the unblocked theorem group (T1, P0–P3).
 
-Normative source: `scratch/spec/2.00.md` (Spec 2.00). This file mechanizes exactly
+Normative source: `scratch/spec/2-00.md` (Spec 2.00). This file mechanizes exactly
 the theorem group that Spec 2.00 §5 marks as *unblocked* — provable now, independent
 of all open machinery (the enriched/quantaloid setting of O1 is NOT needed):
 
