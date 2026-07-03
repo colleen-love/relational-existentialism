@@ -13,7 +13,7 @@ coherent objects — exists and is final among coherent models, and every
 coherent description lands in the coherent part. The sole remaining gap is the
 classical existence of νF (Adámek–Trnková 2011), scheduled for its own order.
 
-Deliverables (work order 2-01b-mechanization.md §1):
+Deliverables (work order 2-01-mechanization-b.md §1):
   T2t-i    coherentPart_good        (CoherentAt, Good, coherentPartO/R)
   T2t-ii   image_good
   T2t-iii  transfer, transfer_lands
@@ -322,7 +322,7 @@ end AxiomAudit
 --   ContainedIn, Touches, MutualPartial   (*Deployable is 2-01 §3.7's definition,
 --   transcribed; the rest are new here.)
 --
--- Deviations from 2-01b-mechanization.md:
+-- Deviations from 2-01-mechanization-b.md:
 --   * File registered as a fourth Lake library root (`Spec201b`) alongside
 --     Paper1/Spec200/Spec201 in `lake/lakefile.toml`.
 --   * T2t-iv (subtype packaging of the coherent part as a `Model`) DROPPED per the
