@@ -18,7 +18,9 @@ The framework has **one primitive** — observation, which is what relating is: 
 
 The document of record — ontology, arena, axioms, every load-bearing decision with its rationale, theorem targets, and open questions — is:
 
-**[Spec 2.00 — Ontology, Arena, and Axioms](./scratch/spec/2.00.md)**
+**[Spec 2.00 — Ontology, Arena, and Axioms](./scratch/spec/2-00.md)**
+
+**[Spec 2.01 — Signature, Dyad Reduction, and Construction of Ω](./scratch/spec/2-01.md)**
 
 Reading path for the argument only: §1 (the axioms) → §2.2 (the closure operator: how objects are given by their relations) → §3 (the ledger: what is primitive, what is proved) → theorems T1 and T2 in §5.
 
