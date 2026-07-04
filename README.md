@@ -24,7 +24,7 @@ The document of record — ontology, arena, axioms, every load-bearing decision 
 
 **[Spec 2.2. — π Ratified, Witnessing, and Comparative Composition Theory](./scratch/spec/2-02.md)**
 
-**[Spec 2.2. — The Mirror: the Collapse Finding, the F(1) Test, and the Correction Program](./scratch/spec/2-03.md)**
+**[Spec 2.3. — The Mirror: the Collapse Finding, the F(1) Test, and the Correction Program](./scratch/spec/2-03.md)**
 
 Reading path for the argument only: §1 (the axioms) → §2.2 (the closure operator: how objects are given by their relations) → §3 (the ledger: what is primitive, what is proved) → theorems T1 and T2 in §5.
 
