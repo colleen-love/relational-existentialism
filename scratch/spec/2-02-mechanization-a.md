@@ -1,4 +1,4 @@
-# 2.02-mechanization — Work Order: Reveal, Internal, and the C1 Conditional
+# 2.02-mechanization-a — Work Order: Reveal, Internal, and the C1 Conditional
 
 **This document describes:** `scratch/formal/Spec202.lean` (new file; imports `Spec201`, `Spec201b`)
 **Normative sources:** `scratch/spec/2-00.md` (current revision, with D17/D18 and the R3-revised D9), `scratch/spec/2-01.md`, and `scratch/spec/2-02.md`. Where this document and the specs disagree, the specs win; report, don't improvise.
