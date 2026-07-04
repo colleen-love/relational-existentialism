@@ -17,9 +17,10 @@ srcDir = "../scratch/formal"
 # `Paper1` is the arena-reset root; `Spec200` mechanizes Spec 2.00's unblocked
 # theorem group (T1, P0–P3); `Spec201` mechanizes Spec 2.01's two-sorted signature
 # (P4s, PR-J(a), the C3 split, L1); `Spec201b` adds the transfer theorem and the
-# design-ready group (T2t, PR-J(b) dichotomy, T12s, P1 barrier one, P2c, C2d).
+# design-ready group (T2t, PR-J(b) dichotomy, T12s, P1 barrier one, P2c, C2d);
+# `Spec202` adds Reveal, Internal, the C1 conditional, and the comparative T14 laws.
 # All are roots of the one live library.
-roots = ["Paper1", "Spec200", "Spec201", "Spec201b"]
+roots = ["Paper1", "Spec200", "Spec201", "Spec201b", "Spec202", "Spec201c", "Spec201d", "Spec203"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.
