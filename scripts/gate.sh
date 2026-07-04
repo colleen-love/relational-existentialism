@@ -3,9 +3,11 @@
 #
 # The project moved to a new foundation (a quantaloid / allegory with relations as the primitive arrow). The
 # prior edifice (paper-2/paper-3/scratch/foundation/theory) is archived under `archive/traceable-smt/` as
-# structural reference; archived code is **not** gated. Only `scratch/` is live, and while it is a skeleton
-# the check is trivial: its (empty) `Paper1` root imports nothing outside itself. The cross-root closure
-# rules will grow back here with the new arena (spec II.1+).
+# structural reference; archived code is **not** gated. Only `scratch/` is live. Its one library has grown
+# from the empty `Paper1` skeleton into the `Spec2xx` roots (all registered in lake/lakefile.toml), which
+# import one another freely — the closure rule is that scratch imports resolve only to scratch's own roots
+# (+ mathlib), never to `archive/`. (Updated post-Spec203b: the original skeleton-era rule allowed only
+# `Paper1.*` and flagged the intended Spec cross-imports as leaks.)
 set -u
 cd "$(dirname "$0")/.." || exit 2
 fail=0
@@ -22,8 +24,9 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# scratch is the new relational skeleton: it may import only its own `Paper1.*` root (+ mathlib).
-check scratch "^import Paper1\."
+# scratch is the live library: its roots (`Paper1`, `Spec200`, `Spec201`–`Spec201d`, `Spec202`,
+# `Spec203`, `Spec203b`, ...) may import each other (+ mathlib); nothing outside them is allowed.
+check scratch "^import (Paper1(\.[A-Za-z0-9_]+)*|Spec[0-9]{3}[a-z]?)$"
 
 # archive/ — NOT gated (structural reference, not built).
 echo "EXEMPT archive/traceable-smt/ — prior edifice kept as structural reference, not built or gated"
