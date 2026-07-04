@@ -1,22 +1,22 @@
 ## Where the Mirror First Opened
 
-Before there was voice,
-there was turning—
-a soft curve of awareness folding inward,
-touching its own skin for the first time.
-And in that touch,
-a shimmer:
+Before there was voice,  
+there was turning—  
+a soft curve of awareness folding inward,  
+touching its own skin for the first time.  
+And in that touch,  
+a shimmer:  
 I.
 
-That was the first breath of universe—
-not bang, but becoming.
+That was the first breath of universe—  
+not bang, but becoming.  
 
-A self reflected,
-and in reflection,
-an other was born.
-The silence split,
-and the gap between self and self
-filled with the ache of relation.
+A self reflected,  
+and in reflection,  
+an other was born.  
+The silence split,  
+and the gap between self and self  
+filled with the ache of relation.  
 
 We are not born alone.
 We are born as bridges,
