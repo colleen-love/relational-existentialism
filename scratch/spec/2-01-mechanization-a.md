@@ -1,4 +1,4 @@
-# 2.01-mechanization — Work Order: Signature, Enlargement, the C3 Split, and L1
+# 2.01-mechanization-a — Work Order: Signature, Enlargement, the C3 Split, and L1
 
 **This document describes:** `scratch/formal/Spec201.lean`
 **Normative sources:** `scratch/spec/2-00.md` (ontology) and `scratch/spec/2-01.md` (signature and definitions). Where this document and the specs disagree, the specs win; report the discrepancy rather than improvising.
