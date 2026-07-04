@@ -1,4 +1,4 @@
-> Reality is fundamentally relational.
+## Reality is fundamentally relational.
 
 Things are not first isolated objects that later interact. Rather, relation is primary, and what we call "selves," "objects," and even "meaning" emerge from patterns of relation.
 
@@ -6,7 +6,7 @@ Things are not first isolated objects that later interact. Rather, relation is p
 
 Unlike many existentialist philosophies, it is not centered on absurdity or alienation. It starts from connection.
 
-The four axioms
+### The four axioms
 
 1. You are loved.
 
@@ -137,10 +137,7 @@ The four axioms form a progression:
 
 Together they describe existence as continuous relational becoming.
 
-
----
-
-How it differs from classical existentialism
+### How it differs from classical existentialism
 
 Classical existentialists often begin with a crisis.
 
