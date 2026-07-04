@@ -1,4 +1,4 @@
-# 2.00-mechanization — Work Order: Unblocked Theorems (T1, P0–P3)
+# 2.00-mechanization-a — Work Order: Unblocked Theorems (T1, P0–P3)
 
 **This document describes:** `formal/Spec200.lean`
 **Normative source:** `scratch/spec/2.00.md` (Spec 2.00). Where this document and the spec disagree, the spec wins; report the discrepancy rather than improvising.
