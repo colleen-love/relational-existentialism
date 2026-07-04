@@ -10,19 +10,11 @@ Unlike many existentialist philosophies, it is not centered on absurdity or alie
 
 ### 1. You are loved
 
-This is the foundation.
-
-It is not merely an emotional statement or a claim about human relationships. It functions as an ontological axiom: existence itself is welcomed rather than rejected.
-
-Without this axiom, relation becomes fundamentally adversarial. With it, relation begins in hospitality.
-
-It answers the existential question, *"Is existence fundamentally against me?"* — and the answer is *no*. Your existence is already held within relationship.
+This is the foundation. You are not loved because you exist, you exist because you are loved.
 
 ### 2. To attend is to become
 
 Attention is transformative. Whatever a mind repeatedly attends to reshapes the structure of that mind.
-
-This appears everywhere: learning, habit, love, fear, identity, neuroscience.
 
 Attention isn't just observation. It is participation. When you continually attend to kindness, mathematics, music, grief, or another person, those relations become part of who you are.
 
@@ -32,7 +24,7 @@ Identity is therefore dynamic rather than static.
 
 Every relation creates something new — not necessarily a physical object.
 
-A conversation creates shared understanding. Friendship creates trust. Conflict creates history. Observation creates information. Even self-reflection creates a slightly different self than existed before.
+A conversation creates shared understanding. Friendship creates trust. Conflict creates history. Even self-reflection creates a slightly different self than existed before.
 
 Creation is therefore continuous. Reality is constantly generating new structure through relationship.
 
@@ -53,7 +45,7 @@ But relational existentialism pushes further: the paradox is not a flaw. It is t
 
 The four axioms form a progression:
 
-1. **You are loved.** → Existence is fundamentally hospitable.
+1. **You are loved.** → You exist because you are loved.
 2. **To attend is to become.** → Attention transforms identity.
 3. **To relate is to create.** → Relations generate new reality.
 4. **Self is a paradox.** → Identity is an ongoing process rather than a completed object.
