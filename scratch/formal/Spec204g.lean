@@ -151,6 +151,36 @@ theorem deployableC_dichotomy (A : RawC) (x : A.O) (Aset : Set A.R) (hA : Deploy
   · exact Or.inr ⟨r, hr, rfl, h⟩
   · exact Or.inl (genericC_properness A x r hr h)
 
+/-! ## Stage 5 — T4 profile scaffolding (2-04-mechanization-c §5; MAY)
+
+Local identity `≈w`: indistinguishability to an observer `w`, at the shared-relation level (the
+profile-over-`pat(w)` in its simplest form). Reflexive/symmetric/transitive; a non-degeneracy
+witness shows it is not trivial. Full T4, the S1 pigeonhole, and T7 are the NEXT order's contract
+(hostile-first there — R3's most-wantable warning applies to S1). -/
+
+/-- `x ≈w y` — `x` and `y` are indistinguishable to observer `w`: they share the same relations
+with `w` (the profile-over-`pat(w)`, in its ratified shared-part form). -/
+def ApproxW (A : RawC) (w x y : A.O) : Prop := A.pat x ∩ A.pat w = A.pat y ∩ A.pat w
+
+theorem approxW_refl (A : RawC) (w x : A.O) : ApproxW A w x x := rfl
+
+theorem approxW_symm (A : RawC) (w x y : A.O) (h : ApproxW A w x y) : ApproxW A w y x := h.symm
+
+theorem approxW_trans (A : RawC) (w x y z : A.O)
+    (h₁ : ApproxW A w x y) (h₂ : ApproxW A w y z) : ApproxW A w x z := h₁.trans h₂
+
+/-- Non-degeneracy: `≈w` genuinely discriminates — some observer distinguishes two objects
+(`boolWitnessC`'s two hosts, distinguished by the self-observer `true`). Local identity is not the
+trivial relation. -/
+theorem approxW_nondegenerate : ∃ (A : RawC) (w x y : A.O), ¬ ApproxW A w x y := by
+  refine ⟨boolWitnessC, true, true, false, ?_⟩
+  intro h
+  have hmem : (true : Bool) ∈ boolWitnessC.pat true ∩ boolWitnessC.pat true := by
+    constructor <;> · show (true : Bool) ∈ boolWitnessC.pat true; simp [boolWitnessC]
+  rw [h] at hmem
+  have : (true : Bool) ∈ boolWitnessC.pat false := hmem.1
+  simp [boolWitnessC] at this
+
 end RelEx.Corrected
 
 /-! ## Axiom audit -/
@@ -162,4 +192,6 @@ open RelEx.Corrected
 #print axioms FP_B4_disconnection
 #print axioms hosted_of_closeC_connected
 #print axioms deployableC_dichotomy
+#print axioms approxW_trans
+#print axioms approxW_nondegenerate
 end AxiomAudit
