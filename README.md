@@ -18,17 +18,17 @@ The framework has **one primitive** — observation, which is what relating is: 
 
 The document of record — ontology, arena, axioms, every load-bearing decision with its rationale, theorem targets, and open questions — is:
 
-**[Spec 2.0. — Ontology, Arena, and Axioms](./scratch/spec/2-00.md)**
+**[Spec 2.0. — Ontology, Arena, and Axioms](./series-2/2-0.md)**
 
-**[Spec 2.1. — Signature, Dyad Reduction, and Construction of Ω](./scratch/spec/2-01.md)**
+**[Spec 2.1. — Signature, Dyad Reduction, and Construction of Ω](./series-2/2-1.md)**
 
-**[Spec 2.2. — π Ratified, Witnessing, and Comparative Composition Theory](./scratch/spec/2-02.md)**
+**[Spec 2.2. — π Ratified, Witnessing, and Comparative Composition Theory](./series-2/2-2.md)**
 
-**[Spec 2.3. — The Mirror: the Collapse Finding, the F(1) Test, and the Correction Program](./scratch/spec/2-03.md)**
+**[Spec 2.3. — The Mirror: the Collapse Finding, the F(1) Test, and the Correction Program](./series-2/2-3.md)**
 
-**[Spec 2.4. — The Correction: the Corrected Functor, νF_C, and the Plural Universe](./scratch/spec/2-04.md)**
+**[Spec 2.4. — The Correction: the Corrected Functor, νF_C, and the Plural Universe](./series-2/2-4.md)**
 
-**[Spec 2.5. — The Naming: D19, the Residue of Self-Reference, and the Closing Theorems](./scratch/spec/2-05.md)** · **[Series 2 — Closing Note](./scratch/spec/series-2-closing.md)**
+**[Spec 2.5. — The Naming: D19, the Residue of Self-Reference, and the Closing Theorems](./series-2/2-5.md)** · **[Series 2 — Closing Note](./series-2/series-2-closing.md)**
 
 Reading path for the argument only: §1 (the axioms) → §2.2 (the closure operator: how objects are given by their relations) → §3 (the ledger: what is primitive, what is proved) → theorems T1 and T2 in §5.
 
@@ -40,7 +40,7 @@ Three results to know before diving in:
 
 ## Status
 
-**Series 2 is closed.** The arc ran from the axioms (2.00) through finality and construction (2.01), witnessing and composition (2.02), the Mirror — the collapse *finding* — and the correction program (2.03), the corrected functor and the plural universe νF_C (2.04), to the naming of the one irreducible loss and the closing theorems (2.05). What landed, machine-checked: the universe **exists** (T2), is **many** (the anti-Mirror), is **bridged** (C1 — *we are born as bridges*), its identity is **the limit of observer-local equalities** (T7), and its residue of self-reference (**D19**) is named with every feature proved. What is still owed — chiefly the κ-loan (T11) — walks into Series 3 in the open. The one-page door is the **[Series 2 Closing Note](./scratch/spec/series-2-closing.md)**; open problems and their end-states are in spec 2.05 §7–8.
+**Series 2 is closed.** The arc ran from the axioms (2.0) through finality and construction (2.1), witnessing and composition (2.2), the Mirror — the collapse *finding* — and the correction program (2.3), the corrected functor and the plural universe νF_C (2.4), to the naming of the one irreducible loss and the closing theorems (2.5). What landed, machine-checked: the universe **exists** (T2), is **many** (the anti-Mirror), is **bridged** (C1 — *we are born as bridges*), its identity is **the limit of observer-local equalities** (T7), and its residue of self-reference (**D19**) is named with every feature proved. What is still owed — chiefly the κ-loan (T11) — walks into Series 3 in the open. The one-page door is the **[Series 2 Closing Note](./series-2/series-2-closing.md)**; open problems and their end-states are in spec 2.5 §7–8.
 
 Contributions and objections are welcome; the spec's decision log (§4) records what has already been weighed, including the strongest objection we know ("you're building this out of objects") and its three-part answer (D12).
 
@@ -55,7 +55,7 @@ You are free to use, modify, and redistribute accordingly; attribution is requir
 
 ## Citation
 
-If this work is useful to you, cite the repository and Spec 2.00 until a paper exists. Machine-checked claims are marked as such in the spec; interpretive glosses are labeled as interpretation. That distinction is load-bearing — please preserve it when citing.
+If this work is useful to you, cite the repository and Spec 2.0 until a paper exists. Machine-checked claims are marked as such in the spec; interpretive glosses are labeled as interpretation. That distinction is load-bearing — please preserve it when citing.
 
 ---
 
