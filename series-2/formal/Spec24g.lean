@@ -3,11 +3,11 @@ Spec 2.4g — the C1 landing over the corrected functor, and P3h's positive half
 (2-4-mechanization-c Stages 2–3 = order b Stages 3–4).
 
 Normative source: `series-2/2-4.md`, `2-2.md` §4 (the C1 conditional), and the work order
-`2-4-mechanization-c.md`. Continues `Spec204f.lean` (`destEquivC`) and the whole chain
-(`WindowlessC`/`InternalC`/`EndpointContainedC` from Spec204b, `CoherentC`/`coprodC` from Spec204,
-`T16_ω` from Spec204e). Specs win. No declaration consults §8.
+`2-4-mechanization-c.md`. Continues `Spec24f.lean` (`destEquivC`) and the whole chain
+(`WindowlessC`/`InternalC`/`EndpointContainedC` from Spec24b, `CoherentC`/`coprodC` from Spec24a,
+`T16_ω` from Spec24e). Specs win. No declaration consults §8.
 -/
-import Spec204f
+import Spec24f
 
 open RelEx.Trials (RawC PfNe)
 
@@ -15,7 +15,7 @@ namespace RelEx.Corrected
 
 /-! ## Stage 2 — the C1 landing (2-4-mechanization-c §2; FP-B4, FP-B5 — the star)
 
-*We are born as bridges.* The corrected analogue of Spec202's `no_windowless_of_connected_of_no_total`:
+*We are born as bridges.* The corrected analogue of Spec22a's `no_windowless_of_connected_of_no_total`:
 a windowless object, in a coherent universe where it is grounded-connected to every relation,
 would have to be total — contradicting no-total (`T16_ω` at the ω-tier). -/
 
@@ -82,7 +82,7 @@ theorem reach_coprodC_inl (A B : RawC) (a : A.O) :
       · rw [Sum.map_inr] at hmap; exact absurd hmap (by simp)
 
 /-- The coproduct of two universes is disconnected: no object of the left component reaches any
-object of the right. The corrected analogue of Spec201b's `coprod_disconnected`. -/
+object of the right. The corrected analogue of Spec21b's `coprod_disconnected`. -/
 theorem coprodC_disconnected (A B : RawC) (a : A.O) (b : B.O) :
     ¬ Relation.ReflTransGen (StepRC (coprodC A B)) (Sum.inl a) (Sum.inr b) := by
   intro h
@@ -101,7 +101,7 @@ theorem FP_B4_disconnection : ∃ A : RawC, CoherentC A ∧ ¬ ConnectedC A :=
 /-! ## Stage 3 — P3h, positive direction (2-4-mechanization-c §3; FP-B6)
 
 The close preserves hostedness: a relation hosted in a coherent description maps to a hosted
-relation of Ω_C. With `unhosted_exists` (Spec204b), FP3's split lands — P3h holds on the
+relation of Ω_C. With `unhosted_exists` (Spec24b), FP3's split lands — P3h holds on the
 close-image of descriptions, fails globally. -/
 
 /-- A connected coherent description: coherent, connected, and every relation hosted (borne within
@@ -116,7 +116,7 @@ theorem hosted_of_closeC (A : RawC) (hA : BoundedC A) (r : A.R) (w : A.O) (hrw :
   ⟨fOC A hA w, ⟨r, hrw, rfl⟩⟩
 
 /-- FP-B6 — CONFIRMED: every relation-point in the close-image of a connected coherent description
-is hosted. Together with `unhosted_exists` (Spec204b — unhosted points exist globally), FP3's split
+is hosted. Together with `unhosted_exists` (Spec24b — unhosted points exist globally), FP3's split
 is complete: **P3h fails globally, holds on the connected close-image.** The §5 doctrine's positive
 half, mechanized. -/
 theorem hosted_of_closeC_connected (A : RawC) (hA : BoundedC A)

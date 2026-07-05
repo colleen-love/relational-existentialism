@@ -2,21 +2,21 @@
 Spec 2.4c — The construction: νHC, the corrected universe Ω_C, and its finality (Stages 2–3).
 
 Normative source: `series-2/2-4.md` §4 (construction), §2 (Ω_C := greatest coherent
-subcoalgebra), and the work order `2-4-mechanization-a.md` Stages 2–3. Continues `Spec204b.lean`
+subcoalgebra), and the work order `2-4-mechanization-a.md` Stages 2–3. Continues `Spec24b.lean`
 (the univariate reduction `HC`). Specs win.
 
-This file discharges the construction that Spec204b flagged as the remaining boundary. The
+This file discharges the construction that Spec24b flagged as the remaining boundary. The
 technical heart is `instQPFHC` — a `QPF` instance for `HC X = Sym2(P⁺f(X) ⊕ X)` — built directly
-(the analogue of Spec201c's `instQPFG`, here over a polynomial whose ordered representative pairs
+(the analogue of Spec21c's `instQPFG`, here over a polynomial whose ordered representative pairs
 two heterogeneous "sides", each a finite-nonempty set or a single element). With it,
 `Ω_R := QPF.Cofix HC` and `Ω_O := P⁺f(Ω_R)` give the corrected universe, packaged as a two-sorted
 `RawC` (`ZΩC`) that is FINAL among bounded corrected coalgebras (`isFinalBRawC`) — T2 discharged
 for the corrected functor at the ω-tier.
 
-File naming/numbering follows Spec204/Spec204b (see the Spec204 header note on the order's
-`2.5`/`Spec205` off-by-one, resolved spec-first).
+File naming/numbering follows Spec24a/Spec24b (see the Spec24a header note on the order's
+`2.5`/`Spec25a` off-by-one, resolved spec-first).
 -/
-import Spec204b
+import Spec24b
 import Mathlib.Data.QPF.Univariate.Basic
 import Mathlib.Data.PFunctor.Univariate.Basic
 import Mathlib.Data.Set.Finite.Basic
@@ -32,7 +32,7 @@ namespace RelEx.Corrected
 positive count (a finite nonempty set) or a single element; positions are the `X`'s across both
 sides. `abs` reads the ordered pair as an unordered pair (Sym2); `repr` picks an ordered
 representative (`Quot.out`) and enumerates each set side (`toFinset`/`equivFin`). Two layers of
-quotient (outer `Sym2`, inner `P⁺f`) absorbed by `abs`/`repr`, as in Spec201c. -/
+quotient (outer `Sym2`, inner `P⁺f`) absorbed by `abs`/`repr`, as in Spec21c. -/
 
 /-- A side shape: a positive count (finite nonempty set) or a single (Unit). -/
 def SideA : Type := ℕ+ ⊕ Unit
@@ -67,7 +67,7 @@ noncomputable def hRepr {X : Type} (z : HC X) : HP.Obj X :=
   ⟨((sideRepr (Quot.out z).1).1, (sideRepr (Quot.out z).2).1),
    Sum.elim (sideRepr (Quot.out z).1).2 (sideRepr (Quot.out z).2).2⟩
 
-/-- Side reconstruction — the crux (mirrors Spec201c's set-reconstruction): representing then
+/-- Side reconstruction — the crux (mirrors Spec21c's set-reconstruction): representing then
 rebuilding a side is the identity. -/
 theorem sideAbs_sideRepr {X : Type} (u : PfNe X ⊕ X) :
     sideAbs (sideRepr u).1 (sideRepr u).2 = u := by
@@ -271,8 +271,8 @@ noncomputable def elt2 : ΩR := fRC seed2 bounded_seed2 PUnit.unit
 noncomputable def elt3 : ΩR := fRC seed3 bounded_seed3 PUnit.unit
 
 /-- **ω̂₂** — the corrected universe's first citizen: the self-witnessing loop as an OBJECT (the
-`fRC`-image of seed 3's pattern). The pre-correction `omegaHat` (Spec201c) named the wrong citizen
-— the bare self-loop, incoherent under the K-triple (`seed1_incoherent`, Spec204); ω̂₂ is the One
+`fRC`-image of seed 3's pattern). The pre-correction `omegaHat` (Spec21c) named the wrong citizen
+— the bare self-loop, incoherent under the K-triple (`seed1_incoherent`, Spec24a); ω̂₂ is the One
 that turns upon its turning (retiring `omegaHat_coherent`; 2.4 O-2-5-3). -/
 noncomputable def omegaHat2 : ΩO := fOC seed3 bounded_seed3 PUnit.unit
 

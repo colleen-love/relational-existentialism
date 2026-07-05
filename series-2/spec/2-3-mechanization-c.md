@@ -1,6 +1,6 @@
 # 2.3-mechanization-c — Work Order: Close the Trials (the Relocation Conjecture, the One-Bit Audit, and the Ascent)
 
-**This document describes:** `series-2/formal/Spec203c.lean` (new file; imports `Spec203b` — which transitively supplies the whole chain)
+**This document describes:** `series-2/formal/Spec23c.lean` (new file; imports `Spec23b` — which transitively supplies the whole chain)
 **Normative sources:** `series-2/2-3.md` §5 (the battery: B6, B7; the frozen C-B6 prediction of §5.3; the results of §5.6) and §8 (O-2-3-1b, O-2-3-2). Specs win; report discrepancies.
 **Audience:** Claude Code. All conventions in force. **This order carries its own frozen predictions (§2) — they are pre-registered as of this document's commit, hostile-first, and amendable afterward only as clearly-marked post-hoc annotations.** Same lab-notebook discipline as `-b`: every theorem's doc-comment names the prediction it CONFIRMS or REFUTES; a surprised prediction is the trial working; no refutation is softened.
 
@@ -8,7 +8,7 @@
 
 ## 1. Purpose and scope
 
-Spec203b ran B1 on every entrant and the fork narrowed to (C) by elimination — twice over for the (A)-family. Three pieces of trial content remain mechanizable *before* the (C) coherence design (which is spec-side and gates B4/B5):
+Spec23b ran B1 on every entrant and the fork narrowed to (C) by elimination — twice over for the (A)-family. Three pieces of trial content remain mechanizable *before* the (C) coherence design (which is spec-side and gates B4/B5):
 
 1. **RELOC** — the Relocation Conjecture (C-B6, frozen in 2.3 §5.3, still untested): inside (C), an attending's aperture and remainder are *definable* as its higher-order neighborhood and that neighborhood's complement. If proved, (C) is the arena, (A) is its phenomenology derived, (B) is (A) with the anatomy forgotten — the fork dissolves into a lattice, and the recorded hybrid (C)+(A) is shown unnecessary.
 2. **BIT** — the one-bit audit of A2: upgrade §5.6's observation ("the two `B1_A2` witnesses differ solely in emptiness") to the theorem that *all* of A2's plurality over the point is the ∅-bit. This converts B7's spec-level elimination of A2 from an audit resting on two examples into an audit resting on a proof.
@@ -26,9 +26,9 @@ Spec203b ran B1 on every entrant and the fork narrowed to (C) by elimination —
 | CTRL | the control's stages are flat forever | P6 | SHOULD (cheap) |
 | DOC | results annotation + spec labels | — | MUST |
 
-**Out of scope:** (C)'s coherence/parthood design (what is endpoint-coherence over `O ⊕ R`? — O-2-3-1b, *spec-side*, and the explicit gate on everything below this line); B4 and B5 (both need that design: the covariety hypotheses and the Model-analogue cannot be checked against a functor whose coherence predicate does not exist yet); νF construction for (C) (the winner's construction is its own order, via the Spec201c template, after the corrected-functor spec with its D20 F(1) pre-registration at the head); B3 beyond what RELOC delivers incidentally (RELOC *is* the down payment: aperture/remainder anatomy inside the arena is D17-payload material); the limit's cardinality (ASCENT proves the stages grow without bound; the infinitude of the final coalgebra itself is a further claim about the inverse limit — not chased, per the honesty note in P5); fog-vs-edges; D19.
+**Out of scope:** (C)'s coherence/parthood design (what is endpoint-coherence over `O ⊕ R`? — O-2-3-1b, *spec-side*, and the explicit gate on everything below this line); B4 and B5 (both need that design: the covariety hypotheses and the Model-analogue cannot be checked against a functor whose coherence predicate does not exist yet); νF construction for (C) (the winner's construction is its own order, via the Spec21c template, after the corrected-functor spec with its D20 F(1) pre-registration at the head); B3 beyond what RELOC delivers incidentally (RELOC *is* the down payment: aperture/remainder anatomy inside the arena is D17-payload material); the limit's cardinality (ASCENT proves the stages grow without bound; the infinitude of the final coalgebra itself is a further claim about the inverse limit — not chased, per the honesty note in P5); fog-vs-edges; D19.
 
-**Note on O-2-3-2's pairs check:** "does F distinguish over pairs" is discharged in substance by `B2_C_separation` (Spec203b): a two-point (C)-shape with an observable, machine-checked difference. Record the discharge in the mapping table; do not write a separate theorem.
+**Note on O-2-3-2's pairs check:** "does F distinguish over pairs" is discharged in substance by `B2_C_separation` (Spec23b): a two-point (C)-shape with an observable, machine-checked difference. Record the discharge in the mapping table; do not write a separate theorem.
 
 ## 2. Predictions (FROZEN at this document's commit; hostile-first)
 
@@ -45,7 +45,7 @@ Spec203b ran B1 on every entrant and the fork narrowed to (C) by elimination —
 namespace RelEx.Trials
 
 /-- Over a subsingleton carrier every set is ∅ or univ — the dichotomy behind the
-forbidden coin. Companion to `forced_univ`/`forced_empty` (Spec203b). -/
+forbidden coin. Companion to `forced_univ`/`forced_empty` (Spec23b). -/
 theorem forced_dichotomy {α : Type} [Subsingleton α] (S : Set α) :
     S = ∅ ∨ S = Set.univ := by
   sorry -- rcases on S.eq_empty_or_nonempty; forced_univ on the nonempty side.
@@ -145,7 +145,7 @@ Construction plan (verify every mathlib name with `exact?`):
 
 ```lean
 /-- (B) is (A) with the anatomy forgotten: per attending, keep the bare division
-pair. `AttB` (Spec203b) is the instance at `ρ := Sym2 PUnit`. Proved reductions
+pair. `AttB` (Spec23b) is the instance at `ρ := Sym2 PUnit`. Proved reductions
 dissolve the fork into a lattice (2.3 §5.2 B6). -/
 def forgetAnatomy {ρ : Type} (a : AttAGen ρ) (r : ↥a.1.1) :
     { p : Set ρ × Set ρ // p.1.Finite ∧ p.1.Nonempty ∧ p.2 ⊂ p.1 } :=
@@ -186,7 +186,7 @@ The depth-1 B1 pass of (C) is carried entirely by the relation sort; the object 
 inherits plurality one stage later (`ascent_O`). Kept so no reader mistakes B1_C for
 more than it is. -/
 theorem O1_subsingleton : Subsingleton (OStage 1) := by
-  sorry -- PfNe of a subsingleton is a subsingleton: PfNe.subsingleton (Spec203b).
+  sorry -- PfNe of a subsingleton is a subsingleton: PfNe.subsingleton (Spec23b).
 
 /-- ASC-NC — CONFIRMS P4 at the object sort, from stage 2 on: two distinct stage-1
 relations give two distinct singleton patterns. -/
@@ -224,7 +224,7 @@ If the embedding plumbing exceeds budget: ship `ascent_R`/`ascent_O`/`O1_subsing
 **CTRL (SHOULD; cheap).** The contrast that gives the Ascent its meaning:
 
 ```lean
-/-- Generalization of `G_unit_subsingleton` (Spec203): G preserves subsingletons —
+/-- Generalization of `G_unit_subsingleton` (Spec23a): G preserves subsingletons —
 G X is defeq to PfNe (Sym2 X), so `PfNe.subsingleton` applies. -/
 theorem G_subsingleton_of (X : Type) [Subsingleton X] : Subsingleton (G X) := by sorry
 
@@ -239,7 +239,7 @@ theorem control_flat : ∀ n, Subsingleton ((G ·)^[n] PUnit) := by
 
 ## 6. Build, verify, deliver
 
-Standard: clean build, no `sorry`, axiom audit (`#print axioms` block; BIT and the ASCENT MUSTs plausibly choice-light — report per theorem), gate green (`scripts/gate.sh` — repaired and live again as of this order's commit; `Spec203c` imports only `Spec203b`), registered as the tenth root in `lake/lakefile.toml`. Mapping table with the prediction-outcome column:
+Standard: clean build, no `sorry`, axiom audit (`#print axioms` block; BIT and the ASCENT MUSTs plausibly choice-light — report per theorem), gate green (`scripts/gate.sh` — repaired and live again as of this order's commit; `Spec23c` imports only `Spec23b`), registered as the tenth root in `lake/lakefile.toml`. Mapping table with the prediction-outcome column:
 
 ```
 -- 2-3-mechanization-c §2 predictions ↔ outcomes (fill in: CONFIRMED / REFUTED / DROPPED-to-conjecture)
@@ -250,7 +250,7 @@ Standard: clean build, no `sorry`, axiom audit (`#print axioms` block; BIT and t
 -- No re-collapse: ascent_R, ascent_O, O1_subsingleton — P4                  → ____
 -- The Ascent:   ascent_strict (+ ascent_fin)     — P5                       → ____
 -- Control flat: control_flat                     — P6                       → ____
--- Pairs check (O-2-3-2): discharged by B2_C_separation (Spec203b) — cited, not reproved.
+-- Pairs check (O-2-3-2): discharged by B2_C_separation (Spec23b) — cited, not reproved.
 ```
 
 Deviations recorded, as always.
@@ -258,8 +258,8 @@ Deviations recorded, as always.
 ## 7. DOC (MUST)
 
 - `2-3.md`: append **§5.7 Results of the closing trials** (post-hoc-marked; this order's §2 predictions stay frozen as written), transcribing the outcome column; every REFUTED or DROPPED entry gets one honest sentence. If P3 confirmed: one sentence noting the hybrid clause stays closed and C-B6's lattice sentence is now proved, with direction bought by the tower's next storey. Update O-2-3-1b/O-2-3-2 statuses (delivered parts marked; the coherence design remains the open gate).
-- `2-0.md` §5, T2's entry: one line — stage checks recorded (`Spec203c`): the tower never re-collapses and strictly ascends; relocation outcome noted.
-- `2-2.md` §7: update the roadmap sentence — after this order, the remaining path is: **(C) coherence design (O-2-3-1b, spec-side) → corrected-functor spec with its D20 F(1) computation at the head → νF_C construction (Spec201c template) → B4/B5 against it → re-anchoring (2.3 §6) → S1 pigeonhole, T4, T7.**
+- `2-0.md` §5, T2's entry: one line — stage checks recorded (`Spec23c`): the tower never re-collapses and strictly ascends; relocation outcome noted.
+- `2-2.md` §7: update the roadmap sentence — after this order, the remaining path is: **(C) coherence design (O-2-3-1b, spec-side) → corrected-functor spec with its D20 F(1) computation at the head → νF_C construction (Spec21c template) → B4/B5 against it → re-anchoring (2.3 §6) → S1 pigeonhole, T4, T7.**
 
 ---
 

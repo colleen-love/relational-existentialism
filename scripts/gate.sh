@@ -4,7 +4,7 @@
 # The project moved to a new foundation (a quantaloid / allegory with relations as the primitive arrow).
 # Only `series-2/` is live. Its one library has grown from the empty `Series2` skeleton into the `Spec2xx`
 # roots (all registered in lake/lakefile.toml), which import one another freely — the closure rule is that
-# series-2 imports resolve only to series-2's own roots (+ mathlib). (Updated post-Spec203b: the original
+# series-2 imports resolve only to series-2's own roots (+ mathlib). (Updated post-Spec23b: the original
 # skeleton-era rule allowed only `Series2.*` and flagged the intended Spec cross-imports as leaks.)
 set -u
 cd "$(dirname "$0")/.." || exit 2
@@ -22,8 +22,8 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# series-2 is the live library: its roots (`Series2`, `Spec200`, `Spec201`–`Spec201d`, `Spec202`,
-# `Spec203`, `Spec203b`, ...) may import each other (+ mathlib); nothing outside them is allowed.
-check series-2 "^import (Series2(\.[A-Za-z0-9_]+)*|Spec[0-9]{3}[a-z]?)$"
+# series-2 is the live library: its roots (`Series2`, `Spec20a`, `Spec21a`–`Spec21d`, `Spec22a`,
+# `Spec23a`, `Spec23b`, ...) may import each other (+ mathlib); nothing outside them is allowed.
+check series-2 "^import (Series2(\.[A-Za-z0-9_]+)*|Spec[0-9]{2}[a-z])$"
 
 exit $fail

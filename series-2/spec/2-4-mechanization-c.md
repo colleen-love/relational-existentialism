@@ -1,6 +1,6 @@
 # 2-4-mechanization-c — Work Order: the Lambek Sub-problem and the Resumed Re-anchoring
 
-Target file: `series-2/formal/Spec204e.lean` (or extend Spec204d if the roots fight; log the choice). Conventions unchanged: no `sorry`; doc-comments with spec addresses (cite 2.4); axiom audit in-build; results post-hoc-marked; hostile-first. **FP-B3 through FP-B6 remain in force exactly as frozen in order b** — this order does not refreeze them; it adds only the sub-problem's own predictions (FP-C1/C2 below).
+Target file: `series-2/formal/Spec24e.lean` (or extend Spec24d if the roots fight; log the choice). Conventions unchanged: no `sorry`; doc-comments with spec addresses (cite 2.4); axiom audit in-build; results post-hoc-marked; hostile-first. **FP-B3 through FP-B6 remain in force exactly as frozen in order b** — this order does not refreeze them; it adds only the sub-problem's own predictions (FP-C1/C2 below).
 
 **Scope in one line.** Unblock `Infinite Ω_R` by whichever of two routes lands, retire the Lambek debt if affordable, then execute order b's Stages 2–6 unchanged. The O-2-4-5 closing discipline carries over verbatim: on completion, record that the condition is met and hand the file back without touching §8.
 

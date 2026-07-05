@@ -3,7 +3,7 @@ Spec 2.1 — mechanization of the two-sorted signature, enlargement, the C3 spli
 
 Normative sources: `series-2/2-0.md` (ontology) and `series-2/2-1.md`
 (signature and definitions). This file realizes the *two-sorted* signature of spec
-2.1, the Arena's successor. `Spec200.lean` stays untouched and remains valid.
+2.1, the Arena's successor. `Spec20a.lean` stays untouched and remains valid.
 
 Deliverables (Spec 2.1, work order 2-1-mechanization.md §1):
   SIG       the two-sorted signature `Model` (+ raw coalgebras and homs)
@@ -40,7 +40,7 @@ containers, numerical identity for free); endpoint coherence as a field —
 which IS proposition P3 and, as P4s will show, the co-requirement.
 `dy` (dyad anchor) is taken as DATA at this interface: its construction from
 `close` is P5 (spec 2.1 §3.1), deferred; no axioms govern it here, and results
-below are interface-relative in the same sense as Spec200's Arena results. -/
+below are interface-relative in the same sense as Spec20a's Arena results. -/
 structure Model where
   O : Type u
   R : Type u
@@ -242,7 +242,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.1 ↔ series-2/formal/Spec201.lean
+-- Specs 2.0 / 2.1 ↔ series-2/formal/Spec21a.lean
 -- P4 (static)        = RelEx.TwoSorted.P4_static
 -- PR-J(a)            = RelEx.TwoSorted.PRJ_a
 -- C3 split           = RelEx.TwoSorted.SelfAnchored (definition; order normative)
@@ -253,8 +253,8 @@ end AxiomAudit
 -- L1 (sum)           = RelEx.TwoSorted.coherent_sum
 --
 -- Deviations from 2-1-mechanization.md:
---   * File registered as a third Lake library root (`Spec201`) alongside
---     `Series2`/`Spec200`, in `lake/lakefile.toml` — same second-root precedent.
+--   * File registered as a third Lake library root (`Spec21a`) alongside
+--     `Series2`/`Spec20a`, in `lake/lakefile.toml` — same second-root precedent.
 --   * `coherent_of_surjective_hom` drops the work order's `hO : Surjective fO`
 --     hypothesis: only `hR : Surjective fR` is used, so the theorem is proved in
 --     strengthened form (the work order §3.4 sanctions this and asks it be recorded).

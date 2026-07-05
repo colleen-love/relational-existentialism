@@ -1,6 +1,6 @@
 # 2.2-mechanization-a — Work Order: Reveal, Internal, and the C1 Conditional
 
-**This document describes:** `series-2/formal/Spec202.lean` (new file; imports `Spec201`, `Spec201b`)
+**This document describes:** `series-2/formal/Spec22a.lean` (new file; imports `Spec21a`, `Spec21b`)
 **Normative sources:** `series-2/2-0.md` (current revision, with D17/D18 and the R3-revised D9), `series-2/2-1.md`, and `series-2/2-2.md`. Where this document and the specs disagree, the specs win; report, don't improvise.
 **Audience:** Claude Code, executing without further clarification. All prior conventions in force (no `sorry`, no new axioms, `#print axioms` audit, doc-comments with spec IDs, mapping table, deviations recorded, Lake root registration per precedent).
 
@@ -43,7 +43,7 @@ def Reveal (M : Model) (x : M.O) (r : M.R) : Set M.R :=
 
 theorem reveal_subset (M : Model) (x : M.O) (r : M.R) (hr : r ∈ M.pat x) :
     Reveal M x r ⊆ M.pat x := by
-  sorry -- insert_subset: hr for r; ctx_subset (Spec201) for the rest
+  sorry -- insert_subset: hr for r; ctx_subset (Spec21a) for the rest
 
 theorem mem_reveal_self (M : Model) (x : M.O) (r : M.R) : r ∈ Reveal M x r := by
   sorry -- Set.mem_insert
@@ -216,7 +216,7 @@ theorem mutualPartial_witness :
 3. Doc-comments: every declaration carries its spec ID; `no_windowless_of_connected_of_no_total`'s comment must include the discharge note (C2, T16) and the one-fact line.
 
 ```
--- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec202.lean
+-- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec22a.lean
 -- Reveal (R2)             = RelEx.TwoSorted.Reveal (+ reveal_subset, mem_reveal_self)
 -- Containers co-attend    = RelEx.TwoSorted.containers_co_attend
 -- P1 barrier two (exist.) = RelEx.TwoSorted.reveals_differ
@@ -240,11 +240,11 @@ theorem mutualPartial_witness :
 ## 7. Spec status-label housekeeping (MUST)
 
 In `series-2/2-0.md` §5, after this order lands:
-- C1: append `— conditional proved (Spec202): connected + no-total ⟹ no windowless.`
-- T14: append `— comparative laws, π lemmas, antisymmetry-failure, and MutualPartial corner proved (Spec202)` (+ T14d if delivered).
-- General P1: append `— barrier two existence form proved (Spec202): reveals differ across a shared relation.`
-- T13: append `— acquaintance and source bounds + properness witness proved (Spec202); chain composition awaits T4.`
-- T12: append `— containers-co-attend per-act form proved (Spec202).`
+- C1: append `— conditional proved (Spec22a): connected + no-total ⟹ no windowless.`
+- T14: append `— comparative laws, π lemmas, antisymmetry-failure, and MutualPartial corner proved (Spec22a)` (+ T14d if delivered).
+- General P1: append `— barrier two existence form proved (Spec22a): reveals differ across a shared relation.`
+- T13: append `— acquaintance and source bounds + properness witness proved (Spec22a); chain composition awaits T4.`
+- T12: append `— containers-co-attend per-act form proved (Spec22a).`
 
 In `series-2/2-2.md` §7: mark this order's items delivered; note the S1 pigeonhole as the sole remaining Series-2 theorem question this side of the νF order.
 

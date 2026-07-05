@@ -1,6 +1,6 @@
 # 2.5-mechanization-a — Work Order: the D19 Pack and the Closing Theorems of Series 2
 
-Target file: `series-2/formal/Spec205.lean` (the name is free again and this is the file it was waiting for). Conventions in force: no `sorry`; doc-comments with spec addresses (cite 2.5); axiom audit in-build; results post-hoc-marked, predictions frozen; hostile-first ordering mandatory.
+Target file: `series-2/formal/Spec25a.lean` (the name is free again and this is the file it was waiting for). Conventions in force: no `sorry`; doc-comments with spec addresses (cite 2.5); axiom audit in-build; results post-hoc-marked, predictions frozen; hostile-first ordering mandatory.
 
 **A change of standing discipline, stated once.** Every prior order forbade consulting §8 / the D19 register. That discipline is retired: D19 is written (2.5 §1) and is now citable like any other decision. What replaces it: **no proof in this order may *depend* on D19 for its mathematics.** The naming is interpretation over proved structure; if any theorem below turns out to need D19 as a hypothesis, that is a category error and a finding — halt and report. The doc-comments may (should) carry the interpretive readings; the proof terms may not.
 
@@ -10,13 +10,13 @@ Target file: `series-2/formal/Spec205.lean` (the name is free again and this is 
 
 ## Stage 0 — the D25 sweep (MUST; cheap; first)
 
-- Doc-comment sweep across Spec200–204g and the specs: 'observe/observation' → 'know/knowing' in interpretive text per D25. **No proof term changes; no declaration renames** (identifier churn risks nothing and buys nothing — record `Reveal`, `contextsC_differ`, etc. as legacy names in a glossary comment at the head of Spec205.lean).
+- Doc-comment sweep across Spec20a–204g and the specs: 'observe/observation' → 'know/knowing' in interpretive text per D25. **No proof term changes; no declaration renames** (identifier churn risks nothing and buys nothing — record `Reveal`, `contextsC_differ`, etc. as legacy names in a glossary comment at the head of Spec25a.lean).
 - One verification build after the sweep; the cold-reader check (O-2-5-5) is spec-side, flagged for the owner.
 
 ## Stage 1 — the D19 formal pack (MUST)
 
 - **V1** `rem_empty_at_saturation` : ctx_x(r) = pat(x) → remC x r = ∅. One line off the definitions; doc-comment: the vanishing that forces the stratified reading — at D19's locus, loss cannot be edge-shaped.
-- **FP-D1 / P-D19-1** `selfKnowing_inexhaustible` : the tower over a self-anchored knowing never terminates — every order has a successor act not witnessed at that order. Route: `ascentC` restricted to the self-anchored locus + T6's seriality (`descent_serial` idiom from Spec201d, ascended). The fog, as theorem.
+- **FP-D1 / P-D19-1** `selfKnowing_inexhaustible` : the tower over a self-anchored knowing never terminates — every order has a successor act not witnessed at that order. Route: `ascentC` restricted to the self-anchored locus + T6's seriality (`descent_serial` idiom from Spec21d, ascended). The fog, as theorem.
 - **FP-D2 / P-D19-2** `residue_private` : (a) Reveal(w, s) ⊆ pat(w) for all w, s (have it); (b) an unshared self-anchored r ∈ pat(x) appears in no Reveal of any w ≠ x. One-liners composed; the content is the composition.
 - **FP-D2 / P-D19-3** `residue_nontransmissible` : no hearsay chain from w ≠ x assembles x's self-anchored tower — chain content bounded by shared boundaries at each step (T13's bound, iterated; if full T13 lands in Stage 5 first, cite it; otherwise prove the bound-per-step form here and let Stage 5 generalize).
 - **FP-D3 / T19** `T19_no_residue_no_many` : package T17 + the Forcing Lemma as one statement over the functor class (any signature without a self-referential loss-generator has final coalgebra ≅ 1). Expected: re-exposition, no new proof. Doc-comment carries the modus tollens.
@@ -31,7 +31,7 @@ Target file: `series-2/formal/Spec205.lean` (the name is free again and this is 
 
 ## Stage 3 — T4 completed and T7 (MUST; FP-D5)
 
-- T4 close-out: `ApproxW` equivalence is delivered (refl/symm/trans, Spec204g); remaining: the profile form's isomorphism-over-pat(w) reading reconciled with the ApproxW definition (a definitional-equivalence lemma or a documented divergence), and O8's all-finite-depths default **ratified in a doc-comment** (owner has not objected; record it as ratified-by-default with a pointer).
+- T4 close-out: `ApproxW` equivalence is delivered (refl/symm/trans, Spec24g); remaining: the profile form's isomorphism-over-pat(w) reading reconciled with the ApproxW definition (a definitional-equivalence lemma or a documented divergence), and O8's all-finite-depths default **ratified in a doc-comment** (owner has not objected; record it as ratified-by-default with a pointer).
 - **T7** `identity_is_limit` : x = y ⟺ bisimilar x y ⟺ ∀ w, ApproxW w x y (with the depth-family bridge through EqDepth). Forward directions are `identity_by_unfolding` + monotonicity; the substantive direction is (∀w-agreement → bisimilarity) — route: exhibit the family's joint refinement as a bisimulation, or the EqDepth-at-all-depths → bisimilarity bridge at the ω-tier (finitely-branching behaviors make depth-wise agreement suffice — the classical argument; note the tier honestly).
 - This is the framework's oldest strong claim (A3's strong form; 2.0 §2.6 as corrected: identity approached as the limit of observer-local equalities). Its landing or failure is the headline alongside T11.
 

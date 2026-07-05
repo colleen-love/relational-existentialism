@@ -2,12 +2,12 @@
 Spec 2.1b — the transfer theorem and the design-ready group.
 
 Normative sources: `series-2/2-0.md` and `series-2/2-1.md`. Builds on
-`Spec201` (imported): the two-sorted signature `Model`/`Raw`/`Hom`, `ctx`,
+`Spec21a` (imported): the two-sorted signature `Model`/`Raw`/`Hom`, `ctx`,
 `SelfAnchored`, `generic_properness`, `coprod`, and the L1 covariety closures.
 
 Centerpiece — the **transfer theorem** (T2t): spec 2.1 §4's three-step
 construction of Ω, machine-checked *modulo the existence of the raw final
-coalgebra νF*. With L1 proved (Spec201), the covariety step (2)→(3) is
+coalgebra νF*. With L1 proved (Spec21a), the covariety step (2)→(3) is
 formalized here: if the raw universe νF is final, then Ω — the universe of
 coherent objects — exists and is final among coherent models, and every
 coherent description lands in the coherent part. The sole remaining gap is the
@@ -28,7 +28,7 @@ Deliverables (work order 2-1-mechanization-b.md §1):
 Several definitions are introduced ahead of spec 2.2 and are flagged
 `pending ratification (2.2)` in their doc-comments (work order §8).
 -/
-import Spec201
+import Spec21a
 import Mathlib.Data.Set.Lattice
 import Mathlib.Logic.Relation
 
@@ -144,7 +144,7 @@ def Deployable (M : Model) (x : M.O) (A : Set M.R) : Prop :=
 
 /-- Spec 2.0 §3, PR-J(b) — the DICHOTOMY, in the exact form the interface
 supports: every deployable attention is proper, or its witnessing relation is
-self-anchored. With `reflexive_saturation` (Spec201) this settles PR-J(b)'s
+self-anchored. With `reflexive_saturation` (Spec21a) this settles PR-J(b)'s
 interface-level status: properness of deployable attention is a THEOREM off the
 self-anchored locus and an AXIOM-candidate on it — the same address C3 gave
 A8(i). Full PR-J(b) ("every deployable attention is proper") is therefore exactly
@@ -201,7 +201,7 @@ def boolWitness : Model.{0} where
   dy _ := true
 
 /-- Spec 2.0 §2.4 / P2 with content: one shared relation, two genuinely unequal
-apertures. Spec201's P2 was type-level (the two directions belong to different
+apertures. Spec21a's P2 was type-level (the two directions belong to different
 objects); this witness shows the difference is MATERIAL — the same relation's
 context in `x` contains a bearing its context in `y` lacks, because the bearing
 is private to `x`. Same part, different wholes, different lenses. -/
@@ -306,7 +306,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.1 ↔ series-2/formal/Spec201b.lean
+-- Specs 2.0 / 2.1 ↔ series-2/formal/Spec21b.lean
 -- T2 (transfer, i)    = RelEx.TwoSorted.coherentPart_good (+ CoherentAt, Good, coherentPartO/R)
 -- T2 (transfer, ii)   = RelEx.TwoSorted.image_good
 -- T2 (transfer, iii)  = RelEx.TwoSorted.transfer, RelEx.TwoSorted.transfer_lands
@@ -323,8 +323,8 @@ end AxiomAudit
 --   transcribed; the rest are new here.)
 --
 -- Deviations from 2-1-mechanization-b.md:
---   * File registered as a fourth Lake library root (`Spec201b`) alongside
---     Series2/Spec200/Spec201 in `lake/lakefile.toml`.
+--   * File registered as a fourth Lake library root (`Spec21b`) alongside
+--     Series2/Spec20a/Spec21a in `lake/lakefile.toml`.
 --   * T2t-iv (subtype packaging of the coherent part as a `Model`) DROPPED per the
 --     work order's §3.4 droppable clause: constructing `Sym2` over a subtype from
 --     membership proofs is dependent-elimination plumbing, and the transfer theorem

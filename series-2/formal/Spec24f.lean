@@ -2,14 +2,14 @@
 Spec 2.4f — Lambek by hand for the corrected functor (2-4-mechanization-c Stage 0, Route A).
 
 Normative source: `series-2/2-4.md` §2 and `2-4-mechanization-c.md` Stage 0 Route A. Continues
-`Spec204e.lean`. Specs win. No declaration consults §8.
+`Spec24e.lean`. Specs win. No declaration consults §8.
 
 Route A: the structure map `dest : Ω_R → HC Ω_R` is an isomorphism (Lambek). Built by hand —
 `mkC := Cofix.corec (HC.map dest)` — because univariate `QPF.Cofix` provides no `mk`. This retires
 the "Lambek in both sorts" claim of 2.4 §2's construction paragraph. FP-C2: the univariate bisim
 closes `mkC_dest` without new axioms beyond the file's existing profile.
 -/
-import Spec204e
+import Spec24e
 
 open RelEx.Trials (RawC PfNe)
 

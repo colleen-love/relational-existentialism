@@ -1,6 +1,6 @@
 # 2.0-mechanization-a — Work Order: Unblocked Theorems (T1, P0–P3)
 
-**This document describes:** `formal/Spec200.lean`
+**This document describes:** `formal/Spec20a.lean`
 **Normative source:** `series-2/2-0.md` (Spec 2.0). Where this document and the spec disagree, the spec wins; report the discrepancy rather than improvising.
 **Audience:** Claude Code, executing without further human clarification. Everything needed is in this file. Follow it closely; do not expand scope.
 
@@ -267,7 +267,7 @@ def P3_note : Unit := ()
 ### 6.1 Checklist (all MUST pass)
 
 1. `lake build` succeeds with zero warnings you introduced (pre-existing warnings tolerated).
-2. `grep -rn "sorry" formal/Spec200.lean` returns nothing.
+2. `grep -rn "sorry" formal/Spec20a.lean` returns nothing.
 3. For each of `unit_final`, `total_isBisim`, `all_bisimilar`, `Arena.P0`, `Arena.P1_self`, `Arena.P2`: run `#print axioms <name>` in a scratch section or the file's bottom; confirm nothing beyond `Classical.choice`, `propext`, `Quot.sound` (ideally the P-block and T1b are axiom-free — report what you see).
 4. Every definition and theorem has a doc-comment with its spec ID.
 5. T1a's proof uses the nonemptiness field (§3.3 step 5) — verify by inspection, not just compilation.
@@ -285,7 +285,7 @@ Statement: any final coalgebra of the shadow functor has a subsingleton carrier 
 ### 6.4 Mapping table (append to the bottom of the Lean file as a comment)
 
 ```
--- Spec 2.0 ↔ formal/Spec200.lean
+-- Spec 2.0 ↔ formal/Spec20a.lean
 -- T1a  = RelEx.Shadow.unit_final
 -- T1b  = RelEx.Shadow.total_isBisim, RelEx.Shadow.all_bisimilar
 -- T1c  = RelEx.Shadow.final_subsingleton        (SHOULD; may be absent)
@@ -304,7 +304,7 @@ Statement: any final coalgebra of the shadow functor has a subsingleton carrier 
 - **General P1** (inexhaustibility to arbitrary observers) — requires the 2.1 channel structure linking observer-restrictions to observed-aspects; proving it now would require inventing unsettled signature, which is exactly what D11's discipline forbids.
 - **Any instance of `Arena`** — instantiation is 2.1's job; a toy instance would create a false impression of discharge.
 - **mathlib's `CategoryTheory` framework** — hand-rolled structures only, per §2.
-- **Refactoring anything outside `formal/Spec200.lean`.**
+- **Refactoring anything outside `formal/Spec20a.lean`.**
 
 If, while working, a genuinely unblocked-looking lemma outside this list presents itself: note it in the PR description as a suggestion; do not prove it.
 

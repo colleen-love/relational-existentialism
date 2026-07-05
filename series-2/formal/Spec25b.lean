@@ -3,11 +3,11 @@ Spec 2.5b — T7 (identity as the limit of observer-local equalities), the T4 cl
 depth-family bridge, and the Stage 4–5 attempts of the closing contract.
 
 Normative source: `series-2/2-5.md` (§5 the formal targets, T7 / FP-D5; §6 FP-D7) and the work
-order `2-5-mechanization-a.md` Stages 3–5. Continues `Spec205.lean` (the D19 pack). Specs win.
+order `2-5-mechanization-a.md` Stages 3–5. Continues `Spec25a.lean` (the D19 pack). Specs win.
 
 STANDING DISCIPLINE (2-5-mechanization-a): no proof term below depends on D19 for its mathematics.
 The D25 verb emendation (`know`, not observe) is in force doc-side; legacy identifiers keep their
-names (see the Spec205 glossary header). `ApproxW w x y` reads "x and y are known alike by w".
+names (see the Spec25a glossary header). `ApproxW w x y` reads "x and y are known alike by w".
 
 THE HEADLINE (T7, Stage 3): **identity is the limit of observer-local equalities.** The framework's
 oldest strong claim (2.0 §2.6 as corrected, A3's strong form) lands in full over Ω_C, and it lands
@@ -21,7 +21,7 @@ The depth-family reading (`EqDepthR`) is bridged by reflexivity (`eqDepth_of_eq`
 `(∀ n, EqDepthR n r s) → r = s` is a corollary of the coinductive core and is not load-bearing —
 the observer-local route already secures identity outright.
 -/
-import Spec205
+import Spec25a
 
 open RelEx.Trials (RawC PfNe)
 
@@ -30,7 +30,7 @@ namespace RelEx.Corrected
 /-! ## Stage 3 — T7, relation sort: the coinductive core (2.5 §5, FP-D5)
 
 *An object is its unfolding.* Bisimilarity ⟺ equality over Ω_R, the corrected analogue of
-Spec201d's `identity_by_unfolding`, re-exporting `QPF.Cofix.bisim` at the corrected functor's door. -/
+Spec21d's `identity_by_unfolding`, re-exporting `QPF.Cofix.bisim` at the corrected functor's door. -/
 
 /-- Relation lifting is reflexive on the diagonal: `Functor.Liftr (=) z z` for every `z : HC Ω_R`.
 The witness is `repr z` used on both sides (`abs_repr` closes the reconstruction). -/
@@ -46,7 +46,7 @@ def BisimC (r s : ΩR) : Prop :=
     ∀ a b, R a b → Functor.Liftr R (QPF.Cofix.dest (F := HC) a) (QPF.Cofix.dest (F := HC) b)
 
 /-- **T7, coinductive core** — 2.5 §5, FP-D5: two relations of Ω_R related by any bisimulation are
-equal. `QPF.Cofix.bisim` re-exported for the corrected functor (the analogue of Spec201d's
+equal. `QPF.Cofix.bisim` re-exported for the corrected functor (the analogue of Spec21d's
 `identity_by_unfolding`). This is the representation-layer half of identity-as-limit. -/
 theorem identity_by_unfoldingC (R : ΩR → ΩR → Prop)
     (H : ∀ x y, R x y →
@@ -144,10 +144,10 @@ theorem eqDepth_of_eq {r s : ΩR} (h : r = s) : ∀ n, EqDepthR n r s :=
 /-! ## Stage 4 — reach_infinite (2.5 §5, T10 partial; SHOULD)
 
 The seeds' universe reaches infinitely many relations along a constitutive-descent spine. The tower
-family (Spec204e) is an infinite injective spine, and each `tower (n+1)` has `tower n` one
+family (Spec24e) is an infinite injective spine, and each `tower (n+1)` has `tower n` one
 constitutive step inside it (`DescC`), so the range is an infinite descending chain. Full
 `ReachableFromSeeds` (the depth-density of the seeds' orbit) stays OPEN, exactly as anchored in
-Spec204d — this is the infinity of the spine, not the closure of the orbit. -/
+Spec24d — this is the infinity of the spine, not the closure of the orbit. -/
 
 /-- The descent spine: `tower n` is one constitutive step inside `tower (n+1)` (a relation endpoint
 of its unfolding). The corrected `Desc` along the tower. -/
@@ -215,7 +215,7 @@ end AxiomAudit
 --                                      depth machinery in hand; no sorry, logged OPEN.  deferred
 -- Stage 5 (SHOULD) FP-D7 C2-strong  → objElt2/3, piC_objElt_empty, not_C2_strong        CONFIRMED (false)
 --                  T13 full         → per-step bound `receivedC_bound`/`residue_
---                                      nontransmissible` (Spec205) in hand; the length
+--                                      nontransmissible` (Spec25a) in hand; the length
 --                                      induction carries to Series 3.                    deferred
 --                  D14(b)           → needs EqDepth antitonicity (a real lemma); the
 --                                      instrument (EqDepthR) is in hand, the monotone

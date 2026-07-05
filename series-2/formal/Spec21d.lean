@@ -2,13 +2,13 @@
 Spec 2.1d — the unblocked four (T6, T9, T5, T10) and the coinduction principle.
 
 Normative sources: `series-2/2-0.md`, `2-1.md`, `2-2.md`. Builds on
-`Spec201`/`Spec201b`/`Spec201c` (imported). Spec201c changed the tense — Ω exists
+`Spec21a`/`Spec21b`/`Spec21c` (imported). Spec21c changed the tense — Ω exists
 (`T2_discharged`), inhabited (`omegaHat_coherent`) — and this file proves the theorem
 group that existence unblocked, stated against the constructed universe `ZΩ`.
 -/
-import Spec201
-import Spec201b
-import Spec201c
+import Spec21a
+import Spec21b
+import Spec21c
 import Mathlib.Order.WellFounded
 import Mathlib.Data.Set.Finite.Lattice
 
@@ -79,7 +79,7 @@ theorem identity_by_unfolding (R : Ω₀ → Ω₀ → Prop)
   QPF.Cofix.bisim R H
 
 /-- Spec 2.0 A5, realized: the universe contains an object that relates to itself —
-ω̂, whose pattern is exactly its own self-relation. From Spec201c's `pat_omegaHat`.
+ω̂, whose pattern is exactly its own self-relation. From Spec21c's `pat_omegaHat`.
 The ledger's "self-loop by Lambek" made concrete. -/
 theorem self_relation_realized :
     ∃ (x : ZΩ.O) (r : ZΩ.R), r ∈ ZΩ.pat x ∧ ZΩ.endpoints r = s(x, x) :=
@@ -252,7 +252,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec201d.lean
+-- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec21d.lean
 -- T6 (no origin)      = RelEx.TwoSorted.desc_serial, no_constitutive_origin, no_origin_ZΩ, desc_chain
 -- COIND               = RelEx.TwoSorted.identity_by_unfolding, self_relation_realized
 -- T9 (canonicity)     = RelEx.TwoSorted.final_unique (+ Hom.idRaw, Hom.compRaw)
@@ -263,7 +263,7 @@ end AxiomAudit
 -- T10s (genesis)      = RelEx.TwoSorted.Arises, omegaOrbit, omegaHat_mem_omegaOrbit, Genesis
 --
 -- Deviations from 2-1-mechanization-d.md:
---   * Registered as a seventh Lake library root (`Spec201d`).
+--   * Registered as a seventh Lake library root (`Spec21d`).
 --   * T5 `closing_dense` DEFERRED per the §5 drop-clause: the EqDepth/ρ/reach
 --     machinery (load-bearing for T4/T7) is proved; the final truncation assembly
 --     is deferred, its blueprint recorded in the PR description. File stays

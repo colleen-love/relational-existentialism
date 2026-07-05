@@ -11,14 +11,14 @@ at that revision's commit; this file makes each one true or false and every theo
 doc-comment says which prediction it CONFIRMS or REFUTES. A surprised prediction is
 the trial working; no refutation is softened.
 
-Builds on `Spec201` (the `Raw` signature), `Spec201c` (`G`), and `Spec203`
-(`G_unit_subsingleton`, and the `Subsingleton (Sym2 PUnit)` instance). Spec203
-transitively imports Spec201/b/c/d/202, so a single import suffices; the work order's
-`Spec201`/`Spec201c` are named for the reader.
+Builds on `Spec21a` (the `Raw` signature), `Spec21c` (`G`), and `Spec23a`
+(`G_unit_subsingleton`, and the `Subsingleton (Sym2 PUnit)` instance). Spec23a
+transitively imports Spec21a/b/c/d/202, so a single import suffices; the work order's
+`Spec21a`/`Spec21c` are named for the reader.
 -/
-import Spec201
-import Spec201c
-import Spec203
+import Spec21a
+import Spec21c
+import Spec23a
 
 namespace RelEx.Trials
 
@@ -95,7 +95,7 @@ theorem forcing_lemma (α : Type) [Subsingleton α]
 
 /-! ## B1 — the F(1)/Parmenides gate (D20), run symmetrically on every entrant
 
-B1-G (control): the collapsed G fails B1 by `G_unit_subsingleton` (Spec203) — cited,
+B1-G (control): the collapsed G fails B1 by `G_unit_subsingleton` (Spec23a) — cited,
 not reproved. Every gate it passes has no discriminating power (2.3 §5.1). -/
 
 /-! ### B1-A — pure (A), division over the pattern -/
@@ -293,7 +293,7 @@ end AxiomAudit
 -- (B)-strict empties, (A2) passes only on the forbidden coin (∅, B7-eliminable).
 --
 -- Entrant ↔ Lean name:
---   B1-G   (control)          = RelEx.TwoSorted.G_unit_subsingleton  (Spec203, cited)
+--   B1-G   (control)          = RelEx.TwoSorted.G_unit_subsingleton  (Spec23a, cited)
 --   B1-A   (pure A)           = RelEx.Trials.AttA, B1_A, B1_A_pattern
 --   B1-B   (B, T possibly ∅)  = RelEx.Trials.AttB, B1_B
 --   B1-Bs  (B-strict)         = RelEx.Trials.AttBs, B1_Bs_empty
@@ -311,5 +311,5 @@ end AxiomAudit
 --     goal (`IsBisimC` / Egli–Milner) is dropped per the work order's "drop freely"
 --     clause: the separation-by-invariant is the load-bearing content, and full
 --     bisimulation machinery belongs to (C)'s own spec if it wins.
---   * Registered as a ninth Lake library root (`Spec203b`).
+--   * Registered as a ninth Lake library root (`Spec23b`).
 -/

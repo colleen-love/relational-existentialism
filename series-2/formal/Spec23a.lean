@@ -2,19 +2,19 @@
 Spec 2.3 — certify the Mirror.
 
 Normative sources: `series-2/2-3.md` (the finding), `series-2/2-0.md`.
-Builds on `Spec201`/`Spec201b`/`Spec201c`/`Spec201d` (imported).
+Builds on `Spec21a`/`Spec21b`/`Spec21c`/`Spec21d` (imported).
 
-Spec201c constructed Ω₀ correctly for a signature that turns out to be the boolean
+Spec21c constructed Ω₀ correctly for a signature that turns out to be the boolean
 shadow in two-sorted clothing. T1 fires: the universe is one point. This file proves
 that fact with dignity, proves the coincidence of the framework's four forbidden
 extremes at that point, and banks the honesty lemmas that keep T5/T10's current
 status from being misread. Certification, not construction — the repo's proudest scar.
 -/
-import Spec201
-import Spec201b
-import Spec201c
-import Spec201d
-import Spec202
+import Spec21a
+import Spec21b
+import Spec21c
+import Spec21d
+import Spec22a
 
 namespace RelEx
 namespace TwoSorted
@@ -45,7 +45,7 @@ theorem G_unit_subsingleton : Subsingleton (G PUnit) := ⟨by
     rwa [Subsingleton.elim p q]⟩
 
 /-- The one-point bounded Raw: one object, one self-relation, whole-pattern.
-The Raw form of Spec200's `Shadow.unit`. -/
+The Raw form of Spec20a's `Shadow.unit`. -/
 def unitRaw : Raw where
   O := PUnit
   R := PUnit
@@ -56,7 +56,7 @@ def unitRaw : Raw where
 /-- The one-point Raw is final among bounded Raws — the two-sorted `unit_final`.
 Existence: constant maps; `end_comm` because `Sym2 PUnit` is a subsingleton;
 `pat_comm` because `Set PUnit`'s universe equals the image of any nonempty set
-(the Spec200 crux, reused: nonemptiness is used exactly once, and must be).
+(the Spec20a crux, reused: nonemptiness is used exactly once, and must be).
 Uniqueness: both carrier maps land in `PUnit`. -/
 theorem isFinalBRaw_unitRaw : IsFinalBRaw unitRaw := by
   refine ⟨?bounded, fun A _ => ?main⟩
@@ -82,7 +82,7 @@ theorem isFinalBRaw_unitRaw : IsFinalBRaw unitRaw := by
 firing on our own construction. The signature of 2.1 §2 — relations individuated by
 bare endpoints, no grading anywhere in the functor — is the boolean shadow in
 two-sorted clothing, and the framework's first theorem enforced itself against the
-framework's authors. The construction (Spec201c) is CORRECT; what it constructs is
+framework's authors. The construction (Spec21c) is CORRECT; what it constructs is
 the One. ω̂ is not Ω's first citizen; it is its only citizen. Derived structure
 (contexts, apertures, dyads) is bisimilarity-invariant and cannot individuate — the
 D4 corollary, returning. The many require loss in the functor (2.3 D21). This is the
@@ -200,7 +200,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.3 ↔ series-2/formal/Spec203.lean
+-- Specs 2.0 / 2.3 ↔ series-2/formal/Spec23a.lean
 -- DIAG (F(1))          = RelEx.TwoSorted.G_unit_subsingleton
 -- UNIT                 = RelEx.TwoSorted.unitRaw, isFinalBRaw_unitRaw
 -- T17 (The Mirror)     = RelEx.TwoSorted.omega_collapse (Route A: final_unique), omegaHat_only
@@ -210,7 +210,7 @@ end AxiomAudit
 -- T17 route shipped: Route A (canonicity — `final_unique ZΩ unitRaw`, then Subsingleton PUnit).
 --
 -- Deviations from 2-3-mechanization-a.md:
---   * Registered as an eighth Lake library root (`Spec203`).
---   * Added `import Spec202` (beyond the work order's Spec201/b/c/d list): T18 uses
---     `Total`/`Windowless`/`Internal`/`internal_subset`, which live in Spec202.
+--   * Registered as an eighth Lake library root (`Spec23a`).
+--   * Added `import Spec22a` (beyond the work order's Spec21a/b/c/d list): T18 uses
+--     `Total`/`Windowless`/`Internal`/`internal_subset`, which live in Spec22a.
 -/

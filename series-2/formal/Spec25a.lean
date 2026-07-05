@@ -2,7 +2,7 @@
 Spec 2.5 — the D19 formal pack, S1_ω, and the closing theorems of Series 2.
 
 Normative source: `series-2/2-5.md` (§1 D19, §2 D25, §5 the formal content, §6 frozen
-predictions) and the work order `2-5-mechanization-a.md`. Continues `Spec204g.lean` (the whole
+predictions) and the work order `2-5-mechanization-a.md`. Continues `Spec24g.lean` (the whole
 corrected-universe chain). Specs win.
 
 STANDING DISCIPLINE (2-5-mechanization-a): the D19 register is now written and citable, but
@@ -20,7 +20,7 @@ them under acquaintance, not spectation:
   * `HasObjEndpointΩ`, `ApproxW`, etc. — knowing-local structure. The mathematics is unmoved; the
     interpretation moves truer. The 2.0 prose sweep (A8's wording, §2.4 headers, D10) is spec-side.
 -/
-import Spec204g
+import Spec24g
 
 open RelEx.Trials (RawC PfNe)
 
@@ -41,13 +41,13 @@ theorem rem_empty_at_saturation (A : RawC) (x : A.O) (r : A.R)
   exact Set.subset_insert r (A.pat x)
 
 /-- One step of constitutive descent among relations: `r` occurs one level inside `s`'s unfolding
-(as a relation endpoint). The corrected `Desc` (cf. Spec201d), on the relation sort. -/
+(as a relation endpoint). The corrected `Desc` (cf. Spec21d), on the relation sort. -/
 def DescC (r s : ΩR) : Prop := Sum.inr r ∈ ZΩC.endpoints s
 
 /-- **P-D19-1 (inexhaustibility / the fog, as theorem)** — 2.5 §5, FP-D1. The tower of self-
 knowing never terminates: over a self-anchored knowing `r` (one that knows itself, `SelfAnchoredC`),
 constitutive descent admits a chain of *every* finite depth — the ascent restricted to the self-
-anchored locus, with T6's seriality (Spec201d's `desc_chain` idiom, ascended to the corrected
+anchored locus, with T6's seriality (Spec21d's `desc_chain` idiom, ascended to the corrected
 functor). At every order of self-knowing there is a further turning; nothing is missing at any
 order, something is unclosable at every order. This is D19(b)'s fog made precise. -/
 theorem selfKnowing_inexhaustible (r : ΩR) (hsa : SelfAnchoredC ZΩC r) :
@@ -68,7 +68,7 @@ theorem residue_private (A : RawC) (w : A.O) (r s : A.R)
   · exact hrw (ctxC_subset A w s hmem)
 
 /-- What `x` receives, by hearsay through `z`, about a relation `s` that `z` knows: the part of
-`z`'s context of `s` that `x` already shares. The corrected `received` (cf. Spec202), bounded by
+`z`'s context of `s` that `x` already shares. The corrected `received` (cf. Spec22a), bounded by
 acquaintance. -/
 def receivedC (A : RawC) (x z : A.O) (s : A.R) : Set A.R := ctxC A z s ∩ A.pat x
 

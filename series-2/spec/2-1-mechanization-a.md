@@ -1,9 +1,9 @@
 # 2.1-mechanization-a — Work Order: Signature, Enlargement, the C3 Split, and L1
 
-**This document describes:** `series-2/formal/Spec201.lean`
+**This document describes:** `series-2/formal/Spec21a.lean`
 **Normative sources:** `series-2/2-0.md` (ontology) and `series-2/2-1.md` (signature and definitions). Where this document and the specs disagree, the specs win; report the discrepancy rather than improvising.
 **Audience:** Claude Code, executing without further human clarification. Follow closely; do not expand scope.
-**Relation to prior work:** `Spec200.lean` stays untouched and remains valid — its Arena interface and proofs (T1, P0, P1s, P2, P3) are not superseded. `Spec201.lean` is a new file realizing the *two-sorted* signature of spec 2.1, which is the Arena's successor.
+**Relation to prior work:** `Spec20a.lean` stays untouched and remains valid — its Arena interface and proofs (T1, P0, P1s, P2, P3) are not superseded. `Spec21a.lean` is a new file realizing the *two-sorted* signature of spec 2.1, which is the Arena's successor.
 
 ---
 
@@ -31,7 +31,7 @@
 
 Identical to `2-0-mechanization.md` §2, with these additions/changes:
 
-- **New file** `series-2/formal/Spec201.lean`, registered alongside `Spec200` in the Lake config the same way `Spec200` was registered (second library root pattern; follow the precedent in the repo, and record any path deviation in the mapping table as before).
+- **New file** `series-2/formal/Spec21a.lean`, registered alongside `Spec20a` in the Lake config the same way `Spec20a` was registered (second library root pattern; follow the precedent in the repo, and record any path deviation in the mapping table as before).
 - **Imports:** `Mathlib.Data.Sym.Sym2` is needed (unordered pairs) in addition to the set-theory basics. `Sym2 α` is mathlib's quotient of `α × α` by swap; membership is `Sym2.Mem` (`x ∈ s` works), the functorial action is `Sym2.map`, and the key lemma is `Sym2.mem_map` (verify exact name with `exact?` if it has drifted). Diagonal pairs `s(x, x)` exist — self-relation is representable, which the framework requires (A5).
 - **No `sorry`, no new axioms**; `#print axioms` audit on every theorem; doc-comments carry spec IDs from **2-0.md and 2-1.md** (note the new hyphenated filenames).
 - Namespace: `RelEx.TwoSorted`.
@@ -54,7 +54,7 @@ containers, numerical identity for free); endpoint coherence as a field —
 which IS proposition P3 and, as P4s will show, the co-requirement.
 `dy` (dyad anchor) is taken as DATA at this interface: its construction from
 `close` is P5 (spec 2.1 §3.1), deferred; no axioms govern it here, and results
-below are interface-relative in the same sense as Spec200's Arena results. -/
+below are interface-relative in the same sense as Spec20a's Arena results. -/
 structure Model where
   O : Type u
   R : Type u
@@ -215,14 +215,14 @@ Three tempting overreaches, all forbidden:
 
 ## 6. Build, verify, deliver
 
-1. `lake build` clean; `grep -rn "sorry" series-2/formal/Spec201.lean` empty.
+1. `lake build` clean; `grep -rn "sorry" series-2/formal/Spec21a.lean` empty.
 2. `#print axioms` on: `P4_static`, `PRJ_a`, `generic_properness`, `reflexive_saturation`, `coherent_of_surjective_hom`, `coherent_of_injective_hom` (+ `coherent_sum` if attempted). Baseline only (`propext`, `Classical.choice`, `Quot.sound`); several of these should be axiom-free — report what you see.
 3. Declaration order in the file: `Model` → `ctx` → `P4_static` → `PRJ_a` → `SelfAnchored` → `generic_properness` → `reflexive_saturation` → Part B. The `SelfAnchored`-before-properness order is normative (D15).
 4. Doc-comments per the templates above; every one carries its spec ID against 2-0.md / 2-1.md.
 5. Mapping table at file foot:
 
 ```
--- Specs 2.0 / 2.1 ↔ series-2/formal/Spec201.lean
+-- Specs 2.0 / 2.1 ↔ series-2/formal/Spec21a.lean
 -- P4 (static)        = RelEx.TwoSorted.P4_static
 -- PR-J(a)            = RelEx.TwoSorted.PRJ_a
 -- C3 split           = RelEx.TwoSorted.SelfAnchored (definition; order normative)
@@ -241,7 +241,7 @@ Three tempting overreaches, all forbidden:
 - **T13, general P1, T4** — need witnessing structure not defined in this order.
 - **The weak-pullback check** — categorical background hypothesis; separate small task.
 - **κ-boundedness anywhere** — `Set R` unbounded is fine at this interface; κ is existence scaffolding (2.1 D4) and none of these results touch existence.
-- **Modifying `Spec200.lean`** or the 2.0 mapping table.
+- **Modifying `Spec20a.lean`** or the 2.0 mapping table.
 
 If an unblocked-looking lemma outside this list presents itself, note it in the PR description; do not prove it.
 

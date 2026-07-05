@@ -1,6 +1,6 @@
 # 2-4-mechanization-b — Work Order: Carving Ω_C, Re-anchoring, and the C1 Landing
 
-Target file: `series-2/formal/Spec204d.lean` (Spec204a–c occupied). Conventions in force: no `sorry`; doc-comment every declaration with its spec address (cite 2.4, per the spec-first resolution recorded in the Spec204 headers); axiom audit per theorem reproduced in-build; results appended to 2.4 post-hoc-marked, predictions left frozen; hostile-first ordering mandatory.
+Target file: `series-2/formal/Spec24d.lean` (Spec24a–c occupied). Conventions in force: no `sorry`; doc-comment every declaration with its spec address (cite 2.4, per the spec-first resolution recorded in the Spec24a headers); axiom audit per theorem reproduced in-build; results appended to 2.4 post-hoc-marked, predictions left frozen; hostile-first ordering mandatory.
 
 **Naming note.** The prior results note referred to this order as "2-5-mechanization-b"; that label is retired here for consistency with the spec-first resolution (spec = 2-4.md, orders = 2-4-x). Alias recorded; nothing else changes.
 
@@ -10,19 +10,19 @@ Target file: `series-2/formal/Spec204d.lean` (Spec204a–c occupied). Convention
 
 ## Stage 0 — Ω_C carved (MUST)
 
-The one item Spec204c left uncarved, now made an object:
+The one item Spec24c left uncarved, now made an object:
 
-- `coherentPartC` — the greatest coherent subcoalgebra of `ZΩC` (Knaster–Tarski over the L1-C covariety; all ingredients proved in Spec204a/c). `Ω_C` := its carrier pair.
+- `coherentPartC` — the greatest coherent subcoalgebra of `ZΩC` (Knaster–Tarski over the L1-C covariety; all ingredients proved in Spec24a/c). `Ω_C` := its carrier pair.
 - Lambek in both sorts on the coherent part; `closeC` the anamorphism into Ω_C (not merely into ZΩC).
-- Citizens relocated: `omegaHat2_mem_ΩC`, `elt2_mem_ΩC`, `elt3_mem_ΩC`; `anti_mirror_ΩC` restated so FP5's separation is a fact *about Ω_C the object*, one `exact` away from Spec204c's theorem.
+- Citizens relocated: `omegaHat2_mem_ΩC`, `elt2_mem_ΩC`, `elt3_mem_ΩC`; `anti_mirror_ΩC` restated so FP5's separation is a fact *about Ω_C the object*, one `exact` away from Spec24c's theorem.
 - `hostedC : Ω_R → Prop` (∃ object-point whose pattern contains it) and `hostedPart` — the doctrine of 2.4 §5 given its formal referent. Interpretation note in the doc-comment: doctrine-level quantifiers over relations relativize here; this is application of normative §5, not a new decision.
 
 ## Stage 1 — the honesty lemmas, lifted (MUST)
 
-Spec203's `eqDepth_trivial` and `genesis_vacuous` exist so no reader mistakes T5/T10 for resolved; this stage replaces both with contentful counterparts.
+Spec23a's `eqDepth_trivial` and `genesis_vacuous` exist so no reader mistakes T5/T10 for resolved; this stage replaces both with contentful counterparts.
 
-- `EqDepthC` / `ρC` over Ω_C, definitions carried from Spec201d with `ends` over O ⊕ R.
-- **FP-B1:** `eqDepthC_nontrivial` — a pair of Ω_C elements agreeing to depth 0 and separating at depth 1 (elt2/elt3 are the intended witnesses; their Spec204c separation is depth-1 by sort-profile, so the eqDepth computation should be mechanical).
+- `EqDepthC` / `ρC` over Ω_C, definitions carried from Spec21d with `ends` over O ⊕ R.
+- **FP-B1:** `eqDepthC_nontrivial` — a pair of Ω_C elements agreeing to depth 0 and separating at depth 1 (elt2/elt3 are the intended witnesses; their Spec24c separation is depth-1 by sort-profile, so the eqDepth computation should be mechanical).
 - **FP-B2:** `GenesisC` stated over Ω_C; `genesisC_nonvacuous` — the hypothesis class is inhabited (the vacuity of the collapsed universe is gone). **Truth-value stays open**, exactly as 2-1d anchored it; the doc-comment says so in referee-hostile terms. T10's sharpened form ("is F(1)'s pregnancy enough to reach everything?") is *stated* as `ReachableFromSeeds` and left open — it is now a precise question about Ω_C, which is the re-anchoring deliverable, not its answer.
 - T5 surrogate: `closing_denseC` **attempted** under the same drop clause as its ancestor (drop freely if the assembly needs machinery out of scope; the deferral was providential once and is sanctioned again). No frozen prediction — logged as OPEN-attempt, outcome recorded either way.
 
@@ -34,7 +34,7 @@ Spec203's `eqDepth_trivial` and `genesis_vacuous` exist so no reader mistakes T5
 
 ## Stage 3 — the C1 landing (SHOULD; the order's star)
 
-The conditional is proved (`no_windowless_of_connected_of_no_total`, Spec202); T16_ω discharges its no-total hypothesis at this tier. What remains is connectivity — and the record already contains the anti-desired-outcome precedent (`coprod_disconnected`), so:
+The conditional is proved (`no_windowless_of_connected_of_no_total`, Spec22a); T16_ω discharges its no-total hypothesis at this tier. What remains is connectivity — and the record already contains the anti-desired-outcome precedent (`coprod_disconnected`), so:
 
 - **FP-B4 (hostile):** Ω_C is **not** globally connected — unhosted chaff and disjoint behaviors predicted to witness disconnection. Prove the disconnection witness if it exists; if Ω_C surprises us by being connected, better news, post-hoc note.
 - `connectedHostedPart` or the appropriately relativized hypothesis: connectivity stated over the hosted part / the close-image of connected descriptions, whichever the proofs favor — the relativization is the §5 doctrine at work.
@@ -45,7 +45,7 @@ The conditional is proved (`no_windowless_of_connected_of_no_total`, Spec202); T
 Deferred from the prior order's Stage 7:
 
 - `ConnectedDescription` defined (every relation-point reachable from some object-point via pat/ends descent).
-- **FP-B6:** `hosted_of_closeC_connected` — every relation-point in the close-image of a connected coherent description is hosted. Together with `unhosted_exists` (Spec204b), the P3h picture completes: fails globally, holds on the connected close-image — FP3's split, both halves landed.
+- **FP-B6:** `hosted_of_closeC_connected` — every relation-point in the close-image of a connected coherent description is hosted. Together with `unhosted_exists` (Spec24b), the P3h picture completes: fails globally, holds on the connected close-image — FP3's split, both halves landed.
 
 ## Stage 5 — B5 completion: the interface pack (SHOULD)
 

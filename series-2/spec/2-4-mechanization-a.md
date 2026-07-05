@@ -1,6 +1,6 @@
 # 2-4-mechanization-a — Work Order: F_C, the Coherence Triple, Ω_C, and the Anti-Mirror
 
-Target file: `series-2/formal/Spec205.lean` (new Lake root, eleventh). Conventions in force: no `sorry`; doc-comment every declaration with its spec address; axiom audit per theorem reproduced in-build; results appended to 2.5 post-hoc-marked with predictions left frozen; hostile-first ordering is **mandatory and is part of this order's deliverables** — the stages below are ordered by hostility, not convenience, and reordering requires a marked note.
+Target file: `series-2/formal/Spec25a.lean` (new Lake root, eleventh). Conventions in force: no `sorry`; doc-comment every declaration with its spec address; axiom audit per theorem reproduced in-build; results appended to 2.5 post-hoc-marked with predictions left frozen; hostile-first ordering is **mandatory and is part of this order's deliverables** — the stages below are ordered by hostility, not convenience, and reordering requires a marked note.
 
 The FP table of Spec 2.4 §7 is the contract. Nothing in this order may consult §8 (the D19 register) as motivation for any proof choice; FP4's hostile framing is the only permitted contact.
 
@@ -11,12 +11,12 @@ The FP table of Spec 2.4 §7 is the contract. Nothing in this order may consult 
 - `F_C` defined exactly: `FO (O R) := {S : Finset R // S.Nonempty}` (or the P⁺f idiom already in use), `FR (O R) := Sym2 (O ⊕ R)`.
 - **FP1a:** object component over the point: `Subsingleton (FO PUnit PUnit)` + inhabited.
 - **FP1b:** relation component over the point: `FR PUnit PUnit ≃ Fin 3` (or the three named elements with pairwise `≠` and an exhaustion lemma — the equiv is preferred; the exhaustion is the drop clause).
-- **FP1c (coherent census):** the three one-point coalgebras defined; the K-triple stated (Stage 1 may be pulled forward for the predicates only); `seed1_incoherent` (K3 fails on the bare self-relation), `seed2_coherent`, `seed3_coherent`, and `seeds_not_bisimilar` at depth 1 (sort-profile separation — the Spec203b B2-C technique applies).
+- **FP1c (coherent census):** the three one-point coalgebras defined; the K-triple stated (Stage 1 may be pulled forward for the predicates only); `seed1_incoherent` (K3 fails on the bare self-relation), `seed2_coherent`, `seed3_coherent`, and `seeds_not_bisimilar` at depth 1 (sort-profile separation — the Spec23b B2-C technique applies).
 - Doc-comment on the census block: the One cannot merely turn; cite 2.5 §0.
 
 ## Stage 1 — signature, coherence, closures (MUST)
 
-- Two-sorted coalgebra structure (`RawC` / `ModelC` per the Spec201 idiom) with `pat`, `ends`.
+- Two-sorted coalgebra structure (`RawC` / `ModelC` per the Spec21a idiom) with `pat`, `ends`.
 - K1, K2, K3 as predicates; `CoherentC := K1 ∧ K2 ∧ K3`.
 - **FP2 (L1-C):** `coherentC_of_surjective_hom`, `coherentC_of_injective_hom`, `coherentC_sum` — proved *per clause*, so a failure isolates the failing clause. A failing clause halts the order at this stage: write the counterexample, mark the finding, stop.
 - The **holding lemma** stated and proved at interface level (K1 + K2 composition on mixed ties), doc-commented "to bear is to hold," cite 2.5 §2.
@@ -25,20 +25,20 @@ The FP table of Spec 2.4 §7 is the contract. Nothing in this order may consult 
 
 - Primary route: two-variable MvQPF. Gate check first (cheap, D20-spirit): P⁺f and `Sym2 ∘ Sum` admit (Mv)QPF instances in current mathlib — verify by instance search *before* writing construction code; log the result either way.
 - `νF_C` via `MvQPF.Cofix` (or the mutual-fixpoint idiom the instances support).
-- **Drop clause (sanctioned):** if mathlib's MvQPF machinery fights the mutual pair for more than a working session, fall back to the Spec201c template generalized by hand: two-sorted bounded `RawC`, `isFinalBRawC` by terminal-sequence convergence. No new ideas, more labor; record which route landed.
+- **Drop clause (sanctioned):** if mathlib's MvQPF machinery fights the mutual pair for more than a working session, fall back to the Spec21c template generalized by hand: two-sorted bounded `RawC`, `isFinalBRawC` by terminal-sequence convergence. No new ideas, more labor; record which route landed.
 - Weak-pullback one-liner extended to `Sym2 ∘ Sum` (bag-of-two over coproduct). This retires the last L1-era obligation.
 
 ## Stage 3 — Ω_C (MUST)
 
 - `Ω_C` := greatest coherent subcoalgebra of `νF_C` (Knaster–Tarski inside the known object; the covariety/transfer machinery instantiated with L1-C).
 - Lambek in both sorts on the coherent part; `closeC` the anamorphism.
-- T2-C recorded: transfer at the bounded quantifier, per the Spec201c pattern.
+- T2-C recorded: transfer at the bounded quantifier, per the Spec21c pattern.
 - Inhabitation: **ω̂₂** (the self-witnessing loop, seed 3 or seed 2 — whichever closes cleanest) closed into Ω_C; `omegaHat2_mem`. Doc-comment retiring `omegaHat_coherent` with a pointer (O-2-5-3).
 
 ## Stage 4 — the anti-Mirror (MUST; immediately after Stage 3, before any comfort work)
 
 - **FP5:** two elements of Ω_C proper, provably non-bisimilar (`identity_by_unfolding`'s contrapositive with a depth-1 separator; the two closed seeds are the intended witnesses).
-- **FP6:** the ascent re-verified against F_C exactly — stage-wise non-collapse of the terminal sequence (`ascentC_R`, `ascentC_O`), Spec203c technique, proxy replaced.
+- **FP6:** the ascent re-verified against F_C exactly — stage-wise non-collapse of the terminal sequence (`ascentC_R`, `ascentC_O`), Spec23c technique, proxy replaced.
 - If FP5 fails: **stop the order.** A second Mirror is a program-level event (2.3 §5.4 has no budget for it); everything downstream is void pending diagnosis.
 
 ## Stage 5 — the residue, attacked (MUST for the attempt; SHOULD for the positive witness)

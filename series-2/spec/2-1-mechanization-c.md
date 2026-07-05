@@ -1,6 +1,6 @@
 # 2.1-mechanization-c — Work Order: νF at the ω-Tier, and the Discharge of T2
 
-**This document describes:** `series-2/formal/Spec201c.lean` (new file; imports `Spec201`, `Spec201b`)
+**This document describes:** `series-2/formal/Spec21c.lean` (new file; imports `Spec21a`, `Spec21b`)
 **Normative sources:** `series-2/2-1.md` §4 (the literature-verified construction) and `series-2/2-0.md` (current revision; D9-R3, D18). Where this document and the specs disagree, the specs win; report, don't improvise.
 **Audience:** Claude Code. This is the most technical order of Series 2 — the construction order. All prior conventions in force. Naming follows the repo's own convention (`2-1-mechanization-b.md` precedent): this is the third mechanization of spec 2.1's ground.
 
@@ -8,9 +8,9 @@
 
 ## 0. What this order does, and one honesty item first
 
-The transfer theorem (Spec201b) proved: *if* a final raw universe exists, Ω exists and is final among coherent models. This order **builds the final raw universe** for the finitely-branching tier and **discharges the hypothesis** — converting T2 from "transfer proved, modulo νF" to "proved at the ω-tier," with the general-κ pattern documented.
+The transfer theorem (Spec21b) proved: *if* a final raw universe exists, Ω exists and is final among coherent models. This order **builds the final raw universe** for the finitely-branching tier and **discharges the hypothesis** — converting T2 from "transfer proved, modulo νF" to "proved at the ω-tier," with the general-κ pattern documented.
 
-**The honesty item (understand before coding):** `IsFinalRaw` as stated in Spec201b — finality over ALL Raws, whose patterns are unbounded `Set R` — is **vacuously unsatisfiable**. Lambek + Cantor: a final Raw would give O ≅ P⁺(Sym2 O), and the nonempty powerset outstrips any carrier. This was always known at the design level (the κ-loan, 2.1 D4: *unbounded branching admits no final coalgebra, full stop*), but the Lean development must now say it out loud, or `transfer` looks stronger than it is. Hence deliverable VAC below. The transfer theorem is not weakened by this — its proof never used unboundedness — it is *re-targeted*: this order generalizes it to the bounded quantifier it always needed, then satisfies that quantifier.
+**The honesty item (understand before coding):** `IsFinalRaw` as stated in Spec21b — finality over ALL Raws, whose patterns are unbounded `Set R` — is **vacuously unsatisfiable**. Lambek + Cantor: a final Raw would give O ≅ P⁺(Sym2 O), and the nonempty powerset outstrips any carrier. This was always known at the design level (the κ-loan, 2.1 D4: *unbounded branching admits no final coalgebra, full stop*), but the Lean development must now say it out loud, or `transfer` looks stronger than it is. Hence deliverable VAC below. The transfer theorem is not weakened by this — its proof never used unboundedness — it is *re-targeted*: this order generalizes it to the bounded quantifier it always needed, then satisfies that quantifier.
 
 **The structural gift (understand before coding, it halves the work):** the two-sorted functor is only *half* recursive. F_R(O, R) = Sym2(O) does not mention R — the relation sort is not defined in terms of itself. So the mutual fixed point collapses to a **single-sorted** one by substitution: take
 
@@ -51,7 +51,7 @@ The transfer theorem (Spec201b) proved: *if* a final raw universe exists, Ω exi
 with unbounded `Set`-patterns — is unsatisfiable: Lambek + Cantor. A final Raw
 would give a bijection between its object sort and the nonempty powerset of a
 type at least as large, which cannot exist. The κ-loan was never optional;
-`transfer` (Spec201b) is hereby re-targeted at the bounded quantifier it always
+`transfer` (Spec21b) is hereby re-targeted at the bounded quantifier it always
 needed (`transfer_bounded` below), which this file then SATISFIES at the ω-tier.
 The transfer proof itself never used unboundedness; nothing there changes. -/
 -- (SHOULD) theorem isFinalRaw_never : ∀ Z : Raw.{0}, ¬ IsFinalRaw Z := ...
@@ -65,7 +65,7 @@ def Bounded (A : Raw) : Prop := ∀ x, (A.pat x).Finite
 def IsFinalBRaw (Z : Raw) : Prop :=
   Bounded Z ∧ ∀ A : Raw, Bounded A → ∃! _h : Hom A Z, True
 
-/-- The transfer theorem, re-targeted (statement change only; Spec201b's
+/-- The transfer theorem, re-targeted (statement change only; Spec21b's
 `image_good`/`transfer_lands` are quantifier-free over finality and apply
 unchanged). If a bounded-final raw universe exists, every bounded coherent
 model admits exactly one morphism into it — landing in the coherent part. -/
@@ -74,7 +74,7 @@ theorem transfer_bounded (Z : Raw) (hZ : IsFinalBRaw Z)
     ∃! _h : Hom M.toRaw Z, True := hZ.2 M.toRaw hM
 ```
 
-For `isFinalRaw_never` (SHOULD, budget ~2h, drop with note): route — from finality extract, via the uniqueness clause applied to the coalgebra `F(Z)` (Lambek's standard argument, hand-rolled for `Raw` as in `Spec200`'s `final_subsingleton` pattern), that `pat` is bijective onto nonempty subsets and `endpoints` bijective; compose to an injection `{S : Set Z.O // S.Nonempty} ↪ Z.O` via the diagonal embedding `Z.O ↪ Sym2 Z.O`; contradict with `Function.cantor_injective` (check exact mathlib name; the nonempty-subtype wrinkle is handled by injecting `Set Z.O` into nonempty subsets via `insert z₀` for a fixed `z₀`, using `Z.pat`'s nonemptiness to obtain `z₀` — or any equivalent dodge; if cardinal arithmetic balloons, drop and keep the doc-comment).
+For `isFinalRaw_never` (SHOULD, budget ~2h, drop with note): route — from finality extract, via the uniqueness clause applied to the coalgebra `F(Z)` (Lambek's standard argument, hand-rolled for `Raw` as in `Spec20a`'s `final_subsingleton` pattern), that `pat` is bijective onto nonempty subsets and `endpoints` bijective; compose to an injection `{S : Set Z.O // S.Nonempty} ↪ Z.O` via the diagonal embedding `Z.O ↪ Sym2 Z.O`; contradict with `Function.cantor_injective` (check exact mathlib name; the nonempty-subtype wrinkle is handled by injecting `Set Z.O` into nonempty subsets via `insert z₀` for a fixed `z₀`, using `Z.pat`'s nonemptiness to obtain `z₀` — or any equivalent dodge; if cardinal arithmetic balloons, drop and keep the doc-comment).
 
 ## 3. GQPF — the functor and its QPF instance
 
@@ -156,7 +156,7 @@ noncomputable def omegaHat : Ω₀ :=
 is a Good pair, so the coherent part of ZΩ — which is Ω — contains the One.
 Proof plan: compute `ZΩ.pat omegaHat` via `Cofix.dest_corec` (it is the singleton
 of s(ω̂, ω̂)); check the three Good fields for the pair ({omegaHat}, {s(omegaHat, omegaHat)});
-conclude membership via `subset_coherentPartO/R` (Spec201b). -/
+conclude membership via `subset_coherentPartO/R` (Spec21b). -/
 theorem omegaHat_coherent :
     omegaHat ∈ coherentPartO ZΩ ∧ s(omegaHat, omegaHat) ∈ coherentPartR ZΩ := by
   sorry
@@ -195,7 +195,7 @@ Detailed plan (follow in order; budget the day for this):
    - Forcing: from `g_end` at `endpoints := id`: `gR r = (A.endpoints r).map gO` (funext).
    - `gO` is a G-coalgebra morphism: show `QPF.Cofix.dest (gO x) = G.map gO (inducedCoalg A hA x)` — substitute the forced `gR` into `g_pat`, then the same `image_image` collapse as step 2, read right-to-left. (Subtype ext: the underlying sets are equal by `g_pat`; the `Finite/Nonempty` components are proof-irrelevant — `Subtype.ext`.)
    - Conclude `gO = fO`: mathlib's uniqueness route is `Cofix.bisim` — construct the relation `R a b := ∃ x, a = gO x ∧ b = fO x` and verify the bisimulation condition from the two coalgebra-morphism squares; **check first** whether the pinned mathlib already packages this as a `corec`-uniqueness lemma (`Cofix.unique`, `Cofix.corec_unique`, or `Cofix.ext`-style) — use it if present rather than re-proving.
-   - `gR = fR` follows from the forcing + `gO = fO`. Package `Hom` equality by `cases` + `congr` + proof irrelevance, as in `Spec200`.
+   - `gR = fR` follows from the forcing + `gO = fO`. Package `Hom` equality by `cases` + `congr` + proof irrelevance, as in `Spec20a`.
 4. **Do not weaken**: no decidability, no countability, no extra hypotheses on `A`. If a step resists as stated, stop and report — with special attention to whether `QPF.Cofix.bisim`'s exact statement (it quantifies over a relation with a particular lifting condition) matches the relation in step 3; a mismatch there is a *finding about the mathlib API*, to be recorded, not silently patched around.
 
 ```lean
@@ -216,8 +216,8 @@ For the file's foot-comment and the spec note: the same construction scales by e
 
 ## 7. Spec housekeeping (MUST)
 
-- `2-0.md` §5, T2 entry → `[proved at the ω-tier (Spec201c): ZΩ constructed via QPF.Cofix; IsFinalBRaw_ZΩ; transfer_bounded discharges the hypothesis; Ω inhabited (omegaHat_coherent — its first citizen is the One). IsFinalRaw-as-stated shown/documented vacuous; κ-loan partially discharged, general-κ pattern documented.]` — and unblock notes on T5, T6, T9, T10: `[unblocked by Spec201c: statable against ZΩ; next order]`.
-- `2-1.md` §4: append a line: construction realized at ω-tier (Spec201c); D4 loan status updated.
+- `2-0.md` §5, T2 entry → `[proved at the ω-tier (Spec21c): ZΩ constructed via QPF.Cofix; IsFinalBRaw_ZΩ; transfer_bounded discharges the hypothesis; Ω inhabited (omegaHat_coherent — its first citizen is the One). IsFinalRaw-as-stated shown/documented vacuous; κ-loan partially discharged, general-κ pattern documented.]` — and unblock notes on T5, T6, T9, T10: `[unblocked by Spec21c: statable against ZΩ; next order]`.
+- `2-1.md` §4: append a line: construction realized at ω-tier (Spec21c); D4 loan status updated.
 - `2-2.md` §7: νF order delivered; remaining Series-2 theorem work: T5/T6/T9/T10 order, S1 pigeonhole order, then T4/T7.
 
 Mapping table per convention, deviations recorded — including, mandatorily, the exact mathlib names used for the QPF/Cofix API (future orders will build on them).

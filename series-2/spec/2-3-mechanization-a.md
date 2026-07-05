@@ -1,6 +1,6 @@
 # 2.3-mechanization-a — Work Order: Certify the Mirror
 
-**This document describes:** `series-2/formal/Spec203.lean` (new file; imports `Spec201`, `Spec201b`, `Spec201c`, `Spec201d`)
+**This document describes:** `series-2/formal/Spec23a.lean` (new file; imports `Spec21a`, `Spec21b`, `Spec21c`, `Spec21d`)
 **Normative sources:** `series-2/2-3.md` (the finding), `series-2/2-0.md` (current, with the 2.3 corrections). Specs win; report discrepancies.
 **Audience:** Claude Code. All conventions in force. This order is deliberately small: it certifies a finding, corrects the record, and banks the honesty lemmas — a half-day, not a construction. **Read 2.3 §0–§2 before writing a line; the doc-comments in this file are the finding's permanent record and must carry its meaning, not just its statements.**
 
@@ -8,7 +8,7 @@
 
 ## 1. Purpose and scope
 
-Spec201c constructed Ω₀ correctly for a signature that turns out to be the boolean shadow in two-sorted clothing. T1 fires: the universe is one point. This order proves that fact with dignity, proves the coincidence of the framework's four forbidden extremes at that point, and mechanizes the honesty lemmas that prevent any future misreading of T5/T10's current status.
+Spec21c constructed Ω₀ correctly for a signature that turns out to be the boolean shadow in two-sorted clothing. T1 fires: the universe is one point. This order proves that fact with dignity, proves the coincidence of the framework's four forbidden extremes at that point, and mechanizes the honesty lemmas that prevent any future misreading of T5/T10's current status.
 
 | ID | Name | Priority |
 |----|------|----------|
@@ -41,7 +41,7 @@ Plan: `Subsingleton (Sym2 PUnit)` first (two `Sym2.ind`s + `Subsingleton PUnit`)
 
 ```lean
 /-- The one-point bounded Raw: one object, one self-relation, whole-pattern.
-The Raw form of Spec200's `Shadow.unit`. -/
+The Raw form of Spec20a's `Shadow.unit`. -/
 def unitRaw : Raw where
   O := PUnit
   R := PUnit
@@ -52,13 +52,13 @@ def unitRaw : Raw where
 /-- The one-point Raw is final among bounded Raws — the two-sorted `unit_final`.
 Existence: constant maps; `end_comm` because `Sym2 PUnit` is a subsingleton;
 `pat_comm` because `Set PUnit`'s universe equals the image of any nonempty set
-(the Spec200 crux, reused: nonemptiness is used exactly once, and must be).
+(the Spec20a crux, reused: nonemptiness is used exactly once, and must be).
 Uniqueness: both carrier maps land in `PUnit`. -/
 theorem isFinalBRaw_unitRaw : IsFinalBRaw unitRaw := by
   sorry
 ```
 
-Plan: boundedness — `Set.univ : Set PUnit` is finite (`Set.finite_univ`, PUnit is a Fintype). Existence: `fO := fun _ => PUnit.unit`, `fR := fun _ => PUnit.unit`; `end_comm` by `Subsingleton.elim` on `Sym2 PUnit`; `pat_comm`: show `Set.univ = (fun _ => PUnit.unit) '' A.pat x` — `Set.eq_univ_iff_forall`, any `p : PUnit` is `PUnit.unit`, witness from `A.pat_nonempty x` (the crux). Uniqueness: `cases`/`congr`/`funext`/`Subsingleton.elim` per the Spec200/201c pattern.
+Plan: boundedness — `Set.univ : Set PUnit` is finite (`Set.finite_univ`, PUnit is a Fintype). Existence: `fO := fun _ => PUnit.unit`, `fR := fun _ => PUnit.unit`; `end_comm` by `Subsingleton.elim` on `Sym2 PUnit`; `pat_comm`: show `Set.univ = (fun _ => PUnit.unit) '' A.pat x` — `Set.eq_univ_iff_forall`, any `p : PUnit` is `PUnit.unit`, witness from `A.pat_nonempty x` (the crux). Uniqueness: `cases`/`congr`/`funext`/`Subsingleton.elim` per the Spec20a/201c pattern.
 
 ## 3. T17 — the Mirror
 
@@ -67,7 +67,7 @@ Plan: boundedness — `Set.univ : Set PUnit` is finite (`Set.finite_univ`, PUnit
 T1 firing on our own construction. The signature of 2.1 §2 — relations
 individuated by bare endpoints, no grading anywhere in the functor — is the
 boolean shadow in two-sorted clothing, and the framework's first theorem
-enforced itself against the framework's authors. The construction (Spec201c)
+enforced itself against the framework's authors. The construction (Spec21c)
 is CORRECT; what it constructs is the One. ω̂ is not Ω's first citizen; it is
 its only citizen. Derived structure (contexts, apertures, dyads) is
 bisimilarity-invariant and cannot individuate — the D4 corollary, returning.
@@ -77,7 +77,7 @@ theorem omega_collapse : ∀ x y : Ω₀, x = y := by
   sorry
 ```
 
-**Route A (recommended — canonicity earning its keep):** `final_unique ZΩ unitRaw isFinalBRaw_ZΩ isFinalBRaw_unitRaw` yields `f : Hom ZΩ unitRaw`, `g : Hom unitRaw ZΩ` with `g.compRaw f = idRaw`. Then for `x y : Ω₀`: `x = g.fO (f.fO x) = g.fO PUnit.unit = g.fO (f.fO y) = y` — the middle equalities by `Subsingleton PUnit` and by reading the composite-equals-id equation at `x` and `y` (extract the carrier-map equation from the `Hom` equality via `congrArg` — the same move `final_subsingleton` used in Spec200; consult it).
+**Route A (recommended — canonicity earning its keep):** `final_unique ZΩ unitRaw isFinalBRaw_ZΩ isFinalBRaw_unitRaw` yields `f : Hom ZΩ unitRaw`, `g : Hom unitRaw ZΩ` with `g.compRaw f = idRaw`. Then for `x y : Ω₀`: `x = g.fO (f.fO x) = g.fO PUnit.unit = g.fO (f.fO y) = y` — the middle equalities by `Subsingleton PUnit` and by reading the composite-equals-id equation at `x` and `y` (extract the carrier-map equation from the `Hom` equality via `congrArg` — the same move `final_subsingleton` used in Spec20a; consult it).
 
 **Route B (fallback, if Route A's Hom-equality extraction fights):** `identity_by_unfolding` with the total relation. The bisimulation obligation under the pinned mathlib's `Liftr` formulation requires, for arbitrary `a b : G Ω₀`, an element of `G {p // True}`-flavored type projecting to each: build it by pairing — for `p = s(p₁,p₂)` and a fixed `q₀ = s(q₁,q₂) ∈ b.1`, the element `s((p₁,q₁),(p₂,q₂))` projects correctly; take the union of `a`-indexed pairings against a fixed `q₀ ∈ b` with `b`-indexed pairings against a fixed `p₀ ∈ a` (both exist by nonemptiness); images recover `a.1` and `b.1` exactly. Fiddlier than Route A; use only if needed, and record which route shipped.
 
@@ -142,7 +142,7 @@ theorem eqDepth_trivial : ∀ (n : ℕ) (x y : Ω₀), EqDepth n x y := by
 
 ## 6. Spec housekeeping (MUST)
 
-The 2.0 corrections (T2/T5/T10 labels, T17/T18 entries, D7 verdict, O1, series plan) ship in this PR from the spec author — **reconcile, do not duplicate**: if your in-flight branch carries the Spec201c/d label updates for T2/T5/T10, the 2-3-corrected labels supersede them (they *include* the c/d outcomes plus the collapse); resolve merge conflicts in favor of the 2.3 wording and note the reconciliation in the PR description. After this order lands, update: T17 → `[proved (Spec203): omega_collapse; route recorded]`; T18 → `[proved (Spec203)]`; the HON pair noted at T5/T10's entries. In `2-2.md` §7: remaining Series-2 work now reads — the O-2-3-1 ruling, then the corrected-functor spec + F(1) pre-registration, then re-anchoring (2.3 §5), then S1/T4/T7 against the corrected Ω.
+The 2.0 corrections (T2/T5/T10 labels, T17/T18 entries, D7 verdict, O1, series plan) ship in this PR from the spec author — **reconcile, do not duplicate**: if your in-flight branch carries the Spec21c/d label updates for T2/T5/T10, the 2-3-corrected labels supersede them (they *include* the c/d outcomes plus the collapse); resolve merge conflicts in favor of the 2.3 wording and note the reconciliation in the PR description. After this order lands, update: T17 → `[proved (Spec23a): omega_collapse; route recorded]`; T18 → `[proved (Spec23a)]`; the HON pair noted at T5/T10's entries. In `2-2.md` §7: remaining Series-2 work now reads — the O-2-3-1 ruling, then the corrected-functor spec + F(1) pre-registration, then re-anchoring (2.3 §5), then S1/T4/T7 against the corrected Ω.
 
 Mapping table per convention; record which T17 route shipped; deviations recorded.
 

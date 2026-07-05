@@ -271,7 +271,7 @@ open RelEx RelEx.Shadow RelEx.Arena
 end AxiomAudit
 
 /-
--- Spec 2.0 ↔ series-2/formal/Spec200.lean
+-- Spec 2.0 ↔ series-2/formal/Spec20a.lean
 -- T1a  = RelEx.Shadow.unit_final
 -- T1b  = RelEx.Shadow.total_isBisim, RelEx.Shadow.all_bisimilar
 -- T1c  = RelEx.Shadow.final_subsingleton        (SHOULD; present)
@@ -281,7 +281,7 @@ end AxiomAudit
 -- P3   = RelEx.P3_note                          (architectural; see doc-comment)
 --
 -- Deviations from 2.0-mechanization.md:
---   * File lives at `series-2/formal/Spec200.lean`, not `formal/Spec200.lean`.
+--   * File lives at `series-2/formal/Spec20a.lean`, not `formal/Spec20a.lean`.
 --     Reason: after the handoff-XVIII rename the repo's `/formal/` is a gitignored
 --     stale build home; the live Lean source root is `series-2/formal` (Lake library
 --     `Series2`, per `lake/lakefile.toml`). Placing the file under `/formal/` would

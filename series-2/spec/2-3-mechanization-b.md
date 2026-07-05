@@ -1,6 +1,6 @@
 # 2.3-mechanization-b — Work Order: Run the Trials (B1, the Forcing Lemma, and the Anti-Mirror Spot-Check)
 
-**This document describes:** `series-2/formal/Spec203b.lean` (new file; imports `Spec201`, `Spec201c`, `Spec203`)
+**This document describes:** `series-2/formal/Spec23b.lean` (new file; imports `Spec21a`, `Spec21c`, `Spec23a`)
 **Normative sources:** `series-2/2-3.md` **§5 (The Trials, R4)** — the protocol, candidates, battery, and frozen predictions — plus §4 (D20/D21). Specs win; report discrepancies.
 **Audience:** Claude Code. All conventions in force. **This file is an experiment's lab notebook: the predictions in 2.3 §5.3 are frozen; your job is to make each one true or false, and every doc-comment must say which prediction its theorem confirms or refutes.** Do not soften a refutation; a surprised prediction is the trial working.
 
@@ -12,7 +12,7 @@ Run gate B1 (the F(1)/Parmenides check, D20) on every entrant, symmetrically; pr
 
 | ID | Name | Prediction under test (2.3 §5.3) | Priority |
 |----|------|-----------------------------------|----------|
-| B1-G | Control: the collapsed G | fails (proved: `G_unit_subsingleton`, Spec203) — cite, don't reprove | MUST (citation) |
+| B1-G | Control: the collapsed G | fails (proved: `G_unit_subsingleton`, Spec23a) — cite, don't reprove | MUST (citation) |
 | B1-A | Pure (A), division-over-pattern | **fails by collapse** (`Subsingleton`) | MUST |
 | B1-B | (B), inclusion, T possibly empty | **fails by collapse** (`Subsingleton`) | MUST |
 | B1-Bs | (B)-strict, both sides nonempty | **fails by emptiness** (`IsEmpty`) — "the arrow cannot turn" | MUST |
@@ -22,7 +22,7 @@ Run gate B1 (the F(1)/Parmenides check, D20) on every entrant, symmetrically; pr
 | B2-C | Anti-Mirror spot-check for (C) | two states separated by a depth-1 sort-composition invariant | MUST |
 | DOC | Results annotation + spec labels | — | MUST |
 
-**Out of scope:** νF construction for any candidate (the winner's construction is its own order, via the Spec201c template); B3–B7 beyond what lands incidentally (spec-level, later spot-checks); the coherence design for (C) (O-2-3-1b — flagged, not solved); anything about D19.
+**Out of scope:** νF construction for any candidate (the winner's construction is its own order, via the Spec21c template); B3–B7 beyond what lands incidentally (spec-level, later spot-checks); the coherence design for (C) (O-2-3-1b — flagged, not solved); anything about D19.
 
 ## 2. The entrants, transcribed to Lean
 
@@ -34,7 +34,7 @@ namespace RelEx.Trials
 def PfNe (α : Type) : Type := {S : Set α // S.Finite ∧ S.Nonempty}
 ```
 
-**B1-A (pure division over the pattern).** Per 2.3 §5.1(A), evaluated at the one-point pair directly — the relation sort there is `Sym2 PUnit`, a subsingleton (Spec203's helper; import and reuse). Take the charitable-to-(A) reading in which the division is defined **on the pattern's members** (do not let off-member junk manufacture a fake pass — kill (A) fairly or be surprised fairly):
+**B1-A (pure division over the pattern).** Per 2.3 §5.1(A), evaluated at the one-point pair directly — the relation sort there is `Sym2 PUnit`, a subsingleton (Spec23a's helper; import and reuse). Take the charitable-to-(A) reading in which the division is defined **on the pattern's members** (do not let off-member junk manufacture a fake pass — kill (A) fairly or be surprised fairly):
 
 ```lean
 def AttA : Type :=
@@ -132,7 +132,7 @@ Standard: clean build, no `sorry`, axiom audit (the B1 block should be choice-li
 ## 6. DOC (MUST)
 
 - `2-3.md`: append **§5.6 Results** (clearly post-hoc-marked, per the freeze rule) transcribing the outcome column; each REFUTED prediction gets one honest sentence.
-- `2-0.md` §5: no theorem-label changes (the trials decide a functor, not a 2.0 target); add one line under T2's entry: `Trials in progress (2.3 §5); B1 outcomes recorded (Spec203b).`
+- `2-0.md` §5: no theorem-label changes (the trials decide a functor, not a 2.0 target); add one line under T2's entry: `Trials in progress (2.3 §5); B1 outcomes recorded (Spec23b).`
 - `2-2.md` §7: note the trials as the current gate on the corrected-functor spec.
 
 ---

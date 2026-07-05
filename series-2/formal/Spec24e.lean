@@ -2,16 +2,16 @@
 Spec 2.4e — the Lambek-free infinitude of Ω_R, and T16 at the ω-tier (2-4-mechanization-c).
 
 Normative source: `series-2/2-4.md` and the work order `2-4-mechanization-c.md`. Continues
-`Spec204d.lean` (Ω_C carved; `EqDepthR`; `hostedC`). Specs win. No declaration consults §8.
+`Spec24d.lean` (Ω_C carved; `EqDepthR`; `hostedC`). Specs win. No declaration consults §8.
 
 Route C (the primary, Lambek-free path to `Infinite Ω_R`): a `tower : ℕ → Ω_R` whose `n`-th
 element reaches an object-sorted endpoint at exactly depth `n`, so distinct indices are separated
 by the same `HasObjEndpointΩ` observation that proved `elt2 ≠ elt3`. No `mk` needed — only
 `Cofix.corec`, `Cofix.dest`, `dest_corec`.
 
-File is `Spec204e.lean` (new root) per the order's primary target.
+File is `Spec24e.lean` (new root) per the order's primary target.
 -/
-import Spec204d
+import Spec24d
 
 open RelEx.Trials (RawC PfNe)
 

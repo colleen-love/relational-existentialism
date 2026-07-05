@@ -6,10 +6,10 @@ Normative source: `series-2/2-4.md` (the corrected-functor design: §0 D20, §1 
 `series-2/spec/2-4-mechanization-a.md`. Specs win; discrepancies reported below.
 
 NAMING DISCREPANCY (reported, resolved spec-first). The work order names its target
-`Spec205.lean` and cites "2.5 §0/§2/§6" and appends results to "2.5" — but the normative spec
+`Spec25a.lean` and cites "2.5 §0/§2/§6" and appends results to "2.5" — but the normative spec
 is `2-4.md` (its §0/§2/§6/§7 are exactly what the order cites), and the file-naming convention
-is spec `2-0N` → `Spec20N` (2.3 → `Spec203`/`Spec203b`/`Spec203c`). The "2.5"/`Spec205`
-references are a systematic off-by-one slip. Per "specs win," this file is `Spec204.lean` and all
+is spec `2-0N` → `Spec20N` (2.3 → `Spec23a`/`Spec23b`/`Spec23c`). The "2.5"/`Spec25a`
+references are a systematic off-by-one slip. Per "specs win," this file is `Spec24a.lean` and all
 citations are to `2-4.md`. The `2.5` open-question labels the spec itself uses (O-2-5-2/3/5)
 are left as the spec wrote them — they name a *future* re-anchoring doc, not this one.
 
@@ -22,11 +22,11 @@ this file; the construction (Stage 2) carries its own sanctioned drop clause and
 session effort. Nothing here consults 2.4 §8 (the D19 register); FP4's hostile framing is the
 only permitted contact and it lives downstream.
 
-Builds on `Spec203c` (transitively the whole chain), reusing `RelEx.Trials.RawC` — which *is*
+Builds on `Spec23c` (transitively the whole chain), reusing `RelEx.Trials.RawC` — which *is*
 the corrected raw signature (`pat : O → Set R`, `ends : R → Sym2 (O ⊕ R)`) — and the `Sym2`/
 `PfNe` idioms.
 -/
-import Spec203c
+import Spec23c
 
 open RelEx.Trials (RawC PfNe)
 
@@ -185,7 +185,7 @@ theorem seed3_coherent : CoherentC seed3 := by
     exact ⟨PUnit.unit, rfl, Sym2.mem_iff.mpr (Or.inr rfl)⟩
 
 /-- The depth-1 object invariant separating the coherent seeds: `x` hosts a relation with an
-object endpoint (a first-order bearing). The sort-profile at depth 1 (Spec203b B2-C technique). -/
+object endpoint (a first-order bearing). The sort-profile at depth 1 (Spec23b B2-C technique). -/
 def ObjHasFirstOrder (A : RawC) (x : A.O) : Prop :=
   ∃ r ∈ A.pat x, ∃ y : A.O, Sum.inl y ∈ A.endpoints r
 
@@ -444,7 +444,7 @@ end AxiomAudit
 --                                                     coherentC_sum                      CONFIRMED
 -- (holding lemma "to bear is to hold")              → holding_lemma                      DELIVERED
 --
--- Naming: file = Spec204.lean (spec is 2-4.md; the order's "Spec205"/"2.5" §0/§2/§6 are an
+-- Naming: file = Spec24a.lean (spec is 2-4.md; the order's "Spec25a"/"2.5" §0/§2/§6 are an
 --   off-by-one slip, resolved spec-first — see the header note).
 -- Stages 2–7 (νF_C/Ω_C construction, anti-Mirror on Ω_C proper, residue attack, B3/B5, P3h) are
 --   the next order-chunk and are NOT in this file. Stage 2's MvQPF mutual construction carries a

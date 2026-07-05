@@ -6,14 +6,14 @@ own FROZEN predictions (§2, P1–P6), pre-registered hostile-first. This file i
 lab notebook: every theorem's doc-comment names the prediction it CONFIRMS or REFUTES; a
 surprised prediction is the trial working; no refutation is softened.
 
-Builds on `Spec203b` (the entrants, `PfNe`, `forced_univ`/`forced_empty`, `RawC`, `AttA2`,
-`AttB`), which transitively supplies the whole chain (incl. `Spec201c`'s `G`).
+Builds on `Spec23b` (the entrants, `PfNe`, `forced_univ`/`forced_empty`, `RawC`, `AttA2`,
+`AttB`), which transitively supplies the whole chain (incl. `Spec21c`'s `G`).
 
 Scope note (2-3-mechanization-c §1): (C)'s coherence/parthood design is OUT of scope and
 gates B4/B5 — everything here is pre-design. The O-2-3-2 "pairs" check is discharged in
-substance by `B2_C_separation` (Spec203b) and is not reproved.
+substance by `B2_C_separation` (Spec23b) and is not reproved.
 -/
-import Spec203b
+import Spec23b
 
 open RelEx.TwoSorted (G)
 
@@ -21,13 +21,13 @@ namespace RelEx.Trials
 
 /-! ## BIT — the one-bit audit of A2 (2-3-mechanization-c §3; P1)
 
-Spec203b's `B1_A2` showed A2 passes B1 with two witnesses differing only in the emptiness of
+Spec23b's `B1_A2` showed A2 passes B1 with two witnesses differing only in the emptiness of
 the grasp `H`. This section upgrades that observation to a theorem: over the point, A2's
 *entire* plurality is the ∅/nonempty bit — the primordial atom D4 refuses. B7's elimination of
 A2 rests on a proof, not two examples. -/
 
 /-- Over a subsingleton carrier every set is `∅` or `univ` — the dichotomy behind the forbidden
-coin. Companion to `forced_univ`/`forced_empty` (Spec203b). -/
+coin. Companion to `forced_univ`/`forced_empty` (Spec23b). -/
 theorem forced_dichotomy {α : Type} [Subsingleton α] (S : Set α) :
     S = ∅ ∨ S = Set.univ := by
   rcases S.eq_empty_or_nonempty with h | h
@@ -133,7 +133,7 @@ def AttAGen (ρ : Type) : Type :=
   Σ S : PfNe ρ, ∀ _r : ↥S.1, {T : Set ρ // T ⊂ S.1}
 
 /-- FORGET — (B) is (A) with the anatomy forgotten: per attending, keep the bare division pair.
-`AttB` (Spec203b) is the instance at `ρ := Sym2 PUnit`. Its existence is its content: proved
+`AttB` (Spec23b) is the instance at `ρ := Sym2 PUnit`. Its existence is its content: proved
 reductions dissolve the fork into a lattice (2.3 §5.2 B6). -/
 def forgetAnatomy {ρ : Type} (a : AttAGen ρ) (r : ↥a.1.1) :
     { p : Set ρ × Set ρ // p.1.Finite ∧ p.1.Nonempty ∧ p.2 ⊂ p.1 } :=
@@ -354,7 +354,7 @@ theorem ascent_strict : ∀ n, ∃ z : RStage (n+1), z ∉ Set.range (stageEmbed
 
 /-! ### CTRL — the flat control (P6) -/
 
-/-- Generalization of `G_unit_subsingleton` (Spec203): `G` preserves subsingletons — `G X` is
+/-- Generalization of `G_unit_subsingleton` (Spec23a): `G` preserves subsingletons — `G X` is
 defeq to `PfNe (Sym2 X)`, so `PfNe.subsingleton` applies. -/
 theorem G_subsingleton_of (X : Type) [Subsingleton X] : Subsingleton (G X) :=
   inferInstanceAs (Subsingleton (PfNe (Sym2 X)))
@@ -400,7 +400,7 @@ end AxiomAudit
 -- No re-collapse: ascent_R, ascent_O, O1_subsingleton   — P4                → CONFIRMED
 -- The Ascent:     ascent_strict                         — P5                → CONFIRMED
 -- Control flat:   control_flat                          — P6                → CONFIRMED
--- Pairs check (O-2-3-2): discharged by B2_C_separation (Spec203b) — cited, not reproved.
+-- Pairs check (O-2-3-2): discharged by B2_C_separation (Spec23b) — cited, not reproved.
 --
 -- All predictions confirmed; nothing refuted. P3 (the directed Relocation) holds: (A)'s
 -- directed anatomy relocates into pure (C) — direction bought by the ownership mark, one storey
@@ -411,7 +411,7 @@ end AxiomAudit
 --   * ascent_fin (the "at least n+1 elements" stretch, §5, marked "drop freely with note") is
 --     DROPPED: ascent_strict already substantiates "F(1) infinite" at the stage level, and the
 --     cardinality-of-the-limit claim is out of scope per the order's own honesty note.
---   * The B2-C pairs check is cited from Spec203b (B2_C_separation), not reproved, per §1.
+--   * The B2-C pairs check is cited from Spec23b (B2_C_separation), not reproved, per §1.
 --
 -- Entrant ↔ Lean name:
 --   BIT       = RelEx.Trials.forced_dichotomy, A2_one_bit, A2_equiv_bool

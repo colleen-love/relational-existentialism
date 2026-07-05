@@ -1,6 +1,6 @@
 # 2-1b-mechanization — Work Order: The Transfer Theorem and the Design-Ready Group
 
-**This document describes:** `series-2/formal/Spec201b.lean` (new file; imports `Spec201`)
+**This document describes:** `series-2/formal/Spec21b.lean` (new file; imports `Spec21a`)
 **Normative sources:** `series-2/2-0.md` and `series-2/2-1.md`. Where this document and the specs disagree, the specs win; report, don't improvise.
 **Audience:** Claude Code, executing without further clarification.
 **Naming note:** this is `2-1b`, not `2.2`, because every item below is normed by specs 2.0/2.1; the name `2-2-mechanization` is reserved for after spec 2.2 (π, quality-weighting, deployment ratification) is written. A few light definitions ARE introduced here out of necessity; they are quarantined in §8's ratification list and must be flagged as `pending ratification (2.2)` in their doc-comments.
@@ -33,7 +33,7 @@ This order encapsulates the maximum open ground reachable without new design dec
 
 As in `2-1-mechanization.md` §2, plus:
 
-- **New file** `series-2/formal/Spec201b.lean`, `import Spec201` (adjust to the actual module path registered in `lake/lakefile.toml`; register `Spec201b` as a library root following the established precedent, and record the wiring in the mapping table).
+- **New file** `series-2/formal/Spec21b.lean`, `import Spec21a` (adjust to the actual module path registered in `lake/lakefile.toml`; register `Spec21b` as a library root following the established precedent, and record the wiring in the mapping table).
 - Additional imports as needed: `Mathlib.Logic.Relation` (for `Relation.ReflTransGen`, used by C2d). Keep imports minimal; `import Mathlib` acceptable with a note if resolution fights back.
 - Namespace: continue `RelEx.TwoSorted`.
 - All prior conventions in force: no `sorry`, no new axioms, `#print axioms` audit block, doc-comments with spec IDs against 2-0.md/2-1.md, mapping table at file foot, deviations recorded.
@@ -42,7 +42,7 @@ As in `2-1-mechanization.md` §2, plus:
 
 ## 3. Part A — the transfer theorem (T2t)
 
-**Why this matters (for doc-comments):** spec 2.1 §4 gives Ω a three-step construction: (1) νF exists on Set × Set [classical: Adámek–Trnková 2011]; (2) coherent coalgebras form a covariety [L1 — proved in Spec201]; (3) Ω is the greatest coherent subcoalgebra of νF. This part mechanizes steps (2)→(3) as a *transfer*: finality of the ambient raw universe transfers to the coherent part. Philosophically: given any lawless universe of raw patterns, **the objects — the coherent patterns — form a universe of their own, and every coherent description specifies exactly one inhabitant of it.** The only unformalized residue after this part is step (1), a single citable classical theorem.
+**Why this matters (for doc-comments):** spec 2.1 §4 gives Ω a three-step construction: (1) νF exists on Set × Set [classical: Adámek–Trnková 2011]; (2) coherent coalgebras form a covariety [L1 — proved in Spec21a]; (3) Ω is the greatest coherent subcoalgebra of νF. This part mechanizes steps (2)→(3) as a *transfer*: finality of the ambient raw universe transfers to the coherent part. Philosophically: given any lawless universe of raw patterns, **the objects — the coherent patterns — form a universe of their own, and every coherent description specifies exactly one inhabitant of it.** The only unformalized residue after this part is step (1), a single citable classical theorem.
 
 ### 3.1 T2t-i: the coherent part
 
@@ -140,7 +140,7 @@ def Deployable (M : Model) (x : M.O) (A : Set M.R) : Prop :=
 
 /-- Spec 2.0 §3, PR-J(b), in the exact form the interface supports — the
 DICHOTOMY: every deployable attention is proper, or its witnessing relation is
-self-anchored. Together with `reflexive_saturation` (Spec201), this settles
+self-anchored. Together with `reflexive_saturation` (Spec21a), this settles
 PR-J(b)'s interface-level status completely: properness of deployable attention
 is a THEOREM off the self-anchored locus and an AXIOM-candidate on it — the
 same address C3 gave A8(i). The full PR-J(b) ("every deployable attention is
@@ -197,7 +197,7 @@ Proof plan: `Set.inter_subset_right` for ⊆; strictness from `h`'s witness (it 
 
 ```lean
 /-- Spec 2.0 §2.4 / P2 with content: one shared relation, two genuinely unequal
-apertures. Spec201's P2 was type-level (the two directions belong to different
+apertures. Spec21a's P2 was type-level (the two directions belong to different
 objects); this witness shows the difference is MATERIAL — the same relation's
 context in `x` contains a bearing its context in `y` lacks, because the bearing
 is private to `x`. Same part, different wholes, different lenses. -/
@@ -235,7 +235,7 @@ theorem coprod_disconnected (A B : Raw) (a : A.O) (b : B.O) :
   sorry
 ```
 
-Proof plan: suppose connected; obtain a `ReflTransGen` chain from `Sum.inl a` to `Sum.inr b`. Prove the invariant `IsLeft`: by induction on the chain (`Relation.ReflTransGen.head_induction_on` or `.trans_induction_on`; check the recursor names), a single `StepR (coprod A B)` step preserves left-ness — unfold `coprod`: a relation `Sum.inl r` has endpoints `(A.endpoints r).map Sum.inl`, so both endpoint members are `inl _` (via `Sym2.mem_map`); symmetric for `inr`. So no step connects `inl _` to `inr _`; the chain's endpoints contradict. Pitfall: `Sum.elim` unfolding inside `Sym2.mem_map` — the four-case pattern from Spec201's `coherent_sum` is the template; reuse its `simp only [coprod, ...]` incantations.
+Proof plan: suppose connected; obtain a `ReflTransGen` chain from `Sum.inl a` to `Sum.inr b`. Prove the invariant `IsLeft`: by induction on the chain (`Relation.ReflTransGen.head_induction_on` or `.trans_induction_on`; check the recursor names), a single `StepR (coprod A B)` step preserves left-ness — unfold `coprod`: a relation `Sum.inl r` has endpoints `(A.endpoints r).map Sum.inl`, so both endpoint members are `inl _` (via `Sym2.mem_map`); symmetric for `inr`. So no step connects `inl _` to `inr _`; the chain's endpoints contradict. Pitfall: `Sum.elim` unfolding inside `Sym2.mem_map` — the four-case pattern from Spec21a's `coherent_sum` is the template; reuse its `simp only [coprod, ...]` incantations.
 
 ---
 
@@ -262,7 +262,7 @@ Then a **four-corner witness**: one small `Model` (or, with permission, up to fo
 4. Mapping table at file foot (template below), deviations recorded.
 
 ```
--- Specs 2.0 / 2.1 ↔ series-2/formal/Spec201b.lean
+-- Specs 2.0 / 2.1 ↔ series-2/formal/Spec21b.lean
 -- T2 (transfer, i)    = RelEx.TwoSorted.coherentPart_good (+ CoherentAt, Good, coherentPartO/R)
 -- T2 (transfer, ii)   = RelEx.TwoSorted.image_good
 -- T2 (transfer, iii)  = RelEx.TwoSorted.transfer, RelEx.TwoSorted.transfer_lands
@@ -284,18 +284,18 @@ Then a **four-corner witness**: one small `Model` (or, with permission, up to fo
 Apply these edits (smallest faithful diff; preserve surrounding prose):
 
 In `series-2/2-0.md` §5:
-- P4 static: `[unblocked]` → `[proved]` (Spec201; note "static form; dynamic form O9").
-- PR-J(a): `[unblocked]` → `[proved]` (Spec201).
-- PR-J(b): → `[dichotomy proved (Spec201b): proper or self-anchored; full form ⟺ A8(i) at self-reference]`.
-- T2: → `[transfer proved (Spec201b): Ω exists and is final among coherent models, modulo νF existence (classical: Adámek–Trnková 2011); νF mechanization scheduled]`.
-- T12: → `[statics skeleton proved (Spec201b); propagation O9]`.
-- General P1: → `[barrier one proved (Spec201b); barrier two needs witnessing structure]`.
-- C2: append `— sharpened (Spec201b): fails for general models (coproduct disconnection); if true, a theorem about Ω specifically.`
-- T14: if T14q lands, append `— qualitative shadow defined and witnessed (Spec201b); graded form awaits π.`
+- P4 static: `[unblocked]` → `[proved]` (Spec21a; note "static form; dynamic form O9").
+- PR-J(a): `[unblocked]` → `[proved]` (Spec21a).
+- PR-J(b): → `[dichotomy proved (Spec21b): proper or self-anchored; full form ⟺ A8(i) at self-reference]`.
+- T2: → `[transfer proved (Spec21b): Ω exists and is final among coherent models, modulo νF existence (classical: Adámek–Trnková 2011); νF mechanization scheduled]`.
+- T12: → `[statics skeleton proved (Spec21b); propagation O9]`.
+- General P1: → `[barrier one proved (Spec21b); barrier two needs witnessing structure]`.
+- C2: append `— sharpened (Spec21b): fails for general models (coproduct disconnection); if true, a theorem about Ω specifically.`
+- T14: if T14q lands, append `— qualitative shadow defined and witnessed (Spec21b); graded form awaits π.`
 
 In `series-2/2-1.md` §5:
-- C3: mark both cases `[proved at interface level]` (Spec201), with the residue note intact.
-- L1: `[proved, incl. coproducts]` (Spec201).
+- C3: mark both cases `[proved at interface level]` (Spec21a), with the residue note intact.
+- L1: `[proved, incl. coproducts]` (Spec21a).
 - §7's L1 obligation line: mark discharged.
 
 ## 8. Ratification list (for the 2.2 spec author, not for you)

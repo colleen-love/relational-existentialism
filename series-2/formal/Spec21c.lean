@@ -2,7 +2,7 @@
 Spec 2.1c — νF at the ω-tier, and the discharge of T2.
 
 Normative sources: `series-2/2-1.md` §4 and `series-2/2-0.md` (D9-R3, D18).
-Builds on `Spec201`/`Spec201b` (imported). The construction order: build the final
+Builds on `Spec21a`/`Spec21b` (imported). The construction order: build the final
 raw universe for the finitely-branching tier and discharge the transfer theorem's
 hypothesis.
 
@@ -10,8 +10,8 @@ The whole ω-tier construction is monomorphized to `Type 0` (work order §1): th
 polynomial's shape types live in `Type 0` and nothing ontological hangs on it — this
 is representation layer.
 -/
-import Spec201
-import Spec201b
+import Spec21a
+import Spec21b
 import Mathlib.Data.QPF.Univariate.Basic
 import Mathlib.Data.PFunctor.Univariate.Basic
 import Mathlib.Data.Set.Finite.Basic
@@ -26,7 +26,7 @@ namespace TwoSorted
 unbounded `Set`-patterns — is unsatisfiable: Lambek + Cantor. A final Raw would give
 a bijection between its object sort and (essentially) the nonempty powerset of a type
 at least as large, which cannot exist. The κ-loan was never optional; `transfer`
-(Spec201b) is hereby re-targeted at the bounded quantifier it always needed
+(Spec21b) is hereby re-targeted at the bounded quantifier it always needed
 (`transfer_bounded` below), which this file then SATISFIES at the ω-tier. The
 transfer proof itself never used unboundedness; nothing there changes. See
 `isFinalRaw_never` for the formal statement. -/
@@ -42,7 +42,7 @@ needed. -/
 def IsFinalBRaw (Z : Raw.{0}) : Prop :=
   Bounded Z ∧ ∀ A : Raw.{0}, Bounded A → ∃! _h : Hom A Z, True
 
-/-- The transfer theorem, re-targeted (statement change only; Spec201b's
+/-- The transfer theorem, re-targeted (statement change only; Spec21b's
 `image_good`/`transfer_lands` are quantifier-free over finality and apply unchanged).
 If a bounded-final raw universe exists, every bounded coherent model admits exactly
 one morphism into it — landing in the coherent part. -/
@@ -275,7 +275,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.1 ↔ series-2/formal/Spec201c.lean
+-- Specs 2.0 / 2.1 ↔ series-2/formal/Spec21c.lean
 -- VAC (honesty)        = RelEx.TwoSorted.vac_note (doc); isFinalRaw_never DROPPED (SHOULD)
 -- BND (re-target)      = RelEx.TwoSorted.Bounded, IsFinalBRaw, transfer_bounded
 -- GQPF (technical heart) = RelEx.TwoSorted.G, GP, gAbs, gRepr, instQPFG
@@ -294,7 +294,7 @@ end AxiomAudit
 --   via `Set.Finite.toFinset` + `Finset.equivFin`.
 --
 -- Deviations from 2-1-mechanization-c.md:
---   * Registered as a sixth Lake library root (`Spec201c`).
+--   * Registered as a sixth Lake library root (`Spec21c`).
 --   * Monomorphized to `Type 0` throughout (work order §1 sanctions this; nothing
 --     ontological hangs on it — representation layer).
 --   * SHOULD items dropped: `isFinalRaw_never` (Cantor vacuity theorem — the honesty

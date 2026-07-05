@@ -1,6 +1,6 @@
 # 2.1-mechanization-d — Work Order: The Unblocked Four (T6, T9, T5, T10) and the Coinduction Principle
 
-**This document describes:** `series-2/formal/Spec201d.lean` (new file; imports `Spec201`, `Spec201b`, `Spec201c`)
+**This document describes:** `series-2/formal/Spec21d.lean` (new file; imports `Spec21a`, `Spec21b`, `Spec21c`)
 **Normative sources:** `series-2/2-0.md` (current), `series-2/2-1.md`, `series-2/2-2.md`. Specs win over this document; report discrepancies.
 **Audience:** Claude Code. All prior conventions in force (no `sorry`, no new axioms, audit block, doc-comments with spec IDs, mapping table, deviations recorded, Lake root per precedent). Naming continues the `-b`/`-c` convention: fourth mechanization of 2.1's ground, now *against* the constructed universe.
 
@@ -8,7 +8,7 @@
 
 ## 1. Purpose and scope
 
-Spec201c changed the tense: Ω exists (`T2_discharged`), inhabited (`omegaHat_coherent`). This order proves the theorem group that existence unblocked — the framework's claims *about* the universe, stated against `ZΩ`. Ordered so the day's first hours bank certain wins (T6, COIND, T9 are tractable) before the one genuinely hard construction (T5).
+Spec21c changed the tense: Ω exists (`T2_discharged`), inhabited (`omegaHat_coherent`). This order proves the theorem group that existence unblocked — the framework's claims *about* the universe, stated against `ZΩ`. Ordered so the day's first hours bank certain wins (T6, COIND, T9 are tractable) before the one genuinely hard construction (T5).
 
 | ID | Name | Priority |
 |----|------|----------|
@@ -37,7 +37,7 @@ def Desc (A : Raw) (z x : A.O) : Prop :=
 and every relation has an endpoint (every `Sym2` is inhabited). -/
 theorem desc_serial (A : Raw) : ∀ x, ∃ z, Desc A z x := by
   sorry -- obtain r from pat_nonempty; expose an endpoint by `Sym2.ind` on
-        -- `A.endpoints r` (or the `out`-projections verified in Spec201c);
+        -- `A.endpoints r` (or the `out`-projections verified in Spec21c);
         -- coherence is NOT needed here.
 
 /-- Spec 2.0 T6 — NO CONSTITUTIVE ORIGIN. On any inhabited Raw, constitutive
@@ -83,7 +83,7 @@ theorem identity_by_unfolding : sorry := sorry
   -- records the exact statement delivered.
 
 /-- Spec 2.0 A5, realized: the universe contains an object that relates to
-itself — ω̂, whose pattern is exactly its own self-relation. From Spec201c's
+itself — ω̂, whose pattern is exactly its own self-relation. From Spec21c's
 `pat_omegaHat` computation. The ledger's "theorem by Lambek" made concrete. -/
 theorem self_relation_realized :
     ∃ (x : ZΩ.O) (r : ZΩ.R), r ∈ ZΩ.pat x ∧ ZΩ.endpoints r = s(x, x) := by
@@ -94,7 +94,7 @@ theorem self_relation_realized :
 ## 4. T9 — canonicity
 
 ```lean
-/-- Identity and composition of Raw homs (mirror Spec200's Shadow versions;
+/-- Identity and composition of Raw homs (mirror Spec20a's Shadow versions;
 `Sym2.map_id`/`map_comp` and `Set.image_id`/`image_image` do the squares). -/
 def Hom.idRaw (A : Raw) : Hom A A := sorry
 def Hom.compRaw {A B C : Raw} (g : Hom B C) (f : Hom A B) : Hom A C := sorry
@@ -105,7 +105,7 @@ independently of every encoding choice. THE ATOMS BELONG TO THE MAP: QPF, the
 polynomial, `Quot.out`, `Type 0` — all scaffolding; what is canonical is Ω
 up to isomorphism. Proof: the two unique morphisms compose to unique
 endomorphisms, which equal the identities (uniqueness at each final object
-applied to itself — the `final_subsingleton` pattern from Spec200, upgraded). -/
+applied to itself — the `final_subsingleton` pattern from Spec20a, upgraded). -/
 theorem final_unique (Z Z' : Raw) (h : IsFinalBRaw Z) (h' : IsFinalBRaw Z') :
     ∃ (f : Hom Z Z') (g : Hom Z' Z),
       Hom.compRaw g f = Hom.idRaw Z ∧ Hom.compRaw f g = Hom.idRaw Z' := by
@@ -143,7 +143,7 @@ def FinitelyRealized (x : Ω₀) : Prop :=
     ∃ (h : Hom A ZΩ) (a : A.O), h.fO a = x
 ```
 
-Basic lemmas to bank first: `EqDepth` is reflexive at every n (induction; `Sym2Lift` reflexivity by `Sym2.ind`); `omegaHat ∈ ρ` (witness: the one-point Raw from `Spec201c`'s `omegaHat` construction, packaged — this also gives ρ ≠ ∅ and a smoke test of `FinitelyRealized`'s shape).
+Basic lemmas to bank first: `EqDepth` is reflexive at every n (induction; `Sym2Lift` reflexivity by `Sym2.ind`); `omegaHat ∈ ρ` (witness: the one-point Raw from `Spec21c`'s `omegaHat` construction, packaged — this also gives ρ ≠ ∅ and a smoke test of `FinitelyRealized`'s shape).
 
 ### 5.2 Reachability is finite (the enabling lemma)
 
@@ -211,11 +211,11 @@ Note for the doc-comment: with T5 in hand, Genesis reduces to whether the *finit
 ## 7. Spec housekeeping (MUST)
 
 In `2-0.md` §5:
-- T6 → `[proved (Spec201d): descent serial in every Raw; not well-founded on any inhabited Raw; instantiated at ZΩ; chains at every depth]`.
-- T9 → `[proved (Spec201d): any two bounded-final Raws isomorphic — canonicity; the atoms belong to the map]`.
-- T5 → per outcome: `[proved (Spec201d): every object depth-n matched by a finitely-realized one; truncation closes with self-loops]` or the drop-clause label.
-- T10 → append `— formally anchored (Spec201d: Genesis, omegaOrbit); open in truth-value; reduction to orbit-approximability of ρ noted.`
-- A4 ledger row → append `— coinduction principle realized (identity_by_unfolding, Spec201d)`; A5 row → append `— realized at ZΩ (self_relation_realized)`.
+- T6 → `[proved (Spec21d): descent serial in every Raw; not well-founded on any inhabited Raw; instantiated at ZΩ; chains at every depth]`.
+- T9 → `[proved (Spec21d): any two bounded-final Raws isomorphic — canonicity; the atoms belong to the map]`.
+- T5 → per outcome: `[proved (Spec21d): every object depth-n matched by a finitely-realized one; truncation closes with self-loops]` or the drop-clause label.
+- T10 → append `— formally anchored (Spec21d: Genesis, omegaOrbit); open in truth-value; reduction to orbit-approximability of ρ noted.`
+- A4 ledger row → append `— coinduction principle realized (identity_by_unfolding, Spec21d)`; A5 row → append `— realized at ZΩ (self_relation_realized)`.
 
 In `2-2.md` §7: this order delivered; remaining Series-2 theorem work: the S1 pigeonhole order, then T4 (profiles — now with EqDepth in hand), then T7.
 

@@ -4,7 +4,7 @@ the ascent against F_C (Stage 4, FP6), the residue attack + witness (Stage 5, FP
 B3/B5 recovery pack (Stage 6, FP7), and P3h (Stage 7, FP3).
 
 Normative source: `series-2/2-4.md` §3 (D24 recovery pack), §4 (construction), §5 (P3h),
-§6 (B5/witness), §7 (FP table). Continues `Spec204.lean` (Stages 0–1). Specs win.
+§6 (B5/witness), §7 (FP table). Continues `Spec24a.lean` (Stages 0–1). Specs win.
 
 Hostile-first note (marked deviation, sanctioned by 2-4-mechanization-a §3). Stages 2–3 — the
 genuinely-mutual construction of νF_C/Ω_C — are the order's hardest piece and carry an explicit
@@ -13,7 +13,7 @@ order itself frames as "interface-plus-witness," §3/§6) and records the Stage-
 reduction concretely, while the νF_C QPF construction (and hence FP5 against Ω_C *proper*) is the
 documented remaining boundary — see the results write-up (2.4 §9). Nothing here consults §8.
 -/
-import Spec204
+import Spec24a
 
 open RelEx.Trials (RawC)
 
@@ -25,7 +25,7 @@ The corrected terminal coalgebra satisfies `Ω_O ≅ P⁺f(Ω_R)` and `Ω_R ≅ 
 Substituting the first into the second eliminates the mutual recursion:
 `Ω_R ≅ Sym2(P⁺f(Ω_R) ⊕ Ω_R) = HC Ω_R`, and then `Ω_O := P⁺f(Ω_R)`. So the whole construction
 rests on a SINGLE univariate fixpoint `νHC`. `HC` is recorded here as a genuine functor; building
-its QPF instance (the analogue of Spec201c's `instQPFG`, but for this richer shape) and taking
+its QPF instance (the analogue of Spec21c's `instQPFG`, but for this richer shape) and taking
 `QPF.Cofix HC` is the remaining heavy step (2.4 §4, Stage 2's sanctioned drop clause). -/
 
 /-- `HC` — the univariate reduction functor: `HC X = Sym2(P⁺f(X) ⊕ X)`, whose greatest fixpoint
@@ -52,19 +52,19 @@ theorem HC_map_id {α : Type} : HC.map (id : α → α) = id := by
 
 /-! ## Stage 4 (FP6) — the ascent re-verified against F_C exactly, proxy replaced (2.4 §0/§7)
 
-The trial proxy (Spec203c `ascent_R`/`ascent_O`) ran over `PfNe`/`Sym2 ∘ ⊕`, which is `F_C`
+The trial proxy (Spec23c `ascent_R`/`ascent_O`) ran over `PfNe`/`Sym2 ∘ ⊕`, which is `F_C`
 verbatim: `FO O R = PfNe R`, `FR O R = Sym2 (O ⊕ R)` are defeq to the stage bodies. The
 stage-wise non-collapse therefore holds *against F_C proper*, restated here through `FO`/`FR`. -/
 
 /-- FP6 (relation sort) — CONFIRMED: the `F_C` relation component never re-collapses at any stage
-of the terminal sequence. `FR (OStage n) (RStage n)` is `RStage (n+1)` (defeq), so Spec203c's
+of the terminal sequence. `FR (OStage n) (RStage n)` is `RStage (n+1)` (defeq), so Spec23c's
 `ascent_R` transfers verbatim — the Mirror's collapse fails at every storey, against F_C proper. -/
 theorem ascentC_R (n : ℕ) :
     ¬ Subsingleton (FR (RelEx.Trials.OStage n) (RelEx.Trials.RStage n)) :=
   RelEx.Trials.ascent_R n
 
 /-- FP6 (object sort) — CONFIRMED: the `F_C` object component never re-collapses from stage 2 on.
-`FO (OStage (n+1)) (RStage (n+1))` is `OStage (n+2)` (defeq); Spec203c's `ascent_O` transfers. -/
+`FO (OStage (n+1)) (RStage (n+1))` is `OStage (n+2)` (defeq); Spec23c's `ascent_O` transfers. -/
 theorem ascentC_O (n : ℕ) :
     ¬ Subsingleton (FO (RelEx.Trials.OStage (n+1)) (RelEx.Trials.RStage (n+1))) :=
   RelEx.Trials.ascent_O n
@@ -143,7 +143,7 @@ theorem RevealC_subset (A : RawC) (x : A.O) (r : A.R) (hr : r ∈ A.pat x) :
   · exact ctxC_subset A x r hs
 
 /-- Remainder — the Relocation Conjecture made definitional (2.4 §3; cf. `relocation_realizes`,
-Spec203c): what the attending at `r` misses within `x`. The fish-gradation lives here — loss in
+Spec23c): what the attending at `r` misses within `x`. The fish-gradation lives here — loss in
 shapes, per relation, not merely in fact. -/
 def remC (A : RawC) (x : A.O) (r : A.R) : Set A.R := A.pat x \ RevealC A x r
 
@@ -190,7 +190,7 @@ the holding lemma's non-collapse (the two hosts keep distinct patterns). Objects
 `Bool` — the shared self-loop `rS = false` (`ends = s(r̂S, r̂S)`) and the extra `rU = true`
 (`ends = s(r̂S, r̂U)`, bearing on `rS` and itself). Object `true` hosts both; object `false` hosts
 only `rS`. (The non-bisimilar-pair requirement of §6 is discharged separately and more sharply by
-the coherent seeds, `seeds_not_bisimilar`, Spec204.) -/
+the coherent seeds, `seeds_not_bisimilar`, Spec24a.) -/
 def boolWitnessC : RawC where
   O := Bool
   R := Bool
@@ -339,7 +339,7 @@ end AxiomAudit
 -- νF_C/Ω_C construction is the documented remaining boundary (Stage 2 drop clause). This file
 -- delivers the construction-INDEPENDENT content of Stages 4-7 plus the Stage-2 reduction. FP5
 -- (anti-Mirror against Ω_C PROPER) awaits the construction; its substance — coherent non-bisimilar
--- states — is witnessed by seeds_not_bisimilar (Spec204) and boolWitnessC here.
+-- states — is witnessed by seeds_not_bisimilar (Spec24a) and boolWitnessC here.
 --
 -- Entrant ↔ Lean name:
 --   Stage 2r = RelEx.Corrected.HC, HC.map, HC_map_id

@@ -2,14 +2,14 @@
 Spec 2.4d — Carving Ω_C, re-anchoring the honesty lemmas, and T16 at the ω-tier.
 
 Normative source: `series-2/2-4.md` (§2 Ω_C := greatest coherent subcoalgebra; §5 the
-hosted-relations doctrine) and the work order `2-4-mechanization-b.md`. Continues `Spec204c.lean`
+hosted-relations doctrine) and the work order `2-4-mechanization-b.md`. Continues `Spec24c.lean`
 (the construction: `ZΩC`, `ΩR`/`ΩO`, `fRC`/`fOC`, `isFinalBRawC`, `elt2`/`elt3`, `omegaHat2`).
 Specs win. No declaration in this file consults §8 (the D19 register).
 
-File naming follows Spec204a–c (spec-first resolution; see the Spec204 header note). This file is
-`Spec204d.lean` per the order.
+File naming follows Spec24a–c (spec-first resolution; see the Spec24a header note). This file is
+`Spec24d.lean` per the order.
 -/
-import Spec204c
+import Spec24c
 
 open RelEx.Trials (RawC PfNe)
 
@@ -17,12 +17,12 @@ namespace RelEx.Corrected
 
 /-! ## Stage 0 — Ω_C carved (2.4 §2; the greatest coherent subcoalgebra)
 
-The one item Spec204c left uncarved. `GoodC` pairs are the two-sorted subcoalgebras on which the
+The one item Spec24c left uncarved. `GoodC` pairs are the two-sorted subcoalgebras on which the
 K-triple holds; `coherentPartC` is their union (Knaster–Tarski by hand), the object `Ω_C`. -/
 
 /-- A good pair of subsets `(UO, UR)` of a corrected coalgebra: a subcoalgebra (endpoints of kept
 relations kept; patterns of kept objects kept) on which the coherence triple K1/K2/K3 holds. The
-corrected analogue of Spec201b's `Good`. -/
+corrected analogue of Spec21b's `Good`. -/
 structure GoodC (Z : RawC) (UO : Set Z.O) (UR : Set Z.R) : Prop where
   endsO : ∀ r ∈ UR, ∀ x : Z.O, Sum.inl x ∈ Z.endpoints r → x ∈ UO
   endsR : ∀ r ∈ UR, ∀ s : Z.R, Sum.inr s ∈ Z.endpoints r → s ∈ UR
@@ -94,7 +94,7 @@ noncomputable def homSeedC (A : RawC) (hA : BoundedC A) : HomC A ZΩC :=
   ⟨fOC A hA, fRC A hA, fRC_end_comm A hA, fun _ => rfl⟩
 
 /-- The image of a COHERENT bounded coalgebra under the canonical hom is a good pair — the
-covariety closure that lands coherent descriptions in `Ω_C`. Corrected analogue of Spec201b's
+covariety closure that lands coherent descriptions in `Ω_C`. Corrected analogue of Spec21b's
 `image_good`. -/
 theorem imageC_good (A : RawC) (hCoh : CoherentC A) (hA : BoundedC A) :
     GoodC ZΩC (Set.range (fOC A hA)) (Set.range (fRC A hA)) := by
@@ -179,7 +179,7 @@ def hostedPart : Set ΩR := {r | hostedC r}
 
 /-! ## Stage 1 — the honesty lemmas, lifted (2.4 §; re-anchoring T5/T10 over Ω_C)
 
-Spec203's `eqDepth_trivial`/`genesis_vacuous` existed so no reader mistook T5/T10 for resolved
+Spec23a's `eqDepth_trivial`/`genesis_vacuous` existed so no reader mistook T5/T10 for resolved
 over the collapsed universe. Here they are replaced with contentful counterparts over the
 corrected, plural universe. -/
 
@@ -191,7 +191,7 @@ def SumLiftC (Ro : ΩO → ΩO → Prop) (Rr : ΩR → ΩR → Prop) : (ΩO ⊕ 
   | _, _ => False
 
 /-! Depth-`n` behavioural equivalence on the corrected universe (mutual over the two sorts;
-carried from Spec201d with `ends` over `O ⊕ R`). Relations agree to depth `n+1` when their
+carried from Spec21d with `ends` over `O ⊕ R`). Relations agree to depth `n+1` when their
 endpoint pairs are `Sym2`-lifted-equal to depth `n` (sort-respecting); objects agree when their
 patterns are Egli–Milner-lifted-equal on relations. -/
 mutual
@@ -210,7 +210,7 @@ end
 /-- FP-B1 — CONFIRMED: `EqDepthR` is NON-TRIVIAL over Ω_C. The two coherent citizens `elt2` and
 `elt3` agree to depth 0 (everything does) but SEPARATE at depth 1 — `elt2`'s unfolding carries an
 object endpoint the sort-respecting lift cannot match to `elt3`'s pure higher-order pair. The
-honesty debt (`eqDepth_trivial`, Spec203) is paid: depth equivalence discriminates. -/
+honesty debt (`eqDepth_trivial`, Spec23a) is paid: depth equivalence discriminates. -/
 theorem eqDepthC_nontrivial : EqDepthR 0 elt2 elt3 ∧ ¬ EqDepthR 1 elt2 elt3 := by
   refine ⟨trivial, ?_⟩
   show ¬ RelEx.TwoSorted.Sym2Lift (SumLiftC (EqDepthO 0) (EqDepthR 0))
@@ -245,7 +245,7 @@ def GenesisC : Prop := ∀ (x : ΩO) (n : ℕ), ∃ y ∈ omegaOrbit2, EqDepthO 
 /-- FP-B2 — CONFIRMED: `GenesisC` is NON-VACUOUS. Over the collapsed universe Genesis was
 vacuously true (everything equalled ω̂); here the universe is genuinely plural (`elt2 ≠ elt3`), so
 `GenesisC` is a contentful claim with a real question behind it. **Its truth-value stays open**,
-exactly as `Genesis` was anchored in Spec201d — this is the anchor, not the answer. -/
+exactly as `Genesis` was anchored in Spec21d — this is the anchor, not the answer. -/
 theorem genesisC_nonvacuous : ∃ r s : ΩR, r ≠ s := ⟨elt2, elt3, elt2_ne_elt3⟩
 
 /-- T10's sharpened form (2.4, "is F(1)'s pregnancy enough to reach everything?"): every
@@ -257,14 +257,14 @@ def ReachableFromSeeds : Prop :=
     ∃ s : ΩR, (s = elt2 ∨ s = elt3) ∧ EqDepthR n r s
 
 /-- T5 surrogate `closing_denseC` (2.4 re-anchoring): DROPPED under the same sanctioned drop
-clause as its ancestor `closing_dense` (Spec201d) — the truncation/density assembly needs
+clause as its ancestor `closing_dense` (Spec21d) — the truncation/density assembly needs
 machinery out of this order's scope. The load-bearing depth machinery (`EqDepthR`/`EqDepthO`,
 `FinitelyRealizedC` below) is in hand; the final assembly is deferred, no `sorry`, outcome
 recorded as OPEN-attempt per the order. -/
 def closing_denseC_note : Unit := ()
 
 /-- ρ_C — the finitely-realized relations of Ω_C: images of finite-carrier bounded coherent
-descriptions. Carried from Spec201d's `FinitelyRealized`. -/
+descriptions. Carried from Spec21d's `FinitelyRealized`. -/
 def FinitelyRealizedC (r : ΩR) : Prop :=
   ∃ (A : RawC) (hA : BoundedC A), CoherentC A ∧ ∃ (a : A.R), fRC A hA a = r
 

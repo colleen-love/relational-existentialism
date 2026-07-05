@@ -11,13 +11,13 @@ defaultTargets = ["Series2"]
 [[lean_lib]]
 name = "Series2"
 srcDir = "../series-2/formal"
-# `Series2` is the arena-reset root; `Spec200` mechanizes Spec 2.0's unblocked
-# theorem group (T1, P0–P3); `Spec201` mechanizes Spec 2.1's two-sorted signature
-# (P4s, PR-J(a), the C3 split, L1); `Spec201b` adds the transfer theorem and the
+# `Series2` is the arena-reset root; `Spec20a` mechanizes Spec 2.0's unblocked
+# theorem group (T1, P0–P3); `Spec21a` mechanizes Spec 2.1's two-sorted signature
+# (P4s, PR-J(a), the C3 split, L1); `Spec21b` adds the transfer theorem and the
 # design-ready group (T2t, PR-J(b) dichotomy, T12s, P1 barrier one, P2c, C2d);
-# `Spec202` adds Reveal, Internal, the C1 conditional, and the comparative T14 laws.
+# `Spec22a` adds Reveal, Internal, the C1 conditional, and the comparative T14 laws.
 # All are roots of the one live library.
-roots = ["Series2", "Spec200", "Spec201", "Spec201b", "Spec202", "Spec201c", "Spec201d", "Spec203", "Spec203b", "Spec203c", "Spec204", "Spec204b", "Spec204c", "Spec204d", "Spec204e", "Spec204f", "Spec204g", "Spec205", "Spec205b"]
+roots = ["Series2", "Spec20a", "Spec21a", "Spec21b", "Spec22a", "Spec21c", "Spec21d", "Spec23a", "Spec23b", "Spec23c", "Spec24a", "Spec24b", "Spec24c", "Spec24d", "Spec24e", "Spec24f", "Spec24g", "Spec25a", "Spec25b"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.

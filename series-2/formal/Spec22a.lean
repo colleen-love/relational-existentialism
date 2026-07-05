@@ -2,7 +2,7 @@
 Spec 2.2 — Reveal, Internal, and the C1 conditional.
 
 Normative sources: `series-2/2-0.md` (with D17/D18 and R3-revised D9),
-`series-2/2-1.md`, `series-2/2-2.md`. Builds on `Spec201`/`Spec201b`
+`series-2/2-1.md`, `series-2/2-2.md`. Builds on `Spec21a`/`Spec21b`
 (imported): `Model`, `ctx`, `ContainedIn`/`Touches`/`MutualPartial`, `boolWitness`,
 `StepR`/`Connected`, `Model.toRaw`.
 
@@ -24,8 +24,8 @@ Deliverables (work order 2-2-mechanization.md §1):
   T14c   mutualPartial_witness
   T14d   comparative fish/partner witness      — DROPPED (SHOULD; see mapping table)
 -/
-import Spec201
-import Spec201b
+import Spec21a
+import Spec21b
 import Mathlib.Logic.Relation
 
 namespace RelEx
@@ -282,7 +282,7 @@ open RelEx.TwoSorted
 end AxiomAudit
 
 /-
--- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec202.lean
+-- Specs 2.0 / 2.1 / 2.2 ↔ series-2/formal/Spec22a.lean
 -- Reveal (R2)             = RelEx.TwoSorted.Reveal (+ reveal_subset, mem_reveal_self)
 -- Containers co-attend    = RelEx.TwoSorted.containers_co_attend
 -- P1 barrier two (exist.) = RelEx.TwoSorted.reveals_differ
@@ -296,7 +296,7 @@ end AxiomAudit
 -- T14 corners             = RelEx.TwoSorted.mutualPartial_witness
 --
 -- Deviations from 2-2-mechanization.md:
---   * File registered as a fifth Lake library root (`Spec202`).
+--   * File registered as a fifth Lake library root (`Spec22a`).
 --   * T14d (comparative fish/partner witness) DROPPED per its SHOULD/droppable
 --     clause; T14a/b/c (the MUST corners and laws) are delivered.
 --   * `mutualPartial_witness` defines `pat` as the endpoint-preimage
