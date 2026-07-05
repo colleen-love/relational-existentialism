@@ -5,18 +5,13 @@
 **No Lean sources live here** — they live in the live root's `formal/`, which the library reaches via
 `srcDir = "../<root>/formal"`. After the arena reset (handoff I.II), only one library is live:
 
-- [`scratch/formal/`](../scratch/formal) — `Paper1.*`, the new-arena skeleton; spec II.1 grows it.
+- [`series-2/formal/`](../series-2/formal) — `Series2.*`, the new-arena skeleton; spec 2.1 grows it.
 
-The prior edifice's Lean (`Foundation.*`, `Theory.*`, the paper closures, `scratch/`) is archived under
-[`../archive/traceable-smt/`](../archive/traceable-smt) as structural reference and is **not** built. See
-[`lakefile.toml`](lakefile.toml) for the live target and [`../STRUCTURE.md`](../STRUCTURE.md) for the turn.
+See [`lakefile.toml`](lakefile.toml) for the live target and [`../STRUCTURE.md`](../STRUCTURE.md) for the turn.
 
 ## Build
 
 ```
 cd lake
-lake build        # builds Paper1 (the only live library); an empty skeleton, green instantly
+lake build        # builds Series2 (the only live library); an empty skeleton, green instantly
 ```
-
-The archived development is not on the build path; to read what it contains, see
-[`../archive/traceable-smt/INDEX.md`](../archive/traceable-smt/INDEX.md).
