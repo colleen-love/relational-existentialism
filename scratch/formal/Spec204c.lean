@@ -256,6 +256,71 @@ becomes "exists". -/
 theorem T2C_discharged : ∃ Z : RawC, IsFinalBRawC Z :=
   ⟨ZΩC, isFinalBRawC⟩
 
+/-! ## Lambek, ω̂₂, and FP5 — the anti-Mirror against the constructed universe (Stages 3–4)
+
+Lambek: `QPF.Cofix.dest` (i.e. `ZΩC.endpoints`) is the structure iso `Ω_R ≅ HC Ω_R = Sym2(Ω_O ⊕
+Ω_R)`, inherited from `QPF.Cofix` (`dest`/`corec` with `dest_corec`). The two coherent seeds close
+into distinct elements of the constructed universe, separated at depth 1 — the anti-Mirror. -/
+
+theorem bounded_seed2 : BoundedC seed2 := fun _ => Set.finite_singleton _
+theorem bounded_seed3 : BoundedC seed3 := fun _ => Set.finite_singleton _
+
+/-- The bearing seed closed into `Ω_R`. -/
+noncomputable def elt2 : ΩR := fRC seed2 bounded_seed2 PUnit.unit
+/-- The higher seed closed into `Ω_R` — the self-witnessing loop. -/
+noncomputable def elt3 : ΩR := fRC seed3 bounded_seed3 PUnit.unit
+
+/-- **ω̂₂** — the corrected universe's first citizen: the self-witnessing loop as an OBJECT (the
+`fRC`-image of seed 3's pattern). The pre-correction `omegaHat` (Spec201c) named the wrong citizen
+— the bare self-loop, incoherent under the K-triple (`seed1_incoherent`, Spec204); ω̂₂ is the One
+that turns upon its turning (retiring `omegaHat_coherent`; 2-04 O-2-05-3). -/
+noncomputable def omegaHat2 : ΩO := fOC seed3 bounded_seed3 PUnit.unit
+
+/-- `elt3`'s unfolding: both endpoints are the loop itself — pure higher-order, no object endpoint
+(the higher seed `s(r̂,r̂)`, closed). -/
+theorem dest_elt3 : ZΩC.endpoints elt3 = s(Sum.inr elt3, Sum.inr elt3) := by
+  show QPF.Cofix.dest elt3 = _
+  rw [elt3, fRC, QPF.Cofix.dest_corec]
+  show HC.map (QPF.Cofix.corec (inducedCoalgC seed3 bounded_seed3))
+      (inducedCoalgC seed3 bounded_seed3 PUnit.unit) = _
+  rw [inducedCoalgC, show seed3.endpoints PUnit.unit = seedRR from rfl, seedRR,
+      Sym2.map_pair_eq, HC.map, Sym2.map_pair_eq]
+  rfl
+
+/-- `elt2`'s unfolding carries an object endpoint (the bearing seed `s(⋆,r̂)`, closed). -/
+theorem dest_elt2 :
+    ZΩC.endpoints elt2 = s(Sum.inl (fOC seed2 bounded_seed2 PUnit.unit), Sum.inr elt2) := by
+  show QPF.Cofix.dest elt2 = _
+  rw [elt2, fRC, QPF.Cofix.dest_corec]
+  show HC.map (QPF.Cofix.corec (inducedCoalgC seed2 bounded_seed2))
+      (inducedCoalgC seed2 bounded_seed2 PUnit.unit) = _
+  rw [inducedCoalgC, show seed2.endpoints PUnit.unit = seedOR from rfl, seedOR,
+      Sym2.map_pair_eq, HC.map, Sym2.map_pair_eq]
+  rfl
+
+/-- Depth-1 anti-Mirror invariant on `Ω_R`: the relation's unfolding carries an object endpoint. -/
+def HasObjEndpointΩ (r : ΩR) : Prop := ∃ o : ΩO, Sum.inl o ∈ ZΩC.endpoints r
+
+/-- FP5 — THE ANTI-MIRROR, against the constructed universe. Two elements of `Ω_R` (the closed
+coherent seeds) are separated at depth 1 by sort-profile: `elt2` (the bearing) carries an object
+endpoint, `elt3` (the loop) does not — so they are non-bisimilar, hence DISTINCT in the final
+coalgebra. The theorem the collapsed universe could not have, now against `Ω` proper: **the
+corrected universe is many.** -/
+theorem anti_mirror_C : HasObjEndpointΩ elt2 ∧ ¬ HasObjEndpointΩ elt3 := by
+  constructor
+  · exact ⟨fOC seed2 bounded_seed2 PUnit.unit, by rw [dest_elt2]; exact Sym2.mem_iff.mpr (Or.inl rfl)⟩
+  · rintro ⟨o, ho⟩
+    rw [dest_elt3, Sym2.mem_iff] at ho
+    rcases ho with h | h <;> simp at h
+
+/-- The two closed seeds are distinct elements of the constructed universe (`Ω_R`) — the plurality
+the Mirror forbade, read off the anti-Mirror invariant. -/
+theorem elt2_ne_elt3 : elt2 ≠ elt3 := by
+  intro h
+  have := anti_mirror_C
+  rw [h] at this
+  exact this.2 this.1
+
 end RelEx.Corrected
 
 /-! ## Axiom audit -/
@@ -264,4 +329,8 @@ open RelEx.Corrected
 #print axioms instQPFHC
 #print axioms isFinalBRawC
 #print axioms T2C_discharged
+#print axioms dest_elt3
+#print axioms dest_elt2
+#print axioms anti_mirror_C
+#print axioms elt2_ne_elt3
 end AxiomAudit
