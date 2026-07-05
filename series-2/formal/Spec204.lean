@@ -3,7 +3,7 @@ Spec 2.4a — The Corrected Functor: F_C, the coherence triple, and the coherent
 
 Normative source: `series-2/2-4.md` (the corrected-functor design: §0 D20, §1 D22 the bare
 (C) signature, §2 D23 the coherence triple, §7 the frozen FP predictions) and the work order
-`series-2/2-4-mechanization-a.md`. Specs win; discrepancies reported below.
+`series-2/spec/2-4-mechanization-a.md`. Specs win; discrepancies reported below.
 
 NAMING DISCREPANCY (reported, resolved spec-first). The work order names its target
 `Spec205.lean` and cites "2.5 §0/§2/§6" and appends results to "2.5" — but the normative spec

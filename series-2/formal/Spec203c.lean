@@ -1,7 +1,7 @@
 /-
 Spec 2.3c — Close the Trials: the Relocation Conjecture, the one-bit audit, and the Ascent.
 
-Normative source: `series-2/2-3-mechanization-c.md` — the order — which carries its
+Normative source: `series-2/spec/2-3-mechanization-c.md` — the order — which carries its
 own FROZEN predictions (§2, P1–P6), pre-registered hostile-first. This file is that order's
 lab notebook: every theorem's doc-comment names the prediction it CONFIRMS or REFUTES; a
 surprised prediction is the trial working; no refutation is softened.
