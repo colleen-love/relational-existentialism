@@ -20,7 +20,7 @@ srcDir = "../scratch/formal"
 # design-ready group (T2t, PR-J(b) dichotomy, T12s, P1 barrier one, P2c, C2d);
 # `Spec202` adds Reveal, Internal, the C1 conditional, and the comparative T14 laws.
 # All are roots of the one live library.
-roots = ["Paper1", "Spec200", "Spec201", "Spec201b", "Spec202", "Spec201c", "Spec201d", "Spec203", "Spec203b", "Spec203c", "Spec204", "Spec204b", "Spec204c", "Spec204d", "Spec204e", "Spec204f", "Spec204g"]
+roots = ["Paper1", "Spec200", "Spec201", "Spec201b", "Spec202", "Spec201c", "Spec201d", "Spec203", "Spec203b", "Spec203c", "Spec204", "Spec204b", "Spec204c", "Spec204d", "Spec204e", "Spec204f", "Spec204g", "Spec205", "Spec205b"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.
