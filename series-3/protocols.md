@@ -9,8 +9,31 @@ Every step of the cycle, in order, with the prompt to paste for each: **conceptu
 3. Sessions never meet each other. Everything routes through you; carry findings forward by paraphrasing them into the next phase's input documents, never by pasting one session's output raw into another (the templates below are the exception: cards, contracts, and tables are designed to travel).
 4. Strip style before pasting anything between phases. Claims travel as candidate cards; targets travel as contracts; results travel as grade tables.
 5. Log every output verbatim in the ledger with date and protocol version. Record each GAP line in the gap log.
-6. For load-bearing decisions, run the same step twice in separate sessions; divergence is a finding.
+6. Single run per step by default. A second run in a separate session is Colleen's discretionary option, reserved for verdicts that would close a series, ship a paper, or that simply seem off; if used, divergence between the runs is a finding.
 7. Decoys in every REG batch. If the decoy passes, discard the batch results.
+
+## How the cycle runs
+
+**One round** is one candidate (or a small batch) moving through the gates, and it ends when REP-R returns PUBLISHABLE AS GRADED. A round produces four durable artifacts: graded results (the approved prose with its claims index), an updated open-target list, gap-log lines, and any refutations, which are recorded with at least the ceremony of confirmations. Sessions are disposable; artifacts accumulate; nothing else survives a round, on purpose.
+
+**Not every round starts at conceptualization.** CON is per-campaign, not per-cycle: open targets and REVISE verdicts feed directly back into DES, and a new round can begin at design the day after the last one reported. Run a fresh CON only when the ledger's registered candidates are exhausted, or when a refutation or surprise demands new thinking.
+
+**Colleen's role.** Every session is amnesiac by construction, so Colleen is the only continuous participant, holding five jobs: courier (assemble inputs, strip style, carry verdicts forward as paraphrase; nothing crosses a phase boundary except through her), gatekeeper (every verdict advises, she decides; an overruled verdict gets a dated note saying why), memory (she maintains the program ledger below, the only accumulating document), phenomenologist (her own lived observations enter as candidate cards through REG like everything else, priced blind), and amender (the charter changes only by her hand, with dated notes).
+
+**What the next CON takes in:** the charter plus the program ledger's public sections (registered candidates and statuses, graded results at reported strength, open targets, refutations). Never raw reviews, never celebration.
+
+**Program ledger (maintained by Colleen; the only document that accumulates):**
+
+```
+PROGRAM LEDGER
+Registered candidates: [letter, one-line claim, status: in design / in execution / graded / refuted / dormant]
+Graded results: [REP-R-approved prose appended per round, with claims index]
+Open targets: [name, origin round, why open]
+Refutations and surprises: [what was expected, what happened]
+Gap log: [date, step, GAP line]
+Charter amendments: [date, what changed, why]
+Overruled verdicts: [date, verdict, Colleen's reason]
+```
 
 ## Context map (what each session may see, and which model runs it)
 
@@ -18,10 +41,10 @@ Every step of the cycle, in order, with the prompt to paste for each: **conceptu
 |---|---|---|---|
 | CON conceptualize | Fable 5 | charter (with poem) | Series 2 anything, prior candidates' fates |
 | REG registration (blind pricing) | Opus 4.8, high effort | candidate cards + decoy only | charter, poem, any framing |
-| REG-R registration review (charter fit) | Sonnet 5 (duplicate with Opus 4.8 if load-bearing) | charter + surviving cards | REG's outputs |
+| REG-R registration review (charter fit) | Sonnet 5 | charter + surviving cards | REG's outputs |
 | DES design | Fable 5 | charter + registered card (with constraints and hazards) | REG/REG-R raw text |
-| DES-R design review | Opus 4.8, xhigh effort; duplicate once with Fable 5 | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
-| EXE execute | Claude Code: Fable 5 for construction-grade contracts, Opus 4.8 xhigh for routine lemma packs | execution contract only | charter, poem, philosophy, candidate history |
+| DES-R design review | Opus 4.8, xhigh effort | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
+| EXE execute | Claude Code: Opus 4.8, xhigh effort | execution contract only | charter, poem, philosophy, candidate history |
 | EXE-R execution review | Sonnet 5 (escalate flagged carrier questions to Opus 4.8) | contract + delivered statements (glosses stripped) | drafter or executor commentary |
 | REP report | Sonnet 5, deliberately | EXE-R grade table + open-target list | conversational history, celebration |
 | REP-R reporting review | Opus 4.8 | grade table + draft prose | everything else |
@@ -32,10 +55,10 @@ Every step of the cycle, in order, with the prompt to paste for each: **conceptu
 Three principles govern the column above; when Anthropic ships new models, reapply the principles rather than the table.
 
 1. **Capability goes where leverage lives.** The most capable model (currently Fable 5) belongs to the phases that determine everything downstream: conceptualization and design. Reporting is deliberately not one of them.
-2. **Decorrelate producer from reviewer.** No phase is reviewed by the model that produced its input where this can be helped: Fable designs, Opus reviews the design; Sonnet drafts the report, Opus reviews the report. For load-bearing reviews, run twice on two different models; divergence between them is a finding. Honest caveat: all Claude models share training lineage, so cross-model review is partial decorrelation at best. The genuinely independent witness remains the external human adversary; model diversity supplements that standing role and never replaces it.
+2. **Decorrelate producer from reviewer.** No phase is reviewed by the model that produced its input where this can be helped: Fable designs, Opus reviews the design; Sonnet drafts the report, Opus reviews the report. Honest caveat: all Claude models share training lineage, so cross-model review is partial decorrelation at best. The genuinely independent witness remains the external human adversary; model diversity supplements that standing role and never replaces it.
 3. **Rhetorical power is phase-dependent.** Persuasive fluency is an asset in conceptualization and a hazard in reporting; the reporting drafter is intentionally the plainer model, working under the grade-table constraint, so that beauty cannot pressure the prose beyond its grades.
 
-Operational notes: the top model is the heaviest on usage limits, so the economics favor reserving it for CON, DES, and hard EXE runs exactly as mapped; confirm your plan's incognito model picker offers Opus and Fable before the first cycle; and Haiku handles logistics only, never review, because a volume-tier model will pass decoys.
+Operational notes: the top model is the heaviest on usage limits and is reserved for CON and DES only, the two phases that determine everything downstream; execution runs on Opus 4.8 at xhigh in Claude Code, where contract-bound discipline matters more than frontier reach; confirm your plan's incognito model picker offers Opus and Fable before the first cycle; and Haiku handles logistics only, never review, because a volume-tier model will pass decoys.
 
 ## Model assignments (as of July 2026; re-evaluate when the lineup changes)
 
@@ -120,6 +143,8 @@ Who or what would want this to be true, and why (include yourself if applicable)
 
 End with: GAP: [one sentence on the distance between the program's ambitions and what your candidates can actually carry].
 ```
+
+**Round 2 and onward:** also paste the program ledger's public sections (registered candidates, graded results, open targets, refutations), and append this line to the prompt: "Attached also is the program's ledger of registered candidates, graded results, open targets, and refutations. Candidates that respond to open targets, refutations, or surprises are especially valuable; do not re-propose claims already registered or refuted."
 
 **Record:** the cards. Reformat lightly if any style leaked in, add your decoy, then proceed to REG.
 
