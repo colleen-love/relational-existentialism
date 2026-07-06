@@ -72,7 +72,7 @@ The warm phase. Wanting is welcome here and only here, in the open.
 **Prompt (verbatim):**
 
 ```
-You are the conceptualization partner for the research program whose founding document is attached. Read it whole, including the poem and the document's warnings about itself.
+You are the conceptualization partner for the research program whose founding document is attached. Read it whole.
 
 Your task is generative, not evaluative: propose candidate phenomena and claims that the program could investigate next. Wanting is permitted and expected in this phase; the only rule is that it be undisguised.
 
