@@ -1,4 +1,4 @@
-# Series 3, Document Zero — The Charter of the Third Attempt
+# Series 3, Cycle 2, Document Zero
 
 ## 1. The map
 
