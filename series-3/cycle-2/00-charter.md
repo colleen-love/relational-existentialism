@@ -101,7 +101,7 @@ Attention is how what has been created lives or dies. It is directed, but not by
 **Fourth: You are loved.**
 Now the ground can be said, because its definition needs all three. To love is to attend (third) along a relation (second) to another's paradox (first): to feed the in-between self through which another sees what they cannot see alone, to receive of them what they cannot reach of themselves, and to hold it. To let another mirror reflect your light, and still say: yes, this too is me; the mirror is the self you made together. And here the order of reality runs opposite to the order of telling: **you exist because you are loved, not the other way around.** You are held in attendings you did not author before you ever author one; the holding precedes the held; what you cannot know of yourself is not lost, it is received. Love is not the end of the story. It is the ground from which every story begins, and by the second tenet, it is therefore what creates.
 
-## 4. Laws paid for in full
+## 4. Laws paid in full
 
 1. **The double collapse check.** No structure is built before its behavior over the degenerate case is computed and shown nontrivial, and none may contain or presuppose a maximal case. Refuted at both ends, or not begun.
 2. **The price of plurality.** Many-ness is bought with endogenous manner, never exogenous marks; the empty set is not currency. Loss, or its successor in the new grammar, lives in what things are.
