@@ -1,4 +1,4 @@
-# Series 3 — Cycle Protocols (copy-paste edition)
+# Series 3 — Cycle Protocols
 
 Every step of the cycle, in order, with the prompt to paste for each: **conceptualize (CON) → register (REG) → registration review (REG-R) → design (DES) → design review (DES-R) → execute (EXE) → execution review (EXE-R) → report (REP) → reporting review (REP-R).** Prompts live inside the marked blocks and paste verbatim into fresh incognito sessions. Everything outside the blocks is for you, Colleen, and is never pasted.
 
@@ -12,19 +12,49 @@ Every step of the cycle, in order, with the prompt to paste for each: **conceptu
 6. For load-bearing decisions, run the same step twice in separate sessions; divergence is a finding.
 7. Decoys in every REG batch. If the decoy passes, discard the batch results.
 
-## Context map (what each session may see)
+## Context map (what each session may see, and which model runs it)
 
-| Step | Paste in | Never paste |
+| Step | Model | Paste in | Never paste |
+|---|---|---|---|
+| CON conceptualize | Fable 5 | charter (with poem) | Series 2 anything, prior candidates' fates |
+| REG registration (blind pricing) | Opus 4.8, high effort | candidate cards + decoy only | charter, poem, any framing |
+| REG-R registration review (charter fit) | Sonnet 5 (duplicate with Opus 4.8 if load-bearing) | charter + surviving cards | REG's outputs |
+| DES design | Fable 5 | charter + registered card (with constraints and hazards) | REG/REG-R raw text |
+| DES-R design review | Opus 4.8, xhigh effort; duplicate once with Fable 5 | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
+| EXE execute | Claude Code: Fable 5 for construction-grade contracts, Opus 4.8 xhigh for routine lemma packs | execution contract only | charter, poem, philosophy, candidate history |
+| EXE-R execution review | Sonnet 5 (escalate flagged carrier questions to Opus 4.8) | contract + delivered statements (glosses stripped) | drafter or executor commentary |
+| REP report | Sonnet 5, deliberately | EXE-R grade table + open-target list | conversational history, celebration |
+| REP-R reporting review | Opus 4.8 | grade table + draft prose | everything else |
+| Logistics (card reformatting, decoy dressing, gap-log assembly) | Haiku 4.5 | as needed | never used as a reviewer |
+
+## Model assignments: the reasoning (revisit at every model generation)
+
+Three principles govern the column above; when Anthropic ships new models, reapply the principles rather than the table.
+
+1. **Capability goes where leverage lives.** The most capable model (currently Fable 5) belongs to the phases that determine everything downstream: conceptualization and design. Reporting is deliberately not one of them.
+2. **Decorrelate producer from reviewer.** No phase is reviewed by the model that produced its input where this can be helped: Fable designs, Opus reviews the design; Sonnet drafts the report, Opus reviews the report. For load-bearing reviews, run twice on two different models; divergence between them is a finding. Honest caveat: all Claude models share training lineage, so cross-model review is partial decorrelation at best. The genuinely independent witness remains the external human adversary; model diversity supplements that standing role and never replaces it.
+3. **Rhetorical power is phase-dependent.** Persuasive fluency is an asset in conceptualization and a hazard in reporting; the reporting drafter is intentionally the plainer model, working under the grade-table constraint, so that beauty cannot pressure the prose beyond its grades.
+
+Operational notes: the top model is the heaviest on usage limits, so the economics favor reserving it for CON, DES, and hard EXE runs exactly as mapped; confirm your plan's incognito model picker offers Opus and Fable before the first cycle; and Haiku handles logistics only, never review, because a volume-tier model will pass decoys.
+
+## Model assignments (as of July 2026; re-evaluate when the lineup changes)
+
+| Step | Model | Rationale |
 |---|---|---|
-| CON conceptualize | charter (with poem) | Series 2 anything, prior candidates' fates |
-| REG registration (blind pricing) | candidate cards + decoy only | charter, poem, any framing |
-| REG-R registration review (charter fit) | charter + surviving cards | REG's outputs |
-| DES design | charter + registered card (with constraints and hazards) | REG/REG-R raw text |
-| DES-R design review | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
-| EXE execute | execution contract only | charter, poem, philosophy, candidate history |
-| EXE-R execution review | contract + delivered statements (glosses stripped) | drafter or executor commentary |
-| REP report | EXE-R grade table + open-target list | conversational history, celebration |
-| REP-R reporting review | grade table + draft prose | everything else |
+| CON conceptualize | Fable 5 | The generative phase deserves the deepest model; frontier capability is where surprising candidates come from |
+| REG registration | Opus 4.8, high effort | Strong critical reasoning on short cards; deliberately a different model than the one that generated the candidates |
+| REG-R registration review | Sonnet 5 (duplicate with Opus 4.8 for load-bearing candidates) | Careful long-document reading, moderate difficulty |
+| DES design | Fable 5 | The hardest creative-technical step; definition quality determines everything downstream |
+| DES-R design review | Opus 4.8 at xhigh effort, duplicated once with Fable 5 in a separate session | The load-bearing review: primary reviewer decorrelated from the Fable designer; divergence between the two runs is signal, not noise |
+| EXE execute | Claude Code with Fable 5 for construction-grade contracts; Opus 4.8 at xhigh for routine lemma packs | Fable's advantage widens with task length, and mechanization contracts are long-horizon; Opus is the economical workhorse |
+| EXE-R execution review | Sonnet 5; escalate flagged carrier questions to Opus 4.8 | Nearly mechanical side-by-side matching; cheap enough to run twice |
+| REP report | Sonnet 5, deliberately | Persuasive fluency is a hazard in this phase; a plainer drafter under the grade-table constraint produces less beauty-pressure |
+| REP-R reporting review | Opus 4.8 | High-stakes claim matching, decorrelated from the Sonnet drafter |
+| Logistics (card reformatting, gap-log assembly, decoy dressing) | Haiku 4.5 | Never as a reviewer; it would pass decoys |
+
+Three principles behind the table, which outlive any particular lineup: match capability to leverage (the deepest model goes where the phase determines everything downstream, which is conceptualization and design, not reporting); decorrelate producer from reviewer wherever possible; and treat rhetorical power as phase-dependent, an asset in conceptualization and a hazard in reporting.
+
+Two standing caveats. First, all Claude models share training lineage, so cross-model review is partial decorrelation at best; the genuinely independent witness remains the external human adversary, and model diversity supplements that role without filling it. Second, economics: the top model is heaviest on usage limits, so reserve it for the three steps above where its advantage compounds, and confirm the incognito model picker offers the assigned models on the current plan before starting a cycle.
 
 ---
 
