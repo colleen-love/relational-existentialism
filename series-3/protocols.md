@@ -1,6 +1,6 @@
 # Series 3 — Cycle Protocols (copy-paste edition)
 
-Every step of the cycle, in order, with the prompt to paste for each: **conceptualize (C1) → register (R1a, R1b) → design (D1) → design review (R2) → execute (E1) → execution review (R3) → report (P1) → reporting review (R4).** Prompts live inside the marked blocks and paste verbatim into fresh incognito sessions. Everything outside the blocks is for you, Colleen, and is never pasted.
+Every step of the cycle, in order, with the prompt to paste for each: **conceptualize (CON) → register (REG) → registration review (REG-R) → design (DES) → design review (DES-R) → execute (EXE) → execution review (EXE-R) → report (REP) → reporting review (REP-R).** Prompts live inside the marked blocks and paste verbatim into fresh incognito sessions. Everything outside the blocks is for you, Colleen, and is never pasted.
 
 ## Ground rules (apply to every session)
 
@@ -10,21 +10,21 @@ Every step of the cycle, in order, with the prompt to paste for each: **conceptu
 4. Strip style before pasting anything between phases. Claims travel as candidate cards; targets travel as contracts; results travel as grade tables.
 5. Log every output verbatim in the ledger with date and protocol version. Record each GAP line in the gap log.
 6. For load-bearing decisions, run the same step twice in separate sessions; divergence is a finding.
-7. Decoys in every R1a batch. If the decoy passes, discard the batch results.
+7. Decoys in every REG batch. If the decoy passes, discard the batch results.
 
 ## Context map (what each session may see)
 
 | Step | Paste in | Never paste |
 |---|---|---|
-| C1 conceptualize | charter (with poem) | Series 2 anything, prior candidates' fates |
-| R1a blind pricing | candidate cards + decoy only | charter, poem, any framing |
-| R1b charter fit | charter + surviving cards | R1a's outputs |
-| D1 design | charter + registered card (with constraints and hazards) | R1a/R1b raw text |
-| R2 design review | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
-| E1 execute | execution contract only | charter, poem, philosophy, candidate history |
-| R3 execution review | contract + delivered statements (glosses stripped) | drafter or executor commentary |
-| P1 report | R3 grade table + open-target list | conversational history, celebration |
-| R4 reporting review | grade table + draft prose | everything else |
+| CON conceptualize | charter (with poem) | Series 2 anything, prior candidates' fates |
+| REG registration (blind pricing) | candidate cards + decoy only | charter, poem, any framing |
+| REG-R registration review (charter fit) | charter + surviving cards | REG's outputs |
+| DES design | charter + registered card (with constraints and hazards) | REG/REG-R raw text |
+| DES-R design review | registered card + proposed formalism (glosses stripped) | charter's poem section optional; drafter's rationale prose |
+| EXE execute | execution contract only | charter, poem, philosophy, candidate history |
+| EXE-R execution review | contract + delivered statements (glosses stripped) | drafter or executor commentary |
+| REP report | EXE-R grade table + open-target list | conversational history, celebration |
+| REP-R reporting review | grade table + draft prose | everything else |
 
 ---
 
@@ -42,14 +42,14 @@ Who or what would want this to be true, and why:
 Status: unregistered
 ```
 
-**Execution contract (assembled by you from D1 output plus R2's fidelity annex):**
+**Execution contract (assembled by you from DES output plus DES-R's fidelity annex):**
 
 ```
 CONTRACT [id]
 Definitions (exact, final):
 Targets, each with: name / formal statement / expected source of difficulty / MUST, SHOULD, or MAY / drop clause if any:
 Discriminating-consequence target (mandatory, marked):
-Fidelity annex (R2's divergence list and required corrections):
+Fidelity annex (DES-R's divergence list and required corrections):
 Conventions: no sorry; report divergences, never silently patch; contract-first on any ambiguity; note proof length per theorem; structural doc-comments only.
 ```
 
@@ -61,7 +61,7 @@ GAP: [one sentence stating the distance between what the material claims and wha
 
 ---
 
-## C1. Conceptualization session
+## CON. Conceptualization session
 
 The warm phase. Wanting is welcome here and only here, in the open.
 
@@ -91,9 +91,9 @@ Who or what would want this to be true, and why (include yourself if applicable)
 End with: GAP: [one sentence on the distance between the program's ambitions and what your candidates can actually carry].
 ```
 
-**Record:** the cards. Reformat lightly if any style leaked in, add your decoy, then proceed to R1a.
+**Record:** the cards. Reformat lightly if any style leaked in, add your decoy, then proceed to REG.
 
-## R1a. Registration, Pass 1: blind pricing
+## REG. Registration: blind pricing
 
 **Paste:** the candidate cards only (real ones plus at least one decoy, shuffled). No charter. No poem. No background.
 
@@ -119,9 +119,9 @@ End with one line: GAP: [one sentence on the overall distance between what these
 
 **Record:** verdicts, ranking, whether the decoy was caught, the GAP line.
 
-## R1b. Registration, Pass 2: charter fit
+## REG-R. Registration review: charter fit
 
-Run only for candidates that survived Pass 1. Different session.
+Run only for candidates that survived registration. Different session.
 
 **Paste:** the charter (whole) and the surviving candidate cards.
 
@@ -142,11 +142,11 @@ For each candidate, in this order:
 End with one line: GAP: [one sentence on the distance between the program's ambitions and what these candidates can actually carry].
 ```
 
-**Record:** verdicts, constraints, tenet-pressure notes (these travel into the D1 input as declared hazards), the GAP line.
+**Record:** verdicts, constraints, tenet-pressure notes (these travel into the DES input as declared hazards), the GAP line.
 
-## D1. Design session
+## DES. Design session
 
-**Paste:** the charter (whole) and the registered candidate card, annotated with R1b's constraints and tenet-pressure hazards.
+**Paste:** the charter (whole) and the registered candidate card, annotated with the registration review's constraints and tenet-pressure hazards.
 
 **Prompt (verbatim):**
 
@@ -167,9 +167,9 @@ Deliver:
 End with: GAP: [one sentence on the distance between the candidate's claim and what your targets, if all proved, would establish].
 ```
 
-**Record:** the design. Strip its rationale prose, keep definitions and targets, and send to R2.
+**Record:** the design. Strip its rationale prose, keep definitions and targets, and send to DES-R.
 
-## R2. Design review: do the definitions mean what the sentences mean
+## DES-R. Design review: do the definitions mean what the sentences mean
 
 **Paste:** the registered candidate card, and the proposed formal definitions and theorem targets as bare mathematics, all glosses and rationale removed.
 
@@ -191,9 +191,9 @@ Then:
 End with: GAP: [one sentence on the distance between what these definitions say and what the claim card says].
 ```
 
-**Record:** the divergence list verbatim; it becomes the fidelity annex of the execution contract. Nothing proceeds to E1 with an open DIVERGENT verdict.
+**Record:** the divergence list verbatim; it becomes the fidelity annex of the execution contract. Nothing proceeds to EXE with an open DIVERGENT verdict.
 
-## E1. Execution session
+## EXE. Execution session
 
 The cold phase. The executor sees the contract and nothing else: no charter, no poem, no candidate history, no philosophy.
 
@@ -216,9 +216,9 @@ Deliver: the code, and a results table (target, delivered statement, grade, proo
 End with: GAP: [one sentence on the distance between what the contract asked and what you delivered].
 ```
 
-**Record:** the results table travels to R3.
+**Record:** the results table travels to EXE-R.
 
-## R3. Execution review: do the proofs say what the definitions contracted
+## EXE-R. Execution review: do the proofs say what the definitions contracted
 
 **Paste:** the execution contract (with fidelity annex) and the delivered theorem statements with proof lengths, all commentary stripped.
 
@@ -240,9 +240,9 @@ End with: GAP: [one sentence on the distance between what was contracted and wha
 
 **Record:** the table, verbatim, into the ledger. Open targets stay open in the tracking doc.
 
-## P1. Reporting session
+## REP. Reporting session
 
-**Paste:** the R3 grade table and the current open-target list. Nothing else.
+**Paste:** the execution review's grade table and the current open-target list. Nothing else.
 
 **Prompt (verbatim):**
 
@@ -259,11 +259,11 @@ Deliver: the prose and the claims index.
 End with: GAP: [one sentence on the distance between what your prose says and what the table supports].
 ```
 
-**Record:** the draft goes to R4 with the grade table.
+**Record:** the draft goes to REP-R with the grade table.
 
-## R4. Reporting review: do the claims say what the proofs say
+## REP-R. Reporting review: do the claims say what the proofs say
 
-**Paste:** the R3 grade table and the draft prose. Nothing else.
+**Paste:** the execution review's grade table and the draft prose. Nothing else.
 
 **Prompt (verbatim):**
 
@@ -284,7 +284,7 @@ End with: GAP: [one sentence on the distance between what this prose says and wh
 
 ---
 
-## Sample decoy candidate (for R1a batches; rewrite each time so it stays unfamiliar)
+## Sample decoy candidate (for REG batches; rewrite each time so it stays unfamiliar)
 
 ```
 CANDIDATE X
@@ -300,4 +300,4 @@ Status: unregistered
 
 ## The gap log
 
-One line per session, appended chronologically: date, step, candidate or target, and the session's GAP sentence. Read the log monthly. If the gap sentences trend from "small and named" toward "large or unnameable," stop the cycle and run a process retrospective
+One line per session, appended chronologically: date, step, candidate or target, and the session's GAP sentence. Read the log monthly. If the gap sentences trend from "small and named" toward "large or unnameable," stop the cycle and run a process retrospective before any further execution. This is the process's own collapse check, and it only works if it runs every time.
