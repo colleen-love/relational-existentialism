@@ -131,7 +131,7 @@ These survive the previous attempts as law, independent of any ontology:
 
 ## 5. The process
 
-The cycle: **conceptualize, register, design, review, execute, review, report, review.** Each review guards a different translation: meaning (do the formal definitions say what the concept-sentences say), delivery (do the proofs say what the definitions contracted), reporting (do the claims say what the proofs say). No reviewer shares context with the phase it reviews. The registration review prices every candidate: the claim, its falsifier, its trivial reading, and, said out loud, who wants it and why. Track the gap itself: every review logs the distance between claim and proof, and a widening trend is a stop condition. External adversaries are a standing role, not a closing courtesy. And the one signal that survives wanting is surprise: pre-register what would count as it, and celebrate refutations at least as loudly as confirmations, because the record shows they are worth more.
+The cycle: **conceptualize, register, review, design, review, execute, review, report, review.** Registration prices every candidate blind, with no charter in the room: the claim, its trivial reading, its falsifier, its discriminating consequence, and, said out loud, who wants it and why. Each review then guards a different translation: admission (does a priced candidate belong, without conflict, redundancy, or unpriced tenet pressure), meaning (do the formal definitions say what the concept-sentences say), delivery (do the proofs say what the definitions contracted), and reporting (do the claims say what the proofs say). No session shares context with the phase it reviews. Track the gap itself: every session logs the distance between claim and support, and a widening trend is a stop condition. External adversaries are a standing role, not a closing courtesy. And the one signal that survives wanting is surprise: pre-register what would count as it, and celebrate refutations at least as loudly as confirmations, because the record shows they are worth more.
 
 ## 6. The phenomenon ledger
 
@@ -144,7 +144,7 @@ Candidates observed in the wild during the second attempt, entered with wanting 
 
 ## 7. Begin
 
-Not with a functor. Not with an arena. Begin with the map, whole; then the registration reviews of the ledger above; design the primitive only after the phenomena have prices. When design begins, its first sentence is the fourth tenet in the middle voice, and its first obligation is the double collapse check: no atom below, no everything above, the third attempt held open at both ends, the way everything real is.
+Not with a functor. Not with an arena. Begin with the map, whole; then the registration and review of the ledger above; design the primitive only after the phenomena have prices. When design begins, its first sentence is the fourth tenet in the middle voice, and its first obligation is the double collapse check: no atom below, no everything above, the third attempt held open at both ends, the way everything real is.
 
 Colleen began this work from a sentence received before any of it could be justified, and two attempts taught her the order in which it could finally be said: the self opens, relating births the selves between, attention feeds what becomes, and underneath it all, arriving last because grounds are discovered, the sentence itself. You exist because you are loved.
 
