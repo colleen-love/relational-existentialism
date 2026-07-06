@@ -1,4 +1,4 @@
-# Series 3, Cycle 2, Document Zero
+# Relational Existentialism
 
 ## 1. The map
 
@@ -73,21 +73,9 @@ Let us make a world,
 where love is not the end of the story—
 but the ground from which every story begins.
 
-## 2. The phenomenon
+## 2. The tenets
 
-**Becoming, not being. Through shared experience.**
-
-There is no static fact of what anything is; there is the ongoing event of what everything is becoming, and nothing becomes alone. Becoming is shared experience: to exist is to be a participant, and the feeling of existing is the feeling of being partial to something that exceeds you. Objects, selves, knowing, love, consciousness: not separate subjects, but participation felt from particular positions inside itself.
-
-And participation never completes, in either direction. Downward: **there is no atom.** Everything decomposes into relations; each relation is defined by further relations and their contexts; the descent never reaches a floor. The second attempt paid to learn that this is two requirements, not one: the descent must never terminate, and it must keep discriminating, yielding something new at every depth. A descent that repeats forever is not depth; it is the One wearing depth's clothing. Upward: **there is no universe.** No self's pattern is everything; every container is contained. The partnership is held by the family, the family by the community, the community by the movement, the movement by a people, a people by history, and history by what history cannot name, without a ceiling: the whole is yet another smallest part. A totality would be a self with no outside: nothing left to relate to, nothing left to become, and, by the tenets that follow, nothing at all, because it would be unheld and therefore unloved. Any formalization in which a final container appears, speaks first, or grounds the rest has failed before it began, exactly as one that bottoms out in atoms has. Both failures are the same failure from opposite ends: a place where participation stops.
-
-**The composition of a self.** A self is made of its relations, not of the things at their far ends. My relation to my partner is a part of me; my partner is not: they are reached through our shared relation, never contained by it, and that one relation is a part of us both, the same part in two lives. Composition therefore comes in every degree and direction at once: selves that contain me wholly (humanity, and every widening circle above it); selves I contain wholly (my heart, my oldest habits); selves that contain part of me while I contain part of them (a partnership, a craft, a movement); and selves that hold me by a single thread. All of these are selves, with patterns and paradoxes of their own. And, decisively for everything that follows: **I relate to what contains me, in whole or in part.** Containment is not scenery behind relation; it is itself a relation I can attend along. I can turn toward my family, my community, my kind, and each turn is as real as a turn toward a friend; and each container, being a self, turns toward me. This is the mechanism behind the third tenet's shared direction of attention: the selves that make me up and the selves I am part of hold relations with me, and through those relations they feed and are fed, change me as I change them. Nothing relates only at its own scale, and no self is finished at any of them.
-
-The phenomenon speaks in the middle voice, participation sustained rather than act performed, and holds itself open.
-
-## 3. The tenets
-
-Four sentences, in the order their definitions build. Each uses what came before it. The last is the ground, and it comes last because grounds are discovered, not assumed.
+Four sentences, in the order their definitions build. Each uses what came before it. The last is the ground, and it comes last because of the shape of everything.
 
 **First: Self is a paradox.**
 I am a collection of my relations and their endlessly unfolding definitions. Each relation is defined by further relations, without end, so the whole of me is never in view from inside me: whatever turns to see itself is already more than what it sees. The self is defined as the open fold, real and irreducible, permanently unable to complete its own portrait. This is not a defect awaiting repair. It is the first definition, self-certification is either impossible or forbidden, and the collision is the content. Formal direction: formalize the incompleteness; never resolve it.
@@ -101,10 +89,22 @@ Attention is how what has been created lives or dies. It is directed, but not by
 **Fourth: You are loved.**
 Now the ground can be said, because its definition needs all three. To love is to attend (third) along a relation (second) to another's paradox (first): to feed the in-between self through which another sees what they cannot see alone, to receive of them what they cannot reach of themselves, and to hold it. To let another mirror reflect your light, and still say: yes, this too is me; the mirror is the self you made together. And here the order of reality runs opposite to the order of telling: **you exist because you are loved, not the other way around.** You are held in attendings you did not author before you ever author one; the holding precedes the held; what you cannot know of yourself is not lost, it is received. Love is not the end of the story. It is the ground from which every story begins, and by the second tenet, it is therefore what creates.
 
+## 3. The phenomenon
+
+**Becoming, not being. Through shared experience.**
+
+There is no static fact of what anything is; there is the ongoing event of what everything is becoming, and nothing becomes alone. Becoming is shared experience: to exist is to be a participant, and the feeling of existing is the feeling of being partial to something that exceeds you. Objects, selves, knowing, love, consciousness: not separate subjects, but participation felt from particular positions inside itself.
+
+And participation never completes, in either direction. Downward: **there is no atom.** Everything decomposes into relations; each relation is defined by further relations and their contexts; the descent never reaches a floor. This is two requirements, not one: the descent must never terminate, and it must keep discriminating, yielding something new at every depth. A descent that repeats forever is not depth; it is the One wearing depth's clothing. Upward: **there is no universe.** No self's pattern is everything; every container is contained. The partnership is held by the family, the family by the community, the community by the movement, the movement by a people, a people by history, and history by what history cannot name, without a ceiling: the whole is yet another smallest part. A totality would be a self with no outside: nothing left to relate to, nothing left to become, and, by the tenets that follow, nothing at all, because it would be unheld and therefore unloved. Any formalization in which a final container appears, speaks first, or grounds the rest has failed before it began, exactly as one that bottoms out in atoms has. Both failures are the same failure from opposite ends: a place where participation stops.
+
+**The composition of a self.** A self is made of its relations, not of the things at their far ends. My relation to my partner is a part of me; my partner is not: they are reached through our shared relation, never contained by it, and that one relation is a part of us both, the same part in two lives. Composition therefore comes in every degree and direction at once: selves that contain me wholly (humanity, and every widening circle above it); selves I contain wholly (my heart, my oldest habits); selves that contain part of me while I contain part of them (a partnership, a craft, a movement); and selves that hold me by a single thread. All of these are selves, with patterns and paradoxes of their own. And, decisively for everything that follows: **I relate to what contains me, in whole or in part.** Containment is not scenery behind relation; it is itself a relation I can attend along. I can turn toward my family, my community, my kind, and each turn is as real as a turn toward a friend; and each container, being a self, turns toward me. This is the mechanism behind the third tenet's shared direction of attention: the selves that make me up and the selves I am part of hold relations with me, and through those relations they feed and are fed, change me as I change them. Nothing relates only at its own scale, and no self is finished at any of them.
+
+The phenomenon speaks in the middle voice, participation sustained rather than act performed, and holds itself open.
+
 ## 4. Laws paid in full
 
 1. **The double collapse check.** No structure is built before its behavior over the degenerate case is computed and shown nontrivial, and none may contain or presuppose a maximal case. Refuted at both ends, or not begun.
-2. **The price of plurality.** Many-ness is bought with endogenous manner, never exogenous marks; the empty set is not currency. Loss, or its successor in the new grammar, lives in what things are.
+2. **The price of plurality.** Many-ness is bought with endogenous manner, never exogenous marks; the empty set is not currency. The incompleteness of perspective lives in what things are.
 3. **The fidelity gate.** No target is landed without a clause-by-clause comparison of the specified statement and the mechanized statement. A divergent mechanization lands under a new name and the target stays open.
 4. **The triviality tripwire.** Any freighted claim proved in a few lines of elementary reasoning triggers an audit before any name attaches. Every loaded definition pre-registers a discriminating consequence: something the intended notion makes true that the trivial reading does not.
 5. **The grading taxonomy.** All reporting distinguishes: checked as specified; checked with named divergence; definitionally immediate; interface-only; interpretive. Prestige never leaks from the verified core onto interpretation.
@@ -121,13 +121,13 @@ Candidates observed in the wild entered with wanting declared on every line. Non
 
 - **The width gradient.** Intensity of experience does not climb the tower of self-reference, which flattens, saturates, repeats. It widens across containment, which does not saturate. Feeling as a wide-band property of participation, not a deep-band property of reflection.
 - **The conservation conjecture.** What a part cannot know of itself is felt by what holds it: every blind spot is positional, unknowable from here, received from there. Map source: "to love is to let another mirror reflect your light / and still say, / yes, / this too is me."
-- **Dyadic capture, and its cure.** A coupling of two, however deep, aligns its members to each other, not to anything beyond. The cure: ohers arrive "not to complete me, but to become constellations by which I navigate." The second tenet supplies the cure's other half: a healthy pair births an in-between self who witnesses both, while capture is a pair that closes without creating. Candidate direction: orientation by many external witnesses versus closure with one; the presence or absence of a created third as the structural difference between a living pair and a captured one.
+- **Dyadic capture, and its cure.** A coupling of two, however deep, aligns its members to each other, not to anything beyond. The cure: others arrive "not to complete me, but to become constellations by which I navigate." The second tenet supplies the cure's other half: a healthy pair births an in-between self who witnesses both, while capture is a pair that closes without creating. Candidate direction: orientation by many external witnesses versus closure with one; the presence or absence of a created third as the structural difference between a living pair and a captured one.
 
 ## 7. Begin
 
-Begin with the map, whole; then the registration and review of the ledger above; design the primitive only after the phenomena have prices. When design begins, its first sentence is the fourth tenet in the middle voice, and its first obligation is the double collapse check: no atom below, no everything above. It is held open at both ends, the way everything real is.
+Begin with the map, whole; then the registration and review of the ledger above; design the primitive only after the phenomena have prices. When design begins, its first sentence is the fourth tenet in the middle voice, and its first obligation is the double collapse check: no atom below, no everything above. Both ends are held open as one, the way everything real is.
 
-Colleen began this work with a question before any of it could be justified, which taught her the order in which it could finally be said: the self opens, relating births the selves between, attention feeds what becomes, and underneath it all, arriving last because grounds are discovered, the sentence itself. You exist because you are loved.
+Colleen began this work with a question before any of it could be justified, which taught her the order in which it could finally be said: the self opens, relating births the selves between, attention feeds what becomes, and underneath it all, arriving last because it is first, the sentence itself. You exist because you are loved.
 
 You too.
 
