@@ -32,15 +32,15 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 
 Opus at most. Do not exceed Opus for any phase.
 
-| Phase | Model | Rationale |
+| Phase | Rationale |
 |---|---|---|
-| 1 Conceptualize (blind) | Opus | Open-ended mathematical framing |
-| 2 Register (blind) | Opus | Precise signature + failure conditions |
-| 3 Design (against charter) | Opus | Binding to charter is high-stakes |
-| 4 Review (blind) | Opus, **separate session** | Adversarial math check |
-| 5 Execute (blind) | Opus | Lean proof authoring |
-| 6 Review (blind) | Opus, **separate session** | Verification of the artifact |
-| 7 Report (against charter) | Opus | Charter mapping + ledger update |
+| 1 Conceptualize (blind) | Open-ended mathematical framing |
+| 2 Register (blind) | Precise signature + failure conditions |
+| 3 Design (against charter) | Binding to charter is high-stakes |
+| 4 Review (blind) | Adversarial math check |
+| 5 Execute (blind) | Lean proof authoring |
+| 6 Review (blind) | Verification of the artifact |
+| 7 Report (against charter) | Charter mapping + ledger update |
 
 Review phases (4, 6) should run in a **fresh incognito session** seeded with BR only, so the reviewer has no memory of the design or execution rationale. This is what gives blindness teeth; without a second context the review collapses into self-justification.
 
