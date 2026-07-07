@@ -39,9 +39,9 @@ One obligation runs seven phases in order:
 |---|---|---|
 | 1 | Conceptualize | against charter |
 | 2 | Design | blind |
-| 3 | Design Review | blind |
-| 4 | Design Review | against charter |
-| 5 | Execute | blind |
+| 3 | Blind Design Review | blind |
+| 4 | Charter Design Review | against charter |
+| 5 | Execute | against repository |
 | 6 | Blind Report | blind |
 | 7 | Charter Report | against charter |
 
