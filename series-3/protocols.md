@@ -24,6 +24,9 @@ The frozen source of truth: commitments C1–C6 (§2), success criteria (i)–(v
 ### Blind Register (BR)
 What a blind phase is allowed to see. For a given obligation, the BR contains **only the mathematical statement** at stake — functor, carrier, monad, distributive law, target property — with all charter-motivating prose stripped out. No mention of ROSR, "view from nowhere," metaphysics, or which commitment this serves.
 
+### Execution Register (ER)
+What a execution phase is allowed to see. For a given obligation, the ER contains the github repository.
+
 The BR is what makes blindness enforceable across incognito sessions: it is the entire context a blind phase receives.
 
 ---
@@ -70,8 +73,8 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
 - **Output:** Pass / revise verdict with specific objections, plus the explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5").
 
-### Phase 5 — Execute (blind)
-- **Context in:** BR, reviewed design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+### Phase 5 — Execute (against repo)
+- **Context in:** ER, **fresh session**.
 - **Instructions:** Write the Lean 4 proof for series-3/ws${X}/03-c-des-rev.md to series-3/ws${X}/04-exe.lean. `sorry`-free is the bar for this design.
 - **Output:** Lean file for this obligation.
 
