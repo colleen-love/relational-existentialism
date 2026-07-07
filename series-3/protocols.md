@@ -72,7 +72,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 ### Phase 4 — Design Review (against charter)
 - **Context in:** Phase 3 blind design review context, charter.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
-- **Instructions (part 2):** Can you update the design and address the problems that you found?
+- **Instructions (part 2):** Can you update the design to fully discharge or impossibly prove the workstream and address the problems that you found?
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 5 — Execute (Claude code, against repo)
