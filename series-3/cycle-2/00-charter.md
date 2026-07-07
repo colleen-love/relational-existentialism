@@ -114,7 +114,7 @@ Commitment 4 asks that an object be constituted *upward* (what it composes into)
 
 ### 3.5 "Whole or in part": graded containment
 
-*Whole or in part* makes parthood non-binary. We enrich containment over `[0,1]` (or a quantale), Lawvere-metric style, so "contains" carries a degree. Graded parthood shares its arithmetic with the attention weights below — one mechanism serving two commitments.
+*Whole or in part* makes parthood non-binary. We enrich containment over `[0,1]` (or a quantale, or a subset), Lawvere-metric style, so "contains" carries a degree. Graded parthood shares its arithmetic with the attention weights below — one mechanism serving two commitments.
 
 ### 3.6 Finite attention and the impossibility of complete self-knowledge
 
