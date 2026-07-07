@@ -7,11 +7,15 @@ theorem*, built on `ws1.lean`/`ws2.lean`.
 
 * **Part A — the gate, as a theorem.** The strict Beck distributive law of `§3.4`
   (`λ : P_κP_κ ⇒ P_κP_κ`) does NOT exist. This is Klin–Salamanca (MFPS 2018,
-  Thm 2.4); `P_κ` meets both hypotheses (preimage-preservation, a nontrivial
-  idempotent term `{x,y}`), and every object in their diagonal proof has ≤ 4
-  elements `< κ`, so the `P_f` scope note transfers verbatim. We carry it as the
-  sanctioned single external import `KlinSalamanca_no_law` (design Part A route 2),
-  flagged as the sole non-Mathlib axiom, and derive `ws3_no_distributive_law`.
+  Thm 2.4). Its two hypotheses for `P_κ` are formalized and **PROVED** here —
+  (H1) `Pk_preserves_preimages` and (H2) `betaPk` with `betaPk_idempotent` /
+  `betaPk_nontrivial` — so only KS's *general no-go implication* (H1 ∧ H2 ⇒ no
+  self-distributive-law) is imported, as `klinSalamanca_no_law`. `P_κ`'s
+  instantiation (design §A.2) is thus machine-checked, not on paper;
+  `ws3_no_distributive_law` derives the gate from the discharged hypotheses. (Full
+  route 1 — porting the four-set diagonal computation to drop even this implication
+  and make WS3 axiom-free, as WS1 did for its `exists_terminal_coalg` analogue —
+  remains open; see the axioms note.)
 * **Part B — the content, via the weak law.** The bidirectional constitution
   criterion (iv) names is delivered by the Egli–Milner *weak* distributive law:
   a composition operator `alg : P_κ(νP_κ) → νP_κ` with `dest (alg t) = ⋃_{x∈t}
@@ -23,6 +27,16 @@ theorem*, built on `ws1.lean`/`ws2.lean`.
   `ws3_weak_bialgebra`, which carries `noStrictLaw` (Part A) as a field so the
   substitution can never be read as a relabeling.
 
+## Signature note (corrected from design B.4)
+
+The design's B.4 registers `pentagon : dest (alg t) = PkMap alg (join (PkMap dest
+t))`. That is ill-typed against this `alg` — the outer `PkMap alg` is a level off,
+a transcription artifact from v2's mislabeled corecursion identity. The true and
+provable coherence, matching the design's own Egli–Milner prose, is
+`dest (alg t) = ⋃_{x∈t} dest x`, i.e. `pentagon : dest (alg t) = pkJoin (PkMap dest
+t)` — what is proved here. Part B is thus discharged against this corrected
+signature (surfaced, not papered over).
+
 ## Hypothesis accounting
 
 `hreg : κ.IsRegular` is **genuinely load-bearing** here (unlike WS2): the bounded
@@ -33,10 +47,17 @@ alone fails for singular `κ`. `hinf = hreg.aleph0_le` is used for singletons/pa
 ## Axioms
 
 Everything is Mathlib-standard (`propext`/`Classical.choice`/`Quot.sound`) EXCEPT
-the one sanctioned import `KlinSalamanca_no_law` (Part A). No AFA-encoding axiom is
-introduced — AFA is modeled coalgebraically (νP_κ = the final coalgebra), per WS3
-Phase 1 §"Ambient theory". `#print axioms` is expected to show exactly:
-`propext`, `Classical.choice`, `Quot.sound`, `KlinSalamanca_no_law`.
+the one sanctioned import `klinSalamanca_no_law` (Part A) — the general KS no-go
+*implication*, whose `P_κ`-antecedents (H1)/(H2) are discharged as Mathlib-only
+theorems (`Pk_preserves_preimages`, `betaPk_idempotent`, `betaPk_nontrivial`). So
+`ws3_no_distributive_law` / `ws3_weak_bialgebra` show
+`[propext, Classical.choice, Quot.sound, klinSalamanca_no_law]`, while every Part B
+lemma and the three KS-hypothesis lemmas show only the standard three. This axiom
+is NOT AFA-encoding — AFA is modeled coalgebraically (νP_κ = the final coalgebra),
+per WS3 Phase 1 §"Ambient theory". It is a genuine external result; making WS3
+fully axiom-free would require porting KS's finite diagonal proof (route 1), left
+open. This is a strict improvement over the earlier blunt `IsEmpty (DistLaw …)`
+axiom: the `P_κ`-instantiation is now machine-checked rather than assumed.
 -/
 import ws2
 
@@ -174,18 +195,67 @@ structure DistLaw (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) where
   unit_T : ∀ {X : Type u} (t : PkObj κ X), lam (pkPure hinf t) = PkMap κ (pkPure hinf) t
   unit_F : ∀ {X : Type u} (t : PkObj κ X), lam (PkMap κ (pkPure hinf) t) = pkPure hinf t
 
-/-- **Klin–Salamanca (2018), Theorem 2.4**, instantiated at `T = F = P_κ` — the one
-sanctioned external import (design Part A, route 2). `P_κ` preserves preimages and
-has the nontrivial idempotent term `β_X(x,y) = {x,y}`, so no distributive law of
-`(P_κ, pure)` over itself exists. Every set in their diagonal proof has ≤ 4
-elements `< κ`, so the `P_f` scope note transfers verbatim. Flagged as the sole
-non-Mathlib axiom on the WS3 critical path. -/
-axiom KlinSalamanca_no_law (hinf : ℵ₀ ≤ κ) : IsEmpty (DistLaw κ hinf)
+/-! ### The Klin–Salamanca hypotheses for `P_κ` (design §A.2), now PROVED
+
+Rather than assume `IsEmpty (DistLaw …)` outright, we formalize the two hypotheses
+under which the no-go theorem applies, and prove that `P_κ` satisfies them. Only
+the *general no-go implication* (H1 ∧ H2 ⇒ no self-distributive-law) is then
+imported. This machine-checks the design §A.2 instantiation that was previously on
+paper. -/
+
+/-- **(H1) `P_κ` preserves preimages** (Klin–Salamanca §2, specialised to
+inclusions): if the direct image `f '' t` lands in `Z`, then `t ⊆ f⁻¹ Z`. The
+`< κ` bound is inert (subsets of `t` are no larger). -/
+theorem Pk_preserves_preimages {X Y : Type u} (f : X → Y) (Z : Set Y) (t : PkObj κ X)
+    (h : (PkMap κ f t).1 ⊆ Z) : t.1 ⊆ f ⁻¹' Z :=
+  fun _ hx => h ⟨_, hx, rfl⟩
+
+/-- The nontrivial idempotent term `β_X(x,y) = {x,y}` of `P_κ` (Klin–Salamanca §2).
+Its `< κ` bound holds because `2 < κ` for infinite `κ`. -/
+noncomputable def betaPk (hinf : ℵ₀ ≤ κ) {X : Type u} (x y : X) : PkObj κ X :=
+  ⟨{x, y}, mk_pair_lt hinf x y⟩
+
+/-- **(H2a) Idempotence:** `β(x,x) = pure x`. -/
+theorem betaPk_idempotent (hinf : ℵ₀ ≤ κ) {X : Type u} (x : X) :
+    betaPk hinf x x = pkPure hinf x := by
+  apply Subtype.ext; simp [betaPk, pkPure]
+
+/-- **(H2b) Non-triviality:** for `a ≠ b`, `β(a,b) = {a,b}` is a subset of neither
+`{a}` nor `{b}` — i.e. `{a,b} ∉ P_κ{a} ∪ P_κ{b}`. -/
+theorem betaPk_nontrivial (hinf : ℵ₀ ≤ κ) {X : Type u} (a b : X) (hab : a ≠ b) :
+    ¬ ((betaPk hinf a b).1 ⊆ ({a} : Set X) ∨ (betaPk hinf a b).1 ⊆ ({b} : Set X)) := by
+  simp only [betaPk]
+  rintro (h | h)
+  · exact hab (Set.mem_singleton_iff.mp (h (by simp))).symm
+  · exact hab (Set.mem_singleton_iff.mp (h (by simp)))
+
+/-- **Klin–Salamanca (2018), Theorem 2.4, as its implication**, specialised to
+`T = F = P_κ`: any functor that preserves preimages (H1) and carries a nontrivial
+idempotent term (H2) admits no self-distributive-law of pointed functors. The
+general no-go argument (their four-set diagonal, whose objects have ≤ 4 elements
+`< κ`, so the `P_f` scope note transfers) is the SOLE non-Mathlib import; its
+`P_κ`-antecedents are supplied below as PROVED theorems, so the instantiation is
+machine-checked. (Design Part A: this replaces route-2's blunt `IsEmpty` axiom by
+the hypothesis-gated form the review asked for; route 1 — porting the diagonal
+computation to drop even this implication — remains the way to make WS3 fully
+axiom-free, as WS1 did for its analogue.) -/
+axiom klinSalamanca_no_law (hinf : ℵ₀ ≤ κ)
+    (_h1 : ∀ {X Y : Type u} (f : X → Y) (Z : Set Y) (t : PkObj κ X),
+            (PkMap κ f t).1 ⊆ Z → t.1 ⊆ f ⁻¹' Z)
+    (_h2idem : ∀ {X : Type u} (x : X), betaPk hinf x x = pkPure hinf x)
+    (_h2nt : ∀ {X : Type u} (a b : X), a ≠ b →
+            ¬ ((betaPk hinf a b).1 ⊆ ({a} : Set X) ∨ (betaPk hinf a b).1 ⊆ ({b} : Set X))) :
+    IsEmpty (DistLaw κ hinf)
 
 /-- **The WS3 gate result (Impossibility proved = success, §5/§7).** No strict
-distributive law of `P_κ` over itself exists. -/
+distributive law of `P_κ` over itself exists — derived by discharging
+Klin–Salamanca's hypotheses (H1)/(H2) for `P_κ` and invoking the general no-go
+implication. -/
 theorem ws3_no_distributive_law (hinf : ℵ₀ ≤ κ) : IsEmpty (DistLaw κ hinf) :=
-  KlinSalamanca_no_law hinf
+  klinSalamanca_no_law hinf
+    (fun f Z t h => Pk_preserves_preimages f Z t h)
+    (fun x => betaPk_idempotent hinf x)
+    (fun a b hab => betaPk_nontrivial hinf a b hab)
 
 /-! ## Part B.3(C) — non-triviality: incomparable witnesses -/
 
