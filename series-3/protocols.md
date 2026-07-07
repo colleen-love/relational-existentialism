@@ -66,7 +66,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Pass / revise verdict with specific objections.
 
 ### Phase 4 — Design Review (against charter)
-- **Context in:** CR, Phase 3 review output + the design it reviewed.
+- **Context in:** CR, Phase 3 blind design review, **fresh session**.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
 - **Output:** Pass / revise verdict with specific objections, plus the explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5").
 
@@ -86,7 +86,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Mathematical outcome + axiom list + ledger row (signature-level fields).
 
 ### Phase 7 — Charter Report (against charter)
-- **Context in:** CR, Phase 6 report + verified artifact.
+- **Context in:** CR, Phase 6 report + verified artifact, **fresh session**.
 - **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. Update the ledger. A failed or partial result triggers a **methodology note, not a reframe**.
 - **Outcome classes:**
   - **Discharged** — theorem discharges the workstream obligation.
