@@ -60,7 +60,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 2 — Design (blind)
 - **Context in:** BR, Phase 1 output, **fresh session**.
-- **Instructions:** Turn the selected candidate into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
+- **Instructions:** Run a triage that is *decidable on paper per candidate* and collapse the framing decision into a table. The framing choice is downstream of the triage, not a substitute for it. Select the best candidate and turn it into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 3 — Design Review (blind)
