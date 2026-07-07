@@ -34,7 +34,7 @@ Opus at most. Do not exceed Opus for any phase.
 
 | Phase | Rationale |
 |---|---|
-| 1 Conceptualize (blind) | Open-ended mathematical framing |
+| 1 Conceptualize (against charter) | Open-ended mathematical framing |
 | 2 Register (blind) | Precise signature + failure conditions |
 | 3 Design (against charter) | Binding to charter is high-stakes |
 | 4 Review (blind) | Adversarial math check |
