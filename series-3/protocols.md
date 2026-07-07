@@ -76,7 +76,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 5 — Execute (Claude code, against repo)
-- **Context in:** ER, **fresh session**.
+- **Context in:** ER.
 - **Instructions:** Please merge in main and write the Lean 4 proof for series-3/spec/ws${X}/04-charter-design-review.md in series-3/formal/ws${X}.lean. Import the new lean file in series-3/formal/Series3.lean so that the build compiles the new file, too. `sorry`-free is the bar for this design. Ignore the archive directory as it is irrelevant. Once you are finished, please ensure that the build compiles and run `#print axioms` and flag any classical/choice or AFA-encoding axioms.
 - **Output:** Lean file for this obligation.
 
