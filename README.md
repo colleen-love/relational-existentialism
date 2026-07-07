@@ -20,20 +20,6 @@ The document of record — the map, the foundational commitments, the formal fra
 
 **[The Series 3 Charter](./series-3/charter.md)**
 
-Reading path for the argument only: §1 (Preamble) → §2 (Foundational commitments) → §3 (Formal framework: how objects are given by their relations) → §4 (Central research question). Series 2, now closed, is preserved under [`archive/`](./archive).
-
-Three results to know before diving in:
-
-- **T1 (The One).** Strip observation of all quality and the entire universe provably collapses to a single self-relating point. Without graded observation, nothing distinguishes anything: observation is what individuates. *Not bang, but becoming.*
-- **T2 (Objects exist).** Any pattern of relating whatsoever determines, via a unique closure map, exactly one object. Objecthood is emergence made exact — attractor, not axiom.
-- **T6 (No ground floor).** The universe has no well-founded elements: decomposition never terminates, and its coherence is machine-checked. As a side effect, this is a formal consistency model for non-well-founded grounding.
-
-## Status
-
-**Series 2 is closed.** The arc ran from the axioms (2.0) through finality and construction (2.1), witnessing and composition (2.2), the Mirror — the collapse *finding* — and the correction program (2.3), the corrected functor and the plural universe νF_C (2.4), to the naming of the one irreducible loss and the closing theorems (2.5). What landed, machine-checked: the universe **exists** (T2), is **many** (the anti-Mirror), is **bridged** (C1 — *we are born as bridges*), its identity is **the limit of observer-local equalities** (T7), and its residue of self-reference (**D19**) is named with every feature proved. What is still owed — chiefly the κ-loan (T11) — walks into Series 3 in the open, and is carried forward by the **[Series 3 charter](./series-3/charter.md)**. The one-page door back to the closed arc is the **[Series 2 Closing Note](./archive/series-2-closing.md)**; open problems and their end-states are in spec 2.5 §7–8 (now under `archive/`).
-
-Contributions and objections are welcome; the spec's decision log (§4) records what has already been weighed, including the strongest objection we know ("you're building this out of objects") and its three-part answer (D12).
-
 ## Licensing
 
 This repository is dual-licensed by content type:
