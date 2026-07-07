@@ -16,6 +16,21 @@
 > A only makes explicit that §3.1's full-powerset gloss and §3.6's boundedness
 > requirement cannot both hold literally, and that the charter sides with §3.6.
 
+> **Charter status — Revision B (post-WS3 report).** Like Revision A, this
+> revision changes neither the philosophical target nor the §7 success criteria.
+> It records what WS3's formalization reported, using the charter's own §5
+> outcome vocabulary and §6.1 ratification machinery. WS3 reported **Partial**: a
+> proved **Impossibility** at the gate (no strict distributive law of the §3.4
+> form exists on the `P_κ` carrier — a §5/§7 success), and the bidirectional
+> constitution content of criterion (iv) delivered through a *weak* distributive
+> law whose canonicity for bounded `P_κ` is **open and routed to WS4**. Per §5, a
+> Partial triggers methodology notes and hand-offs, not a reframe. Every change is
+> confined to: the §8.1 WS3 status line (updated from "at-risk" to the reported
+> class), the §6.1 ratification list (the WS4 canonical-weak-law obligation, newly
+> pinned), a signature erratum on the WS3 design's `pentagon` field, and an
+> operational axiom-check note mirroring the one WS1 already carries. All are
+> tagged **[REV-B]**. Nothing in §§0–7 target/criteria text is altered.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
@@ -138,6 +153,20 @@ Reifying relations as objects (Commitment 2) is ROSR's escape from "relations wi
 
 Commitment 4 asks that an object be constituted *upward* (what it composes into) and *downward* (what it decomposes into) at once — the algebra/coalgebra duality fused in one object: a **bialgebra**. Following Turi & Plotkin (1997), take a monad `T` for composition, a functor `F` for observation, and a **distributive law** `λ : T F ⇒ F T` making them coherent. A `λ`-bialgebra is at once a `T`-algebra and an `F`-coalgebra: an object read from above and below without contradiction. This is the most ambitious component.
 
+> **[REV-B] The strict `λ` named here is proved not to exist for the built
+> carrier.** WS3 reported that no distributive law of the §3.4 form
+> (`λ : P_κ P_κ ⇒ P_κ P_κ`, as pointed functors) exists on the bounded carrier —
+> a Klin–Salamanca no-go, ported and proved as a theorem, not an assumption. This
+> is an **Impossibility proved** (a §5/§7 success), and §8.1's WS3 gating question
+> is thereby answered *No, as a theorem*. The bidirectional constitution this
+> section names is instead realized by a *weak* distributive law (Egli–Milner
+> union); the surviving coherence is the weak-law multiplication square, not the
+> strict pentagon. §3.4's philosophical content (an object read from above and
+> below without contradiction) is retained; only the strict instrument is
+> withdrawn. The canonicity of the weak surrogate is open and routed to WS4
+> (§6.1). This does not endanger criterion (iv); it sharpens it — composition of
+> relations-as-objects is inherently *non-strict*.
+
 ### 3.5 "Whole or in part": graded containment
 
 *Whole or in part* makes parthood non-binary. We enrich containment over `[0,1]` (or a quantale, or a subset), Lawvere-metric style, so "contains" carries a degree. Graded parthood shares its arithmetic with the attention weights below — one mechanism serving two commitments.
@@ -220,7 +249,7 @@ Workstreams:
 
 - **WS1 — Groundless carrier.** Fix the ambient theory (ZFC/AFA, or a category of classes). Confirm the intended reflexive, relation-only objects exist, unique up to bisimulation. **[REV-A] Status: discharged for the bounded carrier `P_κ` (existence + uniqueness-up-to-bisimulation + `Ω = {Ω}` + solution lemma), unconditionally and axiom-free modulo machine-checked compilation. The residual "which bound / no-everything" question is handed to WS6/WS7, not settled here. See §8.**
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
-- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination.
+- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1.**
 - **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3.
 - **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions.
 - **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint.
@@ -245,6 +274,19 @@ Specification → representation → adequacy. Each commitment becomes a categor
 5. Poles-and-outside resolution with its coincidence/impossibility theorems. *(WS6)*
 6. Non-collapse theorem locating the Goldilocks band. *(WS7)*
 7. Synthesis relating the model to ROSR and the "relations without relata" debate.
+
+> **[REV-B] Erratum on the WS3 design's registered `pentagon` signature
+> (deliverable 3).** The WS3 design memo (04) registers the weak-bialgebra
+> coherence field as `pentagon : dest (alg t) = PkMap alg (join (PkMap dest t))`.
+> That form re-applies `alg` after the join and does not state the intended
+> Egli–Milner coherence; it is a transcription artifact carried from the memo's v2
+> and is not what any correct `alg` satisfies. The registered signature is hereby
+> corrected to match the memo's own Egli–Milner prose and the proved theorem:
+> `pentagon : dest (alg t) = pkJoin (PkMap dest t)`, i.e.
+> `dest (alg t) = ⋃_{x∈t} dest x`. This erratum aligns the *registered* signature
+> with the *proved* one so the two coincide on paper; it is a correction of the
+> memo's transcription, not a weakening of criterion (iv), and it is surfaced
+> here rather than left as a silent in-artifact fix (per §8.2).
 
 ### 6.1 [REV-A] Revised dependency structure: the shared `(F, κ)` parameter
 
@@ -277,6 +319,26 @@ The deliverables above are **not** independent. A single choice — the observat
 
 **Management rule (new).** No workstream may report its deliverable as complete against a *provisional* `(F, κ)` without a labeled dependency stating which other workstreams must ratify that same `(F, κ)`. Milestone 1 (the framework memo) is upgraded from "fix `F`" to "fix `F` **and** record the ratification obligations it creates for WS2/WS3/WS4/WS6/WS7." WS7 is the designated *collector*: it must confirm a single concrete `(F, κ)` discharges the richness floor, the plurality floor, and the deferred no-everything obligation, and retro-validate that WS1/WS2/WS4's "for `κ` infinite regular" theorems survive that specific choice.
 
+**[REV-B] Ratification obligations pinned by the WS3 report.** WS3 converted one
+previously-hypothetical coupling into a concrete, named hand-off, added here to
+the ratification list:
+
+- **WS4 — canonical weak law (newly pinned, criterion (iv)-blocking).** WS3
+  delivers criterion (iv)'s content through the Egli–Milner *weak* distributive
+  law, but does not establish that this law is the *canonical* or
+  *uniquely-forced* weak law for the bounded functor `P_κ` — nor that it survives
+  the enriched/weighted functor WS4 may adopt (§3.5). Until WS4 ratifies that a
+  well-behaved weak law persists for its chosen `(F, κ)` and quantale, criterion
+  (iv) is **not** to be reported closed; it stands as Partial (per §8.1). This is
+  in addition to the WS2 weak-pullback hazard WS4 already inherits, and it means
+  the quantale choice now carries *two* WS3-originated ratification duties, not
+  one.
+- **WS7 — `alg`-non-triviality floor (confirmed, not new).** WS3's
+  non-triviality witness is discharged only for concrete objects; the general
+  branching-≥2 distinguishability it relies on remains the WS7 richness-floor
+  obligation already listed above. WS3 adds no new WS7 duty here, but confirms the
+  existing one is load-bearing for (iv), not merely for (vii).
+
 ---
 
 ## 7. Success criteria
@@ -288,6 +350,15 @@ Success is a single object (or small family) that provably (i) contains no atoms
 > (vii); it does not by itself settle (iv), (v), (vi), or the full non-collapse
 > part of (vii). The criteria remain the bar; §3.9 changes only *which object* is
 > offered against them, not the bar.
+
+> **[REV-B] Criterion (iv), after WS3, remains the bar — now met in part.** WS3
+> contributes to (iv) without closing it: the strict-`λ` route (iv) alludes to via
+> §3.4 is proved unavailable (Impossibility proved), and the "coherent bialgebra"
+> (iv) requires is delivered as a *weak* bialgebra whose canonicity is pending
+> WS4. Read against (iv), this is Partial: the bidirectional content is present on
+> the carrier, the coherence is the weak-law coherence, and closure waits on the
+> WS4 ratification pinned in §6.1. As with Revision A, this changes only how much
+> of (iv) is currently discharged, not what (iv) demands.
 
 ---
 
@@ -304,7 +375,7 @@ plus a hidden shared dependency?* Each entry gives a provisional outcome class
 - **The Goldilocks band may be narrow or empty.** Non-collapse pushes `F` to be rich; existence and non-totalization push it to be bounded. That these constraints are jointly satisfiable is a conjecture, not a given; finding the exact band is the crux.
 - **Finite attention as anti-collapse is heuristic until proven.** The claim that positioned, incomplete self-models keep objects distinct (rather than converging to a common fixed point) must be turned into a theorem, with explicit conditions.
 - **Trivialization at the poles.** "Atom = everything" must be a *zero object*, kept strictly apart from the incoherent universal set. Conflating them sinks the program.
-- **Distributive-law existence.** Not every `(T, F)` admits a `λ`; the whole/part bialgebra may force compromises on composition or observation.
+- **Distributive-law existence.** Not every `(T, F)` admits a `λ`; the whole/part bialgebra may force compromises on composition or observation. **[REV-B] Now resolved for the built carrier, in the negative: WS3 proved no strict `λ` of the §3.4 form exists on `P_κ` (Impossibility proved). The "compromise on composition" this risk anticipated is the weak distributive law of §3.4's [REV-B] note; the residual is not existence-of-a-law but canonicity-of-the-weak-law, routed to WS4.**
 - **Attention need not converge.** Contraction/replicator-mutator conditions guarantee good behavior only under hypotheses; ungrounded self-reference may obstruct them. Non-convergent or chaotic self-attention is a phenomenon to characterize, not assume away.
 - **Interpretive gap.** Even a fully successful object leaves open whether it *is* the ROSR world or a faithful model of it — a question to frame, not to overclaim settling.
 
@@ -316,11 +387,21 @@ The WS1-owned obligation — reflexive, relation-only objects exist, unique up t
 **WS2 — Object = relations coinductively. Outcome: at-risk of Partial. Same class of issue as WS1, high likelihood.**
 WS2 inherits `P_κ` and the `κ`-choice directly. The bisimulation characterization it must prove relies on the observation functor *preserving weak pullbacks* (the fact WS1's carrier bundled as a needed-but-unformalized lemma). For plain `P_κ` this holds; but if WS2 (or WS4) moves to a **weighted or probabilistic** observation functor to serve §3.5, weak-pullback preservation can *fail*, and then **bisimilarity and behavioral equivalence come apart** — the very "bisimulation = identity" property (criterion ii) would no longer be automatic. *Methodology note:* WS2's framework memo must state which functor it commits to and prove weak-pullback preservation (or explicitly accept the bisimulation/behavioral-equivalence split as a declared substitution, the WS1-style move). This choice binds WS4.
 
-**WS3 — Bidirectional constitution (bialgebra). Outcome: at-risk of Partial/Failed. Analogous, highest structural risk.**
-This is not a bounding drift but the same *shape* of problem one level up: **the object that satisfies one commitment may not be the object that satisfies another.** A `λ`-bialgebra must carry a `T`-algebra (composition) *and* an `F`-coalgebra (observation) on one carrier. WS1's carrier is a *final* `F`-coalgebra; final coalgebras are not generally free (or even any) `T`-algebras for a composition monad, and not every `(T, F)` admits a distributive law at all (already flagged in the standing risks). Forcing both structures onto one object may require changing `F` or the carrier, which would invalidate WS1/WS2. *Methodology note:* treat "does the WS1/WS2 carrier admit the required `T`-algebra structure and a coherent `λ`?" as an explicit gating question for WS3, answered *before* WS3 builds on the WS1 carrier — and be prepared for the honest outcome that no `λ` exists for the desired `(T, F)`, which is an **Impossibility-proved** result (a success per §7), not a failure to hide.
+**WS3 — Bidirectional constitution (bialgebra). [REV-B] Outcome: Partial — reported. (Prior provisional class: at-risk of Partial/Failed, highest structural risk.)**
+WS3 has now reported, and the outcome resolves to the class §8.1 pre-registered as acceptable. It splits cleanly:
+
+- *The gate — Impossibility proved (a §5/§7 success).* The gating question this entry demanded be answered before building — "does the WS1/WS2 carrier admit the required `T`-algebra structure and a coherent strict `λ`?" — is answered **No, as a theorem**: `ws3_no_distributive_law` proves `IsEmpty (DistLaw κ)`, a full port of the Klin–Salamanca no-go, with no custom axiom. This is exactly the "honest outcome that no `λ` exists," which this entry flagged in advance as Impossibility-proved, not failure.
+- *The content — delivered via a declared surrogate, canonicity pending.* Criterion (iv)'s bidirectional constitution is realized by the Egli–Milner *weak* distributive law: a composition operator `alg` with `dest (alg t) = ⋃_{x∈t} dest x`, satisfying the weak-law multiplication coherence, the `T`-unit law on singletons/idempotents, part-reflection (upward) against `dest` (downward), the `Ω` fixed point, and non-triviality. The impossibility is carried *inside* the deliverable (as a `noStrictLaw` field) so the substitution cannot be read as a relabeling.
+- *Why Partial and not Discharged.* Criterion (iv) names constitution "via a coherent bialgebra." The strict bialgebra is impossible; the coherent bialgebra that exists is the weak one, and whether the weak law is the *canonical* one for bounded `P_κ` (as opposed to one workable choice among possibly many) is **not** settled. That is the precise obstruction, and it lands the workstream at Partial rather than Discharged.
+
+*Methodology notes (per §5 — corrections and hand-offs, not a reframe):*
+1. *Canonical-weak-law ratification → WS4,* newly pinned in §6.1. Criterion (iv) is not to be reported closed until WS4 confirms a well-behaved weak law survives its chosen enriched `(F, κ)` and quantale. This is the WS3-originated ratification duty, additional to the WS2 weak-pullback hazard WS4 already carries.
+2. *Registered-signature erratum → §6 [REV-B] note.* The design memo's `pentagon` field was ill-formed; the registered signature is corrected to the proved Egli–Milner form so registered and proved coincide on paper. Surfaced, not silently patched.
+3. *`alg`-non-triviality one-step-observability → WS7.* The general branching-≥2 distinguishability behind sharp non-triviality remains WS7's richness-floor obligation; WS3 discharges only the concrete-witness case. Confirmed load-bearing for (iv), not only (vii).
+4. *Operational axiom check.* As with WS1, the "no custom axioms beyond Mathlib's standard three" claim rests on a static source audit; a machine-checked `#print axioms ws3_no_distributive_law` and `#print axioms ws3_weak_bialgebra` against live Mathlib is owed before "axiom-free" is reported without qualification. The spots warranting confirmation are the no-go's parity endgame, the `qpfPk` plumbing inherited from WS1, and the `iSup_lt_of_isRegular` bound in `pkJoin` (where `κ.IsRegular` is genuinely consumed — unlike WS2, `hreg` is load-bearing here).
 
 **WS4 — Graded parthood. Outcome: at-risk of Partial. Same class, medium likelihood.**
-Enriching containment over `[0,1]`/a quantale *changes the functor* whose `νF` WS2 built, re-triggering the WS2 weak-pullback hazard and introducing a *second* hidden parameter (the quantale) alongside `κ`. The charter's "one mechanism serves grading and attention" (§3.5) is a *unification conjecture*, not a theorem. *Methodology note:* WS4 must either prove the enriched functor still yields the WS2 carrier with intact bisimulation, or declare (WS1-style) the enriched carrier as a distinct object and re-establish criteria (i)–(iii) for it. The quantale choice joins `(F, κ)` as a ratification obligation on WS7.
+Enriching containment over `[0,1]`/a quantale *changes the functor* whose `νF` WS2 built, re-triggering the WS2 weak-pullback hazard and introducing a *second* hidden parameter (the quantale) alongside `κ`. The charter's "one mechanism serves grading and attention" (§3.5) is a *unification conjecture*, not a theorem. *Methodology note:* WS4 must either prove the enriched functor still yields the WS2 carrier with intact bisimulation, or declare (WS1-style) the enriched carrier as a distinct object and re-establish criteria (i)–(iii) for it. The quantale choice joins `(F, κ)` as a ratification obligation on WS7. **[REV-B] WS4 now also owns the WS3-pinned canonical-weak-law ratification (§6.1): it must confirm a well-behaved weak distributive law persists for its chosen enriched `(F, κ)`, since criterion (iv)'s closure is blocked on this. The quantale choice therefore carries two WS3/WS2-originated duties — weak-pullback preservation and weak-law persistence — not one.**
 
 **WS5 — Finite attention. Outcome: split — incompleteness Discharged/Impossibility-proved-likely; convergence Partial-by-construction.**
 The incompleteness-of-self-knowledge result is *robust*: it is a Lawvere-diagonal impossibility that does not depend on the `(F, κ)` choice, and it is the cleanest candidate for an outright success (indeed an **Impossibility proved** in the §5 sense — a sharp negative that the program *wants*). Convergence is the opposite: Banach needs a genuine contraction on a complete metric realization of the (bounded) `νF`, and the replicator-with-mutation operator being contractive is a *hypothesis*, not a generic fact — the standing risk "attention need not converge" is real. *Methodology note:* report WS5 as two separate results with different statuses; do not let the solid incompleteness theorem launder the conditional convergence claim into looking equally settled. State the contraction/μ conditions explicitly as hypotheses.
@@ -329,7 +410,7 @@ The incompleteness-of-self-knowledge result is *robust*: it is a Lawvere-diagona
 WS6 must discharge, non-trivially, the "no maximal everything" that WS1 secured only by fiat. But §3.7's zero-object route requires *leaving `Set`* for a category with a zero object — which is **not** the category the bounded final coalgebra of WS1/WS2 lives in. So the poles-coincidence object and the groundless carrier risk being different objects in different categories, and "the same object realizes both" is an unproven bridging claim. *Methodology note:* WS6 must state in which single ambient category *all* of (poles-coincidence, no-everything, groundless carrier) are meant to coexist, and either exhibit it or declare the split. This is a stronger coupling to WS1 than the original §6 (deliverable 5 vs 2) admits.
 
 **WS7 — Non-collapse. Outcome: at-risk; the central conjecture may yield Impossibility-proved. Highest hand-off load.**
-WS7 is the designated collector: it inherits `κ` from WS1, the functor/weights from WS2/WS4, and the mutation floor `μ` from WS5, and must show a *single* concrete `(F, κ, μ)` sits in the Goldilocks band. The standing risk that the band "may be narrow or empty" means the honest outcome could be that no such choice exists — an **Impossibility proved** (a program-level success per §7, and arguably the most informative one), *not* a failure. The richness floor (branching ≥ 2) versus boundedness (`< κ`) is plausibly jointly satisfiable for finite/`κ`-powerset, but the *dynamical* non-collapse (μ-floor keeps attention off the simplex vertices) is a separate analytic condition that must be proved, not assumed. *Methodology note:* WS7's deliverable must be phrased as "locate the band **or** prove it empty," with both treated as valid terminal outcomes, and it must retro-validate every upstream "for `κ` infinite regular" theorem against its final concrete choice.
+WS7 is the designated collector: it inherits `κ` from WS1, the functor/weights from WS2/WS4, and the mutation floor `μ` from WS5, and must show a *single* concrete `(F, κ, μ)` sits in the Goldilocks band. The standing risk that the band "may be narrow or empty" means the honest outcome could be that no such choice exists — an **Impossibility proved** (a program-level success per §7, and arguably the most informative one), *not* a failure. The richness floor (branching ≥ 2) versus boundedness (`< κ`) is plausibly jointly satisfiable for finite/`κ`-powerset, but the *dynamical* non-collapse (μ-floor keeps attention off the simplex vertices) is a separate analytic condition that must be proved, not assumed. *Methodology note:* WS7's deliverable must be phrased as "locate the band **or** prove it empty," with both treated as valid terminal outcomes, and it must retro-validate every upstream "for `κ` infinite regular" theorem against its final concrete choice. **[REV-B] WS3 confirms one of WS7's inherited duties is now (iv)-blocking, not merely (vii)-blocking: the branching-≥2 richness floor is what WS3's sharp non-triviality relies on, so WS7's richness-floor result feeds bidirectional constitution as well as non-collapse.**
 
 ### 8.2 [REV-A] The one-line summary
 
@@ -343,10 +424,19 @@ recover the canonical content inside the surrogate where possible, state the
 residual obstruction precisely, and route it to the workstream that owns it —
 never relabel the shortfall as the goal.**
 
+> **[REV-B] WS3 is the pattern's second confirmed instance, and its cleanest.**
+> WS3 named a strict distributive law (§3.4) whose literal form its own gate
+> proved impossible, substituted the weak law openly, recovered criterion (iv)'s
+> bidirectional content inside the surrogate, carried the impossibility *inside*
+> the deliverable so it cannot be relabeled, and routed the one residual
+> (weak-law canonicity) to WS4. This is §8.2 discipline executed end to end — the
+> impossibility half is a positive finding (composition of relations-as-objects is
+> inherently non-strict), not a shortfall dressed up as a goal.
+
 ---
 
 ## 9. Positioning
 
 Philosophically: Ladyman & Ross (*Every Thing Must Go*, 2007), French (*The Structure of the World*, 2014), the "relations without relata" objection, and the denial of a view from nowhere (Nagel). Formally: Aczel's non-well-founded set theory; universal coalgebra (Rutten, Jacobs); Turi–Plotkin bialgebraic semantics; Lawvere's fixed-point theorem and its diagonal corollaries; Lawvere-enriched categories; replicator dynamics. The distinctive bet: these usually separate literatures, taken together, are the correct constitution for a groundless, perspective-bearing, relation-first ontology — and where they resist, the resistance is itself metaphysically informative.
 
-*Working draft. Revision A adds the §3.9 bounded-carrier reconciliation, the §6.1 shared-parameter dependency structure, and the §8.1 per-workstream hazard audit; §§0–2, 4 (workstream list bodies), 5 (methodology body), 7 (criteria), and 9 are otherwise retained from the original. To be revised as the remaining workstreams report.*
+*Working draft. Revision A adds the §3.9 bounded-carrier reconciliation, the §6.1 shared-parameter dependency structure, and the §8.1 per-workstream hazard audit; §§0–2, 4 (workstream list bodies), 5 (methodology body), 7 (criteria), and 9 are otherwise retained from the original. Revision B records the WS3 report: the §8.1 WS3 status (now Partial, reported), the §6.1 WS4 canonical-weak-law ratification obligation, the §6 `pentagon` signature erratum, and the §8.1 operational axiom-check note; it adds inline [REV-B] pointers at §§3.4, 6, 7, 8, 8.2 and leaves all §§0–7 target/criteria text unaltered. To be revised as the remaining workstreams report.*
