@@ -75,7 +75,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Instructions (part 2):** Can you update the design and address the problems that you found?
 - **Output:** Mathematical design + any gap notes.
 
-### Phase 5 — Execute (against repo)
+### Phase 5 — Execute (Claude code, against repo)
 - **Context in:** ER, **fresh session**.
 - **Instructions:** Please merge in main and write the Lean 4 proof for series-3/spec/ws${X}/04-charter-design-review.md in series-3/formal/ws${X}.lean. Import the new lean file in series-3/formal/Series3.lean so that the build compiles the new file, too. `sorry`-free is the bar for this design. Ignore the archive directory as it is irrelevant. Once you are finished, please ensure that the build compiles and run `#print axioms` and flag any classical/choice or AFA-encoding axioms.
 - **Output:** Lean file for this obligation.
@@ -83,12 +83,12 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 ### Phase 6 — Blind Report (blind)
 - **Context in:** BR, executed Lean file, charter design review, **fresh session**.
 - **Instructions:** Verify the artifact — is it `sorry`-free, does it prove **the registered signature** (not a weakened variant) of the design? Please classify the mathematical outcome. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem proves the registered signature. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — registered signature not achieved; document why.
-- **Output:** Mathematical outcome + axiom list + ledger row (signature-level fields).
+- **Output, sent to Claude code if not discharged:** Mathematical outcome + axiom list + ledger row (signature-level fields). 
 
 ### Phase 7 — Charter Report (against charter)
 - **Context in:** Phase 6 blind report context, charter.
 - **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem discharges the workstream obligation. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — workstream obligation not achieved; document why.
-- **Output:** Ledger row (charter-level fields) + outcome classification.
+- **Output, sent to Claude code if not discharged:** Ledger row (charter-level fields) + outcome classification.
 
 ---
 
