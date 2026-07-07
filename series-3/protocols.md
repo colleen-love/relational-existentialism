@@ -72,7 +72,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 5 — Execute (blind)
 - **Context in:** BR, reviewed design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
-- **Instructions:** Write the Lean 4 proof. `sorry`-free is the bar for this design. 
+- **Instructions:** Write the Lean 4 proof for series-3/ws${X}/03-c-des-rev.md to series-3/ws${X}/04-exe.lean. `sorry`-free is the bar for this design.
 - **Output:** Lean file for this obligation.
 
 ### Phase 6 — Blind Report (blind)
