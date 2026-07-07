@@ -7,6 +7,25 @@ the terminal coalgebra of the κ-bounded powerset functor `P_κ`, its Lambek iso
 the bisimulation = identity theorem, the canonical self-membered inhabitant
 `Ω = {Ω}`, and the C2 solution lemma built on top of it.
 
+## Outcome status — the WS1 existence obligation is NOT discharged here
+
+Read this first. The charter's WS1 deliverable (§4, §6 deliverable 2) is an
+EXISTENCE/uniqueness theorem for the carrier. This file does NOT prove it: the
+existence of the carrier is ASSUMED, via `exists_terminal_coalg`, not derived. So
+against the charter obligation this artifact is a CONDITIONAL result, not a
+discharge — everything here holds "*given* terminality of `P_κ`". Concretely:
+
+* Downstream consumers MUST NOT cite `ws1_C1` as establishing that the carrier
+  exists. It may be cited only as: "*given* terminality of `P_κ`, the carrier has
+  these bundled properties (Lambek iso, bisim = identity, non-degeneracy, Ω)."
+* The WS1↔WS7 boundedness drift (Commitment 1 realized against bounded `P_κ`, not
+  charter §3.1's full-powerset/AFA carrier — §0.1, §8) is a separate, openly
+  declared concession and remains open regardless of the above.
+
+Everything BELOW terminality is genuine, unconditional-given-terminality,
+sorry-free mathematics (see the axiom accounting next). The critical path to
+actually discharging existence is recorded at the end of this header.
+
 ## What is proved sorry-free
 
 This file has NO `sorry` and exactly ONE `axiom` (`exists_terminal_coalg`).
@@ -59,16 +78,36 @@ honest accounting:
   `lambek` / `bisim_eq` / `ws1_C2` / `omega_consistency` use ONLY Mathlib's
   standard axioms; the existence axiom enters solely through `ws1_C1`.
 
-* Closing the gap (the registered fix, deliberately NOT attempted here): restate
-  the axiom at the `stabilization_theorem` boundary above (a stabilizing iso on
-  `finalSeq.connectingMap`, with `hacc`/`hbdd`), construct `finalSeq` per §2.1,
-  and PROVE `IsTerminalCoalg` from it via the Corollary 2.2 inductions — moving
-  (L1.2)/(C2.∃)/(C2.!) from this ledger to theorems. That is the design's "single
-  most expensive sub-formalization"; Mathlib currently has no terminal-sequence /
-  final-coalgebra-of-endofunctor infrastructure to lean on (its category-theoretic
-  `Coalgebra` is unrelated, and M-types cover only polynomial functors, which
-  bounded `P_κ` is not), so it is a genuine from-scratch transfinite development
-  and is left as future work rather than shipped half-done.
+* Closing the gap — TWO candidate routes; both are scoped, from-scratch
+  developments, deliberately NOT attempted in this revision:
+
+  ROUTE 1 (design-faithful, §2.1–§2.2; RELOCATES the axiom to the sanctioned
+  boundary). Restate the axiom as the design's `stabilization_theorem` — a
+  stabilizing iso on `finalSeq.connectingMap` under `hacc`/`hbdd` — construct
+  `finalSeq` per §2.1, and PROVE `IsTerminalCoalg` from it via the Corollary 2.2
+  inductions, moving (C2.∃)/(C2.!) from this ledger to theorems and leaving only
+  (L1.2). PREREQUISITE (from §2.2, its own signed-off sub-task): pin the exact
+  stabilization bound `α ≤ κ.ord` against Worrell / Adámek–Milius–Moss BEFORE any
+  Lean work — a wrong bound would typecheck against a false external fact with no
+  local proof to catch it. This is the design's "single most expensive
+  sub-formalization" (simultaneous transfinite recursion of the sequence + its
+  connecting maps; limit-stage uniqueness invariant).
+
+  ROUTE 2 (Mathlib QPF; ELIMINATES the axiom entirely — no ordinals, no
+  stabilization). Bounded powerset over a FIXED `κ` is a quotient of a polynomial
+  functor: shapes `κ.ord.toType`, positions the initial segments below each shape
+  (each of cardinality `< κ`, since `κ.ord` is the least ordinal of cardinality
+  `κ`), `abs = Set.range`. Exhibiting that as a `Mathlib.Data.QPF.Univariate.QPF`
+  instance yields `Cofix P_κ` with `Cofix.dest` (structure map), `Cofix.corec`
+  (the cone map, giving existence + `Cofix.dest_corec`), and `Cofix.bisim`
+  (bisimulation ⇒ equality, UNCONDITIONAL — no uniformity needed) — from which
+  `IsTerminalCoalg (Cofix P_κ)` is a THEOREM and `exists_terminal_coalg` is
+  deleted outright. Cost sits in the QPF instance (the `abs_repr` surjective
+  enumeration; the `< κ` cardinality bookkeeping) and in bridging `Cofix`'s
+  bisimulation API to `IsTerminalCoalg`'s uniqueness clause. (The earlier header
+  claim that "M-types cover only polynomial functors, which bounded `P_κ` is not"
+  was too quick: `P_κ` is not polynomial but IS a quotient of one — a QPF — which
+  is exactly what Mathlib's `QPF`/`Cofix` machinery is built for.)
 
 ## A registered dependency that does NOT appear here (Lemma 3.1a)
 
