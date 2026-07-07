@@ -7,15 +7,10 @@ the terminal coalgebra of the κ-bounded powerset functor `P_κ`, its Lambek iso
 the bisimulation = identity theorem, the canonical self-membered inhabitant
 `Ω = {Ω}`, and the C2 solution lemma built on top of it.
 
-## What is proved vs. what is assumed
+## What is proved sorry-free
 
-The design is explicit (§2.1–§2.2, §7 item 1) that existence of the terminal
-`P_κ`-coalgebra rests on ONE external black box — the Worrell / Adámek–Koubek
-stabilization theorem — which the design itself carries as `axiom
-stabilization_theorem`, calling it "the single most expensive sub-formalization
-in WS1" and leaving it axiomatic with a TODO. We mirror exactly that one
-sanctioned concession here as `exists_terminal_coalg`, and prove EVERYTHING
-downstream of it sorry-free:
+This file has NO `sorry` and exactly ONE `axiom` (`exists_terminal_coalg`).
+Everything below is proved from it (and Mathlib's standard axioms):
 
 * Lemma 1.1  functoriality of `P_κ`               (`PkMap_id`, `PkMap_comp`)
 * Lemma 2.3  Lambek's lemma (`struct` is an iso)  (`lambek`)
@@ -25,6 +20,65 @@ downstream of it sorry-free:
 * §5         the assembled `GroundlessCarrier`     (`ws1_C1`)
 * Theorem 6.2/6.3 the solution lemma               (`ws1_C2`)
 * Lemma 6.4  Ω-consistency of the two Ω routes     (`omega_consistency`)
+
+## Where the axiom boundary sits — and how it differs from the design's
+
+An earlier revision of this header claimed to "mirror exactly" the design's one
+sanctioned black box. That was inaccurate: `exists_terminal_coalg` assumes
+STRICTLY MORE than the sanctioned axiom, and the difference is material. The
+honest accounting:
+
+* The design (§2.2, §7 item 1) sanctions ONE external black box, the
+  Worrell / Adámek–Koubek **`stabilization_theorem`**. Its REGISTERED signature
+  is stated for a general functor `F` under `hacc` (κ-accessibility = Lemma 1.2)
+  and `hbdd` (κ-boundedness), and it concludes ONLY a stabilizing ordinal — an
+  iso on a connecting map of the terminal sequence — NOT terminality:
+
+      axiom stabilization_theorem (F) (κ) (hκ_reg) (hκ_inf) (hacc) (hbdd) :
+        ∃ α : Ordinal, α ≤ κ.ord ∧ IsIso (finalSeq.connectingMap F (α+1) α)
+
+  From that iso the design *derives* terminality in **Corollary 2.2**, whose two
+  transfinite arguments — cone-map existence (recursion) and cone-map uniqueness
+  (induction) — §7 ranks as **tier-2 risk, co-equal with the stabilization
+  theorem itself**. **Lemma 1.2** (κ-accessibility of `P_κ`, feeding `hacc`) is a
+  further registered obligation ("probably a genuine new proof").
+
+* `exists_terminal_coalg` below is DOWNSTREAM of that boundary: it asserts
+  `∃ U, IsTerminalCoalg U` outright. Relative to the design's registered axiom it
+  therefore ASSUMES rather than discharges three registered obligations, which
+  stay on this open ledger:
+
+      (L1.2)  Lemma 1.2      — κ-accessibility of `P_κ`         [assumed]
+      (C2.∃)  Corollary 2.2  — cone-map existence  (recursion)  [assumed]
+      (C2.!)  Corollary 2.2  — cone-map uniqueness (induction)  [assumed, §7 tier-2]
+
+  So the HONEST status of `ws1_C1` is: *conditional on terminality-of-`P_κ` — a
+  strictly stronger hypothesis than the sanctioned `stabilization_theorem` — and
+  against the bounded reading of Commitment 1 (§0.1).* The downstream mathematics
+  is nonetheless sound and independent of this: `#print axioms` shows
+  `lambek` / `bisim_eq` / `ws1_C2` / `omega_consistency` use ONLY Mathlib's
+  standard axioms; the existence axiom enters solely through `ws1_C1`.
+
+* Closing the gap (the registered fix, deliberately NOT attempted here): restate
+  the axiom at the `stabilization_theorem` boundary above (a stabilizing iso on
+  `finalSeq.connectingMap`, with `hacc`/`hbdd`), construct `finalSeq` per §2.1,
+  and PROVE `IsTerminalCoalg` from it via the Corollary 2.2 inductions — moving
+  (L1.2)/(C2.∃)/(C2.!) from this ledger to theorems. That is the design's "single
+  most expensive sub-formalization"; Mathlib currently has no terminal-sequence /
+  final-coalgebra-of-endofunctor infrastructure to lean on (its category-theoretic
+  `Coalgebra` is unrelated, and M-types cover only polynomial functors, which
+  bounded `P_κ` is not), so it is a genuine from-scratch transfinite development
+  and is left as future work rather than shipped half-done.
+
+## A registered dependency that does NOT appear here (Lemma 3.1a)
+
+The `bisim_eq` field proves Theorem 3.2 exactly — "every bisimulation ⊆ the
+diagonal" — which follows from terminality alone. The design's Lemma 3.1a
+(`P_κ` preserves weak pullbacks) and Lemma 3.1 (`bisimEquiv` is an equivalence
+relation, transitivity via 3.1a) are needed only for the *greatest-bisimulation*
+packaging, which the `GroundlessCarrier` signature does not use; they are neither
+needed nor formalized here. This matches Theorem 3.2's registered signature and is
+not a weakening of it, but is flagged so nobody expects 3.1a in this file.
 
 ## Standing hypothesis (§0.1, §1.1)
 
@@ -165,13 +219,21 @@ def omegaCoalg (hinf : ℵ₀ ≤ κ) : Coalg κ :=
 def emptyCoalg (hinf : ℵ₀ ≤ κ) : Coalg κ :=
   ⟨PUnit, fun _ => ⟨∅, mk_empty_lt hinf⟩⟩
 
-/-! ## §2 Existence of the carrier — the one sanctioned black box
+/-! ## §2 Existence of the carrier — the assumed hypothesis (see the header ledger)
 
-The design derives existence of the terminal `P_κ`-coalgebra from the
-stabilization theorem, which it carries as `axiom stabilization_theorem`
-(§2.1–§2.2, §7 item 1: "the single most expensive sub-formalization", left
-axiomatic with a TODO). We mirror exactly that concession: for an infinite
-regular `κ`, a terminal coalgebra exists. Nothing else below is axiomatic. -/
+`exists_terminal_coalg` asserts the CONCLUSION of the design's entire §2 —
+stabilization AND the Corollary 2.2 terminality derivation — together with
+Lemma 1.2 (κ-accessibility). It is therefore STRONGER than the design's one
+sanctioned black box, the `stabilization_theorem` of §2.2, whose registered
+signature concludes only a stabilizing iso on the terminal sequence, not
+terminality. The three registered obligations this axiom folds in —
+
+    (L1.2) Lemma 1.2,  (C2.∃) Corollary 2.2 existence,  (C2.!) Corollary 2.2 uniqueness
+
+— are ASSUMED here, not discharged; they stay on the open-obligations ledger in
+the file header. Nothing else in this file is axiomatic. See the header for the
+registered-boundary statement and the (deliberately deferred) path to closing the
+gap. -/
 axiom exists_terminal_coalg (κ : Cardinal.{u}) (hreg : κ.IsRegular) (hinf : ℵ₀ ≤ κ) :
     ∃ U : Coalg κ, IsTerminalCoalg U
 
@@ -191,9 +253,13 @@ structure GroundlessCarrier (κ : Cardinal.{u}) where
   omega_selfsingleton : (carrier.str omega).1 = {omega}
 
 /-- Theorem `ws1_C1` (§5): a `GroundlessCarrier` exists for every infinite regular
-`κ`. Conditional on `exists_terminal_coalg` (the design's `stabilization_theorem`)
-and stated against the bounded reading of Commitment 1 (§0.1), exactly as §5's
-[DRIFT NOTE] instructs it be reported. -/
+`κ`. HONEST STATUS (per the header ledger): conditional on `exists_terminal_coalg`,
+i.e. on terminality-of-`P_κ` — a hypothesis strictly STRONGER than the design's
+sanctioned `stabilization_theorem`, since it folds in Lemma 1.2 and both halves of
+Corollary 2.2 (the §7 tier-2 transfinite inductions), left un-discharged — and
+stated against the bounded reading of Commitment 1 (§0.1). Downstream of that
+hypothesis the assembly is fully proved; the non-degeneracy, Lambek, bisim=identity
+and Ω facts it bundles do not themselves depend on the axiom beyond terminality. -/
 theorem ws1_C1 (hreg : κ.IsRegular) (hinf : ℵ₀ ≤ κ) :
     Nonempty (GroundlessCarrier κ) := by
   obtain ⟨U, hU⟩ := exists_terminal_coalg κ hreg hinf
