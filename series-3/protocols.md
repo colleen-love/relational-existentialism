@@ -75,7 +75,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 5 — Execute (against repo)
 - **Context in:** ER, **fresh session**.
-- **Instructions:** Write the Lean 4 proof for series-3/ws${X}/4-charter-design-review.md to series-3/ws${X}/5-execute.lean. `sorry`-free is the bar for this design. Ignore the root README.md and the series-2 directory, they are irrelevant.
+- **Instructions:** Write the Lean 4 proof for series-3/ws${X}/4-charter-design-review.md to series-3/ws${X}/5-execute.lean. `sorry`-free is the bar for this design. Ignore the root README.md and the archive/ directory, they are irrelevant.
 - **Output:** Lean file for this obligation.
 
 ### Phase 6 — Blind Report (blind)

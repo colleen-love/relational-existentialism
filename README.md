@@ -14,23 +14,13 @@ The framework has **one primitive** — observation, which is what relating is: 
 
 **One primitive, one axiom. Objects are theorems.**
 
-## The spec
+## The charter
 
-The document of record — ontology, arena, axioms, every load-bearing decision with its rationale, theorem targets, and open questions — is:
+The document of record — the map, the foundational commitments, the formal framework (the anti-foundation axiom, objects-as-relations coalgebra, relations-as-objects, the bialgebra, graded containment, and non-collapse), the central research question, methodology, milestones, success criteria, and open problems — is the **Series 3 charter**:
 
-**[Spec 2.0. — Ontology, Arena, and Axioms](./series-2/2-0.md)**
+**[The Series 3 Charter](./series-3/charter.md)**
 
-**[Spec 2.1. — Signature, Dyad Reduction, and Construction of Ω](./series-2/2-1.md)**
-
-**[Spec 2.2. — π Ratified, Witnessing, and Comparative Composition Theory](./series-2/2-2.md)**
-
-**[Spec 2.3. — The Mirror: the Collapse Finding, the F(1) Test, and the Correction Program](./series-2/2-3.md)**
-
-**[Spec 2.4. — The Correction: the Corrected Functor, νF_C, and the Plural Universe](./series-2/2-4.md)**
-
-**[Spec 2.5. — The Naming: D19, the Residue of Self-Reference, and the Closing Theorems](./series-2/2-5.md)** · **[Series 2 — Closing Note](./series-2/series-2-closing.md)**
-
-Reading path for the argument only: §1 (the axioms) → §2.2 (the closure operator: how objects are given by their relations) → §3 (the ledger: what is primitive, what is proved) → theorems T1 and T2 in §5.
+Reading path for the argument only: §1 (Preamble) → §2 (Foundational commitments) → §3 (Formal framework: how objects are given by their relations) → §4 (Central research question). Series 2, now closed, is preserved under [`archive/`](./archive).
 
 Three results to know before diving in:
 
@@ -40,7 +30,7 @@ Three results to know before diving in:
 
 ## Status
 
-**Series 2 is closed.** The arc ran from the axioms (2.0) through finality and construction (2.1), witnessing and composition (2.2), the Mirror — the collapse *finding* — and the correction program (2.3), the corrected functor and the plural universe νF_C (2.4), to the naming of the one irreducible loss and the closing theorems (2.5). What landed, machine-checked: the universe **exists** (T2), is **many** (the anti-Mirror), is **bridged** (C1 — *we are born as bridges*), its identity is **the limit of observer-local equalities** (T7), and its residue of self-reference (**D19**) is named with every feature proved. What is still owed — chiefly the κ-loan (T11) — walks into Series 3 in the open. The one-page door is the **[Series 2 Closing Note](./series-2/series-2-closing.md)**; open problems and their end-states are in spec 2.5 §7–8.
+**Series 2 is closed.** The arc ran from the axioms (2.0) through finality and construction (2.1), witnessing and composition (2.2), the Mirror — the collapse *finding* — and the correction program (2.3), the corrected functor and the plural universe νF_C (2.4), to the naming of the one irreducible loss and the closing theorems (2.5). What landed, machine-checked: the universe **exists** (T2), is **many** (the anti-Mirror), is **bridged** (C1 — *we are born as bridges*), its identity is **the limit of observer-local equalities** (T7), and its residue of self-reference (**D19**) is named with every feature proved. What is still owed — chiefly the κ-loan (T11) — walks into Series 3 in the open, and is carried forward by the **[Series 3 charter](./series-3/charter.md)**. The one-page door back to the closed arc is the **[Series 2 Closing Note](./archive/series-2-closing.md)**; open problems and their end-states are in spec 2.5 §7–8 (now under `archive/`).
 
 Contributions and objections are welcome; the spec's decision log (§4) records what has already been weighed, including the strongest objection we know ("you're building this out of objects") and its three-part answer (D12).
 
