@@ -1,306 +1,130 @@
-# Series 3 — Cycle Protocols
+# UCM Protocol — Ungrounded Constitution Mechanization
 
-Every step of the cycle, in order: **conceptualize (CON) → register (REG) → design (DES) → design review (DES-R) → execute (EXE) → execution review (EXE-R) → report (REP).**
+A machine-checked workflow for bringing *An Ungrounded Constitution of Objects and Relations* to life in Lean 4, one proof obligation at a time.
 
-Every session is instructed to end its work by emitting two delimited documents: a **REPORT** (its reasoning, verdicts, and GAP line, which you file to the audit trail and never paste onward) and a **HANDOFF** (a self-contained, style-stripped packet that you paste whole into the next session). Between each step, save the session's full output to an audit file and paste its HANDOFF into the next session along with anything the context map lists.
-
-## Ground rules (apply to every session)
-
-1. One fresh incognito session per step. No project memory, no prior turns beyond clarifying that session's own output.
-2. Never signal the wanted outcome. No enthusiasm, no authorship info, no reactions before the output is complete.
-3. Sessions never meet each other except through HANDOFF packets, which are the sanctioned channel: each session strips its own style, reasoning, and advocacy out of its HANDOFF so nothing but content travels.
-4. You copy blocks; you never edit them. If a HANDOFF is defective (missing fields, leaked reasoning), ask that same session to re-emit it correctly rather than fixing it by hand.
-5. File every session's complete output (REPORT + HANDOFF) to the audit trail before pasting anything onward. Naming: `cycle-n/m-step.md` (for example `cycle-2/03-des-r.md`). The audit trail is append-only; nothing is ever revised in place.
-6. Single run per step by default. A second run in a separate session is your discretionary option, reserved for verdicts that would close a series, ship a paper, or that simply seem off; if used, divergence between the runs is a finding, filed.
-
-## How the cycle runs
-
-**One round** is a batch of candidates moving through the gates, ending when REP returns PUBLISHABLE AS GRADED. A round's durable output is its audit folder plus one ledger append. Sessions are disposable; the audit trail accumulates; nothing else survives a round, on purpose.
-
-**Not every round starts at conceptualization.** CON is per-campaign, not per-cycle: open targets and revision packets feed directly back into DES or REP, and a new round can begin at design the day after the last one reported. Run a fresh CON only when the ledger's registered candidates are exhausted, or when a refutation or surprise demands new thinking.
-
-**Your role.** Every session is amnesiac by construction, so you are the only continuous participant, holding five jobs: courier (paste HANDOFFs forward, file outputs; nothing crosses a phase boundary except through you), gatekeeper (every verdict advises, you decide; an overruled verdict gets a dated note in the ledger saying why), memory (you keeps the audit trail and the program ledger), phenomenologist (your own lived observations enter as candidate cards through REG like everything else, priced blind), and amender (the charter changes only by her hand, with dated notes).
-
-**What the next CON takes in:** the charter plus the program ledger. Never raw reviews, never celebration.
-
-**Program ledger (the only document that accumulates; REP's closing packet supplies each round's append block ready-made):**
-
-```
-PROGRAM LEDGER
-Registered candidates: [letter, one-line claim, status: in design / in execution / graded / refuted / dormant]
-Graded results: [REP-approved prose appended per round, with claims index]
-Open targets: [name, origin round, why open]
-Refutations and surprises: [what was expected, what happened]
-Round gap summaries: [round, one line]
-Charter amendments: [date, what changed, why]
-Overruled verdicts: [date, verdict, Colleen's reason]
-```
-
-The gap log is not a separate document: it is the GAP lines standing in the audit files plus the round summaries above. Skim them monthly; if they trend from "small and named" toward "large or unnameable," stop the cycle and run a process retrospective before any further execution.
-
-## Context map
-
-| Step | Model | Paste in | File to audit |
-|---|---|---|---|
-| CON conceptualize | Fable 5 | charter (with poem); from round 2 onward, also the program ledger | full output |
-| REG registration (blind pricing) | Opus 4.8, high effort | CON's HANDOFF only | full output |
-| DES design | Fable 5 | charter + REG-R's HANDOFF | full output |
-| DES-R design review | Opus 4.8, high effort | DES's HANDOFF only | full output |
-| EXE execute | Claude Code: Opus 4.8, high effort | DES-R's HANDOFF (the execution contract) | full output + the code, committed |
-| EXE-R execution review | Sonnet 5 (escalate flagged carrier questions to Opus 4.8) | EXE's HANDOFF only | full output |
-| REP report | Fable 5 | EXE-R's HANDOFF only | full output |
-
-## Model assignments: the reasoning (revisit at every model generation)
-
-1. **Capability goes where leverage lives.** The most capable model (currently Fable 5) belongs to the two phases that determine everything downstream: conceptualization and design. Reporting is deliberately not one of them. It also belongs to the final verification phase.
-2. **Decorrelate producer from reviewer.** No phase is reviewed by the model that produced its input where this can be helped: Fable designs, Opus reviews the design; Sonnet drafts the report, Opus reviews the report. Honest caveat: all Claude models share training lineage, so cross-model review is partial decorrelation at best. The genuinely independent witness remains the external human adversary; model diversity supplements that standing role and never replaces it.
-
-Operational notes: the top model is the heaviest on usage limits and is reserved for CON, DES, and REP only; execution runs on Opus 4.8 at high in Claude Code, where contract-bound discipline matters more than frontier reach; confirm your plan's incognito model picker offers Opus and Fable before the first cycle.
+All work runs in **incognito sessions** (no memory, no cross-session state). Every phase's context must therefore be reconstructed from the registers described below, carried into the session by hand. Nothing persists that you do not explicitly paste in.
 
 ---
 
-## CON. Conceptualization session
+## 0. Core principle
 
-The warm phase. Wanting is welcome here and only here, in the open.
+The charter is realized one **proof obligation** at a time. An obligation is a single commitment-or-criterion turned into a Lean 4 theorem (or a precise impossibility). Each obligation runs the full seven-phase cycle before the next begins.
 
-**Paste:** the charter. From round 2 onward, also the program ledger, and append this line to the prompt: "Attached also is the program's ledger of registered candidates, graded results, open targets, and refutations. Candidates that respond to open targets, refutations, or surprises are especially valuable; do not re-propose claims already registered or refuted."
+The cycle alternates **blind** phases (charter framing withheld, to keep work honest and review adversarial) with **against-charter** phases (artifact explicitly bound back to commitments and success criteria). Blindness is not a metaphor: in an incognito session a "blind" phase must be given the Blind Register *only*, with no charter prose in context.
 
-**Prompt (verbatim):**
+---
 
-```
-You are the conceptualization partner for the research program whose founding document is attached. Read it whole.
+## 1. The two registers
 
-Your task is generative, not evaluative: propose candidate phenomena and claims that the program could investigate next. Wanting is permitted and expected in this phase; the only rule is that it be undisguised.
+Keep these physically separate. Each is a standalone file you paste into a session as needed.
 
-Guidelines:
-- Candidates that arise from surprise, tension, or apparent contradiction in the document are especially valuable; candidates that merely restate the tenets are not.
-- Aim for claims that are comparative or falsifiable in principle, not atmospheric.
-- Produce 3 to 7 candidates, each on this card:
+### Charter Register (CR)
+The frozen source of truth: commitments C1–C6 (§2), success criteria (i)–(vii) (§7), and workstream specs WS1–WS7 (§4). **Hash it once and never edit mid-cycle.** If the charter changes, that is a new CR version with a new hash, and in-flight obligations either complete against the old hash or restart.
 
-**CANDIDATE [letter]**
+### Blind Register (BR)
+What a blind phase is allowed to see. For a given obligation, the BR contains **only the mathematical statement** at stake — functor, carrier, monad, distributive law, target property — with all charter-motivating prose stripped out. No mention of ROSR, "view from nowhere," metaphysics, or which commitment this serves.
 
-Claim (two sentences maximum, declarative):
+The BR is what makes blindness enforceable across incognito sessions: it is the entire context a blind phase receives.
 
-Phenomenon or observation it is based on (three sentences maximum):
+---
 
-What the claim predicts or requires, if true:
-What would make it false:
+## 2. Model choice
 
-Who or what would want this to be true, and why (include yourself if applicable):
+Opus at most. Do not exceed Opus for any phase.
 
-- Nothing from this session is citable or settled; these are candidates for registration, nothing more.
+| Phase | Model | Rationale |
+|---|---|---|
+| 1 Conceptualize (blind) | Opus | Open-ended mathematical framing |
+| 2 Register (blind) | Opus | Precise signature + failure conditions |
+| 3 Design (against charter) | Opus | Binding to charter is high-stakes |
+| 4 Review (blind) | Opus, **separate session** | Adversarial math check |
+| 5 Execute (blind) | Opus | Lean proof authoring |
+| 6 Review (blind) | Opus, **separate session** | Verification of the artifact |
+| 7 Report (against charter) | Opus | Charter mapping + ledger update |
 
-Format your entire response as two delimited documents:
+Review phases (4, 6) should run in a **fresh incognito session** seeded with BR only, so the reviewer has no memory of the design or execution rationale. This is what gives blindness teeth; without a second context the review collapses into self-justification.
 
-=== REPORT ===
-Your reading notes, your declared wanting, the identity of the decoy, and end with:
-GAP: [one sentence on the distance between the program's ambitions and what your candidates can actually carry]
+---
 
-=== HANDOFF ===
-All candidate cards with no other text whatsoever.
-```
+## 3. The seven phases
 
-**You then:** file the full output; paste only the HANDOFF into REG.
+Each phase lists its **context in** (what you paste into the incognito session) and its **output** (what you save out to carry forward).
 
-## REG. Registration: blind pricing
+### Phase 1 — Conceptualize (blind)
+- **Context in:** BR for this obligation.
+- **Do:** State what mathematical object/property is at stake and why it is non-trivial. Guess a proof strategy.
+- **Output:** One-paragraph problem statement + candidate strategy. No charter language.
 
-**Paste:** CON's HANDOFF only. Nothing else.
+### Phase 2 — Register (blind)
+- **Context in:** BR + Phase 1 output.
+- **Do:** Pre-register, *before any design*: the exact Lean 4 signature to be proved; the ambient theory (ZFC/AFA encoding choice, functor `F`, monad `T`, distributive law `λ` if relevant); the success condition; and explicitly **what would count as this obligation failing** (collapse, non-existence, no distributive law, non-convergence).
+- **Output:** Registered signature + failure conditions. **Timestamp and hash it.** This is the guard against post-hoc reframing of a failed proof as a success.
 
-**Prompt (verbatim):**
+### Phase 3 — Design (against charter)
+- **Context in:** CR + Phase 2 registration.
+- **Do:** Open the charter. Bind the registered statement to its commitment(s) and criterion(criteria). Confirm the Lean signature actually discharges the charter obligation and has not drifted. If design reveals the blind statement was underspecified, **record the gap** rather than silently patching it.
+- **Output:** Explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5") + any gap notes.
 
-```
-You are reviewing candidate claims for a research program. You have deliberately been given no background about the program, its authors, or its goals; evaluate only what is on each card.
+### Phase 4 — Review (blind)
+- **Context in:** BR + Phase 3 design, **fresh session**, CR withheld.
+- **Do:** Check the design *as mathematics only*: well-formed signature, sound strategy, hidden assumptions? Blindness here stops charter-sympathy from waving through a bad proof.
+- **Output:** Pass / revise verdict with specific objections.
 
-Before anything else: state what outcome you suspect you might be biased toward given this material and why, in two sentences.
+### Phase 5 — Execute (blind)
+- **Context in:** BR + reviewed design.
+- **Do:** Write the Lean 4 proof. `sorry`-free is the bar. Charter stays closed so you prove what was registered, not what you wish were true.
+- **Output:** Lean file for this obligation.
 
-Then, for each candidate, in this exact order:
-1. TRIVIAL READING: state the most deflationary reading available, the one under which the claim is true but uninteresting, or explained by mundane mechanisms. Be maximally uncharitable here.
-2. FALSIFIER: state the most practical observation, experiment, or formal result that would refute the claim. If none exists, say "unfalsifiable as stated."
-3. DISCRIMINATING CONSEQUENCE: state something the claim predicts that the trivial reading does not. If nothing separates them, say so plainly.
-4. CASE AGAINST registration, three sentences.
-5. CASE FOR registration, three sentences.
-6. VERDICT: REGISTER (has a discriminating consequence and a falsifier), REVISE (fixable defect, name it), or REJECT (no discriminating consequence, or trivial reading fully covers it).
+### Phase 6 — Review (blind)
+- **Context in:** BR + registered signature + Lean file, **fresh session**.
+- **Do:** Verify the artifact: does it compile? Is it `sorry`-free? Does it prove **the registered signature** (not a weakened variant)? Check axiom leakage with `#print axioms` — flag any classical/choice or AFA-encoding axioms not declared in Phase 2.
+- **Output:** Verification verdict + axiom list.
 
-Then rank all candidates from most to least worth pursuing, and identify any candidate you suspect is a control or filler item, with your reason.
+### Phase 7 — Report (against charter)
+- **Context in:** CR + verified artifact + registration.
+- **Do:** Map the verified theorem back to commitment + criterion. Classify the outcome. Update the ledger. A failed or partial result triggers a **methodology note, not a reframe**.
+- **Outcome classes:**
+  - **Discharged** — theorem proves the registered signature.
+  - **Impossibility proved** — a sharp negative result; counts as success per charter §5.
+  - **Partial** — with the obstruction to the rest made precise.
+  - **Failed** — registered signature not achieved; document why.
+- **Output:** Ledger row + outcome classification.
 
-Format your entire response as two delimited documents:
+---
 
-=== REPORT ===
-Your bias statement, all six-part analyses, the ranking, your decoy suspicion, and end with:
-GAP: [one sentence on the overall distance between what these cards claim and what they support]
+## 4. Charter-specific guards
 
-=== HANDOFF ===
-The cards that received VERDICT: REGISTER, reproduced verbatim and unaltered, each followed by two lines you add:
-Registered falsifier: [from your analysis]
-Registered discriminating consequence: [from your analysis]
-No other text whatsoever.
-```
+**Split the Goldilocks band.** Do not make richness-vs-boundedness one obligation. Register three separate obligations: (a) `νF` non-degenerate (branching ≥ 2 survives); (b) `νF` exists as a set (κ-bounded / finite powerset); (c) joint satisfiability for a specific `F`. Registering separately prevents declaring the band non-empty by conflating two half-proofs.
 
-**You then:** decide on any REVISE cards (a REVISE you accept goes back into the next CON batch or is fixed by rerunning REG on an amended card); paste the HANDOFF into REG-R with the charter.
+**Poles invariant.** At every WS6 report phase, check a standing invariant: the terminal-coincidence (zero-object) must never be definitionally entangled with an inconsistent universal set. Conflating them sinks the program (§8).
 
-## DES. Design session
+**Obligation zero.** There is no standard mechanized non-well-founded set theory in Lean 4. WS1 must register "build/justify the AFA carrier" as obligation zero before any downstream obligation can proceed. Its Phase 2 registration must pin the encoding choice and the axioms it introduces.
 
-**Paste:** the charter (whole) and REG's HANDOFF.
+---
 
-**Prompt (verbatim):**
+## 5. The ledger
 
-```
-You are the design partner for a research program. Attached: the program's founding document and one or more registered candidate claims, each with its falsifier, discriminating consequence, constraints, and declared hazards.
+One checked-in file, one row per obligation. Because sessions are incognito, **the ledger is the only durable state** — it must be maintained by hand outside the sessions.
 
-Your task: propose the formal apparatus for investigating these candidates. Produce definitions and theorem targets; do not attempt any proofs.
-
-Before anything else: state in two sentences what outcome you want here and why, given the material.
-
-Deliver:
-1. FORMAL DEFINITIONS: each with a one-line plain-language reading placed beside it. Definitions must respect the founding document's laws, especially: the degenerate case computed and shown nontrivial before anything is built on a structure; no maximal case contained or presupposed; every structural exclusion counted and listed as a commitment.
-2. THEOREM TARGETS: each with a formal statement, marked MUST, SHOULD, or MAY, with a drop clause if any, and your honest prediction of where its difficulty will come from. If a loaded target looks provable by elementary means under your definitions, flag it yourself and either strengthen the target or explain why the ease is legitimate.
-3. THE DISCRIMINATING-CONSEQUENCE TARGET: state each card's registered discriminating consequence as a formal target and mark it. A design without this target is incomplete; do not omit it.
-4. HAZARD RESPONSES: for each declared hazard, state which of your design choices it most threatens and what in the design resists it.
-5. COMMITMENT COUNT: list every assumption, exclusion, and bound your definitions introduce, at honest arithmetic.
-
-Format your entire response as two delimited documents:
-
-=== REPORT ===
-Your wanting statement, your hazard responses, any design rationale, and end with:
-GAP: [one sentence on the distance between the candidates' claims and what your targets, if all proved, would establish]
-
-=== HANDOFF ===
-DESIGN PACKET
-The registered cards verbatim (with all their annotation fields), then:
-DEFINITIONS: each formal definition with its one-line plain reading.
-TARGETS: each formal statement with MUST/SHOULD/MAY, drop clause, and predicted source of difficulty. Discriminating-consequence targets marked.
-COMMITMENT COUNT: the full list.
-No advocacy, no rationale, no other text.
-```
-
-**You then:** file; paste only the HANDOFF into DES-R (no charter, no report).
-
-## DES-R. Design review: do the definitions mean what the sentences mean
-
-**Paste:** DES's HANDOFF only.
-
-**Prompt (verbatim):**
-
-```
-You are reviewing whether a set of formal definitions faithfully captures a set of informal claims, before any proofs are attempted. Attached: a design packet containing claim cards and proposed formal definitions and theorem targets.
-
-Before anything else: state in two sentences any pressure you feel to approve, and why.
-
-Then:
-1. BACK-TRANSLATION: for each formal definition, translate it back into plain language as literally as you can, before consulting the claim cards' wording. Then compare your back-translation to the cards, clause by clause, and name every divergence, however small.
-2. TRIVIAL SATISFACTION: for each theorem target, ask whether the card's trivial reading would also make this theorem true. If yes, the target does not capture the claim; say so and state what stronger target would.
-3. SHORTCUT AUDIT: identify any definition that makes a target provable by elementary means (a few lines of basic reasoning). Elementary provability of a loaded target is a red flag; name it.
-4. DEPENDENCY CHECK: compare each target's stated source of difficulty with what you expect under these definitions. If a target that the claim implies should be hard appears easy, say which definitional choice removed the difficulty.
-5. DISCRIMINATING CONSEQUENCE CHECK: confirm that each card's registered discriminating consequence is stated as a formal target and that its formal statement actually discriminates. If it is missing or weakened, this review fails automatically; say so.
-6. VERDICT per definition and per target: FAITHFUL, DIVERGENT (name the divergence; the target must be renamed or the definition revised), or UNDERDETERMINED (the informal claim is too vague to check; it goes back to registration).
-
-Format your entire response as two delimited documents:
-
-=== REPORT ===
-Your pressure statement, all analyses and verdicts, and end with:
-GAP: [one sentence on the distance between what these definitions say and what the claim cards say]
-
-=== HANDOFF ===
-If every verdict is FAITHFUL, emit:
-EXECUTION CONTRACT [today's date]
-DEFINITIONS: (exact, final, from the design packet)
-TARGETS: name / formal statement / MUST, SHOULD, or MAY / drop clause / predicted source of difficulty. Discriminating-consequence targets marked.
-FIDELITY ANNEX: none.
-CONVENTIONS: no sorry; deliver each target at its contracted statement or deliver the nearest provable statement under a NEW name with the divergence reported and the contracted target marked OPEN; never silently weaken, strengthen, or rename; contract governs all ambiguity, conservative choices reported; exercised drop clauses reported, not buried; structural doc-comments only; report exact statement, proof length, axiom profile, and a provisional grade (CHECKED AS SPECIFIED / CHECKED WITH NAMED DIVERGENCE / DEFINITIONALLY IMMEDIATE / INTERFACE-ONLY / NOT DELIVERED) per theorem; flag any marked target provable in a few elementary lines.
-
-If any verdict is DIVERGENT or UNDERDETERMINED, instead emit:
-REVISION PACKET
-The design packet reproduced with each problem item flagged inline as [REVISE: required correction], suitable for pasting into a fresh design session.
-No other text in either case.
-```
-
-**You then:** file. If the HANDOFF is an EXECUTION CONTRACT, paste it into EXE. If it is a REVISION PACKET, paste it (with the charter) into a fresh DES session, whose prompt you prefix with one line: "A prior design for these cards was reviewed; the packet below carries the required corrections inline. Produce a corrected design."
-
-## EXE. Execution session
-
-The cold phase. The executor sees the contract and nothing else.
-
-**Paste:** DES-R's HANDOFF (the execution contract) only, into Claude Code.
-
-**Prompt (verbatim):**
-
-```
-You are the executor for a formal research contract, attached. Mechanize the contract's targets in Lean 4 (or the contract's stated system). You have deliberately been given no background beyond the contract; do not request any, and do not speculate about the program's purpose. Follow the contract's CONVENTIONS block exactly.
-
-When the work is complete, format your final message as two delimited documents:
-
-=== REPORT ===
-Code location (repository, branch, commit), build status, notes on any conservative choices made under ambiguity, and end with:
-GAP: [one sentence on the distance between what the contract asked and what you delivered]
-
-=== HANDOFF ===
-DELIVERY PACKET
-The execution contract reproduced verbatim, then:
-RESULTS TABLE: target / delivered statement (exact) / provisional grade / proof length / flags / divergences.
-DELIVERED STATEMENTS: each theorem statement exactly as mechanized, with no doc-comments or commentary.
-No other text.
-```
-
-**You then:** file the output and confirm the code is committed (the repository is part of the audit trail); paste the HANDOFF into EXE-R.
-
-## EXE-R. Execution review: do the proofs say what the definitions contracted
-
-**Paste:** EXE's HANDOFF only.
-
-**Prompt (verbatim):**
-
-```
-You are auditing delivered formal results against their contract. Attached: a delivery packet containing the contract and the delivered statements.
-
-For each contracted target:
-1. STATEMENT MATCH: place the contracted statement and the delivered statement side by side. Mark IDENTICAL, EQUIVALENT (justify briefly), or DIVERGENT (name every difference: changed quantifiers, changed carriers or domains, added hypotheses, weakened conclusions).
-2. CARRIER CHECK: confirm the delivered statement quantifies over the object the contract names, not an ambient, larger, or convenient substitute. Name any slippage.
-3. GRADE each delivered result as exactly one of: CHECKED AS SPECIFIED / CHECKED WITH NAMED DIVERGENCE / DEFINITIONALLY IMMEDIATE (true by unfolding definitions) / INTERFACE-ONLY (proved about a class of models or a witness, not the constructed object) / NOT DELIVERED. Do not defer to the executor's provisional grades.
-4. TRIVIALITY FLAG: for any result graded CHECKED whose proof is a few lines of elementary reasoning, flag it for the triviality audit regardless of its grade.
-5. NAME GATE: state whether the delivered result may bear the contracted target's name. DIVERGENT results take a new name and the contracted target remains open; say this explicitly wherever it applies.
-
-Format your entire response as two delimited documents:
-
-=== REPORT ===
-All analyses, and end with:
-GAP: [one sentence on the distance between what was contracted and what was delivered]
-
-=== HANDOFF ===
-GRADE PACKET
-GRADE TABLE: target / grade / name-gate outcome.
-OPEN TARGETS: each open target with one line on why it is open.
-DELIVERED STATEMENTS: each statement labeled with its final grade.
-No other text.
-```
-
-**You then:** file; paste the HANDOFF into REP.
-
-## REP. Reporting session
-
-**Paste:** EXE-R's HANDOFF only.
-
-**Prompt (verbatim):**
-
-```
-You are drafting the results prose for a research program, from a grade packet. Attached: the grade table, open targets, and delivered statements with grades.
-
-Rules:
-1. Every claim in your prose must cite a grade-table row and match its grade in strength. CHECKED AS SPECIFIED may be stated plainly. CHECKED WITH NAMED DIVERGENCE is reported under its new name, with the divergence stated and the original target listed as open. DEFINITIONALLY IMMEDIATE and INTERFACE-ONLY results are labeled as such in the prose itself, not in a footnote.
-2. Failures, exercised drop clauses, and open targets appear in the main text with the same prominence as successes.
-3. No interpretive names for results; describe what was proved. No language implying significance beyond the grades.
-
-Format your entire response as two delimited documents:
-
-=== REPORT ===
-Any drafting notes, and end with:
-GAP: [one sentence on the distance between what your prose says and what the grade table supports]
-
-=== HANDOFF ===
-REPORT PACKET
-GRADE TABLE: reproduced verbatim from the grade packet.
-PROSE: your draft.
-CLAIMS INDEX: every factual claim in the prose, each mapped to its supporting grade-table row.
-No other text.
-```
-
-**You then:** file.
+| Field | Meaning |
+|---|---|
+| `obligation_id` | e.g. WS5-crit-v |
+| `commitment` | C1–C6 |
+| `criterion` | (i)–(vii) |
+| `registered_sig_hash` | hash from Phase 2 |
+| `cr_hash` | charter version this ran against |
+| `outcome` | discharged / impossibility / partial / failed |
+| `axioms_used` | from Phase 6 `#print axioms` |
+| `blind_review_pass` | Phase 4 and Phase 6 verdicts |
+| `lean_file` | path to the artifact |
+
+---
+
+## 6. Incognito session discipline
+
+Because no session remembers any other:
+
+1. **Every phase is a cold start.** Paste in only the declared "context in" for that phase — never more. Pasting the charter into a blind phase breaks the protocol.
+2. **Carry state by hand.** Phase outputs are saved by you and pasted into the next phase. The ledger and the two registers live outside the sessions.
+3. **Hash before you cross a blind/against-charter boundary.** The Phase 2 registration hash and the CR hash are what let you prove, later, that the blind work was not retrofitted to the charter.
+4. **Reviews get their own cold sessions.** Reusing the execution session for review reintroduces the memory that blindness is meant to remove.
