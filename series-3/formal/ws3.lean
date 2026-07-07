@@ -5,17 +5,15 @@ WS3 (`series-3/spec/ws3/04-charter-design-review.md`): **discharging Commitment 
 / criterion (iv)** — bidirectional whole/part constitution — as a *two-part
 theorem*, built on `ws1.lean`/`ws2.lean`.
 
-* **Part A — the gate, as a theorem.** The strict Beck distributive law of `§3.4`
-  (`λ : P_κP_κ ⇒ P_κP_κ`) does NOT exist. This is Klin–Salamanca (MFPS 2018,
-  Thm 2.4). Its two hypotheses for `P_κ` are formalized and **PROVED** here —
-  (H1) `Pk_preserves_preimages` and (H2) `betaPk` with `betaPk_idempotent` /
-  `betaPk_nontrivial` — so only KS's *general no-go implication* (H1 ∧ H2 ⇒ no
-  self-distributive-law) is imported, as `klinSalamanca_no_law`. `P_κ`'s
-  instantiation (design §A.2) is thus machine-checked, not on paper;
-  `ws3_no_distributive_law` derives the gate from the discharged hypotheses. (Full
-  route 1 — porting the four-set diagonal computation to drop even this implication
-  and make WS3 axiom-free, as WS1 did for its `exists_terminal_coalg` analogue —
-  remains open; see the axioms note.)
+* **Part A — the gate, as a theorem, PROVED axiom-free.** The strict Beck
+  distributive law of `§3.4` (`λ : P_κP_κ ⇒ P_κP_κ`) does NOT exist. This is
+  Klin–Salamanca (MFPS 2018, Thm 2.4), and it is **ported in full** here (design
+  Part A **route 1**): `ws3_no_distributive_law` is a theorem with NO custom axiom
+  (matching WS1's removal of `exists_terminal_coalg`). The KS hypotheses for `P_κ`
+  are also recorded as proved lemmas — (H1) `Pk_preserves_preimages`, (H2) `betaPk`
+  with `betaPk_idempotent` / `betaPk_nontrivial` — but the no-go proof inlines the
+  four-set diagonal contradiction they abstract, rather than importing it. This
+  closes the design's Part C item 2 verification gate (the `P_κ` diagonal port).
 * **Part B — the content, via the weak law.** The bidirectional constitution
   criterion (iv) names is delivered by the Egli–Milner *weak* distributive law:
   a composition operator `alg : P_κ(νP_κ) → νP_κ` with `dest (alg t) = ⋃_{x∈t}
@@ -46,18 +44,22 @@ alone fails for singular `κ`. `hinf = hreg.aleph0_le` is used for singletons/pa
 
 ## Axioms
 
-Everything is Mathlib-standard (`propext`/`Classical.choice`/`Quot.sound`) EXCEPT
-the one sanctioned import `klinSalamanca_no_law` (Part A) — the general KS no-go
-*implication*, whose `P_κ`-antecedents (H1)/(H2) are discharged as Mathlib-only
-theorems (`Pk_preserves_preimages`, `betaPk_idempotent`, `betaPk_nontrivial`). So
-`ws3_no_distributive_law` / `ws3_weak_bialgebra` show
-`[propext, Classical.choice, Quot.sound, klinSalamanca_no_law]`, while every Part B
-lemma and the three KS-hypothesis lemmas show only the standard three. This axiom
-is NOT AFA-encoding — AFA is modeled coalgebraically (νP_κ = the final coalgebra),
-per WS3 Phase 1 §"Ambient theory". It is a genuine external result; making WS3
-fully axiom-free would require porting KS's finite diagonal proof (route 1), left
-open. This is a strict improvement over the earlier blunt `IsEmpty (DistLaw …)`
-axiom: the `P_κ`-instantiation is now machine-checked rather than assumed.
+**No custom axioms.** Everything — including the Part A no-go — depends on only
+Mathlib's standard `propext` / `Classical.choice` / `Quot.sound`. `#print axioms`
+on `ws3_no_distributive_law` and `ws3_weak_bialgebra` shows exactly those three.
+(Earlier revisions carried a `klinSalamanca_no_law` import for the no-go; the full
+route-1 diagonal port below removes it, so — like WS1 — WS3 is now axiom-free.) No
+AFA-encoding axiom is introduced: AFA is modeled coalgebraically (νP_κ = the final
+coalgebra), per WS3 Phase 1 §"Ambient theory". `Classical.choice` is inherent to
+the Mathlib base and the terminal-coalgebra / Lambek-inverse machinery.
+
+## Residuals routed (design Part C; not relabeled)
+
+* Canonical weak law / quantale question → **WS4** (joins the shared `(F, κ)` list).
+* The `P_κ` diagonal port (design Part C item 2 build gate) → **CLOSED** here
+  (`ws3_no_distributive_law`, route 1).
+* `alg_nontrivial`'s one-step-observability → discharged here for concrete
+  witnesses; the general branching-≥2 floor stays a **WS7** obligation.
 -/
 import ws2
 
@@ -195,13 +197,14 @@ structure DistLaw (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) where
   unit_T : ∀ {X : Type u} (t : PkObj κ X), lam (pkPure hinf t) = PkMap κ (pkPure hinf) t
   unit_F : ∀ {X : Type u} (t : PkObj κ X), lam (PkMap κ (pkPure hinf) t) = pkPure hinf t
 
-/-! ### The Klin–Salamanca hypotheses for `P_κ` (design §A.2), now PROVED
+/-! ### The Klin–Salamanca hypotheses for `P_κ` (design §A.2), PROVED
 
-Rather than assume `IsEmpty (DistLaw …)` outright, we formalize the two hypotheses
-under which the no-go theorem applies, and prove that `P_κ` satisfies them. Only
-the *general no-go implication* (H1 ∧ H2 ⇒ no self-distributive-law) is then
-imported. This machine-checks the design §A.2 instantiation that was previously on
-paper. -/
+We record the two hypotheses under which the KS no-go theorem applies and prove
+`P_κ` satisfies them (machine-checking the design §A.2 instantiation). These are
+the *checkable content* of §A.2; the no-go proof itself (`ws3_no_distributive_law`,
+route 1) inlines the diagonal contradiction these abstract, so it does not route
+through them — they stand as independent documentation that `P_κ` is in KS's
+scope. -/
 
 /-- **(H1) `P_κ` preserves preimages** (Klin–Salamanca §2, specialised to
 inclusions): if the direct image `f '' t` lands in `Z`, then `t ⊆ f⁻¹ Z`. The
@@ -229,33 +232,113 @@ theorem betaPk_nontrivial (hinf : ℵ₀ ≤ κ) {X : Type u} (a b : X) (hab : a
   · exact hab (Set.mem_singleton_iff.mp (h (by simp))).symm
   · exact hab (Set.mem_singleton_iff.mp (h (by simp)))
 
-/-- **Klin–Salamanca (2018), Theorem 2.4, as its implication**, specialised to
-`T = F = P_κ`: any functor that preserves preimages (H1) and carries a nontrivial
-idempotent term (H2) admits no self-distributive-law of pointed functors. The
-general no-go argument (their four-set diagonal, whose objects have ≤ 4 elements
-`< κ`, so the `P_f` scope note transfers) is the SOLE non-Mathlib import; its
-`P_κ`-antecedents are supplied below as PROVED theorems, so the instantiation is
-machine-checked. (Design Part A: this replaces route-2's blunt `IsEmpty` axiom by
-the hypothesis-gated form the review asked for; route 1 — porting the diagonal
-computation to drop even this implication — remains the way to make WS3 fully
-axiom-free, as WS1 did for its analogue.) -/
-axiom klinSalamanca_no_law (hinf : ℵ₀ ≤ κ)
-    (_h1 : ∀ {X Y : Type u} (f : X → Y) (Z : Set Y) (t : PkObj κ X),
-            (PkMap κ f t).1 ⊆ Z → t.1 ⊆ f ⁻¹' Z)
-    (_h2idem : ∀ {X : Type u} (x : X), betaPk hinf x x = pkPure hinf x)
-    (_h2nt : ∀ {X : Type u} (a b : X), a ≠ b →
-            ¬ ((betaPk hinf a b).1 ⊆ ({a} : Set X) ∨ (betaPk hinf a b).1 ⊆ ({b} : Set X))) :
-    IsEmpty (DistLaw κ hinf)
+/-! ### Route 1 — the no-go PROVED, axiom-free (Klin–Salamanca's four-set diagonal)
 
-/-- **The WS3 gate result (Impossibility proved = success, §5/§7).** No strict
-distributive law of `P_κ` over itself exists — derived by discharging
-Klin–Salamanca's hypotheses (H1)/(H2) for `P_κ` and invoking the general no-go
-implication. -/
-theorem ws3_no_distributive_law (hinf : ℵ₀ ≤ κ) : IsEmpty (DistLaw κ hinf) :=
-  klinSalamanca_no_law hinf
-    (fun f Z t h => Pk_preserves_preimages f Z t h)
-    (fun x => betaPk_idempotent hinf x)
-    (fun a b hab => betaPk_nontrivial hinf a b hab)
+We port the KS Theorem-2.4 argument in full, so `ws3_no_distributive_law` is a
+theorem with NO custom axiom (matching WS1's removal of `exists_terminal_coalg`).
+The diagonal uses a 4-element carrier `Bool × Bool` and the three fibre-collapsing
+maps `fst`, `snd`, `xor` (their pairwise fibres partition the diagonal). Given a
+distributive law `l`, the two unit laws + naturality pin `l.lam W` (for the
+two-fibre element `W`) so tightly that any member `S` of it is simultaneously
+non-constant in `fst` (from `f`) yet constant in both `snd` and `xor` (from
+`g`, `h`) — impossible, since `fst = snd ⊕ xor`. Every set in play has ≤ 2
+elements `< κ`, so the `P_f` scope note transfers to `P_κ` with no extra work. -/
+
+private abbrev ksBB : Type u := ULift.{u} (Bool × Bool)
+private abbrev ksBt : Type u := ULift.{u} Bool
+private def ksE (x y : Bool) : ksBB := ⟨(x, y)⟩
+private def ksF (p : ksBB) : ksBt := ⟨p.down.1⟩
+private def ksG (p : ksBB) : ksBt := ⟨p.down.2⟩
+private def ksH (p : ksBB) : ksBt := ⟨xor p.down.1 p.down.2⟩
+
+/-- **The WS3 gate result (Impossibility proved = success, §5/§7) — PROVED,
+axiom-free.** No strict distributive law of `P_κ` over itself exists. The KS
+hypotheses for `P_κ` are recorded separately (`Pk_preserves_preimages`,
+`betaPk_idempotent`, `betaPk_nontrivial`); this proof inlines the diagonal
+contradiction they abstract. -/
+theorem ws3_no_distributive_law (hinf : ℵ₀ ≤ κ) : IsEmpty (DistLaw κ hinf) := by
+  refine ⟨fun l => ?_⟩
+  let univB : PkObj κ ksBt := ⟨{⟨false⟩, ⟨true⟩}, mk_pair_lt hinf _ _⟩
+  let S12 : PkObj κ ksBB := ⟨{ksE false false, ksE false true}, mk_pair_lt hinf _ _⟩
+  let S34 : PkObj κ ksBB := ⟨{ksE true false, ksE true true}, mk_pair_lt hinf _ _⟩
+  let W : PkObj κ (PkObj κ ksBB) := ⟨{S12, S34}, mk_pair_lt hinf _ _⟩
+  have hfS12 : PkMap κ ksF S12 = pkPure hinf (⟨false⟩ : ksBt) := by
+    apply Subtype.ext; show ksF '' S12.1 = {(⟨false⟩ : ksBt)}; rw [Set.image_pair]; simp [ksF, ksE]
+  have hfS34 : PkMap κ ksF S34 = pkPure hinf (⟨true⟩ : ksBt) := by
+    apply Subtype.ext; show ksF '' S34.1 = {(⟨true⟩ : ksBt)}; rw [Set.image_pair]; simp [ksF, ksE]
+  have hgS12 : PkMap κ ksG S12 = univB := by
+    apply Subtype.ext; show ksG '' S12.1 = univB.1; rw [Set.image_pair]; rfl
+  have hgS34 : PkMap κ ksG S34 = univB := by
+    apply Subtype.ext; show ksG '' S34.1 = univB.1; rw [Set.image_pair]; rfl
+  have hhS12 : PkMap κ ksH S12 = univB := by
+    apply Subtype.ext; show ksH '' S12.1 = univB.1; rw [Set.image_pair]; rfl
+  have hhS34 : PkMap κ ksH S34 = univB := by
+    apply Subtype.ext; show ksH '' S34.1 = univB.1; rw [Set.image_pair]
+    show ({(ULift.up true : ksBt), ULift.up false}) = {ULift.up false, ULift.up true}
+    rw [Set.pair_comm]
+  have cf : PkMap κ (PkMap κ ksF) W = PkMap κ (pkPure hinf) univB := by
+    apply Subtype.ext
+    show (PkMap κ ksF) '' W.1 = (pkPure hinf) '' univB.1
+    rw [show W.1 = {S12, S34} from rfl, Set.image_pair, hfS12, hfS34,
+        show univB.1 = {(⟨false⟩ : ksBt), ⟨true⟩} from rfl, Set.image_pair]
+  have cg : PkMap κ (PkMap κ ksG) W = pkPure hinf univB := by
+    apply Subtype.ext
+    show (PkMap κ ksG) '' W.1 = {univB}
+    rw [show W.1 = {S12, S34} from rfl, Set.image_pair, hgS12, hgS34]; simp
+  have ch : PkMap κ (PkMap κ ksH) W = pkPure hinf univB := by
+    apply Subtype.ext
+    show (PkMap κ ksH) '' W.1 = {univB}
+    rw [show W.1 = {S12, S34} from rfl, Set.image_pair, hhS12, hhS34]; simp
+  have If : PkMap κ (PkMap κ ksF) (l.lam W) = pkPure hinf univB := by
+    rw [← l.natural ksF W, cf, l.unit_F univB]
+  have Ig : PkMap κ (PkMap κ ksG) (l.lam W) = PkMap κ (pkPure hinf) univB := by
+    rw [← l.natural ksG W, cg, l.unit_T univB]
+  have Ih : PkMap κ (PkMap κ ksH) (l.lam W) = PkMap κ (pkPure hinf) univB := by
+    rw [← l.natural ksH W, ch, l.unit_T univB]
+  have hne : (l.lam W).1.Nonempty := by
+    by_contra hemp
+    rw [Set.not_nonempty_iff_eq_empty] at hemp
+    have hh : (PkMap κ (PkMap κ ksF) (l.lam W)).1 = ∅ := by rw [PkMap_val, hemp]; simp
+    rw [If] at hh
+    exact absurd (hh ▸ (Set.mem_singleton univB) : univB ∈ (∅ : Set (PkObj κ ksBt)))
+      (Set.not_mem_empty univB)
+  obtain ⟨S, hS⟩ := hne
+  have hfImg : PkMap κ ksF S = univB := by
+    have hmem : PkMap κ ksF S ∈ (PkMap κ (PkMap κ ksF) (l.lam W)).1 := ⟨S, hS, rfl⟩
+    rw [If] at hmem; exact hmem
+  have singOf : ∀ (φ : ksBB → ksBt),
+      PkMap κ (PkMap κ φ) (l.lam W) = PkMap κ (pkPure hinf) univB →
+      φ '' S.1 = {(ULift.up false : ksBt)} ∨ φ '' S.1 = {(ULift.up true : ksBt)} := by
+    intro φ hI
+    have hmem : PkMap κ φ S ∈ (PkMap κ (PkMap κ φ) (l.lam W)).1 := ⟨S, hS, rfl⟩
+    rw [hI, PkMap_val, show univB.1 = {(ULift.up false : ksBt), ULift.up true} from rfl,
+        Set.image_pair, Set.mem_insert_iff, Set.mem_singleton_iff] at hmem
+    rcases hmem with h | h
+    · left; rw [show φ '' S.1 = (PkMap κ φ S).1 from rfl, h]; rfl
+    · right; rw [show φ '' S.1 = (PkMap κ φ S).1 from rfl, h]; rfl
+  have hg := singOf ksG Ig
+  have hh := singOf ksH Ih
+  have hfeq : ksF '' S.1 = {(ULift.up false : ksBt), ULift.up true} := by
+    have h := congrArg Subtype.val hfImg; simpa [PkMap_val] using h
+  obtain ⟨p, hp, hpf⟩ : (ULift.up false : ksBt) ∈ ksF '' S.1 := by rw [hfeq]; left; rfl
+  obtain ⟨q, hq, hqf⟩ : (ULift.up true : ksBt) ∈ ksF '' S.1 := by rw [hfeq]; right; rfl
+  have hp1 : p.down.1 = false := by have := congrArg ULift.down hpf; simpa [ksF] using this
+  have hq1 : q.down.1 = true := by have := congrArg ULift.down hqf; simpa [ksF] using this
+  have hgpq : ksG p = ksG q := by
+    rcases hg with h | h <;>
+      · have a := (h ▸ Set.mem_image_of_mem ksG hp : _ ∈ ({_} : Set ksBt))
+        have b := (h ▸ Set.mem_image_of_mem ksG hq : _ ∈ ({_} : Set ksBt))
+        rw [Set.mem_singleton_iff.mp a, Set.mem_singleton_iff.mp b]
+  have hhpq : ksH p = ksH q := by
+    rcases hh with h | h <;>
+      · have a := (h ▸ Set.mem_image_of_mem ksH hp : _ ∈ ({_} : Set ksBt))
+        have b := (h ▸ Set.mem_image_of_mem ksH hq : _ ∈ ({_} : Set ksBt))
+        rw [Set.mem_singleton_iff.mp a, Set.mem_singleton_iff.mp b]
+  have hp2 : p.down.2 = q.down.2 := by have := congrArg ULift.down hgpq; simpa [ksG] using this
+  have hx := congrArg ULift.down hhpq
+  simp only [ksH] at hx
+  rw [hp1, hq1, ← hp2] at hx
+  cases hc : p.down.2 <;> rw [hc] at hx <;> simp at hx
 
 /-! ## Part B.3(C) — non-triviality: incomparable witnesses -/
 
