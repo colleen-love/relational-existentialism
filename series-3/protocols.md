@@ -59,43 +59,33 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** 3–7 candidates, each with its registered signature + failure conditions. **Timestamp and hash the selected candidate.** This is the guard against post-hoc reframing of a failed proof as a success.
 
 ### Phase 2 — Design (blind)
-- **Context in:** BR, Phase 1 output, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Context in:** BR, Phase 1 output, **fresh session**.
 - **Instructions:** Turn the selected candidate into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 3 — Design Review (blind)
-- **Context in:** BR, Phase 2 design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Context in:** BR, Phase 2 design, **fresh session**.
 - **Instructions:** Check the mathematics of the design: well-formed signature, sound strategy, hidden assumptions?
 - **Output:** Pass / revise verdict with specific objections.
 
 ### Phase 4 — Design Review (against charter)
-- **Context in:** CR, Phase 3 blind design review, **fresh session**.
+- **Context in:** CR, Phase 3 blind design review, Lean artifacts from previous workstreams (if applicable), **fresh session**.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
 - **Output:** Pass / revise verdict with specific objections, plus the explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5").
 
 ### Phase 5 — Execute (against repo)
 - **Context in:** ER, **fresh session**.
-- **Instructions:** Write the Lean 4 proof for series-3/spec/ws${X}/4-charter-design-review.md in series-3/formal/ws${X}.lean. Import the new lean file in series-3/formal/Series3.lean so that the build compiles the new file, too. `sorry`-free is the bar for this design. Ignore the archive directory as it is irrelevant.
+- **Instructions:** Write the Lean 4 proof for series-3/spec/ws${X}/4-charter-design-review.md in series-3/formal/ws${X}.lean. Import the new lean file in series-3/formal/Series3.lean so that the build compiles the new file, too. `sorry`-free is the bar for this design. Ignore the archive directory as it is irrelevant. Once you are finished, nsure that the build compiles and run `#print axioms` and flag any classical/choice or AFA-encoding axioms not declared in Phase 1.
 - **Output:** Lean file for this obligation.
 
 ### Phase 6 — Blind Report (blind)
-- **Context in:** BR, executed Lean file, design, registration, conceptualization, Lean artifacts from previous workstreams (if applicable), **fresh session**.
-- **Instructions:** Verify the artifact — does it compile, is it `sorry`-free, does it prove **the registered signature** (not a weakened variant)? Run `#print axioms` and flag any classical/choice or AFA-encoding axioms not declared in Phase 1. Then classify the mathematical outcome. A failed or partial result triggers a **methodology note, not a reframe**. (This report stays at the level of the registered signature — no commitment/criterion mapping, which belongs to Phase 7.)
-- **Outcome classes:**
-  - **Discharged** — theorem proves the registered signature.
-  - **Impossibility proved** — a sharp negative result; counts as success per charter §5.
-  - **Partial** — with the obstruction to the rest made precise.
-  - **Failed** — registered signature not achieved; document why.
+- **Context in:** BR, executed Lean file, charter design review, **fresh session**.
+- **Instructions:** Verify the artifact — is it `sorry`-free, does it prove **the registered signature** (not a weakened variant) of the design? Please classify the mathematical outcome. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem proves the registered signature. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — registered signature not achieved; document why.
 - **Output:** Mathematical outcome + axiom list + ledger row (signature-level fields).
 
 ### Phase 7 — Charter Report (against charter)
-- **Context in:** CR, Phase 6 report + verified artifact, **fresh session**.
-- **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. Update the ledger. A failed or partial result triggers a **methodology note, not a reframe**.
-- **Outcome classes:**
-  - **Discharged** — theorem discharges the workstream obligation.
-  - **Impossibility proved** — a sharp negative result; counts as success per charter §5.
-  - **Partial** — with the obstruction to the rest made precise.
-  - **Failed** — workstream obligation not achieved; document why.
+- **Context in:** CR, executed Lean file, charter design review, blind report, **fresh session**.
+- **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem discharges the workstream obligation. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — workstream obligation not achieved; document why.
 - **Output:** Ledger row (charter-level fields) + outcome classification.
 
 ---
