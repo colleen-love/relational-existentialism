@@ -81,12 +81,12 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Lean file for this obligation.
 
 ### Phase 6 — Blind Report (blind)
-- **Context in:** BR, executed Lean file, charter design review, **fresh session**.
+- **Context in:** BR, executed Lean file, Lean artifacts from previous workstreams (if applicable), charter design review, **fresh session**.
 - **Instructions:** Verify the artifact — is it `sorry`-free, does it prove **the registered signature** (not a weakened variant) of the design? Please classify the mathematical outcome. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem proves the registered signature. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — registered signature not achieved; document why.
 - **Output, sent to Claude code if not discharged:** Mathematical outcome + axiom list + ledger row (signature-level fields). 
 
 ### Phase 7 — Charter Report (against charter)
-- **Context in:** Phase 6 blind report context, charter.
+- **Context in:** If Phase 6 passed: phase 6 blind report context, charter. Otherwise, CR, executed Lean file, Lean artifacts from previous workstreams (if applicable), charter design review, **fresh session**.
 - **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem discharges the workstream obligation. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — workstream obligation not achieved; document why.
 - **Output, sent to Claude code if not discharged:** Ledger row (charter-level fields) + outcome classification.
 
