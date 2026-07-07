@@ -15,3 +15,8 @@ import ws2
 -- (Klin–Salamanca, Part A), and the Egli–Milner weak bialgebra that delivers the
 -- content (Part B).
 import ws3
+-- WS4 (`series-3/spec/ws4/04-charter-design-review.md`, v3) — graded parthood over
+-- a good quantale: the Q-weighted functor `W_Q` as a QPF, its terminal coalgebra,
+-- Lambek/bisim, and a coherent graded weak law, instantiated at the concrete
+-- non-idempotent Łukasiewicz witness `Łₙ` (with `tensor_section` proved).
+import ws4
