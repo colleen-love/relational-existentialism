@@ -10,3 +10,8 @@ import ws1
 -- bisimulation theory: the final coalgebra, non-degeneracy, bisim = identity,
 -- weak-pullback preservation (Lemma 3.1a), behavioural equivalence, coinduction.
 import ws2
+-- WS3 (`series-3/spec/ws3/04-charter-design-review.md`) — bidirectional
+-- constitution (Commitment 4 / criterion (iv)): no strict distributive law exists
+-- (Klin–Salamanca, Part A), and the Egli–Milner weak bialgebra that delivers the
+-- content (Part B).
+import ws3
