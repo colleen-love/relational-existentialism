@@ -66,12 +66,14 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 ### Phase 3 — Design Review (blind)
 - **Context in:** BR, Phase 2 design, **fresh session**.
 - **Instructions:** Check the mathematics of the design: well-formed signature, sound strategy, hidden assumptions?
-- **Output:** Pass / revise verdict with specific objections.
+- **Instructions (part 2):** Can you update the design and address the problems that you found?
+- **Output:** Mathematical design + any gap notes.
 
 ### Phase 4 — Design Review (against charter)
 - **Context in:** CR, Phase 3 blind design review, Lean artifacts from previous workstreams (if applicable), **fresh session**.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
-- **Output:** Pass / revise verdict with specific objections, plus the explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5").
+- **Instructions (part 2):** Can you update the design and address the problems that you found?
+- **Output:** Mathematical design + any gap notes.
 
 ### Phase 5 — Execute (against repo)
 - **Context in:** ER, **fresh session**.
