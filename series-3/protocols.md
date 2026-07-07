@@ -59,7 +59,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** 3–7 candidates, each with its registered signature + failure conditions. **Timestamp and hash the selected candidate.** This is the guard against post-hoc reframing of a failed proof as a success.
 
 ### Phase 2 — Design (against charter)
-- **Context in:** CR, Phase 1 output, **fresh session**.
+- **Context in:** Phase 1 context.
 - **Instructions:** Run a triage that is *decidable on paper per candidate* and collapse the framing decision into a table. The framing choice is downstream of the triage, not a substitute for it. Select the best candidate and turn it into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
 - **Output:** Mathematical design + any gap notes.
 
