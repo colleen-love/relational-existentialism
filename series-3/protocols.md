@@ -19,7 +19,7 @@ The cycle alternates **blind** phases (charter framing withheld, to keep work ho
 Keep these physically separate. Each is a standalone file you paste into a session as needed.
 
 ### Charter Register (CR)
-The frozen source of truth: commitments C1–C6 (§2), success criteria (i)–(vii) (§7), and workstream specs WS1–WS7 (§4). **Hash it once and never edit mid-cycle.** If the charter changes, that is a new CR version with a new hash, and in-flight obligations either complete against the old hash or restart.
+The source of truth: commitments, success criteria, and workstream specs. If the charter changes work that is upstream of what has been completed, the process must be restarted.
 
 ### Blind Register (BR)
 What a blind phase is allowed to see. For a given obligation, the BR contains **only the mathematical statement** at stake — functor, carrier, monad, distributive law, target property — with all charter-motivating prose stripped out. No mention of ROSR, "view from nowhere," metaphysics, or which commitment this serves.
