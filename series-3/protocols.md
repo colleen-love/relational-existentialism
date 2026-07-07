@@ -28,17 +28,21 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 
 ---
 
-## 2. Process Overview
+## 2. Process overview
 
-| Phase | Rationale |
-|---|---|
-| 1 Conceptualize (against charter) | Open-ended mathematical framing |
-| 2 Register (blind) | Precise signature + failure conditions |
-| 3 Design (against charter) | Binding to charter is high-stakes |
-| 4 Review (blind) | Adversarial math check |
-| 5 Execute (blind) | Lean proof authoring |
-| 6 Review (blind) | Verification of the artifact |
-| 7 Report (against charter) | Charter mapping + ledger update |
+One obligation runs seven phases in order:
+
+| Phase | Name | Mode |
+|---|---|---|
+| 1 | Conceptualize | against charter |
+| 2 | Design | blind |
+| 3 | Design Review | blind |
+| 4 | Design Review | against charter |
+| 5 | Execute | blind |
+| 6 | Blind Report | blind |
+| 7 | Charter Report | against charter |
+
+Every phase runs on Opus, and every phase runs in a **fresh incognito session**. Blind phases (2, 3, 5, 6) are seeded with the BR only, so no memory of the charter or of prior rationale leaks in. This is what gives blindness teeth; without a fresh context the review collapses into self-justification.
 
 ---
 
@@ -46,45 +50,50 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 
 Each phase lists its **context in** (what you paste into the incognito session) and its **output** (what you save out to carry forward).
 
-### Phase 1 — Conceptualize (blind)
-- **Context in:** CR for this obligation.
-- **Do:** State what mathematical object/property is at stake and why it is non-trivial. Guess a proof strategy.
-- **Output:** One-paragraph problem statement + candidate strategy. No charter language.
+### Phase 1 — Conceptualize (against charter)
+- **Context in:** CR, the workstream to be built, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Instructions:** Working from the charter, state what mathematical object/property is at stake and why it is non-trivial. Generate **3–7 candidate framings** of the obligation — different ways to cash out the commitment/criterion as something provable — and for each, sketch a candidate proof strategy. Note the trade-offs between them. Do not include charter prose in your output; these should be mathematical descriptions. For each candidate include the exact Lean 4 signature to be proved; the ambient theory (ZFC/AFA encoding choice, functor `F`, monad `T`, distributive law `λ` if relevant); the success condition; and explicitly **what would count as this obligation failing** (collapse, non-existence, no distributive law, non-convergence). (This phase reads the charter but emits blind, charter-free output — that output becomes the BR for downstream phases.)
+- **Output:** 3–7 candidates, each with its registered signature + failure conditions. **Timestamp and hash the selected candidate.** This is the guard against post-hoc reframing of a failed proof as a success.
 
-### Phase 2 — Register (blind)
-- **Context in:** BR + Phase 1 output.
-- **Do:** Pre-register, *before any design*: the exact Lean 4 signature to be proved; the ambient theory (ZFC/AFA encoding choice, functor `F`, monad `T`, distributive law `λ` if relevant); the success condition; and explicitly **what would count as this obligation failing** (collapse, non-existence, no distributive law, non-convergence).
-- **Output:** Registered signature + failure conditions. **Timestamp and hash it.** This is the guard against post-hoc reframing of a failed proof as a success.
+### Phase 2 — Design (blind)
+- **Context in:** BR, Phase 1 output, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Instructions:** Turn the selected candidate into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems. Charter stays closed — this is pure mathematics. If the blind statement proves underspecified, **record the gap** rather than silently patching it.
+- **Output:** Mathematical design + any gap notes.
 
-### Phase 3 — Design (against charter)
-- **Context in:** CR + Phase 2 registration.
-- **Do:** Open the charter. Bind the registered statement to its commitment(s) and criterion(criteria). Confirm the Lean signature actually discharges the charter obligation and has not drifted. If design reveals the blind statement was underspecified, **record the gap** rather than silently patching it.
-- **Output:** Explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5") + any gap notes.
-
-### Phase 4 — Review (blind)
-- **Context in:** BR + Phase 3 design, **fresh session**, CR withheld.
-- **Do:** Check the design *as mathematics only*: well-formed signature, sound strategy, hidden assumptions? Blindness here stops charter-sympathy from waving through a bad proof.
+### Phase 3 — Design Review (blind)
+- **Context in:** BR, Phase 2 design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Instructions:** Check the mathematics of the design: well-formed signature, sound strategy, hidden assumptions? Blindness here stops charter-sympathy from waving through a bad proof.
 - **Output:** Pass / revise verdict with specific objections.
 
+### Phase 4 — Design Review (against charter)
+- **Context in:** CR, Phase 3 review output + the design it reviewed.
+- **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
+- **Output:** Pass / revise verdict with specific objections, plus the explicit binding (e.g. "theorem = criterion (v), incompleteness of self-knowledge via Lawvere, C5").
+
 ### Phase 5 — Execute (blind)
-- **Context in:** BR + reviewed design.
-- **Do:** Write the Lean 4 proof. `sorry`-free is the bar. Charter stays closed so you prove what was registered, not what you wish were true.
+- **Context in:** BR, reviewed design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Instructions:** Write the Lean 4 proof. `sorry`-free is the bar for this design. Charter stays closed so you prove what was designed, not what you wish were true.
 - **Output:** Lean file for this obligation.
 
-### Phase 6 — Review (blind)
-- **Context in:** BR + registered signature + Lean file, **fresh session**.
-- **Do:** Verify the artifact: does it compile? Is it `sorry`-free? Does it prove **the registered signature** (not a weakened variant)? Check axiom leakage with `#print axioms` — flag any classical/choice or AFA-encoding axioms not declared in Phase 2.
-- **Output:** Verification verdict + axiom list.
-
-### Phase 7 — Report (against charter)
-- **Context in:** CR + verified artifact + registration.
-- **Do:** Map the verified theorem back to commitment + criterion. Classify the outcome. Update the ledger. A failed or partial result triggers a **methodology note, not a reframe**.
+### Phase 6 — Blind Report (blind)
+- **Context in:** BR, executed Lean file, design, registration, conceptualization, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Instructions:** Verify the artifact — does it compile, is it `sorry`-free, does it prove **the registered signature** (not a weakened variant)? Run `#print axioms` and flag any classical/choice or AFA-encoding axioms not declared in Phase 1. Then classify the mathematical outcome. A failed or partial result triggers a **methodology note, not a reframe**. (This report stays at the level of the registered signature — no commitment/criterion mapping, which belongs to Phase 7.)
 - **Outcome classes:**
   - **Discharged** — theorem proves the registered signature.
   - **Impossibility proved** — a sharp negative result; counts as success per charter §5.
   - **Partial** — with the obstruction to the rest made precise.
   - **Failed** — registered signature not achieved; document why.
-- **Output:** Ledger row + outcome classification.
+- **Output:** Mathematical outcome + axiom list + ledger row (signature-level fields).
+
+### Phase 7 — Charter Report (against charter)
+- **Context in:** CR, Phase 6 report + verified artifact.
+- **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. Update the ledger. A failed or partial result triggers a **methodology note, not a reframe**.
+- **Outcome classes:**
+  - **Discharged** — theorem discharges the workstream obligation.
+  - **Impossibility proved** — a sharp negative result; counts as success per charter §5.
+  - **Partial** — with the obstruction to the rest made precise.
+  - **Failed** — workstream obligation not achieved; document why.
+- **Output:** Ledger row (charter-level fields) + outcome classification.
 
 ---
 
@@ -94,11 +103,37 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 **Poles invariant.** At every WS6 report phase, check a standing invariant: the terminal-coincidence (zero-object) must never be definitionally entangled with an inconsistent universal set. Conflating them sinks the program (§8).
 
-**Obligation zero.** There is no standard mechanized non-well-founded set theory in Lean 4. WS1 must register "build/justify the AFA carrier" as obligation zero before any downstream obligation can proceed. Its Phase 2 registration must pin the encoding choice and the axioms it introduces.
+**Obligation zero.** There is no standard mechanized non-well-founded set theory in Lean 4. WS1 must register "build/justify the AFA carrier" as obligation zero before any downstream obligation can proceed. Its Phase 1 registration must pin the encoding choice and the axioms it introduces.
 
 ---
 
-## 5. The ledger
+## 5. Iteration and workstream dependencies
+
+The seven workstreams are not independent; later ones consume the *discharged theorems* of earlier ones. The unit that crosses a workstream boundary is not prose but a **named, verified Lean artifact** — a theorem that made it to `discharged` in the ledger. Downstream obligations import these as hypotheses or definitions, never re-deriving them.
+
+**Dependency order.** The rough topological order is:
+
+- **WS1 (groundless carrier)** — including obligation zero (the AFA carrier) — has no upstream dependency. It produces the ambient theory + carrier that *every* downstream obligation's BR must reference.
+- **WS2 (object = relations, coinductively)** consumes WS1's carrier; produces `νF` existence + bisimulation characterization.
+- **WS3 (bidirectional constitution)** consumes WS2's `νF` and the functor `F`; produces the bialgebra + distributive law `λ`.
+- **WS4 (graded parthood)** consumes WS2/WS3; produces the enriched containment, reused by attention weights.
+- **WS5 (finite attention)** consumes WS2 (final coalgebra as metric space) and WS4 (weights); produces the incompleteness theorem + convergence conditions.
+- **WS6 (no poles, no outside)** consumes WS2's `νF`; produces the coincidence/impossibility results.
+- **WS7 (non-collapse)** consumes WS2, WS5, WS6; produces the Goldilocks-band results. It is terminal — it depends on the most.
+
+**How an output becomes an input.** When obligation A is `discharged`, its ledger row records the `lean_file` and the theorem name. A downstream obligation B that depends on A does three things:
+
+1. **Phase 1 (Conceptualize/register)** of B names A's theorem in its ambient-theory declaration and lists it as an imported hypothesis. B's registered signature is stated *relative to* A holding.
+2. **Phase 5 (Execute)** of B `import`s A's Lean file and uses the theorem directly. Because A is machine-checked and `sorry`-free, B inherits that guarantee rather than re-proving it.
+3. **B's BR** includes the *statement* of A's theorem (not its charter motivation), so blind phases can use it without seeing why it matters.
+
+**When an upstream result changes.** If A is later revised (re-registered under a new signature hash, or reclassified from `discharged` to `partial`), every obligation whose ledger row names A is **stale** and must re-run from Phase 1. Track this with a `depends_on` field (below): a changed hash upstream invalidates every row that points to it. This is the incognito-safe substitute for a build system's dependency graph — since no session remembers the graph, the ledger *is* the graph.
+
+**Partial upstream results.** A downstream obligation may proceed on a `partial` or `impossibility` upstream result, but only if B's Phase 1 registration explicitly states which part of A it relies on and confirms that part is the discharged part. An impossibility result is often a *usable* input: e.g. WS6's "no maximal everything" (Cantor) is a hypothesis WS7 leans on, not an obstacle.
+
+---
+
+## 6. The ledger
 
 One checked-in file, one row per obligation. Because sessions are incognito, **the ledger is the only durable state** — it must be maintained by hand outside the sessions.
 
@@ -107,20 +142,21 @@ One checked-in file, one row per obligation. Because sessions are incognito, **t
 | `obligation_id` | e.g. WS5-crit-v |
 | `commitment` | C1–C6 |
 | `criterion` | (i)–(vii) |
-| `registered_sig_hash` | hash from Phase 2 |
+| `registered_sig_hash` | hash from Phase 1 |
 | `cr_hash` | charter version this ran against |
 | `outcome` | discharged / impossibility / partial / failed |
 | `axioms_used` | from Phase 6 `#print axioms` |
-| `blind_review_pass` | Phase 4 and Phase 6 verdicts |
+| `blind_review_pass` | Phase 3 and Phase 4 verdicts |
 | `lean_file` | path to the artifact |
+| `depends_on` | list of upstream `obligation_id` + `registered_sig_hash` this row consumes |
 
 ---
 
-## 6. Incognito session discipline
+## 7. Incognito session discipline
 
 Because no session remembers any other:
 
 1. **Every phase is a cold start.** Paste in only the declared "context in" for that phase — never more. Pasting the charter into a blind phase breaks the protocol.
 2. **Carry state by hand.** Phase outputs are saved by you and pasted into the next phase. The ledger and the two registers live outside the sessions.
-3. **Hash before you cross a blind/against-charter boundary.** The Phase 2 registration hash and the CR hash are what let you prove, later, that the blind work was not retrofitted to the charter.
+3. **Hash before you cross a blind/against-charter boundary.** The Phase 1 registration hash and the CR hash are what let you prove, later, that the blind work was not retrofitted to the charter.
 4. **Reviews get their own cold sessions.** Reusing the execution session for review reintroduces the memory that blindness is meant to remove.
