@@ -33,7 +33,7 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 Opus at most. Do not exceed Opus for any phase.
 
 | Phase | Rationale |
-|---|---|---|
+|---|---|
 | 1 Conceptualize (blind) | Open-ended mathematical framing |
 | 2 Register (blind) | Precise signature + failure conditions |
 | 3 Design (against charter) | Binding to charter is high-stakes |
