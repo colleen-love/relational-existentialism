@@ -6,3 +6,7 @@
 -- the terminal coalgebra of the κ-bounded powerset functor, its Lambek iso,
 -- bisimulation = identity, the canonical `Ω = {Ω}`, and the C2 solution lemma.
 import ws1
+-- WS2 (`series-3/spec/ws2/04-charter-design-review.md`) — `νP_κ` and its
+-- bisimulation theory: the final coalgebra, non-degeneracy, bisim = identity,
+-- weak-pullback preservation (Lemma 3.1a), behavioural equivalence, coinduction.
+import ws2
