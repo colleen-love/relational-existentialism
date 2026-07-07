@@ -51,3 +51,5 @@ Done. The Lean 4 proof is written, compiles green, is sorry-free, and is pushed 
 **Sorry-free verification.** `grep` finds no `sorry`/`admit`. `#print axioms` confirms `lambek`, `bisim_eq`, `ws1_C2`, and `omega_consistency` depend only on the standard `propext`/`Classical.choice`/`Quot.sound`; `ws1_C1` additionally uses the one declared `exists_terminal_coalg` axiom — no hidden axioms, no `native_decide`.
 
 **Build wiring.** `Series3.lean` now `import ws1`, and I added `ws1` to the `Series3` library roots in `lake/lakefile.toml` (an import alone doesn't get compiled unless the module is registered with the library). `lake build Series3` completes successfully.
+
+One note for you: I did not open a PR (none was requested). The branch is pushed and ready if you want one.
