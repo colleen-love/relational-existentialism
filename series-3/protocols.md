@@ -28,9 +28,7 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 
 ---
 
-## 2. Model choice
-
-Opus at most. Do not exceed Opus for any phase.
+## 2. Process Overview
 
 | Phase | Rationale |
 |---|---|
@@ -41,8 +39,6 @@ Opus at most. Do not exceed Opus for any phase.
 | 5 Execute (blind) | Lean proof authoring |
 | 6 Review (blind) | Verification of the artifact |
 | 7 Report (against charter) | Charter mapping + ledger update |
-
-Review phases (4, 6) should run in a **fresh incognito session** seeded with BR only, so the reviewer has no memory of the design or execution rationale. This is what gives blindness teeth; without a second context the review collapses into self-justification.
 
 ---
 
