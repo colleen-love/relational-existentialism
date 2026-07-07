@@ -70,7 +70,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 4 — Design Review (against charter)
-- **Context in:** CR, Phase 3 blind design review, Lean artifacts from previous workstreams (if applicable), **fresh session**.
+- **Context in:** Phase 3 blind design review context, charter.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
 - **Instructions (part 2):** Can you update the design and address the problems that you found?
 - **Output:** Mathematical design + any gap notes.
@@ -86,7 +86,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 - **Output:** Mathematical outcome + axiom list + ledger row (signature-level fields).
 
 ### Phase 7 — Charter Report (against charter)
-- **Context in:** CR, executed Lean file, charter design review, blind report, **fresh session**.
+- **Context in:** Phase 6 blind report context, charter.
 - **Instructions:** Map the verified theorem back to the charter. Classify the outcome at the workstream level. A failed or partial result triggers a **methodology note, not a reframe**. Please evaluate the **Outcome classes:** **Discharged** — theorem discharges the workstream obligation. **Impossibility proved** — a sharp negative result; counts as success per charter §5. **Partial** — with the obstruction to the rest made precise. **Failed** — workstream obligation not achieved; document why.
 - **Output:** Ledger row (charter-level fields) + outcome classification.
 
