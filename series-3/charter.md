@@ -31,6 +31,33 @@
 > operational axiom-check note mirroring the one WS1 already carries. All are
 > tagged **[REV-B]**. Nothing in §§0–7 target/criteria text is altered.
 
+> **Charter status — Revision C (post-WS4 report).** Like A and B, this revision
+> changes neither the philosophical target nor the §7 success criteria. It records
+> what WS4's formalization reported, in the §5 vocabulary. WS4 reported **Partial**:
+> the enriched carrier is built and its identity theory discharged — the `Q`-weighted
+> functor `W_Q` as a QPF, its terminal coalgebra via `Cofix`, Lambek, and
+> bisimulation = behavioural equivalence = identity (criteria (i)–(iii) for the
+> enriched carrier, `sorry`/axiom-free) — and the graded weak law's *multiplication*
+> coherence (pentagon/`T`-unit/part-reflection) is proved, together with the concrete
+> **non-idempotent** witness `Łₙ` (a `DivisibleQuantale` whose residuation
+> `tensor_section` is proved and *consumed* via `weight_split`), certifying grading is
+> genuinely quantitative and not a frame in disguise. But the design's discharge bar —
+> **Layer C weak-pullback preservation** (`WQRel_le_comp`, step 6), plus the step-16
+> Bool-reduction and step-13 join-associativity — is **not** met: Layer C is left as a
+> *typed open obligation* (`WQPreservesWeakPullback`), its obstruction made precise
+> (the global witness assembly under non-normalized composite weights, the pointwise
+> residuation already discharged by `weight_split`). Neither is the §8 F6 *Impossibility*
+> branch (`ws4_no_quantitative_grading`) established, so the step-6 fork is open in
+> **neither** direction. Per §5, this triggers methodology notes and hand-offs, not a
+> reframe. Every change is confined to: the WS4 deliverable-list status line, the §8.1
+> WS4 status line (updated from "at-risk" to the reported class), and the §6.1
+> ratification list (WS4's two duties remain open; the WS4-originated `(F, κ, μ, #Q)`
+> cardinality duty is routed to WS7). All are tagged **[REV-C]**. Criterion (iv) stays
+> **Partial** (content present, multiplication coherence proved, canonicity open); the
+> Lean artifact's naming discipline (`ws4_graded_coherence_Luk`, deliberately *not*
+> `ws4_resolved`) is preserved in these status lines so no importer reads the delivered
+> coherence as the registered discharge. Nothing in §§0–7 target/criteria text is altered.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
@@ -250,7 +277,7 @@ Workstreams:
 - **WS1 — Groundless carrier.** Fix the ambient theory (ZFC/AFA, or a category of classes). Confirm the intended reflexive, relation-only objects exist, unique up to bisimulation. **[REV-A] Status: discharged for the bounded carrier `P_κ` (existence + uniqueness-up-to-bisimulation + `Ω = {Ω}` + solution lemma), unconditionally and axiom-free modulo machine-checked compilation. The residual "which bound / no-everything" question is handed to WS6/WS7, not settled here. See §8.**
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
 - **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1.**
-- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3.
+- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1.**
 - **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions.
 - **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint.
 - **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly.
@@ -339,6 +366,26 @@ the ratification list:
   obligation already listed above. WS3 adds no new WS7 duty here, but confirms the
   existing one is load-bearing for (iv), not merely for (vii).
 
+**[REV-C] Ratification status after the WS4 report.** WS4 has reported Partial (§8.1).
+Its effect on the ratification list:
+
+- **WS4's two duties — still open, now sharpened.** Both duties the quantale choice
+  carries — the WS2-inherited *weak-pullback preservation* and the [REV-B] WS3-pinned
+  *weak-law persistence/canonicity* — remain **unclosed**. WS4 built the enriched
+  carrier and its identity theory and proved the graded weak law's multiplication
+  coherence, but weak-pullback preservation is exactly the unproved Layer C
+  (`WQPreservesWeakPullback`, a typed open obligation with its obstruction made
+  precise), and the weak law's *canonicity* for the enriched `(F, κ)` is untouched.
+  Criterion (iv) therefore stays **Partial**; it is **not** to be reported closed. The
+  duties do not transfer — they remain WS4's to discharge — but the obstruction is now
+  a named typed hole rather than a hazard.
+- **WS7 — collector tuple upgraded to `(F, κ, μ, #Q)` (newly routed).** WS4's QPF
+  shape count imposes `#Q ≤ κ` (or a `< κ`-truncation of `Q`) as a Goldilocks-band
+  side condition. Vacuous at the finite witness `Łₙ` (`#Łₙ = n+1 < ℵ₀ ≤ κ`), but a
+  genuine constraint for an unbounded quantitative quantale (`#Q = 𝔠` forces `κ > 𝔠`
+  or a ratified truncation). WS7's collector duty (§6.1 management rule) is upgraded:
+  it must ratify the joint tuple `(F, κ, μ, #Q)`, not `(F, κ, μ)`.
+
 ---
 
 ## 7. Success criteria
@@ -400,8 +447,18 @@ WS3 has now reported, and the outcome resolves to the class §8.1 pre-registered
 3. *`alg`-non-triviality one-step-observability → WS7.* The general branching-≥2 distinguishability behind sharp non-triviality remains WS7's richness-floor obligation; WS3 discharges only the concrete-witness case. Confirmed load-bearing for (iv), not only (vii).
 4. *Operational axiom check.* As with WS1, the "no custom axioms beyond Mathlib's standard three" claim rests on a static source audit; a machine-checked `#print axioms ws3_no_distributive_law` and `#print axioms ws3_weak_bialgebra` against live Mathlib is owed before "axiom-free" is reported without qualification. The spots warranting confirmation are the no-go's parity endgame, the `qpfPk` plumbing inherited from WS1, and the `iSup_lt_of_isRegular` bound in `pkJoin` (where `κ.IsRegular` is genuinely consumed — unlike WS2, `hreg` is load-bearing here).
 
-**WS4 — Graded parthood. Outcome: at-risk of Partial. Same class, medium likelihood.**
-Enriching containment over `[0,1]`/a quantale *changes the functor* whose `νF` WS2 built, re-triggering the WS2 weak-pullback hazard and introducing a *second* hidden parameter (the quantale) alongside `κ`. The charter's "one mechanism serves grading and attention" (§3.5) is a *unification conjecture*, not a theorem. *Methodology note:* WS4 must either prove the enriched functor still yields the WS2 carrier with intact bisimulation, or declare (WS1-style) the enriched carrier as a distinct object and re-establish criteria (i)–(iii) for it. The quantale choice joins `(F, κ)` as a ratification obligation on WS7. **[REV-B] WS4 now also owns the WS3-pinned canonical-weak-law ratification (§6.1): it must confirm a well-behaved weak distributive law persists for its chosen enriched `(F, κ)`, since criterion (iv)'s closure is blocked on this. The quantale choice therefore carries two WS3/WS2-originated duties — weak-pullback preservation and weak-law persistence — not one.**
+**WS4 — Graded parthood (enriched carrier + graded weak law). [REV-C] Outcome: Partial — reported. (Prior provisional class: at-risk of Partial, medium likelihood.)**
+WS4 has now reported, and the outcome resolves to the pre-registered acceptable class. It splits cleanly:
+
+- *The enriched carrier — Discharged (the (i)–(iii) fragment).* WS4 took the WS1-style move this entry named in advance: it declares the `Q`-weighted functor `W_Q` (weightings with `< κ` support) as a distinct object and re-establishes criteria (i)–(iii) for it — `W_Q` is a QPF, `νW_Q = Cofix (W_Q)` is its terminal coalgebra, Lambek holds, and bisimulation = behavioural equivalence = identity (`νWQ_terminal`, `wqLambek`, `wq_bisim_eq`, `wq_bisim_behavioural`), `sorry`/axiom-free. This closes the "or declare the enriched carrier distinct and re-establish (i)–(iii)" branch of the pre-registered methodology note.
+- *The graded weak law — multiplication coherence delivered; the quantitative tripwire fired.* The Egli–Milner weak law lifts to the graded setting: `wqAlg` with `wqAlg_pentagon` (the [REV-B]-corrected join-of-destructors form), the `T`-unit law (`wqAlg_unit`), and part-reflection (`wq_reflects_part`). The `[0,1]`/quantale enrichment is instantiated at the concrete **non-idempotent** Łukasiewicz chain `Łₙ` — a `DivisibleQuantale` whose residuation `tensor_section` is proved constructively and *consumed* (`weight_split`), and `ws4_quantitative_witness` certifies non-idempotence for `n ≥ 2`. So §3.5's grading is certified genuinely quantitative, not a frame in disguise — the unification conjecture's quantitative half is no longer hypothetical at the witness.
+- *Why Partial and not Discharged.* The design's discharge bar is **Layer C weak-pullback preservation** (`WQRel_le_comp`, step 6 — "the one genuinely new proof"), plus the step-16 Bool-reduction and step-13 join-associativity. These are **not** proved. Layer C is registered as a *typed open obligation* (`WQPreservesWeakPullback`), not asserted, and its obstruction is made precise: the pointwise residuation is discharged (`weight_split`), and what remains is the **global witness assembly** — a single weighted graph whose fibre-sup projections match, where the naive composite weight `wR(x,y) ⊗ wS(y,z)` fails to project unless the middle's outgoing weight is `1` (the non-normalization difficulty). The §8 F6 *Impossibility* theorem (`ws4_no_quantitative_grading`) is equally unproved, so the step-6 fork is open in neither direction. That precise obstruction lands the workstream at Partial rather than Discharged.
+
+*Methodology notes (per §5 — corrections and hand-offs, not a reframe):*
+1. *Weak-pullback preservation + canonical-weak-law persistence remain open.* Both WS4-owned ratification duties (the WS2-inherited weak-pullback hazard and the [REV-B] WS3-pinned weak-law persistence, §6.1) stay unclosed for the enriched functor: weak-pullback preservation is exactly the unproved Layer C, and canonicity of the graded weak law is untouched. Criterion (iv) is therefore **not** reported closed; it stands Partial.
+2. *Cardinality collector duty → WS7 (newly routed, §6.1).* The QPF shape count couples `#Q` to `κ` (`hQsmall : #Q ≤ κ`), vacuous at the finite `Łₙ` but a genuine band constraint for an unbounded quantitative quantale. WS7's collector tuple is upgraded from `(F, κ, μ)` to `(F, κ, μ, #Q)`.
+3. *Naming discipline preserved.* The Lean artifact deliberately names its top bundle `ws4_graded_coherence_Luk`, not `ws4_resolved`, and registers Layer C as a typed hole rather than proving a weaker theorem under the discharge name. This status line honours that: do not let the proved quantitative witness (`Łₙ`) launder the unproved Layer C into looking discharged.
+4. *Operational axiom check.* As with WS1/WS3, the "no custom axioms beyond Mathlib's standard three" claim was confirmed by a machine-checked `#print axioms ws4_graded_coherence_Luk` (`[propext, Classical.choice, Quot.sound]`; the `Łₙ` witness and `weight_split` are even choice-free, `[propext, Quot.sound]`).
 
 **WS5 — Finite attention. Outcome: split — incompleteness Discharged/Impossibility-proved-likely; convergence Partial-by-construction.**
 The incompleteness-of-self-knowledge result is *robust*: it is a Lawvere-diagonal impossibility that does not depend on the `(F, κ)` choice, and it is the cleanest candidate for an outright success (indeed an **Impossibility proved** in the §5 sense — a sharp negative that the program *wants*). Convergence is the opposite: Banach needs a genuine contraction on a complete metric realization of the (bounded) `νF`, and the replicator-with-mutation operator being contractive is a *hypothesis*, not a generic fact — the standing risk "attention need not converge" is real. *Methodology note:* report WS5 as two separate results with different statuses; do not let the solid incompleteness theorem launder the conditional convergence claim into looking equally settled. State the contraction/μ conditions explicitly as hypotheses.
