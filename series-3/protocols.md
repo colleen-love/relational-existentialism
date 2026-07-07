@@ -45,7 +45,7 @@ One obligation runs seven phases in order:
 | 6 | Blind Report | blind |
 | 7 | Charter Report | against charter |
 
-Every phase runs on Opus, and every phase runs in a **fresh incognito session**. Blind phases (2, 3, 5, 6) are seeded with the BR only, so no memory of the charter or of prior rationale leaks in. This is what gives blindness teeth; without a fresh context the review collapses into self-justification.
+Every phase runs on Opus, and every phase runs in a **fresh incognito session**. Blind phases (2, 3, 6) are seeded with the BR only, so no memory of the charter or of prior rationale leaks in. This is what gives blindness teeth; without a fresh context the review collapses into self-justification.
 
 ---
 
