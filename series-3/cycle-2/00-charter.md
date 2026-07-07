@@ -132,7 +132,7 @@ Commitment 3 has three precise faces.
 
 - **The coinciding poles (a zero object).** In additive/abelian categories the initial object ("void/atom") and the terminal object ("trivial whole") *coincide* as a single **zero object**, realizing "these two are the same thing" literally and non-trivially. `Set` has `∅ ≠ {∗}`; the program will likely leave `Set` for a setting with a zero object.
 - **No maximal everything (Cantor's wall).** No greatest, contains-all object exists as a set; `νF ≅ F(νF)` for `F = P` is impossible by Cantor. Unbounded groundless structure cannot be totalized — the mathematical echo of "no everything."
-- **No view from nowhere.** There is no substantive *terminal observer* surveying the whole from outside. The only standpoint external to everything is the zero object, which is contentless: the view from nowhere is not banned but empty. Every genuine view is internal, indexed by the object that holds it — sheaf-like local sections with no global section over the whole.
+- **No view from nowhere.** As objects can only attend to their relations, there is no substantive *terminal observer* surveying the whole from outside. The only standpoint external to everything is the zero object, which is contentless: the view from nowhere is not banned but empty. Every genuine view is internal, indexed by the object that holds it — sheaf-like local sections with no global section over the whole.
 
 ### 3.8 Non-collapse
 
@@ -155,7 +155,7 @@ Workstreams:
 - **WS1 — Groundless carrier.** Fix the ambient theory (ZFC/AFA, or a category of classes). Confirm the intended reflexive, relation-only objects exist, unique up to bisimulation.
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
 - **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination.
-- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale; integrate with WS2–WS3.
+- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3.
 - **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions.
 - **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint.
 - **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly.
