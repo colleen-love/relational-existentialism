@@ -1,0 +1,4 @@
+-- `Series3` — the live Lean root (Spec Series 3).
+-- Series 2 is closed and archived under `archive/`; Series 3 opens on the new
+-- foundation. This is a skeleton for now: an empty root with no theorems yet.
+-- The Series 3 charter (`series-3/charter.md`) grows it.

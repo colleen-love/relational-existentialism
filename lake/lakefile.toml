@@ -1,23 +1,18 @@
 name = "RelExist"
-defaultTargets = ["Series2"]
+defaultTargets = ["Series3"]
 
-# ── Layout (handoff I.II — the arena reset) ──────────────────────────────────
-# The project moved to a new foundation (a quantaloid / allegory with relations
-# as the primitive arrow). Only `series-2/` is live, as a buildable skeleton;
-# spec 2.1 grows it (and the build targets) back on the new arena.
+# ── Layout (Series 3 — the live series) ──────────────────────────────────────
+# Series 2 is closed and frozen under `archive/`. Series 3 is the live
+# development; its formal sources live in `series-3/formal/`, reached via
+# `srcDir = "../series-3/formal"`. The Series 3 charter grows it (and the build
+# targets) back on the new arena.
 
-# `series-2/` — *a self arises from the axioms*, rebuilt on the new relational
-# arena. A skeleton for now: an empty `Series2` root (no theorems yet).
+# `series-3/formal/` — the Series 3 root. A skeleton for now: an empty `Series3`
+# root (no theorems yet); the Series 3 charter grows it.
 [[lean_lib]]
-name = "Series2"
-srcDir = "../series-2/formal"
-# `Series2` is the arena-reset root; `Spec20a` mechanizes Spec 2.0's unblocked
-# theorem group (T1, P0–P3); `Spec21a` mechanizes Spec 2.1's two-sorted signature
-# (P4s, PR-J(a), the C3 split, L1); `Spec21b` adds the transfer theorem and the
-# design-ready group (T2t, PR-J(b) dichotomy, T12s, P1 barrier one, P2c, C2d);
-# `Spec22a` adds Reveal, Internal, the C1 conditional, and the comparative T14 laws.
-# All are roots of the one live library.
-roots = ["Series2", "Spec20a", "Spec21a", "Spec21b", "Spec22a", "Spec21c", "Spec21d", "Spec23a", "Spec23b", "Spec23c", "Spec24a", "Spec24b", "Spec24c", "Spec24d", "Spec24e", "Spec24f", "Spec24g", "Spec25a", "Spec25b"]
+name = "Series3"
+srcDir = "../series-3/formal"
+roots = ["Series3"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.

@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# Closure gate — reset to series-2 only (handoff I.II, the arena change).
+# Closure gate — Series 3 is the live series.
 #
 # The project moved to a new foundation (a quantaloid / allegory with relations as the primitive arrow).
-# Only `series-2/` is live. Its one library has grown from the empty `Series2` skeleton into the `Spec2xx`
-# roots (all registered in lake/lakefile.toml), which import one another freely — the closure rule is that
-# series-2 imports resolve only to series-2's own roots (+ mathlib). (Updated post-Spec23b: the original
-# skeleton-era rule allowed only `Series2.*` and flagged the intended Spec cross-imports as leaks.)
+# Series 2 is closed and frozen under `archive/`; only `series-3/` is live. Its one library is the
+# `Series3` skeleton (registered in lake/lakefile.toml) — the closure rule is that series-3 imports
+# resolve only to series-3's own roots (+ mathlib). The Series 3 charter grows it.
 set -u
 cd "$(dirname "$0")/.." || exit 2
 fail=0
@@ -22,8 +21,8 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# series-2 is the live library: its roots (`Series2`, `Spec20a`, `Spec21a`–`Spec21d`, `Spec22a`,
-# `Spec23a`, `Spec23b`, ...) may import each other (+ mathlib); nothing outside them is allowed.
-check series-2 "^import (Series2(\.[A-Za-z0-9_]+)*|Spec[0-9]{2}[a-z])$"
+# series-3 is the live library: its `Series3` root (and any it grows) may import each other
+# (+ mathlib); nothing outside them is allowed.
+check series-3 "^import (Series3(\.[A-Za-z0-9_]+)*|Spec[0-9]{2}[a-z])$"
 
 exit $fail
