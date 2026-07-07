@@ -57,12 +57,12 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 2 — Design (blind)
 - **Context in:** BR, Phase 1 output, Lean artifacts from previous workstreams (if applicable), **fresh session**.
-- **Instructions:** Turn the selected candidate into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems. Charter stays closed — this is pure mathematics. If the blind statement proves underspecified, **record the gap** rather than silently patching it.
+- **Instructions:** Turn the selected candidate into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 3 — Design Review (blind)
 - **Context in:** BR, Phase 2 design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
-- **Instructions:** Check the mathematics of the design: well-formed signature, sound strategy, hidden assumptions? Blindness here stops charter-sympathy from waving through a bad proof.
+- **Instructions:** Check the mathematics of the design: well-formed signature, sound strategy, hidden assumptions?
 - **Output:** Pass / revise verdict with specific objections.
 
 ### Phase 4 — Design Review (against charter)
@@ -72,7 +72,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 5 — Execute (blind)
 - **Context in:** BR, reviewed design, Lean artifacts from previous workstreams (if applicable), **fresh session**.
-- **Instructions:** Write the Lean 4 proof. `sorry`-free is the bar for this design. Charter stays closed so you prove what was designed, not what you wish were true.
+- **Instructions:** Write the Lean 4 proof. `sorry`-free is the bar for this design. 
 - **Output:** Lean file for this obligation.
 
 ### Phase 6 — Blind Report (blind)
