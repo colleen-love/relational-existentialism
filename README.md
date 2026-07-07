@@ -1,6 +1,6 @@
 # Relational Existentialism
 
-**A machine-checked mathematical foundation for priority relationalism.**
+**A machine-checked mathematical foundation for an ungrounded constitution, priority relationalism.**
 
 ## The claim
 
