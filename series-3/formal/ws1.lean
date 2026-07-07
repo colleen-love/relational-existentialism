@@ -7,11 +7,40 @@ the terminal coalgebra of the κ-bounded powerset functor `P_κ`, its Lambek iso
 the bisimulation = identity theorem, the canonical self-membered inhabitant
 `Ω = {Ω}`, and the C2 solution lemma built on top of it.
 
-## What is proved sorry-free
+## Outcome status — the WS1 existence obligation IS discharged, with NO axioms
 
-This file has NO `sorry` and exactly ONE `axiom` (`exists_terminal_coalg`).
-Everything below is proved from it (and Mathlib's standard axioms):
+The charter's WS1 deliverable (§4, §6 deliverable 2) is an existence/uniqueness
+theorem for the carrier. This file PROVES it: `exists_terminal_coalg` is a
+theorem (not an axiom), and the whole file is free of custom axioms — every result
+rests only on Mathlib's standard `propext` / `Classical.choice` / `Quot.sound`
+(verify with `#print axioms ws1_C1`).
 
+Existence is obtained NOT by the design's transfinite terminal-sequence route
+(§2.1–§2.2, which keeps `stabilization_theorem` a permanent axiom) but by a
+cleaner one that removes the black box entirely: bounded powerset over a FIXED `κ`
+is a **quotient of a polynomial functor** (a `QPF`), so Mathlib's `Cofix` machinery
+returns its terminal coalgebra directly. Details are at `§2` below. Consequences:
+
+* `ws1_C1` may be cited by downstream workstreams as genuinely establishing that
+  the carrier EXISTS (with all bundled properties: Lambek iso, bisim = identity,
+  non-degeneracy, Ω) — no conditionality, no assumed terminality.
+* Existence needs NO hypothesis on `κ`; `hreg`/`hinf` are used only downstream, for
+  the `Ω = {Ω}` singleton and non-degeneracy witnesses.
+* The one remaining charter caveat is the DECLARED WS1↔WS7 bounded-carrier drift
+  (§0.1, §8): Commitment 1 is realized against bounded `P_κ`, not charter §3.1's
+  full-powerset / AFA carrier. That is an openly declared modeling choice, not an
+  unproved proof obligation, and is unaffected by the above.
+
+Historical note: earlier revisions of this file carried an `exists_terminal_coalg`
+AXIOM (asserting terminality of `P_κ` outright), which — as review correctly
+flagged — sat strictly downstream of the design's sanctioned `stabilization_theorem`
+boundary and left the WS1 existence obligation assumed rather than derived. That
+axiom has now been discharged via the QPF/`Cofix` route below and deleted.
+
+## What is proved sorry-free (all axiom-free beyond Mathlib's standard three)
+
+* §2         existence: `Cofix (P_κ)` is terminal          (`exists_terminal_coalg`)
+             via the QPF instance `qpfPk` (`PkP`, `absPk`, `reprPk`)
 * Lemma 1.1  functoriality of `P_κ`               (`PkMap_id`, `PkMap_comp`)
 * Lemma 2.3  Lambek's lemma (`struct` is an iso)  (`lambek`)
 * Theorem 3.2 bisimulation = equality             (`bisim_eq`)
@@ -20,55 +49,6 @@ Everything below is proved from it (and Mathlib's standard axioms):
 * §5         the assembled `GroundlessCarrier`     (`ws1_C1`)
 * Theorem 6.2/6.3 the solution lemma               (`ws1_C2`)
 * Lemma 6.4  Ω-consistency of the two Ω routes     (`omega_consistency`)
-
-## Where the axiom boundary sits — and how it differs from the design's
-
-An earlier revision of this header claimed to "mirror exactly" the design's one
-sanctioned black box. That was inaccurate: `exists_terminal_coalg` assumes
-STRICTLY MORE than the sanctioned axiom, and the difference is material. The
-honest accounting:
-
-* The design (§2.2, §7 item 1) sanctions ONE external black box, the
-  Worrell / Adámek–Koubek **`stabilization_theorem`**. Its REGISTERED signature
-  is stated for a general functor `F` under `hacc` (κ-accessibility = Lemma 1.2)
-  and `hbdd` (κ-boundedness), and it concludes ONLY a stabilizing ordinal — an
-  iso on a connecting map of the terminal sequence — NOT terminality:
-
-      axiom stabilization_theorem (F) (κ) (hκ_reg) (hκ_inf) (hacc) (hbdd) :
-        ∃ α : Ordinal, α ≤ κ.ord ∧ IsIso (finalSeq.connectingMap F (α+1) α)
-
-  From that iso the design *derives* terminality in **Corollary 2.2**, whose two
-  transfinite arguments — cone-map existence (recursion) and cone-map uniqueness
-  (induction) — §7 ranks as **tier-2 risk, co-equal with the stabilization
-  theorem itself**. **Lemma 1.2** (κ-accessibility of `P_κ`, feeding `hacc`) is a
-  further registered obligation ("probably a genuine new proof").
-
-* `exists_terminal_coalg` below is DOWNSTREAM of that boundary: it asserts
-  `∃ U, IsTerminalCoalg U` outright. Relative to the design's registered axiom it
-  therefore ASSUMES rather than discharges three registered obligations, which
-  stay on this open ledger:
-
-      (L1.2)  Lemma 1.2      — κ-accessibility of `P_κ`         [assumed]
-      (C2.∃)  Corollary 2.2  — cone-map existence  (recursion)  [assumed]
-      (C2.!)  Corollary 2.2  — cone-map uniqueness (induction)  [assumed, §7 tier-2]
-
-  So the HONEST status of `ws1_C1` is: *conditional on terminality-of-`P_κ` — a
-  strictly stronger hypothesis than the sanctioned `stabilization_theorem` — and
-  against the bounded reading of Commitment 1 (§0.1).* The downstream mathematics
-  is nonetheless sound and independent of this: `#print axioms` shows
-  `lambek` / `bisim_eq` / `ws1_C2` / `omega_consistency` use ONLY Mathlib's
-  standard axioms; the existence axiom enters solely through `ws1_C1`.
-
-* Closing the gap (the registered fix, deliberately NOT attempted here): restate
-  the axiom at the `stabilization_theorem` boundary above (a stabilizing iso on
-  `finalSeq.connectingMap`, with `hacc`/`hbdd`), construct `finalSeq` per §2.1,
-  and PROVE `IsTerminalCoalg` from it via the Corollary 2.2 inductions — moving
-  (L1.2)/(C2.∃)/(C2.!) from this ledger to theorems. That is the design's "single
-  most expensive sub-formalization"; Mathlib currently has no terminal-sequence /
-  final-coalgebra-of-endofunctor infrastructure to lean on (its category-theoretic
-  `Coalgebra` is unrelated, and M-types cover only polynomial functors, which
-  bounded `P_κ` is not), so it is a genuine from-scratch transfinite development
-  and is left as future work rather than shipped half-done.
 
 ## A registered dependency that does NOT appear here (Lemma 3.1a)
 
@@ -83,11 +63,13 @@ not a weakening of it, but is flagged so nobody expects 3.1a in this file.
 ## Standing hypothesis (§0.1, §1.1)
 
 Everything is stated for the *bounded* functor `P_κ` — the declared WS1↔WS7
-drift away from charter §3.1's full-powerset carrier — under the standing
-hypothesis that `κ` is an infinite regular cardinal. Regularity (`hreg`) feeds
-ONLY the existence axiom (its true job, §1.2/§2); every downstream cardinality
-bound uses only `ℵ₀ ≤ κ` ("κ infinite", the `hκ_inf` of §1.1), exactly as the
-revision's note demands.
+drift away from charter §3.1's full-powerset carrier. `ws1_C1` carries the
+charter's "infinite regular `κ`" hypotheses (`hreg`, `hinf`), but note that
+EXISTENCE (`exists_terminal_coalg`) needs neither: the QPF/`Cofix` construction
+works for any `κ`. The hypotheses are consumed only downstream — `ℵ₀ ≤ κ` for the
+`Ω = {Ω}` singleton and non-degeneracy witnesses (`hκ_inf` of §1.1); regularity
+is not needed anywhere on this route (it was the design's tool for the
+stabilization/accessibility argument, which this route bypasses).
 -/
 import Mathlib
 
@@ -219,23 +201,106 @@ def omegaCoalg (hinf : ℵ₀ ≤ κ) : Coalg κ :=
 def emptyCoalg (hinf : ℵ₀ ≤ κ) : Coalg κ :=
   ⟨PUnit, fun _ => ⟨∅, mk_empty_lt hinf⟩⟩
 
-/-! ## §2 Existence of the carrier — the assumed hypothesis (see the header ledger)
+/-! ## §2 Existence of the carrier — PROVED (no axiom)
 
-`exists_terminal_coalg` asserts the CONCLUSION of the design's entire §2 —
-stabilization AND the Corollary 2.2 terminality derivation — together with
-Lemma 1.2 (κ-accessibility). It is therefore STRONGER than the design's one
-sanctioned black box, the `stabilization_theorem` of §2.2, whose registered
-signature concludes only a stabilizing iso on the terminal sequence, not
-terminality. The three registered obligations this axiom folds in —
+The design's §2.1–§2.2 route to existence (build the transfinite terminal
+sequence `finalSeq`, then derive terminality from the `stabilization_theorem`
+black box via the Corollary 2.2 inductions) keeps one permanent axiom. We take a
+different, axiom-free route and DISCHARGE existence outright:
 
-    (L1.2) Lemma 1.2,  (C2.∃) Corollary 2.2 existence,  (C2.!) Corollary 2.2 uniqueness
+**`P_κ` (bounded powerset over a FIXED `κ`) is a quotient of a polynomial functor
+— a `QPF` — so Mathlib's `Cofix` gives its terminal coalgebra directly.** The
+polynomial functor `PkP κ` has shapes `κ.ord.toType` and, over a shape `a`, the
+position type `{b // b < a}` (the initial segment below `a`); each such segment
+has cardinality `< κ` precisely because `κ.ord` is the LEAST ordinal of
+cardinality `κ` (`Ordinal.card_typein_toType_lt`). The quotient map `abs` is
+`Set.range`, and `repr` enumerates a `< κ`-set `s` by the initial segment of
+order-type `(#s).ord` (which lands in `κ.ord.toType` since `(#s).ord < κ.ord`).
+`Cofix (P_κ)` is then a terminal `P_κ`-coalgebra by `Cofix.corec`/`Cofix.dest_corec`
+(the unique cone map) and `Cofix.bisim'` (its uniqueness).
 
-— are ASSUMED here, not discharged; they stay on the open-obligations ledger in
-the file header. Nothing else in this file is axiomatic. See the header for the
-registered-boundary statement and the (deliberately deferred) path to closing the
-gap. -/
-axiom exists_terminal_coalg (κ : Cardinal.{u}) (hreg : κ.IsRegular) (hinf : ℵ₀ ≤ κ) :
-    ∃ U : Coalg κ, IsTerminalCoalg U
+Consequences: `exists_terminal_coalg` is a THEOREM, not an axiom; the whole file
+is free of custom axioms (only Mathlib's standard `propext`/`Classical.choice`/
+`Quot.sound`); existence needs NO hypothesis on `κ` at all (regularity/infiniteness
+are used only downstream, for the `Ω = {Ω}` singleton and non-degeneracy). The
+former (L1.2)/(C2.∃)/(C2.!) ledger is discharged: none of stabilization,
+κ-accessibility, or the transfinite inductions is needed on this route. -/
+section Existence
+open Ordinal Set QPF Functor
+
+/-- The polynomial functor of which `P_κ` is a quotient: shapes `κ.ord.toType`,
+positions the initial segments `{b // b < a}` (each of cardinality `< κ`). -/
+def PkP (κ : Cardinal.{u}) : PFunctor.{u} where
+  A := κ.ord.toType
+  B a := {b : κ.ord.toType // b < a}
+
+/-- `abs ⟨a, f⟩ := range f` — a `< κ`-sized subset (bound: image of a `< κ`
+position type). -/
+def absPk {α : Type u} (p : (PkP κ).Obj α) : PkObj κ α :=
+  ⟨Set.range p.2, lt_of_le_of_lt Cardinal.mk_range_le (card_typein_toType_lt κ p.1)⟩
+
+/-- `repr` of a `< κ`-set `s`: enumerate it by the initial segment of order-type
+`(#s).ord`, available in `κ.ord.toType` because `(#s).ord < κ.ord`. The bundled
+`range = s` proof is what makes `abs_repr` immediate. -/
+noncomputable def reprPk {α : Type u} (s : PkObj κ α) :
+    { p : (PkP κ).Obj α // Set.range p.2 = s.1 } := by
+  have ho' : (Cardinal.mk (↥s.1)).ord < type (α := κ.ord.toType) (· < ·) := by
+    rw [type_toType]; exact Cardinal.ord_lt_ord.mpr s.2
+  set a : κ.ord.toType := enum (α := κ.ord.toType) (· < ·) ⟨(Cardinal.mk (↥s.1)).ord, ho'⟩ with ha
+  have hcard : Cardinal.mk ((PkP κ).B a) = Cardinal.mk (↥s.1) := by
+    have h1 : Cardinal.mk ((PkP κ).B a) = (typein (α := κ.ord.toType) (· < ·) a).card :=
+      card_typein a
+    rw [h1, ha, typein_enum, Cardinal.card_ord]
+  let e : (PkP κ).B a ≃ ↥s.1 := Classical.choice (Cardinal.eq.mp hcard)
+  refine ⟨⟨a, fun i => (e i : α)⟩, ?_⟩
+  show Set.range (Subtype.val ∘ e) = s.1
+  rw [Set.range_comp, e.surjective.range_eq, Set.image_univ, Subtype.range_coe]
+
+/-- `P_κ` is a quotient of the polynomial functor `PkP κ`. -/
+noncomputable instance qpfPk : QPF (PkObj κ) where
+  map f s := PkMap κ f s
+  P := PkP κ
+  abs := absPk
+  repr s := (reprPk s).1
+  abs_repr s := by
+    apply Subtype.ext
+    show Set.range (reprPk s).1.2 = s.1
+    exact (reprPk s).2
+  abs_map f p := by
+    apply Subtype.ext
+    show Set.range (f ∘ p.2) = f '' Set.range p.2
+    exact Set.range_comp f p.2
+
+/-- **Existence of the groundless carrier — the WS1 obligation, DISCHARGED.**
+`Cofix (P_κ)` (with structure map `Cofix.dest`) is a terminal `P_κ`-coalgebra, for
+every `κ`, with no axiom. Existence half of the cone map is `Cofix.corec`
+(`Cofix.dest_corec` witnesses the morphism square); uniqueness is `Cofix.bisim'`,
+with `repr (C.str y)` supplying the common shape. Replaces the former axiom. -/
+theorem exists_terminal_coalg (κ : Cardinal.{u}) : ∃ U : Coalg κ, IsTerminalCoalg U := by
+  refine ⟨⟨Cofix (PkObj κ), Cofix.dest⟩, ?_⟩
+  intro C
+  refine ⟨Cofix.corec C.str, fun x => Cofix.dest_corec C.str x, ?_⟩
+  intro h hh
+  funext x
+  refine Cofix.bisim' (fun _ => True) h (Cofix.corec C.str) ?_ x trivial
+  intro y _
+  refine ⟨(QPF.repr (C.str y)).1,
+          (fun i => h ((QPF.repr (C.str y)).2 i)),
+          (fun i => Cofix.corec C.str ((QPF.repr (C.str y)).2 i)), ?_, ?_, ?_⟩
+  · calc Cofix.dest (h y)
+        = PkMap κ h (C.str y) := hh y
+      _ = h <$> QPF.abs (QPF.repr (C.str y)) := by rw [QPF.abs_repr]; rfl
+      _ = QPF.abs ⟨(QPF.repr (C.str y)).fst, fun i => h ((QPF.repr (C.str y)).snd i)⟩ := by
+            rw [← QPF.abs_map]; rfl
+  · calc Cofix.dest (Cofix.corec C.str y)
+        = Cofix.corec C.str <$> C.str y := Cofix.dest_corec C.str y
+      _ = Cofix.corec C.str <$> QPF.abs (QPF.repr (C.str y)) := by rw [QPF.abs_repr]
+      _ = QPF.abs ⟨(QPF.repr (C.str y)).fst,
+            fun i => Cofix.corec C.str ((QPF.repr (C.str y)).snd i)⟩ := by rw [← QPF.abs_map]; rfl
+  · intro i
+    exact ⟨(QPF.repr (C.str y)).2 i, trivial, rfl, rfl⟩
+
+end Existence
 
 /-! ## §5 The target structure `GroundlessCarrier` and `ws1_C1` -/
 
@@ -253,16 +318,15 @@ structure GroundlessCarrier (κ : Cardinal.{u}) where
   omega_selfsingleton : (carrier.str omega).1 = {omega}
 
 /-- Theorem `ws1_C1` (§5): a `GroundlessCarrier` exists for every infinite regular
-`κ`. HONEST STATUS (per the header ledger): conditional on `exists_terminal_coalg`,
-i.e. on terminality-of-`P_κ` — a hypothesis strictly STRONGER than the design's
-sanctioned `stabilization_theorem`, since it folds in Lemma 1.2 and both halves of
-Corollary 2.2 (the §7 tier-2 transfinite inductions), left un-discharged — and
-stated against the bounded reading of Commitment 1 (§0.1). Downstream of that
-hypothesis the assembly is fully proved; the non-degeneracy, Lambek, bisim=identity
-and Ω facts it bundles do not themselves depend on the axiom beyond terminality. -/
-theorem ws1_C1 (hreg : κ.IsRegular) (hinf : ℵ₀ ≤ κ) :
+`κ`, UNCONDITIONALLY — existence now rests on the proved `exists_terminal_coalg`
+(the `Cofix (P_κ)` terminal coalgebra), not an axiom. `#print axioms ws1_C1` shows
+only Mathlib's standard axioms. `hreg`/`hinf` are consumed only downstream, for the
+`Ω = {Ω}` singleton and non-degeneracy — not for existence. The one remaining
+charter caveat is the DECLARED WS1↔WS7 bounded-carrier drift (§0.1): Commitment 1
+is realized against bounded `P_κ`, a modeling choice, not an unproved obligation. -/
+theorem ws1_C1 (_hreg : κ.IsRegular) (hinf : ℵ₀ ≤ κ) :
     Nonempty (GroundlessCarrier κ) := by
-  obtain ⟨U, hU⟩ := exists_terminal_coalg κ hreg hinf
+  obtain ⟨U, hU⟩ := exists_terminal_coalg κ
   -- the unique morphisms out of the Ω-coalgebra and the empty coalgebra
   obtain ⟨hΩ, hΩnat, -⟩ := hU (omegaCoalg hinf)
   obtain ⟨hE, hEnat, -⟩ := hU (emptyCoalg hinf)
