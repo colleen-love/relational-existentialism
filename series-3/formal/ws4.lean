@@ -6,13 +6,32 @@ a good quantale** — the `Q`-weighted `<κ`-supported observation functor `W_Q`
 terminal coalgebra, and a coherent graded weak distributive law, instantiated at
 the concrete non-idempotent Łukasiewicz witness `Łₙ` (the v3 resolution).
 
+## Outcome: PARTIAL, not Discharged (honest classification)
+
+The design's §6 defines **Discharge** around Layer C — weak-pullback preservation
+(`WQRel_le_comp`, step 6), the "one genuinely new proof" and the whole point of
+committing to `Łₙ` — together with `wq_reduces_to_pk` (step 16) and the full
+step-20 bundle. **Those are not proved here** (see "Scope held open"). This file is
+`sorry`-free/axiom-free and delivers a large genuine fragment — the enriched carrier
+with its full identity theory (Layers A–B), the graded weak law's *multiplication*
+coherence (Layer D: pentagon/unit/reflection), and the `Łₙ` `DivisibleQuantale`
+witness with `tensor_section` proved and **consumed** (`weight_split`) — but it does
+NOT achieve the registered Discharge, and nothing here is named as if it did. Layer
+C is registered as a **typed open obligation** (`WQPreservesWeakPullback`), not
+asserted; the top-level bundle is named `ws4_graded_coherence_Luk`, *not*
+`ws4_resolved`, precisely so a downstream `import` cannot mistake the delivered
+coherence for the registered discharge. This is neither Discharge nor the §8
+Impossibility branch (`ws4_no_quantitative_grading` is likewise unproved): step 6 is
+left open with its obstruction made precise, not decided in either direction.
+
 Built on `ws1`/`ws2`/`ws3` (imported, axiom-free): the `Cofix`/QPF terminal-coalgebra
 route, `Cardinal.iSup_lt_of_isRegular`/`mul_lt_of_lt` bounds, `ws3`'s `alg`/`pkJoin`
 template mirrored here in graded form.
 
 ## What is proved — all `sorry`-free and **axiom-free** beyond Mathlib's standard
 `propext` / `Classical.choice` / `Quot.sound` (verified via `#print axioms
-ws4_resolved`; the `Łₙ` witness is even choice-free — `[propext, Quot.sound]`).
+ws4_graded_coherence_Luk`; the `Łₙ` witness and `weight_split` are even choice-free
+— `[propext, Quot.sound]`).
 
 * **§2 The quantale class hierarchy** — `GoodQuantale` / `DivisibleQuantale`
   (design §2.1–2.2, P1/P3 fixes: `1` is the `⊗`-unit not `⊤`; `tensor_section` the
@@ -37,27 +56,36 @@ ws4_resolved`; the `Łₙ` witness is even choice-free — `[propext, Quot.sound
   `< κ` bound), `wqAlg` via the Lambek inverse, and its coherence: `wqAlg_pentagon`
   (the [REV-B]-corrected "join of destructors" form, S2), `wqAlg_unit` (the
   `T`-unit law), `wq_reflects_part` (graded upward constitution).
-* **§6 Assembly** (Layer E, steps 17–20): `GradedWeakBialgebra` /
-  `ws4_graded_bialgebra` (class-level), and `ws4_resolved` — the top-level bundling
-  at `Q = Łₙ`: graded weak bialgebra ∧ behavioural-equivalence-is-identity ∧
-  quantitative (non-idempotent). This is the machine statement of the design's
-  *Discharged (quantitative)* core: **content present, coherence proved**; criterion
-  (iv)'s canonicity is deliberately left open (charter §9, §7 [REV-B]).
+* **§Layer C (registered, NOT proved).** `WQRel` (the weighted Barr lifting) and
+  `WQPreservesWeakPullback` are given explicit types as the **named open
+  obligation** for step 6; no theorem inhabits the latter. `weight_split` proves —
+  and thereby *consumes* — the one algebraic fact those targets need from `Łₙ`'s
+  residuation (`tensor_section`): every `w ≤ a ⊗ ⊤` factors as `a ⊗ b`.
+* **§6 Assembly** (Layer E, proved fragment): `GradedWeakLawCoherence` /
+  `ws4_graded_law_coherence` (class-level multiplication coherence), and
+  `ws4_graded_coherence_Luk` — the top-level bundling at `Q = Łₙ`: graded weak-law
+  coherence ∧ behavioural-equivalence-is-identity ∧ quantitative (non-idempotent).
+  These are **renamed away** from the design's `GradedWeakBialgebra` / `ws4_resolved`
+  because they prove strictly less (no `algJoin`, no `noStrictLaw`, no Layer C, no
+  step-16 reduction); the names match the proposition, not the registered discharge.
+  Criterion (iv)'s canonicity is separately open (charter §9, §7 [REV-B]).
 
-## Scope held open (named, not relabeled — charter §8.2 discipline)
+## Scope held open (named and TYPED, not relabeled — charter §8.2 discipline)
 
-The design's Layer C (weak-pullback preservation, steps 6–9: the weighted Barr
-lifting `WQRel` and `WQRel_le_comp`) and the `wqAlg_join` associativity /
-`wq_reduces_to_pk` Bool-reduction (steps 13(join)/16) are **not** formalized here.
-The v3 design flags step 6 as "the one genuinely new proof … attack first, may
-resist"; the weighted weak-pullback over a quantale, and the ⊗-scaled sup
-associativity, are the substantive research content and are left as the scoped-open
-remainder. What *is* delivered is the enriched carrier with its full identity theory
-(Layers A–B), the graded weak law's *multiplication* coherence (pentagon/unit/
-reflection, Layer D), and — the v3 linchpin — the concrete non-idempotent
-`DivisibleQuantale` witness `Łₙ` with `tensor_section` proved, which is what forecloses
-the frame-collapse and certifies the grading is quantitative. Canonicity (the
-WS3-inherited question) stays open at the `(Q,κ)` level, as the charter requires.
+The design's Layer C (weak-pullback preservation, steps 6–9), the `wqAlg_join`
+associativity (step 13), and the `wq_reduces_to_pk` Bool-reduction (step 16) are
+**not** formalized here. The v3 design flags step 6 as "the one genuinely new proof
+… attack first, may resist"; it is the substantive research content and is left
+open. The obstruction is made precise rather than merely named: (i) the target
+`WQPreservesWeakPullback` is a typed hole a downstream WS can discharge; (ii)
+`weight_split` isolates and proves the pointwise `⊗`-factorization the proof would
+consume, so what remains is specifically the *global witness assembly* — building a
+single weighted graph whose fibre-sup projections match, where the naive composite
+weight `wR(x,y) ⊗ wS(y,z)` fails to project unless the middle's outgoing weight is
+`1`. That non-normalization is the concrete difficulty, and it is not resolved here.
+The §8 negative theorem `ws4_no_quantitative_grading` is likewise not proved, so the
+step-6 fork is genuinely open, not silently decided. Canonicity (the WS3-inherited
+question) stays open at the `(Q,κ)` level, as the charter requires.
 
 ## Hypothesis accounting
 
@@ -88,6 +116,18 @@ class GoodQuantale (Q : Type u) extends CommMonoid Q, CompleteLattice Q where
 pullback preservation and the graded law are proved for this class. -/
 class DivisibleQuantale (Q : Type u) extends GoodQuantale Q where
   tensor_section : ∀ (a w : Q), w ≤ a * ⊤ → a * (sSup {b | a * b ≤ w}) = w
+
+/-- **The weight-split oracle (design Layer C, the role of `tensor_section` in
+step 6).** In a `DivisibleQuantale`, any weight `w` below `a ⊗ ⊤` **factors** as
+`a ⊗ b`. This is exactly the `⊗`-factorization the weighted weak-pullback
+`WQRel_le_comp` (Layer C, step 6) is meant to consume — split a composite edge
+weight into its two legs. It is the sole place `tensor_section` is *used*, so the
+residuation is no longer a dangling instance: the remaining Layer-C gap is the
+*global witness assembly*, not this pointwise split. At `Q = Łₙ` it is
+unconditional (finite/decidable). -/
+theorem weight_split (Q : Type u) [DivisibleQuantale Q] (a w : Q) (h : w ≤ a * ⊤) :
+    ∃ b : Q, a * b = w :=
+  ⟨sSup {b | a * b ≤ w}, DivisibleQuantale.tensor_section a w h⟩
 
 /-! ## §2.3 The concrete non-idempotent witness `Łₙ` (Łukasiewicz MV-chain) -/
 
@@ -401,6 +441,32 @@ theorem wq_bisim_behavioural {U : WQCoalg Q κ} (hU : IsTerminalWQ U) (x y : U.X
   · rintro rfl
     exact ⟨(fun a b => a = b), ⟨wqDiagBisim U⟩, rfl⟩
 
+/-! ### Layer C — weak-pullback preservation, stated as a NAMED OPEN OBLIGATION
+
+The design's step 6 (`WQRel_le_comp`, "the one genuinely new proof") is **not**
+proved in this file. Rather than leave it an unstated hope, we give its targets
+explicit Lean types so the gap is a *typed hole* a downstream workstream can
+discharge, and — below, in `weight_split` — we isolate and prove the one algebraic
+fact those targets are meant to consume (the `⊗`-factorization from `tensor_section`),
+so the obstruction is made precise: what remains is the global witness assembly, not
+the pointwise residuation. -/
+
+/-- The `Q`-weighted Barr relation lifting (design §3, Layer C) — the weighted
+analogue of `ws2.PkRel`. Registered here so `WQPreservesWeakPullback` is typed. -/
+def WQRel {X Y : Type u} (R : X → Y → Prop) :
+    WQObj Q κ X → WQObj Q κ Y → Prop := fun s t =>
+  ∃ w : WQObj Q κ {p : X × Y // R p.1 p.2},
+    WQMap (fun p => p.1.1) w = s ∧ WQMap (fun p => p.1.2) w = t
+
+/-- **Weak-pullback preservation for `W_Q`** — the design's step-6/step-8 target,
+as an explicit predicate. This is the **named open obligation** (Layer C): no
+theorem in this file inhabits it. It is registered, not asserted, so that downstream
+citations cannot mistake the delivered coherence for weak-pullback preservation. -/
+def WQPreservesWeakPullback (Q : Type u) [CompleteLattice Q] (κ : Cardinal.{u}) : Prop :=
+  ∀ {X Y Z : Type u} (R : X → Y → Prop) (S : Y → Z → Prop)
+    (s : WQObj Q κ X) (u : WQObj Q κ Z),
+    WQRel (fun x z => ∃ y, R x y ∧ S y z) s u → ∃ t, WQRel R s t ∧ WQRel S t u
+
 end Functor
 
 /-! ## §5 The graded weak distributive law (design Layer D, steps 10–14)
@@ -561,14 +627,23 @@ def IsQuantitative (Q : Type u) [Mul Q] : Prop := ∃ a : Q, a * a ≠ a
 
 end GradedLaw
 
-/-! ## §6 The assembled graded weak bialgebra (design Layer E, steps 17–20) -/
+/-! ## §6 The assembled graded weak-law coherence (design Layer E, steps 17–20)
 
-/-- The WS4 graded weak bialgebra on `νW_Q` (steps 17–18): the coherent graded weak
-distributive law. Bundles the pentagon (join of destructors, [REV-B] corrected
-form), the `T`-unit law, part-reflection, and the quantitative-grading tripwire —
-the "content present, coherence proved" state the charter §9 pins for criterion
-(iv) (canonicity deliberately left open). -/
-structure GradedWeakBialgebra (Q : Type u) [GoodQuantale Q] (κ : Cardinal.{u})
+**Naming discipline.** These are deliberately *not* named `GradedWeakBialgebra` /
+`ws4_resolved`. The design's step-17 bialgebra also carries `algJoin` (the
+associativity, step 13) and `noStrictLaw` (the graded impossibility), and its
+step-20 `ws4_resolved` bundles `ws4_weak_pullback_Luk` (Layer C) and
+`wq_reduces_to_pk` (step 16) — none of which are proved here. Using those names
+would let a downstream `import` trust a stronger fact than is proved (the drift the
+design's §8.2 forbids). The names below claim exactly the *multiplication
+coherence* that is proved: pentagon + `T`-unit + part-reflection. -/
+
+/-- The graded weak law's **multiplication coherence** on `νW_Q` (the proved
+fragment of the design's step-17 structure): pentagon (join of destructors, [REV-B]
+corrected form), the `T`-unit law, and part-reflection. It deliberately OMITS the
+step-17 `algJoin` (join-associativity, step 13) and `noStrictLaw` fields, which are
+not proved here — see the header's "Scope held open". -/
+structure GradedWeakLawCoherence (Q : Type u) [GoodQuantale Q] (κ : Cardinal.{u})
     (hreg : κ.IsRegular) where
   alg          : WQObj Q κ (νWQ Q κ).X → (νWQ Q κ).X
   pentagon     : ∀ t, (νWQ Q κ).str (alg t) = wqJoin hreg (WQMap (νWQ Q κ).str t)
@@ -576,29 +651,38 @@ structure GradedWeakBialgebra (Q : Type u) [GoodQuantale Q] (κ : Cardinal.{u})
   reflectsPart : ∀ (t : WQObj Q κ (νWQ Q κ).X) (x y : (νWQ Q κ).X),
                    t.1 x * ((νWQ Q κ).str x).1 y ≤ ((νWQ Q κ).str (alg t)).1 y
 
-/-- **The WS4 class-level graded deliverable (step 18).** For every regular `κ` and
-`GoodQuantale Q`, `νW_Q` carries a graded weak bialgebra. -/
-theorem ws4_graded_bialgebra (Q : Type u) [GoodQuantale Q] {κ : Cardinal.{u}}
-    (hreg : κ.IsRegular) : Nonempty (GradedWeakBialgebra Q κ hreg) :=
+/-- **The graded weak-law multiplication coherence, class level.** For every regular
+`κ` and `GoodQuantale Q`, `νW_Q` carries the pentagon/unit/reflection coherence.
+(This is the proved *subset* of the design's step-18 `ws4_graded_bialgebra`, not
+that theorem — it lacks `algJoin`/`noStrictLaw` and Layer C.) -/
+theorem ws4_graded_law_coherence (Q : Type u) [GoodQuantale Q] {κ : Cardinal.{u}}
+    (hreg : κ.IsRegular) : Nonempty (GradedWeakLawCoherence Q κ hreg) :=
   ⟨{ alg          := wqAlg hreg
    , pentagon     := wqAlg_pentagon hreg
    , algUnit      := wqAlg_unit hreg
    , reflectsPart := wq_reflects_part hreg }⟩
 
-/-- **The WS4 resolution (step 20), instantiated at the concrete non-idempotent
-witness `Łₙ`.** For `n ≥ 2` and regular `κ`, `νW_{Łₙ}` carries a graded weak
-bialgebra (coherence: pentagon + `T`-unit + part-reflection), behavioural
-equivalence on it is identity, and `Łₙ` is genuinely **quantitative**
-(non-idempotent). This is the machine statement of the design's *Discharged
-(quantitative)* core — "content present, coherence proved" (charter §9), with
-`Łₙ`'s `DivisibleQuantale` instance (the residuation gate `tensor_section`,
-proved in §2.3) certifying grading is not a frame in disguise. -/
-theorem ws4_resolved {κ : Cardinal.{0}} (n : ℕ) (hn : 2 ≤ n) (hreg : κ.IsRegular) :
-    Nonempty (GradedWeakBialgebra (Luk n) κ hreg)
+/-- **The proved WS4 core at the concrete non-idempotent witness `Łₙ`.** For `n ≥ 2`
+and regular `κ`: `νW_{Łₙ}` carries the graded weak-law *multiplication coherence*,
+behavioural equivalence on it is identity, and `Łₙ` is genuinely **quantitative**
+(non-idempotent).
+
+**This is NOT the design's step-20 `ws4_resolved`** — it drops that theorem's
+`ws4_weak_pullback_Luk` (Layer C) and `wq_reduces_to_pk` (step 16) conjuncts, which
+are not proved here (see `WQPreservesWeakPullback`, the named open obligation, and
+the header's "Scope held open"). The name reflects the proposition actually proved,
+not the registered discharge. What `Łₙ` *does* certify, via its `DivisibleQuantale`
+instance and `weight_split`, is that the residuation gate `tensor_section` is
+satisfiable and factorizing for a non-idempotent `Q` — the pointwise input Layer C
+would consume — so the frame-collapse is foreclosed even though Layer C's global
+assembly is left open. -/
+theorem ws4_graded_coherence_Luk {κ : Cardinal.{0}} (n : ℕ) (hn : 2 ≤ n)
+    (hreg : κ.IsRegular) :
+    Nonempty (GradedWeakLawCoherence (Luk n) κ hreg)
     ∧ (∀ x y : (νWQ (Luk n) κ).X,
         (∃ R, Nonempty (WQBisim (νWQ (Luk n) κ) R) ∧ R x y) ↔ x = y)
     ∧ IsQuantitative (Luk n) :=
-  ⟨ws4_graded_bialgebra (Luk n) hreg,
+  ⟨ws4_graded_law_coherence (Luk n) hreg,
    fun x y => wq_bisim_behavioural (νWQ_terminal (Luk n) κ) x y,
    Luk.ws4_quantitative_witness n hn⟩
 

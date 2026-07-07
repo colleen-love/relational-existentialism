@@ -17,6 +17,9 @@ import ws2
 import ws3
 -- WS4 (`series-3/spec/ws4/04-charter-design-review.md`, v3) — graded parthood over
 -- a good quantale: the Q-weighted functor `W_Q` as a QPF, its terminal coalgebra,
--- Lambek/bisim, and a coherent graded weak law, instantiated at the concrete
--- non-idempotent Łukasiewicz witness `Łₙ` (with `tensor_section` proved).
+-- Lambek/bisim, and the graded weak law's multiplication coherence, instantiated at
+-- the concrete non-idempotent Łukasiewicz witness `Łₙ` (with `tensor_section` proved
+-- and consumed via `weight_split`). PARTIAL: Layer C weak-pullback preservation
+-- (step 6) is registered as a typed open obligation `WQPreservesWeakPullback`, not
+-- proved — the top bundle is `ws4_graded_coherence_Luk`, not `ws4_resolved`.
 import ws4
