@@ -1,5 +1,73 @@
 /-
-`series-3/formal/ws4.lean`  (WIP — Tier 1: class hierarchy + the Łₙ witness)
+`series-3/formal/ws4.lean`
+
+WS4 (`series-3/spec/ws4/04-charter-design-review.md`, v3): **graded parthood over
+a good quantale** — the `Q`-weighted `<κ`-supported observation functor `W_Q`, its
+terminal coalgebra, and a coherent graded weak distributive law, instantiated at
+the concrete non-idempotent Łukasiewicz witness `Łₙ` (the v3 resolution).
+
+Built on `ws1`/`ws2`/`ws3` (imported, axiom-free): the `Cofix`/QPF terminal-coalgebra
+route, `Cardinal.iSup_lt_of_isRegular`/`mul_lt_of_lt` bounds, `ws3`'s `alg`/`pkJoin`
+template mirrored here in graded form.
+
+## What is proved — all `sorry`-free and **axiom-free** beyond Mathlib's standard
+`propext` / `Classical.choice` / `Quot.sound` (verified via `#print axioms
+ws4_resolved`; the `Łₙ` witness is even choice-free — `[propext, Quot.sound]`).
+
+* **§2 The quantale class hierarchy** — `GoodQuantale` / `DivisibleQuantale`
+  (design §2.1–2.2, P1/P3 fixes: `1` is the `⊗`-unit not `⊤`; `tensor_section` the
+  residuation gate).
+* **§2.3 The concrete non-idempotent witness `Łₙ`** (the v3 resolution). The MV
+  chain `Fin (n+1)` with `a ⊗ b = a + b ⊖ n` is exhibited as a `DivisibleQuantale`:
+  `tensor_sSup`, `bot_tensor`, **and the load-bearing `tensor_section`** are all
+  proved constructively (`omega`/finite-sup), and `ws4_quantitative_witness`
+  certifies `Łₙ` is **non-idempotent** for `n ≥ 2` (step 19 — the tripwire that
+  grading is genuinely quantitative, not a frame in disguise). This is exactly the
+  step v3 committed to in order to *discharge* WS4 rather than leave step 6 a hope.
+* **§3 The functor `W_Q` as a QPF** (Layer A, steps 1–2): `WQObj`, `WQMap`
+  (`Q`-sup pushforward over fibres — lattice joins only, design §3 P2/P4), the
+  functor laws, and the QPF instance `qpfWQ` (`absWQ`/`reprWQ` support-exact
+  reconstruction). Needs only `[CompleteLattice Q]`.
+* **§4 Terminal coalgebra, Lambek, bisimulation** (Layer A step 3, Layer B steps
+  4–5): `νWQ`/`νWQ_terminal` via `Cofix`, `wqLambek`, `wq_bisim_eq`, and
+  `wq_bisim_behavioural` (behavioural equivalence = identity — criteria (i)–(iii)
+  for the enriched carrier).
+* **§5 The graded weak distributive law** (Layer D, steps 10–13): `wqPure` (point
+  mass at `1`), `wqJoin` (graded Egli–Milner union, regularity load-bearing for its
+  `< κ` bound), `wqAlg` via the Lambek inverse, and its coherence: `wqAlg_pentagon`
+  (the [REV-B]-corrected "join of destructors" form, S2), `wqAlg_unit` (the
+  `T`-unit law), `wq_reflects_part` (graded upward constitution).
+* **§6 Assembly** (Layer E, steps 17–20): `GradedWeakBialgebra` /
+  `ws4_graded_bialgebra` (class-level), and `ws4_resolved` — the top-level bundling
+  at `Q = Łₙ`: graded weak bialgebra ∧ behavioural-equivalence-is-identity ∧
+  quantitative (non-idempotent). This is the machine statement of the design's
+  *Discharged (quantitative)* core: **content present, coherence proved**; criterion
+  (iv)'s canonicity is deliberately left open (charter §9, §7 [REV-B]).
+
+## Scope held open (named, not relabeled — charter §8.2 discipline)
+
+The design's Layer C (weak-pullback preservation, steps 6–9: the weighted Barr
+lifting `WQRel` and `WQRel_le_comp`) and the `wqAlg_join` associativity /
+`wq_reduces_to_pk` Bool-reduction (steps 13(join)/16) are **not** formalized here.
+The v3 design flags step 6 as "the one genuinely new proof … attack first, may
+resist"; the weighted weak-pullback over a quantale, and the ⊗-scaled sup
+associativity, are the substantive research content and are left as the scoped-open
+remainder. What *is* delivered is the enriched carrier with its full identity theory
+(Layers A–B), the graded weak law's *multiplication* coherence (pentagon/unit/
+reflection, Layer D), and — the v3 linchpin — the concrete non-idempotent
+`DivisibleQuantale` witness `Łₙ` with `tensor_section` proved, which is what forecloses
+the frame-collapse and certifies the grading is quantitative. Canonicity (the
+WS3-inherited question) stays open at the `(Q,κ)` level, as the charter requires.
+
+## Hypothesis accounting
+
+`hreg : κ.IsRegular` is load-bearing in `wqJoin`'s `< κ` bound (a `<κ`-indexed sup of
+`<κ` cardinals is `<κ` only for regular `κ` — `Cardinal.iSup_lt_of_isRegular`), exactly
+as in `ws3.pkJoin`. `hinf = hreg.aleph0_le` bounds singletons (`wqPure`). Existence /
+functoriality / Lambek / bisim need only `[CompleteLattice Q]` and no cardinal
+hypothesis. `hQsmall : #Q ≤ κ` (the QPF shape count) is **vacuous at `Łₙ`** (finite)
+and is routed to WS7 as the `(F,κ,μ,#Q)` collector duty (design §3 [S1]). No custom
+axioms; `Classical.choice` enters only via Mathlib's `sSup`/terminal-coalgebra base.
 -/
 import ws3
 
@@ -334,5 +402,204 @@ theorem wq_bisim_behavioural {U : WQCoalg Q κ} (hU : IsTerminalWQ U) (x y : U.X
     exact ⟨(fun a b => a = b), ⟨wqDiagBisim U⟩, rfl⟩
 
 end Functor
+
+/-! ## §5 The graded weak distributive law (design Layer D, steps 10–14)
+
+The `Q`-weighted composition monad's multiplication `wqJoin` (the graded
+Egli–Milner union — a `Q`-sup of `⊗`-scaled fibres over the support), its unit
+`wqPure` (point mass at the monoid unit `1`), and the composition operator
+`wqAlg` built through the Lambek inverse. This mirrors `ws3`'s `alg`/`pkJoin`
+with the join replaced by its graded form. Needs `[GoodQuantale Q]` (for `⊗`,
+`bot_tensor`, `tensor_sSup`) and regularity for the `wqJoin` bound (design §5:
+`hreg` load-bearing in `wqJoin`, exactly as in `ws3`). -/
+
+section GradedLaw
+open Cardinal
+attribute [local instance] Classical.propDecidable
+variable {Q : Type u} [GoodQuantale Q] {κ : Cardinal.{u}}
+
+/-- `⊥` annihilates `⊗` on the right too (via `CommMonoid` commutativity). -/
+lemma gq_mul_bot (a : Q) : a * ⊥ = ⊥ := by rw [mul_comm]; exact GoodQuantale.bot_tensor a
+
+/-- `⊗` is monotone in its second argument (from `tensor_sSup` on the pair `{a,b}`). -/
+lemma gq_mul_le_mul_left (c : Q) {a b : Q} (h : a ≤ b) : c * a ≤ c * b := by
+  calc c * a ≤ ⨆ d ∈ ({a, b} : Set Q), c * d := le_iSup₂_of_le a (Set.mem_insert a {b}) le_rfl
+    _ = c * sSup ({a, b} : Set Q) := (GoodQuantale.tensor_sSup c _).symm
+    _ = c * b := by rw [sSup_pair, sup_eq_right.mpr h]
+
+/-- `⊗` is monotone in its first argument. -/
+lemma gq_mul_le_mul_right (c : Q) {a b : Q} (h : a ≤ b) : a * c ≤ b * c := by
+  rw [mul_comm a c, mul_comm b c]; exact gq_mul_le_mul_left c h
+
+/-- The unit of the graded composition monad: point mass `1` at `x` (design §3,
+P1 fix — assigns `1`, the `⊗`-unit, not `⊤`). -/
+noncomputable def wqPure (hinf : ℵ₀ ≤ κ) {X : Type u} (x : X) : WQObj Q κ X :=
+  ⟨fun z => if z = x then (1 : Q) else ⊥, by
+    refine lt_of_le_of_lt (Cardinal.mk_le_mk_of_subset (?_ : Qsupp _ ⊆ {x})) ?_
+    · intro z hz; by_contra hzx; exact hz (if_neg hzx)
+    · rw [Cardinal.mk_singleton]; exact lt_of_lt_of_le Cardinal.one_lt_aleph0 hinf⟩
+
+@[simp] lemma wqPure_val (hinf : ℵ₀ ≤ κ) {X : Type u} (x : X) :
+    (wqPure hinf x : WQObj Q κ X).1 = fun z => if z = x then (1 : Q) else ⊥ := rfl
+
+/-- The graded big-union (`join`/`μ`): `(wqJoin tt)(x) = ⨆_w tt(w) ⊗ w(x)`, the
+`Q`-sup of `⊗`-scaled inner fibres. The underlying function is split out so the
+support bound is elaborated against an explicit type (avoids a heavy `whnf`); its
+`< κ` bound is where **regularity is load-bearing** (as in `ws3.pkJoin`). -/
+noncomputable def wqJoinFun {X : Type u} (tt : WQObj Q κ (WQObj Q κ X)) : X → Q :=
+  fun x => ⨆ w : WQObj Q κ X, tt.1 w * w.1 x
+
+/-- The join's support lies in the union of the inner supports over `supp tt`. -/
+lemma wqJoin_supp_subset {X : Type u} (tt : WQObj Q κ (WQObj Q κ X)) :
+    Qsupp (wqJoinFun tt) ⊆ ⋃ w ∈ Qsupp tt.1, Qsupp w.1 := by
+  intro x hx
+  rw [Set.mem_iUnion₂]
+  by_contra hcon
+  push_neg at hcon
+  apply hx
+  show (⨆ w : WQObj Q κ X, tt.1 w * w.1 x) = ⊥
+  rw [iSup_eq_bot]
+  intro w
+  by_cases hw : tt.1 w = ⊥
+  · rw [hw]; exact GoodQuantale.bot_tensor _
+  · have hxw : w.1 x = ⊥ := by have := hcon w hw; simpa [Qsupp] using this
+    rw [hxw]; exact gq_mul_bot _
+
+-- The `< κ` bound on the join's support — regularity load-bearing (as in
+-- `ws3.pkJoin`): a `< κ`-indexed sup of `< κ` cardinals is `< κ` only for regular `κ`.
+-- (The nested-subtype `mk` unification is heavy, so the heartbeat budget is raised.)
+set_option maxHeartbeats 1000000 in
+lemma wqJoin_supp_lt (hreg : κ.IsRegular) {X : Type u} (tt : WQObj Q κ (WQObj Q κ X)) :
+    Cardinal.mk (↥(Qsupp (wqJoinFun tt))) < κ := by
+  refine lt_of_le_of_lt (Cardinal.mk_le_mk_of_subset (wqJoin_supp_subset tt)) ?_
+  refine lt_of_le_of_lt (Cardinal.mk_biUnion_le (fun w => Qsupp w.1) (Qsupp tt.1)) ?_
+  exact Cardinal.mul_lt_of_lt hreg.aleph0_le tt.2
+    (Cardinal.iSup_lt_of_isRegular hreg tt.2 (fun w => w.1.2))
+
+/-- The graded big-union (`join`/`μ`): `(wqJoin tt)(x) = ⨆_w tt(w) ⊗ w(x)`. -/
+noncomputable def wqJoin (hreg : κ.IsRegular) {X : Type u}
+    (tt : WQObj Q κ (WQObj Q κ X)) : WQObj Q κ X :=
+  ⟨wqJoinFun tt, wqJoin_supp_lt hreg tt⟩
+
+@[simp] lemma wqJoin_val (hreg : κ.IsRegular) {X : Type u} (tt : WQObj Q κ (WQObj Q κ X)) (x : X) :
+    (wqJoin hreg tt).1 x = ⨆ w : WQObj Q κ X, tt.1 w * w.1 x := rfl
+
+/-! ### The composition operator `wqAlg`, via the Lambek inverse (steps 10–11) -/
+
+/-- `dest = (νW_Q).str` as an equiv (Lambek, step 10). -/
+noncomputable def destEquivWQ (Q : Type u) [GoodQuantale Q] (κ : Cardinal.{u}) :
+    (νWQ Q κ).X ≃ WQObj Q κ (νWQ Q κ).X :=
+  Equiv.ofBijective (νWQ Q κ).str (wqLambek (νWQ_terminal Q κ))
+
+/-- **The graded composition operator** (step 11), through the Lambek inverse. -/
+noncomputable def wqAlg (hreg : κ.IsRegular) (t : WQObj Q κ (νWQ Q κ).X) : (νWQ Q κ).X :=
+  (destEquivWQ Q κ).symm (wqJoin hreg (WQMap (νWQ Q κ).str t))
+
+/-- **The graded weak-bialgebra pentagon** (step 12, the corrected [REV-B] form:
+join of destructors): `dest (wqAlg t) = wqJoin (W_Q dest t)`. -/
+theorem wqAlg_pentagon (hreg : κ.IsRegular) (t : WQObj Q κ (νWQ Q κ).X) :
+    (νWQ Q κ).str (wqAlg hreg t) = wqJoin hreg (WQMap (νWQ Q κ).str t) := by
+  show (destEquivWQ Q κ) ((destEquivWQ Q κ).symm _) = _
+  exact (destEquivWQ Q κ).apply_symm_apply _
+
+/-- The pushforward of a point mass is a point mass at the image (with weight `1`). -/
+lemma pushQ_wqPure {X Y : Type u} (x : X) (g : X → Y) (v : Y) :
+    pushQ (fun z => if z = x then (1 : Q) else ⊥) g v = (if g x = v then (1 : Q) else ⊥) := by
+  apply le_antisymm
+  · refine iSup_le fun z => iSup_le fun hz => ?_
+    show (if z = x then (1 : Q) else ⊥) ≤ _
+    by_cases hzx : z = x
+    · subst hzx; rw [if_pos rfl, if_pos hz]
+    · rw [if_neg hzx]; exact bot_le
+  · by_cases hgx : g x = v
+    · rw [if_pos hgx]
+      refine le_iSup₂_of_le x hgx (le_of_eq ?_)
+      show (1 : Q) = (if x = x then (1 : Q) else ⊥); rw [if_pos rfl]
+    · rw [if_neg hgx]; exact bot_le
+
+/-- **`T`-unit coherence** `wqAlg ∘ wqPure = id` (step 13): composing a one-part
+whole `pure x` recovers `x`. Uses `1 ⊗ a = a` (`one_mul`) and `bot_tensor`. -/
+theorem wqAlg_unit (hreg : κ.IsRegular) (x : (νWQ Q κ).X) :
+    wqAlg hreg (wqPure hreg.aleph0_le x) = x := by
+  have hkey : wqJoin hreg (WQMap (νWQ Q κ).str (wqPure hreg.aleph0_le x)) = (νWQ Q κ).str x := by
+    apply Subtype.ext
+    funext y
+    have hw : ∀ v, (WQMap (νWQ Q κ).str (wqPure hreg.aleph0_le x)).1 v
+        = (if (νWQ Q κ).str x = v then (1 : Q) else ⊥) := by
+      intro v; rw [WQMap_val, wqPure_val]; exact pushQ_wqPure x _ v
+    rw [wqJoin_val]
+    apply le_antisymm
+    · refine iSup_le fun v => ?_
+      rw [hw v]
+      by_cases hv : (νWQ Q κ).str x = v
+      · rw [if_pos hv, one_mul, ← hv]
+      · rw [if_neg hv, GoodQuantale.bot_tensor]; exact bot_le
+    · refine le_iSup_of_le ((νWQ Q κ).str x) ?_
+      rw [hw ((νWQ Q κ).str x), if_pos rfl, one_mul]
+  show (destEquivWQ Q κ).symm (wqJoin hreg (WQMap (νWQ Q κ).str (wqPure hreg.aleph0_le x))) = x
+  rw [hkey]; exact (destEquivWQ Q κ).symm_apply_apply x
+
+/-- **Part-reflection (upward constitution, step 13).** Each part `x` of the
+composite `wqAlg t` contributes at least its `⊗`-scaled observation: the graded
+analogue of `ws3.reflects_part` (there `⊆`; here a weight inequality). -/
+theorem wq_reflects_part (hreg : κ.IsRegular) (t : WQObj Q κ (νWQ Q κ).X)
+    (x : (νWQ Q κ).X) (y : (νWQ Q κ).X) :
+    t.1 x * ((νWQ Q κ).str x).1 y ≤ ((νWQ Q κ).str (wqAlg hreg t)).1 y := by
+  rw [wqAlg_pentagon, wqJoin_val]
+  calc t.1 x * ((νWQ Q κ).str x).1 y
+      ≤ (WQMap (νWQ Q κ).str t).1 ((νWQ Q κ).str x) * ((νWQ Q κ).str x).1 y := by
+        refine gq_mul_le_mul_right _ ?_
+        rw [WQMap_val]
+        exact le_iSup₂_of_le x rfl le_rfl
+    _ ≤ ⨆ w : WQObj Q κ (νWQ Q κ).X, (WQMap (νWQ Q κ).str t).1 w * w.1 y :=
+        le_iSup_of_le ((νWQ Q κ).str x) le_rfl
+
+/-- **The quantitative tripwire, class form (step 19).** `Q` admits a
+non-idempotent weight, so grading is genuinely quantitative (not a frame in
+disguise). At `Q = Łₙ` (`n ≥ 2`) this is `Luk.ws4_quantitative_witness`. -/
+def IsQuantitative (Q : Type u) [Mul Q] : Prop := ∃ a : Q, a * a ≠ a
+
+end GradedLaw
+
+/-! ## §6 The assembled graded weak bialgebra (design Layer E, steps 17–20) -/
+
+/-- The WS4 graded weak bialgebra on `νW_Q` (steps 17–18): the coherent graded weak
+distributive law. Bundles the pentagon (join of destructors, [REV-B] corrected
+form), the `T`-unit law, part-reflection, and the quantitative-grading tripwire —
+the "content present, coherence proved" state the charter §9 pins for criterion
+(iv) (canonicity deliberately left open). -/
+structure GradedWeakBialgebra (Q : Type u) [GoodQuantale Q] (κ : Cardinal.{u})
+    (hreg : κ.IsRegular) where
+  alg          : WQObj Q κ (νWQ Q κ).X → (νWQ Q κ).X
+  pentagon     : ∀ t, (νWQ Q κ).str (alg t) = wqJoin hreg (WQMap (νWQ Q κ).str t)
+  algUnit      : ∀ x, alg (wqPure hreg.aleph0_le x) = x
+  reflectsPart : ∀ (t : WQObj Q κ (νWQ Q κ).X) (x y : (νWQ Q κ).X),
+                   t.1 x * ((νWQ Q κ).str x).1 y ≤ ((νWQ Q κ).str (alg t)).1 y
+
+/-- **The WS4 class-level graded deliverable (step 18).** For every regular `κ` and
+`GoodQuantale Q`, `νW_Q` carries a graded weak bialgebra. -/
+theorem ws4_graded_bialgebra (Q : Type u) [GoodQuantale Q] {κ : Cardinal.{u}}
+    (hreg : κ.IsRegular) : Nonempty (GradedWeakBialgebra Q κ hreg) :=
+  ⟨{ alg          := wqAlg hreg
+   , pentagon     := wqAlg_pentagon hreg
+   , algUnit      := wqAlg_unit hreg
+   , reflectsPart := wq_reflects_part hreg }⟩
+
+/-- **The WS4 resolution (step 20), instantiated at the concrete non-idempotent
+witness `Łₙ`.** For `n ≥ 2` and regular `κ`, `νW_{Łₙ}` carries a graded weak
+bialgebra (coherence: pentagon + `T`-unit + part-reflection), behavioural
+equivalence on it is identity, and `Łₙ` is genuinely **quantitative**
+(non-idempotent). This is the machine statement of the design's *Discharged
+(quantitative)* core — "content present, coherence proved" (charter §9), with
+`Łₙ`'s `DivisibleQuantale` instance (the residuation gate `tensor_section`,
+proved in §2.3) certifying grading is not a frame in disguise. -/
+theorem ws4_resolved {κ : Cardinal.{0}} (n : ℕ) (hn : 2 ≤ n) (hreg : κ.IsRegular) :
+    Nonempty (GradedWeakBialgebra (Luk n) κ hreg)
+    ∧ (∀ x y : (νWQ (Luk n) κ).X,
+        (∃ R, Nonempty (WQBisim (νWQ (Luk n) κ) R) ∧ R x y) ↔ x = y)
+    ∧ IsQuantitative (Luk n) :=
+  ⟨ws4_graded_bialgebra (Luk n) hreg,
+   fun x y => wq_bisim_behavioural (νWQ_terminal (Luk n) κ) x y,
+   Luk.ws4_quantitative_witness n hn⟩
 
 end Series3.WS4
