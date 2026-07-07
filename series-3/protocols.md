@@ -47,7 +47,7 @@ The BR is what makes blindness enforceable across incognito sessions: it is the 
 Each phase lists its **context in** (what you paste into the incognito session) and its **output** (what you save out to carry forward).
 
 ### Phase 1 — Conceptualize (blind)
-- **Context in:** BR for this obligation.
+- **Context in:** CR for this obligation.
 - **Do:** State what mathematical object/property is at stake and why it is non-trivial. Guess a proof strategy.
 - **Output:** One-paragraph problem statement + candidate strategy. No charter language.
 
