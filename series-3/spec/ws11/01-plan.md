@@ -10,28 +10,17 @@ R3-1 unabsorbed R2 (no REV-H) · R3-2 WS7NonCollapse tag-fields / inert `A` in t
 
 ---
 
-## Phase 0 — Ledger and hygiene (REV-H, cheap and first)
+## Phase 0 — hygiene (cheap and first)
 
 Everything here is documentation, build machinery, or refactoring — no new mathematics — and it should land before any new workstream so the ledger is current while the real work runs.
 
-**0.1 Charter REV-H (R2-1, R3-1).** Register the R2 audit the way REV-G registered R1: convert each R2 finding into either (a) a typed obligation routed to ws11.1–ws11.5 below, (b) an honest status annotation on an existing criterion line, or (c) a declared scope note. Specifically:
+**0.1 Asserting axiom check (R3-5).** Replace every bare `#print axioms foo` in `AxiomCheck.lean` with a `#guard_msgs` (or equivalent) block asserting the output is exactly `[propext, Classical.choice, Quot.sound]` (choice-free where claimed). A wrong axiom list must be a *build failure*, not something a human has to read. Update the header from "(WS1–WS8)" to the full sweep (R3-6).
 
-- Criterion (iv) status line gains the annotation: *on any carrier satisfying (ii), identity is downward-determined by terminality; the bidirectional-constitution content currently proved is the existence of a composition algebra with part-reflection, not a co-constitution of identity. The identity-level question is ws11.1's obligation, with both outcomes admissible.*
-- Criterion (iii) status line gains: *currently discharged under the successor-state reading; the strong reading (binary relations are themselves elements) is ws11.3's obligation.*
-- §3.7 status lines gain the depth-1 scope note (all no-maximal / no-observer / standpoint theorems quantify over one-step supports; hereditary forms are ws11.2's obligation), and the honest external-totality note: the carrier itself exists as a completed set; "no everything" is currently proved only internally.
-- §3.6 gains a REV-H erratum on the "finite attention is *exactly* the non-surjectivity" clause (R3-8): the diagonal half is structure-independent (`ws5_carrier_incomplete` consumes no bound; `ws5_self_enumerates_relations` shows the flip under the other encoding); the κ-consuming half is `ws10_bounded_self_model(b)`. The word "exactly" is withdrawn as an erratum, not a criteria change — (v)'s bar is untouched.
-- §3.9's "working form of AFA" is annotated: the solution lemma recovers flat/guarded systems only (R2-7).
-- Record that the R2 review itself, like R1, is Claude-generated (independence limitation carried forward).
+**0.2 CI and reproducibility (R3-5).** Add a GitHub Actions workflow: `lake exe cache get && lake build`, on every push, with the build log uploaded as an artifact. Pin the commit hash and toolchain in both summaries' verification sections. This converts "confirmed passing on the author's build" into a public, re-runnable fact — the cheapest possible upgrade for a project whose brand is machine-checking.
 
-**0.2 Asserting axiom check (R3-5).** Replace every bare `#print axioms foo` in `AxiomCheck.lean` with a `#guard_msgs` (or equivalent) block asserting the output is exactly `[propext, Classical.choice, Quot.sound]` (choice-free where claimed). A wrong axiom list must be a *build failure*, not something a human has to read. Update the header from "(WS1–WS8)" to the full sweep (R3-6).
+**0.3 Bundle refactor (R3-2).** Split `WS7NonCollapse` into `WS7Proved` (only proof-bearing fields: `hinf`, `hcard`, `richness_witness`, `no_maximal`, `weak_pb`, `plurality`, `q_small`) and `WS7Status` (the tag fields `richness_general`, `carrier_category`, `dynamics`). Drop or meaningfully instantiate the inert `A : Set ℝ`. Restate `ws10_concrete_tuple` against `WS7Proved` so "hypothesis-free concrete tuple" names a record containing only theorems; the status record travels alongside, explicitly labeled bookkeeping. Rename nothing else — the anti-laundering naming discipline is preserved, just made structurally enforceable.
 
-**0.3 CI and reproducibility (R3-5).** Add a GitHub Actions workflow: `lake exe cache get && lake build`, on every push, with the build log uploaded as an artifact. Pin the commit hash and toolchain in both summaries' verification sections. This converts "confirmed passing on the author's build" into a public, re-runnable fact — the cheapest possible upgrade for a project whose brand is machine-checking.
-
-**0.4 Bundle refactor (R3-2).** Split `WS7NonCollapse` into `WS7Proved` (only proof-bearing fields: `hinf`, `hcard`, `richness_witness`, `no_maximal`, `weak_pb`, `plurality`, `q_small`) and `WS7Status` (the tag fields `richness_general`, `carrier_category`, `dynamics`). Drop or meaningfully instantiate the inert `A : Set ℝ`. Restate `ws10_concrete_tuple` against `WS7Proved` so "hypothesis-free concrete tuple" names a record containing only theorems; the status record travels alongside, explicitly labeled bookkeeping. Rename nothing else — the anti-laundering naming discipline is preserved, just made structurally enforceable.
-
-**0.5 Doc fixes (R3-6, R2-7).** protocols.md blind-phase table vs prose contradiction (phase 2 is either blind or against-charter — pick one and say it once); deduplicate the O3 paragraph in ws10.lean's closing note; clean `spec/ws8/00-holes.md` transcript remnants if still present.
-
-**Exit criterion for Phase 0:** REV-H merged; CI green with asserted axiom check; summaries not yet rewritten (that is Phase 4, after the mathematics moves).
+**0.4 Doc fixes (R3-6, R2-7).** protocols.md blind-phase table vs prose contradiction (phase 2 is either blind or against-charter — pick one and say it once); deduplicate the O3 paragraph in ws10.lean's closing note; clean `spec/ws8/00-holes.md` transcript remnants if still present.
 
 ---
 
@@ -187,7 +176,9 @@ This makes "the self-model is a proper, positioned part of the object" (Commitme
 
 ## Phase 4 — Summaries, positioning, and the human loop
 
-Run after ws11.1–ws11.3 land (ws11.4/ws11.5 can trail): rewrite both summaries against the post-REV-H ledger. Specific corrections owed regardless of new results: delete "attention dynamics fully characterized" in favor of "characterized for the exhibited families, with the per-family gaps stated" (R3-4); rewrite the plain summary's tipping-point sentence to name the family (R3-3); rewrite "the one concrete just-right setting … exhibited outright" against the refactored `WS7Proved` (R3-2); add the depth-1 scope sentence if ws11.2-B fails, delete it if ws11.2 lands; present the fracture count honestly (the ws11.1 trade-off would be the fifth). The plain summary should also carry one sentence a lay reader currently never gets: *most of the informative results are theorems about what this framework cannot do, and the positive constitution increasingly lives in the graded carrier, where much is still unbuilt.*
+**Charter REV-H (R2-1, R3-1).** Register the R2 audit the way REV-G registered R1: convert each ws11 finding into the charter via REV-H.
+
+Rewrite both summaries against the REV-H ledger. Specific corrections owed regardless of new results: delete "attention dynamics fully characterized" in favor of "characterized for the exhibited families, with the per-family gaps stated" (R3-4); rewrite the plain summary's tipping-point sentence to name the family (R3-3); rewrite "the one concrete just-right setting … exhibited outright" against the refactored `WS7Proved` (R3-2); add the depth-1 scope sentence if ws11.2-B fails, delete it if ws11.2 lands; present the fracture count honestly (the ws11.1 trade-off would be the fifth). The plain summary should also carry one sentence a lay reader currently never gets: *most of the informative results are theorems about what this framework cannot do, and the positive constitution increasingly lives in the graded carrier, where much is still unbuilt.*
 
 Finally (R3-7): recruit at least one human reviewer with coalgebra/category-theory expertise, scoped to two questions the model-only loop cannot settle — is the Klin–Salamanca port faithful to the published no-go, and is the ws11.4-C `WeakDistLaw` definition the class Garner's result actually speaks to? Disclose the review chain's provenance in the README alongside the existing Claude-reviewing-Claude note.
 
