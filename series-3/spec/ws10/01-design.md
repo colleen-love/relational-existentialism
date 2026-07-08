@@ -17,6 +17,18 @@ object the review showed the program actually needs (the atomless subcarrier). T
 does not move; the statements move up to the bar or the labels move down to the
 statements.
 
+> **As built (`series-3/formal/ws10.lean`, sorry-free, axiom-clean).** The keystone
+> **O1** is discharged: `carrier_card_ge : κ ≤ #(νPk κ).X` (unconditional in κ), with
+> hypothesis-free corollaries (`ws10_no_maximal`, `ws10_no_global_observer`) and the
+> concrete tuple at `κ₀ = ℵ₀` (`ws10_concrete_tuple`). Its fallout is discharged:
+> **O4** (`ws10_bounded_self_model` — diagonal ∧ κ-consuming carrier-non-surjectivity),
+> **O5** (`ws10_standpoint_proper` — every view misses a state), and **O6**
+> (`ws10_carrier_attention_converges` — at ℵ₀, supports are finite by the carrier's own
+> bound, so attention converges on a genuine carrier support). **O2** (atom / grounded
+> core) is out of scope for this pass. **O3** (canonicity among weak distributive laws)
+> and **O7** (WS9 attractivity / the exact bifurcation boundary) are recorded as the
+> remaining program in `ws10.lean`'s trailer — not laundered into theorems.
+
 **Review findings → obligations map:**
 
 | Review finding | Obligation | Class expected |
