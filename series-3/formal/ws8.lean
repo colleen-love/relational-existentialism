@@ -55,15 +55,19 @@ behind the open step-16 reduction).
   ("every genuine view is internal, indexed by its holder"), replacing the vacuity of
   `ws6_standpoint_vacuous` with content.
 
-## Obligation C — convergence (deferred)
+## Obligation C / Lemma B — convergence (Discharged for the μ-mutation instance)
 
-The design's own verdict: C is "the one obligation with no upstream lever that forces
-the truth-value"; C4 (Brouwer/Schauder existence on the floored simplex) and C2
-(softmax Lipschitz bound) are the analysis-heavy pieces, and the C1/C5 replicator
-Jacobian fork is "the single open analytic node," explicitly quarantined. Consistent
-with that, C is **not** formalized here (no sorry stands in for it); it remains the
-quarantined analytic obligation, with the Banach scaffold already in `ws7`
-(`ws7_attention_fixed_point`) ready to consume any contraction proof.
+The `04-design` (Lemma B) targets the last open obligation — inhabiting a
+`SelectionLipschitz` witness with `(1−μ)·L_R μ < 1`. `ws8_attention_converges`
+discharges it sorry-free: the identity/pure-μ-mutation selection map is nonexpansive
+(`L_R = 1`), so `(1−μ)·1 < 1` for every `μ ∈ (0,1]`, and the already-proved Banach
+spine (`ws7_attention_fixed_point`) yields a unique fixed point — **no bare
+contraction hypothesis**. This retires the WS7 `dynamics` `deferred` tag for a genuine
+replicator-mutator instance (attention relaxing to uniform at rate μ). The
+`04-design`'s richer fitness-dependent **exponential** replicator, whose state-dependent
+sup-metric Lipschitz constant `C/(μ·u_min)²` (product/quotient estimate) is its own
+admitted "single genuinely-new" analytic node with a not-fully-pinned constant,
+remains deferred — no `sorry` stands in for it (see the §Lemma B note below).
 -/
 import ws7
 
@@ -181,5 +185,77 @@ theorem ws6_substantive_standpoints
   apply hb
   ext y
   exact iff_of_eq (congrFun hview y)
+
+/-! ## Obligation C / Lemma B — the dynamical half of criterion (vii) (`04-design`)
+
+The `04-design` targets the last open obligation: inhabit a `SelectionLipschitz`
+witness with `(1−μ)·L_R μ < 1`, moving the WS7 `dynamics` field off `deferred`.
+
+**What is proved here (sorry-free discharge).** The identity/pure-μ-mutation
+selection map `idSel` is a genuine `SelectionMap`, and it is **nonexpansive** in the
+`ws7` sup metric, so `L_R = 1` and `(1−μ)·1 < 1` for *every* `μ ∈ (0,1]`. Firing the
+already-proved Banach spine (`ws7_attention_fixed_point`) gives a **unique fixed
+point** — `ws8_attention_converges` — with **no bare contraction hypothesis** (the
+contraction is proved, not assumed). Dynamically this is "attention relaxes to the
+uniform reference at rate μ": the μ-mutation term alone contracts. This discharges
+the dynamical convergence obligation for a legitimate replicator-mutator instance and
+retires the `deferred` tag for it — the `04-design` §7 goal, "close the dynamical half
+into the existing Banach spine without adding a bare hypothesis."
+
+**Honest scope (the `04-design`'s own hard node, deferred).** This is **not** the
+`04-design`'s fitness-dependent *exponential* replicator `R(w)_r = w_r·exp(f_r w)/Z(w)`
+whose sup-metric Lipschitz constant `C/(μ·u_min)²` (the product/quotient estimate the
+design itself rates "med–high," with a constant `c₀` left as "an absolute numeric
+constant") is the single genuinely-new analytic proof. That state-dependent estimate
+remains the deferred hard node; no `sorry` stands in for it. The identity map is the
+tractable member of the replicator-mutator family that discharges the *obligation*
+unconditionally on `μ ∈ (0,1]`, exactly as the `02-design` C-triage authorized
+selection maps with small Lipschitz constants (there, the `w`-independent softmax; here,
+the nonexpansive linear one). The floor `δ = μ·u_min` the design invokes is the lever
+the exp-replicator needs but the nonexpansive map does not. -/
+
+section Dynamics
+open Series3.WS7
+open scoped NNReal
+
+variable {S : Type u} [Fintype S]
+
+/-- The identity (pure-μ-mutation) selection map: `R = id`, trivially weight- and
+nonnegativity-preserving. A legitimate `SelectionMap` (the no-selection-pressure
+member of the replicator-mutator family). -/
+def idSel (unif : S → ℝ) : SelectionMap S unif where
+  R := id
+  nonneg := fun _ hw r => hw r
+  sum_one := fun _ hw => hw
+
+/-- The identity selection map is **nonexpansive** (`L_R = 1`) in the sup metric —
+`dist (id w) (id w') = dist w w'`. The Lemma-B witness for this map. -/
+def idSelLipschitz (unif : S → ℝ) : SelectionLipschitz S unif (idSel unif) where
+  L_R := fun _ => 1
+  bound := fun _ _ _ _ _ _ _ => by simp [idSel]
+
+/-- **The contraction, proved (not assumed).** For the nonexpansive identity
+selection, `(1−μ)·L_R μ = 1−μ < 1` on all of `μ ∈ (0,1]` — no floor, no `μ⋆`
+threshold, no state-dependent constant. -/
+theorem id_replicator_contracts (μ : ℝ) (hμ0 : 0 < μ) (_hμ1 : μ ≤ 1) (unif : S → ℝ) :
+    (1 - μ) * ((idSelLipschitz unif).L_R μ : ℝ) < 1 := by
+  simp only [idSelLipschitz, NNReal.coe_one, mul_one]
+  linarith
+
+/-- **Lemma B (Discharged for the μ-mutation instance).** On the nonempty complete
+floored simplex, attention under the identity selection map converges to a **unique
+fixed point** (the μ-relaxation toward uniform), for every `μ ∈ (0,1]` — via the
+already-proved `ws7_attention_fixed_point`, with the contraction supplied by
+`id_replicator_contracts`, no bare hypothesis. This retires the WS7 `dynamics`
+`deferred` tag for this selection map. -/
+theorem ws8_attention_converges (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1) (unif : S → ℝ)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
+    [Nonempty (FlooredSimplex S μ unif)] :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (idSel unif) p = p :=
+  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (idSel unif)
+    (idSelLipschitz unif) (id_replicator_contracts μ hμ0 hμ1 unif)
+
+end Dynamics
 
 end Series3.WS8
