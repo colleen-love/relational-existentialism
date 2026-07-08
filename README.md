@@ -12,9 +12,9 @@ This repository makes that position mathematically exact and mechanizes it in Le
 
 The object actually built and machine-checked, sorry-free and on no axioms beyond Mathlib's standard three, is a **bounded reconstruction**: the terminal coalgebra of the κ-bounded powerset functor. The unbounded universe the philosophy first names is proved too big to exist *as a set* (the same wall that forbids a set of all sets); the bounded carrier is what exists, and the canonical self-membered inhabitant `Ω = {Ω}` is recovered inside it.
 
-Two of the framework's commitments hold as **impossibility theorems**, which is what the philosophy predicted and wanted: no strict top-down-and-bottom-up master law can exist (composition of relations-as-objects is inherently non-strict), and no bounded observer can enumerate its own space of self-descriptions. The convergence of attention, the last dynamical question, is now **stratified** rather than asserted: it provably converges on explicit parameter bands, provably fails to converge uniquely outside them (exact multistable and oscillating witnesses), with the boundary located at a named pitchfork.
+**Three** of the framework's commitments hold as **impossibility theorems**, which is what the philosophy predicted and wanted: no strict top-down-and-bottom-up master law can exist (composition of relations-as-objects is inherently non-strict); no bounded observer can enumerate its own space of self-descriptions; and — surfaced by an external audit — in the *unlabeled* carrier, atomlessness and plurality are jointly unsatisfiable, so a groundless, ungraded relation admits exactly one point. The convergence of attention, the last dynamical question, is now **stratified** rather than asserted: it provably converges on explicit parameter bands, provably fails to converge uniquely outside them (exact multistable and oscillating witnesses), with the boundary located at a named pitchfork.
 
-The deepest finding is about the enterprise itself: **the bound that lets the object exist as a set is what weakens every sweeping claim about the totality.** No-outer-edge, no-view-from-nowhere, no-collapse-anywhere: each global claim softens exactly where the existence-buying bound is imposed, while the local commitments (relations are objects; nothing fully knows itself) survive intact. Whether a class-sized or otherwise unbounded mechanization could recover the global claims is open; within a set-sized, machine-checked carrier, the trade-off is proved.
+The deepest finding is about the enterprise itself: **the bound that lets the object exist as a set is what weakens every sweeping claim about the totality** — and the audit sharpened it, showing that even a *local* commitment (atomlessness) prices against plurality unless the relations carry weights, so genuine plurality has to be bought with grading. No-outer-edge, no-view-from-nowhere, no-collapse-anywhere: each global claim softens exactly where the existence-buying bound is imposed. Whether a class-sized or otherwise unbounded mechanization could recover the global claims is open; within a set-sized, machine-checked carrier, the trade-off is proved.
 
 Machine-checked claims and interpretive glosses are kept strictly apart throughout. That distinction is load-bearing; please preserve it when citing.
 
@@ -24,9 +24,9 @@ The current work. Start here:
 
 - **[Plain-language summary](./series-3/summary.md)**: what was asked, what was found, what it means.
 - **[Technical summary](./series-3/summary-technical.md)**: status against the seven success criteria, verification details, the fracture analysis.
-- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-F).
-- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS9. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for one headline theorem per workstream.
-- **[Specs](./series-3/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./series-3/spec/review.md) of the gap between formal statements and prose claims, which the current workstreams are addressing.
+- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-G).
+- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS10. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for headline theorems across every workstream.
+- **[Specs](./series-3/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./series-3/spec/ws9/03-project-review.md) of the gap between formal statements and prose claims, which WS9 and WS10 address.
 
 ### Verification status
 

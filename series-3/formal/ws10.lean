@@ -1,7 +1,7 @@
 /-
 `series-3/formal/ws10.lean` — WS10: statement–gloss reconciliation, the grounded moves.
 
-The external review (`series-3/spec/review.md`) found one recurring failure mode:
+The external review (`series-3/spec/ws9/03-project-review.md`) found one recurring failure mode:
 formal statements weaker than the labels placed on them. WS10 closes what is cheaply
 closable against the exact upstream definitions, sorry-free and on no new axioms. This
 file discharges the **keystone O1** (the carrier-cardinality lower bound, which every

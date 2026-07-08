@@ -1,6 +1,6 @@
 # WS10 · 02 — Design: statement–gloss reconciliation and the graded groundless core
 
-*Design register. This workstream converts the external review (`series-3/spec/review.md`)
+*Design register. This workstream converts the external review (`series-3/spec/ws9/03-project-review.md`)
 into typed obligations, in the charter's §5 outcome vocabulary and under the §8.2
 discipline: substitute openly, recover the canonical content inside the surrogate where
 possible, state the residual obstruction precisely, and route it to the owner. Nothing
@@ -452,7 +452,7 @@ All §8.2-style errata, batched as **REV-G**:
    `ws7/02-design` → `02-design.md`; normalize ws1's `N-name.md` numbering to the
    `0N-name.md` convention used everywhere else.
 5. **Methods disclosure.** The papers' methodology sections state that the blind-review
-   layer is same-model review (Claude reviewing Claude) and that `review.md` is an
+   layer is same-model review (Claude reviewing Claude) and that `03-project-review.md` is an
    external-session audit; independence claims are scoped accordingly. The
    reproducibility footnote pins commit hash + clean-build log per the technical
    summary's own §2 requirement.
