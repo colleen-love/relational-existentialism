@@ -24,8 +24,8 @@ The current work. Start here:
 
 - **[Plain-language summary](./series-3/summary.md)**: what was asked, what was found, what it means.
 - **[Technical summary](./series-3/summary-technical.md)**: status against the seven success criteria, verification details, the fracture analysis.
-- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-G).
-- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS10. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for headline theorems across every workstream.
+- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-H).
+- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS15. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for headline theorems across every workstream.
 - **[Specs](./series-3/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./series-3/spec/ws9/03-project-review.md) of the gap between formal statements and prose claims, which WS9 and WS10 address.
 
 ### Verification status
