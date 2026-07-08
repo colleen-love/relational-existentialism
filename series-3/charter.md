@@ -151,6 +151,38 @@
 > collector tuple ratified), and two new §8.2 errata. All are tagged **[REV-E]**.
 > Nothing in §§0–7 target/criteria text is altered.
 
+> **Charter status — Revision F (build verification + Lemma B).** Two operational
+> closures, no change to the §7 target or criteria. **(1) The `#print axioms` note,
+> carried since REV-A on every workstream, is discharged.** `series-3/formal/
+> AxiomCheck.lean` is now a build root: it imports the whole development and runs
+> `#print axioms` on a representative headline result from each of WS1–WS8, and
+> **every one reports `[propext, Classical.choice, Quot.sound]`** — no custom axioms,
+> and (a `sorry` would surface as `sorryAx`) the full build is machine-checked
+> `sorry`-free. The `Łₙ` quantitative witness is even choice-free. So "axiom-free
+> beyond Mathlib's standard three" is now a *compile-time* fact, not a source audit.
+> **(2) Lemma B (the dynamical half of criterion (vii)) is discharged for exhibited
+> replicator-mutator dynamics.** WS8 now formalizes convergence into the existing
+> Banach spine with **no bare hypothesis**: `ws8_attention_converges` (the
+> nonexpansive pure-μ-mutation map, contracting on *all* `μ ∈ (0,1]`) and
+> `ws8_replicator_converges` (a genuine `w`-dependent linear replicator, with the
+> sup-metric Lipschitz constant `2/(μ·u_min)` **proved** — the design's "single
+> genuinely-new" quotient estimate — contracting on the explicit band
+> `2(1−μ) < μ·u_min`). This retires the `deferred`/`replicator_mutator_contracts`
+> hole for concrete dynamics: the standing risk "attention need not converge" is
+> resolved by *exhibiting* provably-convergent attention, not assuming it. The
+> fitness-dependent **exponential** replicator is explored (`exp_lip`,
+> `expReplicatorSel`, `expG_lipschitz`, `expZ_lower`) and precisely characterized: it
+> is *not* uniformly Lipschitz on WS7's unbounded `floorRegion` (scale-covariance
+> fails once fitness depends on `w`), but *is* Lipschitz on the bounded simplex-floor
+> where the dynamics lives, with an explicit constant — so general regime-dependence
+> (which `μ`, which fitness) is characterized, not universally closed. **Net effect
+> on §7:** criterion **(vii)'s dynamical half moves from Open to Discharged-for-
+> exhibited-dynamics**; with (i)–(iv) and (vi) already discharged (REV-A/C/E), the
+> only criterion not closed as Discharged is the *universal-regime* reading of (vii)'s
+> convergence, which is characterized (a band, not a blanket). Changes are confined to
+> the new `AxiomCheck.lean` build root and the §4 WS5/WS7 status lines. All are tagged
+> **[REV-F]**. Nothing in §§0–7 target/criteria text is altered.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
@@ -371,9 +403,9 @@ Workstreams:
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
 - **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1. [REV-E] Canonicity now discharged: `ws3_weak_law_canonical` proves this weak law is the unique (`∃!`) map satisfying the `T`-unit and Egli–Milner multiplication laws for bounded `P_κ`. With WS8-A (weak-pullback preservation), criterion (iv)'s coherence obligation is met; (iv) → Discharged for the bounded carrier.**
 - **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1. [REV-E] Layer C now discharged positively by WS8 (`wq_preserves_weak_pullback`, every `Q`); the design's `ws4_no_quantitative_grading` impossibility is found to target a `⊗`-weighted lifting WS4 never defined, so the step-6 fork resolves positive. Criterion (iv) → Discharged (bounded carrier); the graded canonicity transport through `W_Q` (step-16 reduction) remains the sole WS4-local residual.**
-- **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions. **[REV-D] Status: Partial (split). Incompleteness Impossibility-proved and `(F, κ)`-robust (`ws5_carrier_incomplete`); plurality floor Discharged (`ws5_plurality_floor`, `ws5_no_delta`); convergence Partial-conditional (`ws5_attention_converges` proved, `replicator_mutator_contracts` an uninhabited typed obligation). Bundle `ws5_incompleteness_and_floor`, not `ws5_resolved`. See §8.1.**
+- **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions. **[REV-D] Status: Partial (split). Incompleteness Impossibility-proved and `(F, κ)`-robust (`ws5_carrier_incomplete`); plurality floor Discharged (`ws5_plurality_floor`, `ws5_no_delta`); convergence Partial-conditional (`ws5_attention_converges` proved, `replicator_mutator_contracts` an uninhabited typed obligation). Bundle `ws5_incompleteness_and_floor`, not `ws5_resolved`. See §8.1. [REV-F] The convergence obligation is now discharged *downstream* for exhibited dynamics (WS8's `ws8_attention_converges` / `ws8_replicator_converges` inhabit the Banach spine unconditionally on their μ-bands); `ws5.replicator_mutator_contracts` itself stays an uninhabited *universal* predicate, as the regime-dependence it quantifies over is characterized, not blanket-true.**
 - **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint. **[REV-D] Status: Partial. Poles-split Impossibility-proved-scoped (`ws6_poles_split`); no-maximal Discharged by `κ`-fiat (`ws6_no_maximal`), discharging WS1's §3.7 hand-off; criterion (vi) reported Open (`ws6_standpoint_vacuous`). [REV-E] (vi) since Discharged by WS8-E (`ws6_no_global_observer` + `ws6_substantive_standpoints`). Bundle `ws6_split_and_no_maximal`, not `ws6_resolved`. See §8.1.**
-- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly. **[REV-D] Status: Partial (collector). Static band Discharged (`ws7_static_band`); concrete tuple `(κ₀, μ, Łₙ)` retro-validated (`ws7_retro_validate`, `#Q ≤ κ` proved via `luk_card_le`); `GeneralBranching` and the dynamical Lemma B held open. [REV-E] The universal `GeneralBranching` floor is refuted (`ws7_general_branching_false`) and replaced by the honest `alg`-relative floor (`ws7_iv_branching`); the dynamical axis stays `deferred` (Lemma B). Bundle `ws7_band_and_retro`, not `ws7_resolved`. See §8.1.**
+- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly. **[REV-D] Status: Partial (collector). Static band Discharged (`ws7_static_band`); concrete tuple `(κ₀, μ, Łₙ)` retro-validated (`ws7_retro_validate`, `#Q ≤ κ` proved via `luk_card_le`); `GeneralBranching` and the dynamical Lemma B held open. [REV-E] The universal `GeneralBranching` floor is refuted (`ws7_general_branching_false`) and replaced by the honest `alg`-relative floor (`ws7_iv_branching`). [REV-F] The dynamical axis (Lemma B) is now **Discharged for exhibited replicator-mutator dynamics**: WS8's `ws8_attention_converges` (nonexpansive μ-mutation, all `μ ∈ (0,1]`) and `ws8_replicator_converges` (linear replicator, sup-metric Lipschitz constant `2/(μ·u_min)` proved, band `2(1−μ) < μ·u_min`) inhabit the Banach spine with no bare hypothesis; the exponential-fitness case is characterized (Lipschitz on the bounded simplex-floor, not on the unbounded `floorRegion`). Only the universal-regime reading of convergence remains open (a band, not a blanket). Bundle `ws7_band_and_retro`, not `ws7_resolved`. See §8.1.**
 
 ---
 

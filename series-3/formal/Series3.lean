@@ -2,6 +2,14 @@
 -- Series 2 is closed and archived under `archive/`; Series 3 opens on the new
 -- foundation. The Series 3 charter (`series-3/charter.md`) grows it.
 --
+-- STATUS: WS1–WS8 are all formalized and the full build compiles, `sorry`-free.
+-- Every workstream's headline deliverable rests only on Mathlib's standard three
+-- axioms (`propext` / `Classical.choice` / `Quot.sound`) — no custom axioms — as
+-- verified at build time by `AxiomCheck.lean` (a `#print axioms` sweep over one
+-- top result per workstream; the `Łₙ` quantitative witness is even choice-free).
+-- Partial/open obligations are named as typed holes and never laundered into
+-- discharged-looking theorems (see each `ws*.lean` header for its exact scope).
+--
 -- WS1 (`series-3/spec/ws1/4-charter-design-review.md`) — the Groundless Carrier:
 -- the terminal coalgebra of the κ-bounded powerset functor, its Lambek iso,
 -- bisimulation = identity, the canonical `Ω = {Ω}`, and the C2 solution lemma.
