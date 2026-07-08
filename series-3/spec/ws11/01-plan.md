@@ -14,11 +14,11 @@ R3-1 unabsorbed R2 (no REV-H) · R3-2 WS7NonCollapse tag-fields / inert `A` in t
 
 Everything here is documentation, build machinery, or refactoring — no new mathematics — and it should land before any new workstream so the ledger is current while the real work runs.
 
-**0.1 Charter REV-H (R2-1, R3-1).** Register the R2 audit the way REV-G registered R1: convert each R2 finding into either (a) a typed obligation routed to WS11–WS15 below, (b) an honest status annotation on an existing criterion line, or (c) a declared scope note. Specifically:
+**0.1 Charter REV-H (R2-1, R3-1).** Register the R2 audit the way REV-G registered R1: convert each R2 finding into either (a) a typed obligation routed to ws11.1–ws11.5 below, (b) an honest status annotation on an existing criterion line, or (c) a declared scope note. Specifically:
 
-- Criterion (iv) status line gains the annotation: *on any carrier satisfying (ii), identity is downward-determined by terminality; the bidirectional-constitution content currently proved is the existence of a composition algebra with part-reflection, not a co-constitution of identity. The identity-level question is WS11's obligation, with both outcomes admissible.*
-- Criterion (iii) status line gains: *currently discharged under the successor-state reading; the strong reading (binary relations are themselves elements) is WS13's obligation.*
-- §3.7 status lines gain the depth-1 scope note (all no-maximal / no-observer / standpoint theorems quantify over one-step supports; hereditary forms are WS12's obligation), and the honest external-totality note: the carrier itself exists as a completed set; "no everything" is currently proved only internally.
+- Criterion (iv) status line gains the annotation: *on any carrier satisfying (ii), identity is downward-determined by terminality; the bidirectional-constitution content currently proved is the existence of a composition algebra with part-reflection, not a co-constitution of identity. The identity-level question is ws11.1's obligation, with both outcomes admissible.*
+- Criterion (iii) status line gains: *currently discharged under the successor-state reading; the strong reading (binary relations are themselves elements) is ws11.3's obligation.*
+- §3.7 status lines gain the depth-1 scope note (all no-maximal / no-observer / standpoint theorems quantify over one-step supports; hereditary forms are ws11.2's obligation), and the honest external-totality note: the carrier itself exists as a completed set; "no everything" is currently proved only internally.
 - §3.6 gains a REV-H erratum on the "finite attention is *exactly* the non-surjectivity" clause (R3-8): the diagonal half is structure-independent (`ws5_carrier_incomplete` consumes no bound; `ws5_self_enumerates_relations` shows the flip under the other encoding); the κ-consuming half is `ws10_bounded_self_model(b)`. The word "exactly" is withdrawn as an erratum, not a criteria change — (v)'s bar is untouched.
 - §3.9's "working form of AFA" is annotated: the solution lemma recovers flat/guarded systems only (R2-7).
 - Record that the R2 review itself, like R1, is Claude-generated (independence limitation carried forward).
@@ -35,17 +35,17 @@ Everything here is documentation, build machinery, or refactoring — no new mat
 
 ---
 
-## WS11 — Bidirectional identity: find it or prove it cannot exist (R2-2)
+## ws11.1 — Bidirectional identity: find it or prove it cannot exist (R2-2)
 
-The centerpiece, and the sponsor's named example. The charter's Commitment 4 says an object is *fixed jointly* by what it contains and what contains it. R2's observation is that terminality makes this impossible *as an identity thesis* on νP_κ. WS11 turns that observation into theorems in both directions.
+The centerpiece, and the sponsor's named example. The charter's Commitment 4 says an object is *fixed jointly* by what it contains and what contains it. R2's observation is that terminality makes this impossible *as an identity thesis* on νP_κ. ws11.1 turns that observation into theorems in both directions.
 
 **Obligation A — the impossibility, on the built carrier.** Prove that on any coalgebra satisfying criterion (ii) (bisimulation = identity), identity is fully downward-determined, so upward relations can contribute nothing to individuation:
 
 ```
-theorem ws11_downward_determined {κ} :
+theorem ws11.1_downward_determined {κ} :
     ∀ x y : (νPk κ).X, (νPk κ).str x = (νPk κ).str y → x = y
 -- immediate from `lambek`; stated for the record, then generalized:
-theorem ws11_ii_forces_downward (C : Coalg κ) (h : BisimEqualsEq C) :
+theorem ws11.1_ii_forces_downward (C : Coalg κ) (h : BisimEqualsEq C) :
     DownwardDetermined C
 ```
 
@@ -54,9 +54,9 @@ The second form is the real content: it is a theorem *schema*, not a fact about 
 **Obligation B — the positive object, where it can live.** Exhibit a concrete finite coalgebra `C` with two states `x ≠ y` that are bisimilar (equal unfoldings up to bisimulation) but distinguished by their containers, and prove the joint determination:
 
 ```
-theorem ws11_bidirectional_witness :
+theorem ws11.1_bidirectional_witness :
     ∃ (C : Coalg κ) (x y : C.X), x ≠ y ∧ Bisim C x y ∧ UpView C x ≠ UpView C y
-theorem ws11_joint_determination (C := witness) :
+theorem ws11.1_joint_determination (C := witness) :
     ∀ x y, ((C.str x = C.str y) ∧ (UpView C x = UpView C y)) → x = y
 ```
 
@@ -68,14 +68,14 @@ where `UpView C x := {z | x ∈ (C.str z).1}`. This shows bidirectional identity
 
 ---
 
-## WS12 — Hereditary scope: no-maximal and no-observer beyond depth 1 (R2-3)
+## ws11.2 — Hereditary scope: no-maximal and no-observer beyond depth 1 (R2-3)
 
-All current §3.7 theorems quantify over immediate successor sets. WS12 either proves the hereditary forms or proves them unprovable at the chosen κ — locate or refute, per §8.2.
+All current §3.7 theorems quantify over immediate successor sets. ws11.2 either proves the hereditary forms or proves them unprovable at the chosen κ — locate or refute, per §8.2.
 
 **Obligation A — reachable-set bound.** Using `Reaches` (already defined in ws10):
 
 ```
-theorem ws12_reachable_card_le {κ} (hreg : κ.IsRegular) (x : (νPk κ).X) :
+theorem ws11.2_reachable_card_le {κ} (hreg : κ.IsRegular) (x : (νPk κ).X) :
     Cardinal.mk {y // Reaches x y} ≤ κ
 ```
 
@@ -84,7 +84,7 @@ Proof sketch: the reachable set is the union over finite depths of iterated `< �
 **Obligation B — strict carrier gap (the keystone, mirroring O1).** `carrier_card_ge` gives κ ≤ #X; the hereditary no-maximal needs *strict* excess over the reachable bound:
 
 ```
-theorem ws12_carrier_card_gt : Cardinal.aleph0 < Cardinal.mk (νPk Cardinal.aleph0.{0}).X
+theorem ws11.2_carrier_card_gt : Cardinal.aleph0 < Cardinal.mk (νPk Cardinal.aleph0.{0}).X
 ```
 
 Strategy: inject `2^ℕ` into the carrier (e.g., an injective family of non-bisimilar infinite trees indexed by binary sequences, built by corecursion/solution lemma; strong extensionality separates them). This is the one genuinely new proof of the workstream — the same role `carrier_card_ge` played in WS10. **Pre-registered failure condition:** if the injection resists mechanization, the honest outcome is Partial with the hereditary theorems stated conditionally on `hgt : κ < #X` — a typed hypothesis in the O1 style, *visibly* carried, never silent.
@@ -92,30 +92,30 @@ Strategy: inject `2^ℕ` into the carrier (e.g., an injective family of non-bisi
 **Obligation C — the hereditary theorems.** Given A + B:
 
 ```
-theorem ws12_no_hereditary_maximal (u) : ¬ ∀ v, Reaches u v
-theorem ws12_no_hereditary_observer (obs) :
+theorem ws11.2_no_hereditary_maximal (u) : ¬ ∀ v, Reaches u v
+theorem ws11.2_no_hereditary_observer (obs) :
     ¬ ∃ f : {y // Reaches obs y} → (νPk κ₀).X, Function.Surjective f
 ```
 
 with the standpoint-properness analogue. These are what the §3.7 rhetoric ("cannot totalize", "no view from nowhere") actually asserts; the depth-1 versions become corollaries, and the summaries' scope note (Phase 0.1) is then *deleted* rather than softened.
 
-**Obligation D — external totality, stated honestly.** The carrier-as-completed-set point cannot be theorem-ed away; it can be sharpened: prove no state's hereditary unfolding is isomorphic to the whole carrier (follows from C), and record in REV-H that "no everything" holds *internally* — the external set-hood of νP_κ is a cost of §3.9, now explicitly priced in the §4.4 fracture analysis rather than left implicit. Rigidity (`endo_eq_id`) is likewise registered as a *finding* — the terminal carrier has absolute individuation — with the positioned-identity reading routed to the graded carrier (WS14).
+**Obligation D — external totality, stated honestly.** The carrier-as-completed-set point cannot be theorem-ed away; it can be sharpened: prove no state's hereditary unfolding is isomorphic to the whole carrier (follows from C), and record in REV-H that "no everything" holds *internally* — the external set-hood of νP_κ is a cost of §3.9, now explicitly priced in the §4.4 fracture analysis rather than left implicit. Rigidity (`endo_eq_id`) is likewise registered as a *finding* — the terminal carrier has absolute individuation — with the positioned-identity reading routed to the graded carrier (ws11.4).
 
 **Effort:** medium; B is the risk. One cycle, possibly two if B splits off.
 
 ---
 
-## WS13 — Reified relations: upgrade criterion (iii) from the deflated reading (R2-4, R2-7-adjacent)
+## ws11.3 — Reified relations: upgrade criterion (iii) from the deflated reading (R2-4, R2-7-adjacent)
 
 R2 is right that in a powerset coalgebra edges have no identity, so "relations are objects" currently means only "successors are states." But the carrier has the resources to do better, and no functor change is needed: **Lambek's bijectivity means every `< κ` subset of the carrier is the unfolding of exactly one state.** So Kuratowski pairing is *constructible inside νP_κ*:
 
 ```
 noncomputable def mkState (s : PkObj κ (νPk κ).X) : (νPk κ).X := (lambek …).invFun s
 noncomputable def pair (x y) : (νPk κ).X := mkState {mkState {x}, mkState {x,y}}
-theorem ws13_pair_inj : Function.Injective2 (pair (κ := κ))
+theorem ws11.3_pair_inj : Function.Injective2 (pair (κ := κ))
 noncomputable def reify (R : Set ((νPk κ).X × (νPk κ).X)) (h : #R < κ) : (νPk κ).X
-theorem ws13_reify_faithful : ∀ R S h₁ h₂, reify R h₁ = reify S h₂ ↔ R = S
-theorem ws13_reify_element : -- the reified relation is itself a state whose
+theorem ws11.3_reify_faithful : ∀ R S h₁ h₂, reify R h₁ = reify S h₂ ↔ R = S
+theorem ws11.3_reify_element : -- the reified relation is itself a state whose
                              -- members (the pairs) are states: iterable reification
 ```
 
@@ -127,15 +127,15 @@ This is the plan's best effort-to-payoff ratio: it converts an R2 "deflation" cr
 
 ---
 
-## WS14 — The graded groundless core and the weak-law package on νW_Q (R2-6, WS10-B, O3)
+## ws11.4 — The graded groundless core and the weak-law package on νW_Q (R2-6, WS10-B, O3)
 
-The largest workstream: everything the fragmentation criticism names. The positive criterion-(i) object was deported to νW_Q by O2; nothing else has followed it there. WS14 makes νW_Q a real second home rather than a forwarding address.
+The largest workstream: everything the fragmentation criticism names. The positive criterion-(i) object was deported to νW_Q by O2; nothing else has followed it there. ws11.4 makes νW_Q a real second home rather than a forwarding address.
 
 **Obligation A — the graded core (positive (i)).** Define the hereditarily-supported subcoalgebra of νW_Q (every reachable state has nonempty weighted support) and prove it is atomless *and* plural:
 
 ```
-theorem ws14_graded_core_atomless : ∀ x ∈ GradedCore, (support (str x)).Nonempty
-theorem ws14_graded_core_plural  : ∃ x y ∈ GradedCore, x ≠ y
+theorem ws11.4_graded_core_atomless : ∀ x ∈ GradedCore, (support (str x)).Nonempty
+theorem ws11.4_graded_core_plural  : ∃ x y ∈ GradedCore, x ≠ y
 ```
 
 Plurality witness per the O2 diagnosis: two self-loops at distinct weights (q₁ ≠ q₂ in Łₙ, n ≥ 2) — distinguishable by *how much* they relate, with no leaf anywhere. This is the theorem the whole REV-G reclassification promised; until it exists, "the positive (i)-object lives in the graded carrier" is a routing slip, not a result.
@@ -150,29 +150,29 @@ structure WeakDistLaw (κ) where
   natural    : …
   unit_laws  : …
   weak_mult  : …   -- the corrected Egli–Milner multiplication square
-theorem ws14_weak_law_unique : ∀ L L' : WeakDistLaw κ, L = L'   -- or a counterexample
+theorem ws11.4_weak_law_unique : ∀ L L' : WeakDistLaw κ, L = L'   -- or a counterexample
 ```
 
 Garner's Vietoris result signals truth; the mechanization is the deliverable. **Both outcomes admissible:** uniqueness discharges (iv)'s reopened canonicity; a second inhabitant would be a finding (the weak law is a *choice*, to be declared). Under no circumstances is `ws3_weak_law_canonical` re-cited for this — that theorem stays labeled a unique-realization statement.
 
 **Obligation D — infinite quantale ratification (R2-6).** Exhibit one countably infinite quantale (e.g., the dyadic rationals in [0,1] under ⊗) with `#Q ≤ κ₀` proved, so grading is ratified beyond the finite Łₙ; state the `#Q = 𝔠` case as the typed obligation it is (requires κ > 𝔠 or truncation — a genuine band constraint, recorded, not solved).
 
-**Effort:** large; the long pole. Two to three protocol cycles (A+B, then C, then D). WS11–WS13 do not depend on it and should not wait for it.
+**Effort:** large; the long pole. Two to three protocol cycles (A+B, then C, then D). ws11.1–ws11.3 do not depend on it and should not wait for it.
 
 ---
 
-## WS15 — Constitutive attention: couple the dynamics to the carrier (R2-5, R3-3)
+## ws11.5 — Constitutive attention: couple the dynamics to the carrier (R2-5, R3-3)
 
-R2's charge is that attention is weight-drift over a static support — "feed the attended, starve the unattended" never *constitutes* anything. WS15 builds the missing bridge using machinery that already exists, then repairs the dynamics-family conflation.
+R2's charge is that attention is weight-drift over a static support — "feed the attended, starve the unattended" never *constitutes* anything. ws11.5 builds the missing bridge using machinery that already exists, then repairs the dynamics-family conflation.
 
 **Obligation A — the self-model map.** Lambek's inverse again: an attention vector on a state's support, μ-floored, selects a nonempty `< κ` sub-support — which *is* a state:
 
 ```
 noncomputable def selfModel (u : (νPk κ₀).X) (w : FlooredSimplex (SelfSupport κ₀ u) μ unif)
     (θ : ℝ) : (νPk κ₀).X   -- mkState of the θ-attended sub-support
-theorem ws15_self_model_proper : selfModel u w θ ≠ u ∨ … -- the self-model misses states
+theorem ws11.5_self_model_proper : selfModel u w θ ≠ u ∨ … -- the self-model misses states
                                                           -- (via ws10_standpoint_proper)
-theorem ws15_omega_fixed : selfModel Ω w θ = Ω            -- Ω is a self-model fixed point
+theorem ws11.5_omega_fixed : selfModel Ω w θ = Ω            -- Ω is a self-model fixed point
 ```
 
 This makes "the self-model is a proper, positioned part of the object" (Commitment 5) a theorem about *states*, not a gloss on weight vectors — attention output re-enters the ontology. Iterating `selfModel` gives dynamics on the carrier itself; even one non-trivial theorem about the iterate (e.g., reachable-set monotonicity, or existence of non-Ω fixed points at suitable θ) would be the first genuinely constitutive dynamics result. **Pre-registered failure conditions:** the θ-threshold selection may not interact well with the simplex flow (report the mismatch precisely); fixed-point structure of the iterate may be intractable at this Mathlib pin (declare Partial with the typed statement).
@@ -187,9 +187,9 @@ This makes "the self-model is a proper, positioned part of the object" (Commitme
 
 ## Phase 4 — Summaries, positioning, and the human loop
 
-Run after WS11–WS13 land (WS14/WS15 can trail): rewrite both summaries against the post-REV-H ledger. Specific corrections owed regardless of new results: delete "attention dynamics fully characterized" in favor of "characterized for the exhibited families, with the per-family gaps stated" (R3-4); rewrite the plain summary's tipping-point sentence to name the family (R3-3); rewrite "the one concrete just-right setting … exhibited outright" against the refactored `WS7Proved` (R3-2); add the depth-1 scope sentence if WS12-B fails, delete it if WS12 lands; present the fracture count honestly (the WS11 trade-off would be the fifth). The plain summary should also carry one sentence a lay reader currently never gets: *most of the informative results are theorems about what this framework cannot do, and the positive constitution increasingly lives in the graded carrier, where much is still unbuilt.*
+Run after ws11.1–ws11.3 land (ws11.4/ws11.5 can trail): rewrite both summaries against the post-REV-H ledger. Specific corrections owed regardless of new results: delete "attention dynamics fully characterized" in favor of "characterized for the exhibited families, with the per-family gaps stated" (R3-4); rewrite the plain summary's tipping-point sentence to name the family (R3-3); rewrite "the one concrete just-right setting … exhibited outright" against the refactored `WS7Proved` (R3-2); add the depth-1 scope sentence if ws11.2-B fails, delete it if ws11.2 lands; present the fracture count honestly (the ws11.1 trade-off would be the fifth). The plain summary should also carry one sentence a lay reader currently never gets: *most of the informative results are theorems about what this framework cannot do, and the positive constitution increasingly lives in the graded carrier, where much is still unbuilt.*
 
-Finally (R3-7): recruit at least one human reviewer with coalgebra/category-theory expertise, scoped to two questions the model-only loop cannot settle — is the Klin–Salamanca port faithful to the published no-go, and is the WS14-C `WeakDistLaw` definition the class Garner's result actually speaks to? Disclose the review chain's provenance in the README alongside the existing Claude-reviewing-Claude note.
+Finally (R3-7): recruit at least one human reviewer with coalgebra/category-theory expertise, scoped to two questions the model-only loop cannot settle — is the Klin–Salamanca port faithful to the published no-go, and is the ws11.4-C `WeakDistLaw` definition the class Garner's result actually speaks to? Disclose the review chain's provenance in the README alongside the existing Claude-reviewing-Claude note.
 
 ---
 
@@ -197,12 +197,12 @@ Finally (R3-7): recruit at least one human reviewer with coalgebra/category-theo
 
 ```
 Phase 0 (REV-H, CI, asserting AxiomCheck, bundle refactor)   ── first, ~days
-   ├── WS11 bidirectional identity  (independent, small)      ┐
-   ├── WS12 hereditary scope        (independent; B is risk)  ├─ parallelizable
-   ├── WS13 reified relations       (independent, small)      ┘
-   ├── WS14 graded core + canonicity (large; the long pole)
-   └── WS15 constitutive attention  (A independent; B/C after WS9 familiarity)
-Phase 4 (summaries rewrite, REV-I, human review)              ── after WS11–13
+   ├── ws11.1 bidirectional identity  (independent, small)      ┐
+   ├── ws11.2 hereditary scope        (independent; B is risk)  ├─ parallelizable
+   ├── ws11.3 reified relations       (independent, small)      ┘
+   ├── ws11.4 graded core + canonicity (large; the long pole)
+   └── ws11.5 constitutive attention  (A independent; B/C after WS9 familiarity)
+Phase 4 (summaries rewrite, REV-I, human review)              ── after ws11.1–13
 ```
 
-Every workstream runs the existing seven-phase protocol, with Phase-1 conceptualize output pre-registering the failure conditions written above, so no result can be reframed after the fact — the same guard that made REV-G possible. The plan adds no new criteria, removes none, and touches no §0–§7 text: it either builds the objects the charter always asked for (WS13, WS14-A, WS15-A), proves sharply that they cannot exist where they were first sought (WS11-A, possibly WS12), or makes the ledger and machinery say exactly what the Lean proves (Phase 0, Phase 4).
+Every workstream runs the existing seven-phase protocol, with Phase-1 conceptualize output pre-registering the failure conditions written above, so no result can be reframed after the fact — the same guard that made REV-G possible. The plan adds no new criteria, removes none, and touches no §0–§7 text: it either builds the objects the charter always asked for (ws11.3, ws11.4-A, ws11.5-A), proves sharply that they cannot exist where they were first sought (ws11.1-A, possibly ws11.2), or makes the ledger and machinery say exactly what the Lean proves (Phase 0, Phase 4).
