@@ -293,3 +293,27 @@ universal in the plurality regime (a concrete multistable replicator‑mutator w
 non‑contracting), establishing the WS8 band as necessary; with existence available
 everywhere.** Failure = the witness cannot be exhibited sorry‑free, or collapses (the
 constructed selection turns out to have a unique fixed point after all).
+
+## 5. Update — what was actually built
+
+The design's re‑triage found decidable, infra‑free realizations for **all** of C2–C7, so
+the delivered scope is the full stratification, not just the C2/C3 core:
+
+- **C4** as an *exact* 2‑cycle of a **contrarian** selection `R(w)_r = w_{¬r}²/∑w²` on
+  `Bool` at `μ = 3/8` (swaps `P ↔ Q`) — no `≥3`‑state witness needed; attention never
+  settles.
+- **C5** as the always‑fixed **center** `(½,½)` — existence for every `μ ∈ (0,1]`, one
+  identity.
+- **C6** as **interval** multistability on `μ ∈ (0, 3/8]` (IVT with anchor `x = 3/4`),
+  **plus** the explicit **pitchfork** `μ⋆ = 1/2`: the persistent center's linearized
+  multiplier `2(1−μ)` (a genuine `HasDerivAt`) crosses `1` at `μ⋆` — attracting above,
+  repelling below.
+- **C7** as convergence under a **nonexpansive** selection (`L_R ≤ 1` ⇒ `(1−μ)L_R < 1`),
+  a structural hypothesis that buys the band back on all `μ`.
+
+**Genuinely open residue** (recorded, not laundered): the *exact* `iff` boundary for
+general frequency‑dependent fitness (a bifurcation surface, no closed form), and
+`potential ⇒ convergence below the band` via a discrete Lyapunov / Baum–Eagon theory
+(absent from Mathlib). The stratification is complete in the achievable sense — sufficient
+conditions and counterexamples meeting at the sharp threshold — but the single exact‑`iff`
+law is off the table for principled reasons.

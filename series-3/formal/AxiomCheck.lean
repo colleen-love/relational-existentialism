@@ -60,7 +60,13 @@ import Series3
 #print axioms Series3.WS8.ws8_exp_replicator_converges_band
 #print axioms Series3.WS8.ws8_noncollapse_partial_band
 
-/-! ### WS9 — the convergence boundary (necessity: attention need not converge uniquely) -/
+/-! ### WS9 — the convergence boundary (full stratification: false / conditional / true) -/
 #print axioms Series3.WS9.ws9_multistable
 #print axioms Series3.WS9.ws9_no_unique_attention
 #print axioms Series3.WS9.ws9_no_contraction
+#print axioms Series3.WS9.ws9_two_cycle
+#print axioms Series3.WS9.ws9_nonexpansive_converges
+#print axioms Series3.WS9.ws9_center_fixed_all
+#print axioms Series3.WS9.ws9_multistable_interval
+#print axioms Series3.WS9.ws9_bifurcation
+#print axioms Series3.WS9.coordIndF_hasDerivAt_center

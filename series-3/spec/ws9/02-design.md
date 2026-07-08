@@ -9,33 +9,47 @@ Each candidate is scored on axes that can be settled **without** running Lean: w
 its truth value is decidable by hand, whether the required Lean infrastructure exists in
 the current build, the witness complexity, and the sorry-free attainability.
 
-| # | Framing | Truth (on paper) | Decidable by hand? | Needs new Mathlib infra? | Witness form | Sorry-free now? |
+| # | Framing | Truth (on paper) | Decidable by hand? | Needs new Mathlib infra? | Witness form | Sorry-free? |
 |---|---|---|---|---|---|---|
 | **C1** | universal unique convergence | **false** | yes (refuted by C2) | no | — | n/a (target) |
-| **C2** | multistability witness ⇒ `¬∃!` | **true** | **yes** — 3 exact rational fixed points | no | 3 rationals, arithmetic | **yes** |
-| **C3** | not a contraction | **true** | **yes** — from C2's two fixed points | no | reuse C2 | **yes** |
-| **C4** | genuine 2-cycle (non-settling) | true (∃ instance) | no — needs `|S|≥3`, exact cycle | no, but hard | irrational/delicate | no (not exact) |
-| **C5** | existence everywhere (IVT) | **true** | yes — 1-D IVT | no (IVT present) | analytic, no witness | plausible |
-| **C6** | sharp band / bifurcation | true (partial) | partly — boundary open | continuity-of-root count | `μ`-family | no |
-| **C7** | conditional Lyapunov convergence | true (conditional) | no | **yes** — discrete LaSalle / Baum–Eagon | — | no |
+| **C2** | multistability witness ⇒ `¬∃!` | **true** | **yes** — 3 exact rational fixed points | no | 3 rationals, arithmetic | **yes ✓** |
+| **C3** | not a contraction | **true** | **yes** — from C2's two fixed points | no | reuse C2 | **yes ✓** |
+| **C4** | genuine 2-cycle (non-settling) | **true** | **yes** — *contrarian* selection, `\|S\|=2` | no | `P ↔ Q`, exact rational | **yes ✓** |
+| **C5** | existence everywhere | **true** | **yes** — the center is fixed ∀μ | no | `(½,½)`, arithmetic | **yes ✓** |
+| **C6** | interval + bifurcation `μ⋆` | **true** (interval side) | **yes** — IVT anchor + linearized multiplier | no (IVT + `HasDerivAt` present) | `μ`-interval + `deriv` | **yes ✓** |
+| **C7** | conditional convergence (no band) | **true** (conditional) | **yes** — nonexpansive ⇒ `(1−μ)L_R<1` | no (reuses WS7 Banach) | structural hypothesis | **yes ✓** |
 
-**Reading of the triage.** Exactly two candidates are *both* decidable-by-hand *and*
-sorry-free-attainable with zero new infrastructure: **C2** and **C3** (and C3 is a
-two-line corollary of C2). **C5** is attainable but needs one analytic theorem (IVT) and
-adds the "existence floor" — worthwhile but strictly secondary; it can be deferred
-without weakening the headline. **C4/C6/C7** each hit a wall that is *decidable on
-paper*: C4 needs an exact cycle on `|S|≥3` (no clean rational witness); C6 needs the
-root-count of the fixed-point cubic as a function of `μ` (a genuine bifurcation
-argument, boundary with no closed form); C7 needs a discrete LaSalle/Lyapunov theory
-(Baum–Eagon) absent from Mathlib. None is a *formalization* obstacle only — each is a
-real mathematical/infrastructure cost.
+**Reading of the triage — revised (all seven realized).** The first-pass assessment
+under-rated C4–C7 by fixing on their *hardest* readings. Re-triage found a decidable,
+infra-free realization for each by **changing the witness, not the bar**:
 
-**Decision.** Formalize **C2 (headline) + C3 (corollary)**. This is the minimal decisive
-content: it *refutes C1* and establishes the WS8 band as **necessary**, entirely by
-exact arithmetic. C5/C4/C6/C7 are logged in `01`'s §4 as the interior-refinement
-program. The framing choice (C2) is the *output* of this triage, not a substitute for
-it: C2 wins because it is the unique node that is decisive, hand-decidable, and
-infra-free.
+- **C4** does *not* need `|S|≥3`. The *contrarian* selection `R(w)_r = w_{¬r}²/∑w²`
+  (anti-coordination, still a valid `SelectionMap`) has an **exact rational 2-cycle** on
+  `Bool` at the same `μ = 3/8`: it swaps `P ↔ Q`. Non-settling, fully checkable.
+- **C5** does *not* need the general IVT+continuity apparatus for the headline: the
+  coordination replicator's **center `(½,½)` is a fixed point for every `μ`**, so
+  existence everywhere is one arithmetic identity. (The IVT machinery is still built —
+  it is what C6 needs.)
+- **C6**'s *interval* side is decidable: for `μ ∈ (0,3/8]` a fixed anchor `x = 3/4`
+  certifies `G(3/4) ≥ 0 ≥ G(1−μ/2)`, so IVT gives an off-center fixed point on the whole
+  interval. The **bifurcation** is made explicit not via the (open) exact boundary but
+  via the **linearized multiplier** `2(1−μ)` of the persistent center fixed point
+  (`HasDerivAt`), whose crossing of `1` at `μ⋆ = 1/2` *is* the pitchfork.
+- **C7** does *not* need Baum–Eagon for its provable core: a **nonexpansive** selection
+  (`L_R ≤ 1` — the structural condition) gives `(1−μ)·L_R ≤ 1−μ < 1`, so WS7's Banach
+  spine fires for *all* `μ ∈ (0,1]`. Trades the band for a structural hypothesis, no band.
+
+What remains genuinely infra-gated (and stays out): the **exact** `μ⋆`-boundary as an
+`iff` for general fitness (a bifurcation surface, no closed form), and
+`potential ⇒ convergence below the band` via a full discrete Lyapunov/Baum–Eagon theory
+(absent from Mathlib). These are the honest open residue; everything else is folded in.
+
+**Decision (revised).** Formalize **all of C2–C7** plus the explicit bifurcation. C2/C3
+remain the decisive headline (they refute C1 and make the WS8 band *necessary*); C4–C7
+stratify the rest of the region — non-settling (C4), existence floor (C5), interval +
+pitchfork (C6), conditional convergence (C7) — each with an exact, hand-decidable,
+infra-free witness. The framing choice is the *output* of the re-triage: the bar never
+moved; the witnesses got smarter.
 
 ## 2. The witness (worked on paper)
 
@@ -130,12 +144,34 @@ headline
 7. **`¬ contraction`.** `dist_pos.mpr ptP_ne_ptM` and `mul_lt_of_lt_one_left`; rewrite
    both `attnStep`-images to `ptP`/`ptM` (fixed points) and `linarith`.
 
+### 3.1a Machinery for the folded-in pieces (C4–C7 + bifurcation)
+
+8. **C4 (non-settling).** `antiR w r := w_{¬r}²/∑w²` (contrarian), `antiSel`,
+   `antiStep := mutT (3/8) … antiSel`. `antiStep_PtoQ : antiStep ptP = ptQ` and
+   `antiStep_QtoP` (same arithmetic as the fixed-point lemmas, with the `Bool.not_*`
+   reindex). `ws9_two_cycle : antiStep (antiStep ptP) = ptP ∧ antiStep ptP ≠ ptP`.
+9. **C5 (existence everywhere).** `coordFix`: a root `coordIndF μ x = x` in
+   `[μ/2, 1−μ/2]` reconstructs a `FlooredSimplex` fixed point `(x,1−x)` (false-coord by
+   the root, true-coord by mass-conservation through `mutationStep_maps_into`).
+   `ws9_center_fixed_all` = `coordFix` at `x = 1/2` (`coordIndF_center`), any `μ`.
+10. **C6 (interval + bifurcation).** `coordIndF μ x := (1−μ)·x²/(x²+(1−x)²) + μ/2`, the
+    induced 1-D map; `coordDen_pos`, `coordIndF_upper` (`≤ 1−μ/2`), `coordIndF_continuous`.
+    `ws9_multistable_interval` (∀ `μ∈(0,3/8]`): center + an IVT root in `[3/4, 1−μ/2]`
+    (`intermediate_value_Icc'` with `G(3/4) ≥ 0 ≥ G(1−μ/2)`), distinct by
+    false-coord `≥ 3/4 ≠ ½`. `coordMultiplier μ := 2(1−μ)`,
+    `coordIndF_hasDerivAt_center : HasDerivAt (coordIndF μ) (coordMultiplier μ) (½)` (via
+    `HasDerivAt.pow/.div`), `ws9_bifurcation` (`multiplier < 1 ↔ ½ < μ` and
+    `1 < multiplier ↔ μ < ½`) — the pitchfork at `μ⋆ = ½`.
+11. **C7 (conditional).** `ws9_nonexpansive_converges`: `SelectionLipschitz` with
+    `L_R μ ≤ 1` ⇒ `(1−μ)·L_R ≤ 1−μ < 1` ⇒ `ws7_attention_fixed_point`, all `μ∈(0,1]`.
+
 ### 3.2 Dependencies on imported upstream theorems
 
 - **WS7 (used directly):** `FlooredSimplex` (subtype + `MetricSpace`), `SelectionMap`,
-  `mutationStep`, `mutT` (the invariance packaging `mutationStep_maps_into` is consumed
-  implicitly through `mutT`). No WS7 *theorem* is invoked — only the definitions — so
-  WS9 cannot inherit any WS7 hazard.
+  `mutationStep`, `mutT`, `mutationStep_maps_into` (invariance, for C5's true-coord),
+  `SelectionLipschitz` + `ws7_attention_fixed_point` (for C7). The necessity core (C2/C3)
+  invokes no WS7 *theorem* — only definitions; the conditional (C7) reuses WS7's Banach
+  spine as its whole content.
 - **WS8 (referenced, not imported):** the bands `ws8_replicator_converges` /
   `ws8_exp_replicator_converges` are the *sufficient* side; WS9 is their converse
   boundary. `ws9_no_contraction` is exactly the statement that WS8's Banach hypothesis
@@ -155,13 +191,27 @@ headline
   `sorry` masks it. If `coordSel` were not a valid `SelectionMap`, the structure fields
   fail to typecheck. There is no route by which a false WS9 claim compiles.
 
-## 4. Scope statement
+## 4. Scope statement (as built)
 
-WS9 delivers the **necessity** half of the convergence characterization: unique
-attention convergence is not universal in the plurality regime (`C2`), and the failure
-is a true non-contraction (`C3`), witnessed by an exact rational bistable
-replicator-mutator instance. It deliberately does **not** claim the interior refinements
-(C4 cycles, C6 sharp bifurcation `μ⋆`, C7 conditional Lyapunov convergence); those are
-named, triaged, and left as typed future obligations, not laundered into the headline.
-The bundle name is `ws9_no_unique_attention` (+ `ws9_no_contraction`), **not**
-`ws9_convergence_characterized`.
+WS9 delivers a **stratified characterization** of the replicator-mutator convergence
+region, all sorry-free and axiom-clean:
+
+- **False (necessity):** `ws9_no_unique_attention` / `ws9_no_contraction` — unique
+  convergence is not universal in the plurality regime (three exact fixed points at
+  `μ = 3/8`); and `ws9_two_cycle` — a contrarian selection *never settles* (an exact
+  period-2 orbit `P ↔ Q`).
+- **True (floors):** `ws9_center_fixed_all` — a fixed point exists for every `μ ∈ (0,1]`;
+  `ws9_multistable_interval` — multistability holds on the whole interval `μ ∈ (0, 3/8]`.
+- **Bifurcation:** `coordIndF_hasDerivAt_center` + `ws9_bifurcation` — the persistent
+  center's linearized multiplier `2(1−μ)` crosses `1` at the pitchfork `μ⋆ = 1/2`
+  (attracting above, repelling below).
+- **Conditional:** `ws9_nonexpansive_converges` — a structural hypothesis (nonexpansive
+  selection) buys convergence back on all of `μ ∈ (0,1]`, no band.
+
+**Honest open residue** (genuinely infra-gated, *not* laundered): the **exact** `μ⋆`
+boundary as an `iff` for general frequency-dependent fitness (a bifurcation surface with
+no closed form), and `potential ⇒ convergence below the band` via a full discrete
+Lyapunov/Baum–Eagon theory (absent from Mathlib). The bundle is therefore named by its
+parts (`ws9_*`), **not** `ws9_convergence_characterized`: the stratification is complete
+in the achievable sense (sufficient conditions + counterexamples that meet at the sharp
+threshold), but the single exact-`iff` law is off the table for principled reasons.
