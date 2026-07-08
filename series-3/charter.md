@@ -58,6 +58,99 @@
 > `ws4_resolved`) is preserved in these status lines so no importer reads the delivered
 > coherence as the registered discharge. Nothing in §§0–7 target/criteria text is altered.
 
+> **Charter status — Revision D (post-WS5/WS6/WS7 reports).** Like A–C, this
+> revision changes neither the philosophical target nor the §7 success criteria; it
+> records, in the §5 vocabulary, what the three remaining primary workstreams
+> reported. **All three reported Partial**, each splitting exactly along the lines
+> §8.1 pre-registered, and each preserving the WS4 naming discipline (the top
+> bundle is named for what it proves — `ws5_incompleteness_and_floor`,
+> `ws6_split_and_no_maximal`, `ws7_band_and_retro` — never `ws*_resolved`), so no
+> importer can read a delivered fragment as full discharge. **WS5 — finite
+> attention. Partial (split).** Self-description incompleteness is **Impossibility
+> proved** and `(F, κ)`-*robust* (`ws5_carrier_incomplete`, a pure Lawvere/Cantor
+> diagonal over the `< κ` attention support, consuming no carrier-cardinality fact
+> and no functor-specific branching, so it survives WS4's `W_Q` and any WS7
+> `(F, κ)`); the plurality/anti-collapse floor is **Discharged**
+> (`ws5_plurality_floor`, `ws5_no_delta`, with `hμ : 0 < μ` load-bearing); and
+> convergence is **Partial-conditional** — the Banach step is proved
+> (`ws5_attention_converges`), but the premise that the replicator-with-mutation is
+> a contraction (`replicator_mutator_contracts`) has **no inhabiting theorem**, the
+> standing §8 risk left exposed. **WS6 — no poles, no outside. Partial.** The
+> pole-coincidence facet is resolved as **declare the split** — an **Impossibility
+> proved (scoped)** (`ws6_poles_split`); the blanket cross-category form is the
+> named open obligation `ws6_no_faithful_zero_host` (almost certainly false as a
+> blanket, itself the finding). "No maximal everything" is **Discharged by
+> `κ`-fiat** (`ws6_no_maximal`), **discharging WS1's §3.7 [REV-A] hand-off**.
+> Criterion **(vi) was reported Open**: on the terminal carrier `PositionFree` is
+> *vacuous* (`ws6_standpoint_vacuous`, via `endo_eq_id`), so the terminal carrier
+> alone furnishes no substantive standpoint content — routed forward. **WS7 —
+> non-collapse (the collector). Partial.** The static structural band is
+> **Discharged** in witness form (`ws7_static_band`); the collector spine is
+> **Discharged at one concrete tuple** `(κ₀, μ, Łₙ)` (`ws7_retro_validate`), with the
+> WS4-routed `#Q ≤ κ` side-condition *proved* at the finite witness (`luk_card_le`),
+> so a single `(F, κ, μ, #Q)` is exhibited against which the WS2 characterization,
+> no-maximal, the WS6 split, and the WS4 graded-law coherence all simultaneously
+> hold. Two collector duties stay **open and typed**: the *universal* richness floor
+> `GeneralBranching` (`RichnessGeneralStatus.open_iv_blocking`, never derived from
+> the ≥2-state witness), and the **dynamical axis, `deferred` to "Lemma B"** — WS7
+> sharpens WS5's opaque contraction obligation into the analytic inequality
+> `(1 − μ)·L_R μ < 1` (existence of a `SelectionLipschitz` witness meeting it),
+> proving the contraction and fixed point *given* it (`ws7_mutation_contracts`,
+> `ws7_attention_fixed_point`) but not the inequality. WS7 fixes its own scope
+> (`CarrierScope.set_cofix_only`): §3.7's no-maximal face and (vii), **not** the
+> zero-object face or (vi). Per §5, three Partials trigger methodology notes and
+> hand-offs, not a reframe. Changes are confined to the §4 WS5/WS6/WS7 status lines,
+> the §8.1 WS5/WS6/WS7 status lines, and the §6.1 ratification list (WS1's §3.7
+> hand-off marked discharged by WS6; `GeneralBranching` and Lemma B pinned open).
+> All are tagged **[REV-D]**. Criterion (iv) remains Partial at this point
+> (unchanged from REV-C); (v) and (vi) are recorded Partial and Open; (vii)'s
+> structural half is met and its dynamical half deferred. Nothing in §§0–7
+> target/criteria text is altered.
+
+> **Charter status — Revision E (post-WS8 report).** WS8 is the "fill the holes"
+> workstream (`series-3/spec/ws8`): it discharges, against the *actual* upstream
+> Lean API, several obligations WS3/WS4/WS6/WS7 left as typed holes — and, in the
+> §8.2 discipline, reports that several of the design's *literal* target signatures
+> are **false against the formalized definitions**, proving the honest true form
+> instead. Like A–D it changes neither the target nor the §7 criteria. WS8 reported
+> (all `sorry`-free at source audit; `#print axioms` per top theorem still owed —
+> see the operational note carried since REV-A). **Obligation A — WS4 Layer C,
+> discharged *positively*.** `WQPreservesWeakPullback` is **proved for every `Q`**
+> (`wq_preserves_weak_pullback`): WS4's `WQRel` is the *sup-based* Barr lifting with
+> **no `⊗`-coupling**, so `ws2.PkRel_le_comp`'s middle-point-selection argument ports
+> verbatim (`Classical.choice` only, no cardinal hypothesis). The design's intended
+> §8 Impossibility branch (`ws4_no_quantitative_grading`) targeted a *different,
+> `⊗`-weighted* lifting WS4 never defined; against the lifting WS4 did define,
+> preservation **holds**, so the REV-C step-6 fork **resolves positive**.
+> **Obligation B — weak-law canonicity, discharged.** `ws3_weak_law_canonical`
+> upgrades WS3's `∃` to **`∃!`**: the Egli–Milner weak law is the unique map
+> satisfying the `T`-unit and corrected Egli–Milner multiplication laws for bounded
+> `P_κ`, via injectivity of `destEquiv` — the canonicity the §6.1 [REV-B] pin
+> required (the *graded* transport through `W_Q` stays behind the open step-16
+> reduction). **Obligation E — criterion (vi), both halves discharged.**
+> `ws6_no_global_observer` (negative — no observer's `< κ` successor set surjects
+> onto the carrier) and `ws6_substantive_standpoints` (positive — distinct bases
+> with distinct observations give genuinely distinct positioned views) **close the
+> (vi) shortfall WS6 reported Open**, replacing the vacuity of
+> `ws6_standpoint_vacuous`. **Obligation D — WS7 richness floor, corrected.**
+> `ws7_general_branching_false` **proves `¬ GeneralBranching κ`** (the empty carrier
+> state has out-degree 0), so the *universal* floor WS7 held open is provably
+> unachievable; the honest replacement is the `alg`-relative floor
+> `ws7_iv_branching` (what WS3's `alg_nontrivial` supplies). **Obligation C —
+> convergence, deferred (unchanged).** WS8 formalizes no convergence and lets **no
+> `sorry` stand in for it**; it remains the quarantined analytic obligation (WS5's
+> `replicator_mutator_contracts` / WS7's Lemma B), the Banach consumer
+> (`ws7_attention_fixed_point`) ready. **Net effect on §7:** with A + B, criterion
+> **(iv) moves from Partial to Discharged for the bounded carrier `P_κ`** (strict law
+> impossible — a positive finding; weak law now weak-pullback-preserving *and*
+> canonical); with E, criterion **(vi) moves from Open to Discharged**; (i)–(iii)
+> stand discharged since REV-A/C; (vii)'s structural half stands and its **dynamical
+> half (convergence / Lemma B) remains the one open criterion**. Changes are confined
+> to the §4 WS3/WS4/WS6/WS7 status lines, the §6.1 ratification list (WS4's two
+> duties discharged by WS8-A/B; `GeneralBranching` refuted and replaced; the WS7
+> collector tuple ratified), and two new §8.2 errata. All are tagged **[REV-E]**.
+> Nothing in §§0–7 target/criteria text is altered.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
@@ -276,11 +369,11 @@ Workstreams:
 
 - **WS1 — Groundless carrier.** Fix the ambient theory (ZFC/AFA, or a category of classes). Confirm the intended reflexive, relation-only objects exist, unique up to bisimulation. **[REV-A] Status: discharged for the bounded carrier `P_κ` (existence + uniqueness-up-to-bisimulation + `Ω = {Ω}` + solution lemma), unconditionally and axiom-free modulo machine-checked compilation. The residual "which bound / no-everything" question is handed to WS6/WS7, not settled here. See §8.**
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
-- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1.**
-- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1.**
-- **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions.
-- **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint.
-- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly.
+- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1. [REV-E] Canonicity now discharged: `ws3_weak_law_canonical` proves this weak law is the unique (`∃!`) map satisfying the `T`-unit and Egli–Milner multiplication laws for bounded `P_κ`. With WS8-A (weak-pullback preservation), criterion (iv)'s coherence obligation is met; (iv) → Discharged for the bounded carrier.**
+- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1. [REV-E] Layer C now discharged positively by WS8 (`wq_preserves_weak_pullback`, every `Q`); the design's `ws4_no_quantitative_grading` impossibility is found to target a `⊗`-weighted lifting WS4 never defined, so the step-6 fork resolves positive. Criterion (iv) → Discharged (bounded carrier); the graded canonicity transport through `W_Q` (step-16 reduction) remains the sole WS4-local residual.**
+- **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions. **[REV-D] Status: Partial (split). Incompleteness Impossibility-proved and `(F, κ)`-robust (`ws5_carrier_incomplete`); plurality floor Discharged (`ws5_plurality_floor`, `ws5_no_delta`); convergence Partial-conditional (`ws5_attention_converges` proved, `replicator_mutator_contracts` an uninhabited typed obligation). Bundle `ws5_incompleteness_and_floor`, not `ws5_resolved`. See §8.1.**
+- **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint. **[REV-D] Status: Partial. Poles-split Impossibility-proved-scoped (`ws6_poles_split`); no-maximal Discharged by `κ`-fiat (`ws6_no_maximal`), discharging WS1's §3.7 hand-off; criterion (vi) reported Open (`ws6_standpoint_vacuous`). [REV-E] (vi) since Discharged by WS8-E (`ws6_no_global_observer` + `ws6_substantive_standpoints`). Bundle `ws6_split_and_no_maximal`, not `ws6_resolved`. See §8.1.**
+- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly. **[REV-D] Status: Partial (collector). Static band Discharged (`ws7_static_band`); concrete tuple `(κ₀, μ, Łₙ)` retro-validated (`ws7_retro_validate`, `#Q ≤ κ` proved via `luk_card_le`); `GeneralBranching` and the dynamical Lemma B held open. [REV-E] The universal `GeneralBranching` floor is refuted (`ws7_general_branching_false`) and replaced by the honest `alg`-relative floor (`ws7_iv_branching`); the dynamical axis stays `deferred` (Lemma B). Bundle `ws7_band_and_retro`, not `ws7_resolved`. See §8.1.**
 
 ---
 
@@ -386,6 +479,33 @@ Its effect on the ratification list:
   or a ratified truncation). WS7's collector duty (§6.1 management rule) is upgraded:
   it must ratify the joint tuple `(F, κ, μ, #Q)`, not `(F, κ, μ)`.
 
+**[REV-D] Obligations from the WS5/WS6/WS7 reports.**
+
+- **WS1 §3.7 `κ`-fiat hand-off — discharged (by WS6).** The "no maximal
+  everything" duty §3.9/§3.7 [REV-A] routed forward is closed by `ws6_no_maximal`
+  (maximality would force the `< κ` support to be the whole carrier, contra
+  `κ ≤ #(νPk κ).X`). Recorded as discharged, not merely reassigned.
+- **Dynamical non-collapse (convergence) — pinned open, Lemma B.** WS5's
+  `replicator_mutator_contracts` is sharpened by WS7 into the analytic inequality
+  `(1 − μ)·L_R μ < 1` (existence of a `SelectionLipschitz` witness). Neither is
+  inhabited; the Banach consumer (`ws7_attention_fixed_point`) is ready. This is the
+  program's one remaining open criterion-(vii) sub-obligation.
+- **WS7 collector tuple — ratified at one witness.** `(F, κ, μ, #Q) = (P_κ, κ₀, μ,
+  Łₙ)` is exhibited and retro-validated (`ws7_retro_validate`); the `#Q ≤ κ` band
+  side-condition [REV-C] is *proved* at the finite witness, not vacuous.
+
+**[REV-E] Obligations closed / corrected by the WS8 report.**
+
+- **WS4 weak-pullback preservation (Layer C) — discharged (WS8-A).**
+  `wq_preserves_weak_pullback` inhabits `WQPreservesWeakPullback Q κ` for every `Q`;
+  the REV-C "open in neither direction" fork resolves positive. See §8.2 erratum 3.
+- **WS3/WS4 weak-law canonicity — discharged for bounded `P_κ` (WS8-B).**
+  `ws3_weak_law_canonical` (`∃!`) closes the [REV-B] canonicity pin. Residual: the
+  *graded* transport through `W_Q` (step-16) stays open, WS4-local.
+- **WS7 universal richness floor `GeneralBranching` — refuted, replaced (WS8-D).**
+  `ws7_general_branching_false` proves `¬ GeneralBranching κ`; the load-bearing floor
+  for (iv)/(vii) is the `alg`-relative `ws7_iv_branching`. See §8.2 erratum 4.
+
 ---
 
 ## 7. Success criteria
@@ -463,11 +583,17 @@ WS4 has now reported, and the outcome resolves to the pre-registered acceptable 
 **WS5 — Finite attention. Outcome: split — incompleteness Discharged/Impossibility-proved-likely; convergence Partial-by-construction.**
 The incompleteness-of-self-knowledge result is *robust*: it is a Lawvere-diagonal impossibility that does not depend on the `(F, κ)` choice, and it is the cleanest candidate for an outright success (indeed an **Impossibility proved** in the §5 sense — a sharp negative that the program *wants*). Convergence is the opposite: Banach needs a genuine contraction on a complete metric realization of the (bounded) `νF`, and the replicator-with-mutation operator being contractive is a *hypothesis*, not a generic fact — the standing risk "attention need not converge" is real. *Methodology note:* report WS5 as two separate results with different statuses; do not let the solid incompleteness theorem launder the conditional convergence claim into looking equally settled. State the contraction/μ conditions explicitly as hypotheses.
 
+*[REV-D] Reported: Partial (split), exactly as pre-registered.* Incompleteness came in as the anticipated **Impossibility proved**, and stronger than expected on robustness: `ws5_carrier_incomplete` is a pure Lawvere/Cantor diagonal (`Function.cantor_surjective`) over the `< κ` attention support, so it consumes no carrier-cardinality fact and no functor-specific branching and survives WS4's `W_Q` and any WS7 `(F, κ)` unchanged; `ws5_incomplete_nonvacuous` records the gap is non-vacuous. The plurality/anti-collapse floor is **Discharged** (`ws5_plurality_floor`, `ws5_no_delta`; `hμ : 0 < μ` is load-bearing and stated — `μ = 0` is exactly where collapse re-enters). Convergence is **Partial-conditional**: `ws5_attention_converges` proves the Banach step (with a `[Nonempty M]` honesty correction to the design signature — existence fails on the empty space), and the contraction premise `replicator_mutator_contracts` is a typed obligation with **no inhabiting theorem**. Bundle `ws5_incompleteness_and_floor`, not `ws5_resolved`, so incompleteness cannot launder the open convergence. *Operational axiom check:* `#print axioms ws5_incompleteness_and_floor` owed (incompleteness core expected `Classical`-only); not run for this revision.
+
 **WS6 — No poles, no outside. Outcome: at-risk of Partial. Same class, high; it is the receiving end of WS1's hand-off.**
 WS6 must discharge, non-trivially, the "no maximal everything" that WS1 secured only by fiat. But §3.7's zero-object route requires *leaving `Set`* for a category with a zero object — which is **not** the category the bounded final coalgebra of WS1/WS2 lives in. So the poles-coincidence object and the groundless carrier risk being different objects in different categories, and "the same object realizes both" is an unproven bridging claim. *Methodology note:* WS6 must state in which single ambient category *all* of (poles-coincidence, no-everything, groundless carrier) are meant to coexist, and either exhibit it or declare the split. This is a stronger coupling to WS1 than the original §6 (deliverable 5 vs 2) admits.
 
+*[REV-D] Reported: Partial.* The bridging worry above is resolved in the honest direction — **declare the split**, a §5 **Impossibility proved (scoped)**: `ws6_poles_split` shows that a faithful carrier-embedding landing *entirely* in zero objects is contradictory (the load-bearing mechanism is terminality, not null morphisms; `ws6_embedding_nonvacuous` certifies the hypothesis is inhabited). The blanket cross-category claim is left as the named open obligation `ws6_no_faithful_zero_host`, almost certainly false as a blanket (pointed sets host the carrier faithfully) — which is itself the finding: the split holds only against *total* coincidence. "No maximal everything" is **Discharged by `κ`-fiat** (`ws6_no_maximal`), which **discharges WS1's declared §3.7 [REV-A] hand-off**, recorded in §6.1. At REV-D criterion **(vi) was reported Open**: `ws6_standpoint_vacuous` proves the true content — `PositionFree` holds *vacuously for every* observation (via `endo_eq_id`, the terminal carrier admitting only the identity endo-view) — and that vacuity is exactly why the terminal carrier alone furnishes no substantive standpoint. *Honest-signature correction:* the design's `ws6_empty_standpoint` disjunction is false as stated (vacuity would force every predicate constant); `ws6_standpoint_vacuous` is the true realization. Bundle `ws6_split_and_no_maximal`, not `ws6_resolved`. *[REV-E] Criterion (vi) since Discharged by WS8:* `ws6_no_global_observer` (negative — no observer's `< κ` successor set surjects onto the carrier) and `ws6_substantive_standpoints` (positive — distinct bases with distinct observations give genuinely distinct positioned partial views) together supply both halves, replacing the vacuity with content. *Operational axiom check:* `#print axioms ws6_split_and_no_maximal` (and the two WS8 (vi) theorems) owed; not run for this revision.
+
 **WS7 — Non-collapse. Outcome: at-risk; the central conjecture may yield Impossibility-proved. Highest hand-off load.**
 WS7 is the designated collector: it inherits `κ` from WS1, the functor/weights from WS2/WS4, and the mutation floor `μ` from WS5, and must show a *single* concrete `(F, κ, μ)` sits in the Goldilocks band. The standing risk that the band "may be narrow or empty" means the honest outcome could be that no such choice exists — an **Impossibility proved** (a program-level success per §7, and arguably the most informative one), *not* a failure. The richness floor (branching ≥ 2) versus boundedness (`< κ`) is plausibly jointly satisfiable for finite/`κ`-powerset, but the *dynamical* non-collapse (μ-floor keeps attention off the simplex vertices) is a separate analytic condition that must be proved, not assumed. *Methodology note:* WS7's deliverable must be phrased as "locate the band **or** prove it empty," with both treated as valid terminal outcomes, and it must retro-validate every upstream "for `κ` infinite regular" theorem against its final concrete choice. **[REV-B] WS3 confirms one of WS7's inherited duties is now (iv)-blocking, not merely (vii)-blocking: the branching-≥2 richness floor is what WS3's sharp non-triviality relies on, so WS7's richness-floor result feeds bidirectional constitution as well as non-collapse.**
+
+*[REV-D] Reported: Partial (collector).* The "locate the band **or** prove it empty" deliverable came in on the *locate* side, at one witness. The static structural band is **Discharged** in witness form (`ws7_static_band`: ≥2 distinct states, no maximal state, weak-pullback preservation). The collector spine is **Discharged at one concrete tuple** `(κ₀, μ, Łₙ)` (`ws7_retro_validate`), and the WS4-routed `#Q ≤ κ` side-condition is *proved* at the finite witness (`luk_card_le`), not left vacuous — so a single `(F, κ, μ, #Q)` is exhibited against which the WS2 characterization, no-maximal, the WS6 split, and the WS4 graded-law coherence all simultaneously hold, retro-validating the upstream "for `κ` infinite regular" theorems at that choice. Two collector duties stayed **open and typed**: the *universal* richness floor `GeneralBranching` (`RichnessGeneralStatus.open_iv_blocking`, never derived from the ≥2-state witness), and the **dynamical axis, `deferred` to "Lemma B"** — WS7 sharpens WS5's opaque contraction premise into the analytic inequality `(1 − μ)·L_R μ < 1` (existence of a `SelectionLipschitz` witness meeting it), proving the contraction and fixed point *given* it (`ws7_mutation_contracts`, `ws7_attention_fixed_point`) but not the inequality. WS7 fixes its own scope (`CarrierScope.set_cofix_only`): §3.7's no-maximal face and (vii), **not** the zero-object face or criterion (vi). Bundle `ws7_band_and_retro`, not `ws7_resolved`. *[REV-E] `GeneralBranching` refuted and replaced by WS8:* `ws7_general_branching_false` proves `¬ GeneralBranching κ` (the empty carrier state has out-degree 0), so the universal floor is provably unachievable; the honest load-bearing floor for (iv)/(vii) is the `alg`-relative `ws7_iv_branching` (out-degree ≥ 2 from two members with distinct successor *points*, the D2 hypothesis corrected — see §8.2 erratum 4). The dynamical axis remains `deferred` (Lemma B), the program's one open criterion-(vii) sub-obligation. *Operational axiom check:* `#print axioms ws7_band_and_retro` (and the WS8 `ws7_*` theorems) owed; not run for this revision.
 
 ### 8.2 [REV-A] The one-line summary
 
@@ -490,10 +616,29 @@ never relabel the shortfall as the goal.**
 > impossibility half is a positive finding (composition of relations-as-objects is
 > inherently non-strict), not a shortfall dressed up as a goal.
 
+> **[REV-E] WS8 executes the same discipline in reverse — surfacing two design
+> targets that were false as literally stated, and proving the honest true form.**
+> *Erratum 3 — WS4 design A5 target (weak-pullback preservation).* The WS4 design
+> registered `¬ WQPreservesWeakPullback` (A5) as the anticipated Impossibility, on
+> the reasoning that non-idempotent `⊗`-weighting blocks witness reassembly. But
+> WS4's *formalized* `WQRel` is the sup-based Barr lifting with no `⊗`-coupling of
+> leg weights; A5's obstruction never arises for it, and WS8 proves the positive
+> `wq_preserves_weak_pullback` instead. The impossibility was aimed at a
+> `⊗`-weighted lifting *outside* the formalization; surfaced here, not silently
+> dropped. The genuine `⊗`-weighted question is a *different* open problem, not this
+> criterion-(iv) obligation, and its resolution here is what moves (iv) to
+> Discharged. *Erratum 4 — WS7 D2 branching hypothesis.* The design's D2 hypothesis
+> `str x₁ ≠ str x₂` is insufficient: a singleton-successor member and the empty
+> state have distinct successor *sets* but their Egli–Milner union has out-degree 1.
+> The true, proved form (`ws7_iv_branching`) hypothesizes two members with distinct
+> successor *points*, exactly what WS3's `alg_nontrivial` supplies. Both are §8.2
+> corrections — an over-shooting target replaced by the honest theorem — not
+> weakenings of any criterion.
+
 ---
 
 ## 9. Positioning
 
 Philosophically: Ladyman & Ross (*Every Thing Must Go*, 2007), French (*The Structure of the World*, 2014), the "relations without relata" objection, and the denial of a view from nowhere (Nagel). Formally: Aczel's non-well-founded set theory; universal coalgebra (Rutten, Jacobs); Turi–Plotkin bialgebraic semantics; Lawvere's fixed-point theorem and its diagonal corollaries; Lawvere-enriched categories; replicator dynamics. The distinctive bet: these usually separate literatures, taken together, are the correct constitution for a groundless, perspective-bearing, relation-first ontology — and where they resist, the resistance is itself metaphysically informative.
 
-*Working draft. Revision A adds the §3.9 bounded-carrier reconciliation, the §6.1 shared-parameter dependency structure, and the §8.1 per-workstream hazard audit; §§0–2, 4 (workstream list bodies), 5 (methodology body), 7 (criteria), and 9 are otherwise retained from the original. Revision B records the WS3 report: the §8.1 WS3 status (now Partial, reported), the §6.1 WS4 canonical-weak-law ratification obligation, the §6 `pentagon` signature erratum, and the §8.1 operational axiom-check note; it adds inline [REV-B] pointers at §§3.4, 6, 7, 8, 8.2 and leaves all §§0–7 target/criteria text unaltered. To be revised as the remaining workstreams report.*
+*Working draft. Revision A adds the §3.9 bounded-carrier reconciliation, the §6.1 shared-parameter dependency structure, and the §8.1 per-workstream hazard audit; §§0–2, 4 (workstream list bodies), 5 (methodology body), 7 (criteria), and 9 are otherwise retained from the original. Revision B records the WS3 report: the §8.1 WS3 status (now Partial, reported), the §6.1 WS4 canonical-weak-law ratification obligation, the §6 `pentagon` signature erratum, and the §8.1 operational axiom-check note; it adds inline [REV-B] pointers at §§3.4, 6, 7, 8, 8.2 and leaves all §§0–7 target/criteria text unaltered. Revision C records the WS4 report: the §4/§8.1 WS4 status (now Partial, reported — enriched carrier and identity theory discharged, graded multiplication coherence proved at the non-idempotent witness `Łₙ`, Layer C left a typed open obligation), the §6.1 [REV-C] ratification status (WS4's two duties open, the `(F, κ, μ, #Q)` cardinality duty routed to WS7), with inline [REV-C] pointers and no §§0–7 change. Revision D records the WS5/WS6/WS7 reports (all Partial): WS5 incompleteness (Impossibility-proved, `(F, κ)`-robust) + plurality floor (Discharged) + conditional convergence; WS6 poles-split (Impossibility-proved, scoped) + no-maximal (Discharged, closing WS1's §3.7 hand-off) + (vi) Open; WS7 static band + concrete-tuple retro-validation (Discharged) with `GeneralBranching` and the dynamical Lemma B held open — updating the §4 and §8.1 WS5/WS6/WS7 status lines and the §6.1 ratification list. Revision E records WS8's hole-filling: weak-pullback preservation (Layer C, WS8-A) and weak-law canonicity (WS8-B) discharged — moving criterion (iv) to Discharged for the bounded carrier — criterion (vi) discharged (WS8-E), and the WS7 universal richness floor refuted and replaced by its honest `alg`-relative form (WS8-D), with two §8.2 errata; inline [REV-D]/[REV-E] pointers at §§4, 6.1, 8.1, 8.2, and no §§0–7 target/criteria change. After Revision E, criteria (i)–(iv) and (vi) are discharged for the bounded carrier and (vii)'s structural half is met; the single remaining open criterion is (vii)'s dynamical half — convergence of attention (Lemma B) — and the standing operational obligation is the machine-checked `#print axioms` pass, not performed for these revisions (no Lean/Mathlib environment at drafting time). To be revised if further workstreams report or the open obligations close.*
