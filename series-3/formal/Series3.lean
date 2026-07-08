@@ -57,3 +57,13 @@ import ws7
 -- the weak law (∃!), general-branching refuted + the honest alg-relative floor, and
 -- both faces of criterion (vi) (no global observer + positioned views). C deferred.
 import ws8
+-- WS9 (`series-3/spec/ws9/`) — the convergence boundary, a full stratification of where
+-- attention converges. WS8 gave sufficient contraction bands; WS9 adds: FALSE — unique
+-- convergence is not universal (`ws9_no_unique_attention`/`ws9_no_contraction`: three
+-- fixed points of `w_r²/∑w²` at `μ = 3/8`) and attention can fail to settle at all
+-- (`ws9_two_cycle`: a contrarian selection's exact 2-cycle); TRUE — existence for every
+-- `μ` (`ws9_center_fixed_all`) and multistability on `μ ∈ (0,3/8]` (`ws9_multistable_interval`);
+-- BIFURCATION — the pitchfork `μ⋆ = 1/2` via the center's multiplier `2(1−μ)`
+-- (`ws9_bifurcation`); CONDITIONAL — nonexpansive selection converges on all `μ`
+-- (`ws9_nonexpansive_converges`). Named by parts, not `ws9_convergence_characterized`.
+import ws9
