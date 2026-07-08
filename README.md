@@ -1,6 +1,6 @@
 # Relational Existentialism
 
-**A machine-checked mathematical foundation for an ungrounded constitution, priority relationalism.**
+**An ungrounded constitution of a relation-first reality — priority relationalism, built and machine-checked in Lean 4 as a bounded reconstruction whose hard edges are proved, not smoothed.**
 
 ## The claim
 
@@ -10,9 +10,13 @@ This repository makes that position mathematically exact and mechanizes it in Le
 
 > **Ω ≅ F(Ω)** — the universe of objects is exactly the patterns of relating among those very objects.
 
-The framework has **one primitive** — observation, which is what relating is: lossy, transmissible witnessing — and **one axiom** governing it. Everything classically asserted about objects (that they exist, self-relate, compose, and are constituted by what they relate to) is *proved*, not posited.
+The framework has **one primitive** — observation, which is what relating is: lossy, transmissible witnessing — and **one axiom** governing it. What is classically *asserted* about objects (that they exist, self-relate, compose, and are constituted by what they relate to) is here *proved*.
 
-**One primitive, one axiom. Objects are theorems.**
+**And the honest result is sharper than the dream — and better.** The literal, unbounded Ω is proved *too big to exist* as a set (the same wall that forbids a set of all sets). So what is built and machine-checked — sorry-free, on no axioms beyond Mathlib's standard three — is a **bounded reconstruction**: the terminal coalgebra of the κ-bounded powerset functor, inside which `Ω ≅ F(Ω)` genuinely holds and the canonical `Ω = {Ω}` is recovered. Of the seven commitments, six are discharged — **two of them as impossibility theorems** (nothing can completely know itself; there is no strict top-down-and-bottom-up master law) — and the seventh, non-collapse, has its structural half discharged and its dynamical half, the **convergence of attention**, now characterized: it converges on explicit bands, provably fails to converge uniquely outside them, with the boundary a named pitchfork.
+
+The deepest finding is a theorem about the enterprise itself: **the very bound that lets the object exist is what weakens every sweeping claim about the totality.** You can have a relation-first world that genuinely *exists*, or the fully unbounded, no-edges-anywhere version that stays a beautiful idea — the mathematics says not both. That trade-off is the price of existence, and it is machine-checked.
+
+**One primitive, one axiom. Objects are theorems — and the theorems include their own limits.**
 
 ## Series 3
 
