@@ -28,7 +28,6 @@ statements.
 | Criterion (vi) rests on a phantom-κ theorem and a triviality | **O5** | Discharged (carrier-linked witness + properness) |
 | Dynamics never touch the carrier (`Fintype S` vs `SelfSupport`) | **O6** | Discharged at the O1 tuple (κ₀ = ℵ₀ makes supports finite) |
 | WS9 residue: multiplier ≠ attractivity; the (3/8, 1/2) gap; no global uniqueness above μ⋆ | **O7** | Partial (attractivity feasible; the rest characterized open) |
-| Prose/claims drift in charter, summaries, README, spec hygiene | **O8** | Discharged (editorial; gated on O1–O6) |
 
 ## 1. What WS9 already closed, and its precise residue
 
