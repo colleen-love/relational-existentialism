@@ -192,6 +192,72 @@
 > confined to the new `AxiomCheck.lean` build root and the §4 WS5/WS7 status lines. All
 > are tagged **[REV-F]**. Nothing in §§0–7 target/criteria text is altered.
 
+> **Charter status — Revision G (post-WS9/WS10 — external-review reconciliation).** An
+> external line-by-line audit (`series-3/spec/ws9/03-project-review.md`) named the program's recurring
+> failure mode: several *formal statements* were weaker than the *labels* placed on them.
+> WS10 converts the audit into typed obligations and closes what is cheaply closable; WS9
+> stratifies the attention dynamics. Both are machine-checked, `sorry`-free, axiom-clean;
+> `AxiomCheck.lean` now sweeps WS1–WS10 (all headline results `[propext, Classical.choice,
+> Quot.sound]`). Unlike REV-F, this revision **does move §7 status lines — honestly, in
+> both directions** (exactly the §8.2 substitute-and-surface discipline).
+>
+> **WS9 — the convergence boundary (stratification, not assertion).** REV-F's "converges
+> on a band" is now bracketed by proofs on both sides. *False:* unique convergence is
+> **not** universal in the plurality regime — `ws9_no_unique_attention`/
+> `ws9_no_contraction` exhibit a coordination replicator with **three exact rational
+> fixed points** at `μ = 3/8`, so the WS8 band is **necessary**, not just sufficient; and
+> `ws9_two_cycle` exhibits a contrarian selection that *never settles* (an exact period-2
+> orbit). *True:* existence holds for every `μ` (`ws9_center_fixed_all`) and multistability
+> on a whole interval `(0, 3/8]` (`ws9_multistable_interval`). *Bifurcation:* the pitchfork
+> `μ⋆ = 1/2` is located by a **genuine derivative** — the center's linearized multiplier
+> `2(1−μ)` crossing 1 (`ws9_bifurcation`, `coordIndF_hasDerivAt_center`). This discharges
+> the review's Overreach 6(b/c): "convergence can genuinely fail below the threshold" is
+> now a theorem.
+>
+> **WS10 — statement–gloss reconciliation.** *(a) The Goldilocks tuple is now real
+> (Overreach 1).* `carrier_card_ge` **proves** `κ ≤ #(νP_κ).X` (if `#X < κ` then
+> `PkObj κ X ≃ Set X`, then Lambek + Cantor), discharging the `hcard` hypothesis that
+> silently sat under `ws6_no_maximal`/`ws6_no_global_observer`/the collector, so the
+> concrete tuple at `κ₀ = ℵ₀` is exhibited **hypothesis-free** (`ws10_concrete_tuple`) —
+> "Discharged at one concrete tuple" is now true as stated, not a schema. *(b)
+> Incompleteness with content (Overreach 3):* `ws10_bounded_self_model` conjoins the
+> structure-independent diagonal with the κ-consuming half (no observer window reaches the
+> carrier) — the bound is load-bearing in the *statement*. *(c) Criterion (vi)
+> carrier-linked (Overreach 4):* `ws10_standpoint_proper` — every positioned view genuinely
+> misses a state. *(d) Dynamics touch the carrier (Overreach 6a):* at `ℵ₀` supports are
+> finite by the carrier's own bound, so `ws10_carrier_attention_converges` runs the
+> dynamics on an actual carrier support. *(e) Criterion (i) reframed (Overreach 5) — a new
+> Impossibility.* The full carrier contains an atom (`bottomState`), and
+> `ws10_unlabeled_atomless_collapses` proves the sharp reason: in *unlabeled* `νP_κ`,
+> **atomlessness and plurality are jointly unsatisfiable** — any two hereditarily-nonempty
+> states are equal (an Aczel–Mendler bisimulation collapsed by `bisim_eq`), so the
+> groundless sub-universe is the single point `Ω`. The atom is *load-bearing for
+> plurality*; the positive (i)-object therefore lives in the **graded** carrier `νW_Q`
+> (routed to WS10-B). This **promotes grading (§3.5) from criterion-(iv) machinery to
+> criterion-(i) necessity** and sharpens the §4.4 interdependence thesis — a *local*
+> commitment now also prices against non-collapse. *(f) WS9 residue closed (O7):*
+> `ws10_center_globally_attracting` (`|coordIndF μ x − ½| ≤ 2(1−μ)|x − ½|` globally, one
+> algebraic identity — no MVT) and `ws10_center_unique_above` (so for `μ > ½` the center
+> is the **unique** induced fixed point).
+>
+> **Reopened, honestly (Overreach 2).** The review is right that `ws3_weak_law_canonical`
+> proves uniqueness of the map satisfying one concrete destructor equation (`destEquiv`
+> injectivity), **not** canonicity over the class of weak distributive laws that §6.1
+> [REV-B] pinned. Criterion (iv)'s coherence and weak-pullback preservation stand
+> Discharged; **canonicity-among-weak-laws reopens** as a typed obligation (`WeakDistLaw`
+> inhabitation + uniqueness; Garner's Vietoris result signals it is true, the mechanization
+> is unbuilt). The theorem is what it is — a unique *realization*, not canonicity.
+>
+> **Net effect on §7.** Criterion **(i)** moves from "Discharged (automatic)" to the honest
+> split: **Impossibility proved** (atomless + plural unsatisfiable in unlabeled `P_κ`),
+> positive object routed to the graded carrier. Criterion **(iv)** keeps
+> coherence/preservation but **reopens canonicity**. Criterion **(vi)** is now genuinely
+> carrier-linked. Criterion **(vii)**'s dynamical half is now *characterized* — sufficient
+> bands and necessary counterexamples meeting at the pitchfork `μ⋆` — with the exact
+> frequency-dependent boundary the sole open residue. Updates touch the §4 WS3/WS6/WS7
+> status lines (and add WS9/WS10 bullets), §7 criteria (i)/(iv), and the §8.1 audit; all
+> tagged **[REV-G]**. New files: `ws9.lean`, `ws10.lean`, extended `AxiomCheck.lean`.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
@@ -410,11 +476,13 @@ Workstreams:
 
 - **WS1 — Groundless carrier.** Fix the ambient theory (ZFC/AFA, or a category of classes). Confirm the intended reflexive, relation-only objects exist, unique up to bisimulation. **[REV-A] Status: discharged for the bounded carrier `P_κ` (existence + uniqueness-up-to-bisimulation + `Ω = {Ω}` + solution lemma), unconditionally and axiom-free modulo machine-checked compilation. The residual "which bound / no-everything" question is handed to WS6/WS7, not settled here. See §8.**
 - **WS2 — Object = relations, coinductively.** Choose the observation functor `F` (bounded/finite powerset, weighted, enriched). Prove `νF` exists and characterize its bisimulation.
-- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1. [REV-E] Canonicity now discharged: `ws3_weak_law_canonical` proves this weak law is the unique (`∃!`) map satisfying the `T`-unit and Egli–Milner multiplication laws for bounded `P_κ`. With WS8-A (weak-pullback preservation), criterion (iv)'s coherence obligation is met; (iv) → Discharged for the bounded carrier.**
-- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1. [REV-E] Layer C now discharged positively by WS8 (`wq_preserves_weak_pullback`, every `Q`); the design's `ws4_no_quantitative_grading` impossibility is found to target a `⊗`-weighted lifting WS4 never defined, so the step-6 fork resolves positive. Criterion (iv) → Discharged (bounded carrier); the graded canonicity transport through `W_Q` (step-16 reduction) remains the sole WS4-local residual.**
+- **WS3 — Bidirectional constitution.** Build `T`, `F`, and a distributive law `λ : TF ⇒ FT`; prove `λ`-bialgebras model container-and-contained determination. **[REV-B] Status: Partial. The strict `λ` of §3.4 is proved not to exist on the `P_κ` carrier (Impossibility proved — a §5/§7 success); the bidirectional-constitution content of criterion (iv) is delivered via a weak distributive law (Egli–Milner), whose canonicity for bounded `P_κ` is open and routed to WS4. See §8.1. [REV-E] Canonicity now discharged: `ws3_weak_law_canonical` proves this weak law is the unique (`∃!`) map satisfying the `T`-unit and Egli–Milner multiplication laws for bounded `P_κ`. With WS8-A (weak-pullback preservation), criterion (iv)'s coherence obligation is met; (iv) → Discharged for the bounded carrier. [REV-G] Erratum surfaced by the external review: `ws3_weak_law_canonical` proves uniqueness of the map satisfying the concrete destructor equation (`destEquiv` injectivity), **not** canonicity over the class of weak distributive laws that §6.1 [REV-B] pinned. Coherence and weak-pullback preservation stand Discharged; **canonicity-among-weak-laws reopens** as a typed obligation (`WeakDistLaw` inhabitation + uniqueness — Garner's Vietoris result signals truth, the mechanization is unbuilt; WS10-O3). The theorem is honestly a unique *realization*, not canonicity.**
+- **WS4 — Graded parthood.** Enrich containment over `[0,1]`/a quantale/a subset; integrate with WS2–WS3. **[REV-C] Status: Partial. The enriched carrier `νW_Q` is built with its identity theory discharged (criteria (i)–(iii), `sorry`/axiom-free) and the graded weak law's multiplication coherence proved, at the concrete non-idempotent witness `Łₙ` (`tensor_section` proved and consumed). The design's discharge bar — Layer C weak-pullback preservation (step 6) plus the step-16 reduction — is not met: Layer C stands as a typed open obligation (`WQPreservesWeakPullback`) with its obstruction made precise, decided in neither the positive nor the §8 Impossibility direction. Criterion (iv) stays Partial. See §8.1. [REV-E] Layer C now discharged positively by WS8 (`wq_preserves_weak_pullback`, every `Q`); the design's `ws4_no_quantitative_grading` impossibility is found to target a `⊗`-weighted lifting WS4 never defined, so the step-6 fork resolves positive. Criterion (iv) → Discharged (bounded carrier); the graded canonicity transport through `W_Q` (step-16 reduction) remains the sole WS4-local residual. [REV-G] The graded carrier is **promoted from criterion-(iv) machinery to the criterion-(i) object.** WS10's `ws10_unlabeled_atomless_collapses` proves that in *unlabeled* `νP_κ` atomlessness and plurality are jointly unsatisfiable (any two hereditarily-nonempty states are equal); distinguishing power must therefore come from grading, so the positive atomless-*and*-plural (i)-object lives in `νW_Q` — the graded groundless core, routed to WS10-B.**
 - **WS5 — Finite attention.** Formalize finite-support attention and its feed/starve dynamics; prove incompleteness of self-representation via the Lawvere route; give convergence/interior conditions. **[REV-D] Status: Partial (split). Incompleteness Impossibility-proved and `(F, κ)`-robust (`ws5_carrier_incomplete`); plurality floor Discharged (`ws5_plurality_floor`, `ws5_no_delta`); convergence Partial-conditional (`ws5_attention_converges` proved, `replicator_mutator_contracts` an uninhabited typed obligation). Bundle `ws5_incompleteness_and_floor`, not `ws5_resolved`. See §8.1. [REV-F] The convergence obligation is now discharged *downstream* for exhibited dynamics (WS8's `ws8_attention_converges` / `ws8_replicator_converges` / `ws8_exp_replicator_converges` — nonexpansive, linear, and **exponential-fitness** replicators — inhabit the Banach spine unconditionally on their μ-bands); `ws5.replicator_mutator_contracts` itself stays an uninhabited *universal* predicate, as the regime-dependence it quantifies over is a proved band, not blanket-true.**
 - **WS6 — No poles, no outside.** Select among proper-class totality, cardinality-bounding, and zero-object coincidence; prove the corresponding coincidence/impossibility results, including the emptiness of the external standpoint. **[REV-D] Status: Partial. Poles-split Impossibility-proved-scoped (`ws6_poles_split`); no-maximal Discharged by `κ`-fiat (`ws6_no_maximal`), discharging WS1's §3.7 hand-off; criterion (vi) reported Open (`ws6_standpoint_vacuous`). [REV-E] (vi) since Discharged by WS8-E (`ws6_no_global_observer` + `ws6_substantive_standpoints`). Bundle `ws6_split_and_no_maximal`, not `ws6_resolved`. See §8.1.**
-- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly. **[REV-D] Status: Partial (collector). Static band Discharged (`ws7_static_band`); concrete tuple `(κ₀, μ, Łₙ)` retro-validated (`ws7_retro_validate`, `#Q ≤ κ` proved via `luk_card_le`); `GeneralBranching` and the dynamical Lemma B held open. [REV-E] The universal `GeneralBranching` floor is refuted (`ws7_general_branching_false`) and replaced by the honest `alg`-relative floor (`ws7_iv_branching`). [REV-F] The dynamical axis (Lemma B) is now **Discharged for exhibited replicator-mutator dynamics**: WS8's `ws8_attention_converges` (nonexpansive μ-mutation, all `μ ∈ (0,1]`), `ws8_replicator_converges` (linear replicator, sup-metric Lipschitz constant `2/(μ·u_min)` proved, band `2(1−μ) < μ·u_min`), **and** `ws8_exp_replicator_converges` (the fitness-dependent **exponential** replicator, explicit simplex-floor constant `e^{2B}(1+L_f)+|S|e^{4B}(1+L_f)` proved in `expR_coord_lipschitz`, band `μ > 1−1/L`) all inhabit the Banach spine with no bare hypothesis — the exp case fired directly on the floored simplex, since it provably *cannot* inhabit a `SelectionLipschitz` over the unbounded `floorRegion`. The exhibited dynamical status is thus **`partial_band`** (`ws8_noncollapse_partial_band`, retiring `deferred`), not `impossible` (Brouwer gives existence on the compact simplex for every `μ`; the band governs uniqueness/convergence). Only the universal-regime reading of convergence remains open (a proved band, not a blanket). Bundle `ws7_band_and_retro`, not `ws7_resolved`. See §8.1.**
+- **WS7 — Non-collapse.** Establish the richness floor on `F` and the plurality floor on attention; prove `νF` is non-degenerate and the dynamics avoid delta collapse; locate the Goldilocks band explicitly. **[REV-D] Status: Partial (collector). Static band Discharged (`ws7_static_band`); concrete tuple `(κ₀, μ, Łₙ)` retro-validated (`ws7_retro_validate`, `#Q ≤ κ` proved via `luk_card_le`); `GeneralBranching` and the dynamical Lemma B held open. [REV-E] The universal `GeneralBranching` floor is refuted (`ws7_general_branching_false`) and replaced by the honest `alg`-relative floor (`ws7_iv_branching`). [REV-F] The dynamical axis (Lemma B) is now **Discharged for exhibited replicator-mutator dynamics**: WS8's `ws8_attention_converges` (nonexpansive μ-mutation, all `μ ∈ (0,1]`), `ws8_replicator_converges` (linear replicator, sup-metric Lipschitz constant `2/(μ·u_min)` proved, band `2(1−μ) < μ·u_min`), **and** `ws8_exp_replicator_converges` (the fitness-dependent **exponential** replicator, explicit simplex-floor constant `e^{2B}(1+L_f)+|S|e^{4B}(1+L_f)` proved in `expR_coord_lipschitz`, band `μ > 1−1/L`) all inhabit the Banach spine with no bare hypothesis — the exp case fired directly on the floored simplex, since it provably *cannot* inhabit a `SelectionLipschitz` over the unbounded `floorRegion`. The exhibited dynamical status is thus **`partial_band`** (`ws8_noncollapse_partial_band`, retiring `deferred`), not `impossible` (Brouwer gives existence on the compact simplex for every `μ`; the band governs uniqueness/convergence). Only the universal-regime reading of convergence remains open (a proved band, not a blanket). Bundle `ws7_band_and_retro`, not `ws7_resolved`. See §8.1. [REV-G] Two upgrades. **The tuple is now genuinely witnessed:** WS10's `carrier_card_ge` *proves* the `hcard` hypothesis (`κ ≤ #(νP_κ).X`) that `ws7_retro_validate`/`ws6_no_maximal`/`ws6_no_global_observer` silently carried, so the concrete tuple at `κ₀ = ℵ₀` is exhibited hypothesis-free (`ws10_concrete_tuple`) — the review's Overreach 1 fixed. **The dynamical half is now characterized, not just exhibited:** WS9 brackets the band with necessity (`ws9_no_unique_attention`/`ws9_no_contraction` — 3 fixed points at `μ=3/8`; `ws9_two_cycle` — a never-settling orbit), existence and interval multistability, and locates the pitchfork `μ⋆ = 1/2` by a genuine derivative (`ws9_bifurcation`); WS10 adds global attractivity and uniqueness above `μ⋆` (`ws10_center_globally_attracting`, `ws10_center_unique_above`), and runs the dynamics on an actual carrier support at `ℵ₀` (`ws10_carrier_attention_converges`). The exact frequency-dependent boundary is the sole open residue.**
+- **WS9 — the convergence boundary (dynamical stratification).** **[REV-G] Status: Discharged (stratified).** WS8 gave *sufficient* bands; WS9 proves the *converse*: unique convergence is not universal in the plurality regime. FALSE — `ws9_no_unique_attention`/`ws9_no_contraction` (three exact rational fixed points at `μ=3/8`, so the band is necessary), `ws9_two_cycle` (a contrarian selection with an exact never-settling 2-cycle). TRUE — `ws9_center_fixed_all` (existence for every `μ`), `ws9_multistable_interval` (multistability on `(0,3/8]`). BIFURCATION — `ws9_bifurcation` + `coordIndF_hasDerivAt_center` locate the pitchfork `μ⋆ = 1/2` via the center's linearized multiplier `2(1−μ)`. Bundle named by parts, not `ws9_convergence_characterized` (the exact frequency-dependent boundary and the `μ ∈ (3/8,1/2)` gap stay open).
+- **WS10 — statement–gloss reconciliation (the external review).** **[REV-G] Status: Discharged (keystone + fallout) + Impossibility (i) + routed remainder.** `carrier_card_ge` proves the carrier-cardinality lower bound (keystone O1); hypothesis-free corollaries and the concrete tuple `ws10_concrete_tuple` at `ℵ₀`; incompleteness with content `ws10_bounded_self_model` (O4); standpoint properness `ws10_standpoint_proper` (O5); the dynamics–carrier bridge `ws10_carrier_attention_converges` (O6); the criterion-(i) Impossibility `ws10_unlabeled_atomless_collapses` (O2); the WS9-residue closures `ws10_center_globally_attracting`/`ws10_center_unique_above` (O7a/O7c). Routed, not laundered: the graded-core positive (i)-object (WS10-B), canonicity-among-weak-laws (O3), the `(3/8,1/2)` gap (O7b). See §8.1.
 
 ---
 
@@ -568,6 +636,26 @@ Success is a single object (or small family) that provably (i) contains no atoms
 > WS4 ratification pinned in §6.1. As with Revision A, this changes only how much
 > of (iv) is currently discharged, not what (iv) demands.
 
+> **[REV-G] The criteria are unchanged; three status readings are corrected honestly
+> (the external review, `spec/ws9/03-project-review.md`).** *Criterion (i).* The prior "Discharged —
+> atomlessness automatic for a terminal coalgebra" was **overreach**: the built carrier
+> `νP_κ` contains `bottomState` (empty successor), a relational atom the development even
+> uses. `ws10_unlabeled_atomless_collapses` proves the sharp reason — in *unlabeled*
+> `νP_κ`, **atomlessness and plurality are jointly unsatisfiable** (any two
+> hereditarily-nonempty states are equal), so the groundless sub-universe is the single
+> point `Ω`. This is **Impossibility proved** (a §5/§7 success), and it relocates the
+> positive (i)-object to the *graded* carrier `νW_Q` (the graded groundless core, routed
+> to WS10-B) — grading is thus promoted from (iv)-machinery to (i)-necessity. *Criterion
+> (iv).* Coherence and weak-pullback preservation stand Discharged, but `ws3_weak_law_canonical`
+> is a unique-*realization* statement, not canonicity over weak distributive laws;
+> **canonicity reopens** (WS10-O3), so (iv) is Discharged-minus-canonicity. *Criterion
+> (vii).* Its dynamical half is now **characterized** — WS9's necessity/non-settling
+> witnesses and WS10's global attractivity/uniqueness bracket the WS8 bands and meet at the
+> proved pitchfork `μ⋆ = 1/2` — with the exact frequency-dependent boundary the sole open
+> residue. As always, these change *which object* is offered and *how much* is discharged,
+> not the bar. And the review's meta-point is recorded: the blind-review layer is
+> Claude-reviewing-Claude, a disclosed limitation, not claimed independence.
+
 ---
 
 ## 8. Open problems and honest risks
@@ -584,7 +672,7 @@ plus a hidden shared dependency?* Each entry gives a provisional outcome class
 - **Finite attention as anti-collapse is heuristic until proven.** The claim that positioned, incomplete self-models keep objects distinct (rather than converging to a common fixed point) must be turned into a theorem, with explicit conditions.
 - **Trivialization at the poles.** "Atom = everything" must be a *zero object*, kept strictly apart from the incoherent universal set. Conflating them sinks the program.
 - **Distributive-law existence.** Not every `(T, F)` admits a `λ`; the whole/part bialgebra may force compromises on composition or observation. **[REV-B] Now resolved for the built carrier, in the negative: WS3 proved no strict `λ` of the §3.4 form exists on `P_κ` (Impossibility proved). The "compromise on composition" this risk anticipated is the weak distributive law of §3.4's [REV-B] note; the residual is not existence-of-a-law but canonicity-of-the-weak-law, routed to WS4.**
-- **Attention need not converge.** Contraction/replicator-mutator conditions guarantee good behavior only under hypotheses; ungrounded self-reference may obstruct them. Non-convergent or chaotic self-attention is a phenomenon to characterize, not assume away.
+- **Attention need not converge.** Contraction/replicator-mutator conditions guarantee good behavior only under hypotheses; ungrounded self-reference may obstruct them. Non-convergent or chaotic self-attention is a phenomenon to characterize, not assume away. **[REV-G] Now characterized, not assumed away:** WS9 *proves* non-convergence occurs — multistability (`ws9_no_unique_attention`, three fixed points at `μ=3/8`) and a never-settling 2-cycle (`ws9_two_cycle`) — locating the pitchfork `μ⋆ = 1/2`; WS10 proves global convergence above it (`ws10_center_unique_above`). The residual is the exact frequency-dependent boundary, not whether the phenomenon is real.
 - **Interpretive gap.** Even a fully successful object leaves open whether it *is* the ROSR world or a faithful model of it — a question to frame, not to overclaim settling.
 
 ### 8.1 [REV-A] Per-workstream hazard audit (the §3.9 pattern applied)
