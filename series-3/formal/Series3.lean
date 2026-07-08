@@ -67,3 +67,11 @@ import ws8
 -- (`ws9_bifurcation`); CONDITIONAL — nonexpansive selection converges on all `μ`
 -- (`ws9_nonexpansive_converges`). Named by parts, not `ws9_convergence_characterized`.
 import ws9
+-- WS10 (`series-3/spec/ws10/`) — statement–gloss reconciliation from the external
+-- review. The keystone `carrier_card_ge` proves `κ ≤ #(νPk κ).X` (the `hcard` every
+-- cardinality-touching "Discharged" silently assumed), so the concrete tuple at
+-- `κ₀ = ℵ₀` is exhibited hypothesis-free (`ws10_concrete_tuple`), incompleteness gets
+-- its κ-consuming half (`ws10_bounded_self_model`), standpoints are proper
+-- (`ws10_standpoint_proper`), and — at ℵ₀ where supports are finite by the carrier's
+-- own bound — attention converges on a carrier support (`ws10_carrier_attention_converges`).
+import ws10

@@ -17,6 +17,29 @@ object the review showed the program actually needs (the atomless subcarrier). T
 does not move; the statements move up to the bar or the labels move down to the
 statements.
 
+> **As built (`series-3/formal/ws10.lean`, sorry-free, axiom-clean).** The keystone
+> **O1** is discharged: `carrier_card_ge : κ ≤ #(νPk κ).X` (unconditional in κ), with
+> hypothesis-free corollaries (`ws10_no_maximal`, `ws10_no_global_observer`) and the
+> concrete tuple at `κ₀ = ℵ₀` (`ws10_concrete_tuple`). Its fallout is discharged:
+> **O4** (`ws10_bounded_self_model` — diagonal ∧ κ-consuming carrier-non-surjectivity),
+> **O5** (`ws10_standpoint_proper` — every view misses a state), and **O6**
+> (`ws10_carrier_attention_converges` — at ℵ₀, supports are finite by the carrier's own
+> bound, so attention converges on a genuine carrier support).
+>
+> **Second pass.** **O2's Impossibility half** is discharged:
+> `ws10_unlabeled_atomless_collapses` — in unlabeled `νP_κ`, any two hereditarily-nonempty
+> states are equal (the Aczel–Mendler bisimulation `ζ = str × str`, collapsed by
+> `bisim_eq`), with `ws10_grounded_core_subsingleton` the corollary. Atomlessness is
+> load-bearing for plurality; the positive (i)-object must move to the graded carrier
+> `νW_Q` (routed to WS10-B). **O7a/O7c** are discharged: `ws10_center_globally_attracting`
+> (the induced map contracts toward the center with factor `2(1−μ)`, globally, by one
+> algebraic identity — no MVT) and `ws10_center_unique_above` (so for `μ > ½` the center
+> is the *unique* fixed point), sharpening the pitchfork residue from "characterized open"
+> to a theorem. **Still open (routed, not laundered):** O2's graded-core positive
+> discharge, **O3** (canonicity among weak distributive laws — a wrong `mult_law` would be
+> worse than an honest open), and **O7b** (the `μ ∈ (3/8, 1/2)` gap and the exact
+> closed-form bifurcation boundary).
+
 **Review findings → obligations map:**
 
 | Review finding | Obligation | Class expected |

@@ -70,3 +70,14 @@ import Series3
 #print axioms Series3.WS9.ws9_multistable_interval
 #print axioms Series3.WS9.ws9_bifurcation
 #print axioms Series3.WS9.coordIndF_hasDerivAt_center
+
+/-! ### WS10 — statement–gloss reconciliation (carrier-cardinality keystone + fallout) -/
+#print axioms Series3.WS10.carrier_card_ge
+#print axioms Series3.WS10.ws10_concrete_tuple
+#print axioms Series3.WS10.ws10_bounded_self_model
+#print axioms Series3.WS10.ws10_standpoint_proper
+#print axioms Series3.WS10.ws10_carrier_attention_converges
+#print axioms Series3.WS10.ws10_unlabeled_atomless_collapses
+#print axioms Series3.WS10.ws10_grounded_core_subsingleton
+#print axioms Series3.WS10.ws10_center_globally_attracting
+#print axioms Series3.WS10.ws10_center_unique_above
