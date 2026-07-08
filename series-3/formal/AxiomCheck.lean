@@ -55,3 +55,7 @@ import Series3
 #print axioms Series3.WS8.ws6_substantive_standpoints
 #print axioms Series3.WS8.ws8_replicator_converges
 #print axioms Series3.WS8.exp_lip
+#print axioms Series3.WS8.expR_coord_lipschitz
+#print axioms Series3.WS8.ws8_exp_replicator_converges
+#print axioms Series3.WS8.ws8_exp_replicator_converges_band
+#print axioms Series3.WS8.ws8_noncollapse_partial_band

@@ -25,7 +25,7 @@ But "yes" comes in a more interesting shape than a simple thumbs-up, and the hon
 - *No thing can fully know itself.* This is proved rigorously, using the same mathematical idea behind Gödel's incompleteness theorem. A thing paying limited attention to itself can never build a complete self-portrait — there's always a positioned, partial blind spot. That blind spot is where perspective lives.
 - *There's no clean "top-down + bottom-up" master rule.* The project wanted a single elegant law letting you read any object both from above (what it's part of) and below (what it's made of) in perfect harmony. It proved that law *cannot exist* in the strict form — and the reason is illuminating: when relationships are themselves things, combining them is inherently a little loose, a little order-forgetting. You still get top-down-and-bottom-up constitution, just not in the rigid form first imagined. **The looseness is a discovery about the nature of relationships, not a bug.**
 
-**Third, one feature is mostly-but-not-fully closed.** The "attention" part of the picture — how a thing's focus shifts over time and whether it settles into a stable partial self-image — is proved to work for a simpler model of attention and precisely *diagnosed* for the richer, more realistic one. For the richer model, the project pinned down exactly why it's harder and exactly what one further step would close it. So it's not a mystery; it's a well-understood piece of unfinished business.
+**Third, the "attention" feature is now closed for the models actually built.** How a thing's focus shifts over time and whether it settles into a stable partial self-image — this is proved to work not just for a simple model of attention but also for the richer, more realistic one where a thing's attention responds to its own current state. In both cases, *when the thing keeps refreshing its attention above a certain minimum rate*, its focus provably converges to a single, stable, partial self-image — and the exact rate needed is pinned down as a clean threshold. What's still not settled is only the most sweeping version of the claim: that attention converges for *every* possible setting of the dials, with no rate condition at all. That fully-general version is understood to be a genuine trade-off (below the threshold, convergence really can fail), not a gap in the proof — so it's a *characterized boundary*, not a mystery.
 
 ## The deeper finding
 
@@ -45,8 +45,8 @@ That trade-off is itself a philosophical result. It says something true and non-
 ## Where things stand
 
 - The core construction exists and is machine-verified.
-- Six of seven required features are established (two of them as illuminating impossibility results); the seventh is established in part and precisely diagnosed for the rest.
-- The main remaining technical task is a single, contained step to finish the richer attention model.
+- Six of seven required features are established (two of them as illuminating impossibility results); the seventh is established structurally, and its "attention converges" half is now proved for both the simple and the richer, state-responsive attention model — under an explicit, named rate condition.
+- What remains is not a missing step but a *characterized boundary*: the fully-general "converges for every setting" claim is a genuine trade-off (it can fail below the rate threshold), and relating the discrete attention model to a continuous-time version is a modelling question current tools can't yet package.
 - One question is permanently outside what any proof can settle: whether this object *is* the relational world the philosophy describes, or a faithful mathematical model *of* it. That's a matter of interpretation to be argued, not proved.
 
 ## The one-sentence version
