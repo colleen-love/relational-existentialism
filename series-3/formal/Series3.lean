@@ -23,3 +23,8 @@ import ws3
 -- (step 6) is registered as a typed open obligation `WQPreservesWeakPullback`, not
 -- proved — the top bundle is `ws4_graded_coherence_Luk`, not `ws4_resolved`.
 import ws4
+-- WS5 (`series-3/spec/ws5/04-charter-design-review.md`, rev. 3) — finite attention:
+-- self-description incompleteness (Impossibility-proved, (F,κ)-robust), the
+-- plurality/anti-collapse floor (Discharged), and convergence (Partial-conditional:
+-- the Banach step proved, the contraction premise a typed open obligation).
+import ws5
