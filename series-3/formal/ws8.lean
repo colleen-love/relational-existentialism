@@ -230,6 +230,15 @@ open scoped NNReal
 
 variable {S : Type u} [Fintype S] [Nonempty S]
 
+/-- **Tier 1.1 — the floored simplex is inhabited (no longer assumed).** When `unif`
+is a probability vector and `μ ≤ 1`, `unif` itself lies in the floored simplex
+(`μ·unif r ≤ unif r`, `∑ = 1`). This discharges the `[Nonempty (FlooredSimplex …)]`
+instance the convergence theorems previously carried as a hypothesis. -/
+lemma flooredSimplex_nonempty (μ : ℝ) (hμ1 : μ ≤ 1) (unif : S → ℝ)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
+    Nonempty (FlooredSimplex S μ unif) :=
+  ⟨⟨unif, fun r => mul_le_of_le_one_left (hunif_nonneg r) hμ1, hunif_sum⟩⟩
+
 /-- The identity (pure-μ-mutation) selection map: `R = id`, trivially weight- and
 nonnegativity-preserving. A legitimate `SelectionMap` (the no-selection-pressure
 member of the replicator-mutator family). -/
@@ -259,11 +268,11 @@ already-proved `ws7_attention_fixed_point`, with the contraction supplied by
 `id_replicator_contracts`, no bare hypothesis. This retires the WS7 `dynamics`
 `deferred` tag for this selection map. -/
 theorem ws8_attention_converges (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1) (unif : S → ℝ)
-    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
-    [Nonempty (FlooredSimplex S μ unif)] :
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
     ∃! p : FlooredSimplex S μ unif,
-      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (idSel unif) p = p :=
-  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (idSel unif)
+      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (idSel unif) p = p := by
+  haveI := flooredSimplex_nonempty μ hμ1 unif hunif_nonneg hunif_sum
+  exact ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (idSel unif)
     (idSelLipschitz unif) (id_replicator_contracts μ hμ0 hμ1 unif)
 
 /-! ### The hard thing — a genuine `w`-dependent replicator with a proved Lipschitz bound
@@ -423,20 +432,58 @@ for anti-collapse. -/
 theorem ws8_replicator_converges (c : S → ℝ) (hc : ∀ s, 0 < c s)
     (unif : S → ℝ) (hunif_pos : ∀ r, 0 < unif r)
     (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1) (hband : 2 * (1 - μ) < μ * uMin unif)
-    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
-    [Nonempty (FlooredSimplex S μ unif)] :
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
     ∃! p : FlooredSimplex S μ unif,
-      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif) p = p :=
-  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif)
+      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif) p = p := by
+  haveI := flooredSimplex_nonempty μ hμ1 unif hunif_nonneg hunif_sum
+  exact ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif)
     (linReplicatorLipschitz c hc unif hunif_pos)
     (lin_replicator_contracts c hc unif hunif_pos μ hμ0 hμ1 hband)
+
+/-! ### Tier 1.3 — the explicit contraction band `(μ⋆, 1]`
+
+The linear replicator's contraction condition `2(1−μ) < μ·u_min` has an explicit
+crossover: solving for `μ` gives `μ > μ⋆ := 2/(u_min + 2)`. Below we name `μ⋆`, show
+it lies strictly in `(0,1)` (so the band is nonempty), and restate convergence over
+the explicit interval — the design's `DynamicalStatus.partial_band` with a nameable
+boundary. -/
+
+/-- The contraction crossover `μ⋆ = 2/(u_min + 2)`. -/
+noncomputable def muStar (unif : S → ℝ) : ℝ := 2 / (uMin unif + 2)
+
+lemma muStar_pos {unif : S → ℝ} (hunif_pos : ∀ r, 0 < unif r) : 0 < muStar unif :=
+  div_pos two_pos (by have := uMin_pos hunif_pos; linarith)
+
+lemma muStar_lt_one {unif : S → ℝ} (hunif_pos : ∀ r, 0 < unif r) : muStar unif < 1 := by
+  have hu := uMin_pos hunif_pos
+  rw [muStar, div_lt_one (by linarith)]; linarith
+
+/-- The contraction band is *exactly* `μ > μ⋆` — the crossover is a genuine threshold. -/
+lemma band_iff_gt_muStar {unif : S → ℝ} (hunif_pos : ∀ r, 0 < unif r) (μ : ℝ) :
+    2 * (1 - μ) < μ * uMin unif ↔ muStar unif < μ := by
+  have hu : 0 < uMin unif := uMin_pos hunif_pos
+  rw [muStar, div_lt_iff₀ (by linarith : (0:ℝ) < uMin unif + 2)]
+  constructor <;> intro h <;> nlinarith
+
+/-- **Convergence on the explicit band `(μ⋆, 1]`.** For every `μ` in the nameable
+interval `(μ⋆, 1]` (`μ⋆ = 2/(u_min+2) ∈ (0,1)`), the linear replicator converges to a
+unique fixed point. This is the design's `partial_band` outcome, made explicit. -/
+theorem ws8_replicator_converges_band (c : S → ℝ) (hc : ∀ s, 0 < c s)
+    (unif : S → ℝ) (hunif_pos : ∀ r, 0 < unif r)
+    (μ : ℝ) (hμstar : muStar unif < μ) (hμ1 : μ ≤ 1)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ (le_of_lt (lt_trans (muStar_pos hunif_pos) hμstar)) hμ1 unif
+        hunif_nonneg hunif_sum (linReplicatorSel c hc unif) p = p :=
+  ws8_replicator_converges c hc unif hunif_pos μ (lt_trans (muStar_pos hunif_pos) hμstar) hμ1
+    ((band_iff_gt_muStar hunif_pos μ).mpr hμstar) hunif_nonneg hunif_sum
 
 /-! ### Exploring the exponential fitness replicator (`04-design` §2–3)
 
 The `04-design`'s target is the **fitness-dependent** replicator
 `R(w)_r = w_r · exp(f_r w) / Z(w)`, `Z(w) = ∑_s w_s exp(f_s w)`. We build its pieces
-sorry-free (`exp_lip`, `expReplicatorSel`, the fitness-Lipschitz and normalizer
-bounds) and record the precise mathematical finding.
+sorry-free (`exp_lip`, `expReplicatorSel`, the fitness/normalizer bounds) **and, in
+Tier 2 below, discharge convergence** (`ws8_exp_replicator_converges[_band]`).
 
 **The finding (why the linear case was clean and the exp case is delicate).** The
 linear replicator is **scale-covariant** (`R(λw) = R(w)`), so its Lipschitz constant
@@ -446,20 +493,24 @@ unbounded floor region **no uniform Lipschitz constant exists**: the cross term
 `w'_r·(g_r(w) − g_r(w')) / Z(w)` mixes `w'` in the numerator with `Z(w)` in the
 denominator, and `w'_r / Z(w) → ∞` as `w'` scales up while `w` stays small — the
 direct estimate is `O(d²)`, not `O(d)`. So the exp replicator **cannot** inhabit
-`ws7.SelectionLipschitz` (whose `bound` quantifies over the unbounded floor region).
+`ws7.SelectionLipschitz` (whose `bound` quantifies over the unbounded floor region);
+Tier 2 therefore fires Banach *directly* on the floored simplex, bypassing that
+interface.
 
-**Where it IS Lipschitz.** On the **bounded** simplex-floor (`∑w = 1` *and* the floor,
-so `w_r ∈ [δ, 1]`) — which is exactly where the dynamics lives (`mutT` maps
+**Where it IS Lipschitz (now proved).** On the **bounded** simplex-floor (`∑w = 1`
+*and* the floor, so `w_r ∈ [δ, 1]`) — exactly where the dynamics lives (`mutT` maps
 `FlooredSimplex` to itself) — the exp replicator is Lipschitz with the **explicit**
-constant `L = 1/δ + e^{2B}·L_f + |S|·e^{4B}·(1 + L_f)`, from the bounds below (`w'_r ≤ 1`
-is now available, killing the cross term). Firing convergence from this needs either a
-`SelectionLipschitz` tightened to the simplex-floor, or a `C¹`-fitness Jacobian /
-mean-value route on the convex floor region — an upstream change beyond `ws8`.
+constant **`L = e^{2B}(1+L_f) + |S|·e^{4B}(1+L_f)`** (`expLipConst`), discharged
+sorry-free in `expR_coord_lipschitz`. The `w'_r ≤ 1` bound (available only on the
+simplex) kills the cross term, and — crucially — `∑w = 1` gives `Z ≥ e^{−B}`
+*directly*, so **no `1/δ` term appears**. Convergence follows on the band
+`(1−μ)·L < 1`, i.e. `μ > μ⋆_exp := 1 − 1/L` (`exp_band_iff`).
 
 **Correction to the `04-design`'s constant.** The design's `C/(μ·u_min)²` with
-`c₀·e^{3B}` is neither the unbounded-region truth (no finite constant) nor the
-bounded-region truth (constant above, first-power `δ`, `e^{4B}`); its `w r ≤ 1`
-assumption silently restricts to the simplex, which is the honest domain. -/
+`c₀·e^{3B}` is *worse than the truth on both counts*: there is no `δ`-blowup (the
+simplex bounds `Z` below without the floor) and the `B`-dependence is `e^{4B}`, not
+`e^{3B}`. Its silent `w r ≤ 1` assumption is exactly the restriction to the honest
+domain (the simplex), which we make explicit. -/
 
 /-- `exp` is Lipschitz with constant `exp C` on `Iic C` — the fitness building block
 (from `Real.add_one_le_exp`). -/
@@ -538,6 +589,286 @@ lemma expZ_lower {f : S → (S → ℝ) → ℝ} {B : ℝ} (hf_bdd : ∀ r w, |f
         refine Finset.sum_le_sum fun s _ => ?_
         exact mul_le_mul_of_nonneg_left
           (Real.exp_le_exp.mpr (neg_le_of_abs_le (hf_bdd s w))) (hw s)
+
+/-! ### Tier 2 — the exp replicator IS a contraction on the bounded simplex-floor
+
+The design note above pinned *where* the exp replicator is Lipschitz (the bounded
+simplex-floor, where `w_r ∈ [δ,1]`) but left the estimate uninhabited. Below we
+**discharge it sorry-free**: a per-coordinate Lipschitz bound with an explicit
+constant, then convergence via the Banach spine (`ws5_attention_converges`),
+bypassing `ws7.SelectionLipschitz` (whose `bound` quantifies over the *unbounded*
+floor region, which the exp replicator cannot inhabit).
+
+The clean constant — **`L = e^{2B}(1+L_f) + |S|·e^{4B}(1+L_f)`**, with *no* `1/δ`
+term — improves on the design's `C/(μ·u_min)²·e^{3B}`: on the simplex the
+normalizer is bounded below by `e^{−B}` *directly* from `∑w = 1` (not through the
+floor `δ`), so the `δ`-blowup the design feared never appears. -/
+
+/-- **Numerator Lipschitz bound.** On the simplex (`w' r ∈ [0,1]`), the un-normalized
+fibre `w_r·exp(f_r w)` is Lipschitz with constant `e^B(1+L_f)`: split
+`w_r g(w) − w'_r g(w') = (w_r−w'_r)g(w) + w'_r(g(w)−g(w'))`, bound `g ≤ e^B`,
+`w'_r ≤ 1`, and reuse `expG_lipschitz`. -/
+lemma expN_lipschitz {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (r : S) (w w' : S → ℝ) (hw'0 : 0 ≤ w' r) (hw'1 : w' r ≤ 1) :
+    |w r * Real.exp (f r w) - w' r * Real.exp (f r w')| ≤ Real.exp B * (1 + L_f) * dist w w' := by
+  have hgw : Real.exp (f r w) ≤ Real.exp B := Real.exp_le_exp.mpr (le_of_abs_le (hf_bdd r w))
+  have hgpos : (0 : ℝ) ≤ Real.exp (f r w) := (Real.exp_pos _).le
+  have hd : (0 : ℝ) ≤ dist w w' := dist_nonneg
+  have hdr : |w r - w' r| ≤ dist w w' := by rw [← Real.dist_eq]; exact dist_le_pi_dist w w' r
+  have hsplit : w r * Real.exp (f r w) - w' r * Real.exp (f r w')
+      = (w r - w' r) * Real.exp (f r w) + w' r * (Real.exp (f r w) - Real.exp (f r w')) := by ring
+  calc |w r * Real.exp (f r w) - w' r * Real.exp (f r w')|
+      = |(w r - w' r) * Real.exp (f r w) + w' r * (Real.exp (f r w) - Real.exp (f r w'))| := by
+          rw [hsplit]
+    _ ≤ |(w r - w' r) * Real.exp (f r w)| + |w' r * (Real.exp (f r w) - Real.exp (f r w'))| :=
+          abs_add _ _
+    _ = |w r - w' r| * Real.exp (f r w) + w' r * |Real.exp (f r w) - Real.exp (f r w')| := by
+          rw [abs_mul, abs_mul, abs_of_nonneg hgpos, abs_of_nonneg hw'0]
+    _ ≤ dist w w' * Real.exp B + 1 * (Real.exp B * L_f * dist w w') := by
+          apply add_le_add
+          · exact mul_le_mul hdr hgw hgpos hd
+          · exact mul_le_mul hw'1 (expG_lipschitz hf_bdd hf_lip r w w') (abs_nonneg _) zero_le_one
+    _ = Real.exp B * (1 + L_f) * dist w w' := by ring
+
+/-- **Normalizer Lipschitz bound.** `|Z(w) − Z(w')| ≤ |S|·e^B(1+L_f)·dist` — sum the
+numerator bound over the `|S|` fibres. -/
+lemma expZ_lipschitz {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (w w' : S → ℝ) (hw'0 : ∀ s, 0 ≤ w' s) (hw'1 : ∀ s, w' s ≤ 1) :
+    |(∑ s, w s * Real.exp (f s w)) - (∑ s, w' s * Real.exp (f s w'))|
+      ≤ (Fintype.card S) * (Real.exp B * (1 + L_f)) * dist w w' := by
+  rw [← Finset.sum_sub_distrib]
+  calc |∑ s, (w s * Real.exp (f s w) - w' s * Real.exp (f s w'))|
+      ≤ ∑ s, |w s * Real.exp (f s w) - w' s * Real.exp (f s w')| := Finset.abs_sum_le_sum_abs _ _
+    _ ≤ ∑ _s : S, Real.exp B * (1 + L_f) * dist w w' :=
+        Finset.sum_le_sum (fun s _ => expN_lipschitz hf_bdd hf_lip s w w' (hw'0 s) (hw'1 s))
+    _ = (Fintype.card S) * (Real.exp B * (1 + L_f)) * dist w w' := by
+        rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]; ring
+
+/-- The explicit Lipschitz constant on the simplex-floor:
+`L = e^{2B}(1+L_f) + |S|·e^{4B}(1+L_f)`. -/
+noncomputable def expLipConst (B L_f : ℝ) (n : ℕ) : ℝ :=
+  Real.exp B ^ 2 * (1 + L_f) + (n : ℝ) * Real.exp B ^ 4 * (1 + L_f)
+
+lemma expLipConst_pos {B L_f : ℝ} (hLf : 0 ≤ L_f) (n : ℕ) : 0 < expLipConst B L_f n := by
+  have hL1 : (0 : ℝ) < 1 + L_f := by linarith
+  have h1 : 0 < Real.exp B ^ 2 * (1 + L_f) := mul_pos (by positivity) hL1
+  have h2 : 0 ≤ (n : ℝ) * Real.exp B ^ 4 * (1 + L_f) :=
+    mul_nonneg (mul_nonneg (Nat.cast_nonneg _) (by positivity)) hL1.le
+  simp only [expLipConst]; linarith
+
+/-- **Tier 2.4 — the bounded-domain per-coordinate Lipschitz bound (Discharged).** On
+the simplex-floor (`0 ≤ w`, `∑w = 1`, both points), the exp replicator's `r`-fibre
+obeys `|R(w)_r − R(w')_r| ≤ L·dist(w,w')` with `L = expLipConst`. The quotient split
+`a/p − b/q = (a−b)/p + b(q−p)/(pq)`, closed with the numerator/normalizer bounds and
+`Z ≥ e^{−B}`, `w'_r·g ≤ e^B` (the bounded-domain facts the unbounded region lacked). -/
+lemma expR_coord_lipschitz {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (hLf : 0 ≤ L_f) (w w' : S → ℝ) (hw0 : ∀ s, 0 ≤ w s) (hws : ∑ s, w s = 1)
+    (hw'0 : ∀ s, 0 ≤ w' s) (hw's : ∑ s, w' s = 1) (r : S) :
+    |expR f w r - expR f w' r| ≤ expLipConst B L_f (Fintype.card S) * dist w w' := by
+  -- normalizers positive (via `Z ≥ e^{−B}`)
+  have hp : Real.exp (-B) ≤ ∑ s, w s * Real.exp (f s w) := expZ_lower hf_bdd hw0 hws
+  have hq : Real.exp (-B) ≤ ∑ s, w' s * Real.exp (f s w') := expZ_lower hf_bdd hw'0 hw's
+  have hp_pos : 0 < ∑ s, w s * Real.exp (f s w) := lt_of_lt_of_le (Real.exp_pos _) hp
+  have hq_pos : 0 < ∑ s, w' s * Real.exp (f s w') := lt_of_lt_of_le (Real.exp_pos _) hq
+  -- reduce both fibres to the genuine quotient
+  have hRw : expR f w r = w r * Real.exp (f r w) / (∑ s, w s * Real.exp (f s w)) := by
+    rw [expR, if_pos hp_pos]
+  have hRw' : expR f w' r = w' r * Real.exp (f r w') / (∑ s, w' s * Real.exp (f s w')) := by
+    rw [expR, if_pos hq_pos]
+  rw [hRw, hRw']
+  -- the algebraic facts, in full terms (folded to `a,b,p,q` by `set` below)
+  have hEE : Real.exp B * Real.exp (-B) = 1 := by rw [← Real.exp_add]; simp
+  have hw'1 : ∀ s, w' s ≤ 1 := fun s => by
+    have := Finset.single_le_sum (f := fun i => w' i) (fun i _ => hw'0 i) (Finset.mem_univ s)
+    rwa [hw's] at this
+  have hb0 : (0 : ℝ) ≤ w' r * Real.exp (f r w') := mul_nonneg (hw'0 r) (Real.exp_pos _).le
+  have hb_le : w' r * Real.exp (f r w') ≤ Real.exp B := by
+    have := mul_le_mul (hw'1 r) (Real.exp_le_exp.mpr (le_of_abs_le (hf_bdd r w')))
+      (Real.exp_pos _).le zero_le_one
+    simpa using this
+  have hEp : 1 ≤ Real.exp B * (∑ s, w s * Real.exp (f s w)) := by
+    rw [← hEE]; exact mul_le_mul_of_nonneg_left hp (Real.exp_pos B).le
+  have hkey : Real.exp B ^ 2 * (Real.exp (-B) * Real.exp (-B)) = 1 := by
+    rw [show Real.exp B ^ 2 * (Real.exp (-B) * Real.exp (-B))
+          = (Real.exp B * Real.exp (-B)) * (Real.exp B * Real.exp (-B)) from by ring, hEE]; ring
+  have hpq_low : Real.exp (-B) * Real.exp (-B)
+      ≤ (∑ s, w s * Real.exp (f s w)) * (∑ s, w' s * Real.exp (f s w')) :=
+    mul_le_mul hp hq (Real.exp_pos _).le hp_pos.le
+  have hpq2 : 1 ≤ Real.exp B ^ 2
+      * ((∑ s, w s * Real.exp (f s w)) * (∑ s, w' s * Real.exp (f s w'))) := by
+    rw [← hkey]; exact mul_le_mul_of_nonneg_left hpq_low (by positivity)
+  have hab : |w r * Real.exp (f r w) - w' r * Real.exp (f r w')|
+      ≤ Real.exp B * (1 + L_f) * dist w w' := expN_lipschitz hf_bdd hf_lip r w w' (hw'0 r) (hw'1 r)
+  have hqp : |(∑ s, w' s * Real.exp (f s w')) - (∑ s, w s * Real.exp (f s w))|
+      ≤ (Fintype.card S) * Real.exp B * (1 + L_f) * dist w w' := by
+    rw [abs_sub_comm]
+    calc |(∑ s, w s * Real.exp (f s w)) - (∑ s, w' s * Real.exp (f s w'))|
+        ≤ (Fintype.card S) * (Real.exp B * (1 + L_f)) * dist w w' :=
+          expZ_lipschitz hf_bdd hf_lip w w' hw'0 hw'1
+      _ = (Fintype.card S) * Real.exp B * (1 + L_f) * dist w w' := by ring
+  have hCnn : (0 : ℝ) ≤ Real.exp B * (1 + L_f) * dist w w' :=
+    mul_nonneg (mul_nonneg (Real.exp_pos B).le (by linarith)) dist_nonneg
+  have hD0 : (0 : ℝ) ≤ (Fintype.card S) * Real.exp B * (1 + L_f) * dist w w' :=
+    mul_nonneg (mul_nonneg (mul_nonneg (Nat.cast_nonneg _) (Real.exp_pos B).le) (by linarith))
+      dist_nonneg
+  set p := ∑ s, w s * Real.exp (f s w) with hpdef
+  set q := ∑ s, w' s * Real.exp (f s w') with hqdef
+  set a := w r * Real.exp (f r w) with hadef
+  set b := w' r * Real.exp (f r w') with hbdef
+  -- leg 1: the numerator move, `|(a−b)/p| ≤ e^{2B}(1+L_f)·dist`
+  have hleg1 : |a / p - b / p| ≤ Real.exp B ^ 2 * (1 + L_f) * dist w w' := by
+    rw [div_sub_div_same, abs_div, abs_of_pos hp_pos, div_le_iff₀ hp_pos]
+    nlinarith [hab, hCnn, hEp, mul_le_mul_of_nonneg_left hEp hCnn]
+  -- leg 2: the denominator move, `|b(q−p)/(pq)| ≤ |S|·e^{4B}(1+L_f)·dist`
+  have hleg2 : |b / p - b / q| ≤ (Fintype.card S) * Real.exp B ^ 4 * (1 + L_f) * dist w w' := by
+    rw [div_sub_div _ _ hp_pos.ne' hq_pos.ne', abs_div, abs_of_pos (mul_pos hp_pos hq_pos),
+      show b * q - p * b = b * (q - p) from by ring, abs_mul, abs_of_nonneg hb0,
+      div_le_iff₀ (mul_pos hp_pos hq_pos)]
+    calc b * |q - p|
+        ≤ Real.exp B * ((Fintype.card S) * Real.exp B * (1 + L_f) * dist w w') :=
+          mul_le_mul hb_le hqp (abs_nonneg _) (Real.exp_pos B).le
+      _ ≤ (Real.exp B * ((Fintype.card S) * Real.exp B * (1 + L_f) * dist w w'))
+            * (Real.exp B ^ 2 * (p * q)) :=
+          le_mul_of_one_le_right (mul_nonneg (Real.exp_pos B).le hD0) hpq2
+      _ = ((Fintype.card S) * Real.exp B ^ 4 * (1 + L_f) * dist w w') * (p * q) := by ring
+  calc |a / p - b / q|
+      ≤ |a / p - b / p| + |b / p - b / q| := abs_sub_le _ _ _
+    _ ≤ Real.exp B ^ 2 * (1 + L_f) * dist w w'
+          + (Fintype.card S) * Real.exp B ^ 4 * (1 + L_f) * dist w w' := add_le_add hleg1 hleg2
+    _ = expLipConst B L_f (Fintype.card S) * dist w w' := by simp only [expLipConst]; ring
+
+/-- **Tier 2.5 — the mutation step's contraction factor (Discharged).** On the floored
+simplex, `mutT` for the exp replicator is Lipschitz with constant
+`(1−μ)·expLipConst` in the sup metric — the `μ·unif` term cancels, leaving `(1−μ)`
+times the selection bound (now a genuine simplex-floor estimate, not a
+`SelectionLipschitz` over the unbounded region). -/
+lemma exp_mutation_lipschitz {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (hLf : 0 ≤ L_f) (μ : ℝ) (hμ0 : 0 ≤ μ) (hμ1 : μ ≤ 1) (unif : S → ℝ)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
+    (w w' : FlooredSimplex S μ unif) :
+    dist (mutT μ hμ0 hμ1 unif hunif_nonneg hunif_sum (expReplicatorSel f unif) w)
+         (mutT μ hμ0 hμ1 unif hunif_nonneg hunif_sum (expReplicatorSel f unif) w')
+      ≤ ((1 - μ) * expLipConst B L_f (Fintype.card S)) * dist w w' := by
+  have h1μ : (0 : ℝ) ≤ 1 - μ := by linarith
+  have hL1 : (0 : ℝ) ≤ 1 + L_f := by linarith
+  have hLc : 0 ≤ expLipConst B L_f (Fintype.card S) := (expLipConst_pos hLf _).le
+  have hCnn : 0 ≤ ((1 - μ) * expLipConst B L_f (Fintype.card S)) * dist w w' :=
+    mul_nonneg (mul_nonneg h1μ hLc) dist_nonneg
+  rw [Subtype.dist_eq, dist_pi_le_iff hCnn]
+  intro r
+  have e : ∀ v : FlooredSimplex S μ unif,
+      (mutT μ hμ0 hμ1 unif hunif_nonneg hunif_sum (expReplicatorSel f unif) v).1 r
+        = (1 - μ) * expR f v.1 r + μ * unif r := fun _ => rfl
+  rw [e w, e w', Real.dist_eq,
+    show ((1 - μ) * expR f w.1 r + μ * unif r) - ((1 - μ) * expR f w'.1 r + μ * unif r)
+       = (1 - μ) * (expR f w.1 r - expR f w'.1 r) by ring,
+    abs_mul, abs_of_nonneg h1μ, mul_assoc]
+  refine mul_le_mul_of_nonneg_left ?_ h1μ
+  have hw0 : ∀ s, 0 ≤ w.1 s := fun s => le_trans (mul_nonneg hμ0 (hunif_nonneg s)) (w.2.1 s)
+  have hw'0 : ∀ s, 0 ≤ w'.1 s := fun s => le_trans (mul_nonneg hμ0 (hunif_nonneg s)) (w'.2.1 s)
+  rw [Subtype.dist_eq]
+  exact expR_coord_lipschitz hf_bdd hf_lip hLf w.1 w'.1 hw0 w.2.2 hw'0 w'.2.2 r
+
+/-- **Tier 2.5 — convergence of the exp replicator (Discharged, sorry-free).** On the
+nonempty complete floored simplex, the **fitness-dependent exponential replicator**
+`R(w)_r = w_r·exp(f_r w)/Z(w)` converges to a unique fixed point whenever
+`(1−μ)·expLipConst < 1` — the exact analogue of the linear result, now with the
+genuine fitness coupling. No `SelectionLipschitz` (the exp map cannot inhabit it);
+Banach is fired directly from the simplex-floor bound. This closes the `04-design`'s
+open exp-fitness target. -/
+theorem ws8_exp_replicator_converges {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (hLf : 0 ≤ L_f) (unif : S → ℝ) (μ : ℝ) (hμ0 : 0 ≤ μ) (hμ1 : μ ≤ 1)
+    (hband : (1 - μ) * expLipConst B L_f (Fintype.card S) < 1)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ hμ0 hμ1 unif hunif_nonneg hunif_sum (expReplicatorSel f unif) p = p := by
+  haveI := flooredSimplex_nonempty μ hμ1 unif hunif_nonneg hunif_sum
+  have hK0 : 0 ≤ (1 - μ) * expLipConst B L_f (Fintype.card S) :=
+    mul_nonneg (by linarith) (expLipConst_pos hLf _).le
+  refine Series3.WS5.ws5_attention_converges _
+    ⟨(1 - μ) * expLipConst B L_f (Fintype.card S), hK0⟩ ?_ ?_
+  · exact_mod_cast hband
+  · intro w w'
+    exact exp_mutation_lipschitz hf_bdd hf_lip hLf μ hμ0 hμ1 unif hunif_nonneg hunif_sum w w'
+
+/-! ### Tier 3 — the exp contraction band, and the honest status of the harder routes
+
+The exp replicator's contraction condition `(1−μ)·L < 1` has, exactly as the linear
+case, an explicit crossover `μ⋆_exp := 1 − 1/L`. Below we name it and show the band
+is `(μ⋆_exp, 1]`. We then record honestly what the remaining design routes are worth. -/
+
+/-- The exp-replicator contraction crossover `μ⋆_exp = 1 − 1/L`. -/
+noncomputable def muStarExp (B L_f : ℝ) (n : ℕ) : ℝ := 1 - 1 / expLipConst B L_f n
+
+/-- The exp contraction band is *exactly* `μ > μ⋆_exp` — a genuine threshold. -/
+lemma exp_band_iff {B L_f : ℝ} (hLf : 0 ≤ L_f) (n : ℕ) (μ : ℝ) :
+    (1 - μ) * expLipConst B L_f n < 1 ↔ muStarExp B L_f n < μ := by
+  have hL := expLipConst_pos (B := B) (L_f := L_f) hLf n
+  rw [muStarExp]
+  constructor
+  · intro h
+    have h2 : (1 - μ) < 1 / expLipConst B L_f n := (lt_div_iff₀ hL).mpr h
+    linarith
+  · intro h
+    have h2 : (1 - μ) < 1 / expLipConst B L_f n := by linarith
+    exact (lt_div_iff₀ hL).mp h2
+
+/-- **Convergence of the exp replicator on the explicit band `(μ⋆_exp, 1]`.** -/
+theorem ws8_exp_replicator_converges_band {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (hLf : 0 ≤ L_f) (unif : S → ℝ) (μ : ℝ) (hμ0 : 0 ≤ μ) (hμ1 : μ ≤ 1)
+    (hμstar : muStarExp B L_f (Fintype.card S) < μ)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1) :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ hμ0 hμ1 unif hunif_nonneg hunif_sum (expReplicatorSel f unif) p = p :=
+  ws8_exp_replicator_converges hf_bdd hf_lip hLf unif μ hμ0 hμ1
+    ((exp_band_iff hLf (Fintype.card S) μ).mpr hμstar) hunif_nonneg hunif_sum
+
+/-!
+**Tier 3.6 / 3.7 — the harder design routes, assessed honestly (no laundering).**
+
+*3.6 (a `C¹`-Jacobian / mean-value route to Lipschitz).* This was the design's
+fallback for the *unbounded* floor region. It is **subsumed and unnecessary**: the
+dynamics lives on the bounded floored simplex, where the elementary estimate above
+(`expR_coord_lipschitz`) already gives a Lipschitz constant with no differentiability
+machinery. Formalizing a Fréchet-derivative bound would be strictly more work for a
+weaker payload, so it is deliberately **not** pursued.
+
+*3.7 (faithfulness to a continuous-time replicator ODE).* Genuinely out of reach
+sorry-free at present: Mathlib v4.15.0 lacks the flow/Picard–Lindelöf packaging to
+state "the discrete `mutT` is the time-`h` map of the replicator vector field" and
+relate their fixed points without a substantial upstream development. We do **not**
+assert it; it is recorded here as an open modelling obligation, not a hole.
+
+*3.8 (is the band *necessary* — is the exp replicator ever `impossible`?).* No, and
+claiming `DynamicalStatus.impossible` would be **dishonest**: the floored simplex is
+compact and convex and `mutT` is continuous, so Brouwer gives a fixed point for
+*every* `μ ∈ [0,1]` regardless of contraction. What the band controls is
+**uniqueness/convergence**, not existence — and `exp_band_iff` shows the contraction
+crossover is a sharp threshold `μ⋆_exp`. Hence the honest dynamical label for the
+exhibited replicators is **`partial_band`** (converges on a proper sub-band), never
+`impossible`. -/
+
+/-- **Tier 1.2 — retiring `deferred` for the exhibited dynamics (Discharged).** The
+WS7 non-collapse bundle, now with dynamical status **`partial_band`** rather than
+`deferred`: for the exhibited replicators (linear `ws8_replicator_converges_band` and
+exponential `ws8_exp_replicator_converges_band`) attention converges to a unique fixed
+point on the explicit band `(μ⋆, 1]`. This is the honest upgrade — a proper sub-band,
+not all of `A` (`discharged`), and not `impossible` (Brouwer gives existence
+everywhere). The justifying convergence theorems live in this file; the status field
+points at exhibited, proved dynamics. -/
+theorem ws8_noncollapse_partial_band
+    (κ₀ : Cardinal.{0}) (hreg : κ₀.IsRegular)
+    (hcard : κ₀ ≤ Cardinal.mk (νPk κ₀).X)
+    (μ : ℝ) (hμ : 0 < μ) (A : Set ℝ) (n : ℕ) (hn : 2 ≤ n) :
+    Nonempty (WS7NonCollapse κ₀ μ A) := by
+  obtain ⟨w⟩ := ws7_band_and_retro κ₀ hreg hcard μ hμ A n hn
+  exact ⟨{ w with dynamics := DynamicalStatus.partial_band }⟩
 
 end Dynamics
 

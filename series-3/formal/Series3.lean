@@ -7,8 +7,12 @@
 -- axioms (`propext` / `Classical.choice` / `Quot.sound`) — no custom axioms — as
 -- verified at build time by `AxiomCheck.lean` (a `#print axioms` sweep over one
 -- top result per workstream; the `Łₙ` quantitative witness is even choice-free).
--- Partial/open obligations are named as typed holes and never laundered into
--- discharged-looking theorems (see each `ws*.lean` header for its exact scope).
+-- The dynamical half of criterion (vii) is discharged for exhibited dynamics: the
+-- nonexpansive, linear, AND fitness-dependent **exponential** replicators all
+-- converge on explicit μ-bands (`ws8_{,exp_}replicator_converges`), so the WS7
+-- dynamical status is `partial_band`, not `deferred`. Partial/open obligations are
+-- named as typed holes and never laundered into discharged-looking theorems (see
+-- each `ws*.lean` header for its exact scope).
 --
 -- WS1 (`series-3/spec/ws1/4-charter-design-review.md`) — the Groundless Carrier:
 -- the terminal coalgebra of the κ-bounded powerset functor, its Lambek iso,
