@@ -1,0 +1,316 @@
+# WS7 · Lemma B — design for the dynamical half of criterion (vii)
+
+*Convergence of attention: inhabiting `replicator_mutator_contracts`.*
+
+**Status of this memo.** This is a *design*, not a report. It targets the one
+mathematical obligation the whole program still leaves open after Revisions D/E:
+the dynamical half of criterion (vii). Everything the obligation feeds into is
+already proved in `ws7.lean` and consumes a single hypothesis; this memo specifies
+how to discharge that hypothesis — or, per §5 vocabulary, to return the honest
+`Impossibility`/`Partial-band` verdict if it resists. It is written against the
+**actual** `ws5.lean`/`ws7.lean` API, and it flags two places where the existing
+Lean definitions differ from the WS7 `02-design` prose (metric, and the selection
+map's domain), in the §8.2 surfacing discipline.
+
+---
+
+## 0. What is already closed, and what Lemma B is exactly
+
+The dynamical spine in `ws7.lean` is complete except for one input. Proved and
+`sorry`-free, given a `SelectionLipschitz` witness `sl`:
+
+- `mutationStep_maps_into` / `mutT` — B0, invariance of the floored simplex under
+  `w ↦ (1−μ)·R w + μ·unif`.
+- `mutation_lipschitz` — the step is Lipschitz with constant `(1−μ)·L_R μ` in the
+  ambient `Pi` metric.
+- `ws7_mutation_contracts` — given `hfloor_contr : (1 − μ)·(sl.L_R μ) < 1`, the step
+  is a contraction with an explicit `K < 1`.
+- `ws7_attention_fixed_point` — Banach, via `ws5_attention_converges`, on the
+  nonempty complete floored simplex.
+
+So the terminal verdict of the dynamical axis is set by **one** predicate. In the
+WS5 vocabulary it is `replicator_mutator_contracts μ`; in the WS7 vocabulary it is
+the existence of a `SelectionLipschitz` witness `sl` for a genuine replicator
+selection map `sel`, together with the inequality
+
+```
+Lemma B:   (1 − μ) · (sl.L_R μ)  <  1
+```
+
+on a stated range of `μ`. Discharging Lemma B closes criterion (vii)'s dynamical
+half; the design's registered fork (`02-design` §3, `DynamicalStatus`) is the set of
+honest outcomes:
+
+- **Discharged** — `sl.L_R μ` is proved finite and `(1−μ)·L_R μ < 1` on a μ-range;
+  `DynamicalStatus.discharged`.
+- **Impossibility proved** — every weight-preserving replicator `R` has
+  `L_R μ ≥ 1/(1−μ)` for all `μ ∈ (0,1]`; `DynamicalStatus.impossible` (the standing
+  "attention need not converge" risk *realized*, a §5/§7 success, not a failure).
+- **Partial-band** — `L_R μ` bounded below `1/(1−μ)` only on a proper sub-interval
+  of `μ`; `DynamicalStatus.partial_band`, obstruction = the exact admissible
+  interval.
+
+The T7 discipline (`02-design` §4) binds: the final `ws7_band_and_retro` bundle must
+**not** carry `hfloor_contr` as a bare hypothesis. Lemma B either inhabits the
+witness (moving `dynamics` off `deferred`) or reports which of the three cases holds.
+
+---
+
+## 1. Two corrections to the upstream design, surfaced not patched
+
+Checking `02-design`'s prose against the definitions actually compiled in `ws7.lean`
+turns up two mismatches. Per the §8.2 discipline (as WS8 did for A5/D2), the design
+proceeds against the *true* definitions and records the corrections here.
+
+**Correction 1 — the metric is `ℓ∞` (sup), not `ℓ¹`/total variation.** `02-design`
+§2 and §3-Lemma-A both describe the carrier metric as `ℓ¹`, `dist w w' = ∑_r |w r −
+w' r|`, and the Lemma-A proof sums coordinate differences. But `ws7.lean` gives
+`FlooredSimplex` its metric by `inferInstanceAs` on the subtype of `S → ℝ`, i.e. the
+Mathlib **`Pi` (sup) metric** `dist w w' = ⊔_r |w r − w' r|`, and `mutation_lipschitz`
+is proved with `dist_pi_le_iff` + `dist_le_pi_dist` (a sup-norm argument), *not* a
+sum. The two are Lipschitz-equivalent on a finite `S` (`d_∞ ≤ d_1 ≤ |S|·d_∞`), so the
+*existence* of a contraction is unaffected in principle — but **the constant is
+not**: a bound proved for `ℓ¹` does not transfer verbatim, and the naive
+coordinatewise selection bound behaves differently under sup. Lemma B must be proved
+for the **sup metric** that `sl.bound` actually quantifies over
+(`dist (sel.R w) (sel.R w') ≤ (L_R μ) · dist w w'`, both `dist`s sup). This memo does
+so. Whoever later reconciles the prose should either re-instance `FlooredSimplex`
+with an explicit `ℓ¹` metric or restate `02-design` in sup terms; until then, sup is
+load-bearing and `ℓ¹`-flavored intuition about "mass moving" is not directly usable.
+
+**Correction 2 — `SelectionMap.R` acts on all of `S → ℝ`, not the interior.**
+`02-design` §3-Lemma-B speaks of "the μ-floored interior" as `R`'s domain and reads
+`L_R` off "the fitness gradient where all weights exceed `μ·min unif`." But the
+formalized `SelectionMap` has `R : (S → ℝ) → (S → ℝ)` total, and `SelectionLipschitz.
+bound` only *quantifies* the Lipschitz estimate over `floorRegion μ unif` members
+(`∀ w ∈ floorRegion μ unif, …`). So the floor is a *hypothesis on the pair of points*,
+not a restriction of the domain. This is the more honest shape (a total `R` with a
+region-local bound), and it is what Lemma B must supply: an `L_R : ℝ → ℝ≥0` and a
+proof that the estimate holds *for points in the floor region*. The concrete `R`
+below is defined totally but only its floor-region behavior is bounded.
+
+---
+
+## 2. The concrete replicator selection map
+
+Fix a finite `S = SelfSupport κ u` (the attention support), and a strictly positive
+uniform reference `unif : S → ℝ`, `∑ unif = 1`, `unif r > 0`. Let `μ ∈ (0,1]`. The
+floor region forces, for any `w` with `∀ r, μ·unif r ≤ w r`, the pointwise lower
+bound
+
+```
+w r ≥ μ · unif r ≥ μ · u_min > 0,     u_min := min_r unif r.
+```
+
+This positive floor `δ := μ·u_min` is the entire analytic lever: it keeps the
+replicator away from the simplex boundary, where its Lipschitz constant would blow
+up. `ws5_plurality_floor`/`ws5_no_delta` already certify this floor is real and
+load-bearing; Lemma B is what *uses* it quantitatively.
+
+**Fitness.** Take a bounded, Lipschitz fitness field `f : S → (S → ℝ) → ℝ`,
+`f_r(w)` the fitness of relation `r` at attention profile `w`, with a global bound
+`|f_r(w)| ≤ B` and a Lipschitz modulus `L_f` in `w` (sup metric). The
+program-canonical choice is the **linear/quadratic replicator payoff** `f_r(w) =
+(A w)_r` for a fixed payoff matrix `A` (fitness = expected payoff against the current
+mix); then `B = ‖A‖_∞` and `L_f = ‖A‖_∞` directly. Nothing below needs more than
+`(B, L_f)` finite, so an entropy-regularized or softmax fitness works identically
+with its own `(B, L_f)`.
+
+**Selection.** The (discrete, normalized) replicator update:
+
+```
+R(w)_r  =  w_r · g_r(w) / Z(w),      g_r(w) := exp( f_r(w) ),      Z(w) := ∑_s w_s g_s(w).
+```
+
+`R` is manifestly weight-preserving (`∑_r R(w)_r = 1`) and nonnegativity-preserving,
+so it inhabits `SelectionMap S unif` (fields `nonneg`, `sum_one` are immediate; `R`
+extended to all of `S → ℝ` by the same formula, with `Z(w)` bounded away from 0 on
+the floor region — see below — and defined as, say, `w` itself off the region to
+keep it total, since only floor-region behavior is bounded).
+
+Using `g = exp∘f` rather than bare `(1 + f)` guarantees `g_r > 0` and sidesteps the
+"fitness can push a weight negative" case-split; it is the standard exponential /
+log-linear replicator and keeps `R` inside the positive cone unconditionally.
+
+---
+
+## 3. Lemma B proper — the sup-metric Lipschitz bound on the floor region
+
+**Claim (Lemma B, Discharged form).** There is `L_R : ℝ → ℝ≥0` such that for all
+`μ ∈ (0,1]` and all `w, w' ∈ floorRegion μ unif`,
+
+```
+d_∞(R w, R w')  ≤  L_R(μ) · d_∞(w, w'),        with   L_R(μ) = C / δ^2 = C / (μ · u_min)^2
+```
+
+for an explicit constant `C = C(B, L_f, |S|)` depending only on the fitness bound,
+the fitness Lipschitz modulus, and `|S|` — **not** on `w, w'` or on how close to the
+boundary the ambient space gets, because the floor caps that.
+
+**Why the floor gives a bound (the analytic heart).** Write `R(w)_r = w_r g_r(w) /
+Z(w)`. On the floor region every coordinate obeys `w_r ≥ δ` and `w_r ≤ 1` (sum-one),
+and `g_r(w) = exp f_r(w) ∈ [e^{−B}, e^{B}]`, so
+
+```
+Z(w) = ∑_s w_s g_s(w) ∈ [ δ·e^{−B},  |S|·e^{B} ],   bounded away from 0 by  δ·e^{−B} > 0.
+```
+
+`R` is a composition/quotient of maps that are each Lipschitz with an *explicit*
+modulus on this region, because the only quantities that could blow up — `1/Z` and
+the `g_r` — are controlled: `1/Z` is Lipschitz with modulus `≤ (sup|∇Z|)/(inf Z)^2`,
+`inf Z ≥ δe^{−B}`, and `g_r = exp f_r` is Lipschitz with modulus `≤ e^{B} L_f`. A
+finite product/quotient rule (each factor bounded, each factor Lipschitz) yields a
+single `L_R(μ)` scaling like `1/δ^2 = 1/(μ u_min)^2`. The `δ^{−2}` is the honest cost
+of the quotient's two floor-sensitive pieces (`w_r` in the numerator is fine; `1/Z`
+contributes one `δ^{−1}`, and the coupling of `Z`'s own `w`-dependence contributes
+the second). Constants:
+
+```
+C  =  c_0 · |S| · e^{3B} · (1 + L_f),          c_0 an absolute numeric constant,
+L_R(μ) = C / (μ · u_min)^2.
+```
+
+**The fork, made quantitative.** Plug into the contraction requirement:
+
+```
+(1 − μ) · L_R(μ)  =  (1 − μ) · C / (μ u_min)^2  <  1
+   ⟺   (1 − μ) · C  <  (μ u_min)^2.
+```
+
+The left side → `C` as `μ → 0` and → `0` as `μ → 1`; the right side → `0` as `μ → 0`
+and → `u_min^2` as `μ → 1`. So:
+
+- Near `μ = 1` the inequality **holds** (LHS→0, RHS→`u_min^2`>0): there is always a
+  sub-interval `(μ*, 1]` on which the step contracts. **This alone secures
+  `Partial-band` unconditionally, and `Partial-band` degenerates to `Discharged`
+  once the interval is shown to be all of a charter-admissible μ-range.**
+- The crossover `μ*` is the largest root in `(0,1)` of `(1−μ)C = (μ u_min)^2`, i.e.
+  `μ* = ( −C + sqrt(C^2 + 4 C u_min^2) ) / (2 u_min^2)` (monotone pieces, single
+  crossing). Explicit, so the admissible band is *nameable*, which is exactly what
+  `DynamicalStatus.partial_band` must carry.
+- **Impossibility** is therefore *not* what obtains for this exponential replicator:
+  the operator provably contracts near `μ = 1`. The `impossible` branch would require
+  a different selection map whose `L_R` has no `μ`-window below `1/(1−μ)`; this design
+  does not take that branch and predicts it is not forced.
+
+**Verdict this design targets: Discharged on the band `μ ∈ (μ*, 1]`,** reported as
+`partial_band` with the explicit `μ*` if the charter insists on small-`μ`
+plurality simultaneously (see §6), or `discharged` if the intended μ-range sits
+inside `(μ*, 1]`.
+
+---
+
+## 4. The Lean shape — what to add to `ws7.lean`
+
+Nothing already proved is touched. Add, in `namespace Series3.WS7`, `section
+Dynamics`:
+
+```lean
+/-- The exponential (log-linear) replicator selection map for a bounded Lipschitz
+    fitness `f`. Total on `S → ℝ`; weight- and nonnegativity-preserving. -/
+def replicatorSel (f : S → (S → ℝ) → ℝ) (unif : S → ℝ) : SelectionMap S unif := …
+
+/-- **Lemma B (the analytic obligation).** For a bounded (`|f| ≤ B`) Lipschitz-in-`w`
+    (`L_f`) fitness, the exponential replicator is Lipschitz on the μ-floor region
+    with an explicit `L_R μ = C / (μ · u_min)^2`. Sup metric (Correction 1). -/
+def replicatorLipschitz
+    (f : S → (S → ℝ) → ℝ) (unif : S → ℝ)
+    (hunif_pos : ∀ r, 0 < unif r)
+    (B L_f : ℝ) (hbdd : ∀ r w, |f r w| ≤ B)
+    (hlip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w') :
+    SelectionLipschitz S unif (replicatorSel f unif) :=
+  { L_R   := fun μ => ⟨C B L_f (Fintype.card S) / (μ * (uMin unif))^2, by positivity⟩
+  , bound := …  -- the §3 quotient-rule estimate, sup metric, on floorRegion
+  }
+
+/-- **The contraction window (the fork, quantitative).** For the exponential
+    replicator, `(1−μ)·L_R μ < 1` holds for every `μ ∈ (μ⋆, 1]`, where `μ⋆` is the
+    stated crossover. This is Lemma B's decision, not a hypothesis. -/
+theorem replicator_contracts_on_band
+    (f unif) (hunif_pos) (B L_f) (hbdd) (hlip)
+    {μ : ℝ} (hμ : muStar B L_f unif < μ) (hμ1 : μ ≤ 1) :
+    (1 - μ) * ((replicatorLipschitz f unif hunif_pos B L_f hbdd hlip).L_R μ) < 1 := …
+```
+
+With these, the existing chain fires unchanged:
+
+```lean
+theorem ws7_attention_converges_band (…same fitness data…)
+    {μ : ℝ} (hμ0 : 0 < μ) (hμ⋆ : muStar … < μ) (hμ1 : μ ≤ 1)
+    (hunif_nonneg) (hunif_sum) [Nonempty (FlooredSimplex S μ unif)] :
+    ∃! p, mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum
+              (replicatorSel f unif) p = p :=
+  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum
+    (replicatorSel f unif) (replicatorLipschitz f unif …)
+    (replicator_contracts_on_band f unif … hμ⋆ hμ1)
+```
+
+and `replicator_mutator_contracts μ` (WS5) is inhabited for `μ ∈ (μ⋆,1]` by packaging
+the same `⟨K, hK, hlip⟩` — closing WS5's sole open obligation on that band.
+
+**Then, and only then, the assembly is updated (T7):** `ws7_band_and_retro`'s
+`dynamics` field moves from `DynamicalStatus.deferred` to
+`DynamicalStatus.partial_band` (carrying `μ⋆` and the interval) — or `.discharged`
+if the whole admissible μ-range lies above `μ⋆`. `hfloor_contr` never appears as a
+bundle hypothesis; it is *produced* by `replicator_contracts_on_band`.
+
+---
+
+## 5. Proof-effort map (where the real work is)
+
+| Piece | Content | Difficulty | Mathlib levers |
+|---|---|---|---|
+| `replicatorSel` well-defined | `sum_one`, `nonneg`; `Z>0` on floor | low | `Finset.sum`, `Real.exp_pos` |
+| `uMin`, `δ = μ·u_min` bounds | floor ⇒ `w_r ≥ δ`, `Z ≥ δe^{−B}` | low | `Finset.min'`, `Finset.single_le_sum` |
+| `g_r = exp f_r` Lipschitz on region | `|e^a − e^b| ≤ e^{B}|a−b|` | low–med | `Real.add_pow_le_pow_mul_pow_of_sq_le`? no — `Real.exp` MVT: `Real.abs_exp_sub_…` / `Convex` |
+| `1/Z` Lipschitz on region | `|1/Z − 1/Z'| ≤ |Z−Z'|/(inf Z)^2` | med | `inf Z ≥ δe^{−B}`; quotient bound by hand |
+| **product/quotient assembly → `L_R μ`** | finite product rule, sup metric | **med–high** | `dist_pi_le_iff`, triangle, the §3 constant bookkeeping |
+| `replicator_contracts_on_band` | `(1−μ)C < (μ u_min)^2` root analysis | med | `Polynomial`/`nlinarith`; monotonicity, one crossing |
+| assembly update | `deferred → partial_band/discharged` | low | — |
+
+The single genuinely new proof, exactly as `02-design` predicted, is the
+product/quotient Lipschitz assembly (`replicatorLipschitz.bound`) in the **sup**
+metric. Everything else is bookkeeping or already-proved plumbing. There is no
+`sorry` anywhere in the target; the fitness data `(B, L_f)` enters as explicit
+hypotheses (the linear payoff `f = A·w` discharges them with `B = L_f = ‖A‖_∞`), so
+nothing is smuggled as an axiom.
+
+---
+
+## 6. The one design decision the charter must ratify
+
+`ws5_plurality_floor`/`ws5_no_delta` want `μ > 0` *and* care about small `μ` (the
+floor `μ·unif` should be a light touch, not a heavy pull toward uniform). Lemma B's
+contraction window is `μ ∈ (μ⋆, 1]` — the **opposite** end. These are compatible only
+if `μ⋆ < ` (the largest μ the plurality story tolerates). Two honest outcomes:
+
+- If the intended operating μ sits in `(μ⋆, 1]`: report **`DynamicalStatus.discharged`**
+  — convergence and plurality cohold, criterion (vii)'s dynamical half closed.
+- If plurality forces μ below `μ⋆`: report **`DynamicalStatus.partial_band`** with the
+  explicit `μ⋆`, and record the tension as the precise obstruction — convergence on
+  `(μ⋆,1]`, plurality on `(0, ·]`, the two windows' overlap the deliverable. This is a
+  genuine, nameable Partial, not a failure, and it is *more* informative than a bare
+  contraction: it quantifies the trade-off between "attention stays plural" and
+  "attention settles."
+
+Either way the `deferred` label is retired. That retirement — replacing an open
+tag with a proved status (discharged or an explicitly-bounded partial) — is the
+completion of the last open obligation in the §7 criteria, modulo the standing
+operational `#print axioms` check owed on the new theorems (expected
+`[propext, Classical.choice, Quot.sound]`; the exp/quotient estimates are classical
+but not choice-heavy).
+
+---
+
+## 7. Summary
+
+Lemma B is not "prove attention converges" in the abstract; it is: **exhibit the
+exponential replicator as a `SelectionMap`, prove its sup-metric Lipschitz constant
+on the μ-floor region is `C/(μ u_min)^2`, and observe that `(1−μ)·L_R μ < 1` on an
+explicit window `(μ⋆,1]`.** The floor `δ = μ·u_min > 0` — the very object WS5 proved
+load-bearing for anti-collapse — is what bounds the constant, so the plurality
+mechanism and the convergence mechanism are the *same* floor read two ways. The
+verdict this design predicts is Discharged (on `(μ⋆,1]`) or a quantified
+Partial-band, never Impossibility, and it closes the dynamical half of criterion
+(vii) into the existing, already-proved Banach spine without adding a single bare
+hypothesis to the collector bundle.
