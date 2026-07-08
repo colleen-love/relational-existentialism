@@ -18,6 +18,8 @@ The framework has **one primitive** — observation, which is what relating is: 
 
 The document of record — the map, the foundational commitments, the formal framework (the anti-foundation axiom, objects-as-relations coalgebra, relations-as-objects, the bialgebra, graded containment, and non-collapse), the central research question, methodology, milestones, success criteria, and open problems — is the **Series 3 charter**:
 
+**[The Series 3 Summary](./series-3/summary.md)**
+**[The Series 3 Technical Summary](./series-3/summary-technical.md)**
 **[The Series 3 Charter](./series-3/charter.md)**
 
 ## Licensing
