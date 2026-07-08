@@ -431,6 +431,114 @@ theorem ws8_replicator_converges (c : S → ℝ) (hc : ∀ s, 0 < c s)
     (linReplicatorLipschitz c hc unif hunif_pos)
     (lin_replicator_contracts c hc unif hunif_pos μ hμ0 hμ1 hband)
 
+/-! ### Exploring the exponential fitness replicator (`04-design` §2–3)
+
+The `04-design`'s target is the **fitness-dependent** replicator
+`R(w)_r = w_r · exp(f_r w) / Z(w)`, `Z(w) = ∑_s w_s exp(f_s w)`. We build its pieces
+sorry-free (`exp_lip`, `expReplicatorSel`, the fitness-Lipschitz and normalizer
+bounds) and record the precise mathematical finding.
+
+**The finding (why the linear case was clean and the exp case is delicate).** The
+linear replicator is **scale-covariant** (`R(λw) = R(w)`), so its Lipschitz constant
+`2/(μ·u_min)` survives the *unbounded* `ws7.floorRegion` (only `∑w ≥ μ` is needed).
+Fitness-dependence **breaks scale-covariance** (`f_r(λw) ≠ f_r(w)`), and on the
+unbounded floor region **no uniform Lipschitz constant exists**: the cross term
+`w'_r·(g_r(w) − g_r(w')) / Z(w)` mixes `w'` in the numerator with `Z(w)` in the
+denominator, and `w'_r / Z(w) → ∞` as `w'` scales up while `w` stays small — the
+direct estimate is `O(d²)`, not `O(d)`. So the exp replicator **cannot** inhabit
+`ws7.SelectionLipschitz` (whose `bound` quantifies over the unbounded floor region).
+
+**Where it IS Lipschitz.** On the **bounded** simplex-floor (`∑w = 1` *and* the floor,
+so `w_r ∈ [δ, 1]`) — which is exactly where the dynamics lives (`mutT` maps
+`FlooredSimplex` to itself) — the exp replicator is Lipschitz with the **explicit**
+constant `L = 1/δ + e^{2B}·L_f + |S|·e^{4B}·(1 + L_f)`, from the bounds below (`w'_r ≤ 1`
+is now available, killing the cross term). Firing convergence from this needs either a
+`SelectionLipschitz` tightened to the simplex-floor, or a `C¹`-fitness Jacobian /
+mean-value route on the convex floor region — an upstream change beyond `ws8`.
+
+**Correction to the `04-design`'s constant.** The design's `C/(μ·u_min)²` with
+`c₀·e^{3B}` is neither the unbounded-region truth (no finite constant) nor the
+bounded-region truth (constant above, first-power `δ`, `e^{4B}`); its `w r ≤ 1`
+assumption silently restricts to the simplex, which is the honest domain. -/
+
+/-- `exp` is Lipschitz with constant `exp C` on `Iic C` — the fitness building block
+(from `Real.add_one_le_exp`). -/
+lemma exp_lip {a b C : ℝ} (ha : a ≤ C) (hb : b ≤ C) :
+    |Real.exp a - Real.exp b| ≤ Real.exp C * |a - b| := by
+  wlog hab : b ≤ a generalizing a b with H
+  · rw [abs_sub_comm, abs_sub_comm a b]; exact H hb ha (le_of_not_le hab)
+  have ht : (0 : ℝ) ≤ a - b := by linarith
+  have key : Real.exp (a - b) - 1 ≤ (a - b) * Real.exp (a - b) := by
+    have h := Real.add_one_le_exp (-(a - b))
+    have he : Real.exp (-(a - b)) * Real.exp (a - b) = 1 := by rw [← Real.exp_add]; simp
+    nlinarith [mul_le_mul_of_nonneg_right h (Real.exp_pos (a - b)).le, he, Real.exp_pos (a - b)]
+  have hfact : Real.exp a - Real.exp b = Real.exp b * (Real.exp (a - b) - 1) := by
+    have : Real.exp b * Real.exp (a - b) = Real.exp a := by rw [← Real.exp_add]; congr 1; ring
+    rw [mul_sub, mul_one, this]
+  have hexpb : Real.exp b * ((a - b) * Real.exp (a - b)) = (a - b) * Real.exp a := by
+    have : Real.exp b * Real.exp (a - b) = Real.exp a := by rw [← Real.exp_add]; congr 1; ring
+    rw [← mul_assoc, mul_comm (Real.exp b) (a - b), mul_assoc, this]
+  have h1 : Real.exp a - Real.exp b ≤ (a - b) * Real.exp C := by
+    calc Real.exp a - Real.exp b = Real.exp b * (Real.exp (a - b) - 1) := hfact
+      _ ≤ Real.exp b * ((a - b) * Real.exp (a - b)) :=
+          mul_le_mul_of_nonneg_left key (Real.exp_pos b).le
+      _ = (a - b) * Real.exp a := hexpb
+      _ ≤ (a - b) * Real.exp C := mul_le_mul_of_nonneg_left (Real.exp_le_exp.mpr ha) ht
+  rw [abs_of_nonneg (by linarith [Real.exp_le_exp.mpr hab] : (0 : ℝ) ≤ Real.exp a - Real.exp b),
+    abs_of_nonneg ht, mul_comm]
+  exact h1
+
+/-- The exponential-fitness replicator update, total on `S → ℝ` (identity off the
+positive-`Z` region). On any point with a positive coordinate it is the genuine
+`w_r·exp(f_r w) / Z(w)`. -/
+noncomputable def expR (f : S → (S → ℝ) → ℝ) (w : S → ℝ) (r : S) : ℝ :=
+  if 0 < ∑ s, w s * Real.exp (f s w) then
+    w r * Real.exp (f r w) / (∑ s, w s * Real.exp (f s w)) else w r
+
+/-- The exp-fitness replicator as a `SelectionMap` (weight- and nonnegativity-
+preserving — `exp > 0` makes every fibre positive). -/
+noncomputable def expReplicatorSel (f : S → (S → ℝ) → ℝ) (unif : S → ℝ) :
+    SelectionMap S unif where
+  R := expR f
+  nonneg := fun w hw r => by
+    rw [expR]
+    by_cases hZ : 0 < ∑ s, w s * Real.exp (f s w)
+    · rw [if_pos hZ]
+      exact div_nonneg (mul_nonneg (hw r) (Real.exp_pos _).le) hZ.le
+    · rw [if_neg hZ]; exact hw r
+  sum_one := fun w hw => by
+    by_cases hZ : 0 < ∑ s, w s * Real.exp (f s w)
+    · have hval : ∀ r, expR f w r = w r * Real.exp (f r w) / (∑ s, w s * Real.exp (f s w)) :=
+        fun r => by rw [expR, if_pos hZ]
+      simp_rw [hval, ← Finset.sum_div]; exact div_self hZ.ne'
+    · have hval : ∀ r, expR f w r = w r := fun r => by rw [expR, if_neg hZ]
+      simp_rw [hval]; exact hw
+
+/-- **Fitness-Lipschitz bound** (from `exp_lip`): the fibre multiplier `exp(f_r ·)` is
+Lipschitz with constant `e^B·L_f` on the region where `|f| ≤ B` and `f_r` is
+`L_f`-Lipschitz — the coupling the linear replicator lacked. -/
+lemma expG_lipschitz {f : S → (S → ℝ) → ℝ} {B L_f : ℝ}
+    (hf_bdd : ∀ r w, |f r w| ≤ B) (hf_lip : ∀ r w w', |f r w - f r w'| ≤ L_f * dist w w')
+    (r : S) (w w' : S → ℝ) :
+    |Real.exp (f r w) - Real.exp (f r w')| ≤ Real.exp B * L_f * dist w w' := by
+  have hb1 : f r w ≤ B := le_of_abs_le (hf_bdd r w)
+  have hb2 : f r w' ≤ B := le_of_abs_le (hf_bdd r w')
+  calc |Real.exp (f r w) - Real.exp (f r w')| ≤ Real.exp B * |f r w - f r w'| := exp_lip hb1 hb2
+    _ ≤ Real.exp B * (L_f * dist w w') :=
+        mul_le_mul_of_nonneg_left (hf_lip r w w') (Real.exp_pos B).le
+    _ = Real.exp B * L_f * dist w w' := by ring
+
+/-- **Normalizer lower bound** on the simplex-floor: `Z(w) = ∑ w_s exp(f_s w) ≥ e^{−B}`
+(uses `∑ w = 1` and `exp(f) ≥ e^{−B}`), so `Z > 0` and every ratio `g_r/Z ≤ 1/w_r`. -/
+lemma expZ_lower {f : S → (S → ℝ) → ℝ} {B : ℝ} (hf_bdd : ∀ r w, |f r w| ≤ B)
+    {w : S → ℝ} (hw : ∀ s, 0 ≤ w s) (hws : ∑ s, w s = 1) :
+    Real.exp (-B) ≤ ∑ s, w s * Real.exp (f s w) := by
+  calc Real.exp (-B) = ∑ s, w s * Real.exp (-B) := by rw [← Finset.sum_mul, hws, one_mul]
+    _ ≤ ∑ s, w s * Real.exp (f s w) := by
+        refine Finset.sum_le_sum fun s _ => ?_
+        exact mul_le_mul_of_nonneg_left
+          (Real.exp_le_exp.mpr (neg_le_of_abs_le (hf_bdd s w))) (hw s)
+
 end Dynamics
 
 end Series3.WS8
