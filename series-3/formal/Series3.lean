@@ -28,3 +28,8 @@ import ws4
 -- plurality/anti-collapse floor (Discharged), and convergence (Partial-conditional:
 -- the Banach step proved, the contraction premise a typed open obligation).
 import ws5
+-- WS6 (`series-3/spec/ws6/04-charter-design-review.md`, rev. 2) — no poles, no
+-- outside: the pole-coincidence split (Impossibility-proved, scoped), the no-maximal
+-- wall discharged by κ-fiat, and criterion (vi) reported Open (vacuous) with a routed
+-- obstruction — never laundered.
+import ws6
