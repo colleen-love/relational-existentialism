@@ -59,3 +59,8 @@ import Series3
 #print axioms Series3.WS8.ws8_exp_replicator_converges
 #print axioms Series3.WS8.ws8_exp_replicator_converges_band
 #print axioms Series3.WS8.ws8_noncollapse_partial_band
+
+/-! ### WS9 — the convergence boundary (necessity: attention need not converge uniquely) -/
+#print axioms Series3.WS9.ws9_multistable
+#print axioms Series3.WS9.ws9_no_unique_attention
+#print axioms Series3.WS9.ws9_no_contraction

@@ -57,3 +57,9 @@ import ws7
 -- the weak law (∃!), general-branching refuted + the honest alg-relative floor, and
 -- both faces of criterion (vi) (no global observer + positioned views). C deferred.
 import ws8
+-- WS9 (`series-3/spec/ws9/`) — the convergence boundary (necessity). WS8 gave
+-- sufficient contraction bands for attention convergence; WS9 shows unique
+-- convergence is NOT universal in the plurality regime: the coordination-game
+-- replicator `w_r²/∑w²` on `Bool` at `μ = 3/8` has three exact rational fixed points
+-- (`ws9_no_unique_attention`, `ws9_no_contraction`), so the WS8 band is necessary.
+import ws9
