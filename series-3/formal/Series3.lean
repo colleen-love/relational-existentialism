@@ -39,3 +39,9 @@ import ws6
 -- branching held open), and the dynamical Banach step (convergence deferred to the
 -- open Lemma B). Named ws7_band_and_retro, not ws7_resolved.
 import ws7
+-- WS8 (`series-3/spec/ws8/02-design.md`) — filling the holes A–E: weighted
+-- weak-pullback preservation proved POSITIVELY (discharging WS4's open obligation;
+-- the design's impossibility is false against the sup-based lifting), canonicity of
+-- the weak law (∃!), general-branching refuted + the honest alg-relative floor, and
+-- both faces of criterion (vi) (no global observer + positioned views). C deferred.
+import ws8
