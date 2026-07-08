@@ -75,3 +75,38 @@ import ws9
 -- (`ws10_standpoint_proper`), and — at ℵ₀ where supports are finite by the carrier's
 -- own bound — attention converges on a carrier support (`ws10_carrier_attention_converges`).
 import ws10
+-- WS11 (`series-3/spec/ws11/02-design.md`) — the identity split: on any coalgebra,
+-- strong extensionality forces downward determination (equality-of-unfoldings is a
+-- bisimulation), so upward-load-bearing identity is impossible inside the strongly
+-- extensional class (`ws11_no_upward_identity`) yet realized outside it by an explicit
+-- three-state witness (`ws11_upward_witness`); the terminal map erases exactly the
+-- upward distinctions (`ws11_terminal_identifies`). Named `ws11_identity_split`.
+import ws11
+-- WS12 (`series-3/spec/ws12/02-design.md`) — hereditary non-domination. Every reachable
+-- set is `≤ κ` (`ws12_reachable_card_le`), and at `κ₀ = ℵ₀` the carrier is STRICTLY larger:
+-- a `2^ℵ₀` spine-coalgebra family injects into it (`ws12_carrier_card_continuum`,
+-- `ws12_carrier_card_gt`) — the R2 keystone lands. Hence no state hereditarily reaches
+-- everything and no reachable set surjects onto the carrier (`ws12_hereditary_scope`).
+import ws12
+-- WS13 (`series-3/spec/ws13/02-design.md`) — pairs and relations as states. The
+-- `lambek`-inverse state-former `mkState` gives Kuratowski pairing (`ws13_pair_inj`) and
+-- faithful, usable reification of every `< κ` relation as a state (`ws13_reify_inj`,
+-- `ws13_reify_mem`), iterable (`ws13_reification`). Exports `mkState` (consumed by WS15).
+import ws13
+-- WS14 (`series-3/spec/ws14/02-design.md`) — the graded carrier defeats the collapse.
+-- Self-loop states exist at every weight (`loop_str_self`), distinct weights give distinct,
+-- hereditarily-supported loops (`ws14_loop_ne`, `loop_hereditary`), so the weighted carrier
+-- carries a plural hereditarily-supported subclass (`ws14_graded_core`) — opposite verdict
+-- to WS10's plain-carrier collapse — plus the weighted cardinality bound (`ws14_wq_card_ge`).
+-- The closure fork (G5), standpoints (G8), Lawvere witness (G9), and weak-law class (G6)
+-- remain open remarks routed to later waves.
+import ws14
+-- WS15 (`series-3/spec/ws15/02-design.md`) — constitutive attention. The dynamics' output
+-- re-enters the carrier as a state (`selfModel`, via WS13's `mkState`), proper exactly when
+-- attention under-covers the support (`ws15_selfModel_eq_iff`, `ws15_selfModel_view_proper`);
+-- and the coordination family's exact count via the cubic factorization
+-- (`ws15_coord_cubic_factor`) pins the bifurcation threshold at precisely `1/2`
+-- (`ws15_multistable_iff`); every orbit keeps its floor (`ws15_orbit_floor`).
+-- The convergence half of the linear family (A4) and the settled self-model (A3) are
+-- open remarks. Named `ws15_constitutive_attention`.
+import ws15

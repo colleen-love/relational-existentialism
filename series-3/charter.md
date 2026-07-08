@@ -258,6 +258,109 @@
 > status lines (and add WS9/WS10 bullets), §7 criteria (i)/(iv), and the §8.1 audit; all
 > tagged **[REV-G]**. New files: `ws9.lean`, `ws10.lean`, extended `AxiomCheck.lean`.
 
+> **Charter status — Revision H (WS11–WS15 — the graded turn and the identity split).**
+> Five new workstreams, all machine-checked, `sorry`-free, axiom-clean; `AxiomCheck.lean`
+> now sweeps WS1–WS15 (every headline result `[propext, Classical.choice, Quot.sound]`,
+> the `Łₙ` witness still choice-free). This revision does two things: it **advances the
+> positive constitution** — the object the review (REV-G) said "increasingly lives in the
+> graded carrier, unbuilt" is now partly built — and it **discharges corrections owed to
+> the plain summary regardless of new results.**
+>
+> **Owed corrections (independent of WS11–15), applied to both summaries.** *(R3-4)* "attention
+> dynamics **fully** characterized" overclaims and is replaced by "characterized **for the
+> exhibited families, with the per-family gaps stated**": the landscape is now known
+> per-family (below), not as one uniform boundary. *(R3-3)* The plain summary's tipping-point
+> sentence now **names the family** — the pitchfork at rate ½ is a fact about the
+> *coordination* (frequency-dependent) family; the simple frequency-independent family
+> provably never splits at any rate. *(R3-2)* "The one concrete just-right setting … exhibited
+> outright, with no leftover assumption" is corrected against what the WS7 non-collapse bundle
+> actually carries: the *static and cardinal* conditions are exhibited hypothesis-free
+> (`ws10_concrete_tuple`), but the bundle still carries the (iv)-general-branching floor as a
+> typed *open* status and the dynamical axis as a typed *status* field — "just-right" is a
+> witnessed point with named open fields, not a leftover-free discharge. *(WS12 scope)* Because
+> WS12's strict carrier-gap **lands** (below), no "depth-1 only" scope caveat is owed on the
+> non-domination results; the hereditary (all-finite-depth) form is proved. The plain summary
+> also now carries the sentence a lay reader never got: **most of the informative results are
+> theorems about what this framework cannot do, and the positive constitution increasingly
+> lives in the graded carrier, where much is still unbuilt.**
+>
+> **WS11 — the identity split (a fifth trade-off).** On *any* `P_κ`-coalgebra,
+> equality-of-unfoldings is a bisimulation (`strEqBisim`), so **strong extensionality forces
+> downward determination** (`ws11_extensional_downward`): a strongly extensional coalgebra
+> cannot have upward-load-bearing identity (`ws11_no_upward_identity`). Outside that class the
+> property is coherent — an explicit three-state witness has `str`-collision separated only by
+> the in-neighbourhood (`ws11_upward_witness`) — and the unique map into the terminal carrier
+> **erases exactly those distinctions** (`ws11_terminal_identifies`, `ws11_witness_collapsed`).
+> Since the built carrier *is* strongly extensional (that is criterion (ii)), upward data is
+> provably redundant *there*; identity can depend non-redundantly on the upward direction only
+> in the non-extensional coalgebras the terminal quotient collapses. This is a **fifth**
+> instance of the recurring shape — a desirable property (upward-carried identity) is
+> impossible in the setting that actually exists. Bundle `ws11_identity_split`.
+>
+> **WS12 — hereditary non-domination (the strict carrier-gap lands).** REV-G's no-maximal /
+> no-global-observer results quantified over the *one-step* successor set. WS12 lifts them to
+> the hereditary closure `Reaches`. Every reachable set is `≤ κ` (`ws12_reachable_card_le`,
+> needing only `ℵ₀ ≤ κ`), and **at `κ₀ = ℵ₀` the carrier is strictly larger than `ℵ₀`** —
+> the R2 keystone: an explicit `2^ℵ₀` family of spine coalgebras (a countable chain with an
+> `A`-indexed loop-off) injects into the carrier (`ws12_carrier_card_continuum`,
+> `ws12_carrier_card_gt`), so finite branching does **not** bound it; infinite-depth behaviour
+> does the coding. Hence **no state hereditarily reaches every state**
+> (`ws12_no_hereditary_maximal`) and **no reachable set surjects onto the carrier**
+> (`ws12_no_hereditary_observer`) — every finite-depth observation round at once. Bundle
+> `ws12_hereditary_scope`. Open remarks: the uncountable strict bound and the general-`κ` gap
+> (at strong-limit regular `κ` the gap can fail).
+>
+> **WS13 — pairs and relations as states (criterion (iii), strengthened).** The
+> `lambek`-inverse state-former `mkState` makes ordered pairs and `< κ` binary relations
+> *first-class states*: Kuratowski pairing is injective in both arguments (`ws13_pair_inj`),
+> every `< κ` relation reifies faithfully to a state whose unfolding is exactly its pair-states
+> (`ws13_reify_inj`, `ws13_reify_mem`), and the construction is iterable — relations between
+> reified relations are again states (`ws13_reification`). Criterion (iii) was "successors are
+> states"; it is now "pairs, relations, and relations-of-relations are states."
+>
+> **WS14 — the graded groundless core (the positive criterion (i), partly built).** REV-G
+> routed the atomless-*and*-plural (i)-object to the graded carrier `νW_Q` as outstanding item
+> #1, *unbuilt*. WS14 builds the plurality/hereditary-support half **exactly as item #1
+> specified — "distinct self-loops at distinct weights."** A self-loop state exists at every
+> weight (`loop_str_self`); distinct weights give **distinct** loops (`ws14_loop_ne`), and a
+> `q ≠ ⊥` loop reaches only itself with nonempty support, so it is **hereditarily supported**
+> (`loop_hereditary`). Hence the weighted carrier carries a **plural, hereditarily-supported
+> subclass** (`ws14_graded_core`, instantiated at `Łₙ` for `n ≥ 2`) — the direct weighted
+> counterpart, with **opposite verdict**, of the plain-carrier collapse
+> (`ws10_unlabeled_atomless_collapses`); the collapse's projection step has no weighted
+> analogue because a `WQBisim` must *preserve weights* (`ws14_loops_not_bisim`). The weighted
+> carrier-cardinality bound `κ ≤ #(νW_Q)` (`ws14_wq_card_ge`) transfers the properness
+> machinery. What item #1 still leaves open: the KS-no-go and weak-law package surviving the
+> nonempty-support restriction, and closure of composition on the subclass (the `⊥`-divisor
+> fork, G5). So (i)'s positive object is **partially built, not closed.**
+>
+> **WS15 — constitutive attention (the dynamics re-enters the carrier; the count goes exact).**
+> Two gains. *(structure)* The dynamics' output re-enters the carrier as a state: `selfModel u
+> w θ` is the state whose unfolding is the `θ`-attended sub-support of `u` (built through WS13's
+> `mkState`), proper exactly when attention under-covers the support (`ws15_selfModel_eq_iff`)
+> and always missing a state (`ws15_selfModel_view_proper`). *(landscape)* The coordination
+> family's fixed-point cubic **factors** — `2x³−3x²+(1+μ)x−μ/2 = (x−½)(2x²−2x+μ)`
+> (`ws15_coord_cubic_factor`, a `ring` identity) — giving the **exact** count: a non-central
+> fixed point exists iff `μ < ½` (`ws15_multistable_iff`), so the pitchfork is at *precisely*
+> ½ **by root-counting**, and the sliver `μ ∈ (3/8, ½)` is closed (multistable) for this
+> family; and every orbit keeps its floor at every `μ` (`ws15_orbit_floor`). This makes
+> (vii)'s dynamical half **characterized per-family and exact for the exhibited families**
+> (coordination: bifurcation at exactly ½; linear: no multistability at any `μ`), retiring the
+> "fully characterized" over-label. Open remarks: the linear family's *global-convergence*
+> half (A4, a monotone-orbit plumbing budget item), the settled self-model (A3), and the exact
+> frequency-dependent boundary across *all* families / continuous-time faithfulness.
+>
+> **Net effect on §7 / §8.** No criterion regresses. Criterion **(i)**'s positive object is
+> now *partially built* in the graded carrier (WS14), the Impossibility half (REV-G) unchanged.
+> Criterion **(iii)** strengthens (WS13). The no-maximal / no-observer content of **(vi)** and
+> the non-collapse content of **(vii)** strengthen from one-step to **hereditary** (WS12).
+> Criterion **(vii)**'s dynamical half is now **per-family exact** (WS15). The §8 fracture count
+> is honestly **five** (the three global fractures, the atomlessness/plurality fourth, and the
+> WS11 extensionality/upward-identity fifth). Outstanding item #1 (graded core) is *partially
+> discharged*; item #3's sliver is *closed for the coordination family*. All tagged
+> **[REV-H]**. New files: `ws11.lean`, `ws12.lean`, `ws13.lean`, `ws14.lean`, `ws15.lean`,
+> extended `AxiomCheck.lean`.
+
 ## 0. The map
 
 **Where the Mirror First Opened**
