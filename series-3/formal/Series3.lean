@@ -33,3 +33,9 @@ import ws5
 -- wall discharged by κ-fiat, and criterion (vi) reported Open (vacuous) with a routed
 -- obstruction — never laundered.
 import ws6
+-- WS7 (`series-3/spec/ws7/04-charter-design-review.md`, v3) — non-collapse, the
+-- collector: the static band + retro-validation of the shared (F,κ,μ,#Q) tuple at one
+-- concrete choice, the richness/plurality floors (with the (iv)-blocking general
+-- branching held open), and the dynamical Banach step (convergence deferred to the
+-- open Lemma B). Named ws7_band_and_retro, not ws7_resolved.
+import ws7
