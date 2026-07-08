@@ -1,4 +1,4 @@
-# WS10 · 02 — Design: statement–gloss reconciliation and the grounded core
+# WS10 · 02 — Design: statement–gloss reconciliation and the graded groundless core
 
 *Design register. This workstream converts the external review (`series-3/spec/review.md`)
 into typed obligations, in the charter's §5 outcome vocabulary and under the §8.2
@@ -22,12 +22,13 @@ statements.
 | Review finding | Obligation | Class expected |
 |---|---|---|
 | `hcard` unproved; no concrete tuple exhibited | **O1** | Discharged (cheap) |
-| Atomlessness has an in-house counterexample; no (i) theorem exists | **O2** | Split: Impossibility proved (full carrier) + Discharged (grounded core) |
+| Atomlessness has an in-house counterexample; no (i) theorem exists | **O2** | Split: Impossibility proved (atomless + plural is unsatisfiable in unlabeled `P_κ`) + Discharged (the graded groundless core, in `νW_Q`) |
 | "Canonicity" is uniqueness-of-a-defining-equation, not canonicity among weak laws | **O3** | At-risk of Partial (hard); immediate relabel regardless |
 | Incompleteness is bare Cantor; attention/finiteness play no role | **O4** | Discharged (honest reframe + a κ-consuming strengthening via O1) |
 | Criterion (vi) rests on a phantom-κ theorem and a triviality | **O5** | Discharged (carrier-linked witness + properness) |
 | Dynamics never touch the carrier (`Fintype S` vs `SelfSupport`) | **O6** | Discharged at the O1 tuple (κ₀ = ℵ₀ makes supports finite) |
 | WS9 residue: multiplier ≠ attractivity; the (3/8, 1/2) gap; no global uniqueness above μ⋆ | **O7** | Partial (attractivity feasible; the rest characterized open) |
+| Prose/claims drift in charter, summaries, README, spec hygiene | **O8** | Discharged (editorial; gated on O1–O6) |
 
 ## 1. What WS9 already closed, and its precise residue
 
@@ -95,80 +96,108 @@ and the same Cantor endgame.
 strengthening and O6's bridge become available; §8.1 status lines for WS6/WS7 lose their
 silent conditionality.
 
-### O2 — The atom, named; the grounded core, built (criterion (i))
+### O2 — The atomless object, built where it can exist (criterion (i))
 
-**Finding.** The technical summary calls (i) "Discharged — automatic," but the carrier
-contains `bottomState` (empty successor set): an object that decomposes into no
-relations, i.e. a relational atom under the only natural reading of Commitment 1 — and
-the development *uses* this state (it refutes `GeneralBranching`). No atomlessness
-theorem exists anywhere. Lambek's iso does not preclude empty unfoldings.
+**Finding (review).** The technical summary calls (i) "Discharged — automatic," but the
+carrier contains `bottomState` (empty successor set): a relational atom under the only
+natural reading of Commitment 1, and one the development *uses* (it refutes
+`GeneralBranching`). No atomlessness theorem exists anywhere.
 
-**Design decision (the §8.2 move).** Do not defend "the full carrier is atomless"; it
-is false on the honest definition. Split:
+**Finding (this design — the reason the build moves).** The two direct repairs both
+collapse, by the same argument, and the collapse is a theorem worth having:
 
-1. **Impossibility proved (full carrier).** Define the atom and prove it inhabited:
+> **Lemma (no plural atomless unlabeled carrier).** In `νP_κ`, let `R x y :=`
+> "x and y are hereditarily nonempty" (every reachable state has nonempty successors).
+> Then `R` is an Aczel–Mendler bisimulation: take
+> `ζ(x,y) := (str x) × (str y)` on the graph — it lands in `R` by closure, it is `< κ`
+> (a product of two `< κ` cardinals, `κ` infinite), and `fst '' (A × B) = A` exactly
+> because `B` is **nonempty** (likewise `snd`). By `bisim_eq`, any two hereditarily
+> nonempty states are **equal**.
 
-```lean
-def IsRelationalAtom (u : (νPk κ).X) : Prop := ((νPk κ).str u).1 = ∅
-
-theorem ws10_carrier_has_atom (hinf : ℵ₀ ≤ κ) :
-    ∃ u : (νPk κ).X, IsRelationalAtom u    -- witness: bottomState
-```
-
-This is a *finding*, stated in the charter's own currency: the terminal carrier of a
-powerset-type functor is the space of **all** bounded behaviours, grounded and
-groundless alike. Totality of behaviours and atomlessness are incompatible — a small
-sibling of the §4.4 fracture pattern (another global claim paying for existence).
-
-2. **Discharged (the grounded core).** Carve the honest (i)-object: the largest
-subcoalgebra of hereditarily nonempty states.
+Consequences, both to be formalized:
 
 ```lean
-/-- Reachability along the successor relation. -/
-def Reaches (u v : (νPk κ).X) : Prop :=
-  Relation.ReflTransGen (fun a b => b ∈ ((νPk κ).str a).1) u v
+/-- The grounded core of the unlabeled carrier is exactly {Ω}: atomless + plural
+is unsatisfiable in νP_κ. Leaves are the sole source of distinguishability under
+unlabeled powerset observation. -/
+theorem ws10_unlabeled_atomless_collapses (hinf : ℵ₀ ≤ κ) :
+    ∀ x y : (νPk κ).X, HereditarilyNonempty x → HereditarilyNonempty y → x = y
 
-/-- The grounded core: states all of whose reachable states have successors. -/
-def Grounded (κ) : Set (νPk κ).X :=
-  { u | ∀ v, Reaches u v → ((νPk κ).str v).1 ≠ ∅ }
-
-theorem grounded_closed : ∀ u ∈ Grounded κ, ((νPk κ).str u).1 ⊆ Grounded κ
-def groundedCoalg (κ) : Coalg κ                    -- carrier ↥(Grounded κ)
-theorem omega_grounded (hinf) : Ω κ ∈ Grounded κ
-theorem ws10_grounded_atomless :
-    ∀ u : ↥(Grounded κ), ¬ IsRelationalAtom u.1    -- criterion (i), as a theorem
-theorem grounded_nondegenerate (hinf) : ∃ a b : ↥(Grounded κ), a ≠ b
-    -- e.g. Ω and the two-cycle solution Ω' = {Ω''}, Ω'' = {Ω'} via ws1_C2
+/-- Corollary: the nonempty bounded powerset functor P⁺_κ has a SUBSINGLETON
+terminal coalgebra — the "forbid atoms in the functor" route is structural
+collapse, the §3.8 failure mode. -/
+theorem ws10_nonempty_powerset_trivial : …
 ```
 
-**Strategy.** `grounded_closed` is definitional (a reachable-from-successor state is
-reachable). `omega_grounded`: everything reachable from Ω is Ω (its successor set is
-`{Ω}`), and `str Ω = {Ω} ≠ ∅`. `ws10_grounded_atomless`: `Reaches u u` by `refl`, apply
-the defining property. Non-degeneracy needs a second grounded state; the solution lemma
-(`ws1_C2`) supplies guarded systems whose solutions are hereditarily nonempty by
-construction. Identity theory transfers: states of the core are carrier states, so
-bisimilarity-as-identity is inherited (a one-line restriction lemma, not a new proof).
+This is an **Impossibility proved** in the §5 sense, and it is the strongest form of
+the review's finding: the atom is not a blemish on `P_κ`, it is **load-bearing for
+plurality**. Removing it — by carving (`Grounded`) or by functor surgery (`P⁺_κ`) —
+collapses the universe to the single self-relating point `Ω`. (This subsumes and
+sharpens `ws7_general_branching_false`: even the hereditarily-branching sub-universe
+is trivial.) The finding is Parmenides-shaped — ungraded, groundless relation admits
+exactly One — and it strengthens the §4.4 interdependence thesis: a *local* commitment
+(atomlessness) also turns out to price against non-collapse, not only the global ones.
 
-**The composition wrinkle (routed, not hidden).** `alg` is *not* closed on the core:
-`alg ∅` has empty destructor — the empty whole is exactly the atom re-entering through
-composition. The honest fix is philosophically apt: on the core, composition is the
-**nonempty** bounded-powerset monad `P⁺_κ` (no object is composed of nothing). Two
-sub-obligations: (a) `alg` restricted to nonempty inputs lands in the core
-(`dest (alg t) = ⋃ dest x` is nonempty when `t` is and members are grounded) —
-straightforward; (b) whether the Klin–Salamanca no-go and the weak-law package survive
-the passage `P_κ → P⁺_κ` — **routed to a WS10-B check** (KS's diagonal uses two-element
-sets and singletons only, so the port is expected verbatim; expected Discharged, but it
-must be checked, not asserted).
+**Design decision (the build, per §6.1's shared-`F` machinery).** The charter's own
+instruments say what to do when the chosen `F` cannot host a commitment: change `F`
+through the ratification pipeline. Distinguishing power must come from somewhere other
+than leaves — that is **grading** (§3.5), and WS4 already built the graded universe
+`νW_Q` with its full identity theory. In `W_Q`, weights distinguish where leaves did:
+two self-loops at distinct weights `q₁ ≠ q₂` are distinct states (immediate from
+`dest`-injectivity: equal states have equal destructor weightings), and both are
+atomless. So the §7 object this program offers for (i) is the **graded groundless
+core**: the hereditarily-supported subcoalgebra of `νW_Q`.
 
-**Outcome class.** Split as above. **Failure mode.** If `Grounded` fails closure or Ω
-membership, the definition is wrong, caught at build. The genuine risk is (b); if the
-P⁺ port fails, criterion (iv) on the core reclassifies to Partial with the obstruction
-named.
+```lean
+/-- Nonempty-support reachability and the graded groundless core. -/
+def WReaches (u v : (νWQ Q κ).X) : Prop := Relation.ReflTransGen (fun a b => b ∈ wsupp a) u v
+def GradedCore (Q κ) : Set (νWQ Q κ).X := { u | ∀ v, WReaches u v → wsupp v ≠ ∅ }
 
-**Charter effect.** Criterion (i)'s §7 status line becomes: *refuted for the full
-carrier (with witness); discharged for the grounded core, the named (i)-object.* The
-program's "single object (or small family)" clause in §7 already licenses offering the
-core: this is a declared substitution in the §3.9 pattern, not a moved goalpost.
+theorem gradedCore_closed  : ∀ u ∈ GradedCore Q κ, wsupp u ⊆ GradedCore Q κ
+theorem omegaQ_mem         : ΩQ ∈ GradedCore Q κ          -- self-loop at weight 1
+theorem ws10_core_atomless : ∀ u : ↥(GradedCore Q κ), wsupp u.1 ≠ ∅   -- criterion (i)
+theorem ws10_core_plural (hQ : ∃ q₁ q₂ : Q, q₁ ≠ q₂ ∧ …) :
+    ∃ a b : ↥(GradedCore Q κ), a ≠ b     -- self-loops at q₁ ≠ q₂; holds at Łₙ, n ≥ 1
+theorem wqAlg_closed : (nonempty-support t, members in the core) → wqAlg t ∈ GradedCore
+```
+
+**Strategy.** Closure and `ΩQ`-membership are definitional/one-step, as in the
+unlabeled sketch. Plurality: build the two self-loops by `Cofix.corec` from
+single-state `Q`-weighted coalgebras at `q₁`, `q₂`; distinctness by computing `dest`
+of each and comparing weights at the unique point — no bisimulation analysis needed.
+`wqAlg` closure is where the graded setting pays: the destructor of `wqAlg t` is the
+graded Egli–Milner union, whose support is the union of member supports — **nonempty**
+for nonempty-support `t` with core members. The composition wrinkle that killed the
+unlabeled version (the empty whole re-entering through `alg ∅`) is handled the same
+way — composition on the core is the nonempty-support restriction of the graded monad
+— but here the restriction costs nothing, because the core is not a singleton.
+Identity theory ((ii)) transfers from `wq_bisim_eq` by restriction; (iii) is the
+single-sortedness of `νW_Q`, unchanged.
+
+**Verification duty (not assumed).** The distinct-weight self-loops argument must be
+checked against WS4's exact graded-bisimulation definition, and the plurality witness
+must be re-derived if `wq_bisim_eq`'s statement differs from the Aczel–Mendler shape.
+Whether the KS no-go and the weak-law package survive the nonempty-support restriction
+of the graded monad is **routed to WS10-B** (the diagonal uses singletons and
+doubletons, all nonempty-support; expected verbatim, to be checked not asserted).
+
+**Outcome class.** Split: Impossibility proved (the collapse lemma + the `P⁺_κ`
+corollary) **and** Discharged (the graded core as the (i)-object, with plurality at
+`Łₙ`). **Failure mode.** If the graded core also collapses — i.e. if graded
+bisimulation ignores weights in a way that revives the product argument — that is a
+finding of the first importance (grading insufficient for groundless plurality) and
+lands as a second Impossibility, routed to a functor with still more distinguishing
+power (labeled/polynomial observation). No branch of this fork is a walk-back of (i);
+every branch is a theorem about where the object lives.
+
+**Charter effect.** Criterion (i)'s status becomes: *unsatisfiable jointly with (vii)
+in unlabeled `P_κ` (Impossibility proved — a §5/§7 success); discharged on the graded
+groundless core, the object the program offers.* This is the §3.9 pattern executed
+end-to-end — the literal target is unrealizable *for a proved reason*, the canonical
+content is recovered inside the declared surrogate, and the residual (the WS10-B port)
+is routed. It also upgrades the program's interdependence result: **grading (§3.5) is
+promoted from criterion-(iv) machinery to criterion-(i) necessity** — the collector
+tuple already carries `Łₙ`, and this is the theorem that says why it had to.
 
 ### O3 — Canonicity, the real statement
 
@@ -311,7 +340,10 @@ research project in ℓ¹ dynamics); **specialize the carrier** to the O1 tuple.
 `κ₀ = ℵ₀`, every support is finite *by the carrier's own bound*: `mk (SelfSupport ℵ₀ u)
 < ℵ₀` gives `Finite`, hence a (noncomputable) `Fintype` instance — the hypothesis the
 simplex needs becomes a theorem the carrier supplies. Nonemptiness of the support comes
-from O2: on the grounded core, successor sets are nonempty.
+from O2: on the graded groundless core, supports are nonempty by the core's defining
+property (on the unlabeled `νP_ℵ₀` carrier the bridge instead carries an explicit
+nonempty-support hypothesis — after O2's collapse lemma, hereditary nonemptiness is
+not available there as a plural source).
 
 **Target signature.**
 
@@ -324,16 +356,18 @@ dynamics (nonexpansive selection, μ ∈ (0,1]) converges to a unique fixed poin
 ON THAT STATE'S OWN SUPPORT — the first convergence theorem whose state space is
 the carrier's. -/
 theorem ws10_carrier_attention_converges
-    (u : ↥(Grounded ℵ₀)) (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1)
-    (unif : SelfSupport ℵ₀ u.1 → ℝ) (hn : ∀ r, 0 ≤ unif r) (hs : ∑ r, unif r = 1)
-    (sel : SelectionMap (SelfSupport ℵ₀ u.1) unif)
+    (u : ↥(GradedCore (Luk n) ℵ₀)) (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1)
+    (unif : ↥(wsupp u.1) → ℝ) (hn : ∀ r, 0 ≤ unif r) (hs : ∑ r, unif r = 1)
+    (sel : SelectionMap ↥(wsupp u.1) unif)
     (sl : SelectionLipschitz _ unif sel) (hL : sl.L_R μ ≤ 1) :
-    ∃! p : FlooredSimplex (SelfSupport ℵ₀ u.1) μ unif, mutT … sel p = p
+    ∃! p : FlooredSimplex ↥(wsupp u.1) μ unif, mutT … sel p = p
+
+-- plus the unlabeled variant on (νPk ℵ₀).X with an explicit nonempty-support
+-- hypothesis, so the WS5 Attn story is bridged on both carriers.
 ```
 
 with the WS9 stratification (multistability, two-cycle, pitchfork) restated as
-*instantiable on carrier supports of size ≥ 2* wherever the grounded core provides
-them.
+*instantiable on carrier supports of size ≥ 2* wherever the core provides them.
 
 **Outcome class.** Discharged. **Failure mode.** `Fintype` instance plumbing
 (decidability noise around the noncomputable instance); mitigated by `Classical` local
@@ -350,4 +384,93 @@ q·|x − 1/2|` for some `q < 1` on a closed interval around 1/2, via the deriva
 induced 1-D map, which O7 must compute away from the center — routine calculus, the
 denominator is bounded below on the interval). Local instability below 1/2 (the
 repelling half) needs a reverse MVT estimate; attempt it, classify Partial if the
-inverse-function packaging is disproportio
+inverse-function packaging is disproportionate. **Until O7a lands, the WS9 prose
+"attracting above, repelling below" is softened to "multiplier crossing" wherever it
+appears (O8).**
+
+**O7b (the (3/8, 1/2) gap).** Attempt the parametrized anchor: replace the fixed
+`x = 3/4` with `x(μ)` chosen so `G(x(μ)) ≥ 0` holds up to μ < 1/2 (on paper the
+off-center roots persist to exactly 1/2; the algebra is a solvable quadratic in `x` for
+each μ, so exact rational anchors may exist on a subdivision). If the subdivision gets
+ugly, stop and record the gap as characterized-open with the paper computation cited.
+
+**O7c (global band above μ⋆).** Compute `coordR`'s sup-metric Lipschitz constant on the
+floored simplex by the WS8 `linR` method (denominator bounded below by the floor). This
+yields a global-uniqueness band `μ > μ⁺` with `μ⁺ > 1/2`; the strip `(1/2, μ⁺]` between
+local attractivity and global uniqueness is the honest residual, folded into the
+declared open bifurcation surface.
+
+**Outcome class.** Partial by design; every sub-item terminates in a theorem or a
+characterized-open stamp. Bundle named `ws10_pitchfork_dynamics`, not
+`ws9_bifurcation_resolved`.
+
+### O8 — Prose, charter, and hygiene reconciliation (gated on O1–O7)
+
+All §8.2-style errata, batched as **REV-G**:
+
+1. **Charter §4/§8.1 status lines.** (i): jointly-unsatisfiable-with-(vii) in unlabeled
+   `P_κ` (Impossibility proved) + discharged on the graded groundless core (O2), with
+   grading recorded as (i)-necessary, not only (iv)-machinery. (iv): canonicity reopened, `unique_realization` erratum recorded (O3). (v):
+   reframed + `ws10_bounded_self_model` recorded (O4). (vi): properness added (O5).
+   (vii): WS9 + O7 statuses; "attracting/repelling" language conditioned on O7a.
+   Collector: concrete tuple ratified at ℵ₀, `hcard` discharged (O1).
+2. **Summaries.** "Proved inhabited at one concrete tuple" becomes true — keep it only
+   after O1 merges. "Atomlessness is automatic" is replaced by the collapse finding and the graded
+   build: the atom is load-bearing for plurality in unlabeled observation, and the
+   (i)-object lives in the graded universe. The
+   trade-off thesis is scoped: *"you cannot have both"* → *"you cannot have both in a
+   set-sized, Mathlib-mechanized carrier; a class-based mechanization (algebraic set
+   theory / categories of classes) is a road not taken, not a road proved closed."*
+3. **README.** Handled separately (already drafted alongside this design): drop
+   "one primitive, one axiom" (it describes the Series 2 axiom ledger, not the Series 3
+   artifact), scope the existence trade-off as above, cite Series 3 not Spec 2.0.
+4. **Spec hygiene.** Strip the session-transcript preamble from `spec/ws8/00-holes.md`
+   (keep the assessment content); fix `ws8/04-design-md` → `04-design.md` and
+   `ws7/02-design` → `02-design.md`; normalize ws1's `N-name.md` numbering to the
+   `0N-name.md` convention used everywhere else.
+5. **Methods disclosure.** The papers' methodology sections state that the blind-review
+   layer is same-model review (Claude reviewing Claude) and that `review.md` is an
+   external-session audit; independence claims are scoped accordingly. The
+   reproducibility footnote pins commit hash + clean-build log per the technical
+   summary's own §2 requirement.
+
+## 3. Dependency order
+
+```
+O1 (hcard + ℵ₀ tuple)  ──┬──> O4 (bounded self-model)
+                         ├──> O5 (standpoint properness)
+                         └──> O6 (carrier bridge)   <── O2 (graded core: nonempty supports)
+O2 (collapse lemma + graded core) ──> WS10-B (nonempty-support graded-monad port) ──> (iv)-on-core status
+O3 (canonicity)  — independent; immediate relabel unconditional
+O7 (WS9 residue) — independent of O1–O6
+O8 (REV-G)       — last, consumes all statuses
+```
+
+Critical path: **O1 → O6** (cheapest, highest status impact) in the first execution
+pass, with O2 alongside; O3 and O7a in the second pass; O7b/c opportunistic; O8 closes.
+
+## 4. Success criteria and failure modes (formal)
+
+- **Success.** `lake build` compiles WS10 sorry-free; `#print axioms` on
+  `carrier_card_ge`, `ws10_concrete_tuple`, `ws10_unlabeled_atomless_collapses`,
+  `ws10_core_atomless`, `ws10_core_plural`, `ws10_bounded_self_model`, `ws10_poles_split`,
+  `ws10_standpoint_proper`, `ws10_carrier_attention_converges` reports only
+  `[propext, Classical.choice, Quot.sound]`; O3 terminates in a proof, a counterexample
+  law, or a Partial with the propagation obstruction typed; REV-G lands with every
+  status line matching a theorem name.
+- **Failure that would matter.** `carrier_card_ge` failing would falsify the review's
+  own claim and reinstate `hcard` as genuinely open — surfaced, not masked. The
+  graded core collapsing (the O2 failure fork) would be a first-importance finding —
+  grading insufficient for groundless plurality — landing as a second Impossibility
+  and routing to a richer observation functor; surfaced, not laundered. There is no route by which a false WS10 claim compiles.
+
+## 5. Charter impact statement
+
+REV-G changes **no** §§0–7 target or criteria text. It changes: §4 and §8.1 status
+lines (per O8.1), the §6.1 ratification list (`hcard` discharged; the concrete tuple
+ratified at ℵ₀; the canonicity pin reopened with its erratum; the P⁺ port pinned), and
+adds §8.2 errata 5–7 (the unlabeled atomless-collapse finding and the graded-core
+substitution; canonicity relabel; concrete-tuple
+correction). The program's one-line discipline is unchanged and is this workstream's
+entire content: **never relabel the shortfall as the goal — and never let the label
+outrun the theorem.**
