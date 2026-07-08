@@ -1,43 +1,61 @@
 # Relational Existentialism
 
-**An ungrounded constitution of a relation-first reality — priority relationalism, built and machine-checked in Lean 4 as a bounded reconstruction whose hard edges are proved, not smoothed.**
+**A machine-checked constitution of a groundless, relation-first ontology, with its hard edges proved rather than smoothed.**
 
 ## The claim
 
-Relations cannot exist without relata. And the relata are patterns of relata and relations, ad infinitum, with no atom.
+Relations cannot exist without relata. And the relata are patterns of relata and relations, all the way down, with no atom.
 
-This repository makes that position mathematically exact and mechanizes it in Lean 4. There is one layer of reality with two kinds of entity: **relations**, which are fundamental, and **objects** — patterns of objects and relations, coalesced with varying degrees of closure — which do the relating. Nothing is eliminated and nothing is atomic. Formally, the universe of objects Ω satisfies a single fixed-point equation:
+This repository makes that position mathematically exact and mechanizes it in Lean 4. There is one layer of reality with two kinds of entity: **relations**, which are fundamental, and **objects**, which are patterns of objects and relations and which do the relating. The universe of objects satisfies a single fixed-point equation:
 
-> **Ω ≅ F(Ω)** — the universe of objects is exactly the patterns of relating among those very objects.
+> **Ω ≅ F(Ω)**: the universe of objects is exactly the patterns of relating among those very objects.
 
-The framework has **one primitive** — observation, which is what relating is: lossy, transmissible witnessing — and **one axiom** governing it. What is classically *asserted* about objects (that they exist, self-relate, compose, and are constituted by what they relate to) is here *proved*.
+The object actually built and machine-checked, sorry-free and on no axioms beyond Mathlib's standard three, is a **bounded reconstruction**: the terminal coalgebra of the κ-bounded powerset functor. The unbounded universe the philosophy first names is proved too big to exist *as a set* (the same wall that forbids a set of all sets); the bounded carrier is what exists, and the canonical self-membered inhabitant `Ω = {Ω}` is recovered inside it.
 
-**And the honest result is sharper than the dream — and better.** The literal, unbounded Ω is proved *too big to exist* as a set (the same wall that forbids a set of all sets). So what is built and machine-checked — sorry-free, on no axioms beyond Mathlib's standard three — is a **bounded reconstruction**: the terminal coalgebra of the κ-bounded powerset functor, inside which `Ω ≅ F(Ω)` genuinely holds and the canonical `Ω = {Ω}` is recovered. Of the seven commitments, six are discharged — **two of them as impossibility theorems** (nothing can completely know itself; there is no strict top-down-and-bottom-up master law) — and the seventh, non-collapse, has its structural half discharged and its dynamical half, the **convergence of attention**, now characterized: it converges on explicit bands, provably fails to converge uniquely outside them, with the boundary a named pitchfork.
+Two of the framework's commitments hold as **impossibility theorems**, which is what the philosophy predicted and wanted: no strict top-down-and-bottom-up master law can exist (composition of relations-as-objects is inherently non-strict), and no bounded observer can enumerate its own space of self-descriptions. The convergence of attention, the last dynamical question, is now **stratified** rather than asserted: it provably converges on explicit parameter bands, provably fails to converge uniquely outside them (exact multistable and oscillating witnesses), with the boundary located at a named pitchfork.
 
-The deepest finding is a theorem about the enterprise itself: **the very bound that lets the object exist is what weakens every sweeping claim about the totality.** You can have a relation-first world that genuinely *exists*, or the fully unbounded, no-edges-anywhere version that stays a beautiful idea — the mathematics says not both. That trade-off is the price of existence, and it is machine-checked.
+The deepest finding is about the enterprise itself: **the bound that lets the object exist as a set is what weakens every sweeping claim about the totality.** No-outer-edge, no-view-from-nowhere, no-collapse-anywhere: each global claim softens exactly where the existence-buying bound is imposed, while the local commitments (relations are objects; nothing fully knows itself) survive intact. Whether a class-sized or otherwise unbounded mechanization could recover the global claims is open; within a set-sized, machine-checked carrier, the trade-off is proved.
 
-**One primitive, one axiom. Objects are theorems — and the theorems include their own limits.**
+Machine-checked claims and interpretive glosses are kept strictly apart throughout. That distinction is load-bearing; please preserve it when citing.
 
-## Series 3
+## Series 3 (live)
 
-**[The Series 3 Summary](./series-3/summary.md)**
+The current work. Start here:
 
-**[The Series 3 Technical Summary](./series-3/summary-technical.md)**
+- **[Plain-language summary](./series-3/summary.md)**: what was asked, what was found, what it means.
+- **[Technical summary](./series-3/summary-technical.md)**: status against the seven success criteria, verification details, the fracture analysis.
+- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-F).
+- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS9. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for one headline theorem per workstream.
+- **[Specs](./series-3/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./series-3/spec/review.md) of the gap between formal statements and prose claims, which the current workstreams are addressing.
 
-**[The Series 3 Charter](./series-3/charter.md)**
+### Verification status
+
+- No `sorry` anywhere in the development; no custom axioms. Every headline theorem rests only on Mathlib's `propext`, `Classical.choice`, `Quot.sound`.
+- Toolchain and Mathlib are pinned in [`lake/`](./lake/). To build:
+
+```
+cd lake
+lake build
+```
+
+Reproducibility claims in any publication should cite the specific commit hash and a clean-build log.
+
+## Series 2 (closed)
+
+Series 2, including Spec 2.0 and its formalization, is frozen under [`archive/`](./archive/). It remains readable as the origin of the axiom-ledger approach and the Mirror/collapse findings, but it is superseded: Series 3 rebuilt the foundation after review, and nothing in the archive is normative for the live development.
 
 ## Licensing
 
 This repository is dual-licensed by content type:
 
-- **All code** (Lean, Agda, tooling, build configuration) is licensed under the **[Apache License 2.0](./LICENSE)**.
-- **All writing** (specs, documentation, essays, poetry, this README) is licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE-writing)**.
+- **All code** (Lean, tooling, build configuration) is licensed under the **[Apache License 2.0](./LICENSE)**.
+- **All writing** (specs, documentation, essays, poetry, this README) is licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE-docs)**.
 
 You are free to use, modify, and redistribute accordingly; attribution is required for the writing, and the code carries Apache 2.0's patent and notice terms. If a file's type is ambiguous, the license follows its function: executable or checkable artifacts are code; everything meant to be read by humans is writing.
 
 ## Citation
 
-If this work is useful to you, cite the repository and Spec 2.0 until a paper exists. Machine-checked claims are marked as such in the spec; interpretive glosses are labeled as interpretation. That distinction is load-bearing — please preserve it when citing.
+Until a paper exists, cite the repository at a specific commit, together with the [Series 3 technical summary](./series-3/summary-technical.md) and the [charter](./series-3/charter.md). Machine-checked claims are marked as such; interpretive glosses are labeled as interpretation.
 
 ---
 
