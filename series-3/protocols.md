@@ -14,7 +14,7 @@ The cycle alternates **blind** phases (charter framing withheld, to keep work ho
 
 ---
 
-## 1. The two registers
+## 1. The three registers
 
 Keep these physically separate. Each is a standalone file you paste into a session as needed.
 
