@@ -24,10 +24,21 @@ statements.
 > **O4** (`ws10_bounded_self_model` — diagonal ∧ κ-consuming carrier-non-surjectivity),
 > **O5** (`ws10_standpoint_proper` — every view misses a state), and **O6**
 > (`ws10_carrier_attention_converges` — at ℵ₀, supports are finite by the carrier's own
-> bound, so attention converges on a genuine carrier support). **O2** (atom / grounded
-> core) is out of scope for this pass. **O3** (canonicity among weak distributive laws)
-> and **O7** (WS9 attractivity / the exact bifurcation boundary) are recorded as the
-> remaining program in `ws10.lean`'s trailer — not laundered into theorems.
+> bound, so attention converges on a genuine carrier support).
+>
+> **Second pass.** **O2's Impossibility half** is discharged:
+> `ws10_unlabeled_atomless_collapses` — in unlabeled `νP_κ`, any two hereditarily-nonempty
+> states are equal (the Aczel–Mendler bisimulation `ζ = str × str`, collapsed by
+> `bisim_eq`), with `ws10_grounded_core_subsingleton` the corollary. Atomlessness is
+> load-bearing for plurality; the positive (i)-object must move to the graded carrier
+> `νW_Q` (routed to WS10-B). **O7a/O7c** are discharged: `ws10_center_globally_attracting`
+> (the induced map contracts toward the center with factor `2(1−μ)`, globally, by one
+> algebraic identity — no MVT) and `ws10_center_unique_above` (so for `μ > ½` the center
+> is the *unique* fixed point), sharpening the pitchfork residue from "characterized open"
+> to a theorem. **Still open (routed, not laundered):** O2's graded-core positive
+> discharge, **O3** (canonicity among weak distributive laws — a wrong `mult_law` would be
+> worse than an honest open), and **O7b** (the `μ ∈ (3/8, 1/2)` gap and the exact
+> closed-form bifurcation boundary).
 
 **Review findings → obligations map:**
 

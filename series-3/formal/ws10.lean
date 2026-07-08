@@ -26,9 +26,20 @@ out of it once it lands (O4, O5, O6).
   the carrier's support — the first convergence theorem whose state space is the
   carrier's, not an abstract `Fintype`.
 
-O2 (the atom / grounded core) is out of scope here. O3 (canonicity among weak
-distributive laws) and O7 (WS9 attractivity, the exact bifurcation boundary) are the
-remaining WS10 program, noted at the end — not laundered into this file's theorems.
+Also discharged here:
+* **O2 (Impossibility).** `ws10_unlabeled_atomless_collapses` — in unlabeled `νP_κ` any
+  two hereditarily-nonempty states are *equal*: atomlessness and plurality are jointly
+  unsatisfiable (an Aczel–Mendler bisimulation `ζ = str × str`, collapsed by `bisim_eq`).
+  The atom is load-bearing for plurality; the positive (i)-object must move to the graded
+  carrier (routed).
+* **O7a / O7c.** `ws10_center_globally_attracting` — the induced attention map contracts
+  toward the center with factor `2(1−μ)` (globally, by one algebraic identity), and
+  `ws10_center_unique_above` — so for `μ > ½` the center is the *unique* fixed point,
+  sharpening the pitchfork residue from "characterized open" to a theorem.
+
+O2's graded-core (positive (i)) discharge, O3 (canonicity among weak distributive laws),
+and O7b (the `(3/8, 1/2)` gap) are the remaining WS10 program, noted at the end — not
+laundered into this file's theorems.
 -/
 import ws8
 import ws9
@@ -139,6 +150,154 @@ theorem ws10_carrier_attention_converges (u : (νPk Cardinal.aleph0.{0}).X)
   haveI := flooredSimplex_nonempty μ hμ1 unif hn hs
   exact ws9_nonexpansive_converges unif hn hs sel sl μ hμ0 hμ1 hL
 
+/-! ### O2 — atomless + plural is unsatisfiable in unlabeled `νP_κ` (Impossibility proved)
+
+The review's Overreach 5: the carrier contains `bottomState` (empty successor), a
+relational atom. The two direct repairs — carve the hereditarily-nonempty subcarrier,
+or move to the nonempty powerset functor — **both collapse**, and the collapse is a
+theorem. `R x y := (x, y both hereditarily nonempty)` is an Aczel–Mendler bisimulation:
+`ζ(x,y) := str x × str y` on the graph lands in `R` by closure, is `< κ` (a product of
+two `< κ` cardinals, `κ` infinite), and `fst '' (A × B) = A` *exactly because* `B` is
+nonempty. By `bisim_eq`, any two hereditarily-nonempty states are **equal** — the
+groundless sub-universe of unlabeled `P_κ` is the single point `Ω`. Atomlessness is
+load-bearing for plurality: an ungraded, groundless relation admits exactly One
+(Parmenides-shaped), a *local* commitment that also prices against non-collapse. -/
+
+section O2
+variable {κ : Cardinal.{u}}
+
+/-- Reachability along the successor relation. -/
+def Reaches (x y : (νPk κ).X) : Prop :=
+  Relation.ReflTransGen (fun a b => b ∈ ((νPk κ).str a).1) x y
+
+/-- Hereditarily nonempty: every reachable state has a nonempty successor set. -/
+def HereditarilyNonempty (x : (νPk κ).X) : Prop :=
+  ∀ v, Reaches x v → ((νPk κ).str v).1 ≠ ∅
+
+lemma HereditarilyNonempty.ne_empty {x : (νPk κ).X}
+    (hx : HereditarilyNonempty x) : ((νPk κ).str x).1 ≠ ∅ :=
+  hx x Relation.ReflTransGen.refl
+
+lemma HereditarilyNonempty.succ {x w : (νPk κ).X}
+    (hx : HereditarilyNonempty x) (hw : w ∈ ((νPk κ).str x).1) : HereditarilyNonempty w :=
+  fun v hv => hx v (Relation.ReflTransGen.head hw hv)
+
+/-- The graph of "both hereditarily nonempty". -/
+private abbrev HNGraph (κ : Cardinal.{u}) : Type u :=
+  {p : (νPk κ).X × (νPk κ).X // HereditarilyNonempty p.1 ∧ HereditarilyNonempty p.2}
+
+/-- The bisimulation coalgebra structure `ζ(x,y) = str x × str y` on the graph. -/
+noncomputable def hnZeta (hinf : Cardinal.aleph0 ≤ κ) (q : HNGraph κ) :
+    PkObj κ (HNGraph κ) :=
+  ⟨{ g : HNGraph κ | g.1.1 ∈ ((νPk κ).str q.1.1).1 ∧ g.1.2 ∈ ((νPk κ).str q.1.2).1 }, by
+    have hinj : Function.Injective
+        (fun g : ↥{ g : HNGraph κ |
+              g.1.1 ∈ ((νPk κ).str q.1.1).1 ∧ g.1.2 ∈ ((νPk κ).str q.1.2).1 } =>
+          ((⟨g.1.1.1, g.2.1⟩ : ↥((νPk κ).str q.1.1).1),
+           (⟨g.1.1.2, g.2.2⟩ : ↥((νPk κ).str q.1.2).1))) := by
+      intro a b hab
+      apply Subtype.ext; apply Subtype.ext
+      refine Prod.ext ?_ ?_
+      · exact congrArg Subtype.val (congrArg Prod.fst hab)
+      · exact congrArg Subtype.val (congrArg Prod.snd hab)
+    have hbmul : Cardinal.mk (↥((νPk κ).str q.1.1).1) * Cardinal.mk (↥((νPk κ).str q.1.2).1) < κ :=
+      Cardinal.mul_lt_of_lt hinf ((νPk κ).str q.1.1).2 ((νPk κ).str q.1.2).2
+    have hbprod : Cardinal.mk (↥((νPk κ).str q.1.1).1 × ↥((νPk κ).str q.1.2).1)
+        = Cardinal.mk (↥((νPk κ).str q.1.1).1) * Cardinal.mk (↥((νPk κ).str q.1.2).1) := by
+      rw [Cardinal.mk_prod, Cardinal.lift_id, Cardinal.lift_id]
+    exact lt_of_le_of_lt (Cardinal.mk_le_of_injective hinj) (hbprod ▸ hbmul)⟩
+
+/-- `R x y := (both hereditarily nonempty)` is a `P_κ`-bisimulation on the carrier. -/
+noncomputable def hereditarilyNonempty_bisim (hinf : Cardinal.aleph0 ≤ κ) :
+    Bisim (νPk κ) (fun x y => HereditarilyNonempty x ∧ HereditarilyNonempty y) where
+  ζ := hnZeta hinf
+  nat_fst := fun q => by
+    apply Subtype.ext
+    rw [PkMap_val]
+    ext c
+    simp only [hnZeta, Set.mem_image, Set.mem_setOf_eq]
+    constructor
+    · intro hc
+      obtain ⟨d, hd⟩ := Set.nonempty_iff_ne_empty.mpr q.2.2.ne_empty
+      exact ⟨⟨(c, d), q.2.1.succ hc, q.2.2.succ hd⟩, ⟨hc, hd⟩, rfl⟩
+    · rintro ⟨g, hg, rfl⟩
+      exact hg.1
+  nat_snd := fun q => by
+    apply Subtype.ext
+    rw [PkMap_val]
+    ext c
+    simp only [hnZeta, Set.mem_image, Set.mem_setOf_eq]
+    constructor
+    · intro hc
+      obtain ⟨d, hd⟩ := Set.nonempty_iff_ne_empty.mpr q.2.1.ne_empty
+      exact ⟨⟨(d, c), q.2.1.succ hd, q.2.2.succ hc⟩, ⟨hd, hc⟩, rfl⟩
+    · rintro ⟨g, hg, rfl⟩
+      exact hg.2
+
+/-- **O2 (Impossibility proved).** In the unlabeled carrier `νP_κ`, any two
+hereditarily-nonempty states are **equal**: the groundless (atomless) sub-universe is
+the single self-relating point `Ω`. Atomlessness and plurality are jointly
+unsatisfiable — removing the atom (by carving or by functor surgery) collapses the
+universe. -/
+theorem ws10_unlabeled_atomless_collapses (hinf : Cardinal.aleph0 ≤ κ)
+    (x y : (νPk κ).X) (hx : HereditarilyNonempty x) (hy : HereditarilyNonempty y) : x = y :=
+  ws2_bisim_eq _ (hereditarilyNonempty_bisim hinf) x y ⟨hx, hy⟩
+
+/-- **O2 corollary.** The hereditarily-nonempty subcarrier is a **subsingleton** — the
+"forbid atoms by restricting the carrier/functor" route is structural collapse (the
+§3.8 failure mode), sharpening `ws7_general_branching_false`. -/
+theorem ws10_grounded_core_subsingleton (hinf : Cardinal.aleph0 ≤ κ) :
+    Subsingleton {x : (νPk κ).X // HereditarilyNonempty x} :=
+  ⟨fun a b => Subtype.ext (ws10_unlabeled_atomless_collapses hinf a.1 b.1 a.2 b.2)⟩
+
+end O2
+
+/-! ### O7 — WS9 residue: the center is globally attracting, and unique above `μ⋆`
+
+The pitchfork gloss "attracting above, repelling below" (R1) and "no global uniqueness
+above μ⋆" (R3) were the WS9 residue. Both fall to one **algebraic** identity — no MVT,
+no derivative bound. Writing `D = x²+(1−x)² = 2(x−½)²+½ ≥ ½`,
+`coordIndF μ x − ½ = (1−μ)·(2x−1)/(2D)`, so since `1/(2D) ≤ 1`, the induced map
+contracts toward the center with factor `2(1−μ)` **globally** (not just locally). Above
+`μ⋆ = ½` that factor is `< 1`, forcing the center to be the *unique* fixed point of the
+induced dynamics — sharpening R3 from "characterized open" to a theorem. (The gap
+`μ ∈ (3/8, 1/2)`, R2, stays genuinely open — there the factor exceeds 1.) -/
+
+/-- **O7a (Discharged, and global).** The induced attention map contracts toward the
+center `½` with factor `2(1−μ)`, for every `x`: `|coordIndF μ x − ½| ≤ 2(1−μ)·|x − ½|`.
+For `μ > ½` this factor is `< 1` — the dynamical "attracting" content the multiplier
+`ws9_bifurcation` only hinted at. -/
+theorem ws10_center_globally_attracting {μ : ℝ} (hμ1 : μ ≤ 1) (x : ℝ) :
+    |coordIndF μ x - 1 / 2| ≤ 2 * (1 - μ) * |x - 1 / 2| := by
+  have hD : (0 : ℝ) < x ^ 2 + (1 - x) ^ 2 := coordDen_pos x
+  have h1μ : (0 : ℝ) ≤ 1 - μ := by linarith
+  have h2D : (1 : ℝ) ≤ 2 * (x ^ 2 + (1 - x) ^ 2) := by nlinarith [sq_nonneg (2 * x - 1)]
+  have hkey : coordIndF μ x - 1 / 2
+      = (1 - μ) * (2 * x - 1) / (2 * (x ^ 2 + (1 - x) ^ 2)) := by
+    unfold coordIndF; field_simp; ring
+  have hxhalf : |x - 1 / 2| = |2 * x - 1| / 2 := by
+    rw [show x - 1 / 2 = (2 * x - 1) / 2 by ring, abs_div]; norm_num
+  have hLHS : |coordIndF μ x - 1 / 2|
+      = (1 - μ) * |2 * x - 1| / (2 * (x ^ 2 + (1 - x) ^ 2)) := by
+    rw [hkey, abs_div, abs_mul, abs_of_nonneg h1μ,
+      abs_of_pos (by positivity : (0 : ℝ) < 2 * (x ^ 2 + (1 - x) ^ 2))]
+  rw [hLHS, hxhalf, div_le_iff₀ (by positivity : (0 : ℝ) < 2 * (x ^ 2 + (1 - x) ^ 2))]
+  nlinarith [mul_nonneg h1μ (abs_nonneg (2 * x - 1)), h2D,
+    mul_nonneg (mul_nonneg h1μ (abs_nonneg (2 * x - 1))) (by linarith [h2D] :
+      (0 : ℝ) ≤ 2 * (x ^ 2 + (1 - x) ^ 2) - 1)]
+
+/-- **O7c (Discharged above `μ⋆`).** For `μ > ½` the induced dynamics has a **unique**
+fixed point — the center. Any fixed `x` satisfies `|x−½| ≤ 2(1−μ)|x−½|` with
+`2(1−μ) < 1`, forcing `x = ½`. This closes the "no global uniqueness above `μ⋆`"
+residue at the induced-map level. -/
+theorem ws10_center_unique_above {μ : ℝ} (hμ : 1 / 2 < μ) (hμ1 : μ ≤ 1) {x : ℝ}
+    (hfix : coordIndF μ x = x) : x = 1 / 2 := by
+  have h := ws10_center_globally_attracting hμ1 x
+  rw [hfix] at h
+  have hz : |x - 1 / 2| ≤ 0 := by nlinarith [abs_nonneg (x - 1 / 2), h]
+  have : x - 1 / 2 = 0 := abs_eq_zero.mp (le_antisymm hz (abs_nonneg _))
+  linarith
+
 /-!
 ### The remaining WS10 program (recorded, not laundered)
 
@@ -151,11 +310,28 @@ theorem ws10_carrier_attention_converges (u : (νPk Cardinal.aleph0.{0}).X)
   inhabitation + uniqueness (Garner's Vietoris result is the literature signal it is
   true; the mechanization cost — the Egli–Milner multiplication square, easy to
   mis-transcribe per the pentagon erratum — is the unknown). Not attempted here.
-* **O7 — WS9 residue.** `ws9_bifurcation` is a statement about the *multiplier* `2(1−μ)`;
-  the orbit-level "attracting above, repelling below" (O7a) needs an MVT/Lipschitz bound
-  on the induced map away from the center. The interval `μ ∈ (3/8, 1/2)` (O7b) and global
-  uniqueness above `μ⋆` (O7c) remain characterized-open — the exact bifurcation boundary
-  is a surface with no closed form. Not attempted here.
+* **O2 (graded core — the Discharged half).** The collapse above shows atomlessness is
+  unsatisfiable with plurality in *unlabeled* `P_κ`; the positive (i)-object therefore
+  lives in the **graded** carrier `νW_Q` (WS4), where distinct weights distinguish where
+  leaves cannot. Defining `wsupp`/`ΩQ`, the graded groundless core, and its plurality at
+  `Łₙ` is graded-functor surgery routed to a follow-up (WS10-B), together with the
+  KS-no-go / weak-law port under the nonempty-support restriction. Not built here; the
+  Impossibility half above is the load-bearing content.
+* **O3 — canonicity among weak distributive laws.** `ws3_weak_law_canonical` proves
+  uniqueness of the map satisfying one concrete destructor equation (`destEquiv`
+  injectivity), *not* canonicity over the class of weak distributive laws that §6.1
+  pinned. Honest reclassification: coherence and weak-pullback preservation stand
+  Discharged; canonicity among weak laws **reopens** as `WeakDistLaw` inhabitation +
+  uniqueness. Garner's Vietoris result signals it is true; the mechanization cost — the
+  Egli–Milner multiplication square, easy to mis-transcribe (the pentagon erratum) — is
+  the unknown, and the propagation-to-all-of-`P_κ P_κ` step is the named obstruction. At
+  risk of Partial; not attempted here (a wrong `mult_law` would be worse than an honest
+  open).
+* **O7b — the gap `μ ∈ (3/8, 1/2)`.** Multistability is proved on `(0, 3/8]`
+  (`ws9_multistable_interval`) and uniqueness on `(1/2, 1]` (`ws10_center_unique_above`);
+  the open interval `(3/8, 1/2)` — where the contraction factor `2(1−μ)` exceeds 1 but no
+  multistability witness is exhibited — remains genuinely open, as does the exact
+  bifurcation boundary (a surface with no closed form). Recorded, not laundered.
 -/
 
 end Series3.WS10
