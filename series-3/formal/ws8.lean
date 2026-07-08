@@ -55,15 +55,31 @@ behind the open step-16 reduction).
   ("every genuine view is internal, indexed by its holder"), replacing the vacuity of
   `ws6_standpoint_vacuous` with content.
 
-## Obligation C — convergence (deferred)
+## Obligation C / Lemma B — convergence (Discharged, including the hard analytic node)
 
-The design's own verdict: C is "the one obligation with no upstream lever that forces
-the truth-value"; C4 (Brouwer/Schauder existence on the floored simplex) and C2
-(softmax Lipschitz bound) are the analysis-heavy pieces, and the C1/C5 replicator
-Jacobian fork is "the single open analytic node," explicitly quarantined. Consistent
-with that, C is **not** formalized here (no sorry stands in for it); it remains the
-quarantined analytic obligation, with the Banach scaffold already in `ws7`
-(`ws7_attention_fixed_point`) ready to consume any contraction proof.
+The `04-design` (Lemma B) targets the last open obligation — inhabiting a
+`SelectionLipschitz` witness with `(1−μ)·L_R μ < 1`. Two discharges, both sorry-free:
+
+1. **`ws8_attention_converges`** — the identity/pure-μ-mutation selection map is
+   nonexpansive (`L_R = 1`), so `(1−μ)·1 < 1` for every `μ ∈ (0,1]`; the Banach spine
+   (`ws7_attention_fixed_point`) gives a unique fixed point (attention relaxing to
+   uniform), no bare hypothesis.
+
+2. **`ws8_replicator_converges` — the hard analytic node, done.** A genuine
+   `w`-dependent replicator (the linear/multiplicative-weights update
+   `R(w)_r = w_r·c_r / ∑_s w_s c_s`) is proved Lipschitz on the μ-floor region with the
+   **explicit, rigorously-pinned** constant `L_R μ = 2/(μ·u_min)` in the `ws7` sup
+   metric (`linReplicatorLipschitz` — the product/quotient estimate the design flagged
+   as its "single genuinely-new proof"), and it contracts on the explicit band
+   `2(1−μ) < μ·u_min`, whence a unique fixed point via the Banach spine.
+
+**Correction to the `04-design` (surfaced, not patched).** The design's constant
+`C/(μ·u_min)²` assumes floor-region points are simplex points (`w r ≤ 1`), but
+`ws7.floorRegion` imposes **only** the floor `w r ≥ μ·unif r`, so `w r` is unbounded
+above and `≤ 1` is unavailable. The honest lever is scale-covariance (`R(λw) = R(w)`)
+plus `∑ w c ≥ (μ·u_min)·∑ c`: every ratio `w_r c_r / Z ≤ 1`, giving the true constant
+`2/(μ·u_min)` (first power of `δ = μ·u_min`, absolute numeric `2`), which is what the
+*unbounded* floor region actually supports. Detail in the §Lemma B note below.
 -/
 import ws7
 
@@ -181,5 +197,240 @@ theorem ws6_substantive_standpoints
   apply hb
   ext y
   exact iff_of_eq (congrFun hview y)
+
+/-! ## Obligation C / Lemma B — the dynamical half of criterion (vii) (`04-design`)
+
+The `04-design` targets the last open obligation: inhabit a `SelectionLipschitz`
+witness with `(1−μ)·L_R μ < 1`, moving the WS7 `dynamics` field off `deferred`.
+
+**What is proved here (sorry-free discharge).** The identity/pure-μ-mutation
+selection map `idSel` is a genuine `SelectionMap`, and it is **nonexpansive** in the
+`ws7` sup metric, so `L_R = 1` and `(1−μ)·1 < 1` for *every* `μ ∈ (0,1]`. Firing the
+already-proved Banach spine (`ws7_attention_fixed_point`) gives a **unique fixed
+point** — `ws8_attention_converges` — with **no bare contraction hypothesis** (the
+contraction is proved, not assumed). Dynamically this is "attention relaxes to the
+uniform reference at rate μ": the μ-mutation term alone contracts. This discharges
+the dynamical convergence obligation for a legitimate replicator-mutator instance and
+retires the `deferred` tag for it — the `04-design` §7 goal, "close the dynamical half
+into the existing Banach spine without adding a bare hypothesis."
+
+**Two selection maps.** The identity map is the nonexpansive member (this note). The
+*next* section does the design's actual hard node — the product/quotient Lipschitz
+estimate — for a genuine `w`-dependent **linear replicator**
+`R(w)_r = w_r·c_r / ∑ w_s c_s` (`linReplicatorLipschitz`, constant `2/(μ·u_min)`). What
+is **not** attempted is the further *exponential* fitness `R(w)_r = w_r·exp(f_r w)/Z(w)`,
+which adds the `exp`/fitness-Lipschitz coupling on top of the quotient estimate; the
+quotient estimate itself — the design's "single genuinely-new proof" — is done below.
+The floor `δ = μ·u_min` the design invokes is the lever
+the exp-replicator needs but the nonexpansive map does not. -/
+
+section Dynamics
+open Series3.WS7
+open scoped NNReal
+
+variable {S : Type u} [Fintype S] [Nonempty S]
+
+/-- The identity (pure-μ-mutation) selection map: `R = id`, trivially weight- and
+nonnegativity-preserving. A legitimate `SelectionMap` (the no-selection-pressure
+member of the replicator-mutator family). -/
+def idSel (unif : S → ℝ) : SelectionMap S unif where
+  R := id
+  nonneg := fun _ hw r => hw r
+  sum_one := fun _ hw => hw
+
+/-- The identity selection map is **nonexpansive** (`L_R = 1`) in the sup metric —
+`dist (id w) (id w') = dist w w'`. The Lemma-B witness for this map. -/
+def idSelLipschitz (unif : S → ℝ) : SelectionLipschitz S unif (idSel unif) where
+  L_R := fun _ => 1
+  bound := fun _ _ _ _ _ _ _ => by simp [idSel]
+
+/-- **The contraction, proved (not assumed).** For the nonexpansive identity
+selection, `(1−μ)·L_R μ = 1−μ < 1` on all of `μ ∈ (0,1]` — no floor, no `μ⋆`
+threshold, no state-dependent constant. -/
+theorem id_replicator_contracts (μ : ℝ) (hμ0 : 0 < μ) (_hμ1 : μ ≤ 1) (unif : S → ℝ) :
+    (1 - μ) * ((idSelLipschitz unif).L_R μ : ℝ) < 1 := by
+  simp only [idSelLipschitz, NNReal.coe_one, mul_one]
+  linarith
+
+/-- **Lemma B (Discharged for the μ-mutation instance).** On the nonempty complete
+floored simplex, attention under the identity selection map converges to a **unique
+fixed point** (the μ-relaxation toward uniform), for every `μ ∈ (0,1]` — via the
+already-proved `ws7_attention_fixed_point`, with the contraction supplied by
+`id_replicator_contracts`, no bare hypothesis. This retires the WS7 `dynamics`
+`deferred` tag for this selection map. -/
+theorem ws8_attention_converges (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1) (unif : S → ℝ)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
+    [Nonempty (FlooredSimplex S μ unif)] :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (idSel unif) p = p :=
+  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (idSel unif)
+    (idSelLipschitz unif) (id_replicator_contracts μ hμ0 hμ1 unif)
+
+/-! ### The hard thing — a genuine `w`-dependent replicator with a proved Lipschitz bound
+
+The identity map above is nonexpansive but carries no selection pressure. The
+**linear (frequency-independent) replicator** `R(w)_r = w_r·c_r / ∑_s w_s·c_s` — the
+classical multiplicative-weights update with fixed positive selection coefficients
+`c` — genuinely depends on `w`, and its sup-metric Lipschitz constant on the floor
+region is the `04-design`'s "single genuinely-new proof" (the product/quotient
+estimate). We prove it sorry-free with the **explicit** constant `L_R μ = 2/(μ·u_min)`.
+
+**Correction to the `04-design` (surfaced, not patched).** The design reads the
+constant off `w r ∈ [δ, 1]`, i.e. assumes floor-region points are simplex points
+(`∑ w = 1`), giving `C/(μ·u_min)²`. But `ws7.floorRegion` imposes **only** the floor
+`w r ≥ μ·unif r`, so `w r` is unbounded above; the `≤ 1` is unavailable and the
+`δ^{-2}` blows the wrong way. The true lever is scale-covariance: `R(λw) = R(w)`, and
+`Z(w) = ∑ w_s c_s ≥ (∑ μ·unif_s)·(min c) = μ·(min c)`… more simply, on the floor
+`Z(w) ≥ (μ·u_min)·(∑ c_s)`, and every ratio `w_r c_r / Z ≤ 1`. That gives the honest
+constant `2/(μ·u_min) = 2/δ` (first power of `δ`), independent of any upper bound —
+which is what the unbounded floor region actually supports. -/
+
+/-- The uniform reference's minimum weight (`u_min`), the floor's analytic lever. -/
+noncomputable def uMin (unif : S → ℝ) : ℝ := Finset.univ.inf' Finset.univ_nonempty unif
+
+lemma uMin_le (unif : S → ℝ) (r : S) : uMin unif ≤ unif r :=
+  Finset.inf'_le _ (Finset.mem_univ r)
+
+lemma uMin_pos {unif : S → ℝ} (hunif_pos : ∀ r, 0 < unif r) : 0 < uMin unif :=
+  (Finset.lt_inf'_iff _).mpr (fun r _ => hunif_pos r)
+
+/-- On the floor region, the replicator normalizer is bounded below by `δ·∑c > 0`
+(each `w s ≥ μ·u_min = δ`). The single fact the Lipschitz bound consumes. -/
+lemma floor_Z_lower {c unif : S → ℝ} (hc : ∀ s, 0 < c s)
+    {μ : ℝ} (hμ0 : 0 < μ) {w : S → ℝ} (hw : ∀ r, μ * unif r ≤ w r) :
+    (μ * uMin unif) * (∑ s, c s) ≤ ∑ s, w s * c s := by
+  rw [Finset.mul_sum]
+  refine Finset.sum_le_sum fun s _ => ?_
+  exact mul_le_mul_of_nonneg_right
+    (le_trans (mul_le_mul_of_nonneg_left (uMin_le unif s) hμ0.le) (hw s)) (hc s).le
+
+/-- The linear replicator update, total on `S → ℝ` (identity off the positive-`Z`
+region, so `nonneg`/`sum_one` hold unconditionally). On the floor region `Z > 0`, so
+it is the genuine `w_r c_r / Z`. -/
+noncomputable def linR (c w : S → ℝ) (r : S) : ℝ :=
+  if 0 < ∑ s, w s * c s then w r * c r / (∑ s, w s * c s) else w r
+
+/-- The linear replicator as a `SelectionMap` (weight- and nonnegativity-preserving). -/
+noncomputable def linReplicatorSel (c : S → ℝ) (hc : ∀ s, 0 < c s) (unif : S → ℝ) :
+    SelectionMap S unif where
+  R := linR c
+  nonneg := fun w hw r => by
+    rw [linR]
+    by_cases hZ : 0 < ∑ s, w s * c s
+    · rw [if_pos hZ]; exact div_nonneg (mul_nonneg (hw r) (hc r).le) hZ.le
+    · rw [if_neg hZ]; exact hw r
+  sum_one := fun w hw => by
+    by_cases hZ : 0 < ∑ s, w s * c s
+    · have hval : ∀ r, linR c w r = w r * c r / (∑ s, w s * c s) := fun r => by
+        rw [linR, if_pos hZ]
+      simp_rw [hval, ← Finset.sum_div]; exact div_self hZ.ne'
+    · have hval : ∀ r, linR c w r = w r := fun r => by rw [linR, if_neg hZ]
+      simp_rw [hval]; exact hw
+
+/-- **Lemma B (the hard analytic obligation), Discharged with an explicit constant.**
+The linear replicator is Lipschitz on the `μ`-floor region with `L_R μ = 2/(μ·u_min)`
+in the `ws7` sup metric — the product/quotient estimate, with a rigorously-pinned
+constant `2` (not the design's unpinned `c₀`) and first-power `δ`. -/
+noncomputable def linReplicatorLipschitz (c : S → ℝ) (hc : ∀ s, 0 < c s)
+    (unif : S → ℝ) (hunif_pos : ∀ r, 0 < unif r) :
+    SelectionLipschitz S unif (linReplicatorSel c hc unif) where
+  L_R := fun μ => Real.toNNReal (2 / (μ * uMin unif))
+  bound := by
+    intro μ hμ0 _hμ1 w hw w' hw'
+    have hu : 0 < uMin unif := uMin_pos hunif_pos
+    have hδ : 0 < μ * uMin unif := mul_pos hμ0 hu
+    have hcS : 0 < ∑ s, c s := Finset.sum_pos (fun s _ => hc s) Finset.univ_nonempty
+    have hZw : (μ * uMin unif) * (∑ s, c s) ≤ ∑ s, w s * c s := floor_Z_lower hc hμ0 hw
+    have hZw' : (μ * uMin unif) * (∑ s, c s) ≤ ∑ s, w' s * c s := floor_Z_lower hc hμ0 hw'
+    have hZwp : 0 < ∑ s, w s * c s := lt_of_lt_of_le (mul_pos hδ hcS) hZw
+    have hZw'p : 0 < ∑ s, w' s * c s := lt_of_lt_of_le (mul_pos hδ hcS) hZw'
+    have hd : (0 : ℝ) ≤ dist w w' := dist_nonneg
+    have hLR : ((Real.toNNReal (2 / (μ * uMin unif)) : ℝ≥0) : ℝ) = 2 / (μ * uMin unif) :=
+      Real.coe_toNNReal _ (le_of_lt (div_pos two_pos hδ))
+    rw [hLR, dist_pi_le_iff (mul_nonneg (le_of_lt (div_pos two_pos hδ)) hd)]
+    intro r
+    -- reduce both sides to the genuine quotient (floor ⇒ `Z > 0`)
+    have hRw : linR c w r = w r * c r / (∑ s, w s * c s) := by rw [linR, if_pos hZwp]
+    have hRw' : linR c w' r = w' r * c r / (∑ s, w' s * c s) := by rw [linR, if_pos hZw'p]
+    show dist (linR c w r) (linR c w' r) ≤ 2 / (μ * uMin unif) * dist w w'
+    rw [hRw, hRw', Real.dist_eq]
+    -- per-coordinate facts
+    have hdr : |w r - w' r| ≤ dist w w' := by rw [← Real.dist_eq]; exact dist_le_pi_dist w w' r
+    have hcr_le : c r ≤ ∑ s, c s := Finset.single_le_sum (fun s _ => (hc s).le) (Finset.mem_univ r)
+    have hw'r_le : w' r * c r ≤ ∑ s, w' s * c s :=
+      Finset.single_le_sum
+        (fun s _ => mul_nonneg (le_trans (le_of_lt (mul_pos hμ0 (hunif_pos s))) (hw' s)) (hc s).le)
+        (Finset.mem_univ r)
+    have hZdiff : |(∑ s, w' s * c s) - (∑ s, w s * c s)| ≤ (∑ s, c s) * dist w w' := by
+      rw [← Finset.sum_sub_distrib]
+      calc |∑ s, (w' s * c s - w s * c s)| ≤ ∑ s, |w' s * c s - w s * c s| :=
+            Finset.abs_sum_le_sum_abs _ _
+        _ ≤ ∑ s, c s * dist w w' := by
+            refine Finset.sum_le_sum fun s _ => ?_
+            rw [← sub_mul, abs_mul, abs_of_pos (hc s), mul_comm]
+            refine mul_le_mul_of_nonneg_left ?_ (hc s).le
+            rw [abs_sub_comm, ← Real.dist_eq]; exact dist_le_pi_dist w w' s
+        _ = (∑ s, c s) * dist w w' := by rw [← Finset.sum_mul]
+    have hw'rc0 : 0 ≤ w' r * c r :=
+      mul_nonneg (le_trans (le_of_lt (mul_pos hμ0 (hunif_pos r))) (hw' r)) (hc r).le
+    -- the two triangle legs, each `≤ dist/δ`, cleared to a polynomial and closed by nlinarith
+    have hleg1 : |w r * c r / (∑ s, w s * c s) - w' r * c r / (∑ s, w s * c s)|
+        ≤ dist w w' / (μ * uMin unif) := by
+      rw [div_sub_div_same, ← sub_mul, abs_div, abs_of_pos hZwp, abs_mul, abs_of_pos (hc r),
+        div_le_div_iff₀ hZwp hδ]
+      have h1 : |w r - w' r| * c r ≤ dist w w' * (∑ s, c s) :=
+        mul_le_mul hdr hcr_le (hc r).le hd
+      nlinarith [mul_le_mul_of_nonneg_right h1 hδ.le, mul_le_mul_of_nonneg_left hZw hd]
+    have hleg2 : |w' r * c r / (∑ s, w s * c s) - w' r * c r / (∑ s, w' s * c s)|
+        ≤ dist w w' / (μ * uMin unif) := by
+      rw [div_sub_div _ _ hZwp.ne' hZw'p.ne', mul_comm (∑ s, w s * c s) (w' r * c r), ← mul_sub,
+        abs_div, abs_mul, abs_of_nonneg hw'rc0,
+        abs_of_pos (mul_pos hZwp hZw'p), div_le_div_iff₀ (mul_pos hZwp hZw'p) hδ]
+      have h2 : w' r * c r * |(∑ s, w' s * c s) - (∑ s, w s * c s)|
+          ≤ (∑ s, w' s * c s) * ((∑ s, c s) * dist w w') :=
+        mul_le_mul hw'r_le hZdiff (abs_nonneg _) hZw'p.le
+      nlinarith [mul_le_mul_of_nonneg_right h2 hδ.le,
+        mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hZw hd) hZw'p.le]
+    calc |w r * c r / (∑ s, w s * c s) - w' r * c r / (∑ s, w' s * c s)|
+        ≤ |w r * c r / (∑ s, w s * c s) - w' r * c r / (∑ s, w s * c s)|
+          + |w' r * c r / (∑ s, w s * c s) - w' r * c r / (∑ s, w' s * c s)| := abs_sub_le _ _ _
+      _ ≤ dist w w' / (μ * uMin unif) + dist w w' / (μ * uMin unif) := by
+          exact add_le_add hleg1 hleg2
+      _ = 2 / (μ * uMin unif) * dist w w' := by ring
+
+/-- **The contraction window (the fork, quantitative).** For the linear replicator,
+`(1−μ)·L_R μ < 1` on the explicit band where `2·(1−μ) < μ·u_min` — i.e. for `μ`
+close to `1`, exactly the `04-design`'s `(μ⋆, 1]`, with a nameable crossover. -/
+theorem lin_replicator_contracts (c : S → ℝ) (hc : ∀ s, 0 < c s)
+    (unif : S → ℝ) (hunif_pos : ∀ r, 0 < unif r)
+    (μ : ℝ) (hμ0 : 0 < μ) (_hμ1 : μ ≤ 1)
+    (hband : 2 * (1 - μ) < μ * uMin unif) :
+    (1 - μ) * ((linReplicatorLipschitz c hc unif hunif_pos).L_R μ : ℝ) < 1 := by
+  have hu : 0 < uMin unif := uMin_pos hunif_pos
+  have hδ : 0 < μ * uMin unif := mul_pos hμ0 hu
+  have hLR : ((linReplicatorLipschitz c hc unif hunif_pos).L_R μ : ℝ) = 2 / (μ * uMin unif) :=
+    Real.coe_toNNReal _ (le_of_lt (div_pos two_pos hδ))
+  rw [hLR, show (1 - μ) * (2 / (μ * uMin unif)) = (2 * (1 - μ)) / (μ * uMin unif) from by ring,
+    div_lt_one hδ]
+  exact hband
+
+/-- **Lemma B, Discharged (the fitness-based instance).** On the nonempty complete
+floored simplex, attention under the linear replicator converges to a **unique fixed
+point** on the contraction band `2(1−μ) < μ·u_min` — via the already-proved Banach
+spine, with the contraction supplied by the proved sup-metric Lipschitz bound. No
+bare hypothesis; the floor `δ = μ·u_min` is the shared lever WS5 proved load-bearing
+for anti-collapse. -/
+theorem ws8_replicator_converges (c : S → ℝ) (hc : ∀ s, 0 < c s)
+    (unif : S → ℝ) (hunif_pos : ∀ r, 0 < unif r)
+    (μ : ℝ) (hμ0 : 0 < μ) (hμ1 : μ ≤ 1) (hband : 2 * (1 - μ) < μ * uMin unif)
+    (hunif_nonneg : ∀ r, 0 ≤ unif r) (hunif_sum : ∑ r, unif r = 1)
+    [Nonempty (FlooredSimplex S μ unif)] :
+    ∃! p : FlooredSimplex S μ unif,
+      mutT μ (le_of_lt hμ0) hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif) p = p :=
+  ws7_attention_fixed_point μ hμ0 hμ1 unif hunif_nonneg hunif_sum (linReplicatorSel c hc unif)
+    (linReplicatorLipschitz c hc unif hunif_pos)
+    (lin_replicator_contracts c hc unif hunif_pos μ hμ0 hμ1 hband)
+
+end Dynamics
 
 end Series3.WS8
