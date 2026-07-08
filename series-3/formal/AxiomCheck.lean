@@ -81,3 +81,38 @@ import Series3
 #print axioms Series3.WS10.ws10_grounded_core_subsingleton
 #print axioms Series3.WS10.ws10_center_globally_attracting
 #print axioms Series3.WS10.ws10_center_unique_above
+
+/-! ### WS11 — the identity split (extensional ⇒ downward; the upward witness) -/
+#print axioms Series3.WS11.ws11_identity_split
+#print axioms Series3.WS11.ws11_no_upward_identity
+#print axioms Series3.WS11.ws11_upward_witness
+#print axioms Series3.WS11.ws11_terminal_identifies
+
+/-! ### WS12 — hereditary non-domination (the `2^ℵ₀` spine keystone) -/
+#print axioms Series3.WS12.ws12_hereditary_scope
+#print axioms Series3.WS12.ws12_reachable_card_le
+#print axioms Series3.WS12.ws12_carrier_card_continuum
+#print axioms Series3.WS12.ws12_carrier_card_gt
+#print axioms Series3.WS12.ws12_no_hereditary_maximal
+#print axioms Series3.WS12.ws12_no_hereditary_observer
+
+/-! ### WS13 — pairs and relations as states -/
+#print axioms Series3.WS13.ws13_reification
+#print axioms Series3.WS13.ws13_pair_inj
+#print axioms Series3.WS13.ws13_reify_inj
+#print axioms Series3.WS13.ws13_reify_mem
+
+/-! ### WS14 — the graded carrier defeats the collapse -/
+#print axioms Series3.WS14.ws14_graded_core
+#print axioms Series3.WS14.ws14_loop_ne
+#print axioms Series3.WS14.ws14_loops_not_bisim
+#print axioms Series3.WS14.ws14_wq_card_ge
+#print axioms Series3.WS14.ws14_graded_core_Luk
+
+/-! ### WS15 — constitutive attention (self-model + exact coordination count) -/
+#print axioms Series3.WS15.ws15_constitutive_attention
+#print axioms Series3.WS15.ws15_selfModel_eq_iff
+#print axioms Series3.WS15.ws15_selfModel_view_proper
+#print axioms Series3.WS15.ws15_multistable_iff
+#print axioms Series3.WS15.ws15_multistable_below_half
+#print axioms Series3.WS15.ws15_orbit_floor
