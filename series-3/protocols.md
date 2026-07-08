@@ -60,7 +60,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 
 ### Phase 2 — Design (against charter)
 - **Context in:** Phase 1 context.
-- **Instructions:** Run a triage that is *decidable on paper per candidate* and collapse the framing decision into a table. The framing choice is downstream of the triage, not a substitute for it. Select the best candidate and turn it into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
+- **Instructions:** Run a triage that is *decidable on paper per candidate* and collapse the framing decision into a table. The framing choice is downstream of the triage, not a substitute for it. Select the best candidate(s) and turn it into a full mathematical design: the proof architecture, the definitions and lemmas needed, and the dependencies on imported upstream theorems.
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 3 — Design Review (blind)
@@ -72,7 +72,7 @@ Each phase lists its **context in** (what you paste into the incognito session) 
 ### Phase 4 — Design Review (against charter)
 - **Context in:** Phase 3 blind design review context, charter.
 - **Instructions:** Check the design against the charter. Does it accurately represent the active workstream? Bind the design to its commitment(s) and criterion(criteria), and confirm the signature discharges the charter obligation without drift.
-- **Instructions (part 2):** Can you update the design to fully discharge or impossibly prove the workstream and address the problems that you found?
+- **Instructions (part 2):** Can you update the design to fully align with the workstream and address the problems that you found?
 - **Output:** Mathematical design + any gap notes.
 
 ### Phase 5 — Execute (Claude code, against repo)
