@@ -1,21 +1,22 @@
 name = "RelExist"
-defaultTargets = ["Series4"]
+defaultTargets = ["Series5"]
 
-# ── Layout (Series 4 — the live series) ──────────────────────────────────────
-# Series 3 is closed and frozen under `archive/`. Series 4 is the live
-# development; its formal sources live in `series-4/formal/`, reached via
-# `srcDir = "../series-4/formal"`. The Series 4 charter grows it (and the build
-# targets) back on the new arena.
+# ── Layout (Series 5 — the live series) ──────────────────────────────────────
+# Series 3 is closed and frozen under `archive/`; Series 4 is complete under
+# `series-4/`. Series 5 is the live development; its formal sources live in
+# `series-5/formal/`, reached via `srcDir = "../series-5/formal"`. The Series 5
+# charter grows it (and the build targets) on the stratified arena.
 
-# `series-4/formal/` — the Series 4 root. A skeleton for now: an empty `Series4`
-# root (no theorems yet); the Series 4 charter grows it.
+# `series-5/formal/` — the Series 5 root. A skeleton for now: an empty `Series5`
+# root (no theorems yet) plus the owed `AxiomCheck`; the Series 5 charter grows
+# it. As each workstream lands, add its `wsN` root to `roots` below.
 [[lean_lib]]
-name = "Series4"
-srcDir = "../series-4/formal"
-roots = ["Series4", "ws1", "ws2", "ws3", "ws4", "ws5", "ws6", "ws7", "AxiomCheck"]
+name = "Series5"
+srcDir = "../series-5/formal"
+roots = ["Series5", "ws1", "ws2", "ws3", "ws4", "ws5", "ws6", "ws7", "AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
-# when the new-arena development needs it; the empty skeleton imports none of it.
+# when the stratified development needs it; the empty skeleton imports none of it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
