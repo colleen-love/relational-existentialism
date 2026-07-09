@@ -54,6 +54,7 @@ import Series5
 -- WS7 — double-unboundedness, the S1 obstruction, the payoffs, the anchors, the verdict
 #print axioms Series5.WS7.ws7_double_unboundedness
 #print axioms Series5.WS7.ws7_setindexed_walls
+#print axioms Series5.WS7.ws7_properclass_index_cofinal
 #print axioms Series5.WS7.ws7_no_du_tower
 #print axioms Series5.WS7.ws7_payoffs_hold
 #print axioms Series5.WS7.ws7_leakfree_NOT_from_du

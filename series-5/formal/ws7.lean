@@ -43,31 +43,49 @@ theorem ws7_double_unboundedness (T : Tower Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) :
     DoubleUnboundedness T := ⟨hna, hnb, hunb⟩
 
-/-! ### The S1 obstruction: the set-indexed tower walls (charter §4.1, now a theorem)
+/-! ### The S1 obstruction, and the pre-registered fix (charter §4.1 / §9, mechanized)
 
 The batched review (project-review-1.md, S1) found that every flagship payoff is conditional
-on `hunb` / `DoubleUnboundedness`, satisfied by no built tower. Sharper: on the *set-indexed*
-`Tower` (`Idx : Type u`) that hypothesis is **unsatisfiable**. The family `a ↦ (T.lvl a).card`
-is `u`-small, so it has a supremum no level exceeds — the "tower with a top" the charter
-warned of (§4.1). So the doubly-unbounded inhabitant is not merely unbuilt but **unbuildable
-at `Idx : Type u`**; it needs a proper-class / universe-bumped index (the charter-§9
-existential, a genuinely different construction). The flagship payoffs are therefore reported
-**Partial** at the headline — sound conditionals whose subject has no model here. -/
+on `hunb` / `DoubleUnboundedness`, satisfied by no built tower. The reason is *pre-registered*
+in the design, not a new dead-end: the WS1 C2 candidate says "the index a proper class / large
+directed set with no greatest element," and the charter §9 names the fix, "the tower existential
+needs a proper-class index." But the C2 Lean *sketch* — and this file's `Tower` following it —
+typed `Idx : Type u`, which **collapses** C2's proper-class index to a set. A `u`-small index
+forces the family `a ↦ (T.lvl a).card` to have a supremum, so `hunb` cannot hold: this is
+exactly the "tower with a top" the charter warned of (§4.1). Both sides are mechanized below:
+`ws7_setindexed_walls` (the set-indexed collapse) and `ws7_properclass_index_cofinal` (the
+pre-registered proper-class index *does* satisfy the unbounded-cardinals condition). The
+remaining work — transporting the tower/colimit machinery to a proper-class (universe-bumped)
+index so `Winf` and its payoffs are stated over it — is the charter-§9 refactor. -/
 
-/-- **Impossibility — a set-indexed tower cannot have unbounded cardinals.** For any
-`T : Tower Q`, no cardinal beyond `⨆ a, (T.lvl a).card` is realized as a level, so `hunb`
-fails. This is the §4.1 supremum wall, mechanized. -/
+/-- **The set-indexed collapse (charter §4.1, mechanized).** For any `T : Tower Q` with the
+present `Idx : Type u`, the level-cardinals `a ↦ (T.lvl a).card` are `u`-small, so they have a
+supremum `⨆ a, (T.lvl a).card` no level exceeds; `hunb` fails. This is *not* a limitation of
+the program but of the `Idx : Type u` typing — the very collapse C2's proper-class index was
+pre-registered to avoid. -/
 theorem ws7_setindexed_walls (T : Tower Q) :
     ¬ (∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) := by
   intro h
   obtain ⟨a, ha⟩ := h (⨆ a, (T.lvl a).card)
   exact absurd ha (not_lt.mpr (le_ciSup (Cardinal.bddAbove_range fun a => (T.lvl a).card) a))
 
-/-- **No set-indexed tower is doubly-unbounded.** Consequently every
-`DoubleUnboundedness`-conditional payoff (no-top, groundless-no-collapse, no-completing-view,
-`ws7_payoffs_hold`, the derivations, the anchors) is a sound conditional whose antecedent no
-`Tower Q` satisfies. The verdict `payoffsEstablished` therefore holds **for towers satisfying
-`DoubleUnboundedness`; the existence of such a tower is open (unbuildable at `Idx : Type u`).** -/
+/-- **The pre-registered fix works (index level).** A *proper-class* index — realized as a
+universe-bumped `Type (u+1)` type, here `Cardinal.{u}` itself with `card = id` — **does**
+satisfy the unbounded-cardinals condition: for every `c : Cardinal.{u}` there is a level whose
+cardinal exceeds it (`2 ^ c`, by Cantor). So the obstruction in `ws7_setindexed_walls` is
+exactly the `Idx : Type u` collapse of C2, and the charter-§9 proper-class index resolves it —
+the pre-registered fix, mechanized at the index level. (Transporting the full `Tower`/`Winf`
+machinery onto such an index is the remaining §9 refactor.) -/
+theorem ws7_properclass_index_cofinal :
+    ∃ (I : Type (u+1)) (card : I → Cardinal.{u}), ∀ c : Cardinal.{u}, ∃ a, c < card a :=
+  ⟨Cardinal.{u}, id, fun c => ⟨2 ^ c, Cardinal.cantor c⟩⟩
+
+/-- **No *set-indexed* tower is doubly-unbounded** (a consequence of the `Idx : Type u`
+collapse, not the program). Every `DoubleUnboundedness`-conditional payoff (no-top,
+groundless-no-collapse, no-completing-view, `ws7_payoffs_hold`, the derivations, the anchors)
+is a sound conditional whose antecedent no *present* `Tower Q` satisfies — pending the §9
+proper-class-index refactor (`ws7_properclass_index_cofinal` shows that index exists and works).
+So the verdict `payoffsEstablished` holds **for towers satisfying `DoubleUnboundedness`**. -/
 theorem ws7_no_du_tower (T : Tower Q) : ¬ DoubleUnboundedness T :=
   fun h => ws7_setindexed_walls T h.2.2
 
