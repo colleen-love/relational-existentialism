@@ -100,9 +100,10 @@ The project review's findings become the **seed of the next series**. The inter-
 
 > **Each series is a response to the previous series' honest findings — not a continuation of its plan.**
 
-Concretely, the pattern Series 2 → 3 → 4 has followed:
+Concretely, the pattern Series 1 →2 → 3 → 4 has followed:
 
-- **Series 2** built the first mechanization and was met by a review (`series-2-review.md`) that exposed methodology weaknesses.
+- **Series 1** built the first mechanization and was met by a review that exposed foundational mathematical failures.
+- **Series 2** restarted the program in a new mathematical arena but was met with a review that exposed a crippling methodology weaknesses.
 - **Series 3** was a *redesign in response*, not an extension: it rebuilt the foundation, added the register discipline, and its central finding (the interdependence / fracture result) came out of taking Series 2's resistances seriously.
 - **Series 4** is a *response to Series 3's central fracture* — the bound-as-fiat — and reframes the whole program around making the bound endogenous. It inherits Series 3 as prior art but presupposes none of it.
 
