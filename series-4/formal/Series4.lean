@@ -1,0 +1,8 @@
+-- `Series4` — the live Lean root (Spec Series 4).
+-- Series 3 is closed and archived under `archive/`; Series 4 opens on a fresh
+-- foundation. The Series 4 charter (`series-4/charter.md`) grows it.
+--
+-- STATUS: Revision 0 — the skeleton before any workstream has reported. This
+-- root is intentionally empty (no theorems yet); the Series 4 charter's seven
+-- workstreams (WS1–WS7) grow it, adding one root per workstream as it lands and
+-- importing them here, with an `AxiomCheck` sweep once headline theorems exist.
