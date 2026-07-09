@@ -67,7 +67,7 @@ Designs are written together so cross-workstream dependencies (§4) are settled 
 
 ### Phase C — Build all seven (one session, with repo context)
 
-In a single session, realize every design in `formal/wsNN.lean`, building `Series5.lean` and `AxiomCheck.lean`, self-contained (transcribe Series 4/3 machinery; import nothing from `series-4/` or `archive/`). Respect the dependency order (§4): WS1 first (blocking), then WS2, then WS3–WS6, then WS7. The build produces theorems (or precise impossibilities) matching the designs' signatures.
+In a single session, realize every design in `formal/wsNN.lean`, building `Series5.lean` and `AxiomCheck.lean`, self-contained (transcribe Series 4/3 machinery; import nothing from `series-4/` or `archive/`). Respect the dependency order (§4): WS1 first (blocking), then WS2, then WS3–WS6, then WS7. The build produces theorems (or precise impossibilities) matching the designs' signatures. Please update `charter-status.md` as you go.
 
 A build may discover a design was wrong. The one prohibited move is **building past a broken design**: if a design cannot be realized as written, stop and record the defect in `charter-status.md` (routed to the owning design), and either fix the design in place (it is the same session's artifact) or report the workstream Partial with the obstruction precise. Do not silently retarget a signature to whatever the proof happened to yield.
 
@@ -75,22 +75,22 @@ Because the build is batched, a mid-build discovery that reaches upstream (e.g. 
 
 ### Phase D — Blind series-review (one session) → `series-review.md`
 
-In a fresh session, hand the reviewer:
+In a fresh session:
 
-- all built code (`formal/ws1.lean … ws7.lean`, `AxiomCheck.lean`),
-- every design's **theorem signatures and outcome classes** (the contracts),
-- the charter's **success criteria** (the bar),
-- **but not** the designs' motivating prose or the charter's metaphysical framing.
+Can you clone this repo and read the series 5 charter, charter status, design documents, and lean files? Please view the ${WORKING} branch.
+[colleen-love/relational-existentialism: A view of the universe](https://github.com/colleen-love/relational-existentialism)
 
-The reviewer answers, adversarially and across the whole series at once: *does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim — with no `sorry`, no custom axiom, no signature that quietly weakens the target?* Specifically for Series 5, the reviewer runs:
+Once you are finished, please do an adversarial review of the formalization. 
 
-- **The strip test** on every payoff (§0.3): does no-top still go through with "no last level" deleted? does no-completing-view still go through with "face" deleted? Flag every payoff that survives stripping as an index/cardinality fact, not an earned carrier theorem — exactly the S1/S2 findings that reshaped Series 4.
-- **Cross-workstream laundering** — a claim discharged in isolation that leans on a hypothesis another workstream left open (e.g. WS4's V3 depending on WS6's cross-level face; WS2's no-first-level depending on WS6's descending map). The batched review is the only place this is visible.
-- **The coincidence rule** where it applies — is a "forced" theorem genuinely independent of its "definitional" partner, or does its proof unfold to the definition? (WS3 `ws3_wall_vs_grain`, WS6 `ws6_relating_is_composition`, WS6 `ws6_unknowable_eq_noview`.)
-- **The trivialization verdict** — do the payoffs reduce to distinct consequences of double-unboundedness (WS7's distinctness ledger) or collapse into one definition? Confirm or refute **Trivialized** at the whole-program level.
-- **The axiom-check status** — was `#print axioms` actually run, or is the claim still *static*?
+Please answer, adversarially and across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim — with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 5, please run:
 
-The reviewer writes **`series-review.md`**: findings graded **SERIOUS** (the verdict rests on it — e.g. a flagship payoff laundering), **REAL** (a genuine gap, correctly labelled once fixed), **COSMETIC/ACCEPTABLE**, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed — **no goalpost-moving**: the review says "relabel this / prove that / strip and re-prove," never "lower the bar."
+* The strip test on every payoff (§0.3): does no-top still go through with "no last level" deleted? does no-completing-view still go through with "face" deleted? Flag every payoff that survives stripping as an index/cardinality fact, not an earned carrier theorem — exactly the S1/S2 findings that reshaped Series 4.
+* Cross-workstream laundering — a claim discharged in isolation that leans on a hypothesis another workstream left open (e.g. WS4's V3 depending on WS6's cross-level face; WS2's no-first-level depending on WS6's descending map). The batched review is the only place this is visible.
+* The coincidence rule where it applies — is a "forced" theorem genuinely independent of its "definitional" partner, or does its proof unfold to the definition? (WS3 `ws3_wall_vs_grain`, WS6 `ws6_relating_is_composition`, WS6 `ws6_unknowable_eq_noview`.)
+* The trivialization verdict — do the payoffs reduce to distinct consequences of double-unboundedness (WS7's distinctness ledger) or collapse into one definition? Confirm or refute Trivialized at the whole-program level.
+* The axiom-check status — was `#print axioms` actually run, or is the claim still static?
+
+Please write a `series-review.md`: findings graded SERIOUS (the verdict rests on it — e.g. a flagship payoff laundering), REAL (a genuine gap, correctly labelled once fixed), COSMETIC/ACCEPTABLE, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed — no goalpost-moving: the review says "relabel this / prove that / strip and re-prove," never "lower the bar."
 
 ### Phase E — Address `series-review.md` (one session)
 
