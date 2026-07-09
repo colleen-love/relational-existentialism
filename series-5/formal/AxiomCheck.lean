@@ -59,6 +59,10 @@ import Series5
 #print axioms Series5.WS7.ws7_setindexed_walls
 #print axioms Series5.WS7.ws7_properclass_index_cofinal
 #print axioms Series5.WS7.ws7_no_du_tower
+-- WS7 — the S1 antecedent DISCHARGED: a genuinely built doubly-unbounded tower (charter §9)
+#print axioms Series5.WS7.ws7_cardinalTower_du
+#print axioms Series5.WS7.ws7_notop_unconditional
+#print axioms Series5.WS7.ws7_payoffs_unconditional
 #print axioms Series5.WS7.ws7_payoffs_hold
 #print axioms Series5.WS7.ws7_leakfree_NOT_from_du
 #print axioms Series5.WS7.ws7_notop_vs_collapse_distinct

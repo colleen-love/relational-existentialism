@@ -217,26 +217,27 @@ theorem ws3_no_top (T : Tower Q) (hQ : Nonempty Q)
   intro hall
   obtain ⟨α, y, hxrep, hyb⟩ := ws1_local_bound T x
   obtain ⟨β, hβ⟩ := hunb (T.lvl α).card
-  -- the set of objects x relates to is the image of a `< κ_α`-sized set
-  have hRel : (Set.univ : Set (Winf T))
-      = (fun p : Q × (T.lvl α).carrier => toColim T p.2) '' (lstr y).1 := by
-    ext w
-    simp only [Set.mem_univ, true_iff]
-    obtain ⟨q, hqw⟩ := hall w
+  -- If `x` relates to every object, each level-β object `w` satisfies `toColim w = toColim z`
+  -- for some `(q,z) ∈ lstr y`. Choice gives an injection `carrier β ↪ (lstr y).1` — both
+  -- `Type u`, so the whole contradiction stays in `Cardinal.{u}` (no cross-universe lift).
+  have hg : ∀ w : (T.lvl β).carrier,
+      ∃ p : ↥(lstr y).1, toColim T p.1.2 = toColim T w := by
+    intro w
+    obtain ⟨q, hqw⟩ := hall (toColim T w)
     rw [hxrep, succSet_toColim] at hqw
     obtain ⟨p, hp, hpe⟩ := hqw
-    exact ⟨p, hp, congrArg Prod.snd hpe⟩
-  have hcard_univ : Cardinal.mk (Winf T) < (T.lvl α).card := by
-    calc Cardinal.mk (Winf T)
-        = Cardinal.mk ↥(Set.univ : Set (Winf T)) := (Cardinal.mk_univ).symm
-      _ = Cardinal.mk ↥((fun p : Q × (T.lvl α).carrier => toColim T p.2) '' (lstr y).1) := by rw [hRel]
-      _ ≤ Cardinal.mk ↥(lstr y).1 := Cardinal.mk_image_le
-      _ < (T.lvl α).card := hyb
-  have hcard_ge : (T.lvl β).card ≤ Cardinal.mk (Winf T) := by
-    calc (T.lvl β).card
-        ≤ Cardinal.mk (T.lvl β).carrier := nuLk_card_ge _ (T.lvl β).hinf Q hQ
-      _ ≤ Cardinal.mk (Winf T) := Cardinal.mk_le_of_injective (toColim_level_inj T β)
-  exact absurd (lt_trans hβ (lt_of_le_of_lt hcard_ge hcard_univ)) (lt_irrefl _)
+    exact ⟨⟨p, hp⟩, congrArg Prod.snd hpe⟩
+  choose g hgspec using hg
+  have hginj : Function.Injective g := by
+    intro w w' hww
+    have h : toColim T w = toColim T w' := by rw [← hgspec w, ← hgspec w', hww]
+    exact toColim_level_inj T β h
+  -- κ_β ≤ #(carrier β) ≤ #(lstr y).1 < κ_α < κ_β — a contradiction in `Cardinal.{u}`.
+  have hle : Cardinal.mk (T.lvl β).carrier ≤ Cardinal.mk ↥(lstr y).1 :=
+    Cardinal.mk_le_of_injective hginj
+  have hκβ : (T.lvl β).card ≤ Cardinal.mk (T.lvl β).carrier :=
+    nuLk_card_ge _ (T.lvl β).hinf Q hQ
+  exact absurd (lt_trans hβ (lt_of_le_of_lt (le_trans hκβ hle) hyb)) (lt_irrefl _)
 
 /-! ## B3 — The bound is the grain (interpretive corollary) -/
 
@@ -399,11 +400,71 @@ hypotheses are non-vacuously satisfiable, and the colimit carries the coalgebra 
 bisimulation-is-identity for a real object — the program's "most likely single point of
 failure" discharged, independent of the (separate) proper-class-index question. -/
 theorem ws1_gate_settled (Q : Type u) :
-    ∃ (T : Tower Q) (a b : T.Idx) (h : T.le a b),
+    ∃ (T : Tower.{u, u} Q) (a b : T.Idx) (h : T.le a b),
       (T.lvl a).card < (T.lvl b).card ∧ Function.Injective (T.ι h) := by
   refine ⟨growingTower Q, ⟨0⟩, ⟨1⟩, (by norm_num : (0 : ℕ) ≤ 1), ?_, ?_⟩
   · exact growCard_lt_succ 0
   · exact boundRelax_injective _
+
+/-! ### The doubly-unbounded tower: a proper-class (universe-bumped) index (charter §9)
+
+`growingTower` settles the *gate* (genuine injective connecting maps) but its `ℕ` index is
+`u`-small, so its cardinals are not cofinal in `Cardinal.{u}` (`ws7_setindexed_walls`): it is
+not doubly-unbounded. The pre-registered fix (C2 / charter §9) is a **proper-class index**,
+realized here as the universe-bumped `Cardinal.{u} × ℤ : Type (u+1)` under the lexicographic
+order — the `Cardinal` coordinate gives no greatest element and cofinal cardinals, the `ℤ`
+coordinate gives no least element. Transported onto the same `boundRelax` connecting maps, it
+is a genuine `Tower.{u, u+1}` that **does** satisfy `DoubleUnboundedness`, so the flagship
+payoffs hold of a real object with no open antecedent. -/
+
+/-- Lexicographic order on the proper-class index `Cardinal.{u} × ℤ`: compare the cardinal
+first, then the `ℤ` descent coordinate. -/
+noncomputable def cardIdxLe : (Cardinal.{u} × ℤ) → (Cardinal.{u} × ℤ) → Prop :=
+  fun a b => a.1 < b.1 ∨ (a.1 = b.1 ∧ a.2 ≤ b.2)
+
+/-- The level cardinal of index `(c, n)`: `max ℵ₀ c` (always `≥ ℵ₀`, so a legal `Level`). -/
+noncomputable def cardIdxCard (a : Cardinal.{u} × ℤ) : Cardinal.{u} := max Cardinal.aleph0 a.1
+
+theorem cardIdxLe_refl (a : Cardinal.{u} × ℤ) : cardIdxLe a a := Or.inr ⟨rfl, le_refl _⟩
+
+theorem cardIdxLe_trans {a b c : Cardinal.{u} × ℤ} (hab : cardIdxLe a b) (hbc : cardIdxLe b c) :
+    cardIdxLe a c := by
+  rcases hab with h1 | ⟨h1, h1'⟩
+  · rcases hbc with h2 | ⟨h2, _⟩
+    · exact Or.inl (lt_trans h1 h2)
+    · exact Or.inl (h2 ▸ h1)
+  · rcases hbc with h2 | ⟨h2, h2'⟩
+    · exact Or.inl (h1 ▸ h2)
+    · exact Or.inr ⟨h1.trans h2, le_trans h1' h2'⟩
+
+theorem cardIdx_mono {a b : Cardinal.{u} × ℤ} (h : cardIdxLe a b) :
+    cardIdxCard a ≤ cardIdxCard b := by
+  have h1 : a.1 ≤ b.1 := by rcases h with h | ⟨h, _⟩; exacts [le_of_lt h, le_of_eq h]
+  exact max_le_max (le_refl _) h1
+
+/-- **The doubly-unbounded tower.** Proper-class index `Cardinal.{u} × ℤ`, levels at cardinal
+`max ℵ₀ c`, connected by the constructed bound-relaxing injective coalgebra morphisms
+`boundRelax`. Non-degenerate exactly as `growingTower`, but now with an index that has no
+greatest element *and* cofinal cardinals (via `Cardinal`) and no least element (via `ℤ`). -/
+noncomputable def cardinalTower (Q : Type u) : Tower.{u, u+1} Q where
+  Idx := Cardinal.{u} × ℤ
+  le := cardIdxLe
+  le_refl := cardIdxLe_refl
+  le_trans := cardIdxLe_trans
+  directed := fun a b => ⟨(max a.1 b.1, max a.2 b.2), by
+      rcases lt_or_eq_of_le (le_max_left a.1 b.1) with h | h
+      · exact Or.inl h
+      · exact Or.inr ⟨h, le_max_left a.2 b.2⟩, by
+      rcases lt_or_eq_of_le (le_max_right a.1 b.1) with h | h
+      · exact Or.inl h
+      · exact Or.inr ⟨h, le_max_right a.2 b.2⟩⟩
+  lvl := fun a => ⟨cardIdxCard a, le_max_left _ _⟩
+  mono := fun h => cardIdx_mono h
+  ι := fun h x => boundRelax (cardIdx_mono h) x
+  ι_dest := fun h x => boundRelax_dest (cardIdx_mono h) x
+  ι_refl := fun x => boundRelax_refl _ x
+  ι_trans := fun _ _ x => boundRelax_trans _ _ _ x
+  ι_inj := fun _ => boundRelax_injective _
 
 /-! ## B4 — the inherited impossibility: faces cannot bound branching -/
 

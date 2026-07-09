@@ -43,27 +43,31 @@ theorem ws7_double_unboundedness (T : Tower Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) :
     DoubleUnboundedness T := ⟨hna, hnb, hunb⟩
 
-/-! ### The S1 obstruction, and the pre-registered fix (charter §4.1 / §9, mechanized)
+/-! ### The S1 obstruction, and the pre-registered fix — REFACTOR COMPLETE (charter §4.1 / §9)
 
-The batched review (project-review-1.md, S1) found that every flagship payoff is conditional
-on `hunb` / `DoubleUnboundedness`, satisfied by no built tower. The reason is *pre-registered*
-in the design, not a new dead-end: the WS1 C2 candidate says "the index a proper class / large
-directed set with no greatest element," and the charter §9 names the fix, "the tower existential
-needs a proper-class index." But the C2 Lean *sketch* — and this file's `Tower` following it —
-typed `Idx : Type u`, which **collapses** C2's proper-class index to a set. A `u`-small index
-forces the family `a ↦ (T.lvl a).card` to have a supremum, so `hunb` cannot hold: this is
-exactly the "tower with a top" the charter warned of (§4.1). Both sides are mechanized below:
-`ws7_setindexed_walls` (the set-indexed collapse) and `ws7_properclass_index_cofinal` (the
-pre-registered proper-class index *does* satisfy the unbounded-cardinals condition). The
-remaining work — transporting the tower/colimit machinery to a proper-class (universe-bumped)
-index so `Winf` and its payoffs are stated over it — is the charter-§9 refactor. -/
+The batched review (project-review-1.md, S1) found that every flagship payoff was conditional
+on `hunb` / `DoubleUnboundedness`, satisfied by no *then-built* tower. The reason was
+*pre-registered* in the design, not a new dead-end: the WS1 C2 candidate says "the index a
+proper class / large directed set with no greatest element," and the charter §9 names the fix,
+"the tower existential needs a proper-class index." The original C2 Lean *sketch* — and this
+file's `Tower` following it — typed `Idx : Type u`, which **collapses** C2's proper-class index
+to a set. A `u`-small index forces the family `a ↦ (T.lvl a).card` to have a supremum, so `hunb`
+cannot hold: exactly the "tower with a top" the charter warned of (§4.1). That is now settled on
+both sides. `Tower` was made universe-polymorphic (`Idx : Type w`, `Winf : Type (max u w)`), and
+`cardinalTower : Tower.{u, u+1}` (WS3) is a **genuinely built** proper-class-indexed tower —
+index `Cardinal.{u} × ℤ`, connected by the constructed `boundRelax` injective coalgebra
+morphisms — that **does** satisfy `DoubleUnboundedness` (`ws7_cardinalTower_du` below). So the
+flagship payoffs hold of a real object with no open antecedent (`ws7_payoffs_unconditional`).
+`ws7_setindexed_walls` now carries the honest hypothesis `[Small.{u} T.Idx]`: the collapse is a
+fact about *small*-indexed towers, and `cardinalTower`'s index is provably not `u`-small. -/
 
-/-- **The set-indexed collapse (charter §4.1, mechanized).** For any `T : Tower Q` with the
-present `Idx : Type u`, the level-cardinals `a ↦ (T.lvl a).card` are `u`-small, so they have a
-supremum `⨆ a, (T.lvl a).card` no level exceeds; `hunb` fails. This is *not* a limitation of
-the program but of the `Idx : Type u` typing — the very collapse C2's proper-class index was
-pre-registered to avoid. -/
-theorem ws7_setindexed_walls (T : Tower Q) :
+/-- **The set-indexed collapse (charter §4.1, mechanized).** For any `T : Tower Q` whose index
+is `u`-small (`[Small.{u} T.Idx]` — e.g. `constTower`, `growingTower`), the level-cardinals
+`a ↦ (T.lvl a).card` form a `u`-small family, so they have a supremum `⨆ a, (T.lvl a).card`
+no level exceeds; `hunb` fails. This is *not* a limitation of the program but of a *small*
+index — exactly the collapse C2's proper-class index was pre-registered to avoid, and which
+`cardinalTower` (index `Cardinal.{u} × ℤ`, *not* `u`-small) escapes. -/
+theorem ws7_setindexed_walls (T : Tower Q) [Small.{u} T.Idx] :
     ¬ (∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) := by
   intro h
   obtain ⟨a, ha⟩ := h (⨆ a, (T.lvl a).card)
@@ -73,21 +77,44 @@ theorem ws7_setindexed_walls (T : Tower Q) :
 universe-bumped `Type (u+1)` type, here `Cardinal.{u}` itself with `card = id` — **does**
 satisfy the unbounded-cardinals condition: for every `c : Cardinal.{u}` there is a level whose
 cardinal exceeds it (`2 ^ c`, by Cantor). So the obstruction in `ws7_setindexed_walls` is
-exactly the `Idx : Type u` collapse of C2, and the charter-§9 proper-class index resolves it —
-the pre-registered fix, mechanized at the index level. (Transporting the full `Tower`/`Winf`
-machinery onto such an index is the remaining §9 refactor.) -/
+exactly the *small*-index collapse of C2, and the charter-§9 proper-class index resolves it.
+The full transport onto such an index — `cardinalTower : Tower.{u, u+1}` — is now built (WS3);
+`ws7_cardinalTower_du` upgrades this index-level fact to a genuine doubly-unbounded tower. -/
 theorem ws7_properclass_index_cofinal :
     ∃ (I : Type (u+1)) (card : I → Cardinal.{u}), ∀ c : Cardinal.{u}, ∃ a, c < card a :=
   ⟨Cardinal.{u}, id, fun c => ⟨2 ^ c, Cardinal.cantor c⟩⟩
 
-/-- **No *set-indexed* tower is doubly-unbounded** (a consequence of the `Idx : Type u`
-collapse, not the program). Every `DoubleUnboundedness`-conditional payoff (no-top,
-groundless-no-collapse, no-completing-view, `ws7_payoffs_hold`, the derivations, the anchors)
-is a sound conditional whose antecedent no *present* `Tower Q` satisfies — pending the §9
-proper-class-index refactor (`ws7_properclass_index_cofinal` shows that index exists and works).
-So the verdict `payoffsEstablished` holds **for towers satisfying `DoubleUnboundedness`**. -/
-theorem ws7_no_du_tower (T : Tower Q) : ¬ DoubleUnboundedness T :=
+/-- **No *small-indexed* tower is doubly-unbounded** (a consequence of a `u`-small index, not the
+program). For any `[Small.{u} T.Idx]` tower the unbounded-cardinals condition fails, so
+`DoubleUnboundedness` cannot hold. This is the honest scope of the collapse: it is a fact about
+*small* indices, which `cardinalTower` (index `Cardinal.{u} × ℤ`, not `u`-small) escapes. -/
+theorem ws7_no_du_tower (T : Tower Q) [Small.{u} T.Idx] : ¬ DoubleUnboundedness T :=
   fun h => ws7_setindexed_walls T h.2.2
+
+/-! ### The refactor complete: a genuinely built doubly-unbounded tower -/
+
+/-- **The doubly-unbounded tower is real (charter §9 refactor, discharged).** The proper-class
+-indexed `cardinalTower` (WS3) satisfies `DoubleUnboundedness`: no greatest index (the
+`Cardinal` coordinate has no top — `(c, n) < (c, n+1)`), no least index (the `ℤ` coordinate has
+no bottom — `(c, n-1) < (c, n)`), and cofinal cardinals (for any `d`, level `(2^(max ℵ₀ d), 0)`
+has cardinal `2^(max ℵ₀ d) > d`, by Cantor). So every `DoubleUnboundedness`-conditional payoff
+holds of a genuinely built object — the S1 antecedent is discharged, not merely satisfiable. -/
+theorem ws7_cardinalTower_du (Q : Type u) : DoubleUnboundedness (cardinalTower Q) := by
+  refine ⟨?_, ?_, ?_⟩
+  · rintro ⟨c, n⟩
+    refine ⟨(c, n + 1), Or.inr ⟨rfl, by omega⟩, ?_⟩
+    intro h; have : n = n + 1 := congrArg Prod.snd h; omega
+  · rintro ⟨c, n⟩
+    refine ⟨(c, n - 1), Or.inr ⟨rfl, by omega⟩, ?_⟩
+    intro h; have : n = n - 1 := congrArg Prod.snd h; omega
+  · intro d
+    refine ⟨(2 ^ (max Cardinal.aleph0 d), 0), ?_⟩
+    show d < cardIdxCard (2 ^ (max Cardinal.aleph0 d), 0)
+    have h1 : Cardinal.aleph0 ≤ 2 ^ (max Cardinal.aleph0 d) :=
+      le_of_lt (lt_of_le_of_lt (le_max_left _ _) (Cardinal.cantor _))
+    show d < max Cardinal.aleph0 (2 ^ (max Cardinal.aleph0 d))
+    rw [max_eq_right h1]
+    exact lt_of_le_of_lt (le_max_right Cardinal.aleph0 d) (Cardinal.cantor _)
 
 /-- **The second fact (F2's second ingredient): cross-level leak-freeness.** Composition
 never annihilates a face — independent of double-unboundedness. -/
@@ -119,6 +146,28 @@ theorem ws7_payoffs_hold (T : Tower Q) (hQ : Nonempty Q) (hdu : DoubleUnboundedn
 theorem ws7_notop_from_du (T : Tower Q) (hQ : Nonempty Q) (hdu : DoubleUnboundedness T) :
     ∀ x : Winf T, ¬ ∀ y, RelatesInf T x y :=
   fun x => ws3_no_top T hQ hdu.2.2 x
+
+/-! ### The S1 antecedent discharged: payoffs of the *built* doubly-unbounded tower -/
+
+/-- **No-top holds unconditionally on the built doubly-unbounded tower.** Applying
+`ws7_notop_from_du` to `cardinalTower` with its `DoubleUnboundedness` witness — no open
+antecedent remains. -/
+theorem ws7_notop_unconditional (Q : Type u) (hQ : Nonempty Q) :
+    ∀ x : Winf (cardinalTower Q), ¬ ∀ y, RelatesInf (cardinalTower Q) x y :=
+  ws7_notop_from_du (cardinalTower Q) hQ (ws7_cardinalTower_du Q)
+
+/-- **The flagship payoffs hold of a real object, no open antecedent (charter §9 discharged).**
+The four payoffs of `ws7_payoffs_hold`, now applied to the genuinely built, genuinely
+doubly-unbounded `cardinalTower` rather than to an abstract `T` with an assumed
+`DoubleUnboundedness`. This is what S1 asked for: not a sound conditional, but the payoffs
+holding of an actual tower. -/
+theorem ws7_payoffs_unconditional (Q : Type u) (hQ : Nonempty Q)
+    (a0 : (cardinalTower Q).Idx) {q1 q2 : Q} (hq : q1 ≠ q2) :
+    (∀ x : Winf (cardinalTower Q), ¬ ∀ y, RelatesInf (cardinalTower Q) x y)
+  ∧ (∃ x y : Winf (cardinalTower Q), x ≠ y)
+  ∧ CrossLevelLeakFree ((cardinalTower Q).lvl a0).card Q
+  ∧ (∀ v : ViewAt (cardinalTower Q), ∃ y : Winf (cardinalTower Q), ¬ FaceReaches (cardinalTower Q) v y) :=
+  ws7_payoffs_hold (cardinalTower Q) hQ (ws7_cardinalTower_du Q) a0 hq
 
 /-- **Descent genuinely derives from double-unboundedness** (it uses no-first-level: `ℤ`
 has no least element). -/

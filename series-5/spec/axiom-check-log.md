@@ -68,9 +68,13 @@ definitional/decidable results depend on *no* axioms.)
 
 -- WS7
 'Series5.WS7.ws7_double_unboundedness' : [propext, Classical.choice, Quot.sound]
-'Series5.WS7.ws7_setindexed_walls'   : [propext, Classical.choice, Quot.sound]
+'Series5.WS7.ws7_setindexed_walls'   : [propext, Classical.choice, Quot.sound]  -- now [Small.{u} Idx]
 'Series5.WS7.ws7_properclass_index_cofinal' : [propext, Classical.choice, Quot.sound]
-'Series5.WS7.ws7_no_du_tower'        : [propext, Classical.choice, Quot.sound]
+'Series5.WS7.ws7_no_du_tower'        : [propext, Classical.choice, Quot.sound]  -- now [Small.{u} Idx]
+-- WS7 — the S1 antecedent DISCHARGED: a genuinely built doubly-unbounded tower (charter §9)
+'Series5.WS7.ws7_cardinalTower_du'   : [propext, Classical.choice, Quot.sound]  -- cardinalTower ⊨ DoubleUnboundedness
+'Series5.WS7.ws7_notop_unconditional' : [propext, Classical.choice, Quot.sound]  -- no open antecedent
+'Series5.WS7.ws7_payoffs_unconditional' : [propext, Classical.choice, Quot.sound]  -- no open antecedent
 'Series5.WS7.ws7_payoffs_hold'       : [propext, Classical.choice, Quot.sound]
 'Series5.WS7.ws7_leakfree_NOT_from_du' : [propext, Classical.choice, Quot.sound]
 'Series5.WS7.ws7_notop_vs_collapse_distinct' : [propext, Classical.choice, Quot.sound]

@@ -23,7 +23,7 @@ Sorry-free; axiom-clean beyond Mathlib's standard `propext`/`Classical.choice`/
 -/
 import Mathlib
 
-universe u
+universe u w
 
 namespace Series5.WS1
 
@@ -491,7 +491,7 @@ noncomputable def Level.carrier {Q : Type u} (L : Level Q) : Type u := νLk L.ca
 bound-relaxing connecting maps that preserve the successor structure. The
 coalgebra-morphism law `ι_dest` carries the bound relaxation `LkRelax`. -/
 structure Tower (Q : Type u) where
-  Idx      : Type u
+  Idx      : Type w
   le       : Idx → Idx → Prop
   le_refl  : ∀ a, le a a
   le_trans : ∀ {a b c}, le a b → le b c → le a c
@@ -513,8 +513,11 @@ def TowerColimRel (T : Tower Q) :
     (Σ a, (T.lvl a).carrier) → (Σ a, (T.lvl a).carrier) → Prop :=
   fun p q => ∃ (c : T.Idx) (hpc : T.le p.1 c) (hqc : T.le q.1 c), T.ι hpc p.2 = T.ι hqc q.2
 
-/-- The colimit carrier `W_∞`. -/
-def Winf (T : Tower Q) : Type u := Quot (TowerColimRel T)
+/-- The colimit carrier `W_∞`. Lives in `Type (max u w)`: the level carriers are `Type u`,
+but the index `T.Idx` is `Type w`, so with a proper-class (universe-bumped) index the colimit
+lands one universe up. For set-indexed towers (`w = u`, e.g. `constTower`, `growingTower`) it
+is the expected `Type u`. -/
+def Winf (T : Tower.{u, w} Q) : Type (max u w) := Quot (TowerColimRel T)
 
 /-- Injection of a level into the colimit. -/
 def toColim (T : Tower Q) {a : T.Idx} (x : (T.lvl a).carrier) : Winf T := Quot.mk _ ⟨a, x⟩
