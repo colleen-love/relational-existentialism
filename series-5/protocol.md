@@ -67,7 +67,7 @@ Designs are written together so cross-workstream dependencies (§4) are settled 
 
 ### Phase C — Build all seven (one session, with repo context)
 
-In a single session, realize every design in `formal/wsNN.lean`, building `Series5.lean` and `AxiomCheck.lean`, self-contained (transcribe Series 4/3 machinery; import nothing from `series-4/` or `archive/`). Respect the dependency order (§4): WS1 first (blocking), then WS2, then WS3–WS6, then WS7. The build produces theorems (or precise impossibilities) matching the designs' signatures.
+In a single session, realize every design in `formal/wsNN.lean`, building `Series5.lean` and `AxiomCheck.lean`, self-contained (transcribe Series 4/3 machinery; import nothing from `series-4/` or `archive/`). Respect the dependency order (§4): WS1 first (blocking), then WS2, then WS3–WS6, then WS7. The build produces theorems (or precise impossibilities) matching the designs' signatures. Please update `charter-status.md` as you go.
 
 A build may discover a design was wrong. The one prohibited move is **building past a broken design**: if a design cannot be realized as written, stop and record the defect in `charter-status.md` (routed to the owning design), and either fix the design in place (it is the same session's artifact) or report the workstream Partial with the obstruction precise. Do not silently retarget a signature to whatever the proof happened to yield.
 
