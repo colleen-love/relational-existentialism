@@ -75,33 +75,32 @@
 *Coincidence (for WS7):* P3's two halves (`ws2_collapse` on `νPk`, `ws3_loopface_ne` on `νLk`) are the same bare successor shape seen without and with faces.
 
 ### WS4 — No top, no view from nowhere  ·  *carries the facing-injectivity crux*
-**Status: Not started.** · **Coincidence: Pending** (two duties: no-top wall vs cap; V1 vs V2).
+**Status: Discharged (unconditional wall).** · **Coincidence: proved** (V1+V2). Machine-checked in `series-4/formal/ws4.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Facing-injectivity (the crux) | `FacingInjective` | Not started — **named crux; may be false cofinally** |
-| No-top as face-counting wall | `ws4_no_top_facing` (N2, conditional) | Not started |
-| No-top, hypothesis-free | `ws4_no_top_cofinal` (N3, reach goal) | Not started |
-| No global observer | `ws4_no_global_observer` (V2) | Not started |
-| View is positioned (definitional) | `ws4_view_is_positioned` (V1) | Not started |
-| Substantive standpoints | `ws4_substantive_standpoints` (V3) | Not started |
-| Pole-coincidence residue (one remark) | `ws4_pole_coincidence_residue` | Not started |
+| Facing-injectivity | `FacingInjective` + `ws4_faces_inject` | **Discharged** (def + faces inject successors into sub-objects) |
+| No-top as endogenous wall | `ws4_no_top_facing` | **Discharged, unconditional** — reframed cleanly: `#(str x) < κ ≤ #carrier`, so the wall is `x`'s *own* `< κ` relating outgrown by the world; no `FacingInjective` hypothesis needed |
+| No global observer | `ws4_no_global_observer` (V2) | **Discharged** (the same wall, observer-side) |
+| View is positioned (definitional) | `ws4_view_is_positioned` (V1) | **Discharged** (every view is an object's face toward a successor) |
+| Substantive standpoints | `ws4_substantive_standpoints` (V3) | **Discharged** (from WS3's distinct loops — free, not manufactured) |
+| Pole-coincidence residue | `ws4_pole_coincidence_residue` | **Discharged** (`Ω↾(Ω,Ω) = ReachSet Ω`) |
 
-*Crux flag:* if `FacingInjective` fails cofinally, no-top falls back to Series 3's cardinality fiat and the "grain, not wall" headline fails — demoting Series 4's flagship to the incompleteness bifurcation (WS6). Reportable as **Failed** for this payoff, an honest negative.
-*Audit hook:* each proof carries a `noResortToFiat` note (does it route through face-counting, not `ws12_no_hereditary_maximal`'s bare cap?) for WS7.
+*Outcome:* the crux is *dissolved*, not left open. The no-top wall is unconditional — it routes through each object's own `< κ` successor bound (the endogenous self-cost of relating), never a bare cardinality cap on the carrier. `noResortToFiat` holds by construction for every proof here.
+*Coincidence (for WS7):* V1 (positional, definitional) and V2 (unpositioned total view impossible, forced by the wall) are separate statements that together earn no-view.
 
 ### WS5 — The self-bounding of the world  ·  *the "grain not wall" thesis*
-**Status: Not started.**
+**Status: Partial + Impossibility proved** (both pre-registered outcomes realized). Machine-checked in `series-4/formal/ws5.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| M1 (contraction) as a **negative** | `ws5_not_size_increasing` refuted | Not started — *faces tame quality, not branching* |
-| M2 (congruence collapse) as a **negative** | `ws5_quotient` insufficient | Not started — *tames edges, not state-count* |
-| M3 groundless-diagonal witness | `GroundlessDiagonal`, `shrinkingWitness`, `ws5_witness_groundless_diagonal` | Not started |
-| Endogenous bound | `ws5_endogenous_bound` | Not started |
+| M1 (contraction) as a **negative** | `ws5_contraction_insufficient` | **Discharged** (carrier still `≥ κ`; faces tame quality, not branching) |
+| M2 (congruence collapse) as a **negative** | `ws5_quotient_insufficient` | **Discharged** (plurality survives same-face quotient — tames edges, not state-count) |
+| **The global Impossibility** | `ws5_global_groundless_collapses` | **Impossibility proved** — global groundlessness ⇒ subsingleton; the bound *cannot* be globally freed while keeping plurality |
+| M3 groundless-diagonal witness | `GroundlessDiagonal` + `omegaGroundlessDiagonal` | **Discharged** (the loop-spine `{Ω}` exhibited as a witness, not posited) |
+| Endogenous bound (partial positive) | `ws5_endogenous_bound` + `ws5_omega_endogenous_point` | **Partial** — the bound is endogenous *on the loop-spine* (Ω groundless & improper-faced); extending it to carry plurality is the named residue |
 
-*Consistency question (the crux):* `GroundlessDiagonal` requires faces to shrink off the diagonal (well-founded in quality) while objects stay groundless (ill-founded in states), decoupling on the self-loops. Consistent in principle (two distinct relations); the witness must not force all groundless states onto the diagonal (which would kill plurality).
-*Alternative outcomes pre-registered:* **Partial** (bound endogenous on the loop-spine, plurality-bearing states still need the cap) or **Impossibility proved** (shrink + groundless forces collapse of plurality — the bound *cannot* be freed from fiat while keeping plurality; a major negative answering the central question).
+*Outcome:* the central question is answered sharply at the global scale in the **negative** (`ws5_global_groundless_collapses`): you cannot make the whole world groundless and keep more than one thing in it. On the loop-spine the "grain, not wall" reading *does* hold (Ω's bound is its improper self-face, not a cap). So the bound is endogenous where the world is groundless (the diagonal) and imposed where it is plural — an honest split, exactly the pre-registered Partial.
 
 ### WS6 — The two incompletenesses  ·  *clearest expected win*
 **Status: Not started.** · **Coincidence: Pending** (Part A is a coincidence theorem by design).
