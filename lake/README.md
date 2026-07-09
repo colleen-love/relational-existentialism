@@ -6,7 +6,8 @@
 `srcDir = "../<root>/formal"`. Series 3 is closed and frozen under `archive/`; Series 4 is complete under
 `series-4/`; Series 5 is the one live library:
 
-- [`series-5/formal/`](../series-5/formal) — `Series5`, the Series 5 skeleton; the Series 5 charter grows it.
+- [`series-5/formal/`](../series-5/formal) — `Series5`, the live Series 5 development
+  (`ws1`…`ws7`, `AxiomCheck`); the stratification program, `sorry`-free and axiom-clean.
 
 See [`lakefile.toml`](lakefile.toml) for the live target.
 
@@ -14,5 +15,5 @@ See [`lakefile.toml`](lakefile.toml) for the live target.
 
 ```
 cd lake
-lake build        # builds Series5 (the only live library); an empty skeleton, green instantly
+lake build        # builds Series5 (ws1…ws7 + AxiomCheck); the mathlib cache must be warm
 ```

@@ -24,14 +24,14 @@
 | | |
 |---|---|
 | **Charter revision** | REV-0 (charter design unchanged) |
-| **This status file** | v0 — all seven design docs committed; no formal build yet |
-| **Design docs** | `series-5/spec/ws01…ws07-design.md` + `README.md` — **committed** (this session). Each: 3–7 candidate framings with Lean signatures + ambient theory + success/failure conditions, a paper-decidable triage collapsed to a table, the winner developed into a full mathematical design. |
-| **Formalization** | **Not started.** `series-5/formal/` scaffolded (empty). Target: `ws1.lean … ws7.lean`, `Series5.lean`, `AxiomCheck.lean`, self-contained (Series 4/3 theorems transcribed, nothing imported from `series-4/` or `archive/`), pinned Lean 4.15.0 / Mathlib v4.15.0. |
+| **This status file** | v1 — all seven design docs committed; **full formal build lands, `sorry`-free and axiom-clean** (Phase C, this session) |
+| **Design docs** | `series-5/spec/ws01…ws07-design.md` + `README.md` — **committed**. Each: 3–7 candidate framings with Lean signatures + ambient theory + success/failure conditions, a paper-decidable triage collapsed to a table, the winner developed into a full mathematical design. |
+| **Formalization** | **BUILT.** `ws1.lean … ws7.lean`, `Series5.lean`, `AxiomCheck.lean` — self-contained (Series 4/3 machinery transcribed; closure gate confirms nothing imported from `series-4/` or `archive/`), pinned Lean 4.15.0 / Mathlib v4.15.0. `lake build` green; `#print axioms` on all 34 headline theorems shows only `propext` / `Classical.choice` / `Quot.sound` (two verdict theorems depend on none). Two in-build design fixes recorded below (WS1); several honest scopings recorded per workstream. |
 | **Central question** (charter §8) | **Open — design predicts a split answer.** Boundlessness-without-a-wall (WS3), groundlessness-without-collapse (WS4), and cross-level leak-free relating (WS6) are predicted **earned** (survive their strip tests); the pole coincidence (WS4), the naive no-view V2 (WS4), and attention-as-grade-shift (WS6) are predicted **index facts / laundering / Trivialized**. Verdict predicted `payoffsEstablished`, not `oneDoubleUnboundedness`. |
 | **Headline positive (predicted)** | Explosion Dilemma (WS2, Impossibility) · no-top powered by no-last-level surviving its strip test (WS3) · groundless-no-collapse via the local/global decoupling (WS4) · leak-free cross-level composition, floor-free because ℤ has no bottom (WS6) · no strict graded distributive law (WS6, Impossibility, inherited KS diagonal). |
 | **Signature risk** | Trivialization — the payoffs may be one construction (double-unboundedness) restated. WS7's strip-test ledger and distinctness anchors exist to catch it. Design predicts it is caught: three of four totality-payoffs survive, so the verdict lands at the honest middle. |
-| **Blocking item** | **WS1 colimit gate** (existential, charter §9) — *design committed, not built.* Nothing downstream is sound until the colimit is shown to carry a coalgebra with bisimulation-is-identity. Settled first. |
-| **Verdict (WS7)** | **Predicted `payoffsEstablished`** — not yet built. |
+| **Blocking item** | **WS1 colimit gate** — **DISCHARGED.** `ws1_bisim_eq_colim` (a colimit bisimulation, restricted at a common level, is contained in the diagonal, via the level-local `nuLk_bisim_eq` + injective legs). `ws1_colim_equiv`, `ws1_local_bound`, `ws1_omega_selfloop` also built. A concrete `constTower` witnesses `Tower Q` is inhabited (non-vacuity); a *doubly-unbounded* inhabitant with bound-relaxing injective coalgebra-morphism legs remains the charter-§9 existential (the abstract `Tower` is the WS1 deliverable, per the design). |
+| **Verdict (WS7)** | **`payoffsEstablished`** — built. `ws7_verdict_eq` : `ws7_verdict = payoffsEstablished`; `ws7_not_trivialized`; `ws7_not_one_du`. Two payoffs derive from double-unboundedness (`ws7_notop_from_du`, `ws7_descent_from_du`); leak-freeness is a second fact (`ws7_leakfree_NOT_from_du`, holds on the walled `constTower`). |
 
 ---
 
@@ -185,7 +185,66 @@
 
 ## Closed log
 
-*Empty. No workstream has reached a terminal proof state; the design batch is committed but unbuilt. Entries land here as builds pass review.*
+### [build pass, Phase C] WS1–WS7 built — full `sorry`-free, axiom-clean compile
+
+All seven `formal/wsNN.lean` + `Series5.lean` + `AxiomCheck.lean` compile; `#print axioms`
+records only `propext` / `Classical.choice` / `Quot.sound` on every headline theorem. The
+closure gate confirms self-containment (no import from `series-4/` or `archive/`).
+
+**Design fixes made in-build (Phase C, per protocol §2 Phase C — recorded, target not weakened):**
+- **WS1 `destInf` codomain.** The design typed `destInf : Winf T → Σ' a, LkObj κ_α Q (Winf T)`.
+  That `Σ'` codomain is **not** `Quot.lift`-definable: the level index `α` depends on the
+  representative, so two representatives of one colimit point give unequal `⟨a,_⟩`. Realized
+  faithfully as the representative-independent successor **set** `succSet : Winf T → Set (Q × Winf T)`
+  (well-defined via `ι_dest`); the honest local `< κ_α` bound is recovered separately as
+  `ws1_local_bound`. No target weakened — the gate and no-top consume `succSet`/`RelatesInf`.
+- **WS1 `ι_dest` bound-relaxation.** The design's `lstr (ι h x) = LkMap (ι h) (lstr x)` is
+  ill-typed (`LkObj κ_α` vs `LkObj κ_β` differ by the cardinality predicate). Realized as
+  `lstr (ι h x) = LkRelax (mono h) (LkMap (ι h) (lstr x))`, an explicit inclusion that is the
+  identity on the underlying set — exactly the design's "relaxes the bound" prose.
+
+**Honest scopings recorded (per workstream):**
+- **WS2 `ws2_no_atom_floor`** — delivered as the **index form** (`no-least ⇒ strictly-lower level`);
+  the *carrier* descent (a face descending into `W_b`) is owed to WS6 (open obligation #2), so
+  no-first-level is **definitional pending WS6** exactly as pre-registered.
+- **WS3 no-top** carries a `Nonempty Q` hypothesis (needed for `nuLk_card_ge`; without labels
+  `νLk κ ∅` is a point). Honest and necessary; `Q` is plural anyway for the plurality payoff.
+- **WS4 V1 (`ws4_view_is_positioned`)** simplified to "a view is at a level" (`rfl`); the design's
+  `viewOf = faceAt` form is heterogeneously typed across the bound level. V1 is definitional, as
+  the design already flags. **V2 (`ws4_no_view_from_nowhere`)** is recorded as `ws2_no_least ∧
+  ws2_no_great` — the laundering form, **not** a payoff. **V3 (`ws4_no_completing_view`)** is the
+  earned payoff (= `ws6_tower_unknowable`), with `ws4_unknowable_eq_noview` the one-theorem coincidence.
+- **WS4 `ws4_groundless_no_collapse`** delivers the earned halves — plurality survives the colimit
+  (strip-surviving) ∧ the single-carrier collapse anchor — and defers the tower-carrier *descent*
+  (every object has a strictly finer relatum) to the WS6 graded spine `descState` /
+  `ws6_descent_nonterminating` (open obligation #2).
+- **WS6 `ws6_relating_is_composition`** delivered **definitionally** (`Iff.rfl`); the genuine
+  two-definition coincidence is the open residue (as the design's coincidence duty (i) anticipates).
+- **WS6 attention (`attend`)** is **definable and reported Trivialized** — no coincidence with an
+  independent attention notion (AT2 replicator / AT3 convergence) on this carrier, the design's
+  predicted honest negative.
+- **WS6 descent** is stated for a **constructed descending spine** (`descState`), not `∀ x : Winf T`
+  (which is false in general — not every object descends forever); this honestly exhibits that
+  groundless descent *exists* and never bottoms out (uses `ℤ` no-least load-bearingly).
+
+**Payoff verdicts as built (matching the §5.4 tracker):** boundlessness-without-a-wall **earned**
+(`ws3_no_top` survives strip — higher level supplies the escaping object); groundless-no-collapse
+**earned** (`ws4_groundless_no_collapse` via object plurality + the single-carrier collapse anchor);
+cross-level leak-free **earned** (`ws6_crosslevel_never_annihilate`, transported verbatim, floor-free
+via `ℤ`); no strict distributive law **Impossibility** (`ws6_no_strict_graded_law`, KS diagonal);
+graded weak law **Discharged** (`ws6_graded_weak_law_exists`); Explosion Dilemma **Impossibility**
+(`ws2_explosion_dilemma`); poles **index fact** (`ws4_poles_coincide`, flagged interpretation) with
+lopsided alternative (`ws4_poles_split`); no-view V2 **laundering / demoted**, V3 **earned**;
+attention **Trivialized**; verdict **`payoffsEstablished`**.
+
+- Axiom check: **run** against the pinned build; all headline theorems on the standard three.
+- Charter touched? **No** — status-only; the charter design is unchanged (the two WS1 fixes are
+  Lean-realization corrections of ill-typed/undefinable design sketches, recorded here, not
+  target changes).
+
+---
+
+*Earlier note (superseded): the design batch was committed but unbuilt. Entries land here as builds pass review.*
 
 *Template for future entries:*
 
