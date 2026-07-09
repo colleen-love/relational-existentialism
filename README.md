@@ -22,11 +22,11 @@ Machine-checked claims and interpretive glosses are kept strictly apart througho
 
 The current work. Start here:
 
-- **[Plain-language summary](./series-3/summary.md)**: what was asked, what was found, what it means.
-- **[Technical summary](./series-3/summary-technical.md)**: status against the seven success criteria, verification details, the fracture analysis.
-- **[Charter](./series-3/charter.md)**: the program document, with its full revision history (REV-A through REV-H).
-- **[Formalization](./series-3/formal/)**: the Lean 4 development, workstreams WS1 through WS15. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for headline theorems across every workstream.
-- **[Specs](./series-3/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./series-3/spec/ws9/03-project-review.md) of the gap between formal statements and prose claims, which WS9 and WS10 address.
+- **[Plain-language summary](./archive/summary.md)**: what was asked, what was found, what it means.
+- **[Technical summary](./archive/summary-technical.md)**: status against the seven success criteria, verification details, the fracture analysis.
+- **[Charter](./archive/charter.md)**: the program document, with its full revision history (REV-A through REV-H).
+- **[Formalization](./archive/formal/)**: the Lean 4 development, workstreams WS1 through WS15. `AxiomCheck.lean` imports the whole build and emits a `#print axioms` record for headline theorems across every workstream.
+- **[Specs](./archive/spec/)**: per-workstream conceptualize / design / execute / review documents, and an [external audit](./archive/spec/ws9/03-project-review.md) of the gap between formal statements and prose claims, which WS9 and WS10 address.
 
 ### Verification status
 
@@ -40,10 +40,6 @@ lake build
 
 Reproducibility claims in any publication should cite the specific commit hash and a clean-build log.
 
-## Series 2 (closed)
-
-Series 2, including Spec 2.0 and its formalization, is frozen under [`archive/`](./archive/). It remains readable as the origin of the axiom-ledger approach and the Mirror/collapse findings, but it is superseded: Series 3 rebuilt the foundation after review, and nothing in the archive is normative for the live development.
-
 ## Licensing
 
 This repository is dual-licensed by content type:
@@ -55,7 +51,7 @@ You are free to use, modify, and redistribute accordingly; attribution is requir
 
 ## Citation
 
-Until a paper exists, cite the repository at a specific commit, together with the [Series 3 technical summary](./series-3/summary-technical.md) and the [charter](./series-3/charter.md). Machine-checked claims are marked as such; interpretive glosses are labeled as interpretation.
+Until a paper exists, cite the repository at a specific commit, together with the [Series 3 technical summary](./archive/summary-technical.md) and the [charter](./archive/charter.md). Machine-checked claims are marked as such; interpretive glosses are labeled as interpretation.
 
 ---
 

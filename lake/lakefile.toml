@@ -1,18 +1,18 @@
 name = "RelExist"
-defaultTargets = ["Series3"]
+defaultTargets = ["Series4"]
 
-# ── Layout (Series 3 — the live series) ──────────────────────────────────────
-# Series 2 is closed and frozen under `archive/`. Series 3 is the live
-# development; its formal sources live in `series-3/formal/`, reached via
-# `srcDir = "../series-3/formal"`. The Series 3 charter grows it (and the build
+# ── Layout (Series 4 — the live series) ──────────────────────────────────────
+# Series 3 is closed and frozen under `archive/`. Series 4 is the live
+# development; its formal sources live in `series-4/formal/`, reached via
+# `srcDir = "../series-4/formal"`. The Series 4 charter grows it (and the build
 # targets) back on the new arena.
 
-# `series-3/formal/` — the Series 3 root. A skeleton for now: an empty `Series3`
-# root (no theorems yet); the Series 3 charter grows it.
+# `series-4/formal/` — the Series 4 root. A skeleton for now: an empty `Series4`
+# root (no theorems yet); the Series 4 charter grows it.
 [[lean_lib]]
-name = "Series3"
-srcDir = "../series-3/formal"
-roots = ["Series3", "ws1", "ws2", "ws3", "ws4", "ws5", "ws6", "ws7", "ws8", "ws9", "ws10", "ws11", "ws12", "ws13", "ws14", "ws15", "AxiomCheck"]
+name = "Series4"
+srcDir = "../series-4/formal"
+roots = ["Series4"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.

@@ -123,11 +123,11 @@ elan default "leanprover/lean4:v${LEAN_VER}" >/dev/null 2>&1 || true
 log "lean: $(lean --version 2>&1 | head -1)"
 
 # --- 3. Build the dependency-free core (always; fast) -------------------------
-# The live root is `Series3` (see lake/lakefile.toml; sources in
-# ../series-3/formal). Series 2 is closed and frozen under archive/.
+# The live root is `Series4` (see lake/lakefile.toml; sources in
+# ../series-4/formal). Series 3 is closed and frozen under archive/.
 cd "$REPO_DIR"
-log "building core target Series3..."
-lake build Series3
+log "building core target Series4..."
+lake build Series4
 log "core built."
 
 # --- 4. Build the mathlib-backed target (slow first time, cached after) -------
@@ -146,8 +146,8 @@ else
   else
     log "cache unreachable — will compile mathlib from source (slow first time, cached after)."
   fi
-  log "building the live target Series3 (skeleton imports no mathlib yet)..."
-  lake build Series3
+  log "building the live target Series4 (skeleton imports no mathlib yet)..."
+  lake build Series4
   log "target built."
 fi
 
