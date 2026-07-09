@@ -178,16 +178,62 @@ theorem ws3_plurality_core_concrete (hinf : ℵ₀ ≤ κ) :
 
 /-! ## Composition stays atom-free (the internality payoff) -/
 
-/-- **C-unconditional — faces never annihilate.** The internality of the face
-(it is part of the relata, not a value in an external algebra with a bottom) means
-there is no external `⊥` for composition to reach. Concretely: a non-atomic loop's
-face never degenerates to the empty object — its successor set is a nonempty
-singleton at every step, so no composition of faces produces an atom. This is
-*stronger* than Series 3 `ws14`, which genuinely leaked at the nilpotent Łukasiewicz
-weight: with no imported bottom, there is nothing to leak. -/
-theorem ws3_faces_never_annihilate (q : Q) (hinf : ℵ₀ ≤ κ) :
+/-- A face-`q` loop is non-atomic (its successor set is a nonempty singleton). -/
+theorem ws3_loop_nonatomic (q : Q) (hinf : ℵ₀ ≤ κ) :
     (Cofix.dest (loopState q hinf)).1 ≠ ∅ := by
   rw [loop_dest]
   exact (Set.singleton_nonempty _).ne_empty
+
+/-- The **composition (state-forming) coalgebra**. Given a labelled successor
+structure `t` whose targets are existing states, `lcompCoalg t` unfolds a fresh root
+whose successors are exactly `t`'s (injected as `some`), while every existing state
+unfolds via its own `dest`. Corecursing from the root flattens `t` into a single
+state — the internal analogue of composing relations along an edge. -/
+noncomputable def lcompCoalg (t : LkObj κ Q (νLk κ Q)) :
+    Option (νLk κ Q) → LkObj κ Q (Option (νLk κ Q))
+  | none => PkMap κ (Prod.map id Option.some) t
+  | some s => PkMap κ (Prod.map id Option.some) (Cofix.dest s)
+
+/-- **The composite state** formed from a labelled successor structure. -/
+noncomputable def lcomp (t : LkObj κ Q (νLk κ Q)) : νLk κ Q :=
+  Cofix.corec (lcompCoalg t) none
+
+/-- The composite's successor structure is `t`, re-rooted through the corecursion. -/
+theorem lcomp_dest (t : LkObj κ Q (νLk κ Q)) :
+    Cofix.dest (lcomp t)
+      = LkMap (Cofix.corec (lcompCoalg t)) (PkMap κ (Prod.map id Option.some) t) := by
+  rw [lcomp, Cofix.dest_corec]; rfl
+
+/-- A composite successor built from a non-atomic state is itself non-atomic. -/
+theorem lcomp_succ_nonatomic (t : LkObj κ Q (νLk κ Q)) (s : νLk κ Q) (hs : NonAtomic s) :
+    NonAtomic (Cofix.corec (lcompCoalg t) (Option.some s)) := by
+  rw [NonAtomic, Cofix.dest_corec]
+  show (LkMap (Cofix.corec (lcompCoalg t))
+      (PkMap κ (Prod.map id Option.some) (Cofix.dest s))).1.Nonempty
+  simp only [LkMap, PkMap_val]
+  exact ((show (Cofix.dest s).1.Nonempty from hs).image _).image _
+
+/-- **C-unconditional — composition never annihilates a face.** Forming a composite
+from a nonempty labelled structure of non-atomic states yields a non-atomic state, all
+of whose successors are again non-atomic — **unconditionally**, with no `BotFree`-style
+hypothesis. Because the face is internal (a part of the relata, not a value in an
+external algebra with a bottom), there is no external `⊥` for composition to reach: the
+only way to reach the empty object is for a factor to have been empty already — an atom,
+already excluded. This is *stronger* than Series 3 `ws14`, which genuinely leaked at the
+nilpotent Łukasiewicz weight; internality leaves nothing to leak. -/
+theorem ws3_faces_never_annihilate (t : LkObj κ Q (νLk κ Q))
+    (ht : t.1.Nonempty) (hmem : ∀ p ∈ t.1, NonAtomic p.2) :
+    NonAtomic (lcomp t) ∧ ∀ p ∈ (Cofix.dest (lcomp t)).1, NonAtomic p.2 := by
+  refine ⟨?_, ?_⟩
+  · rw [NonAtomic, lcomp_dest]
+    show (LkMap (Cofix.corec (lcompCoalg t)) (PkMap κ (Prod.map id Option.some) t)).1.Nonempty
+    simp only [LkMap, PkMap_val]
+    exact (ht.image _).image _
+  · intro p hp
+    rw [lcomp_dest] at hp
+    simp only [LkMap, PkMap_val] at hp
+    rcases hp with ⟨a, ha, rfl⟩
+    rcases ha with ⟨b, hb, rfl⟩
+    exact lcomp_succ_nonatomic t b.2 (hmem b hb)
 
 end Series4.WS3

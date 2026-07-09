@@ -30,15 +30,15 @@ namespace Series4.WS4
 
 variable {κ : Cardinal.{u}}
 
-/-! ## The endogenous no-top wall -/
+/-! ## The no-top wall — cardinal form and endogenous (face-routed) form -/
 
-/-- **The no-top wall (N3, unconditional).** No object relates to *every* object: its
-successor set is `< κ`, but the carrier is `≥ κ`. This is the self-cost of facing —
-each object's own relating is `< κ`-bounded — replacing Series 3's external
-cardinality cap. `noResortToFiat`: the contradiction routes through `x`'s *own*
-successor bound `#(str x) < κ` (a fact about `x`'s relating), not a bare cap on the
-carrier. -/
-theorem ws4_no_top_facing (x : (νPk κ).X) : ¬ (∀ y, y ∈ ((νPk κ).str x).1) := by
+/-- **No-top, cardinal form.** No object relates to *every* object: its successor set is
+`< κ`, but the carrier is `≥ κ`. This is the Series 3 cardinality wall, inherited: the
+contradiction is a bound on `x`'s successor *count*, not derived from face-structure.
+The endogenous (face-counting) wall is `ws4_no_top_endogenous` below; it routes through
+faces and `x`'s own reach. (This lemma does not claim `noResortToFiat` — it *is* the
+cardinal bound.) -/
+theorem ws4_no_top_cardinal (x : (νPk κ).X) : ¬ (∀ y, y ∈ ((νPk κ).str x).1) := by
   intro hall
   have huniv : (Set.univ : Set (νPk κ).X) ⊆ ((νPk κ).str x).1 := fun y _ => hall y
   have hle : Cardinal.mk (νPk κ).X ≤ Cardinal.mk ↥((νPk κ).str x).1 := by
@@ -62,13 +62,39 @@ theorem ws4_faces_inject (x : (νPk κ).X) (hinj : FacingInjective x) :
   by_contra hne
   exact hinj a.1 b.1 a.2 b.2 (fun h => hne (Subtype.ext h)) hab
 
+/-- **No-top, endogenous (face-routed) form — the charter bar.** No object relates to
+every object, proved *through faces* and `x`'s own extent: if `x` faced every object,
+then every object would lie in one of `x`'s faces — but faces are parts of `x`'s reach
+(`face_sub_reach`), so `x`'s reach would be the whole world, contradicting that `x`'s
+reach is a *proper part* of it (`hreach`). The wall reads "you would need to turn part
+of yourself toward every object, but you can only face into your own reach, and your
+reach is not the whole world." This is the self-cost of facing — a fact about `x`'s own
+faces and reach, not a bare cardinality cap on the carrier.
+
+The endogenous hypothesis `hreach` (a state's reach is a proper part of the world) holds
+for every state on the `ℵ₀` witness (`#reach ≤ ℵ₀ < 2^ℵ₀ = #carrier`, transcribable from
+Series 3 `ws12`); reproducing that continuum bound is deferred, so it is stated here as
+the explicit endogenous premise. `FacingInjective` / `ws4_faces_inject` express the
+sharper "distinct faces" reading of the same self-cost (the charter §9 crux: whether
+facing is cofinally injective). -/
+theorem ws4_no_top_endogenous (x : (νPk κ).X)
+    (hreach : Cardinal.mk ↥(ReachSet x) < Cardinal.mk (νPk κ).X) :
+    ¬ (∀ y, y ∈ ((νPk κ).str x).1) := by
+  intro hall
+  -- every object lies in one of x's faces, and faces are parts of x's reach
+  have hcov : ∀ y, y ∈ ReachSet x := fun y => face_sub_reach x y (mem_face_self (hall y))
+  have huniv : ReachSet x = Set.univ := Set.eq_univ_of_forall hcov
+  have hcard : Cardinal.mk ↥(ReachSet x) = Cardinal.mk (νPk κ).X := by
+    rw [huniv]; exact Cardinal.mk_univ
+  exact absurd hcard (ne_of_lt hreach)
+
 /-! ## No global observer (V2) — the same wall, observer-side -/
 
 /-- **V2 — no observer surveys the whole.** An observer whose immediate window
 covered every object would relate to everything, contradicting the wall. No-top and
 no-view-from-nowhere are the *same wall* seen from object-side and observer-side. -/
 theorem ws4_no_global_observer (obs : (νPk κ).X) : ¬ (∀ y, y ∈ ((νPk κ).str obs).1) :=
-  ws4_no_top_facing obs
+  ws4_no_top_cardinal obs
 
 /-! ## Views are positioned (V1) and standpoints are substantive (V3) -/
 

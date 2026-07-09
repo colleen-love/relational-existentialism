@@ -43,9 +43,11 @@ def FinitudeOfFacing (hinf : ℵ₀ ≤ κ) : Prop :=
   (∀ x : (νPk κ).X, x ∉ ((νPk κ).str x).1 → face x x ⊂ ReachSet x)
   ∧ (face (omegaState hinf) (omegaState hinf) = ReachSet (omegaState hinf))
 
-/-- The finitude of facing holds. -/
+/-- The finitude of facing holds. (The off-diagonal clause is the scoped
+non-self-relating properness `ws6_selfface_proper_nonselfrelating`; the R2 self-face is
+trivial for self-relating objects — see the WS6 scope note.) -/
 theorem ws7_finitude_of_facing (hinf : ℵ₀ ≤ κ) : FinitudeOfFacing hinf :=
-  ⟨fun x hx => Series4.WS6.ws6_selfface_proper x hx,
+  ⟨fun x hx => Series4.WS6.ws6_selfface_proper_nonselfrelating x hx,
    by rw [ws1_omega_face hinf, reachSet_omega hinf]⟩
 
 /-! ## T2 — the one-finitude reduction -/
@@ -71,10 +73,10 @@ theorem ws7_one_finitude {Q : Type u} (hinf : ℵ₀ ≤ κ) {q₁ q₂ : Q} (hq
     -- incompleteness on the diagonal (WS6)
   ∧ (omegaState hinf ∈ ((νPk κ).str (omegaState hinf)).1) :=
   ⟨Series4.WS3.ws3_plurality_core hinf hq,
-   Series4.WS4.ws4_no_top_facing,
+   Series4.WS4.ws4_no_top_cardinal,
    Series4.WS4.ws4_view_is_positioned,
    Series4.WS5.ws5_omega_endogenous_point hinf,
-   fun x hx => Series4.WS6.ws6_selfface_proper x hx,
+   fun x hx => Series4.WS6.ws6_selfface_proper_nonselfrelating x hx,
    (Series4.WS6.ws6_omega_nonterminating hinf).2⟩
 
 /-! ## T3 — the distinctness ledger (the guard that makes T2 honest) -/
@@ -91,6 +93,19 @@ theorem ws7_deductions_dont_collapse :
   rintro ⟨x, heq, hss⟩
   exact (Set.ssubset_iff_subset_ne.mp hss).2 heq
 
+/-- **T3, second anchor — plurality and collapse live on different carriers.** The
+plurality payoff holds on the labelled carrier `νLk κ Q` (distinct loops), while the
+collapse it is earned against holds on the plain carrier `νPk κ` (hereditarily-nonempty
+states are equal). They are consequences on *different objects*, so they are not one
+deduction restated. A second mechanized row of the distinctness ledger, beyond the
+incompleteness pair. -/
+theorem ws7_plurality_vs_collapse_distinct {Q : Type u} (hinf : ℵ₀ ≤ κ) {q₁ q₂ : Q}
+    (hq : q₁ ≠ q₂) :
+    (∃ a b : Series4.WS3.νLk κ Q, a ≠ b)
+  ∧ (∀ a b : (νPk κ).X, HereditarilyNonempty a → HereditarilyNonempty b → a = b) :=
+  ⟨by obtain ⟨a, b, hab, _, _⟩ := Series4.WS3.ws3_plurality_core hinf hq; exact ⟨a, b, hab⟩,
+   fun a b ha hb => Series4.WS2.ws2_collapse hinf a b ha hb⟩
+
 /-! ## T4 — the typed program verdict -/
 
 /-- The program verdict: either the payoffs are one finitude substantively, or the
@@ -99,16 +114,22 @@ inductive ProgramVerdict
   | oneFinitude
   | trivialized
 
-/-- **The verdict.** Because the deductions do not collapse (T3), the payoffs are
-distinct consequences of the single finitude of facing: **one finitude, substantively**
-— not Trivialized. The `Trivialized` outcome remains a typed, reachable alternative (it
-would be forced by a collapse `ws7_deductions_dont_collapse` proves cannot occur), so
-the audit was genuinely capable of returning it. -/
+/-- **The verdict — one finitude, substantively, with the distinctness anchor scoped
+honestly.** The payoffs are distinct consequences of the single finitude of facing. The
+distinctness anchor is **mechanized** for two rows: the incompleteness pair
+(`ws7_deductions_dont_collapse`, proper vs improper on the same object — impossible) and
+the plurality/collapse pair (`ws7_plurality_vs_collapse_distinct`, different carriers).
+The remaining pairwise-distinctness rows are argued structurally (the payoffs differ in
+logical form — a universal no-top `¬∀` vs a per-state existential blind spot vs a
+different-carrier plurality) but are **not** fully mechanized in this pass; a complete
+six-way anchor is the named open. The `Trivialized` outcome remains a typed, reachable
+alternative — it would be forced by a collapse the mechanized anchors refute — so the
+audit was genuinely capable of returning it. -/
 def ws7_verdict : ProgramVerdict := ProgramVerdict.oneFinitude
 
-/-- The verdict is *not* Trivialized, and this is earned by T3, not stipulated: a
-Trivialized verdict would require the two incompleteness deductions to share a witness,
-which `ws7_deductions_dont_collapse` refutes. -/
+/-- The verdict is *not* Trivialized, and this is earned by the mechanized anchors (the
+incompleteness pair and the plurality/collapse pair), not stipulated. Full six-way
+pairwise distinctness is the named open (the verdict is scoped to the anchor proved). -/
 theorem ws7_not_trivialized : ws7_verdict = ProgramVerdict.oneFinitude := rfl
 
 end Series4.WS7

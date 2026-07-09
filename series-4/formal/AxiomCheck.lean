@@ -24,15 +24,18 @@ import Series4
 #print axioms Series4.WS2.ws2_forced_answer
 #print axioms Series4.WS2.carrier_card_ge
 
--- WS3 — the labelled carrier and plurality without atoms
+-- WS3 — the labelled carrier, plurality without atoms, and composition-closure
 #print axioms Series4.WS3.ws3_loopface_ne
 #print axioms Series4.WS3.ws3_same_succ_diff_face
 #print axioms Series4.WS3.ws3_plurality_core
 #print axioms Series4.WS3.ws3_plurality_core_concrete
+#print axioms Series4.WS3.ws3_loop_nonatomic
+#print axioms Series4.WS3.lcomp_dest
 #print axioms Series4.WS3.ws3_faces_never_annihilate
 
--- WS4 — the no-top wall and positioned views
-#print axioms Series4.WS4.ws4_no_top_facing
+-- WS4 — the no-top wall (cardinal + endogenous) and positioned views
+#print axioms Series4.WS4.ws4_no_top_cardinal
+#print axioms Series4.WS4.ws4_no_top_endogenous
 #print axioms Series4.WS4.ws4_faces_inject
 #print axioms Series4.WS4.ws4_no_global_observer
 #print axioms Series4.WS4.ws4_view_is_positioned
@@ -46,8 +49,9 @@ import Series4
 #print axioms Series4.WS5.ws5_omega_endogenous_point
 #print axioms Series4.WS5.ws5_endogenous_bound
 
--- WS6 — the two incompletenesses
-#print axioms Series4.WS6.ws6_selfface_proper
+-- WS6 — the two incompletenesses (self-face is trivial on R2; A1 scoped)
+#print axioms Series4.WS6.ws6_selfface_trivial
+#print axioms Series4.WS6.ws6_selfface_proper_nonselfrelating
 #print axioms Series4.WS6.ws6_lawvere_incomplete
 #print axioms Series4.WS6.ws6_blindspot_nonempty
 #print axioms Series4.WS6.ws6_omega_nonterminating
@@ -57,4 +61,5 @@ import Series4
 #print axioms Series4.WS7.ws7_finitude_of_facing
 #print axioms Series4.WS7.ws7_one_finitude
 #print axioms Series4.WS7.ws7_deductions_dont_collapse
+#print axioms Series4.WS7.ws7_plurality_vs_collapse_distinct
 #print axioms Series4.WS7.ws7_not_trivialized

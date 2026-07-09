@@ -34,13 +34,39 @@ namespace Series4.WS6
 
 variable {κ : Cardinal.{u}}
 
-/-! ## Part A — Incompleteness off the diagonal (the blind spot) -/
+/-! ## Part A — Incompleteness off the diagonal (the blind spot)
 
-/-- **A1 — the self-face is proper.** For an object that does not relate to itself, the
-inward face `x↾(x,x)` is a *proper* sub-object of its reach — it turns none of itself
-inward — so it cannot wholly capture itself. (The improper case is exactly the
-self-loop spine: `ws1_omega_face`.) -/
-theorem ws6_selfface_proper (x : (νPk κ).X) (hx : x ∉ ((νPk κ).str x).1) :
+**Scope note (a blind-review finding).** Under the R2 derived face, the self-face is
+*trivial*: `face x x` is `∅` when `x` does not relate to itself, and *all* of
+`ReachSet x` (improper) as soon as `x` does relate to itself — it is never a nonempty
+*proper* part. So the charter's "self-face is a proper part" (criterion v) is met by the
+R2 face only in the empty-face (non-self-relating) case; for self-relating objects the
+R2 self-face is improper, and a nontrivial proper self-face is provably unattainable on
+this carrier. This is recorded honestly (`ws6_selfface_trivial`), not papered over; the
+nontrivial proper self-face is the named open (it needs the `∪ {y}` face variant or a
+richer R3 self-model). -/
+
+/-- **The R2 self-face is trivial.** `face x x` is either empty (when `x` does not relate
+to itself) or the whole of `ReachSet x` (improper, when it does). It is never a nonempty
+proper sub-object — the derived R2 face has no nontrivial self-modelling regime. This is
+why the charter's general proper-self-face claim provably resists on this carrier. -/
+theorem ws6_selfface_trivial (x : (νPk κ).X) :
+    face x x = ∅ ∨ face x x = ReachSet x := by
+  by_cases hx : x ∈ ((νPk κ).str x).1
+  · right
+    ext z
+    simp only [mem_face, ReachSet, Set.mem_setOf_eq, hx, true_and]
+  · left
+    ext z
+    simp only [mem_face, Set.mem_empty_iff_false, iff_false, not_and]
+    exact fun h => absurd h hx
+
+/-- **A1 (scoped) — the self-face is proper for a non-self-relating object.** When `x`
+does not relate to itself, its inward face is empty, hence a proper part of its
+(nonempty) reach: `x` turns none of itself inward, so it cannot wholly capture itself.
+The self-relating non-spine case is *not* covered — there the R2 self-face is improper
+(`ws6_selfface_trivial`), which is the named open. -/
+theorem ws6_selfface_proper_nonselfrelating (x : (νPk κ).X) (hx : x ∉ ((νPk κ).str x).1) :
     face x x ⊂ ReachSet x := by
   have hempty : face x x = ∅ := by
     ext z
