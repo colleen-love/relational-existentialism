@@ -77,7 +77,7 @@ Because the build is batched, a mid-build discovery that reaches upstream (e.g. 
 
 In a fresh session:
 
-Can you clone this repo and read the series 5 charter, charter status, design documents, and lean files? Please view the ${WORKING} branch.
+Can you clone this repo and read the series 5 charter, charter status, design documents, and lean files? Please view the series 5 working branch.
 [colleen-love/relational-existentialism: A view of the universe](https://github.com/colleen-love/relational-existentialism)
 
 Once you are finished, please do an adversarial review of the formalization. 
