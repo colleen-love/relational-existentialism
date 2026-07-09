@@ -51,8 +51,10 @@ import Series5
 #print axioms Series5.WS6.ws6_no_strict_graded_law
 #print axioms Series5.WS6.ws6_graded_weak_law_exists
 
--- WS7 — double-unboundedness, the payoffs, the counterweight, the anchors, the verdict
+-- WS7 — double-unboundedness, the S1 obstruction, the payoffs, the anchors, the verdict
 #print axioms Series5.WS7.ws7_double_unboundedness
+#print axioms Series5.WS7.ws7_setindexed_walls
+#print axioms Series5.WS7.ws7_no_du_tower
 #print axioms Series5.WS7.ws7_payoffs_hold
 #print axioms Series5.WS7.ws7_leakfree_NOT_from_du
 #print axioms Series5.WS7.ws7_notop_vs_collapse_distinct

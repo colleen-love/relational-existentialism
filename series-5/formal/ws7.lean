@@ -43,6 +43,34 @@ theorem ws7_double_unboundedness (T : Tower Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) :
     DoubleUnboundedness T := ⟨hna, hnb, hunb⟩
 
+/-! ### The S1 obstruction: the set-indexed tower walls (charter §4.1, now a theorem)
+
+The batched review (project-review-1.md, S1) found that every flagship payoff is conditional
+on `hunb` / `DoubleUnboundedness`, satisfied by no built tower. Sharper: on the *set-indexed*
+`Tower` (`Idx : Type u`) that hypothesis is **unsatisfiable**. The family `a ↦ (T.lvl a).card`
+is `u`-small, so it has a supremum no level exceeds — the "tower with a top" the charter
+warned of (§4.1). So the doubly-unbounded inhabitant is not merely unbuilt but **unbuildable
+at `Idx : Type u`**; it needs a proper-class / universe-bumped index (the charter-§9
+existential, a genuinely different construction). The flagship payoffs are therefore reported
+**Partial** at the headline — sound conditionals whose subject has no model here. -/
+
+/-- **Impossibility — a set-indexed tower cannot have unbounded cardinals.** For any
+`T : Tower Q`, no cardinal beyond `⨆ a, (T.lvl a).card` is realized as a level, so `hunb`
+fails. This is the §4.1 supremum wall, mechanized. -/
+theorem ws7_setindexed_walls (T : Tower Q) :
+    ¬ (∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) := by
+  intro h
+  obtain ⟨a, ha⟩ := h (⨆ a, (T.lvl a).card)
+  exact absurd ha (not_lt.mpr (le_ciSup (Cardinal.bddAbove_range fun a => (T.lvl a).card) a))
+
+/-- **No set-indexed tower is doubly-unbounded.** Consequently every
+`DoubleUnboundedness`-conditional payoff (no-top, groundless-no-collapse, no-completing-view,
+`ws7_payoffs_hold`, the derivations, the anchors) is a sound conditional whose antecedent no
+`Tower Q` satisfies. The verdict `payoffsEstablished` therefore holds **for towers satisfying
+`DoubleUnboundedness`; the existence of such a tower is open (unbuildable at `Idx : Type u`).** -/
+theorem ws7_no_du_tower (T : Tower Q) : ¬ DoubleUnboundedness T :=
+  fun h => ws7_setindexed_walls T h.2.2
+
 /-- **The second fact (F2's second ingredient): cross-level leak-freeness.** Composition
 never annihilates a face — independent of double-unboundedness. -/
 def CrossLevelLeakFree (κ : Cardinal.{u}) (Q : Type u) : Prop :=

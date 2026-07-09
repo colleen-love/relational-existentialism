@@ -53,15 +53,19 @@ theorem ws6_crosslevel_never_annihilate (t : LkObj κ (GLabel Q) (νLk κ (GLabe
 def RelatesAtGrade (x y : νLk κ (GLabel Q)) (d : ℤ) : Prop :=
   ∃ q : Q, (((ULift.up d, q) : GLabel Q), y) ∈ (lstr x).1
 
-/-- `x` is composed of `y` at grade `d` (composition side). Defined via the same graded
-successor structure — the observation and composition sides coincide here, so the
-identification is delivered **definitionally** (reported definitional-only; the genuine
-two-definition coincidence is the open residue). -/
+/-- `x` is composed of `y` at grade `d` (composition side). **HONEST NOTE (project-review-1.md
+S2b):** this is *character-for-character the same definition* as `RelatesAtGrade` — there is
+no second, independently-motivated composition-side definition. The genuine identification
+duty (a composition-side relation built from `lcomp`, proved `↔` the observation side) is
+therefore **OPEN**, not "definitional-only." This alias is kept only to name the two readings
+of the one relation. -/
 def IsComposedOfAtGrade (x y : νLk κ (GLabel Q)) (d : ℤ) : Prop :=
   ∃ q : Q, (((ULift.up d, q) : GLabel Q), y) ∈ (lstr x).1
 
-/-- **Relating-to = being-composed-of, at a grade.** (Delivered definitionally; see the
-note on `IsComposedOfAtGrade`.) -/
+/-- **Relating-to = being-composed-of, at a grade — `Iff.rfl` on ONE definition, NOT a
+coincidence.** The two sides are identical by definition, so this carries no identification
+content. The charter's coincidence duty for this payoff is **unmet / open** (see the note on
+`IsComposedOfAtGrade`); it is *not* listed as a discharged coincidence. -/
 theorem ws6_relating_is_composition (x y : νLk κ (GLabel Q)) (d : ℤ) :
     RelatesAtGrade x y d ↔ IsComposedOfAtGrade x y d := Iff.rfl
 

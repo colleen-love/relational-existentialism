@@ -116,10 +116,13 @@ theorem ws4_no_completing_view (T : Tower Q) (hQ : Nonempty Q)
     ∃ y : Winf T, ¬ FaceReaches T v y :=
   ws6_tower_unknowable T hQ hunb v
 
-/-- **The coincidence: tower-unknowability = no-completing-view, one theorem.** The
-epistemic form (WS6 `ws6_tower_unknowable`) and the positional form (V3) are the *same
-proof term* — the no-first-no-last fact read once epistemically and once positionally.
-Adjudicated as one theorem, per the charter's "one theorem or two" duty. -/
+/-- **Tower-unknowability = no-completing-view — one theorem by construction (NOT a proved
+coincidence).** `ws4_no_completing_view` is *defined as* `ws6_tower_unknowable`, so this `rfl`
+is `X = X` — an alias identity, not two independently-motivated forms proved equal. The
+charter's "one theorem or two?" duty is answered **"one"** (a legitimate answer), but this
+identity carries no coincidence content: it certifies only that V3 was defined as INC2.
+Recorded honestly per project-review-1.md S2a — the coincidence *column* for this payoff is
+"one theorem by construction," not a discharged coincidence. -/
 theorem ws4_unknowable_eq_noview (T : Tower Q) (hQ : Nonempty Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) (v : ViewAt T) :
     ws6_tower_unknowable T hQ hunb v = ws4_no_completing_view T hQ hunb v := rfl
