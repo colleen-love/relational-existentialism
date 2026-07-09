@@ -89,7 +89,10 @@ carrier provably walls or collapses, so *something* unbounded is necessary. -/
 def UnboundednessForced (T : Tower Q) : Prop := ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card
 
 /-- The **particular cardinal values** `κ_α` and their cofinality are chosen — the residual
-fiat WS5 reports rather than concealing. -/
+fiat WS5 reports rather than concealing. **Report-flag** (pass-2 R5): this is `:= True`, a prose
+tag marking "the cardinal assignment is a chosen fiat," *not* a proved characterization of that
+choice. The `ws5_residual_fiat` second conjunct is therefore `trivial`; only the first conjunct
+(`UnboundednessForced`, the earned necessity) carries content. -/
 def CardinalValuesChosen (_ : Tower Q) : Prop := True
 
 /-- **G4 — the honest split.** The *necessity* of unboundedness is earned (WS2); the

@@ -1,9 +1,17 @@
 # Series 5 — Axiom-check log (committed evidence)
 
-**Addresses project-review-1.md finding S3** ("the axiom-clean / `lake build`-green claim is
-static, not shown"). This file records the actual `lake build` result and the `#print axioms`
-output for every headline theorem, captured from a clean build against the pinned toolchain.
+**Addresses project-review-1.md finding S3** (and **project-review-2.md S3**: "committed
+evidence, not re-verified" — the log must be regenerated against the *addressed* build). This
+file records the actual `lake build` result and the `#print axioms` output for every headline
+theorem, captured from a clean build against the pinned toolchain.
 
+- **Regenerated:** against the **Phase-F + pass-2 build** (2026-07-09) — i.e. after the
+  universe-poly `Tower` / `cardinalTower` refactor *and* the pass-2 relabels
+  (`ws7_descent_nofirst_on_spine`, `GradedObsCoherentShift` /
+  `ws6_graded_obs_coherent_shift_exists`). The lines below are the verbatim
+  `lake env lean series-5/formal/AxiomCheck.lean` emit, including the new
+  `ws7_cardinalTower_du`, `ws7_notop_unconditional`, `ws7_payoffs_unconditional`,
+  `boundRelax_injective`, and the universe-refactored `ws3_no_top`.
 - **Toolchain:** `leanprover/lean4:v4.15.0`, Mathlib `v4.15.0` (see `lake/lean-toolchain`,
   `lake/lakefile.toml`).
 - **Build:** `cd lake && lake build` → `Build completed successfully.` (default target
@@ -64,7 +72,7 @@ definitional/decidable results depend on *no* axioms.)
 'Series5.WS6.ws6_omega_nonterminating' : [propext, Classical.choice, Quot.sound]
 'Series5.WS6.ws6_tower_unknowable'   : [propext, Classical.choice, Quot.sound]
 'Series5.WS6.ws6_no_strict_graded_law' : [propext, Classical.choice, Quot.sound]
-'Series5.WS6.ws6_graded_weak_law_exists' : [propext, Classical.choice, Quot.sound]
+'Series5.WS6.ws6_graded_obs_coherent_shift_exists' : [propext, Classical.choice, Quot.sound]  -- pass-2 R4 rename
 
 -- WS7
 'Series5.WS7.ws7_double_unboundedness' : [propext, Classical.choice, Quot.sound]

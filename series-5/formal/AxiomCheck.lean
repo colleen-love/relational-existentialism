@@ -52,7 +52,7 @@ import Series5
 #print axioms Series5.WS6.ws6_omega_nonterminating
 #print axioms Series5.WS6.ws6_tower_unknowable
 #print axioms Series5.WS6.ws6_no_strict_graded_law
-#print axioms Series5.WS6.ws6_graded_weak_law_exists
+#print axioms Series5.WS6.ws6_graded_obs_coherent_shift_exists
 
 -- WS7 — double-unboundedness, the S1 obstruction, the payoffs, the anchors, the verdict
 #print axioms Series5.WS7.ws7_double_unboundedness

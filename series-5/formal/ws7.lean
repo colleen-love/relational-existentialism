@@ -7,11 +7,16 @@ genuinely reduce to one fact — the double-unboundedness of the tower — or wh
 unification is an artifact of the construction.
 
 The mechanized picture (following the Series 4 R1 discipline): the payoffs are a
-*conjunction*, not a derivation; **two** payoffs genuinely derive from double-unboundedness
-(no-top from no-last-level, descent from no-first-level), **one** (leak-freeness) does not
-(it is the inherited composition, holding even on a walled constant tower); the distinctness
-anchors refute `trivialized`; the incomplete reduction refutes `oneDoubleUnboundedness`. So
-the verdict is the honest middle, `payoffsEstablished`.
+*conjunction*, not a derivation; **one** payoff genuinely derives from double-unboundedness
+(no-top, from no-last-level — it consumes the unbounded-cardinals hypothesis); **one**
+(leak-freeness) is a demonstrated second fact (the inherited composition, holding even on a
+walled constant tower); descent is the no-first-level *index* fact exhibited on a bespoke
+spine (`ws7_descent_nofirst_on_spine` — it does not take `DoubleUnboundedness`, so it is not a
+derivation; the carrier-level descent is open obligation #2); the distinctness anchors refute
+`trivialized`; the incomplete reduction refutes `oneDoubleUnboundedness`. So the verdict is
+the honest middle, `payoffsEstablished` (pass-2 S1: the derivation count is one, not two).
+The flagship antecedent is now discharged against a genuinely built doubly-unbounded tower
+(`cardinalTower`, `ws7_payoffs_unconditional`).
 
 Self-audit disclosure (charter §9): Claude-auditing-Claude. The distinctness anchors are the
 objective part. Design doc: `series-5/spec/ws07-design.md`.
@@ -169,9 +174,15 @@ theorem ws7_payoffs_unconditional (Q : Type u) (hQ : Nonempty Q)
   ∧ (∀ v : ViewAt (cardinalTower Q), ∃ y : Winf (cardinalTower Q), ¬ FaceReaches (cardinalTower Q) v y) :=
   ws7_payoffs_hold (cardinalTower Q) hQ (ws7_cardinalTower_du Q) a0 hq
 
-/-- **Descent genuinely derives from double-unboundedness** (it uses no-first-level: `ℤ`
-has no least element). -/
-theorem ws7_descent_from_du (q0 : Q) (hinf : ℵ₀ ≤ κ) (d : ℤ) :
+/-- **Descent is the no-first-level index fact, exhibited on the `descState` spine** (pass-2
+S1, relabelled honestly). This is *not* a derivation from `DoubleUnboundedness` — it does not
+take that hypothesis, is not stated over `∀ x : Winf T`, and consumes only that `ℤ` has no
+least element (a bare order fact on the index). It exhibits no-first-level on the bespoke
+graded carrier `νLk κ (GLabel Q)` via `ws6_descent_nonterminating`, *not* a cross-level
+descending edge on a genuine colimit object (that carrier-level descent is open obligation #2).
+So in the verdict ledger descent counts as the index fact on a spine, not a second derivation
+from the tower's double-openness. -/
+theorem ws7_descent_nofirst_on_spine (q0 : Q) (hinf : ℵ₀ ≤ κ) (d : ℤ) :
     ∃ (finer : νLk κ (GLabel Q)) (d' : ℤ), d' < d ∧ RelatesAtGrade (descState q0 hinf d) finer d' :=
   ws6_descent_nonterminating q0 hinf d
 
@@ -228,11 +239,16 @@ inductive ProgramVerdict
   | trivialized
   deriving DecidableEq
 
-/-- **The verdict — `payoffsEstablished`.** Two payoffs derive from double-unboundedness
-(`ws7_notop_from_du`, `ws7_descent_from_du`); one does not (`ws7_leakfree_NOT_from_du`, a
-second fact); the distinctness anchors refute `trivialized`; the incomplete reduction
-refutes `oneDoubleUnboundedness`. The honest middle, the same place and structural reason as
-Series 4. -/
+/-- **The verdict — `payoffsEstablished`.** The honest derivation count (pass-2 S1): **one**
+payoff genuinely derives from double-unboundedness — no-top (`ws7_notop_from_du`), which
+consumes the unbounded-cardinals conjunct and runs the real cardinality argument; **one** is a
+demonstrated second fact — leak-freeness (`ws7_leakfree_NOT_from_du`, holding of the walled
+`constTower`); descent (`ws7_descent_nofirst_on_spine`) is the no-first-level *index* fact on a
+bespoke spine, not a derivation (it does not take `DoubleUnboundedness`); the remaining payoffs
+are conjoined (`ws7_payoffs_hold`). The three distinctness anchors refute `trivialized`; the
+incomplete reduction refutes `oneDoubleUnboundedness`. So the verdict is the honest middle —
+one derivation + one second fact + anchors — the same place and structural reason as Series 4.
+Note the antecedent is now discharged against a built tower (`ws7_payoffs_unconditional`). -/
 def ws7_verdict : ProgramVerdict := ProgramVerdict.payoffsEstablished
 
 theorem ws7_not_trivialized : ws7_verdict ≠ ProgramVerdict.trivialized := by decide

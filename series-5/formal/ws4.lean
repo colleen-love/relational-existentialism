@@ -106,11 +106,15 @@ theorem ws4_no_view_from_nowhere :
     ¬ (∃ n : ℤ, ∀ m, n ≤ m) ∧ ¬ (∃ n : ℤ, ∀ m, m ≤ n) :=
   ⟨ws2_no_least, ws2_no_great⟩
 
-/-- **V3 — no completing view (the genuine payoff, survives the strip test).** A view's
-*face* misses an object: it engages `< κ_α` targets and no level is last, so an object at a
-higher level escapes its face. **Delete the face and there is nothing to miss** — the
-face's reach is load-bearing, unlike V2. This is the genuine no-view Series 4 lacked. It is
-literally WS6's `ws6_tower_unknowable`, read positionally (see `ws4_unknowable_eq_noview`). -/
+/-- **V3 — no completing view (the earned no-view payoff).** A view's *face* misses an object:
+it engages `< κ_α` targets and no level is last, so an object at a higher level escapes its
+face. **Honest scope (pass-2 R1):** this is *not* a mechanism distinct from no-top — `FaceReaches`
+unfolds to `RelatesInf`, and the proof is exactly `ws3_no_top` at `toColim T v.obj`; there is no
+independent face-reach cardinality argument. So V3 is the no-top carrier fact *read positionally*
+(through the facing structure), not a second load path. Its genuine gain over Series 4's V2 is
+not that face-reach is an independent mechanism but that **no-top itself is now forced by
+no-last-level** (`hunb`), not by a fiat κ — delete `hunb` and the escaping object vanishes. It is
+literally WS6's `ws6_tower_unknowable` (see `ws4_unknowable_eq_noview`). -/
 theorem ws4_no_completing_view (T : Tower Q) (hQ : Nonempty Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) (v : ViewAt T) :
     ∃ y : Winf T, ¬ FaceReaches T v y :=

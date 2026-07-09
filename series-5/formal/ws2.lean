@@ -192,19 +192,25 @@ inductive Boundless (Q : Type u) where
   | singleCarrier (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ)
   | doublyUnboundedTower (T : Tower Q)
 
-/-- A single carrier's no-top is the imposed cardinal wall (always, definitionally). -/
+/-- A single carrier's no-top is the imposed cardinal wall. **Report-flag** (pass-2 R5): this
+is `:= True`, a label marking the single-carrier branch as "walled by fiat," *not* a proved
+characterization of that carrier. The genuine wall content is `carrier_card_ge` / `ws2_collapse`;
+this flag only tags the dichotomy branch. -/
 def WallsByFiat (_ : Cardinal.{u}) : Prop := True
 
 /-- A single carrier collapses if made groundless everywhere. -/
 def CollapsesGlobally (κ : Cardinal.{u}) (_ : ℵ₀ ≤ κ) : Prop :=
   (∀ x : (νPk κ).X, HereditarilyNonempty x) → Subsingleton (νPk κ).X
 
-/-- **F2 — the forced-answer dichotomy.** Every boundless construction is either a
-*single carrier* — whose no-top is the imposed cardinal wall (`WallsByFiat`) while global
-groundlessness collapses it (`CollapsesGlobally`), the two Explosion horns — or a
-*doubly-unbounded tower*, the unique escape. The essential-uniqueness clause (every
-boundless-and-plural construction *is* a doubly-unbounded tower) is the named open
-obligation (charter §9), witnessed here by the WS1 colimit. -/
+/-- **F2 — the provenance dichotomy (NOT an essential-uniqueness theorem).** **Honest scope
+(pass-2 R5):** this classifies the *stipulated* 2-constructor type `Boundless` — a `cases` over
+its two constructors, `rfl`/`trivial` in each branch — so it says "a `Boundless` value is one of
+its two constructors," which is a tautology over a type that *stipulates* the two provenances.
+It does **not** prove every boundless-and-plural construction *is* one of them (single carrier
+walled by fiat, or doubly-unbounded tower); that essential-uniqueness clause is the named open
+obligation #3 (charter §9, heuristic), witnessed but not characterized here by the WS1 colimit.
+`WallsByFiat` is a report-flag (`:= True`), not a wall proof. Read the name as
+*dichotomy-by-provenance*, not *forced answer*. -/
 theorem ws2_forced_answer {Q : Type u} (b : Boundless Q) :
     (∃ κ' h', b = Boundless.singleCarrier κ' h' ∧ WallsByFiat κ' ∧ CollapsesGlobally κ' h')
   ∨ (∃ T, b = Boundless.doublyUnboundedTower T) := by

@@ -134,7 +134,9 @@ def FaceReaches (T : Tower Q) (v : ViewAt T) (y : Winf T) : Prop :=
 /-- **INC2 — the tower is unknowable from any level.** A view at level `α` sees, through
 its face, only `< κ_α` objects; but no level is last, so a higher level over-populates
 `W_∞` (`ws3_no_top`), and the view's face misses an object. The epistemic face of
-no-view-from-nowhere. -/
+no-view-from-nowhere. **Honest scope (pass-2 R1):** the content is exactly `ws3_no_top`
+(`FaceReaches` = `RelatesInf`); this is no-top read positionally, not an independent
+face-reach argument — see `ws4_no_completing_view`. -/
 theorem ws6_tower_unknowable (T : Tower Q) (hQ : Nonempty Q)
     (hunb : ∀ c : Cardinal.{u}, ∃ a, c < (T.lvl a).card) (v : ViewAt T) :
     ∃ y : Winf T, ¬ FaceReaches T v y := by
@@ -294,22 +296,31 @@ theorem PkMap_bij {X Y : Type u} {f : X → Y} (hf : Function.Bijective f) :
 noncomputable def gradeShiftStr (Δ : ℤ) {X : Type u} (s : LkObj κ (GLabel Q) X) :
     LkObj κ (GLabel Q) X := PkMap κ (Prod.map (gradeShiftLabel Δ) id) s
 
-/-- A **graded weak distributive law**: a grade-shift on labelled structures that is a
-bijection (so composition/union commute with it — `d ↦ d + Δ` is a `ℤ`-bijection) and
-commutes with observation `LkMap` (the grade acts on labels, observation on targets). This
-is the DL2 content: cross-level composition coheres with level-wise observation *and* the
-depth-grade, conditional on the grade being an inert `ℤ`-label (GF1). -/
-structure GradedWeakDistLaw (κ : Cardinal.{u}) (Q : Type u) where
+/-- A **graded observation-coherent shift** (pass-2 R4: renamed from `GradedWeakDistLaw`, which
+over-claimed). This is NOT a distributive law `λ : T F ⇒ F T` of the composition monad over the
+observation functor — it carries none of the `DistLaw` monad laws (`natural`/`unit_T`/`unit_F`;
+those live in `DistLaw`, used by the genuine impossibility `ws6_no_strict_graded_law`). It is a
+grade-shift on labelled structures that is a bijection (`d ↦ d + Δ` is a `ℤ`-bijection, so
+composition/union commute with it) and commutes with observation `LkMap` (the grade acts on
+labels, observation on targets). That is the DL2 content actually delivered: grade-shift coheres
+with level-wise observation, given the grade is an inert `ℤ`-label (GF1). The genuine graded
+weak *distributive law* — an Egli–Milner-style `λ` commuting with observation *and* grade,
+carrying the bialgebra laws — is **not** built here; it is open obligation #13. -/
+structure GradedObsCoherentShift (κ : Cardinal.{u}) (Q : Type u) where
   shift    : ℤ → ∀ {X : Type u}, LkObj κ (GLabel Q) X → LkObj κ (GLabel Q) X
   bij      : ∀ (Δ : ℤ) {X : Type u}, Function.Bijective (fun s : LkObj κ (GLabel Q) X => shift Δ s)
   comm_obs : ∀ (Δ : ℤ) {X Y : Type u} (f : X → Y) (s : LkObj κ (GLabel Q) X),
                shift Δ (LkMap f s) = LkMap f (shift Δ s)
 
-/-- **DL2 — the graded weak distributive law exists.** Witnessed by `gradeShiftStr`: it is
-a `ℤ`-bijection (inverse `gradeShiftStr (-Δ)`) and commutes with observation. The same
-inertness of the `ℤ`-grade that gives leak-freeness gives grade-commutation. -/
-theorem ws6_graded_weak_law_exists (κ : Cardinal.{u}) (Q : Type u) :
-    Nonempty (GradedWeakDistLaw κ Q) := by
+/-- **DL2 — a graded observation-coherent shift exists** (pass-2 R4: renamed from
+`ws6_graded_weak_law_exists`; it is a grade-shift bijection commuting with observation, *not* a
+weak distributive law — see `GradedObsCoherentShift`). Witnessed by `gradeShiftStr`: a
+`ℤ`-bijection (inverse `gradeShiftStr (-Δ)`) commuting with observation. The same inertness of
+the `ℤ`-grade that gives leak-freeness gives grade-commutation. The paired impossibility
+`ws6_no_strict_graded_law` *is* about actual `DistLaw`s; the positive partner is this weaker
+coherence, and the genuine graded weak distributive law stays open (#13). -/
+theorem ws6_graded_obs_coherent_shift_exists (κ : Cardinal.{u}) (Q : Type u) :
+    Nonempty (GradedObsCoherentShift κ Q) := by
   refine ⟨{ shift := fun Δ {X} s => gradeShiftStr Δ s, bij := ?_, comm_obs := ?_ }⟩
   · intro Δ X
     exact PkMap_bij ((gradeShiftLabel_bij Δ).prodMap Function.bijective_id)
