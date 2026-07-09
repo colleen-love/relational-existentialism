@@ -21,8 +21,8 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# series-4 is the live library: its `Series4` root (and any it grows) may import each other
-# (+ mathlib); nothing outside them is allowed.
-check series-4 "^import (Series4(\.[A-Za-z0-9_]+)*|Spec[0-9]{2}[a-z])$"
+# series-4 is the live library: its roots (`Series4`, the per-workstream `wsN`, and
+# `AxiomCheck`) may import each other (+ mathlib); nothing outside them is allowed.
+check series-4 "^import (Series4(\.[A-Za-z0-9_]+)*|AxiomCheck|ws[0-9]+)$"
 
 exit $fail

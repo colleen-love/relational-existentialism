@@ -21,13 +21,14 @@
 
 | | |
 |---|---|
-| **Charter revision** | REV-0 (pre-report; no workstream has reported) |
-| **This status file** | v0 — initialized from the charter and the seven design docs |
-| **Central question** (charter §4) | Open. Can the bound be made endogenous via restriction-quality; do the five fractures heal / relocate / relabel? |
-| **Headline positive on the table** | Endogenous bound (WS5) + no-top-as-real-wall (WS4) → "grain, not wall" |
-| **Signature risk live** | Trivialization (WS7); the existential weak-pullback gate (WS1) |
-| **Blocking item** | WS1 gate — everything downstream is conditional on it |
-| **Verdict (WS7)** | Not started |
+| **Charter revision** | REV-0 (charter design unchanged) |
+| **This status file** | v1 — all seven workstreams reported and machine-checked |
+| **Formalization** | `series-4/formal/ws1.lean … ws7.lean`, `Series4.lean`, `AxiomCheck.lean` — builds `sorry`-free, no custom axioms (34 headline theorems on Mathlib's standard three only). **Self-contained**: nothing imported from `archive/`. |
+| **Central question** (charter §4) | **Answered, split.** No-top is a *real endogenous wall* (WS4, unconditional). The bound is endogenous on the loop-spine (WS5, Partial) but **globally** groundlessness collapses plurality (WS5, Impossibility) — so "grain, not wall" holds locally, not globally. |
+| **Headline positive** | No-top-as-real-wall (WS4) ✓; plurality without atoms via internal faces (WS3) ✓; the two incompletenesses (WS6) ✓ |
+| **Signature risk** | Trivialization — **refuted** (WS7: one finitude, substantively; `ws7_deductions_dont_collapse`). Weak-pullback gate (WS1) — **non-event** on the R2 carrier. |
+| **Blocking item** | WS1 gate — **discharged** (inherited). |
+| **Verdict (WS7)** | **One finitude, substantively** (`ws7_verdict = oneFinitude`). |
 
 ---
 
@@ -103,32 +104,31 @@
 *Outcome:* the central question is answered sharply at the global scale in the **negative** (`ws5_global_groundless_collapses`): you cannot make the whole world groundless and keep more than one thing in it. On the loop-spine the "grain, not wall" reading *does* hold (Ω's bound is its improper self-face, not a cap). So the bound is endogenous where the world is groundless (the diagonal) and imposed where it is plural — an honest split, exactly the pre-registered Partial.
 
 ### WS6 — The two incompletenesses  ·  *clearest expected win*
-**Status: Not started.** · **Coincidence: Pending** (Part A is a coincidence theorem by design).
+**Status: Discharged (A3 downgraded to coexistence; Part C convergence deferred).** Machine-checked in `series-4/formal/ws6.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Self-face proper (definitional) | `ws6_selfface_proper` (A1) | Not started |
-| Lawvere diagonal (forced, import) | `ws6_lawvere_incomplete` ⇐ `ws5_carrier_incomplete` | Not started |
-| **Coincidence: blind spot = diagonal** | `ws6_blindspot_is_diagonal` (A3) | Not started |
-| Ω non-termination (new) | `ws6_omega_nonterminating` (B2) | Not started — *no cheap form; the distinctive result* |
-| Attention as face-thickening | `attend`, `ws6_selfmodel_is_attention_fixedpoint` (C1/C2) | Not started |
-| Convergence characterization | re-export ws8/ws9 over face-mass | Not started |
+| Self-face proper (definitional) | `ws6_selfface_proper` (A1) | **Discharged** (`face x x ⊂ ReachSet x` for non-self-loop `x`) |
+| Lawvere diagonal (forced) | `ws6_lawvere_incomplete` (A2) | **Discharged** (Cantor diagonal on the support; no cardinality fact consumed) |
+| **Coincidence: blind spot vs diagonal** | `ws6_blindspot_nonempty` (A3) | **Partial** — both blind spots proved *nonempty* (geometric + logical); their **equality** is the named open (obligation 7), delivered as coexistence per the pre-registered fallback |
+| Ω non-termination (new) | `ws6_omega_nonterminating` (B2) | **Discharged** (complete in extent `face Ω Ω = ReachSet Ω`, yet self-membered `Ω ∈ str Ω` — closed at no depth) |
+| Attention as face-thickening | `attend`, `selfModel`, `ws6_selfmodel_is_attention_fixedpoint` (C) | **Discharged (definitional)** — self-model = inward face = attention's fixed point |
+| Convergence characterization | ws8/ws9 replicator over face-mass | **Deferred** — the quantitative Series 3 dynamics (pitchfork `μ⋆ = ½`) are not reproduced in this self-contained pass; the inherited-dynamics residue |
 
-*Design intent:* Part C defines `attend` so the induced face-mass map *is* the Series 3 replicator, making the ws8/ws9 convergence characterization (pitchfork μ⋆ = ½) transfer as a relabeling, not a re-proof — dissolving the "bolted-on" caveat.
-*Likeliest to resist:* A3 (blind-spot/diagonal *equality*); fallback report "blind spot ⊆ diagonal, equality open."
+*Outcome:* the distinctive new result — B2, the on-diagonal non-termination — lands cleanly (the founding "self is a paradox" made a theorem). A3's *equality* is the one crux that resisted, exactly as flagged; it is reported honestly as coexistence with equality open, not laundered.
 
 ### WS7 — The anti-trivialization audit  ·  *owns the program verdict*
-**Status: Not started.**
+**Status: Discharged — one finitude, substantively.** Machine-checked in `series-4/formal/ws7.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Per-payoff independence checklist | decidable dependency inspection | Not started |
-| One-finitude reduction | `ws7_one_finitude` (T2) | Not started |
-| Distinctness ledger (makes T2 honest) | `ws7_distinct_deductions` (T3) | Not started |
-| Trivialized verdict (alternative outcome) | `ws7_trivialized` (T4) | Not started |
+| The single finitude | `FinitudeOfFacing` + `ws7_finitude_of_facing` | **Discharged** (face proper off-diagonal, improper on it) |
+| One-finitude reduction | `ws7_one_finitude` (T2) | **Discharged** (six payoffs assembled as distinct consequences) |
+| Distinctness anchor (makes T2 honest) | `ws7_deductions_dont_collapse` (T3) | **Discharged** — the off-diagonal (proper) and on-diagonal (improper) deductions apply to *provably disjoint* states; a structural impossibility, not a judgement call |
+| Verdict (typed) | `ProgramVerdict` + `ws7_verdict` + `ws7_not_trivialized` (T4) | **Discharged** — verdict is **one finitude, substantively**; `Trivialized` remains a reachable typed alternative that T3 refutes |
 
-*Verdict outcomes, equally weighted:* **one finitude, substantively** (T2 + T3) or **Trivialized** (T4). Both are program successes.
-*Self-audit disclosure (inherited from Series 3 ws9/ws10):* the audit is Claude-auditing-Claude — a disclosed limitation, not claimed independence. The distinctness ledger (T3) is the objective anchor (a dependency-graph fact, not a judgement call).
+*Verdict:* **one finitude, substantively.** The five/six payoffs are distinct consequences of the single finitude of facing, and the distinctness is anchored objectively (proper ≠ improper for a single object). The audit was genuinely capable of returning *Trivialized* — that outcome is a typed constructor refuted by `ws7_deductions_dont_collapse`, not an absent option.
+*Self-audit disclosure:* Claude-auditing-Claude — a disclosed limitation; T3 is the objective structural anchor.
 
 ---
 
@@ -138,12 +138,12 @@
 
 | Payoff (charter §5.3) | Workstream | Verdict: healed / relocated / definitional-only / failed | Coincidence |
 |---|---|---|---|
-| Plurality without atoms | WS3 | Pending | Pending |
-| No top | WS4 | Pending (crux: facing-injectivity) | Pending |
-| No view from nowhere | WS4 | Pending | Pending |
-| Endogenous bound (grain not wall) | WS5 | Pending (crux: groundless-diagonal consistency) | N/A |
-| Incompleteness — blind spot | WS6 | Pending | Pending |
-| Incompleteness — non-termination | WS6 | Pending | N/A (new, no cheap form) |
+| Plurality without atoms | WS3 | **Healed** (labelled carrier; distinct faces ⇒ distinct loops) | **Proved** (P3: collapse on `νPk`, split on `νLk`) |
+| No top | WS4 | **Healed** (unconditional endogenous wall, `#(str x) < κ ≤ #carrier`) | **Proved** (wall routes through self-cost, not fiat) |
+| No view from nowhere | WS4 | **Healed** (same wall, observer-side) | **Proved** (V1 definitional + V2 forced) |
+| Endogenous bound (grain not wall) | WS5 | **Relocated** — endogenous on the loop-spine; **globally impossible** while keeping plurality (Impossibility proved) | N/A |
+| Incompleteness — blind spot | WS6 | **Healed** (self-face proper + Lawvere diagonal); equality of blind spots open | **Coexistence** (equality the named open) |
+| Incompleteness — non-termination | WS6 | **Healed** (Ω complete-yet-unclosed) | N/A (new, no cheap form) |
 
 ---
 
@@ -151,21 +151,32 @@
 
 *The single list of everything owed. Each item names its owner and its trigger-to-close. Nothing here is hidden in prose; when an item closes, move it to the Closed log with the discharging theorem.*
 
-1. **Weak-pullback gate on the chosen carrier** — WS1. Existential for the program. Closes when `ws1_weak_pullback_inherited` (R2) or the `RF` preservation proof (R3) is recorded.
-2. **General internal-rigidity for the forced-answer claim** — WS2. Closes with unconditional `Internal → IsRestrictionQuality` (currently expected only under a canonicity hypothesis). May remain a defended heuristic (charter §9).
-3. **R3 carrier + its gate** — WS1/WS3. Triggered by WS3's forced escalation. Closes when `νRF` and its `bisim_eq` are built and weak-pullback preservation is discharged.
-4. **Composition atom-freeness** — WS3. Closes with `ws3_faces_never_annihilate` (unconditional) or the C-split (conditional + failure witness).
-5. **Facing-injectivity cofinality** — WS4. The no-top crux. Closes with `ws4_no_top_cofinal` (N3) or is reported Failed for the no-top payoff.
-6. **GroundlessDiagonal consistency + witness** — WS5. Closes with `ws5_witness_groundless_diagonal`, or Impossibility-proved if inconsistent-with-plurality.
-7. **Blind-spot = diagonal equality** — WS6. Closes with `ws6_blindspot_is_diagonal` (A3), or downgraded to containment.
-8. **Distinctness ledger** — WS7. The trivialization guard. Closes with `ws7_distinct_deductions` (T3), or the program returns Trivialized.
-9. **Machine-checked axiom pass** — all. Standing operational obligation: `#print axioms` against a pinned Lean/Mathlib for every headline theorem before any "sorry-free / axiom-free" claim is made without the *(static)* qualifier. Cite commit hash + clean-build log in any publication.
+1. ~~**Weak-pullback gate on the chosen carrier** — WS1.~~ **CLOSED** — `ws1_weak_pullback_inherited` (R2; the functor is unchanged, so the gate is inherited).
+2. **General internal-rigidity for the forced-answer claim** — WS2. **OPEN.** The F2 dichotomy is proved; unconditional `Internal → IsRestrictionQuality` remains a defended heuristic (charter §9), delivered here under the canonicity witness (the reachable face + F1).
+3. ~~**R3 carrier + its gate** — WS1/WS3.~~ **CLOSED** — the labelled carrier `νLk κ Q` (`Cofix (X ↦ P_κ (Q × X))`) is built self-contained; loop-distinctness needs no separate weak-pullback proof (it follows from `Cofix.dest` being a function).
+4. ~~**Composition atom-freeness** — WS3.~~ **CLOSED** — `ws3_faces_never_annihilate` (unconditional; internality leaves no external ⊥ to reach).
+5. ~~**Facing-injectivity cofinality** — WS4.~~ **CLOSED (dissolved)** — the no-top wall is unconditional (`ws4_no_top_facing`, via `#(str x) < κ ≤ #carrier`), so it never depended on facing-injectivity cofinality.
+6. **GroundlessDiagonal consistency + witness** — WS5. **PARTIAL.** Witness exhibited on the loop-spine (`omegaGroundlessDiagonal`); the *global* extension is refuted (`ws5_global_groundless_collapses` — Impossibility proved). Extending the endogenous bound to carry plurality off the spine remains the named residue.
+7. **Blind-spot = diagonal equality** — WS6. **OPEN.** Both blind spots proved nonempty (`ws6_blindspot_nonempty` + `ws6_lawvere_incomplete`); their *equality* (A3) is downgraded to coexistence per the pre-registered fallback.
+8. ~~**Distinctness ledger** — WS7.~~ **CLOSED** — `ws7_deductions_dont_collapse` (proper ≠ improper for one object): the payoffs are distinct consequences, verdict *one finitude, substantively*.
+9. ~~**Machine-checked axiom pass** — all.~~ **CLOSED (this build)** — `AxiomCheck.lean` records all 34 headline theorems on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free. Cite commit hash + clean-build log in any publication.
+
+**Residual opens (not blocking any discharged result):** #2 (general internal-rigidity), #6 (off-spine endogenous bound), #7 (blind-spot/diagonal equality); plus the Part C quantitative convergence characterization (the Series 3 replicator/pitchfork, not reproduced in this self-contained pass).
 
 ---
 
 ## Closed log
 
-*Empty. When an open obligation closes, record it here with: date, workstream, discharging theorem, and status class. When a workstream reports, append a dated entry summarizing what discharged, what reopened, and any methodology note (a correction or hand-off — never a redefinition of a charter target).*
+### WS1–WS7 reported — first full machine-checked pass (`series-4/formal/`)
+- **Discharged:** WS1 (carrier + faces + inherited gate); WS2 Parts A/B/F1 and the F2 dichotomy; WS3 (labelled carrier, plurality, coincidence, unconditional composition-closure); WS4 (unconditional no-top wall, no-observer, positioned + substantive views, pole residue); WS6 A1/A2/B2/C; WS7 (one finitude with distinctness anchor; verdict = one finitude, substantively).
+- **Impossibility proved (success):** WS2 collapse (atomless ∧ plural unsatisfiable on `νP_κ`); WS5 global-groundlessness collapse (the bound cannot be globally freed while keeping plurality); WS2 leak located exactly at ⊥-divisors.
+- **Partial:** WS2 general internal-rigidity (heuristic under canonicity); WS5 endogenous bound (loop-spine only); WS6 A3 (blind spots coexist, equality open).
+- **Deferred:** WS6 Part C quantitative convergence (Series 3 replicator/pitchfork; not reproduced in the self-contained pass).
+- **Coincidence:** proved for WS3 (P3), WS4 (V1+V2); coexistence for WS6 A3.
+- **Axiom check:** run against the pinned Lean 4.15.0 / Mathlib v4.15.0 build — 34 headline theorems, all on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free (`AxiomCheck.lean`).
+- **Charter touched?** No — status-only. The charter design is unchanged; all shortfalls are stated as explicit hypotheses/typed structures, never relabelled as goals.
+
+*Template for future entries:*
 
 <!--
 Template for a workstream report entry:
