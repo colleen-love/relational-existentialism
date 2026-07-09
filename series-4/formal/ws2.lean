@@ -169,18 +169,19 @@ theorem ws2_botfree_safe (A : QAlg) (h : BotFree A) {a b : A.Q}
   · exact ha h1
   · exact hb h1
 
-/-- **A concrete leaky witness (the nilpotent Łukasiewicz-style chain `Łuk3`).**
-Weights `{0, ½, 1}` (as `Fin 3`), bottom `0`, and truncated composition — two
-half-strength links in series compose to nothing: `½ ⊗ ½ = 0`. So `Łuk3` has a
-`⊥`-divisor and leaks. This is the internal echo the charter's §4.2 warns of, made
-concrete. -/
-def Luk3 : QAlg where
+/-- **A concrete `⊥`-divisor witness.** A three-element quality algebra (`Fin 3`,
+bottom `0`) with an *ad hoc* composition engineered so that two non-`⊥` elements
+compose to `⊥` (`comp 1 1 = 0`). This is only a witness that `⊥`-divisors exist — all
+`ws2_leak_witness` needs — and is deliberately *not* claimed to be genuine truncated
+Łukasiewicz multiplication (which would need a real MV-algebra; the earlier `Luk3`
+name oversold it). -/
+def BotDivisorWitness : QAlg where
   Q := Fin 3
   bot := 0
   comp := fun a b => if a = 0 ∨ b = 0 then 0 else if a.val + b.val ≤ 3 then 0 else 1
 
-theorem ws2_leak_Luk3 : ¬ BotFree Luk3 := by
-  unfold BotFree Luk3
+theorem ws2_leak_witness : ¬ BotFree BotDivisorWitness := by
+  unfold BotFree BotDivisorWitness
   push_neg
   exact ⟨1, 1, by decide, by decide, by decide⟩
 

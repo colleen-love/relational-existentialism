@@ -19,7 +19,7 @@ import Series4
 -- WS2 — collapse, leak, forced answer, carrier bound
 #print axioms Series4.WS2.ws2_collapse
 #print axioms Series4.WS2.ws2_leak
-#print axioms Series4.WS2.ws2_leak_Luk3
+#print axioms Series4.WS2.ws2_leak_witness
 #print axioms Series4.WS2.ws2_botfree_safe
 #print axioms Series4.WS2.ws2_forced_answer
 #print axioms Series4.WS2.carrier_card_ge
@@ -33,9 +33,9 @@ import Series4
 #print axioms Series4.WS3.lcomp_dest
 #print axioms Series4.WS3.ws3_faces_never_annihilate
 
--- WS4 — the no-top wall (cardinal + endogenous) and positioned views
+-- WS4 — the no-top wall (cardinal wall; reach form) and positioned views
 #print axioms Series4.WS4.ws4_no_top_cardinal
-#print axioms Series4.WS4.ws4_no_top_endogenous
+#print axioms Series4.WS4.ws4_no_top_reach
 #print axioms Series4.WS4.ws4_faces_inject
 #print axioms Series4.WS4.ws4_no_global_observer
 #print axioms Series4.WS4.ws4_view_is_positioned
@@ -59,7 +59,9 @@ import Series4
 
 -- WS7 — the anti-trivialization audit and verdict
 #print axioms Series4.WS7.ws7_finitude_of_facing
-#print axioms Series4.WS7.ws7_one_finitude
+#print axioms Series4.WS7.ws7_payoffs_hold
+#print axioms Series4.WS7.ws7_incompleteness_off_from_finitude
 #print axioms Series4.WS7.ws7_deductions_dont_collapse
 #print axioms Series4.WS7.ws7_plurality_vs_collapse_distinct
 #print axioms Series4.WS7.ws7_not_trivialized
+#print axioms Series4.WS7.ws7_verdict_eq
