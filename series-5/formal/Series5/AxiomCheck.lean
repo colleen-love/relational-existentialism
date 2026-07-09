@@ -47,6 +47,12 @@ import Series5
 -- WS6 — leak-free transport, descent, the incompletenesses, the distributive laws
 #print axioms Series5.WS6.ws6_crosslevel_never_annihilate
 #print axioms Series5.WS6.ws6_descent_nonterminating
+-- WS6 — obligation #2 CLOSED: the descent earned at the tower carrier `Winf`
+#print axioms Series5.WS6.ws6_carrier_descent_nonterminating
+#print axioms Series5.WS6.ws6_carrier_descent_crosslevel
+-- WS6 — obligation #12 CLOSED: a genuine (non-`Iff.rfl`) relating = composed-of coincidence
+#print axioms Series5.WS6.lcomp_lstr
+#print axioms Series5.WS6.ws6_relating_is_composition_coincidence
 #print axioms Series5.WS6.ws6_relating_is_composition
 #print axioms Series5.WS6.ws6_lawvere_incomplete
 #print axioms Series5.WS6.ws6_omega_nonterminating

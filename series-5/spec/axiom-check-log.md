@@ -5,13 +5,14 @@ evidence, not re-verified" — the log must be regenerated against the *addresse
 file records the actual `lake build` result and the `#print axioms` output for every headline
 theorem, captured from a clean build against the pinned toolchain.
 
-- **Regenerated:** against the **Phase-F + pass-2 build** (2026-07-09) — i.e. after the
-  universe-poly `Tower` / `cardinalTower` refactor *and* the pass-2 relabels
-  (`ws7_descent_nofirst_on_spine`, `GradedObsCoherentShift` /
-  `ws6_graded_obs_coherent_shift_exists`). The lines below are the verbatim
-  `lake env lean series-5/formal/Series5/AxiomCheck.lean` emit, including the new
-  `ws7_cardinalTower_du`, `ws7_notop_unconditional`, `ws7_payoffs_unconditional`,
-  `boundRelax_injective`, and the universe-refactored `ws3_no_top`.
+- **Regenerated:** against the **obligations-#2/#12 build** (`paper-prep-1.md`) — i.e. after
+  closing register #2 (carrier-level descent on `Winf`) and #12 (a genuine, non-`Iff.rfl`
+  relating = composed-of coincidence). The lines below are the verbatim
+  `#print axioms` emit for all **47** headline theorems, now including
+  `ws6_carrier_descent_nonterminating`, `ws6_carrier_descent_crosslevel`, `lcomp_lstr`, and
+  `ws6_relating_is_composition_coincidence` (prior passes added `ws7_cardinalTower_du`,
+  `ws7_notop_unconditional`, `ws7_payoffs_unconditional`, `boundRelax_injective`, and the
+  universe-refactored `ws3_no_top` / `GradedObsCoherentShift`).
 - **Toolchain:** `leanprover/lean4:v4.15.0`, Mathlib `v4.15.0` (see `lake/lean-toolchain`,
   `lake/lakefile.toml`).
 - **Build:** `cd lake && lake build` → `Build completed successfully.` (default targets now
@@ -68,7 +69,11 @@ definitional/decidable results depend on *no* axioms.)
 -- WS6
 'Series5.WS6.ws6_crosslevel_never_annihilate' : [propext, Classical.choice, Quot.sound]
 'Series5.WS6.ws6_descent_nonterminating' : [propext, Classical.choice, Quot.sound]
-'Series5.WS6.ws6_relating_is_composition' : [propext, Classical.choice, Quot.sound]
+'Series5.WS6.ws6_carrier_descent_nonterminating' : [propext, Classical.choice, Quot.sound]  -- #2 CLOSED: descent at the tower carrier Winf
+'Series5.WS6.ws6_carrier_descent_crosslevel' : [propext, Classical.choice, Quot.sound]  -- #2: strictly-decreasing tower levels (no-least-index)
+'Series5.WS6.lcomp_lstr'             : [propext, Classical.choice, Quot.sound]  -- composition is a faithful section of observation
+'Series5.WS6.ws6_relating_is_composition_coincidence' : [propext, Classical.choice, Quot.sound]  -- #12 CLOSED: genuine coincidence (not Iff.rfl)
+'Series5.WS6.ws6_relating_is_composition' : [propext, Classical.choice, Quot.sound]  -- old alias, retained as a non-load-bearing remark
 'Series5.WS6.ws6_lawvere_incomplete' : [propext, Classical.choice, Quot.sound]
 'Series5.WS6.ws6_omega_nonterminating' : [propext, Classical.choice, Quot.sound]
 'Series5.WS6.ws6_tower_unknowable'   : [propext, Classical.choice, Quot.sound]

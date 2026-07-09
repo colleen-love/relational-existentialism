@@ -80,7 +80,7 @@ So Series 5 is the **mirror image** of Series 4: where Series 4 found a local su
 - **[Charter](./series-5/charter.md)** and **[charter status](./series-5/charter-status.md)**: the stable program document and its mutable companion (open-obligations register, per-workstream status, three review passes).
 - **[Formalization](./series-5/formal/)** and **[specs](./series-5/spec/)**: the Lean 4 development (WS1–WS7), design docs, three adversarial reviews, and the committed [axiom-check log](./series-5/spec/axiom-check-log.md).
 
-*Verification:* no `sorry`, no custom axioms; all **43** headline theorems rest only on Mathlib's `propext`, `Classical.choice`, `Quot.sound` (two on none) — machine-run and recorded, regenerated against the addressed build. Self-contained — nothing imported from `series-4/` or `archive/` (confirmed by `scripts/gate.sh`).
+*Verification:* no `sorry`, no custom axioms; all **47** headline theorems rest only on Mathlib's `propext`, `Classical.choice`, `Quot.sound` (two on none) — machine-run and recorded, regenerated against the addressed build. Self-contained — nothing imported from `series-4/` or `archive/` (confirmed by `scripts/gate.sh`).
 
 ### Building
 
