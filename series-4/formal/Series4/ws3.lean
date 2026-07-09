@@ -22,7 +22,7 @@ coincidence — false on `νPk` by `ws2_collapse`, true on `νLk`), `ws3_plurali
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws2
+import Series4.ws2
 
 universe u
 

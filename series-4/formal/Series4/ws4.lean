@@ -20,7 +20,7 @@ Deliverables: `FacingInjective`, `ws4_no_top_facing` (N2/N3, unconditional),
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws3
+import Series4.ws3
 
 universe u
 

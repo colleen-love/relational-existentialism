@@ -16,7 +16,7 @@ canonicity hypothesis, exactly as the charter §9 hedge pre-registers.
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws1
+import Series4.ws1
 
 universe u
 

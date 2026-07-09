@@ -9,20 +9,21 @@ theorem, captured from a clean build against the pinned toolchain.
   universe-poly `Tower` / `cardinalTower` refactor *and* the pass-2 relabels
   (`ws7_descent_nofirst_on_spine`, `GradedObsCoherentShift` /
   `ws6_graded_obs_coherent_shift_exists`). The lines below are the verbatim
-  `lake env lean series-5/formal/AxiomCheck.lean` emit, including the new
+  `lake env lean series-5/formal/Series5/AxiomCheck.lean` emit, including the new
   `ws7_cardinalTower_du`, `ws7_notop_unconditional`, `ws7_payoffs_unconditional`,
   `boundRelax_injective`, and the universe-refactored `ws3_no_top`.
 - **Toolchain:** `leanprover/lean4:v4.15.0`, Mathlib `v4.15.0` (see `lake/lean-toolchain`,
   `lake/lakefile.toml`).
-- **Build:** `cd lake && lake build` → `Build completed successfully.` (default target
-  `Series5` = `ws1 … ws7` + `AxiomCheck`).
+- **Build:** `cd lake && lake build` → `Build completed successfully.` (default targets now
+  `Series4` + `Series5`, each in its own module namespace; the Series 5 pass is `Series5` =
+  `ws1 … ws7` + `Series5.AxiomCheck`).
 - **Textual audit:** no `sorry`, no `admit`, no custom `axiom`, no `native_decide` in
   `series-5/formal/` (the only textual hits are inside doc-comments).
 - **Closure gate:** `scripts/gate.sh` → `OK series-5/ — imports resolve only to allowed
   roots` (nothing imported from `series-4/` or `archive/`).
 
 To reproduce: warm the Mathlib cache (environment Setup script), then `cd lake && lake build`;
-the `#print axioms` lines are emitted by `series-5/formal/AxiomCheck.lean`.
+the `#print axioms` lines are emitted by `series-5/formal/Series5/AxiomCheck.lean`.
 
 ## `#print axioms` output
 

@@ -23,7 +23,7 @@ impossibility, not a subjective independence claim.
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws6
+import Series4.ws6
 
 universe u
 

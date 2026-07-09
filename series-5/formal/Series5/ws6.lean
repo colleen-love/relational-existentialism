@@ -18,7 +18,7 @@ cross-level-face objects `ViewAt`, `FaceReaches`, and the core `ws6_tower_unknow
 Design doc: `series-5/spec/ws06-design.md`. Sorry-free; axiom-clean beyond Mathlib's
 standard three.
 -/
-import ws3
+import Series5.ws3
 
 universe u
 

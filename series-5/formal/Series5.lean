@@ -24,21 +24,21 @@
 
 -- WS1 (`ws01-design.md`) — the tower and its colimit: `Level`, `Tower`, the colimit
 -- `Winf`, the gate `ws1_bisim_eq_colim`, Ω recovered with a local bound.
-import ws1
+import Series5.ws1
 -- WS2 (`ws02-design.md`) — the Explosion Dilemma, the `ℤ` index (no least / no greatest /
 -- self-dual), and the forced answer.
-import ws2
+import Series5.ws2
 -- WS3 (`ws03-design.md`) — boundlessness without a wall: no object relates to everything,
 -- powered by no-last-level (the escaping object lives at a higher level).
-import ws3
+import Series5.ws3
 -- WS4 (`ws04-design.md`) — no first / no last: groundless without collapse, the poles
 -- (self-dual or lopsided), and no-view (V2 laundering vs V3 earned).
-import ws4
+import Series5.ws4
 -- WS5 (`ws05-design.md`) — the self-bounding revisited: grain-not-wall tower-wide, against
 -- the standing M1/M2/M3 negatives, with the residual-fiat report.
-import ws5
+import Series5.ws5
 -- WS6 (`ws06-design.md`) — relating across levels: leak-free transport, descent, the
 -- incompletenesses, no strict distributive law, the graded weak law, attention.
-import ws6
+import Series5.ws6
 -- WS7 (`ws07-design.md`) — the anti-trivialization audit and the typed program verdict.
-import ws7
+import Series5.ws7

@@ -16,7 +16,7 @@ laundering).
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws6
+import Series5.ws6
 
 universe u
 
