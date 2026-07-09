@@ -23,12 +23,12 @@
 |---|---|
 | **Charter revision** | REV-0 (charter design unchanged) |
 | **This status file** | v1 — all seven workstreams reported and machine-checked |
-| **Formalization** | `series-4/formal/ws1.lean … ws7.lean`, `Series4.lean`, `AxiomCheck.lean` — builds `sorry`-free, no custom axioms (**39** headline theorems on Mathlib's standard three only), **machine-verified** ([`axiom-check-log.md`](./axiom-check-log.md), Lean 4.15.0 / Mathlib v4.15.0). **Self-contained**: nothing imported from `archive/`. |
-| **Central question** (charter §4) | **Answered, split.** No-top is a real wall: the endogenous face-routed form (`ws4_no_top_endogenous`) holds conditional on reach-properness (true at ℵ₀), the cardinal form unconditionally. The bound is endogenous on the loop-spine (WS5, Partial) but **globally** groundlessness collapses plurality (WS5, Impossibility) — so "grain, not wall" holds locally, not globally. |
-| **Headline positive** | No-top-as-real-wall (WS4) ✓; plurality without atoms via internal faces (WS3) ✓; the two incompletenesses (WS6) ✓ |
-| **Signature risk** | Trivialization — **refuted** on the mechanized anchor rows (WS7: one finitude, substantively; `ws7_deductions_dont_collapse` + `ws7_plurality_vs_collapse_distinct`); the full six-way anchor is the named open. Weak-pullback gate (WS1) — **non-event** on the R2 carrier. |
+| **Formalization** | `series-4/formal/ws1.lean … ws7.lean`, `Series4.lean`, `AxiomCheck.lean` — builds `sorry`-free, no custom axioms (**41** headline theorems on Mathlib's standard three only), **machine-verified** ([`axiom-check-log.md`](./axiom-check-log.md), Lean 4.15.0 / Mathlib v4.15.0). **Self-contained**: nothing imported from `archive/`. |
+| **Central question** (charter §4) | **Answered, split — and sharper after adversarial review.** No-top is a real wall but a **cardinal** one (`ws4_no_top_cardinal`); on R2 faces provably do *not* bound (review S2 + the WS5 M1/M2 negatives), so there is no endogenous face-counting wall. The bound is endogenous only on the loop-spine (WS5), and **globally** groundlessness collapses plurality (WS5, Impossibility). So "grain, not wall" is **not** achieved for bounding/positioning — faces do structural work for *plurality and composition*, not for *bounding*. That sharp localization is the real finding. |
+| **Headline positive** | Parmenides collapse (WS2) ✓; plurality without atoms + unconditional composition-closure via internal faces (WS3) ✓; the coinductive incompleteness at Ω (WS6 B2) ✓; the global-groundlessness Impossibility (WS5) ✓. |
+| **Signature risk** | Trivialization — refuted only on the two mechanized anchor rows; the "one finitude" reduction is **not** mechanized (review R1), so the verdict is downgraded (below). Weak-pullback gate (WS1) — **non-event** on the R2 carrier. |
 | **Blocking item** | WS1 gate — **discharged** (inherited). |
-| **Verdict (WS7)** | **One finitude, substantively** (`ws7_verdict = oneFinitude`). |
+| **Verdict (WS7)** | **`payoffsEstablished`** (`ws7_verdict`) — payoffs hold and are distinct where mechanized; their common origin in one finitude is argued, not mechanized. Not `oneFinitude`. |
 
 ---
 
@@ -53,7 +53,7 @@
 | Obligation | Target | Status |
 |---|---|---|
 | Collapse Theorem | `ws2_collapse` (self-contained re-proof) | **Discharged** (Impossibility proved: atomless ∧ plural unsatisfiable on `νP_κ`) |
-| Imported-weight leak, general form | `ws2_leak` (all ⊥-divisor `QAlg`) + `ws2_botfree_safe` (boundary) + `ws2_leak_Luk3` (nilpotent witness) | **Discharged** (leak located exactly at ⊥-divisibility; L3 false, so the escape is real) |
+| Imported-weight leak, general form | `ws2_leak` (all ⊥-divisor `QAlg`) + `ws2_botfree_safe` (boundary) + `ws2_leak_witness` (concrete ⊥-divisor via `BotDivisorWitness`) | **Discharged** (leak located exactly at ⊥-divisibility; L3 false, so the escape is real) |
 | Restriction introduces no leak | `ws2_restriction_no_leak` (F1) | **Discharged** (faces of atomless objects never empty — no internal zero) |
 | **Forced-answer dichotomy** | `ws2_forced_answer` (F2) | **Discharged as a dichotomy** (external ⇒ leak-or-fiat; internal ⇒ no leak by F1). General internal-rigidity remains the named open (obligation 2). |
 
@@ -76,20 +76,21 @@
 *Coincidence (for WS7):* P3's two halves (`ws2_collapse` on `νPk`, `ws3_loopface_ne` on `νLk`) are the same bare successor shape seen without and with faces.
 
 ### WS4 — No top, no view from nowhere  ·  *carries the facing-injectivity crux*
-**Status: Discharged (unconditional wall).** · **Coincidence: proved** (V1+V2). Machine-checked in `series-4/formal/ws4.lean`.
+**Status: Relocated (no-top = cardinal wall; faces do not bound) + Partial (no-view: V1 definitional, V2 absent).** Corrected after adversarial review (`project-review-2.md`, S1/S2/R2). Machine-checked in `series-4/formal/ws4.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
 | Facing-injectivity | `FacingInjective` + `ws4_faces_inject` | **Discharged** (def + faces inject successors into sub-objects) |
-| No-top, cardinal form | `ws4_no_top_cardinal` | **Discharged, unconditional** — the inherited Series 3 cardinality wall (`#(str x) < κ ≤ #carrier`). Honestly *not* face-derived. |
-| No-top, endogenous (face-routed) form | `ws4_no_top_endogenous` | **Discharged, conditional** — proved *through faces*: facing everything ⇒ your faces cover the world ⇒ your reach = the world, contradicting `hreach` (your reach is a proper part). Conditioned on the endogenous premise `#reach x < #carrier` (true at ℵ₀; the continuum bound is deferred). This is the charter-strength self-cost wall. |
-| No global observer | `ws4_no_global_observer` (V2) | **Discharged** (the same wall, observer-side) |
-| View is positioned (definitional) | `ws4_view_is_positioned` (V1) | **Discharged** (every view is an object's face toward a successor) |
+| No-top, cardinal form (the real wall) | `ws4_no_top_cardinal` | **Discharged, unconditional** — the inherited Series 3 cardinality wall (`#(str x) < κ ≤ #carrier`). This is what the no-top payoff actually rests on. |
+| No-top, reachability restatement | `ws4_no_top_reach` | **Discharged, conditional — but faces do NO work** (review S2). Powered by `hreach` (`#reach x < #carrier`) via plain `Reaches.step`; the proof holds verbatim with faces stripped. Kept, honestly named, to *record* that faces do not bound here. (Was mislabelled `ws4_no_top_endogenous`.) |
+| No global observer | `ws4_no_global_observer` | **Discharged (cardinal wall, observer-side)** — *not* a face-routed V2. |
+| View is positioned (definitional) | `ws4_view_is_positioned` (V1) | **Discharged (definitional, `rfl`)** — a view is a face because "view" was defined as "face" (`ws4_observation_inhabited` shows it is not vacuous). |
+| Real forced V2 (face-routed) | — | **Absent** (review R2) — and unavailable on R2, since faces do not bound. |
 | Substantive standpoints | `ws4_substantive_standpoints` (V3) | **Discharged** (from WS3's distinct loops — free, not manufactured) |
 | Pole-coincidence residue | `ws4_pole_coincidence_residue` | **Discharged** (`Ω↾(Ω,Ω) = ReachSet Ω`) |
 
-*Outcome (corrected after blind review):* there are now **two** no-top theorems, honestly labelled. `ws4_no_top_cardinal` is the unconditional inherited cardinality wall (faces nowhere in its proof — the earlier "endogenous/`noResortToFiat`" label on it was drift, now removed). `ws4_no_top_endogenous` is the charter-strength wall: it routes through faces (`face_sub_reach`, `mem_face_self`) and `x`'s *own reach*, conditioned on the endogenous premise that a state's reach is a proper part of the world (`hreach`, true at ℵ₀). `FacingInjective` / `ws4_faces_inject` state the sharper "distinct faces" self-cost — whether facing is cofinally injective is the charter §9 crux, left open.
-*Coincidence (for WS7):* V1 (positional, definitional) and V2 (unpositioned total view impossible, forced by the wall) are separate statements that together earn no-view.
+*Outcome (corrected after adversarial review `project-review-2.md`):* the earlier "endogenous face-routed wall" claim was **overclaim** and is withdrawn. On the R2 carrier faces provably do *not* bound (this is exactly the WS5 M1/M2 negatives — faces tame quality, not branching), so no genuine face-counting no-top wall exists. `ws4_no_top_cardinal` is the real, unconditional wall; `ws4_no_top_reach` is a reachability restatement with faces painted on (kept as an honest record, not as an endogenous result). So no-top is **Relocated (cardinal wall)**, not Healed-as-endogenous.
+*No-view (review R2):* the coincidence is **not** delivered. V1 (`ws4_view_is_positioned`) is `rfl` (definitional); a forced face-routed V2 does not exist (`ws4_no_global_observer` is the cardinal wall observer-side). So no-view is **Partial — V1 definitional, V2 absent**.
 
 ### WS5 — The self-bounding of the world  ·  *the "grain not wall" thesis*
 **Status: Partial + Impossibility proved** (both pre-registered outcomes realized). Machine-checked in `series-4/formal/ws5.lean`.
@@ -119,16 +120,18 @@
 *Outcome:* the distinctive new result — B2, the on-diagonal non-termination — lands cleanly (the founding "self is a paradox" made a theorem). Two cruxes are honestly open: A3's blind-spot/diagonal *equality* (delivered as coexistence), and A1's proper self-face for *self-relating* objects (provably unattainable on the R2 derived face — `ws6_selfface_trivial`). Neither is laundered; both are stated as scope/open.
 
 ### WS7 — The anti-trivialization audit  ·  *owns the program verdict*
-**Status: Discharged — one finitude, substantively (anchor scoped to two mechanized rows).** Machine-checked in `series-4/formal/ws7.lean`.
+**Status: Partial — verdict downgraded to `payoffsEstablished`** (adversarial review `project-review-2.md`, R1: the "one finitude" bundle is a conjunction, not a derivation from finitude). Machine-checked in `series-4/formal/ws7.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
 | The single finitude | `FinitudeOfFacing` + `ws7_finitude_of_facing` | **Discharged** (face proper off-diagonal, improper on it) |
-| One-finitude reduction | `ws7_one_finitude` (T2) | **Discharged** (six payoffs assembled as consequences) |
-| Distinctness anchor (makes T2 honest) | `ws7_deductions_dont_collapse` + `ws7_plurality_vs_collapse_distinct` (T3) | **Partial (scoped after blind review)** — mechanized for **two** rows: the incompleteness pair (proper vs improper, same object impossible) and the plurality/collapse pair (different carriers). The remaining pairwise rows are argued structurally, not mechanized; a full **six-way** anchor is the named open. |
-| Verdict (typed) | `ProgramVerdict` + `ws7_verdict` + `ws7_not_trivialized` (T4) | **Discharged, scoped** — verdict is **one finitude, substantively**, earned by the two mechanized anchor rows; `Trivialized` remains a reachable typed alternative they refute |
+| Payoffs hold (a conjunction) | `ws7_payoffs_hold` (T2, was `ws7_one_finitude`) | **Discharged as a conjunction only** — six independently-proved payoffs conjoined. This does **not** show common origin; renamed to say only what it proves (review R1). |
+| Derivation from finitude | `ws7_incompleteness_off_from_finitude` | **Partial** — exactly *one* payoff (off-diagonal incompleteness) is mechanically derived *from* `FinitudeOfFacing`; the rest are established independently, their reduction argued in prose. |
+| Distinctness anchor | `ws7_deductions_dont_collapse` + `ws7_plurality_vs_collapse_distinct` (T3) | **Partial** — mechanized for two rows; a full six-way anchor is the named open. |
+| Verdict (typed) | `ProgramVerdict` + `ws7_verdict` + `ws7_verdict_eq` + `ws7_not_trivialized` (T4) | **`payoffsEstablished`** — *not* the stronger `oneFinitude` (would need every payoff derived from finitude), and *not* `Trivialized` (the anchors refute it). The honest middle. |
 
-*Verdict:* **one finitude, substantively** — with the distinctness anchor honestly scoped. It is *mechanized* for two rows (the incompleteness pair and the plurality/collapse pair) and *structural* for the rest; full six-way pairwise distinctness is the named open. The audit was genuinely capable of returning *Trivialized* — a typed constructor the mechanized anchors refute, not an absent option.
+*Verdict:* **payoffs established; common origin in one finitude argued, not fully mechanized.** Per review R1, `ws7_payoffs_hold` is a conjunction (any six theorems can be conjoined), so "one finitude, *substantively*" is not earned at the Lean level. What is mechanized: the payoffs hold, one of them derives from `FinitudeOfFacing`, and distinctness is anchored for two pairs. The typed verdict is `payoffsEstablished`, honestly below `oneFinitude`.
+*Self-audit disclosure:* Claude-auditing-Claude — a disclosed limitation; the mechanized anchors (T3) are the objective part.
 *Self-audit disclosure:* Claude-auditing-Claude — a disclosed limitation; T3 is the objective structural anchor.
 
 ---
@@ -140,8 +143,8 @@
 | Payoff (charter §5.3) | Workstream | Verdict: healed / relocated / definitional-only / failed | Coincidence |
 |---|---|---|---|
 | Plurality without atoms | WS3 | **Healed** (labelled carrier; distinct faces ⇒ distinct loops) | **Proved** (P3: collapse on `νPk`, split on `νLk`) |
-| No top | WS4 | **Healed** — endogenous face-routed wall (`ws4_no_top_endogenous`) conditional on reach-properness (true at ℵ₀); cardinal wall (`ws4_no_top_cardinal`) unconditional | **Proved** (endogenous wall routes through faces + own reach, not the bare cap) |
-| No view from nowhere | WS4 | **Healed** (same wall, observer-side) | **Proved** (V1 definitional + V2 forced) |
+| No top | WS4 | **Relocated (cardinal wall); faces do not bound** — `ws4_no_top_cardinal` is the real wall; `ws4_no_top_reach` is a reachability restatement with faces inessential (review S2). The WS5 M1/M2 negatives explain why no face-counting wall exists. | N/A (no face coincidence) |
+| No view from nowhere | WS4 | **Partial** — V1 (`ws4_view_is_positioned`) is definitional `rfl`; a forced face-routed V2 is absent (`ws4_no_global_observer` is the cardinal wall). | **Not delivered** (review R2) |
 | Endogenous bound (grain not wall) | WS5 | **Relocated** — endogenous on the loop-spine; **globally impossible** while keeping plurality (Impossibility proved) | N/A |
 | Incompleteness — blind spot | WS6 | **Partial** — Lawvere diagonal + proper self-face for *non-self-relating* objects; the R2 self-face is trivial (empty/improper), so the self-relating proper-self-face case is unattainable, open | **Coexistence** (blind-spot equality + self-relating case both open) |
 | Incompleteness — non-termination | WS6 | **Healed** (Ω complete-yet-unclosed) | N/A (new, no cheap form) |
@@ -156,29 +159,39 @@
 2. **General internal-rigidity for the forced-answer claim** — WS2. **OPEN.** The F2 dichotomy is proved; unconditional `Internal → IsRestrictionQuality` remains a defended heuristic (charter §9), delivered here under the canonicity witness (the reachable face + F1).
 3. ~~**R3 carrier + its gate** — WS1/WS3.~~ **CLOSED** — the labelled carrier `νLk κ Q` (`Cofix (X ↦ P_κ (Q × X))`) is built self-contained; loop-distinctness needs no separate weak-pullback proof (it follows from `Cofix.dest` being a function).
 4. ~~**Composition atom-freeness** — WS3.~~ **CLOSED** — a real state-forming operator `lcomp` + `ws3_faces_never_annihilate` (unconditional; internality leaves no external ⊥ to reach).
-5. **Facing-injectivity cofinality (the endogenous no-top crux)** — WS4. **PARTIAL.** The endogenous face-routed wall `ws4_no_top_endogenous` is proved conditional on reach-properness `#reach x < #carrier` (true at ℵ₀; the continuum bound `#carrier > ℵ₀`, transcribable from Series 3 `ws12`, is deferred). The unconditional cardinal wall `ws4_no_top_cardinal` is inherited. Whether facing is *cofinally injective* (`FacingInjective`) — the sharper "distinct faces" self-cost — remains the charter §9 open crux.
+5. **Endogenous (face-counting) no-top wall** — WS4. **WITHDRAWN as unachievable on R2 (review S1/S2).** Faces provably do not bound here (the WS5 M1/M2 negatives: faces tame quality, not branching), so there is no genuine face-counting wall. `ws4_no_top_cardinal` (the cardinal wall) is the real, unconditional no-top; `ws4_no_top_reach` is a reachability restatement with faces inessential. No-top is **Relocated (cardinal wall)**. A face-routed wall would need a different (R3-style) carrier where faces are independent bounding data.
 6. **GroundlessDiagonal consistency + witness** — WS5. **PARTIAL.** Witness exhibited on the loop-spine (`omegaGroundlessDiagonal`); the *global* extension is refuted (`ws5_global_groundless_collapses` — Impossibility proved). Extending the endogenous bound to carry plurality off the spine remains the named residue.
 7. **Blind-spot = diagonal equality** — WS6. **OPEN.** Both blind spots proved nonempty (`ws6_blindspot_nonempty` + `ws6_lawvere_incomplete`); their *equality* (A3) is downgraded to coexistence per the pre-registered fallback.
 8. **Proper self-face for self-relating objects (A1 general)** — WS6. **OPEN.** `ws6_selfface_trivial` shows the R2 derived self-face is trivial (empty or improper), so a nontrivial proper self-face is unattainable on this carrier; needs the `∪{y}` face variant or an R3 self-model.
-9. **Full six-way distinctness anchor** — WS7. **PARTIAL.** Mechanized for two rows (`ws7_deductions_dont_collapse`, `ws7_plurality_vs_collapse_distinct`); the remaining pairwise rows are structural, not mechanized. Verdict scoped accordingly.
-10. ~~**Machine-checked axiom pass** — all.~~ **CLOSED (this build)** — `AxiomCheck.lean` records all **39** headline theorems on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free; the run is captured in [`axiom-check-log.md`](./axiom-check-log.md) against Lean 4.15.0 / Mathlib v4.15.0. Cite the commit hash + that log in any publication.
+9. **"One finitude" derivation + six-way distinctness anchor** — WS7. **PARTIAL (review R1).** `ws7_payoffs_hold` is a conjunction, not a derivation from `FinitudeOfFacing`; only one payoff (`ws7_incompleteness_off_from_finitude`) is derived from finitude, and distinctness is mechanized for two rows. Verdict downgraded to `payoffsEstablished`. Deriving *every* payoff from a single finitude, and a full six-way anchor, are open.
+10. **Real face-routed V2 (no-view coincidence)** — WS4. **OPEN (review R2).** V1 is definitional `rfl`; a forced "unpositioned total view impossible, via faces" is absent and unavailable on R2 (faces do not bound). No-view is Partial.
+11. ~~**Machine-checked axiom pass** — all.~~ **CLOSED (this build)** — `AxiomCheck.lean` records all **41** headline theorems on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free; captured in [`axiom-check-log.md`](./axiom-check-log.md) against Lean 4.15.0 / Mathlib v4.15.0. Cite the commit hash + that log in any publication.
 
-**Residual opens (not blocking any discharged result):** #2 (general internal-rigidity), #5 (facing-injectivity cofinality / unconditional endogenous no-top), #6 (off-spine endogenous bound), #7 (blind-spot/diagonal equality), #8 (self-relating proper self-face), #9 (six-way distinctness anchor); plus the Part C quantitative convergence characterization (the Series 3 replicator/pitchfork, not reproduced in this self-contained pass).
+**Residual opens (not blocking any *correctly-labelled* result):** #2 (internal-rigidity), #5 (face-counting no-top — withdrawn on R2, needs R3), #6 (off-spine endogenous bound), #7 (blind-spot/diagonal equality), #8 (self-relating proper self-face), #9 ("one finitude" derivation + six-way anchor), #10 (face-routed V2); plus Part C quantitative convergence. **Pattern (the review's bottom line):** wherever the charter wanted faces to *bound / position / unify*, the Lean uses the cardinal fact or a `rfl` — faces cannot do that structural work on R2. Wherever faces genuinely work — *plurality, composition, collapse* — the results are solid and correctly labelled.
 
 ---
 
 ## Closed log
 
+### Reconciliation pass 2 — adversarial review `project-review-2.md` addressed
+Corrections owed, applied faithfully (the review's own guidance: several are relabel, not fix — faces cannot do bounding/positioning work on R2). Charter untouched.
+- **S1/S2 — no-top.** Overclaim withdrawn. The "endogenous face-routed wall" was a reachability wall with faces painted on; renamed `ws4_no_top_endogenous → ws4_no_top_reach`, re-proved via plain `Reaches.step` to make the point, and documented that faces do no work. No-top relabelled **Relocated (cardinal wall)**; the real wall is `ws4_no_top_cardinal`.
+- **R1 — verdict.** `ws7_one_finitude → ws7_payoffs_hold` (it is a conjunction). Added `ws7_incompleteness_off_from_finitude` (the one payoff genuinely derived from `FinitudeOfFacing`). `ProgramVerdict` gains `payoffsEstablished`; `ws7_verdict` downgraded from `oneFinitude` to `payoffsEstablished`.
+- **R2 — no-view.** Relabelled **Partial**: V1 is definitional `rfl`, a face-routed V2 is absent (`ws4_no_global_observer` is the cardinal wall observer-side). Added `ws4_observation_inhabited` (C1: V1 not vacuous).
+- **R3 — left as-is** (already honestly Partial).
+- **C2 — `Luk3 → BotDivisorWitness`**, `ws2_leak_Luk3 → ws2_leak_witness` (the gadget is not genuine Łukasiewicz).
+- Build still `sorry`-free / axiom-clean (41 theorems); axiom log refreshed.
+
 ### Reconciliation pass — blind review `project-review-1.md` addressed
 Charter-strength theorems attempted first per the executor rule; honest Partials where they provably resist. Charter untouched.
-- **WS4 (no-top).** Charter-strength **met**: added `ws4_no_top_endogenous`, routing the wall through faces (`face_sub_reach`, `mem_face_self`) and `x`'s own reach, conditional on reach-properness. Renamed the old proof `ws4_no_top_cardinal` and stripped its false "endogenous / `noResortToFiat`" label. `FacingInjective`-cofinality is the remaining sharper crux.
+- **WS4 (no-top).** ~~Charter-strength met: added `ws4_no_top_endogenous`...~~ **[SUPERSEDED by pass 2]** — review S2 showed that theorem is a *reachability* wall with faces painted on; it was renamed `ws4_no_top_reach` and no-top relabelled **Relocated (cardinal wall)**. See pass 2 above.
 - **WS3 (composition).** Charter-strength **met**: built a real state-forming operator `lcomp` (via `corec` on `Option`) and proved `ws3_faces_never_annihilate` at its intended meaning (composition of non-atomic states is non-atomic, unconditionally). The old loop-nonemptiness lemma is now `ws3_loop_nonatomic`.
 - **WS6 (A1).** Primary **provably resisted**: `ws6_selfface_trivial` proves the R2 derived self-face is always empty or improper, so a nontrivial proper self-face is unattainable. Scoped `ws6_selfface_proper` → `ws6_selfface_proper_nonselfrelating`; A1 → Partial.
 - **WS7 (anchor).** **Partial**: added a second mechanized distinctness row (`ws7_plurality_vs_collapse_distinct`); verdict scoped to the two mechanized rows, six-way anchor named open.
 - **Axiom check.** Now **machine-run** (39 theorems), captured in `axiom-check-log.md`; the *(static)* qualifier is lifted.
 
 ### WS1–WS7 reported — first full machine-checked pass (`series-4/formal/`)
-- **Discharged:** WS1 (carrier + faces + inherited gate); WS2 Parts A/B/F1 and the F2 dichotomy; WS3 (labelled carrier, plurality, coincidence, unconditional composition-closure); WS4 (unconditional no-top wall, no-observer, positioned + substantive views, pole residue); WS6 A1/A2/B2/C; WS7 (one finitude with distinctness anchor; verdict = one finitude, substantively).
+- **Discharged:** WS1 (carrier + faces + inherited gate); WS2 Parts A/B/F1 and the F2 dichotomy; WS3 (labelled carrier, plurality, coincidence, unconditional composition-closure); WS4 (no-top wall [pass 2: = cardinal wall, Relocated], no-observer, positioned + substantive views, pole residue); WS6 A1/A2/B2/C; WS7 (payoffs + distinctness anchor; verdict [pass 2: downgraded to `payoffsEstablished`]). *[Rows marked [pass 2] were relabelled by the adversarial-review pass above.]*
 - **Impossibility proved (success):** WS2 collapse (atomless ∧ plural unsatisfiable on `νP_κ`); WS5 global-groundlessness collapse (the bound cannot be globally freed while keeping plurality); WS2 leak located exactly at ⊥-divisors.
 - **Partial:** WS2 general internal-rigidity (heuristic under canonicity); WS5 endogenous bound (loop-spine only); WS6 A3 (blind spots coexist, equality open).
 - **Deferred:** WS6 Part C quantitative convergence (Series 3 replicator/pitchfork; not reproduced in the self-contained pass).

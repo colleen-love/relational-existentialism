@@ -30,14 +30,16 @@ namespace Series4.WS4
 
 variable {κ : Cardinal.{u}}
 
-/-! ## The no-top wall — cardinal form and endogenous (face-routed) form -/
+/-! ## The no-top wall — cardinal form (the real wall) and a reachability restatement -/
 
-/-- **No-top, cardinal form.** No object relates to *every* object: its successor set is
-`< κ`, but the carrier is `≥ κ`. This is the Series 3 cardinality wall, inherited: the
-contradiction is a bound on `x`'s successor *count*, not derived from face-structure.
-The endogenous (face-counting) wall is `ws4_no_top_endogenous` below; it routes through
-faces and `x`'s own reach. (This lemma does not claim `noResortToFiat` — it *is* the
-cardinal bound.) -/
+/-- **No-top, cardinal form (the real, unconditional wall).** No object relates to *every*
+object: its successor set is `< κ`, but the carrier is `≥ κ`. This is the Series 3
+cardinality wall, inherited: the contradiction is a bound on `x`'s successor *count*, not
+derived from face-structure. Per `project-review-2.md` (S1/S2), this — not a face-counting
+wall — is what the no-top payoff actually rests on; `ws4_no_top_reach` below is only a
+reachability restatement (faces do no work there), and faces provably cannot bound on this
+carrier (the WS5 M1/M2 negatives). So the no-top payoff is **Relocated (cardinal wall)**,
+not an endogenous face wall. -/
 theorem ws4_no_top_cardinal (x : (νPk κ).X) : ¬ (∀ y, y ∈ ((νPk κ).str x).1) := by
   intro hall
   have huniv : (Set.univ : Set (νPk κ).X) ⊆ ((νPk κ).str x).1 := fun y _ => hall y
@@ -62,41 +64,44 @@ theorem ws4_faces_inject (x : (νPk κ).X) (hinj : FacingInjective x) :
   by_contra hne
   exact hinj a.1 b.1 a.2 b.2 (fun h => hne (Subtype.ext h)) hab
 
-/-- **No-top, endogenous (face-routed) form — the charter bar.** No object relates to
-every object, proved *through faces* and `x`'s own extent: if `x` faced every object,
-then every object would lie in one of `x`'s faces — but faces are parts of `x`'s reach
-(`face_sub_reach`), so `x`'s reach would be the whole world, contradicting that `x`'s
-reach is a *proper part* of it (`hreach`). The wall reads "you would need to turn part
-of yourself toward every object, but you can only face into your own reach, and your
-reach is not the whole world." This is the self-cost of facing — a fact about `x`'s own
-faces and reach, not a bare cardinality cap on the carrier.
+/-- **No-top, reachability form (honest re-labelling; NOT face-routed).** If `x`
+reached every object then its reach would be the whole world, contradicting that `x`'s
+reach is a *proper part* of it (`hreach`).
 
-The endogenous hypothesis `hreach` (a state's reach is a proper part of the world) holds
-for every state on the `ℵ₀` witness (`#reach ≤ ℵ₀ < 2^ℵ₀ = #carrier`, transcribable from
-Series 3 `ws12`); reproducing that continuum bound is deferred, so it is stated here as
-the explicit endogenous premise. `FacingInjective` / `ws4_faces_inject` express the
-sharper "distinct faces" reading of the same self-cost (the charter §9 crux: whether
-facing is cofinally injective). -/
-theorem ws4_no_top_endogenous (x : (νPk κ).X)
+Adversarial-review finding (`project-review-2.md`, S2): this is a **reachability** wall,
+not a face wall. `Reaches` is a plain-carrier notion that exists with no face structure,
+and the contradiction is powered entirely by `hreach` (the deferred cardinality fact
+`#reach x < #carrier`). Faces do *no* work here — the proof below uses only
+`Reaches.step` (a successor is reachable). This is kept, honestly named, precisely to
+record that on the R2 carrier faces do **not** bound: the WS5 negatives
+(`ws5_contraction_insufficient`, `ws5_quotient_insufficient`) already proved faces tame
+*quality*, not *branching*, so no genuine face-counting wall is available here. The real,
+unconditional no-top is the cardinal wall `ws4_no_top_cardinal`. -/
+theorem ws4_no_top_reach (x : (νPk κ).X)
     (hreach : Cardinal.mk ↥(ReachSet x) < Cardinal.mk (νPk κ).X) :
     ¬ (∀ y, y ∈ ((νPk κ).str x).1) := by
   intro hall
-  -- every object lies in one of x's faces, and faces are parts of x's reach
-  have hcov : ∀ y, y ∈ ReachSet x := fun y => face_sub_reach x y (mem_face_self (hall y))
+  -- purely reachability: every successor is reachable, so reaching everything = univ
+  have hcov : ∀ y, y ∈ ReachSet x := fun y => Reaches.step (hall y)
   have huniv : ReachSet x = Set.univ := Set.eq_univ_of_forall hcov
   have hcard : Cardinal.mk ↥(ReachSet x) = Cardinal.mk (νPk κ).X := by
     rw [huniv]; exact Cardinal.mk_univ
   exact absurd hcard (ne_of_lt hreach)
 
-/-! ## No global observer (V2) — the same wall, observer-side -/
+/-! ## No global observer — the cardinal wall, observer-side (NOT a face-routed V2) -/
 
-/-- **V2 — no observer surveys the whole.** An observer whose immediate window
-covered every object would relate to everything, contradicting the wall. No-top and
-no-view-from-nowhere are the *same wall* seen from object-side and observer-side. -/
+/-- **No global observer (cardinal wall, observer-side).** An observer whose immediate
+window covered every object would relate to everything, contradicting `ws4_no_top_cardinal`.
+
+Adversarial-review finding (`project-review-2.md`, R2): this is **not** the charter's
+forced V2 ("an unpositioned total view is impossible, *routed through faces*"). It is the
+cardinality wall applied observer-side. A genuine face-routed V2 is **absent** — and, per
+S2 / the WS5 negatives, unavailable on the R2 carrier, since faces do not bound. So
+no-view is **not** earned by a real coincidence (see `ws4_view_is_positioned`). -/
 theorem ws4_no_global_observer (obs : (νPk κ).X) : ¬ (∀ y, y ∈ ((νPk κ).str obs).1) :=
   ws4_no_top_cardinal obs
 
-/-! ## Views are positioned (V1) and standpoints are substantive (V3) -/
+/-! ## Views are positioned (definitional) and standpoints are substantive -/
 
 /-- An observation is a genuine positioned view: an object together with one of its
 successors, the edge along which it looks. -/
@@ -106,11 +111,21 @@ def Observation (κ : Cardinal.{u}) : Type u :=
 /-- The content of an observation is a face. -/
 def viewOf (o : Observation κ) : Set (νPk κ).X := face o.1.1 o.1.2
 
-/-- **V1 — every view is positioned.** A view *is* an object's face toward something:
-positioned by construction (indexed by whose it is and toward what). This is the
-definitional half; the coincidence rule (WS7) forbids reporting it as Discharged
-*alone* — it is paired with V2, the forced impossibility of an unpositioned total
-view. -/
+/-- Observations are inhabited (Ω's self-loop is one), so `ws4_view_is_positioned` is
+not vacuously true (`project-review-2.md`, C1). -/
+theorem ws4_observation_inhabited (hinf : ℵ₀ ≤ κ) : Nonempty (Observation κ) :=
+  ⟨⟨(omegaState hinf, omegaState hinf), by
+      rw [omega_selfsingleton hinf]; exact rfl⟩⟩
+
+/-- **V1 — every view is positioned (definitional).** A view *is* an object's face toward
+one of its successors: positioned by construction.
+
+Adversarial-review finding (`project-review-2.md`, R2): this is `rfl` — `viewOf o` is
+*defined* as `face o.1.1 o.1.2`, so "a view is a face" holds because a view was defined as
+a face. It carries no force on its own. The charter wanted V1 paired with a *forced* V2
+(an unpositioned total view impossible, via faces); that V2 does not exist as a distinct
+face-routed theorem (`ws4_no_global_observer` is the cardinal wall). So the no-view
+*coincidence* is **not** delivered — V1 is definitional, V2 absent. Reported honestly. -/
 theorem ws4_view_is_positioned (o : Observation κ) : ∃ x y, viewOf o = face x y :=
   ⟨o.1.1, o.1.2, rfl⟩
 

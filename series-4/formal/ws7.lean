@@ -7,16 +7,15 @@ facing) or whether the unification is an artifact of an over-strong definition.
 
 * **FinitudeOfFacing** — the single fact beneath the payoffs: the face is proper off
   the diagonal and improper on it. Proved (`ws7_finitude_of_facing`).
-* **T2** `ws7_one_finitude` — the six forced payoffs (plurality, no-top, no-view,
-  endogenous-bound-on-spine, incompleteness-off, incompleteness-on) assembled as
-  distinct consequences.
-* **T3** `ws7_deductions_dont_collapse` — the distinctness anchor: the off-diagonal
-  (proper) and on-diagonal (improper) incompleteness deductions apply to *provably
-  disjoint* states (a state cannot be both proper- and improper-faced), so they are not
-  one deduction wearing two costumes. This is the objective, dependency-graph fact (not
-  a judgement call) that makes T2 honest.
-* **T4** `ws7_verdict` / `ProgramVerdict` — the typed verdict. Because the deductions do
-  *not* collapse (T3), the verdict is **one finitude, substantively**, not *Trivialized*.
+* **T2** `ws7_payoffs_hold` — the six forced payoffs conjoined (a conjunction, NOT a
+  derivation from finitude; renamed from `ws7_one_finitude` per `project-review-2.md` R1).
+  `ws7_incompleteness_off_from_finitude` is the one payoff genuinely derived from
+  `FinitudeOfFacing`.
+* **T3** `ws7_deductions_dont_collapse` (+ `ws7_plurality_vs_collapse_distinct`) — the
+  distinctness anchor, mechanized for two rows only; a full six-way anchor is open.
+* **T4** `ws7_verdict` / `ProgramVerdict` — the typed verdict, honestly downgraded to
+  **`payoffsEstablished`**: the payoffs hold and are distinct where mechanized, but their
+  common origin in one finitude is argued, not fully mechanized (not `oneFinitude`).
 
 Self-audit disclosure (charter §9): this is Claude-auditing-Claude, a disclosed
 limitation. The distinctness anchor (T3) is the objective part — a structural
@@ -50,15 +49,21 @@ theorem ws7_finitude_of_facing (hinf : ℵ₀ ≤ κ) : FinitudeOfFacing hinf :=
   ⟨fun x hx => Series4.WS6.ws6_selfface_proper_nonselfrelating x hx,
    by rw [ws1_omega_face hinf, reachSet_omega hinf]⟩
 
-/-! ## T2 — the one-finitude reduction -/
+/-! ## T2 — the established payoffs (a conjunction, NOT a derivation from finitude) -/
 
-/-- **T2 — one finitude, six consequences.** From the world of restriction-quality the
-six forced payoffs all hold, each a *different* consequence of the finitude of facing:
-plurality (WS3), no-top (WS4), positioned views (WS4), the endogenous bound on the
-loop-spine (WS5), incompleteness off the diagonal (WS6), and incompleteness on it
-(WS6). That they are genuinely different consequences — not one theorem restated — is
-the content of T3 below. -/
-theorem ws7_one_finitude {Q : Type u} (hinf : ℵ₀ ≤ κ) {q₁ q₂ : Q} (hq : q₁ ≠ q₂) :
+/-- **T2 — the payoffs hold.** The six forced payoffs all hold: plurality (WS3), no-top
+(WS4, cardinal form), positioned views (WS4, definitional), the bound on the loop-spine
+(WS5), incompleteness off the diagonal (WS6, non-self-relating case), and incompleteness
+on it (WS6).
+
+Adversarial-review finding (`project-review-2.md`, R1): this is a **conjunction** of six
+independently-proved facts — it does *not* take `FinitudeOfFacing` as a hypothesis and
+derive them, so it is **not**, by itself, evidence that they share a single origin (any
+six theorems can be conjoined). Renamed from `ws7_one_finitude` to `ws7_payoffs_hold` to
+say only what it proves. The genuine (partial) derivation-from-finitude is
+`ws7_incompleteness_off_from_finitude` below; the reduction of the *other* payoffs to a
+single finitude is argued in prose, not mechanized (see the verdict caveat). -/
+theorem ws7_payoffs_hold {Q : Type u} (hinf : ℵ₀ ≤ κ) {q₁ q₂ : Q} (hq : q₁ ≠ q₂) :
     -- plurality (WS3)
     (∃ a b : Series4.WS3.νLk κ Q, a ≠ b ∧ Series4.WS3.NonAtomic a ∧ Series4.WS3.NonAtomic b)
     -- no top (WS4)
@@ -78,6 +83,15 @@ theorem ws7_one_finitude {Q : Type u} (hinf : ℵ₀ ≤ κ) {q₁ q₂ : Q} (hq
    Series4.WS5.ws5_omega_endogenous_point hinf,
    fun x hx => Series4.WS6.ws6_selfface_proper_nonselfrelating x hx,
    (Series4.WS6.ws6_omega_nonterminating hinf).2⟩
+
+/-- **The one genuine derivation from finitude.** The off-diagonal incompleteness payoff
+*does* follow from `FinitudeOfFacing` — it is literally its first clause. This is the only
+payoff mechanically derived *from* the finitude (the rest are established independently and
+their reduction to finitude is argued in prose). Recorded so the "one finitude" claim has
+at least one honest mechanized instance rather than none. -/
+theorem ws7_incompleteness_off_from_finitude (hinf : ℵ₀ ≤ κ) (h : FinitudeOfFacing hinf) :
+    ∀ x : (νPk κ).X, x ∉ ((νPk κ).str x).1 → face x x ⊂ ReachSet x :=
+  h.1
 
 /-! ## T3 — the distinctness ledger (the guard that makes T2 honest) -/
 
@@ -108,28 +122,35 @@ theorem ws7_plurality_vs_collapse_distinct {Q : Type u} (hinf : ℵ₀ ≤ κ) {
 
 /-! ## T4 — the typed program verdict -/
 
-/-- The program verdict: either the payoffs are one finitude substantively, or the
-unification is definitional (Trivialized). Both are charter successes. -/
+/-- The program verdict. `payoffsEstablished`: the payoffs hold and are pairwise-distinct
+where mechanized, but their common origin in a single finitude is argued, not fully
+mechanized. `oneFinitude`: the stronger claim (all payoffs derived from one finitude) —
+*not* reached in this pass. `trivialized`: the unification is definitional. -/
 inductive ProgramVerdict
+  | payoffsEstablished
   | oneFinitude
   | trivialized
+  deriving DecidableEq
 
-/-- **The verdict — one finitude, substantively, with the distinctness anchor scoped
-honestly.** The payoffs are distinct consequences of the single finitude of facing. The
-distinctness anchor is **mechanized** for two rows: the incompleteness pair
-(`ws7_deductions_dont_collapse`, proper vs improper on the same object — impossible) and
-the plurality/collapse pair (`ws7_plurality_vs_collapse_distinct`, different carriers).
-The remaining pairwise-distinctness rows are argued structurally (the payoffs differ in
-logical form — a universal no-top `¬∀` vs a per-state existential blind spot vs a
-different-carrier plurality) but are **not** fully mechanized in this pass; a complete
-six-way anchor is the named open. The `Trivialized` outcome remains a typed, reachable
-alternative — it would be forced by a collapse the mechanized anchors refute — so the
-audit was genuinely capable of returning it. -/
-def ws7_verdict : ProgramVerdict := ProgramVerdict.oneFinitude
+/-- **The verdict — `payoffsEstablished` (honest downgrade after adversarial review).**
+`project-review-2.md` (R1) is right: `ws7_payoffs_hold` is a conjunction, not a derivation
+from `FinitudeOfFacing`, so "one finitude, *substantively*" is not mechanized. What *is*
+established: the six payoffs hold (`ws7_payoffs_hold`); one of them genuinely derives from
+finitude (`ws7_incompleteness_off_from_finitude`); and distinctness is mechanized for two
+rows (`ws7_deductions_dont_collapse`, `ws7_plurality_vs_collapse_distinct`). The full
+reduction of *all* payoffs to one finitude — and the full six-way distinctness anchor —
+are the named opens. So the verdict is **payoffs established, common origin argued not
+mechanized**, not `oneFinitude`. `Trivialized` remains a typed, reachable alternative the
+mechanized anchors refute. -/
+def ws7_verdict : ProgramVerdict := ProgramVerdict.payoffsEstablished
 
-/-- The verdict is *not* Trivialized, and this is earned by the mechanized anchors (the
-incompleteness pair and the plurality/collapse pair), not stipulated. Full six-way
-pairwise distinctness is the named open (the verdict is scoped to the anchor proved). -/
-theorem ws7_not_trivialized : ws7_verdict = ProgramVerdict.oneFinitude := rfl
+/-- The verdict is *not* Trivialized (the mechanized distinctness anchors refute it), and
+also *not* the stronger `oneFinitude` (that would need each payoff derived from
+`FinitudeOfFacing`, only partially done). It is the honest middle: `payoffsEstablished`. -/
+theorem ws7_not_trivialized : ws7_verdict ≠ ProgramVerdict.trivialized := by decide
+
+/-- The verdict is the honest middle `payoffsEstablished`, not the stronger
+`oneFinitude`. -/
+theorem ws7_verdict_eq : ws7_verdict = ProgramVerdict.payoffsEstablished := rfl
 
 end Series4.WS7
