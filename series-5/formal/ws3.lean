@@ -264,6 +264,147 @@ theorem ws3_wall_vs_grain (T : Tower Q) (hQ : Nonempty Q)
   ∧ (∀ x : Winf T, ¬ ∀ y, RelatesInf T x y) :=
   ⟨fun x => ws4_no_top_cardinal_at T hQ a x, fun x => ws3_no_top T hQ hunb x⟩
 
+/-! ## Settling the colimit gate: the bound-relaxing connecting maps EXIST (charter §9)
+
+`ws1_bisim_eq_colim` proves the gate for an *abstract* `Tower`, whose connecting-map fields
+(`ι_dest`, `ι_inj`, `ι_refl`, `ι_trans`) are assumed; `constTower` only witnesses them with
+`ι = id` (degenerate — all levels at one cardinal). The charter (§9) flags the *existence* of
+genuine connecting maps — **bound-relaxing injective coalgebra morphisms between
+different-cardinal `νLk` carriers** — as "the most likely single point of failure." Here we
+**construct** them (`boundRelax`, via terminality of the larger carrier) and assemble a genuine
+non-degenerate tower (`growingTower`, strictly increasing cardinals `ℵ₀ < 2^ℵ₀ < ⋯`), so the
+gate is settled with a real witness rather than assumed fields. -/
+
+/-- `LkMap` and `LkRelax` commute (they act on disjoint coordinates: targets vs. the bound). -/
+theorem LkMap_LkRelax_comm {X Y : Type u} {κ₁ κ₂ : Cardinal.{u}} (f : X → Y) (hle : κ₁ ≤ κ₂)
+    (t : LkObj κ₁ Q X) : LkMap f (LkRelax hle t) = LkRelax hle (LkMap f t) := by
+  apply Subtype.ext; rfl
+
+/-- View `νLk κ₁ Q` as a `κ₂`-level coalgebra by relaxing the bound (`κ₁ ≤ κ₂`). -/
+noncomputable def boundRelaxCoalg {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) : LkCoalg κ₂ Q :=
+  ⟨νLk κ₁ Q, fun x => LkRelax hle (lstr x)⟩
+
+/-- **The bound-relaxing connecting map** `νLk κ₁ Q → νLk κ₂ Q` (`κ₁ ≤ κ₂`): the unique
+coalgebra morphism into the terminal `κ₂`-carrier. This is C2's "reindex a `< κ₁`-successor
+set as a `< κ₂` one," constructed. -/
+noncomputable def boundRelax {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) : νLk κ₁ Q → νLk κ₂ Q :=
+  (nuLk_terminal κ₂ Q (boundRelaxCoalg hle)).choose
+
+theorem boundRelax_spec {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) (x : νLk κ₁ Q) :
+    lstr (boundRelax hle x) = LkMap (boundRelax hle) (LkRelax hle (lstr x)) :=
+  (nuLk_terminal κ₂ Q (boundRelaxCoalg hle)).choose_spec.1 x
+
+/-- `boundRelax` is a coalgebra morphism in the `ι_dest` form (bound relaxation carried). -/
+theorem boundRelax_dest {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) (x : νLk κ₁ Q) :
+    lstr (boundRelax hle x) = LkRelax hle (LkMap (boundRelax hle) (lstr x)) := by
+  rw [boundRelax_spec, LkMap_LkRelax_comm]
+
+/-- The successor set of `boundRelax hle x` is the `boundRelax`-image of `x`'s. -/
+theorem boundRelax_dest_val {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) (x : νLk κ₁ Q) :
+    (lstr (boundRelax hle x)).1 = (Prod.map id (boundRelax hle)) '' (lstr x).1 := by
+  rw [boundRelax_dest]; rfl
+
+/-- **`boundRelax` is injective** — the load-bearing gate fact. The relation
+`R a b := boundRelax a = boundRelax b` is a `νLk`-bisimulation: `boundRelax` factors as
+`ψ ∘ Quot.mk R` for an injective `ψ`, so `R`-related states have equal one-step unfoldings
+after quotienting, hence are equal by `nuLk_bisim_eq`. -/
+theorem boundRelax_injective {κ₁ κ₂ : Cardinal.{u}} (hle : κ₁ ≤ κ₂) :
+    Function.Injective (boundRelax (Q := Q) hle) := by
+  intro x y hxy
+  refine nuLk_bisim_eq (fun a b => boundRelax hle a = boundRelax hle b) ?_ x y hxy
+  intro a b hab
+  -- ψ : Quot R → νLk κ₂ Q, injective, with ψ ∘ Quot.mk R = boundRelax hle
+  let ψ : Quot (fun a b => boundRelax hle a = boundRelax hle b) → νLk κ₂ Q :=
+    Quot.lift (boundRelax hle) (fun _ _ h => h)
+  have hψ : Function.Injective ψ := by
+    intro p q hpq
+    obtain ⟨c, rfl⟩ := Quot.exists_rep p
+    obtain ⟨d, rfl⟩ := Quot.exists_rep q
+    exact Quot.sound hpq
+  have hfact : Prod.map (id : Q → Q) (boundRelax hle)
+      = (Prod.map (id : Q → Q) ψ)
+        ∘ (Prod.map (id : Q → Q) (Quot.mk (fun a b => boundRelax hle a = boundRelax hle b))) := by
+    funext p; obtain ⟨q, z⟩ := p; rfl
+  have himg : (Prod.map (id : Q → Q) (boundRelax hle)) '' (lstr a).1
+      = (Prod.map (id : Q → Q) (boundRelax hle)) '' (lstr b).1 := by
+    rw [← boundRelax_dest_val, ← boundRelax_dest_val, hab]
+  rw [hfact, Set.image_comp, Set.image_comp] at himg
+  apply Subtype.ext
+  show (Prod.map (id : Q → Q) (Quot.mk (fun a b => boundRelax hle a = boundRelax hle b))) '' (lstr a).1
+     = (Prod.map (id : Q → Q) (Quot.mk (fun a b => boundRelax hle a = boundRelax hle b))) '' (lstr b).1
+  exact Set.image_injective.mpr ((@Function.injective_id Q).prodMap hψ) himg
+
+/-- `boundRelax` of a bound `κ ≤ κ` is the identity (terminal-morphism uniqueness). -/
+theorem boundRelax_refl {κ : Cardinal.{u}} (hle : κ ≤ κ) (x : νLk κ Q) :
+    boundRelax hle x = x := by
+  have hid : boundRelax hle = id :=
+    hom_uniqueLk (nuLk_terminal κ Q) (boundRelaxCoalg hle)
+      (fun y => boundRelax_spec hle y)
+      (fun y => by simp only [id_eq]; rw [LkMap_id]; apply Subtype.ext; rfl)
+  rw [hid]; rfl
+
+/-- `boundRelax` composes (terminal-morphism uniqueness): the connecting maps are functorial. -/
+theorem boundRelax_trans {κ₁ κ₂ κ₃ : Cardinal.{u}} (hab : κ₁ ≤ κ₂) (hbc : κ₂ ≤ κ₃)
+    (hac : κ₁ ≤ κ₃) (x : νLk κ₁ Q) :
+    boundRelax hbc (boundRelax hab x) = boundRelax hac x := by
+  have hcomp : (boundRelax hbc ∘ boundRelax hab) = boundRelax hac :=
+    hom_uniqueLk (nuLk_terminal κ₃ Q) (boundRelaxCoalg hac)
+      (fun y => by
+        show lstr (boundRelax hbc (boundRelax hab y))
+           = LkMap (boundRelax hbc ∘ boundRelax hab) (LkRelax hac (lstr y))
+        rw [boundRelax_spec hbc, boundRelax_spec hab, LkMap_comp]
+        congr 1)
+      (fun y => boundRelax_spec hac y)
+  exact congrFun hcomp x
+
+/-! ### A genuine non-degenerate tower with strictly increasing cardinals -/
+
+/-- Strictly increasing cardinals `ℵ₀ < 2^ℵ₀ < 2^(2^ℵ₀) < ⋯`. -/
+noncomputable def growCard : ℕ → Cardinal.{u}
+  | 0 => Cardinal.aleph0
+  | (n + 1) => 2 ^ growCard n
+
+theorem growCard_hinf : ∀ n, Cardinal.aleph0 ≤ growCard n
+  | 0 => le_refl _
+  | (n + 1) => le_trans (growCard_hinf n) (le_of_lt (Cardinal.cantor _))
+
+theorem growCard_lt_succ (n : ℕ) : growCard n < growCard (n + 1) := Cardinal.cantor _
+
+theorem growCard_mono : Monotone growCard :=
+  monotone_nat_of_le_succ (fun n => le_of_lt (growCard_lt_succ n))
+
+/-- **A genuine doubly-connected tower.** Levels `ℕ` at strictly increasing cardinals
+`growCard`, connected by the constructed bound-relaxing injective coalgebra morphisms
+`boundRelax`. Its cardinals are *not* cofinal in `Cardinal.{u}` (an `ℕ`-index walls, §4.1) —
+that is the separate index question — but the **connecting maps are genuine, non-identity,
+injective coalgebra morphisms**, so the colimit gate holds of a real, non-degenerate object. -/
+noncomputable def growingTower (Q : Type u) : Tower Q where
+  Idx := ULift.{u} ℕ
+  le := fun a b => a.down ≤ b.down
+  le_refl := fun a => le_refl a.down
+  le_trans := fun h1 h2 => le_trans h1 h2
+  directed := fun a b => ⟨⟨max a.down b.down⟩, le_max_left _ _, le_max_right _ _⟩
+  lvl := fun n => ⟨growCard n.down, growCard_hinf n.down⟩
+  mono := fun h => growCard_mono h
+  ι := fun h x => boundRelax (growCard_mono h) x
+  ι_dest := fun h x => boundRelax_dest (growCard_mono h) x
+  ι_refl := fun x => boundRelax_refl _ x
+  ι_trans := fun _ _ x => boundRelax_trans _ _ _ x
+  ι_inj := fun _ => boundRelax_injective _
+
+/-- **The colimit gate is settled (charter §9).** A genuine non-degenerate tower exists: its
+levels have strictly increasing cardinals and its connecting maps are constructed injective
+coalgebra morphisms (not the degenerate `id` of `constTower`). So `ws1_bisim_eq_colim`'s
+hypotheses are non-vacuously satisfiable, and the colimit carries the coalgebra structure with
+bisimulation-is-identity for a real object — the program's "most likely single point of
+failure" discharged, independent of the (separate) proper-class-index question. -/
+theorem ws1_gate_settled (Q : Type u) :
+    ∃ (T : Tower Q) (a b : T.Idx) (h : T.le a b),
+      (T.lvl a).card < (T.lvl b).card ∧ Function.Injective (T.ι h) := by
+  refine ⟨growingTower Q, ⟨0⟩, ⟨1⟩, (by norm_num : (0 : ℕ) ≤ 1), ?_, ?_⟩
+  · exact growCard_lt_succ 0
+  · exact boundRelax_injective _
+
 /-! ## B4 — the inherited impossibility: faces cannot bound branching -/
 
 /-- **B4 (inherited impossibility).** Faces cannot supply the bound: the carrier is still

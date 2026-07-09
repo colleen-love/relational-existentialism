@@ -41,6 +41,8 @@ definitional/decidable results depend on *no* axioms.)
 'Series5.WS3.ws3_no_top'             : [propext, Classical.choice, Quot.sound]
 'Series5.WS3.ws3_wall_vs_grain'      : [propext, Classical.choice, Quot.sound]
 'Series5.WS3.nuLk_card_ge'           : [propext, Classical.choice, Quot.sound]
+'Series5.WS3.boundRelax_injective'   : [propext, Classical.choice, Quot.sound]  -- gate settled
+'Series5.WS3.ws1_gate_settled'       : [propext, Classical.choice, Quot.sound]  -- gate settled
 
 -- WS4
 'Series5.WS4.ws4_groundless_no_collapse' : [propext, Classical.choice, Quot.sound]

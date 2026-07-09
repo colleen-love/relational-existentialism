@@ -28,6 +28,9 @@ import Series5
 #print axioms Series5.WS3.ws3_no_top
 #print axioms Series5.WS3.ws3_wall_vs_grain
 #print axioms Series5.WS3.nuLk_card_ge
+-- WS3 — the colimit gate SETTLED: bound-relaxing injective legs + a genuine tower (charter §9)
+#print axioms Series5.WS3.boundRelax_injective
+#print axioms Series5.WS3.ws1_gate_settled
 
 -- WS4 — groundless-no-collapse, poles, no-completing-view, the coincidence
 #print axioms Series5.WS4.ws4_groundless_no_collapse
