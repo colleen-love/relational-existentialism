@@ -89,7 +89,8 @@ Please answer, adversarially and across the whole series at once: does the code 
 * The coincidence rule where it applies — is a "forced" theorem genuinely independent of its "definitional" partner, or does its proof unfold to the definition? (WS3 `ws3_wall_vs_grain`, WS6 `ws6_relating_is_composition`, WS6 `ws6_unknowable_eq_noview`.)
 * The trivialization verdict — do the payoffs reduce to distinct consequences of double-unboundedness (WS7's distinctness ledger) or collapse into one definition? Confirm or refute Trivialized at the whole-program level.
 * The axiom-check status — was `#print axioms` actually run, or is the claim still static?
-Please write a `series-review-1.md`: findings graded SERIOUS (the verdict rests on it — e.g. a flagship payoff laundering), REAL (a genuine gap, correctly labelled once fixed), COSMETIC/ACCEPTABLE, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed — no goalpost-moving: the review says "relabel this / prove that / strip and re-prove," never "lower the bar."
+
+Please write a `series-review.md`: findings graded SERIOUS (the verdict rests on it — e.g. a flagship payoff laundering), REAL (a genuine gap, correctly labelled once fixed), COSMETIC/ACCEPTABLE, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed — no goalpost-moving: the review says "relabel this / prove that / strip and re-prove," never "lower the bar."
 
 ### Phase E — Address `series-review.md` (one session)
 
