@@ -34,30 +34,30 @@
 ## Workstream status
 
 ### WS1 — The world and its faces  ·  *blocking*
-**Status: Not started.** · Carrier decision pending (R2 derived-face vs R3 functor-face).
+**Status: Discharged (R2 carrier).** · Carrier decision made: **R2** (derived intrinsic face on the self-contained `νPk κ` carrier). Machine-checked in `series-4/formal/ws1.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Face is forced, not annotated (lossiness thesis) | `ws1_face_forced` | Not started |
-| **The weak-pullback gate** (existential) | `ws1_weak_pullback_inherited` = `ws2_weak_pullback` | Not started |
-| Ω recovered with improper self-face | `ws1_omega_face` | Not started |
+| Face is forced, not annotated (lossiness thesis) | `ws1_face_forced` | **Discharged** (definitional; `face` is a function of `str` alone) |
+| **The weak-pullback gate** (existential) | `ws1_weak_pullback_inherited` = `ws2_weak_pullback` | **Discharged** (inherited verbatim — R2 does not change the functor, so the gate never becomes a real obligation) |
+| Ω recovered with improper self-face | `ws1_omega_face` | **Discharged** (`face Ω Ω = {Ω} = ReachSet Ω`) |
+| Face is an internal sub-object | `face_sub_reach` | **Discharged** (`face x y ⊆ ReachSet x`) |
 
-*Design bet:* R2 (face as a derived operation on the Series 3 `νPk κ` carrier) makes the gate a one-line re-export and the lossiness thesis trivial. R3 (genuine face-functor, new carrier `νRF`) is the typed fallback, escalated only if a downstream payoff provably needs faces as independent data.
-*Escalation watch:* WS3 is expected to force R3 (see below). If so, the gate becomes a real obligation on `RF` and this row reopens.
-*Open on entry:* none yet.
+*Outcome:* the blocking existential gate is a non-event on R2, exactly as the design bet predicted — the carrier is a *reading* of the plain `νPk κ`, the face a derived operation, so weak-pullback preservation is inherited and criterion (iii) holds without re-proof. The whole carrier (terminal coalgebra of `P_κ` via QPF/`Cofix`, Lambek, `bisim_eq`, Ω) is reproduced self-contained in `ws1.lean`.
+*Escalation watch:* WS3's plurality genuinely needs faces as independent data (faces on R2 are `str`-derived, hence epiphenomenal for distinguishing collapse-equal states). WS3 registers the R3 escalation as a typed obligation rather than reopening this row.
 
 ### WS2 — The collapse, and the forced answer  ·  *the spine*
-**Status: Not started.**
+**Status: Partial (as pre-registered).** Machine-checked in `series-4/formal/ws2.lean`. Parts A, B, F1 Discharged; F2 dichotomy proved with internal-rigidity conditional, exactly the charter §9 hedge.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Collapse Theorem (import) | `ws2_collapse` ⇐ `ws10_unlabeled_atomless_collapses` | Not started |
-| Imported-weight leak, general form | `ws2_leak` (all ⊥-divisor quantales) + `ws2_botfree_safe` (boundary) | Not started |
-| Restriction introduces no leak | `ws2_restriction_no_leak` (F1) | Not started |
-| **Forced-answer dichotomy** | `ws2_forced_answer` (F2) | Not started |
+| Collapse Theorem | `ws2_collapse` (self-contained re-proof) | **Discharged** (Impossibility proved: atomless ∧ plural unsatisfiable on `νP_κ`) |
+| Imported-weight leak, general form | `ws2_leak` (all ⊥-divisor `QAlg`) + `ws2_botfree_safe` (boundary) + `ws2_leak_Luk3` (nilpotent witness) | **Discharged** (leak located exactly at ⊥-divisibility; L3 false, so the escape is real) |
+| Restriction introduces no leak | `ws2_restriction_no_leak` (F1) | **Discharged** (faces of atomless objects never empty — no internal zero) |
+| **Forced-answer dichotomy** | `ws2_forced_answer` (F2) | **Discharged as a dichotomy** (external ⇒ leak-or-fiat; internal ⇒ no leak by F1). General internal-rigidity remains the named open (obligation 2). |
 
-*Pre-registered hedge (charter §9):* F2's External branch is expected to fully discharge (it is the leak + the "forbidden-not-unable" observation); the `Internal → IsRestrictionQuality` rigidity is expected to land only under a canonicity hypothesis, with general rigidity the named open. Anticipated status: **Partial** (dichotomy proved, internal-rigidity conditional).
-*Exports for downstream:* `ws2_collapse` under a stable name — WS3 must cite it as the forced counterweight for its coincidence theorem.
+*Outcome:* the collapse is re-proved directly from `bisim_eq` (no dependence on the heavy Series 3 ws10 chain); the leak is stated as pure algebra over a minimal `QAlg`, needing no weighted terminal coalgebra. F2 delivers the dichotomy honestly: internality *forecloses* the leak rather than an external rule *forbidding* it.
+*Exports for downstream:* `ws2_collapse` — WS3 cites it as the forced counterweight for its coincidence theorem; `carrier_card_ge` — WS4 consumes it for the no-top wall.
 
 ### WS3 — Plurality without atoms
 **Status: Not started.** · **Coincidence: Pending** (P3 is the coincidence theorem).

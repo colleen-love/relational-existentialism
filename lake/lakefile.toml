@@ -12,7 +12,7 @@ defaultTargets = ["Series4"]
 [[lean_lib]]
 name = "Series4"
 srcDir = "../series-4/formal"
-roots = ["Series4"]
+roots = ["Series4", "ws1", "ws2", "ws3", "ws4", "ws5", "ws6", "ws7", "AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`) so the dependency is in place
 # when the new-arena development needs it; the empty skeleton imports none of it.
