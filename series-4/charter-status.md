@@ -60,18 +60,19 @@
 *Exports for downstream:* `ws2_collapse` — WS3 cites it as the forced counterweight for its coincidence theorem; `carrier_card_ge` — WS4 consumes it for the no-top wall.
 
 ### WS3 — Plurality without atoms
-**Status: Not started.** · **Coincidence: Pending** (P3 is the coincidence theorem).
+**Status: Discharged.** · **Coincidence: proved** (P3). Machine-checked in `series-4/formal/ws3.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
-| Central dichotomy: do faces distinguish beyond `str`? | paper-decidable | **Pre-resolved on paper: (I) holds on R2** — faces are `str`-derived, so R2 cannot carry plurality. **Escalation to R3 is forced.** |
-| Plurality witness (distinct faces) | `ws3_loopface_ne` (P1) | Not started |
-| Coincidence: distinct on `νRF`, equal on `νPk` | `ws3_same_succ_diff_face` (P3) + `ws2_collapse` | Not started |
-| Atomless plurality bundle | `ws3_plurality_core` (P4) | Not started |
-| Composition stays atom-free | `ws3_faces_never_annihilate` (unconditional target) / C-split fallback | Not started |
+| Central dichotomy: do faces distinguish beyond `str`? | paper-decidable | **Resolved: (I) on R2** — faces are `str`-derived; escalation to R3 taken. |
+| R3 carrier built (self-contained) | `νLk κ Q` = `Cofix (X ↦ P_κ (Q × X))`, its `qpfLk` QPF instance, `loop_dest` | **Discharged** (labelled terminal coalgebra via QPF/`Cofix`, no dependency outside `series-4/formal/`) |
+| Plurality witness (distinct faces) | `ws3_loopface_ne` (P1) | **Discharged** (distinct faces ⇒ distinct loops; the `ws14_loop_ne` analogue, by face not weight) |
+| Coincidence: equal on `νPk`, distinct on `νLk` | `ws3_same_succ_diff_face` (P3) + `ws2_collapse` | **Discharged** (both halves, same bare successor shape) |
+| Atomless plurality bundle | `ws3_plurality_core` (P4) + `ws3_plurality_core_concrete` | **Discharged** (two distinct non-atomic states; concrete at `Q = ULift Bool`) |
+| Composition stays atom-free | `ws3_faces_never_annihilate` | **Discharged (unconditional)** — internality means no external ⊥ to reach; *stronger* than ws14, which leaked at nilpotent `Luk` |
 
-*Consequence for the program:* WS3 is the workstream that triggers WS1's R3 escalation. This is by design (the cheap carrier tried first, the payoff that needs more escalates deliberately), but it means the WS1 weak-pullback gate must be discharged for `RF` before WS3's witnesses are sound. **Dependency: WS3 ⟵ WS1(R3).**
-*Optimistic sub-bet:* internality may make composition *unconditionally* atom-free (no external ⊥ to reach), stronger than Series 3's ws14 which genuinely leaked at nilpotent `Luk`. Fallback is the ws14-style split.
+*Outcome:* the R3 escalation the design pre-registered is realized as a genuine, self-contained labelled carrier. The gate for `νLk` is a non-issue for the delivered results: loop-distinctness follows from `Cofix.dest` being a function (different `dest` ⇒ different state), so no separate weak-pullback proof is consumed. Composition is *unconditionally* atom-free — the optimistic sub-bet landed.
+*Coincidence (for WS7):* P3's two halves (`ws2_collapse` on `νPk`, `ws3_loopface_ne` on `νLk`) are the same bare successor shape seen without and with faces.
 
 ### WS4 — No top, no view from nowhere  ·  *carries the facing-injectivity crux*
 **Status: Not started.** · **Coincidence: Pending** (two duties: no-top wall vs cap; V1 vs V2).
