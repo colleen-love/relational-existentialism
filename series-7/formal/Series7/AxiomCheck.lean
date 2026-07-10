@@ -35,6 +35,7 @@ import Series7
 
 -- WS4 — the imports catalogued: drop (1) [labelled, survives quotient] and drop (2) [plain non-reduction]
 #print axioms Series7.WS4.ws4_labels_are_import
+#print axioms Series7.WS4.ws4_label_drop_atomless
 #print axioms Series7.WS4.ws4_label_survives_quotient
 #print axioms Series7.WS4.ws4_free_label_is_import
 #print axioms Series7.WS4.ws4_recoverable_not_import
@@ -59,6 +60,11 @@ import Series7
 -- WS6 — the heuristic ceiling
 #print axioms Series7.WS6.ws6_provable_core
 #print axioms Series7.WS6.ws6_universal_is_heuristic
+
+-- The verdict `def`s themselves (series-review-3 C5: the reported constants, not just their eq-lemmas)
+#print axioms Series7.WS7.ws7_verdict
+#print axioms Series7.WS5.ws5_loophole_adjudication
+#print axioms Series7.WS6.ws6_universal
 
 -- WS7 — the audit and the mechanized (certificate-wired) verdict
 #print axioms Series7.WS7.leafCoalg_behav
