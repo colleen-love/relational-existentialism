@@ -23,117 +23,122 @@
 
 | | |
 |---|---|
-| **Charter revision** | REV-0 (charter design unchanged) |
-| **This status file** | v0 — charter written (Phase A). Protocol written. No designs, no build. |
-| **Design docs** | **Not started.** To be written as a batch under `series-6/spec/ws01…ws07-design.md` + `README.md` (protocol §2, Phase B). |
-| **Formalization** | **Not started.** Target layout `series-6/formal/ws1.lean … ws7.lean`, `Series6.lean`, `AxiomCheck.lean`, self-contained (transcribe Series 4/5 machinery; import nothing from `series-5/`, `series-4/`, or `archive/`), pinned Lean/Mathlib per `lake/`. |
-| **Central question** (charter §8) | **Open — the series has just been chartered.** Can a *process* over the plain carrier `νPk` be *genuinely* globally atomless (no imported atom — no label, index, or weight — to carry its plurality) and plural at once (the thing §3 proves no finished object can be), driven from within by the diagonal, with a directed endogenous arrow, and with the one-arrow-or-many question decided by the mathematics? None of this is built. |
-| **Headline target (positive)** | A genuinely built, non-collapsing diagonal-driven process (WS1) over `νPk` that is **genuinely globally atomless and plural** — the plurality carried by endogenous time, not an imported label (WS6, the achievement the Static Collapse forbids to any static object); the **engine identity** fixed-point-freeness = incompleteness = non-termination (WS3); the **endogenous arrow** (WS4); and the **relativity verdict** on `≺` decided by the two-sided (endogenous) survey (WS5). |
-| **Headline target (negative, first-class)** | The **Static Collapse Theorem** (WS2, Impossibility): no static *genuinely* globally-atomless construction is plural — every static plurality is bought by an imported atom (`νLk`'s labels, the tower's index). Subsumes Parmenides (S4, `ws2_collapse` on `νPk`) and the tower (S5). The motivating engine, as the Parmenides collapse and Explosion Dilemma were for S4/S5. |
-| **Signature risk** | Trivialization — the diagonal *painted on* rather than driving (WS3), and the §5.5 unification a *conjunction* rather than one mechanism (WS6/WS7). The exact failure mode Series 3's attention and Series 5's grade-shift hit. Untested until built. |
-| **Blocking item** | **WS1 gate** — the process must exist as a coherent, non-collapsing object with a plurality-keeping notion of sameness that carries the diagonal transition. Existential; settled first (charter §9). **Not started.** |
-| **Verdict (WS7)** | **Not started.** Typed `ProgramVerdict ∈ { oneDiagonal, payoffsEstablished, Trivialized }` to be reported only after WS1–WS6. |
+| **Charter revision** | REV-0 (charter design unchanged; the build finding is routed to the WS1/WS4/WS5/WS6 *designs*, not the charter — the charter's Static-Collapse thesis is *confirmed and extended*, not refuted). |
+| **This status file** | v1 — designs committed (Phase B) and the full build landed (Phase C). All seven `wsN.lean` + `Series6.lean` + `AxiomCheck.lean` compile, **sorry-free and axiom-clean** (standard three only; `spec/axiom-check-log.md`). Closure gate passes (self-contained). |
+| **Design docs** | **Committed.** `spec/ws1…ws7-design.md` + `spec/README.md`. |
+| **Formalization** | **Built.** `series-6/formal/ws1.lean … ws7.lean`, `Series6.lean`, `AxiomCheck.lean`. Self-contained (no `series-4/`, `series-5/`, `archive/` imports; gate OK). Pinned Lean 4 v4.15.0 / Mathlib v4.15.0. |
+| **Central question** (charter §8) | **Answered, negatively, for the C2 carrier — a sharp result.** On the stagewise process `Proc` over the finite founded-approximation carrier `Approx κ n = P_κⁿ(PUnit)`, a *process* CANNOT be genuinely globally atomless and plural: each `Approx κ n` is finite and hereditary non-emptiness forces a unique value, so **Ω is the unique productive thread** (`WS1.ws1_productive_unique`) and productive plurality is impossible (`WS1.ws1_no_productive_plurality`). The Static Collapse reaches into every finite approximation. The genuine escape is owed to the richer carrier home (metric C4 / guarded), NOT built this session. |
+| **Headline result (what landed)** | (i) The **Static Collapse Theorem** (WS2) — the motivating Impossibility, fully proved and diagnosed (escapes-are-imports). (ii) The **C2-collapse Impossibility** (WS1/WS6) — the naive process ALSO collapses; a new sharp negative extending the charter's thesis. (iii) The **genuinely diagonal-driven engine** (WS3) — the residue IS the Cantor diagonal and the sole definiens of the successor; not painted on. (iv) Lossy survey / one-to-many residue / strict arrow (WS4), agreement-is-collapse (WS5), groundlessness-from-the-diagonal and no-view (WS6). |
+| **Headline target NOT met (obstructed, owed to C4)** | The **achievement** (genuinely atomless AND plural) — Impossibility on C2. The **endogenous arrow** — Partial (imported depth axis; a first moment exists). **Relativity** — Partial/laundered (bare same-depth incomparability, not face-earned). |
+| **Signature risk outcome** | The engine is **NOT** painted on (`ws3_diagonal_drives` uniqueness holds; residue is the sole definiens) — so **NOT Trivialized**. The §5.5 unification is a conjunction obstructed by the collapse (`payoffsEstablished`). |
+| **Blocking item** | **WS1 gate — settled as Impossibility for C2.** The stagewise carrier does not carry productive plurality; escalation to the metric home C4 is the pre-registered fallback (charter §5.6/§9), owed to a future session. |
+| **Verdict (WS7)** | **`payoffsEstablished`** (`ws7_verdict_eq`, by `rfl`). `paintedOn = false`, `anchorsDistinct = true`, `allDerive = false`. The central finding is the sharp negative (Static Collapse extended to the naive process). |
 
 ---
 
 ## Workstream status
 
-*All seven are **Not started.** The rows below record the *pre-registered contract* — the target theorem names and outcome classes from the charter — so the design batch (Phase B) has explicit hooks. Theorem names are provisional design targets, not built artifacts.*
+*All seven are **built** (`series-6/formal/wsN.lean`, sorry-free, axiom-clean). Theorem names below are the built artifacts. The overriding build finding — recorded once here, routed to the WS1 design and inherited by WS4/WS5/WS6 — is the **C2 collapse**: `Approx κ n` is finite, hereditary non-emptiness forces the unique value `omegaApprox κ n`, so Ω is the unique productive thread. This is the pre-registered WS1-D2 gate-failure (charter §5.6/§9), an **Impossibility proved** that reaches downstream.*
 
 ### WS1 — The process and its gate  ·  *blocking*
-**Status: Not started.** · Base carrier fixed: the **plain `νPk`** (no imported labels — the honestly atom-free carrier where the static collapse bites). Carrier-*home* decision **open**: three candidate encodings of the process over `νPk` to adjudicate on a paper-decidable gate — **guarded recursion / topos of trees** (lead), **metric completion** (Lawvere-enriched, quality-as-distance), **pro-object / final-chain-without-limit**.
+**Status: Impossibility proved (gate fails on C2, as pre-registered) + carrier Discharged.** · Carrier-home: **C2 built** (stagewise `Proc` over the finite `Approx`); the guarded/metric/pro-object escalation is the pre-registered fallback, owed to a future session. The carrier, Ω, and stagewise identity are Discharged; the gate returns Impossibility.
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| The process exists as a genuine object | `ws1_process_exists` | Not started |
-| Productive / non-terminating (well-defined) | `ws1_productive` | Not started |
-| **The gate: sameness keeps plurality, does not collapse to limit identity** | `ws1_no_collapse` | Not started (existential — the most likely single point of failure) |
-| Ω recovered as the self-knowing-that-never-closes | `ws1_omega_process` | Not started |
+| The process exists; stagewise identity | `ws1_process_exists`, `proc_ext` | **Discharged** |
+| Ω recovered, productive, non-closing | `ws1_omega_process`, `ws1_omega_nonclosing` | **Discharged** |
+| Differ-at-a-stage ⇒ distinct (no bisimulation to collapse) | `ws1_no_collapse` | **Discharged** |
+| **The gate: productive plurality** | `ws1_productive_unique`, `ws1_no_productive_plurality` | **Impossibility proved** — Ω is the *unique* productive thread; no productive plurality on C2. Escalate to C4 (owed). |
 
 ### WS2 — The Static Collapse, and the forced answer  ·  *the spine*
-**Status: Not started.** · Breadth decision: **Broad** (charter §3.1 target) — any static behaviorally-identified fixed-point object, subsuming single carrier and colimit/tower.
+**Status: Discharged (Impossibility — the motivating success), forced-answer half obstructed.** · Behavioral identity taken as the DEFINING property of "static" (no QPF needed).
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| **Static Collapse Theorem (broad, genuine-atomlessness form)** | `ws2_static_collapse` | Not started (Impossibility target — no imported atom) |
-| Apparent escapes are imports (`νLk` labels, tower index) | `ws2_escapes_are_imports` | Not started (the diagnosis that makes the theorem true) |
-| Subsumes Parmenides (single carrier) | `ws2_subsumes_parmenides` | Not started |
-| Subsumes the tower (colimit), diagnoses S5 open-#2 | `ws2_subsumes_tower` | Not started |
-| Definition of "static" + "no imported atom" pinned | `ws2_static_def` | Not started (the definitional spine on which breadth rests) |
-| Forced answer: dynamism is the escape | `ws2_forced_answer` | Not started (essential-uniqueness target; heuristic floor pre-authorized, charter §9) |
+| **Static Collapse Theorem (genuine-atomless form)** | `ws2_static_collapse` | **Impossibility proved** (the star) |
+| Apparent escapes are imports (indexed loops) | `ws2_escapes_are_imports` | **Discharged** (the non-circularity check) |
+| Subsumes Parmenides (plain carrier) | `ws2_subsumes_parmenides` | **Discharged** (via WS1 uniqueness) |
+| Subsumes the tower (any behaviorally-identified atomless static) | `ws2_subsumes_tower` | **Discharged** |
+| "static" + "no imported atom" pinned | `Static`, `GenuinelyAtomless`, `NoImportedAtom` | **Discharged** |
+| Forced answer: dynamism is the escape | `ws2_forced_answer` | **Partial — obstructed:** collapse half Discharged; the escape half is NEGATIVE on C2 (the process also collapses). Escape owed to C4. |
 
 ### WS3 — The engine: incompleteness as fuel
-**Status: Not started.** · **Coincidence duty (signature crux):** the diagonal must *drive*, not be painted on.
+**Status: Discharged (engine genuine, not painted on).** · The residue IS the Cantor diagonal, realized as a concrete stage-`(n+1)` element via finiteness; the sole definiens of the successor.
 
-| Obligation | Target (provisional) | Status · strip test |
+| Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| **Engine identity** fixed-point-free = incompleteness = non-termination = productive | `ws3_fpf_eq_incompleteness_eq_nontermination` | Not started · *strip "diagonal" — must lose its content* |
-| Transition **is** the diagonal residue | `ws3_residue_is_successor` | Not started |
-| Ω as the canonical non-terminating orbit | `ws3_omega_orbit` | Not started |
-| Coincidence: the diagonal genuinely drives | `ws3_diagonal_drives` | Not started (Trivialized if unearned) |
+| **Engine identity** fpf = incompleteness = non-termination | `ws3_fpf_eq_incompleteness_eq_nontermination` | **Discharged** · *strip "diagonal" ⇒ contentless (uses Cantor)* |
+| Transition **is** the diagonal residue | `ws3_residue_is_successor`, `ws3_residue_is_diagonal` | **Discharged** (`rfl`) |
+| The successor state genuinely moves (properness) | `ws3_residue_new` | **Discharged** (Cantor-driven) |
+| Ω the canonical non-terminating orbit | `ws3_omega_orbit` | **Discharged** |
+| Coincidence: the diagonal genuinely drives (uniqueness) | `ws3_diagonal_drives` | **Discharged** — NOT painted on; residue is the sole definiens. |
+
+*Honesty note (routed to WS7): moment-level `stepM m ≠ m` combines the genuine state-move (`ws3_residue_new`, survives strip) with the depth counter `n+1 ≠ n` (arithmetic, fails strip). The engine's diagonal content is genuine; the moment counter is auxiliary.*
 
 ### WS4 — The arrow: self-knowing gives directionality
-**Status: Not started.** · **Strip test:** delete the external time index; a direction must remain.
+**Status: Partial — imported axis (pre-registered, charter §9).**
 
-| Obligation | Target (provisional) | Status · strip test |
+| Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| Self-survey lossy and proper (the past) | `ws4_survey_lossy` | Not started |
-| Residue one-to-many (the future) | `ws4_residue_one_to_many` | Not started |
-| Arrow strictly directional | `ws4_arrow_strict` | Not started |
-| Arrow endogenous — no imported axis, no first moment | `ws4_arrow_endogenous` | Not started · *strip external time — direction must survive via proper-subobject order* |
-| Coincidence: directionality from properness, not a counter | `ws4_arrow_from_properness` | Not started |
+| Self-survey lossy (many-to-one — the past) | `ws4_survey_lossy` | **Discharged** |
+| Residue one-to-many (the future) | `ws4_residue_one_to_many` | **Discharged** |
+| Arrow strict, no return | `ws4_arrow_strict`, `ws4_no_return` | **Discharged** (strictness via depth) |
+| Arrow endogenous — no first moment | `ws4_arrow_has_first_moment` | **Partial — imported axis:** a first moment EXISTS (depth-0 bud); strictness rests on the depth index (fails the strip). Endogenous arrow owed to C4. |
+| Diagonal-driven half (properness) survives | `ws4_arrow_from_properness` | **Discharged** (the step genuinely opens a residue) |
 
 ### WS5 — One arrow or many: the relativity crux  ·  *"let the math decide"*
-**Status: Not started.** · The decidable theorem: is `≺` total (global time) or partial (relativity)?
+**Status: Partial — laundered (pre-registered SERIOUS check), core Discharged.**
 
-| Obligation | Target (provisional) | Status · strip test |
+| Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| `≺` is a definite order | `ws5_precedes_order` | Not started |
-| **Totality ⟺ cross-survey agreement** | `ws5_total_iff_agree` | Not started |
-| Plurality forbids agreement (via two-sided face + §3) | `ws5_plurality_forbids_agreement` | Not started |
-| `≺` is a genuine partial order, incomparability nonempty | `ws5_causal_partial_order` | Not started · *strip "face" — incomparability must not survive as a bare poset* |
-| Global time is a frame (non-canonical linearization) | `ws5_global_time_is_frame` | Not started |
-| **Branch:** Ω as absolute frame ⇒ total order (Newton) | `ws5_omega_absolute_frame` | Not started (pre-registered honest alternative) |
-| **Ceiling:** order-plus-number ⇒ Lorentzian/causal-set metric | `ws5_lorentzian` | Not started (flagged heuristic; likely open) |
+| `≺` is a definite strict order | `ws5_precedes_order` | **Discharged** (from WS4) |
+| Agreement is identity / the collapse | `ws5_agree_iff_eq`, `ws5_agreement_is_collapse` | **Discharged** (the honest core of totality⟺agreement) |
+| Plurality forbids agreement | `ws5_plurality_forbids_agreement` | **Discharged** (for process-plurality) |
+| `≺` partial, incomparability nonempty | `ws5_causal_partial_order` | **Partial — laundered:** `¬Total` holds, but incomparability is bare same-depth posethood (`ws5_incomparability_is_bare_poset`), NOT face-earned (survives the strip of "face"). Earned relativity owed to C4 (needs productive plurality). |
+| Ω-absolute-frame branch (Newton) | `ws5_omega_absolute_frame` | **Discharged** — a global survey = collapse; Ω is not one (Newton does not return via Ω). |
+| Lorentzian ceiling | — | **Not built** (flagged heuristic, charter §5.4; not attempted, never a dependency). |
 
 ### WS6 — Globally atomless and plural, and the one-engine unification
-**Status: Not started.** · Owns the headline achievement.
+**Status: achievement Impossibility; groundlessness/no-view/incompleteness Discharged.**
 
-| Obligation | Target (provisional) | Status · coincidence |
+| Obligation | Built theorem | Status · coincidence |
 |---|---|---|
-| **Genuinely globally atomless AND plural (the achievement)** | `ws6_atomless_and_plural` | Not started (over `νPk`; plurality by endogenous time, no imported atom — the success the Static Collapse forbids to any finished object) |
-| Groundlessness from the diagonal (no completion ⇒ no atom) | `ws6_groundlessness_from_diagonal` | Not started |
-| Plurality from the diagonal (each residue ⇒ new distinction) | `ws6_plurality_from_diagonal` | Not started |
-| **Coincidence: one engine, not a conjunction** | `ws6_one_engine` | Not started (the reduction S4/S5 downgraded) |
-| No view from nowhere (inhabited, not surveyed) | `ws6_no_view_from_nowhere` | Not started · *strip — must not reduce to "the limit does not exist"* |
-| Inherited incompleteness transported, re-read as engine | `ws6_incompleteness_inherited` | Not started |
+| **Genuinely globally atomless AND plural (the achievement)** | `ws6_atomless_and_plural_impossible` | **Impossibility proved** — no productive plurality on C2 (= WS1 gate). Owed to C4. |
+| Plurality costs an atom (the diagnosis at the process level) | `ws6_plurality_costs_an_atom` | **Discharged** |
+| Groundlessness from the diagonal | `ws6_groundlessness_from_diagonal` | **Discharged** (the residue is never surveyed) |
+| **One engine** | `ws6_one_engine_obstructed` | **Partial — obstructed:** groundlessness and process-plurality hold, but NOT as one productive-atomless mechanism (that is impossible on C2) ⇒ conjunction, `payoffsEstablished`. |
+| No view from nowhere (inhabited, not surveyed) | `ws6_no_view_from_nowhere` | **Discharged** · *strip: needs the residue (not "no limit")* |
+| Inherited incompleteness, re-read as engine | `ws6_incompleteness_inherited` | **Discharged** |
 
 ### WS7 — The anti-trivialization audit  ·  *owns the program verdict*
-**Status: Not started.**
+**Status: Discharged — verdict `payoffsEstablished`.**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| The single incompletion | `ws7_one_incompletion` | Not started |
-| Payoffs hold (a conjunction, honestly) | `ws7_payoffs_hold` | Not started |
-| Genuine derivation from the one diagonal | `ws7_derivation_from_diagonal` | Not started |
-| Distinctness anchors | `ws7_distinctness_anchors` | Not started |
-| Strip-test ledger aggregated | `ws7_strip_ledger` | Not started |
-| Typed verdict | `ProgramVerdict` + `ws7_verdict` | Not started (`oneDiagonal` / `payoffsEstablished` / `Trivialized`) |
+| The single incompletion | `ws7_one_incompletion` | **Discharged** |
+| Payoffs hold (a conjunction, honestly) | `ws7_payoffs_hold` | **Discharged** |
+| Engine not painted on (paintedOn = false) | `ws7_engine_not_painted_on` | **Discharged** |
+| Distinctness anchors (three rows) | `ws7_distinctness_anchors` | **Discharged** |
+| Strip-test ledger aggregated | `ws7_strip_ledger` | **Discharged** (engine earned; arrow + relativity flagged) |
+| The central negative finding | `ws7_c2_collapses` | **Discharged** (Impossibility — the Static Collapse extended) |
+| Typed verdict | `ProgramVerdict`, `ws7_verdict_eq` | **`payoffsEstablished`** (`rfl`; `ws7_not_trivialized`) |
 
 ---
 
 ## The §5.5 payoffs — headline tracker
 
-*The charter's central question is whether the diagonal-driven process earns, relocates, or relabels each payoff. Nothing built yet; every row is Pending.*
+*The charter's central question is whether the diagonal-driven process earns, relocates, or relabels each payoff. Built verdict below.*
 
 | Payoff (charter §5.5) | Workstream | Verdict | Coincidence |
 |---|---|---|---|
-| Globally atomless AND plural (the achievement) | WS1, WS6 | Pending | N/A |
-| Groundlessness and plurality from one engine | WS6 | Pending | Pending |
-| Time directed and endogenous | WS4 | Pending | Pending |
-| Time plural and relational (relativity) | WS5 | Pending | Pending (or N/A if `≺` total) |
-| No view from nowhere (inhabited, not surveyed) | WS6 | Pending | Pending |
-| Incompleteness inherited, re-read as engine | WS3, WS6 | Pending | N/A (inherited) |
+| Globally atomless AND plural (the achievement) | WS1, WS6 | **Impossibility on C2** (`ws6_atomless_and_plural_impossible`); owed to C4 | N/A |
+| Groundlessness and plurality from one engine | WS6 | **Partial — obstructed** (conjunction; the productive-atomless mechanism is impossible on C2) | Definitional-only |
+| Time directed and endogenous | WS4 | **Partial — imported axis** (strict, but a first moment exists; strictness via depth) | Definitional-only |
+| Time plural and relational (relativity) | WS5 | **Partial — laundered** (`¬Total` holds but incomparability is bare posethood, not face-earned) | N/A |
+| No view from nowhere (inhabited, not surveyed) | WS6 | **Discharged** (`ws6_no_view_from_nowhere`; needs the residue) | N/A |
+| Incompleteness inherited, re-read as engine | WS3, WS6 | **Discharged** (`ws6_incompleteness_inherited`, `ws3_*`) | N/A (inherited) |
+| *(motivating)* Static Collapse | WS2 | **Impossibility proved — Discharged** (`ws2_static_collapse`) | N/A |
+| *(engine)* Diagonal genuinely drives (not painted on) | WS3 | **Discharged** (`ws3_diagonal_drives`) | Coincidence proved (uniqueness) |
 
 ---
 
@@ -141,25 +146,33 @@
 
 *The single list of everything owed. Each item names its owner and its trigger-to-close. At Rev-0 these are the pre-registered cruxes and hazards from charter §5.6 / §9; the register fills in as work proceeds.*
 
-1. **The WS1 gate** — WS1. **OPEN (blocking).** The process must exist as a coherent, non-collapsing object with plurality-keeping sameness that carries the diagonal transition. Trigger-to-close: `ws1_no_collapse` on a chosen carrier (guarded / metric / pro-object), with Ω recovered.
-2. **Definition of "static" + "no imported atom" for the broad collapse** — WS2. **OPEN.** The breadth of `ws2_static_collapse` rests on a precise, non-circular definition of "static" (behavioral identity on a finished fixed-point object, covering colimits) *and* of "genuinely globally atomless / no imported atom" (the distinction between objects carried by the relating, not a label alphabet, index, or weight — the sharpening without which `νLk`'s labelled loops refute the theorem). Trigger-to-close: `ws2_static_def` + `ws2_escapes_are_imports` + the subsumption lemmas.
-3. **The diagonal drives, not painted on (signature crux)** — WS3. **OPEN.** Trigger-to-close: `ws3_residue_is_successor` with the transition *definitionally* the residue, surviving the strip of "diagonal"; else **Trivialized**.
-4. **The arrow is endogenous, no imported axis** — WS4. **OPEN.** Trigger-to-close: `ws4_arrow_endogenous` surviving the strip of the external time index (direction carried by the proper-subobject order).
-5. **The relativity fork** — WS5. **OPEN.** Trigger-to-close: `ws5_total_iff_agree` + `ws5_plurality_forbids_agreement` ⇒ partial order (relativity), OR the honest `ws5_omega_absolute_frame` branch ⇒ total order (Newton). Either resolves the fork.
-6. **Relativity not laundered** — WS5. **OPEN.** Trigger-to-close: incomparability in `ws5_causal_partial_order` earned from the two-sided face (fails the strip of "face"), not bare posethood.
-7. **The Lorentzian ceiling** — WS5. **OPEN (heuristic, likely long-open).** Order-plus-number ⇒ metric (`ws5_lorentzian`). Flagged heuristic from the start; the bare causal order is the floor.
-8. **One-engine unification vs conjunction** — WS6/WS7. **OPEN (signature risk).** Trigger-to-close: `ws6_one_engine` proving groundlessness and plurality the *same* mechanism; else the verdict is `payoffsEstablished`, not `oneDiagonal`.
-9. **No view from nowhere earned** — WS6. **OPEN.** Trigger-to-close: `ws6_no_view_from_nowhere` from the inhabited/surveyed asymmetry, not "the limit does not exist" relabelled.
-10. **Essential-uniqueness of the forced answer** — WS2. **OPEN (heuristic pre-authorized).** "Dynamism is *the* escape" as a theorem rather than a defended dichotomy (charter §9).
-11. **Machine-checked axiom pass** — all. **OPEN.** No build yet; `AxiomCheck.lean` + `spec/axiom-check-log.md` owed once WS1–WS7 build.
+1. **The WS1 gate — SETTLED as Impossibility for C2, ESCALATION owed.** `ws1_productive_unique` / `ws1_no_productive_plurality`: Ω is the unique productive thread on the stagewise finite carrier, so productive plurality is impossible. The pre-registered carrier-home escalation (guarded → metric → pro-object, charter §5.6/§9) is **OPEN for a future session**: build the metric completion C4 where distinct Cauchy sequences give genuine atomless plurality, and re-realize the engine/arrow/relativity there. This is the single most consequential open.
+2. **Definition of "static" + "no imported atom"** — WS2. **CLOSED.** `Static`, `GenuinelyAtomless`, `NoImportedAtom` pinned; `ws2_escapes_are_imports` refutes `NoImportedAtom` for the indexed loops (non-circular).
+3. **The diagonal drives, not painted on** — WS3. **CLOSED.** `ws3_diagonal_drives`: residue is the sole definiens (`ws3_residue_is_diagonal`), transition uniquely pinned. NOT Trivialized.
+4. **The arrow is endogenous, no imported axis** — WS4. **SETTLED as Partial — imported axis.** `ws4_arrow_has_first_moment`: a first moment exists on C2, strictness rests on the depth counter. Endogenous arrow owed to C4.
+5. **The relativity fork** — WS5. **SETTLED (degenerate on C2).** `ws5_causal_partial_order`: `¬Total` holds; `ws5_omega_absolute_frame`: Ω is not an absolute frame (Newton does not return). But see #6.
+6. **Relativity not laundered** — WS5. **SETTLED as Partial — laundered.** `ws5_incomparability_is_bare_poset`: incomparability is bare same-depth posethood, survives the strip of "face". Face-earned relativity needs productive plurality (owed to C4).
+7. **The Lorentzian ceiling** — WS5. **OPEN (heuristic, not attempted).** Never a dependency of any Discharged theorem.
+8. **One-engine unification vs conjunction** — WS6/WS7. **SETTLED as conjunction (`payoffsEstablished`).** `ws6_one_engine_obstructed`: the same-mechanism reduction is impossible on C2 (the achievement is Impossibility). Verdict `payoffsEstablished`, not `oneDiagonal`.
+9. **No view from nowhere earned** — WS6. **CLOSED.** `ws6_no_view_from_nowhere` factors through the residue, not "no limit".
+10. **Essential-uniqueness of the forced answer** — WS2. **OPEN (heuristic, and now moot on C2):** the escape half of `ws2_forced_answer` is negative on C2 (the process collapses too); a genuine dynamic escape (hence the forced-answer's positive half) awaits C4.
+11. **Machine-checked axiom pass** — all. **CLOSED.** `AxiomCheck.lean` built; `spec/axiom-check-log.md` records every headline theorem sorry-free on the standard three.
 
-**Residual opens at Rev-0:** all of the above — this is a freshly chartered series. **Pattern to watch (the program's recurring lesson):** wherever the charter wants the diagonal to do *unifying* work (one mechanism for groundlessness + plurality + time), expect the same pressure Series 4's "one finitude" and Series 5's "one double-unboundedness" met — a conjunction until proven otherwise. Wherever the diagonal does *local* work (drive the transition, direct the arrow, decide `≺`), expect it to be earnable. The design batch (Phase B) should pre-register that split.
+**Residual opens after the build:** #1 (the C4 escalation — the whole positive program), #7 (Lorentzian ceiling), #10 (forced-answer essential-uniqueness / a genuine escape). Everything else is settled (Discharged, Impossibility, or a precise Partial). **The program's recurring lesson, confirmed:** the diagonal does *local* work genuinely (drives the transition — earned), but the *unifying* work (one mechanism for groundlessness + plurality + time) is a conjunction — and here worse, the plural-atomless world it was meant to unify is impossible on the naive carrier. The escape genuinely requires the richer home the charter pre-registered.
 
 ---
 
 ## Closed log
 
-*Empty. Entries land here as builds pass review, each with its discharging theorem.*
+### 2026-07-10 Phase B+C — designs committed and the full build landed
+- **Discharged:** WS2 `ws2_static_collapse` (the motivating Impossibility) + `ws2_escapes_are_imports` + subsumptions; WS3 the whole engine (`ws3_fpf_eq_incompleteness_eq_nontermination`, `ws3_residue_is_diagonal`, `ws3_diagonal_drives`, `ws3_omega_orbit`) — the diagonal genuinely drives, NOT painted on; WS1 carrier + Ω (`proc_ext`, `ws1_omega_process`); WS4 `ws4_survey_lossy`, `ws4_residue_one_to_many`, `ws4_arrow_strict`; WS5 `ws5_agreement_is_collapse`, `ws5_omega_absolute_frame`; WS6 `ws6_incompleteness_inherited`, `ws6_groundlessness_from_diagonal`, `ws6_no_view_from_nowhere`; WS7 `ws7_*` and the verdict `payoffsEstablished`.
+- **Impossibility proved (successes):** WS2 `ws2_static_collapse` (static genuine-atomless ⇒ subsingleton); **WS1 `ws1_productive_unique` / `ws1_no_productive_plurality`** — the *new* sharp negative: the naive stagewise process over the finite founded-approximation carrier ALSO collapses (Ω unique productive thread), extending the Static Collapse into every finite approximation. WS6 `ws6_atomless_and_plural_impossible` is the same fact at the headline.
+- **Partial (obstruction precise):** WS2 forced-answer escape half (process collapses on C2); WS4 endogenous arrow (imported depth axis, a first moment exists); WS5 relativity (laundered — bare same-depth incomparability); WS6 one-engine (conjunction, the productive-atomless mechanism impossible on C2).
+- **Coincidence:** WS3 `ws3_diagonal_drives` — proved (uniqueness pins the transition). Others definitional-only / N/A.
+- **Strip test:** engine EARNED (residue the sole definiens); arrow endogeneity FLAGGED (survives via depth); relativity incomparability FLAGGED (survives strip of "face"). Aggregated in `ws7_strip_ledger`.
+- **Methodology note (build finding, routed to the WS1 design; inherited by WS4/WS5/WS6):** the C2 carrier (finite `Approx κ n`) cannot host genuine atomless plurality — hereditary non-emptiness forces the unique value `omegaApprox κ n`. This is the pre-registered WS1-D2 gate failure. The build did NOT retarget any signature: the plurality-dependent payoffs are reported as Impossibility/Partial with the obstruction precise, and the pre-registered carrier-home escalation (guarded → metric → pro-object) is the fallback, owed to a future session. The design docs carry a BUILD FINDING note; the Lean files carry it in their headers.
+- **Axiom check:** run (`spec/axiom-check-log.md`) — every headline theorem sorry-free on `propext` / `Classical.choice` / `Quot.sound`.
+- **Charter touched?** No — status-only. The charter's Static-Collapse thesis is confirmed and *extended* (the collapse reaches the naive process), not refuted; the escape it pre-registered simply requires the richer home, exactly as charter §5.6/§9 foresaw.
 
 *Template for future entries:*
 
@@ -181,7 +194,9 @@
 
 *Series 6 batches review at the whole-series level (see `protocol.md` §2–§3): a review session reads all built code against all design contracts and charter criteria, blind to motivating prose, and writes `series-review.md`; a code session addresses it; repeat.*
 
-- **Phase A (charter)** complete: `charter.md`, `charter-status.md` (this file), `protocol.md` written. No designs, no build, no review.
+- **Phase A (charter)** complete: `charter.md`, `charter-status.md` (this file), `protocol.md` written.
+- **Phase B (design-all)** complete: `spec/ws1…ws7-design.md` + `spec/README.md` committed.
+- **Phase C (build-all)** complete: all seven `wsN.lean` + `Series6.lean` + `AxiomCheck.lean` compile, sorry-free and axiom-clean; closure gate passes. The blind series-review (Phase D) has not yet been run — this build session records its own findings above; a fresh blind reviewer should now check the headline reframe (C2 collapse) against the design contracts, especially: (i) is `ws1_productive_unique` a genuine forced collapse or an artifact of the `Productive`/`allNonempty` definition? (ii) is the WS3 engine genuinely diagonal-driven given the moment counter (the honesty note)? (iii) are the Partials (WS4 imported-axis, WS5 laundered) correctly labelled and not quietly lowering a bar?
 
 *Template:*
 

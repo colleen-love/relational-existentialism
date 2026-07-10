@@ -172,3 +172,17 @@ theorem ws6_no_view_from_nowhere {κ} (hinf : ℵ₀ ≤ κ) (x : Proc κ) (h : 
 ## Deliverable
 
 `series-6/formal/ws6.lean`: transcribed `ws6_lawvere_incomplete`, `ws6_omega_nonterminating`, `omegaState`, `ws2_collapse` (self-contained); `Branches`, `NoAtomAt`, `Survey`/`Faithful`/`Missed`, `pastMap`/`futureMap`, `openResidue`, `residueThread`, `residue`/`residue_spec` (consumed from WS3); `ws6_incompleteness_inherited` (A1), `ws6_groundlessness_from_diagonal` (A2), `ws6_plurality_from_diagonal` (A3), `ws6_one_engine` (A4), `ws6_atomless_and_plural` (A5, exported as the `ws1_productive_plurality` witness), `ws6_no_view_from_nowhere` (A6). Axiom check: `#print axioms ws6_atomless_and_plural` should reduce through `residue_spec` and `ws1_omega_process` to the standard three (`propext, Classical.choice, Quot.sound`); `#print axioms ws6_one_engine` must show the *same* `residue_spec` dependency in both consequents — the machine-checkable form of the coincidence.
+
+---
+
+## BUILD FINDING (2026-07-10) — inherited from the WS1 gate collapse
+
+The WS1 gate returned **Impossibility** on C2 (Ω is the unique productive thread; see
+`ws1-design.md` BUILD FINDING and `charter-status.md`). This workstream inherits it:
+`ws6_incompleteness_inherited`, `ws6_groundlessness_from_diagonal`, `ws6_no_view_from_nowhere` are
+Discharged. But the **achievement `ws6_atomless_and_plural` is Impossibility on C2**
+(`ws6_atomless_and_plural_impossible`): no productive plurality. The plurality that exists is bought
+by an atom (`ws6_plurality_costs_an_atom`) — the Static Collapse diagnosis at the process level. So
+`ws6_one_engine` is **Partial — obstructed** (`ws6_one_engine_obstructed`): groundlessness and
+process-plurality hold, but not as one productive-atomless mechanism, so the unification is a
+conjunction (`payoffsEstablished`), not the same-residue reduction. All owed to C4.

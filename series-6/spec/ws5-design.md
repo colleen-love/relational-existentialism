@@ -172,3 +172,17 @@ theorem ws5_lorentzian {κ} : LorentzianReconstruction (Moment κ) prec := by
 ## Deliverable
 
 `series-6/formal/ws5.lean`: transcribed `prec`, `Moment`, `faceAt`, WS4 order facts, `ws2_static_collapse`, `ws6_omega_nonterminating`, `omegaProc` (self-contained, no cross-series import); `Agree`, `Total`, `Incomparable`, `GlobalSurvey`, `cdist`; `ws5_precedes_order` (D1), `ws5_total_iff_agree` (D2), `ws5_plurality_forbids_agreement` (D3), `ws5_causal_partial_order` (D4), `ws5_global_time_is_frame` + `ws5_omega_absolute_frame` (D5), `ws5_cdist_asym_of_face` + `ws5_lorentzian` (D6, ceiling `sorry`-flagged). **Axiom note:** `#print axioms ws5_causal_partial_order` should reduce to the transcribed `ws2_static_collapse` axiom set (`propext, Classical.choice, Quot.sound`) plus the WS4 order facts and the WS1/WS6 plurality witness — and **must not** depend on `ws5_lorentzian`'s `sorry`. `ws5_global_time_is_frame` additionally uses the order-extension principle (Classical.choice); `ws5_lorentzian` is quarantined behind an explicit `axiom`/`sorry` and is never a dependency of any Discharged theorem.
+
+---
+
+## BUILD FINDING (2026-07-10) — inherited from the WS1 gate collapse
+
+The WS1 gate returned **Impossibility** on C2 (Ω is the unique productive thread; see
+`ws1-design.md` BUILD FINDING and `charter-status.md`). This workstream inherits it:
+`ws5_precedes_order`, `ws5_agreement_is_collapse` (the honest core of totality⟺agreement),
+`ws5_plurality_forbids_agreement`, `ws5_omega_absolute_frame` (Newton = collapse; Ω is not a frame)
+are Discharged. But `ws5_causal_partial_order` is **Partial — laundered**: `¬Total` holds, yet the
+incomparable witnesses are two distinct *same-depth* moments and their incomparability is bare
+depth-posethood (`ws5_incomparability_is_bare_poset`), surviving the strip of "face". Earned
+relativity (incomparability from mismatched faces on a productive plurality) needs the C4 escape.
+`ws5_lorentzian` was not attempted (flagged heuristic, never a dependency).
