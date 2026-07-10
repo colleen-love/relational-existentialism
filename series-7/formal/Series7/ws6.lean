@@ -26,7 +26,7 @@ variable {κ : Cardinal.{u}}
 collapse (Series 6), and the single-coalgebra dichotomy (WS3, `ws3_dichotomy`), conjoined — an
 explicit disjunction over the shapes Series 7 mechanizes, with a genuine ∀ inside each conjunct
 and NO ∀ over "constructions". The honest floor. (The third, intensional-history kind lives on the
-process and collapses under atomlessness — `WS3.ws3_history_kind_collapses` — it is not a kind of
+process and collapses under atomlessness — `WS3.ws3_leafy_thread_collapses` — it is not a kind of
 distinction on a single coalgebra.) -/
 theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X),

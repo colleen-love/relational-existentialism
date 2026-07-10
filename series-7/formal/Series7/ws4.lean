@@ -78,10 +78,12 @@ theorem ws4_label_survives_quotient (hinf : ℵ₀ ≤ κ) :
   subst hq
   exact absurd hfst (by decide)
 
-/-- **The labelled world is behaviorally identified (2) and plural (4) and atomless (3) — on
-the non-plain functor.** So it escapes the Import Theorem exactly by dropping (1). Every
-label-bisimulation is ⊆ equality (the label pins each state), and the two loops are distinct
-and each relates to something. -/
+/-- **The labelled world is behaviorally identified (2) and plural (4) and first-level nonempty —
+on the non-plain functor.** So it escapes the Import Theorem exactly by dropping (1). Every
+label-bisimulation is ⊆ equality (the label pins each state), and the two loops are distinct and
+each relates to something. (Pass-2 C3: ingredient (3) here is the MINIMAL first-level-nonempty
+witness `(labelLoop i).1 ≠ ∅`, not a hereditary `SHNE` — enough to show the labelled functor
+evades the theorem; `Q = X = ULift Bool` is the minimal alphabet.) -/
 theorem ws4_labels_are_import (hinf : ℵ₀ ≤ κ) :
     BehaviorallyIdentifiedL (labelLoop hinf)
   ∧ ((⟨true⟩ : ULift.{u} Bool) ≠ ⟨false⟩)
@@ -108,13 +110,16 @@ theorem ws4_toy_loop_is_drop2 (hinf : ℵ₀ ≤ κ) :
   ∧ (∃ R, IsBisim (twoLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
   ⟨twoLoop_HNE hinf, by decide, ⟨fun _ _ => True, twoLoop_true_bisim hinf, trivial⟩⟩
 
-/-- **S5 — levels are the label import via an index.** The tower's level-index is a label: the
-SAME drop-(1) mechanism (`ws4_labels_are_import`), the index behaving as the labelled
-coordinate. The full Series 5 tower colimit `Winf` is prior art, not re-transcribed; the
-structural drop is witnessed here. -/
-theorem ws4_levels_are_import (hinf : ℵ₀ ≤ κ) :
-    BehaviorallyIdentifiedL (labelLoop hinf) ∧ ((⟨true⟩ : ULift.{u} Bool) ≠ ⟨false⟩) :=
-  ⟨(ws4_labels_are_import hinf).1, by decide⟩
+/-- **S5 — the level-index REUSES the label mechanism.** (Pass-2 C1: renamed and strengthened —
+the term reuses the FULL drop-(1) label witness, including survives-quotient, and does NOT touch
+`Winf`.) The tower's level-index is a label: the SAME drop-(1) mechanism, the index behaving as the
+labelled coordinate. The full Series 5 tower colimit `Winf` is prior art, NOT re-transcribed — the
+index-is-a-label identification is stated (prose), the structural drop witnessed via the label
+mechanism. -/
+theorem ws4_index_reuses_label_mechanism (hinf : ℵ₀ ≤ κ) :
+    BehaviorallyIdentifiedL (labelLoop hinf)
+  ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩ :=
+  ⟨(ws4_labels_are_import hinf).1, ws4_label_survives_quotient hinf⟩
 
 /-- **The capstone — the program explained.** (a) the drop-(1) import mechanism is witnessed
 (the label survives the quotient); (b) the drop-(2) non-reduction is witnessed (`twoLoop`); (c)

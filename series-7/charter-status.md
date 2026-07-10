@@ -64,7 +64,7 @@
 |---|---|---|
 | Distinction on a single coalgebra is leaf or import | `ws3_dichotomy` | **Discharged** (`≠` in hypothesis, disjunction in conclusion — not the C2 trap; honest dichotomy after R1) |
 | Atomless-distinct ⇒ import (consumes no-leaf hyp) | `ws3_atomless_distinct_is_import` | **Discharged** (engine-driven; genuinely uses `¬ LeafDiff`, after R2) |
-| Third kind (history) contentful, inhabited, collapses | `ws3_history_kind_inhabited`, `ws3_history_kind_collapses`, `ws3_history_collapses` | **Discharged** (on `Proc`; no longer a `False` placeholder, after R1) |
+| Third kind (leafy-thread) contentful, inhabited, collapses | `ws3_leafy_thread_inhabited`, `ws3_leafy_thread_collapses`, `ws3_no_same_limit_haecceity` | **Discharged** (on `Proc`; no longer a `False` placeholder, after R1; honestly a leafy-thread diff, with the same-limit haecceity witness structurally absent, after C2) |
 | Three kinds genuinely distinct | `ws3_leaf_not_import`, `ws3_import_not_leaf` | **Discharged** (different extensions — not a partition) |
 
 ### WS4 — The imports catalogued: the program explained  ·  *the capstone unification*
@@ -170,7 +170,14 @@
   - **R4/R5 (WS5 framing) — FIXED (scope/prose).** `ws5_leafy_plurality → ws5_leafy_pair`, honestly stating `emptyProc` is a PERMANENT atom (not limit-atomless); the convergent metric family stays Partial. The import-in-time adjudication is stated as a RULING, not forced.
   - **R6 (IsImportWitness vacuous) — FIXED (removed).** The empty `IsImportWitness` predicate is gone; WS4 now uses the genuine drop-1/drop-2 statements.
   - **C1/C2 (framing) — acknowledged.** Series 7's delta over Series 6 is honestly a reframing + the general bisimilarity lemma; the "live importForced arm" is gated on the open exhaustiveness flag and not implied to be near.
-  Full build re-verified sorry-free, axiom-clean; gate passes. A pass-2 blind review should regenerate against this addressed build.
+  Full build re-verified sorry-free, axiom-clean; gate passes.
+- **Phase D (blind review), pass 2 — CLEAN, exit criterion met** (`spec/project-review-2.md`, against commit `cdf26d3`): four reviewers (two fix-validators, two fresh from-scratch, one tasked solely with building a counterexample). **No SERIOUS finding remains.** All four pass-1 SERIOUS items independently confirmed genuinely fixed at the term level (S1 fully; S3/S4 fully; S2 re-scoped to an honest Partial); the fresh from-scratch attack could not build a counterexample to the Import Theorem and confirmed *why* (the genuine unlabelled-powerset collapse, not a rigged `IsBisim`); AxiomCheck coverage confirmed to omit none of the load-bearing headlines. Recommendation: **Series 7 closes at `payoffsEstablished`, earned.**
+- **Phase E (address), pass 2** complete (2026-07-10). Only cosmetic/terminal items (C1–C4) — all relabels/removals, **no mathematics changed**, verdict unchanged:
+  - **C1 — `ws4_levels_are_import → ws4_index_reuses_label_mechanism`.** Renamed (it reuses the label mechanism, never touches `Winf`) and STRENGTHENED to carry the full survives-quotient conjunct.
+  - **C2 — `HistoryDiff → LeafyThreadDiff`** (and `ws3_history_kind_* → ws3_leafy_thread_*`): honestly a leafy-thread (leaf) difference, not the design's same-limit haecceity kind. Added `ws3_no_same_limit_haecceity` recording the genuine haecceity witness as **structurally absent** (any two productive threads are equal) — a named open, the sharpest statement of what the program has circled and arguably the seed of a Series 8.
+  - **C3 — wording downgrade.** `labelLoop`'s ingredient-(3) is the minimal first-level-nonempty witness, not hereditary; docstring corrected ("atomless" → "first-level nonempty").
+  - **C4 — dead scaffolding removed** (`Static`/`HereditarilyAtomless`/`GenuinelyAtomless`, unused); `verdictNoCertificate` docstring softened (the load-bearing content is `ws7_audited_not_circular`).
+  Full build re-verified sorry-free, axiom-clean (37 headline theorems, standard three); gate passes. **No further review pass owed — the exit criterion is met.**
 
 ---
 

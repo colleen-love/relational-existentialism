@@ -160,8 +160,10 @@ theorem ws7_audited_not_circular {hinf : ℵ₀ ≤ κ} (cert : Audit κ hinf) (
   · show ProgramVerdict.payoffsEstablished ≠ ProgramVerdict.Circular; decide
   · show ProgramVerdict.importForced ≠ ProgramVerdict.Circular; decide
 
-/-- The verdict without a certificate: `Circular`. (The pass-verdicts require an `Audit`; a
-failed non-circularity audit leaves only this.) -/
+/-- The verdict without a certificate: `Circular`. This is a plain constant naming the
+no-certificate outcome; the load-bearing content is `ws7_audited_not_circular` (with a
+certificate, never `Circular`) — the pass-verdicts require an `Audit`, so a failed
+non-circularity audit leaves only this. (Pass-2 C4: the constant is documentation, not the proof.) -/
 def verdictNoCertificate : ProgramVerdict := ProgramVerdict.Circular
 
 /-- If exhaustiveness were to land (`exhaustive = true`) with a certificate, the same function

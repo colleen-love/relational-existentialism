@@ -42,7 +42,7 @@ REVIEW RESPONSE (project-review-1.md R1/R2, recorded in `charter-status.md`). Pa
 that on a SINGLE plain coalgebra there are only two kinds — a leaf or an import — because there
 is no founded-history dimension; the earlier `HistoryDiff := False` made the "trichotomy" a
 dichotomy in trichotomy vocabulary. This is now stated honestly: `ws3_dichotomy` (two kinds on a
-single coalgebra) plus a CONTENTFUL third kind `HistoryDiff` on the PROCESS (inhabited among
+single coalgebra) plus a CONTENTFUL third kind `LeafyThreadDiff` on the PROCESS (inhabited among
 non-productive threads, collapsing under atomlessness). The "no fourth kind / teeth" framing is
 withdrawn; the single-coalgebra exhaustiveness is a genuine dichotomy, not overclaimed. -/
 
@@ -69,27 +69,45 @@ theorem ws3_atomless_distinct_is_import {X : Type u} (dest : X → PkObj κ X) (
   obtain ⟨hx, hy⟩ := hnl
   exact ⟨ws1_atomless_bisim dest x y hx hy, h⟩
 
-/-! ## The third kind (intensional history) — contentful, on the process -/
+/-! ## The third kind (leafy-thread difference) — contentful, on the process
 
-/-- **(iii) An INTENSIONAL-HISTORY difference**, on the PROCESS carrier: two distinct threads at
-least one of which is non-atomless (leafy). This kind is genuinely inhabited (among
-non-productive threads) and collapses under atomlessness. -/
-def HistoryDiff (x y : Proc κ) : Prop := x ≠ y ∧ (¬ Productive x ∨ ¬ Productive y)
+REVIEW RESPONSE (project-review-2.md C2, recorded in `charter-status.md`). Pass 2 was right that
+this kind is honestly a *leafy-thread* difference, NOT the design's intended "same limit, different
+finite history" (haecceity) kind — its inhabitant (Ω vs the atom) is really a leaf difference. So
+it is renamed `LeafyThreadDiff`. The genuine same-behaviour-different-history witness is
+**structurally impossible in this model** (`ws3_no_same_limit_haecceity`): any two productive
+(atomless) threads are BOTH `omegaProc`, so the "extra to identity" cannot live in process-history
+at all — it can appear only as a non-reduced carrier (`twoLoop`) or an imported label (`labelLoop`).
+That limitation is recorded as a named open — arguably the seed of a next series, not a defect. -/
 
-/-- **The third kind is inhabited** — Ω and the atom process are a history difference (the atom
-is leafy). So `HistoryDiff` is not a `False` placeholder. -/
-theorem ws3_history_kind_inhabited (hinf : ℵ₀ ≤ κ) : ∃ x y : Proc κ, HistoryDiff x y :=
+/-- **(iii) A LEAFY-THREAD difference**, on the PROCESS carrier: two distinct threads at least one
+of which is non-atomless (leafy). Genuinely inhabited (among non-productive threads) and collapses
+under atomlessness. (Honestly a leaf difference on the process — see the section note.) -/
+def LeafyThreadDiff (x y : Proc κ) : Prop := x ≠ y ∧ (¬ Productive x ∨ ¬ Productive y)
+
+/-- **The third kind is inhabited** — Ω and the atom process are a leafy-thread difference (the
+atom is leafy). So it is not a `False` placeholder. -/
+theorem ws3_leafy_thread_inhabited (hinf : ℵ₀ ≤ κ) : ∃ x y : Proc κ, LeafyThreadDiff x y :=
   ⟨omegaProc hinf, emptyProc hinf, omega_ne_empty hinf, Or.inr (empty_not_productive hinf)⟩
 
-/-- **D2 — the third kind collapses under atomlessness.** Two productive (atomless) threads
-have no history difference: both are Ω. Transcribes `ws1_productive_unique`. -/
-theorem ws3_history_kind_collapses (_hinf : ℵ₀ ≤ κ) (x y : Proc κ)
-    (hx : Productive x) (hy : Productive y) : ¬ HistoryDiff x y :=
+/-- **D2 — the third kind collapses under atomlessness.** Two productive (atomless) threads have
+no leafy-thread difference: both are Ω. Transcribes `ws1_productive_unique`. -/
+theorem ws3_leafy_thread_collapses (_hinf : ℵ₀ ≤ κ) (x y : Proc κ)
+    (hx : Productive x) (hy : Productive y) : ¬ LeafyThreadDiff x y :=
   fun ⟨_, hor⟩ => hor.elim (fun h => h hx) (fun h => h hy)
 
 /-- The direct collapse fact (Ω unique among atomless threads), transcribed. -/
 theorem ws3_history_collapses (hinf : ℵ₀ ≤ κ) (t : Proc κ) (ht : Productive t) :
     t = omegaProc hinf := ws1_productive_unique hinf t ht
+
+/-- **The genuine same-limit haecceity witness is structurally absent (pass-2 C2, a named open).**
+Two *productive* (atomless) threads are always EQUAL — so there is no "same behaviour, different
+finite history" distinction on this carrier. The "extra to identity" that plurality needs provably
+cannot live in process-history here; it can appear only as non-reduced carrier (`twoLoop`) or an
+imported label (`labelLoop`). This is the sharpest statement of what the program has circled. -/
+theorem ws3_no_same_limit_haecceity (hinf : ℵ₀ ≤ κ) (x y : Proc κ)
+    (hx : Productive x) (hy : Productive y) : x = y := by
+  rw [ws1_productive_unique hinf x hx, ws1_productive_unique hinf y hy]
 
 /-! ## The three kinds are genuinely distinct (not a definitional partition) -/
 

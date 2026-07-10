@@ -26,8 +26,9 @@ import Series7
 -- WS3 — the single-coalgebra dichotomy + the contentful third kind on the process
 #print axioms Series7.WS3.ws3_dichotomy
 #print axioms Series7.WS3.ws3_atomless_distinct_is_import
-#print axioms Series7.WS3.ws3_history_kind_inhabited
-#print axioms Series7.WS3.ws3_history_kind_collapses
+#print axioms Series7.WS3.ws3_leafy_thread_inhabited
+#print axioms Series7.WS3.ws3_leafy_thread_collapses
+#print axioms Series7.WS3.ws3_no_same_limit_haecceity
 #print axioms Series7.WS3.ws3_history_collapses
 #print axioms Series7.WS3.ws3_leaf_not_import
 #print axioms Series7.WS3.ws3_import_not_leaf
@@ -36,7 +37,7 @@ import Series7
 #print axioms Series7.WS4.ws4_labels_are_import
 #print axioms Series7.WS4.ws4_label_survives_quotient
 #print axioms Series7.WS4.ws4_toy_loop_is_drop2
-#print axioms Series7.WS4.ws4_levels_are_import
+#print axioms Series7.WS4.ws4_index_reuses_label_mechanism
 #print axioms Series7.WS4.ws4_program_explained
 
 -- WS5 — the limit-atomlessness loophole

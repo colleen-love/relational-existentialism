@@ -253,17 +253,11 @@ lemma hneRel_isBisim {X : Type u} (dest : X → PkObj κ X) : IsBisim dest (hneR
     obtain ⟨x', hx'⟩ := Set.nonempty_iff_ne_empty.mpr hx.ne_empty
     exact ⟨x', hx', hx.succ hx', hy.succ hy'⟩
 
-/-! ## The abstract static object (transcribed) -/
+/-! ## The escapes are imports: two indexed self-loops (transcribed)
 
-structure Static (κ : Cardinal.{u}) where
-  X : Type u
-  dest : X → PkObj κ X
-  behav : BehaviorallyIdentified dest
-
-def HereditarilyAtomless (S : Static κ) : Prop := ∀ x, SHNE S.dest x
-def GenuinelyAtomless (S : Static κ) : Prop := HereditarilyAtomless S ∧ NoImportedAtom S.dest
-
-/-! ## The escapes are imports: two indexed self-loops (transcribed) -/
+(Pass-2 C4: the unused `Static` / `HereditarilyAtomless` / `GenuinelyAtomless` scaffolding was
+removed — Series 7 states the collapse directly over `BehaviorallyIdentified` coalgebras, so the
+bundled structure was dead weight.) -/
 
 noncomputable def twoLoop (hinf : ℵ₀ ≤ κ) : ULift.{u} Bool → PkObj κ (ULift.{u} Bool) :=
   fun i => toPk hinf {i}
