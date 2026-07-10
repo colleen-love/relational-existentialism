@@ -36,6 +36,8 @@ import Series7
 -- WS4 — the imports catalogued: drop (1) [labelled, survives quotient] and drop (2) [plain non-reduction]
 #print axioms Series7.WS4.ws4_labels_are_import
 #print axioms Series7.WS4.ws4_label_survives_quotient
+#print axioms Series7.WS4.ws4_free_label_is_import
+#print axioms Series7.WS4.ws4_recoverable_not_import
 #print axioms Series7.WS4.ws4_toy_loop_is_drop2
 #print axioms Series7.WS4.ws4_index_reuses_label_mechanism
 #print axioms Series7.WS4.ws4_program_explained

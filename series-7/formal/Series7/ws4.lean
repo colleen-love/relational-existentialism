@@ -27,6 +27,19 @@ Honest scope: the full Series 4 `νLk` / Series 5 `Winf` / Series 3 weight-algeb
 prior art, NOT re-transcribed here; what is mechanized is the drop-(1) and drop-(2) MECHANISMS
 on minimal labelled/plain witnesses. The full-carrier unification is reported Partial.
 
+REVIEW RESPONSE (project-review-2/pass-3 S1/S2/R2, recorded in `charter-status.md`). A LATER
+alignment pass showed the deeper problem: "labelled" (a `Q` in the signature) is not the charter's
+"import" (a coordinate NOT carried by the relating). Two things are added/disclosed below:
+(i) the charter-strength SEMANTIC import test — `ws4_free_label_is_import`: the label is an import
+iff the plain (label-forgetting) relating cannot recover it (plain-bisimilar states carry distinct
+labels) — and `ws4_recoverable_not_import`: a recoverable label is NOT an import; (ii) the honest
+FAITHFULNESS disclosure — `labelLoop` is a FREE-label witness (a genuine import); the Series 4 face
+`x↾(x,y)` is an ENDOGENOUS RESTRICTION (recoverable, hence NOT an import — a leaf/faced-boundary),
+and Series 4 reached plurality only by ESCALATING the restriction into a free label. So the minimal
+witness and the paradigm S4 carrier are NOT the same kind; the reclassification is stated below and
+routed to WS3 (the faced-boundary is the candidate fourth kind) and WS7 (the audit certifies the
+free-label import, not that the S4 restriction is one).
+
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
 import Series7.ws3
@@ -98,6 +111,73 @@ theorem ws4_labels_are_import (hinf : ℵ₀ ≤ κ) :
     exact hab hfst
   · intro i; rw [labelLoop_val]; exact (Set.singleton_ne_empty _)
 
+/-! ## The SEMANTIC import test (project-review-2/pass-3 S1/S2/R3)
+
+Pass 3 was right: "labelled" (a `Q` in the functor signature) is NOT the charter's "import" (a
+coordinate NOT carried by the relating, §4.1). The genuine test is **recoverability**: a label is
+an import iff it is not determined by the plain, label-forgetting relating — iff two states the
+plain relating cannot tell apart nonetheless carry different labels. `ws4_label_survives_quotient`
+alone (survival under the label-MATCHING bisimulation) is the weaker, near-syntactic fact; the
+charter-strength predicate is below. -/
+
+/-- Forget the label, keep the target: the plain (label-forgetting) coalgebra. -/
+noncomputable def plainOf {Q X : Type u} (dest : X → LkObj κ Q X) : X → PkObj κ X :=
+  fun x => PkMap κ Prod.snd (dest x)
+
+@[simp] lemma plainOf_labelLoop_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (plainOf (labelLoop hinf) i).1 = {i} := by
+  show Prod.snd '' ({(i, i)} : Set (ULift.{u} Bool × ULift.{u} Bool)) = {i}
+  rw [Set.image_singleton]
+
+lemma plainOf_labelLoop_true_bisim (hinf : ℵ₀ ≤ κ) :
+    IsBisim (plainOf (labelLoop hinf)) (fun _ _ => True) := by
+  intro x y _
+  refine ⟨?_, ?_⟩
+  · intro x' _; exact ⟨y, by rw [plainOf_labelLoop_val]; exact rfl, trivial⟩
+  · intro y' _; exact ⟨x, by rw [plainOf_labelLoop_val]; exact rfl, trivial⟩
+
+/-- **`ws4_free_label_is_import` — the charter-strength (semantic) import.** The plain,
+label-forgetting relating CANNOT tell the two loops apart (they are plain-bisimilar), yet the
+label DOES distinguish them (no label-bisimulation relates them). So the label carries a
+distinction the relating does not determine — it is NOT recoverable — a genuine import (§4.1),
+not merely "a label at all". -/
+theorem ws4_free_label_is_import (hinf : ℵ₀ ≤ κ) :
+    (∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
+  ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
+  ⟨⟨fun _ _ => True, plainOf_labelLoop_true_bisim hinf, trivial⟩,
+   ws4_label_survives_quotient hinf⟩
+
+/-- A label is **recoverable** if every plain (label-forgetting) bisimulation is already a
+label-bisimulation — the labels add no constraint the relating does not already impose. -/
+def Recoverable {Q X : Type u} (dest : X → LkObj κ Q X) : Prop :=
+  ∀ R, IsBisim (plainOf dest) R → IsBisimL dest R
+
+/-- **`ws4_recoverable_not_import` — a recoverable label is NOT an import (S2).** If the label is
+recoverable (a function of the relating, as the Series 4 restriction `x↾(x,y)` is), then
+plain-bisimilar states are label-bisimilar: the label distinguishes nothing the relating does not.
+So a recoverable label fails the import test — it is carried by the relating. (Hence the Series 4
+FACE, a restriction of the relatum, is not an import; see the reclassification note below.) -/
+theorem ws4_recoverable_not_import {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hrec : Recoverable dest) (x y : X)
+    (h : ∃ R, IsBisim (plainOf dest) R ∧ R x y) :
+    ∃ R, IsBisimL dest R ∧ R x y :=
+  let ⟨R, hR, hxy⟩ := h
+  ⟨R, hrec R hR, hxy⟩
+
+/-! ## RECLASSIFICATION of Series 4 (project-review-2/pass-3 S2, recorded in `charter-status.md`)
+
+Pass 3 correctly identified that the charter's paradigm import — the Series 4 face `x↾(x,y)` — is a
+RESTRICTION of the relatum, hence a FUNCTION of the relata, hence `Recoverable`, hence NOT an import
+by `ws4_recoverable_not_import`. It is a **leaf** (a descent boundary, drop of ingredient (3)) — or,
+more precisely, a *faced boundary*: a leaf that also carries a distinguishing quality, a cell the
+leaf/import dichotomy does not enumerate (a named open, see `ws3.lean`). Series 4 reached plurality
+only by ESCALATING the restriction into a FREE label on `νLk` (`loopState q` with arbitrary `q`) —
+replacing the non-import with an import and keeping the name. So the honest catalogue reading is:
+Series 4's *faithful* restriction is a leaf that collapses; Series 4's *plurality* is a free-label
+escalation, which IS a genuine import (`ws4_free_label_is_import`). The two objects are different.
+This corrects `ws4_program_explained`'s "S4 dropped (1)": what dropped (1) is the escalated free
+label, not the restriction. The full `νLk` face is prior art, not re-transcribed. -/
+
 /-! ## drop (2): the plain non-reduction (twoLoop), distinct from drop (1) -/
 
 /-- **The plain non-reduction analogue.** `twoLoop`'s two atomless states are distinct yet
@@ -121,12 +201,16 @@ theorem ws4_index_reuses_label_mechanism (hinf : ℵ₀ ≤ κ) :
   ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩ :=
   ⟨(ws4_labels_are_import hinf).1, ws4_label_survives_quotient hinf⟩
 
-/-- **The capstone — the program explained.** (a) the drop-(1) import mechanism is witnessed
-(the label survives the quotient); (b) the drop-(2) non-reduction is witnessed (`twoLoop`); (c)
-the Import Theorem predicts the drop — plurality on a plain coalgebra forces dropping behavioral
-identity or atomlessness (`ws2_plurality_requires_drop`); (d) Series 6 is the confirmation — it
-refused the drop, kept (1)(2)(3), and collapsed (`ws1_productive_unique`). Honest scope: the S3
-weight carrier and the full S4/S5 carriers are prior art, not re-transcribed. -/
+/-- **The capstone — the program explained.** (a) the drop-(1) import mechanism is witnessed by a
+genuine (semantic) FREE-label import (`ws4_free_label_is_import`: plain-bisimilar yet
+label-distinct); (b) the drop-(2) non-reduction is witnessed (`twoLoop`); (c) the Import Theorem
+predicts the drop — plurality on a plain coalgebra forces dropping behavioral identity or
+atomlessness (`ws2_plurality_requires_drop`); (d) Series 6 is the confirmation — it refused the
+drop, kept (1)(2)(3), and collapsed (`ws1_productive_unique`). Honest scope (pass-3 S2): this
+explains the program *for the free-label imports*; the ENDOGENOUS cases (the S4 restriction, and
+possibly the S5 index if the index is endogenous to the level structure) are recoverable, hence
+leaves/faced-boundaries not imports — Series 4's plurality is a free-label ESCALATION of its
+restriction, reclassified above. The full `νLk`/`Winf`/weight carriers are prior art. -/
 theorem ws4_program_explained (hinf : ℵ₀ ≤ κ) :
     (BehaviorallyIdentifiedL (labelLoop hinf) ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)  -- drop (1)
   ∧ (∃ R, IsBisim (twoLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)                                                   -- drop (2)

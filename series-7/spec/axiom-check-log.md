@@ -5,8 +5,8 @@ run via `lake env lean series-7/formal/Series7/AxiomCheck.lean`. Every headline 
 sorry-free and rests only on Mathlib's standard three (`propext`, `Classical.choice`,
 `Quot.sound`) — no `sorryAx`, no custom `axiom`.
 
-Regenerated 2026-07-10 after addressing project-review-2.md (pass 2, clean; cosmetic C1-C4
-relabels/removals only — no mathematics changed).
+Regenerated 2026-07-10 after the alignment pass (project-review-2 pass 3): the semantic import
+test (`ws4_free_label_is_import`, `ws4_recoverable_not_import`) and the audit re-grounded on it.
 
 ```
 'Series7.WS1.ws1_atomless_bisim' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -28,6 +28,8 @@ relabels/removals only — no mathematics changed).
 'Series7.WS3.ws3_import_not_leaf' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_labels_are_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_label_survives_quotient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_free_label_is_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_recoverable_not_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_toy_loop_is_drop2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_index_reuses_label_mechanism' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_program_explained' depends on axioms: [propext, Classical.choice, Quot.sound]

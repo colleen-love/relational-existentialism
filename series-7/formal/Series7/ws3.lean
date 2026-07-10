@@ -109,6 +109,20 @@ theorem ws3_no_same_limit_haecceity (hinf : ℵ₀ ≤ κ) (x y : Proc κ)
     (hx : Productive x) (hy : Productive y) : x = y := by
   rw [ws1_productive_unique hinf x hx, ws1_productive_unique hinf y hy]
 
+/-! ## The candidate FOURTH kind: the faced boundary (project-review-2/pass-3 R1, a named open)
+
+Pass 3 identified a candidate fourth location the leaf/import dichotomy does not enumerate: the
+**faced boundary** — a descent boundary (leaf-like: it bottoms out, `¬ SHNE`) that ALSO carries a
+distinguishing quality (import-like: it tells states apart). The Series 4 restriction `x↾(x,y)` is
+exactly this: the relatum cut to a context, where the cut is itself a quality. `LeafDiff` is a bare
+`¬ SHNE` with no quality; `ImportDiff` is quality with no leaf; neither has the faced boundary's
+extension. This is the same "extra to identity" that `ws3_no_same_limit_haecceity` shows cannot live
+in behaviour or history — seen from the label side: it lives in the faced boundary. Whether it
+REDUCES to leaf-or-import (restoring the dichotomy) or is a genuine fourth kind (demoting the
+impossibility to collapse-plus-examples, charter §5.2) is the **load-bearing open** — NOT assumed
+either way. It needs a carrier that supports the restriction (the `νLk` face), which Series 7 does
+not transcribe. Recorded as a named open, routed to a possible Series 8. -/
+
 /-! ## The three kinds are genuinely distinct (not a definitional partition) -/
 
 /-- A leaf that is not an import: two distinct states, one an atom, NOT bisimilar-related as a
