@@ -1,36 +1,42 @@
 name = "RelExist"
-defaultTargets = ["Series4", "Series5"]
+defaultTargets = ["Series4", "Series5", "Series6"]
 
-# ── Layout (Series 4 complete + Series 5 live, both built) ────────────────────
-# Series 3 is closed and frozen under `archive/`. Series 4 is complete under
-# `series-4/`; Series 5 is the live development under `series-5/`. Both are built
-# here so an artifact-evaluation run of `lake build` verifies the whole program
-# (Paper 2 leans on the Series 4 theorems as well as Series 5).
+# ── Layout (Series 4 complete + Series 5 complete + Series 6 live, all built) ──
+# Series 3 is closed and frozen under `archive/`. Series 4 and Series 5 are complete
+# under `series-4/` and `series-5/`; Series 6 is the live development under `series-6/`.
+# All three are built here so an artifact-evaluation run of `lake build` verifies the
+# whole program.
 #
-# Each series is a distinct module namespace so the two can coexist in one
-# package: Series 4's roots live under `Series4.*` (files in
-# `series-4/formal/Series4/`) and Series 5's under `Series5.*` (files in
-# `series-5/formal/Series5/`). The aggregator roots `Series4` / `Series5`
-# (`<series>/formal/<Series>.lean`) import their workstreams; the `AxiomCheck`
-# root under each namespace runs `#print axioms` over that series' build.
+# Each series is a distinct module namespace so they can coexist in one package:
+# Series 4's roots live under `Series4.*` (files in `series-4/formal/Series4/`),
+# Series 5's under `Series5.*` (`series-5/formal/Series5/`), and Series 6's under
+# `Series6.*` (`series-6/formal/Series6/`). The aggregator roots `SeriesN`
+# (`<series>/formal/<Series>.lean`) import their workstreams; the `AxiomCheck` root
+# under each namespace runs `#print axioms` over that series' build.
 
-# `series-4/formal/` — Series 4 (complete). `Series4` imports `ws1`…`ws7`;
-# `Series4.AxiomCheck` runs the axiom pass over the whole Series 4 build.
+# `series-4/formal/` — Series 4 (complete).
 [[lean_lib]]
 name = "Series4"
 srcDir = "../series-4/formal"
 roots = ["Series4", "Series4.AxiomCheck"]
 
-# `series-5/formal/` — Series 5 (live). `Series5` imports `ws1`…`ws7`;
-# `Series5.AxiomCheck` runs the axiom pass over the whole Series 5 build. The
-# Series 5 charter grows it; as each workstream lands its `Series5.wsN` root is
-# already reached transitively from `Series5`.
+# `series-5/formal/` — Series 5 (complete).
 [[lean_lib]]
 name = "Series5"
 srcDir = "../series-5/formal"
 roots = ["Series5", "Series5.AxiomCheck"]
 
-# mathlib is retained (cache present under `.lake`); both series import it.
+# `series-6/formal/` — Series 6 (live). `Series6` imports `Series6.ws1`…`Series6.ws7`;
+# `Series6.AxiomCheck` runs the axiom pass over the whole Series 6 build. Series 6 is
+# WHOLLY STANDALONE (charter §1): every Series 4/5 lemma it reuses is transcribed into
+# `series-6/formal/Series6/wsNN.lean` and re-namespaced `Series6.WSNN` — nothing is
+# imported from `series-5/`, `series-4/`, or `archive/`.
+[[lean_lib]]
+name = "Series6"
+srcDir = "../series-6/formal"
+roots = ["Series6", "Series6.AxiomCheck"]
+
+# mathlib is retained (cache present under `.lake`); all series import it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"

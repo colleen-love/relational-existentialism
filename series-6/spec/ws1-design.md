@@ -149,3 +149,34 @@ C3 (topos of trees) denotes the *same* carrier as C2 but needs unbuilt Lean infr
 ## Deliverable
 
 `series-6/formal/ws1.lean`: transcribed carrier machinery (self-contained); `Approx`, `trunc`, `Proc`, `Productive`, `omegaProc`, `omegaApprox`; `ws1_process_exists` + `ws1_stagewise_id` (D1), `ws1_no_collapse` + `ws1_productive_plurality` [WS6-witnessed] (D2), `ws1_omega_process` + `ws1_omega_nonclosing` (D3); the C4 metric fallback typed but unbuilt. Axiom check: `#print axioms ws1_no_collapse` should reduce to `proc_ext` (`propext`, `Quot.sound` at most).
+
+---
+
+## BUILD FINDING (2026-07-10, routed here per protocol §2 Phase C) — the gate returns Impossibility on C2
+
+The build realized C2 concretely as `Approx κ 0 = PUnit`, `Approx κ (n+1) = PkObj κ (Approx κ n)`,
+`Proc κ = { x : ∀ n, Approx κ n // ∀ n, trunc n (x (n+1)) = x n }`, with `Productive` the honest
+hereditary-non-emptiness liveness (`allNonempty`). Two structural facts, both machine-checked, sink
+the productive-plurality half of the gate:
+
+1. **Every `Approx κ n` is finite** (`approx_finite`): a tower of exponentials `2 ↑↑ n`. (This is a
+   *bonus* for WS3 — the Cantor residue realizes as a concrete stage-`(n+1)` element via `toPk`.)
+2. **Hereditary non-emptiness forces a unique value** (`allNonempty_unique`): the only hereditarily
+   nonempty depth-`n` approximation is `omegaApprox κ n`.
+
+Together: **Ω is the unique productive thread** (`ws1_productive_unique`), so
+`ws1_productive_plurality` is FALSE — its negation `ws1_no_productive_plurality` is the theorem. The
+design's D2 pre-registered exactly this failure clause ("if the only productive threads turn out
+stagewise-equal to `omegaProc` … the gate fails — Impossibility proved for the stagewise encoding,
+escalate to C4"). This is the Static Collapse (WS2) reappearing inside every founded approximation:
+the un-quotiented process does NOT, by itself, keep atomless plurality — because plurality was never
+destroyed by the *quotient* alone but by the finiteness-plus-hereditary-non-emptiness of the founded
+stages, which the un-quotiented thread inherits.
+
+**Disposition (no signature retargeted).** `ws1_no_collapse`, `proc_ext`, `ws1_process_exists`,
+`ws1_omega_process` are Discharged as designed. The gate is reported **Impossibility proved** for C2,
+and the pre-registered carrier-home escalation (**C4 metric completion**, where distinct Cauchy
+sequences give genuine atomless plurality, or the guarded/topos-of-trees home) is the fallback, owed
+to a future session. The downstream plurality-dependent payoffs (WS4 endogenous arrow, WS5 earned
+relativity, WS6 achievement/one-engine) inherit this and are reported Partial/Impossibility with the
+obstruction precise — never relabelled. See `charter-status.md` (Closed log, 2026-07-10).

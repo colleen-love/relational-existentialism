@@ -155,3 +155,15 @@ theorem ws4_arrow_from_properness {κ} (hinf : ℵ₀ ≤ κ) :
 ## Deliverable
 
 `series-6/formal/ws4.lean`: transcribed diagonal machinery (`ws6_lawvere_incomplete`, `ws6_omega_nonterminating`, `omegaState`) and the cited `trunc`/`Proc`/`Δ`/`Moment`/`prec`/`faceAt` (self-contained, no cross-series import); `IsResidueExt`, `accDist`, `SurveyProperlyContained`; `ws4_survey_lossy`, `ws4_residue_one_to_many`, `ws4_arrow_strict` + `ws4_no_return`, `ws4_arrow_endogenous`, `ws4_arrow_from_properness`; the C4 asymmetric-quasimetric fallback typed but unbuilt. Every theorem carries a strip annotation (delete the depth index; the statement must still type and prove) for WS7's ledger. Axiom check: `#print axioms ws4_arrow_from_properness` should reduce to the transcribed diagonal (`propext`, `Classical.choice`, `Quot.sound` at most) — and, crucially, must **not** mention any `Nat.lt`-carried order as the source of strictness.
+
+---
+
+## BUILD FINDING (2026-07-10) — inherited from the WS1 gate collapse
+
+The WS1 gate returned **Impossibility** on C2 (Ω is the unique productive thread; see
+`ws1-design.md` BUILD FINDING and `charter-status.md`). This workstream inherits it:
+`ws4_survey_lossy`, `ws4_residue_one_to_many`, `ws4_arrow_strict`, `ws4_no_return` are Discharged,
+but the **endogenous arrow is Partial — imported axis**: a first moment exists (the depth-0 bud,
+`ws4_arrow_has_first_moment`) and strictness rests on the survey-depth index `ℕ` (`prec_depth_lt`),
+which does not survive the strip. The genuinely diagonal-driven half (`ws4_arrow_from_properness`:
+each step opens a residue that moves the state) survives. The endogenous arrow is owed to C4.
