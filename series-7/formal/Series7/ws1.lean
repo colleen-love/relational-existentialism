@@ -255,7 +255,7 @@ lemma hneRel_isBisim {X : Type u} (dest : X → PkObj κ X) : IsBisim dest (hneR
 
 /-! ## The escapes are imports: two indexed self-loops (transcribed)
 
-(Pass-2 C4: the unused `Static` / `HereditarilyAtomless` / `GenuinelyAtomless` scaffolding was
+(Interim-review C4: the unused `Static` / `HereditarilyAtomless` / `GenuinelyAtomless` scaffolding was
 removed — Series 7 states the collapse directly over `BehaviorallyIdentified` coalgebras, so the
 bundled structure was dead weight.) -/
 

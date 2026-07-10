@@ -27,7 +27,7 @@ Honest scope: the full Series 4 `νLk` / Series 5 `Winf` / Series 3 weight-algeb
 prior art, NOT re-transcribed here; what is mechanized is the drop-(1) and drop-(2) MECHANISMS
 on minimal labelled/plain witnesses. The full-carrier unification is reported Partial.
 
-REVIEW RESPONSE (project-review-2/pass-3 S1/S2/R2, recorded in `charter-status.md`). A LATER
+REVIEW RESPONSE (project-review-2/pass-2 S1/S2/R2, recorded in `charter-status.md`). The
 alignment pass showed the deeper problem: "labelled" (a `Q` in the signature) is not the charter's
 "import" (a coordinate NOT carried by the relating). Two things are added/disclosed below:
 (i) the charter-strength SEMANTIC import test — `ws4_free_label_is_import`: the label is an import
@@ -94,7 +94,7 @@ theorem ws4_label_survives_quotient (hinf : ℵ₀ ≤ κ) :
 /-- **The labelled world is behaviorally identified (2) and plural (4) and first-level nonempty —
 on the non-plain functor.** So it escapes the Import Theorem exactly by dropping (1). Every
 label-bisimulation is ⊆ equality (the label pins each state), and the two loops are distinct and
-each relates to something. (Pass-2 C3: ingredient (3) here is the MINIMAL first-level-nonempty
+each relates to something. (Interim-review C3: ingredient (3) here is the MINIMAL first-level-nonempty
 witness `(labelLoop i).1 ≠ ∅`, not a hereditary `SHNE` — enough to show the labelled functor
 evades the theorem; `Q = X = ULift Bool` is the minimal alphabet.) -/
 theorem ws4_labels_are_import (hinf : ℵ₀ ≤ κ) :
@@ -111,9 +111,9 @@ theorem ws4_labels_are_import (hinf : ℵ₀ ≤ κ) :
     exact hab hfst
   · intro i; rw [labelLoop_val]; exact (Set.singleton_ne_empty _)
 
-/-! ## The SEMANTIC import test (project-review-2/pass-3 S1/S2/R3)
+/-! ## The SEMANTIC import test (project-review-2/pass-2 S1/S2/R3)
 
-Pass 3 was right: "labelled" (a `Q` in the functor signature) is NOT the charter's "import" (a
+Pass 2 was right: "labelled" (a `Q` in the functor signature) is NOT the charter's "import" (a
 coordinate NOT carried by the relating, §4.1). The genuine test is **recoverability**: a label is
 an import iff it is not determined by the plain, label-forgetting relating — iff two states the
 plain relating cannot tell apart nonetheless carry different labels. `ws4_label_survives_quotient`
@@ -164,7 +164,7 @@ theorem ws4_recoverable_not_import {Q X : Type u} (dest : X → LkObj κ Q X)
   let ⟨R, hR, hxy⟩ := h
   ⟨R, hrec R hR, hxy⟩
 
-/-! ## RECLASSIFICATION of Series 4 (project-review-2/pass-3 S2, recorded in `charter-status.md`)
+/-! ## RECLASSIFICATION of Series 4 (project-review-2/pass-2 S2, recorded in `charter-status.md`)
 
 Pass 3 correctly identified that the charter's paradigm import — the Series 4 face `x↾(x,y)` — is a
 RESTRICTION of the relatum, hence a FUNCTION of the relata, hence `Recoverable`, hence NOT an import
@@ -190,7 +190,7 @@ theorem ws4_toy_loop_is_drop2 (hinf : ℵ₀ ≤ κ) :
   ∧ (∃ R, IsBisim (twoLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
   ⟨twoLoop_HNE hinf, by decide, ⟨fun _ _ => True, twoLoop_true_bisim hinf, trivial⟩⟩
 
-/-- **S5 — the level-index REUSES the label mechanism.** (Pass-2 C1: renamed and strengthened —
+/-- **S5 — the level-index REUSES the label mechanism.** (Interim-review C1: renamed and strengthened —
 the term reuses the FULL drop-(1) label witness, including survives-quotient, and does NOT touch
 `Winf`.) The tower's level-index is a label: the SAME drop-(1) mechanism, the index behaving as the
 labelled coordinate. The full Series 5 tower colimit `Winf` is prior art, NOT re-transcribed — the
@@ -206,7 +206,7 @@ genuine (semantic) FREE-label import (`ws4_free_label_is_import`: plain-bisimila
 label-distinct); (b) the drop-(2) non-reduction is witnessed (`twoLoop`); (c) the Import Theorem
 predicts the drop — plurality on a plain coalgebra forces dropping behavioral identity or
 atomlessness (`ws2_plurality_requires_drop`); (d) Series 6 is the confirmation — it refused the
-drop, kept (1)(2)(3), and collapsed (`ws1_productive_unique`). Honest scope (pass-3 S2): this
+drop, kept (1)(2)(3), and collapsed (`ws1_productive_unique`). Honest scope (pass-2 S2): this
 explains the program *for the free-label imports*; the ENDOGENOUS cases (the S4 restriction, and
 possibly the S5 index if the index is endogenous to the level structure) are recoverable, hence
 leaves/faced-boundaries not imports — Series 4's plurality is a free-label ESCALATION of its

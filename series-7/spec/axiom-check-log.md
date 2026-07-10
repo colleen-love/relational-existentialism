@@ -5,7 +5,7 @@ run via `lake env lean series-7/formal/Series7/AxiomCheck.lean`. Every headline 
 sorry-free and rests only on Mathlib's standard three (`propext`, `Classical.choice`,
 `Quot.sound`) — no `sorryAx`, no custom `axiom`.
 
-Regenerated 2026-07-10 after the alignment pass (project-review-2 pass 3): the semantic import
+Regenerated 2026-07-10 after the alignment pass (project-review-2 pass 2): the semantic import
 test (`ws4_free_label_is_import`, `ws4_recoverable_not_import`) and the audit re-grounded on it.
 
 ```
