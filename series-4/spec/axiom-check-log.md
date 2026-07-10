@@ -1,6 +1,6 @@
 # Series 4 — machine-checked axiom log
 
-Output of `#print axioms` (via `series-4/formal/AxiomCheck.lean`) over every
+Output of `#print axioms` (via `series-4/formal/Series4/AxiomCheck.lean`) over every
 headline theorem of WS1–WS7, run against the pinned toolchain. Every theorem rests
 only on Mathlib's standard three (`propext`, `Classical.choice`, `Quot.sound`), or
 on no axioms; there is no `sorryAx` and no custom `axiom`.
@@ -8,7 +8,7 @@ on no axioms; there is no `sorryAx` and no custom `axiom`.
 ```
 Toolchain : leanprover/lean4:v4.15.0
 Mathlib   : rev v4.15.0 (see lake/lakefile.toml)
-Build     : cd lake && lake build Series4 AxiomCheck  →  Build completed successfully
+Build     : cd lake && lake build Series4 Series4.AxiomCheck  →  Build completed successfully
 sorryAx   : none
 ```
 

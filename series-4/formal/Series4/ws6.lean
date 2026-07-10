@@ -24,7 +24,7 @@ face-thickening (C).
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws5
+import Series4.ws5
 
 universe u
 

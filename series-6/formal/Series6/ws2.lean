@@ -23,7 +23,7 @@ reports this honestly: the collapse half (Discharged) and the not-yet-escaped ha
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws1
+import Series6.ws1
 
 universe u
 

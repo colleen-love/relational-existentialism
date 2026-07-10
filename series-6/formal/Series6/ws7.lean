@@ -28,8 +28,8 @@ itself is genuine.
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws2
-import ws6
+import Series6.ws2
+import Series6.ws6
 
 universe u
 

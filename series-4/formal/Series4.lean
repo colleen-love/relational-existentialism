@@ -17,26 +17,26 @@
 -- coalgebra of the κ-bounded powerset functor (via QPF/`Cofix`), the derived
 -- intrinsic `face`, the inherited weak-pullback gate, and Ω with its improper
 -- self-face.
-import ws1
+import Series4.ws1
 -- WS2 (`ws02-design.md`) — the collapse (atomless ∧ plural unsatisfiable on `νP_κ`),
 -- the imported-weight leak over a minimal quality algebra, and the forced-answer
 -- dichotomy.
-import ws2
+import Series4.ws2
 -- WS3 (`ws03-design.md`) — plurality without atoms: a self-contained labelled carrier
 -- `νLk` on which loops are distinguished by face, with composition unconditionally
 -- atom-free.
-import ws3
+import Series4.ws3
 -- WS4 (`ws04-design.md`) — no top, no view from nowhere: the endogenous no-top wall
 -- (each object's own `< κ` relating outgrown by the world), positioned views, and
 -- substantive standpoints.
-import ws4
+import Series4.ws4
 -- WS5 (`ws05-design.md`) — the self-bounding of the world: the M1/M2 negatives, the
 -- global-groundlessness Impossibility, and the endogenous bound on the loop-spine.
-import ws5
+import Series4.ws5
 -- WS6 (`ws06-design.md`) — the two incompletenesses: the proper self-face and its
 -- Lawvere diagonal (off the diagonal), and Ω's complete-yet-unclosed self-model (on
 -- it), with attention as face-thickening.
-import ws6
+import Series4.ws6
 -- WS7 (`ws07-design.md`) — the anti-trivialization audit: the finitude of facing, the
 -- one-finitude reduction, the distinctness anchor, and the typed program verdict.
-import ws7
+import Series4.ws7

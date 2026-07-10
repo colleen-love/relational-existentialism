@@ -1,10 +1,10 @@
 # Series 6 — Axiom Check Log
 
 Machine-checked `#print axioms` against the pinned build (Lean 4 v4.15.0 / Mathlib v4.15.0),
-run via `lake env lean series-6/formal/AxiomCheck.lean`. Every headline theorem is sorry-free
-and rests only on Mathlib's standard three (`propext`, `Classical.choice`, `Quot.sound`) —
-no `sorryAx`, no custom `axiom`. (`Classical.choice` enters via the `toPk` finiteness bound
-and `Cardinal` machinery, a Mathlib-base axiom, not a new one.)
+run via `lake env lean series-6/formal/Series6/AxiomCheck.lean`. Every headline theorem is
+sorry-free and rests only on Mathlib's standard three (`propext`, `Classical.choice`,
+`Quot.sound`) — no `sorryAx`, no custom `axiom`. (`Classical.choice` enters via the `toPk`
+finiteness bound and `Cardinal` machinery, a Mathlib-base axiom, not a new one.)
 
 Recorded 2026-07-10.
 

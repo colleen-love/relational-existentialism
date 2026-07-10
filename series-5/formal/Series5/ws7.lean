@@ -23,7 +23,7 @@ objective part. Design doc: `series-5/spec/ws07-design.md`.
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws5
+import Series5.ws5
 
 universe u
 

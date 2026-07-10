@@ -285,3 +285,50 @@ Lean rather than trusting the prose above. If the built reality contradicts any
 structural claim here (for example, if `succSet`/`toColim` compatibility is not
 already available), that is a design error to be recorded and fixed in this document,
 not worked around silently.
+
+---
+
+## Executor note (built, `sorry`-free, axiom-clean — standard three)
+
+Both obligations were built and verified against the pinned toolchain. Full `lake build` green;
+`spec/axiom-check-log.md` regenerated; Series 5 headline count 43 → 47. Two design corrections,
+recorded here as instructed:
+
+**Obligation #2 — the descent.** Built as `ws6_carrier_descent_nonterminating` and
+`ws6_carrier_descent_crosslevel` on `Winf (cardinalTower (GLabel Q))`.
+- **Design fix (label set): `cardinalTower (GLabel Q)`, not `cardinalTower Q`.** The design's
+  signature wrote `cardinalTower Q`, but step 1 reuses `descState`, which lives on the *graded*
+  carrier `νLk κ (GLabel Q)`. A tower over the plain label set `Q` cannot host the graded spine,
+  and the grade is exactly what the crux (and the strip test) require — on an ungraded uniform
+  chain the descending states are bisimilar and collapse to one self-loop. So the tower is
+  instantiated at the graded label set `GLabel Q` (WS6's own carrier). This is still *the*
+  `cardinalTower`, not a bespoke tower.
+- **Honest realization of "cross-level."** The chain's representatives sit at levels `(ℵ₀, n)`
+  whose index strictly decreases in the `ℤ` coordinate (no least element), but whose cardinal is
+  held fixed, so the connecting maps between them are identities (`boundRelax_refl`). Hence the
+  descent's *unboundedness below* is powered by the `ℤ`-index having no least element, and its
+  *distinctness* by the grade label (`descState_inj`) — not by cardinal stratification (cardinals
+  are well-founded, so a strictly-descending cardinal chain is impossible; the design's "no first
+  level (index) does real work for no atom floor (carrier)" is exactly this). The two theorems are
+  honest about this: distinct colimit points, genuine `RelatesInf` edges, no `∀ x` /
+  `HereditarilyNonempty` claim — a *selected path*, so the Parmenides collapse is not reawakened
+  (the design's crux, confirmed in Lean).
+
+**Obligation #12 — the coincidence.** Built as `ws6_relating_is_composition_coincidence`, proved
+via the new lemma `lcomp_lstr : lstr (lcomp t) = t`.
+- **Mechanism, stated transparently.** The genuine content is that `lcomp` is a *faithful section*
+  of observation: `s ↦ Cofix.corec (lcompCoalg t) (some s)` is a coalgebra endomorphism of the
+  terminal `νLk`, hence the identity (terminality), so `lcomp` reconstitutes a labelled structure
+  exactly. The composition-side relation `ComposedViaLcomp x y d := RelatesAtGrade (lcomp (lstr x)) y d`
+  (form the `lcomp` composite of `x`, then observe it) therefore coincides with `RelatesAtGrade x y d`,
+  and the proof rewrites through `lcomp_lstr` — it is **not** `Iff.rfl`, and the two definitions are
+  syntactically distinct (the acceptance criteria). The coincidence's meaning is "composing-then-observing
+  = observing," i.e. composition's faithfulness; that is the honest level of the discharge, not a
+  comparison of two a-priori-unrelated relations.
+
+**Phase-D self-review (blind acceptance criteria).** #12: the proof is confirmed not `Iff.rfl` and
+the definitions confirmed syntactically distinct. #2: the descent is confirmed to (a) depend on the
+grade for distinctness (strip test bites — `descState_inj` uses the grade), (b) assert no global
+hereditary-nonemptiness, (c) live on `cardinalTower`, not a bespoke tower. Verdict `payoffsEstablished`
+is unchanged: the #2 carrier descent is not a double-unboundedness derivation, so WS7's derivation
+count stays one.

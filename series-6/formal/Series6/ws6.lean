@@ -24,7 +24,7 @@ same-mechanism reduction (`ws6_one_engine_obstructed`): verdict pressure toward
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws5
+import Series6.ws5
 
 universe u
 

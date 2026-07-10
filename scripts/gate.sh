@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Closure gate — Series 6 is the live series.
+# Closure gate — each series is standalone.
 #
 # Series 3 is closed and frozen under `archive/`; Series 4 and Series 5 are complete under
-# `series-4/` and `series-5/`; only `series-6/` is live. Its one library is `Series6`
-# (registered in lake/lakefile.toml) — the closure rule is that series-6 imports resolve only
-# to series-6's own roots (+ mathlib). Series 6 is wholly standalone: nothing is imported from
-# `series-5/`, `series-4/`, or `archive/`.
+# `series-4/` and `series-5/`; Series 6 is live under `series-6/`. All three libraries are
+# registered in lake/lakefile.toml, each in its own module namespace (`Series4.*` /
+# `Series5.*` / `Series6.*`) so the flat `wsN` module names can coexist. The closure rule is
+# that each series' imports resolve only to that series' own roots (+ mathlib): Series 6
+# imports nothing from `series-5/`, `series-4/`, or `archive/`, and likewise for the others.
 set -u
 cd "$(dirname "$0")/.." || exit 2
 fail=0
@@ -22,8 +23,10 @@ check () { # <root> <allowed-egrep>
   fi
 }
 
-# series-6 is the live library: its roots (`Series6`, the per-workstream `wsN`, and
-# `AxiomCheck`) may import each other (+ mathlib); nothing outside them is allowed.
-check series-6 "^import (Series6(\.[A-Za-z0-9_]+)*|AxiomCheck|ws[0-9]+)$"
+# Each series' roots (the aggregator `SeriesN`, the per-workstream `SeriesN.wsX`, and
+# `SeriesN.AxiomCheck`) may import each other (+ mathlib); nothing outside the namespace is allowed.
+check series-4 "^import Series4(\.[A-Za-z0-9_]+)*$"
+check series-5 "^import Series5(\.[A-Za-z0-9_]+)*$"
+check series-6 "^import Series6(\.[A-Za-z0-9_]+)*$"
 
 exit $fail

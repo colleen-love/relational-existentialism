@@ -11,7 +11,7 @@
 - **Status vocabulary** (from charter §7): **Discharged** (target proved) · **Impossibility proved** (sharp negative, counts as success) · **Partial** (part proved, obstruction made precise) · **Failed** (not achieved, documented why) · **Trivialized** (the WS7-only verdict: an elegant unification that turned out definitional — a success, not a failure) · **Not started**.
 - **Coincidence status** (from charter §5, the coincidence rule): for each §5.3 payoff, whether the definitional form and an independently forced form were separately proved and shown to coincide. Values: **Coincidence proved** · **Definitional-only** (cheap form holds, forced form open) · **N/A** (payoff has no cheap form) · **Pending**.
 - **Naming discipline** (inherited from Series 3 ws4/ws5): a bundle is named by its parts, never `*_resolved` / `series4_resolved`, while any hole remains.
-- Every claim of "sorry-free / axiom-free" is provisional until a machine-checked `#print axioms` against a pinned Lean/Mathlib is recorded in the axiom-check row below. Static source audits are marked *(static)*. **As of this pass the axiom check is machine-run, not static** — see [`axiom-check-log.md`](./axiom-check-log.md).
+- Every claim of "sorry-free / axiom-free" is provisional until a machine-checked `#print axioms` against a pinned Lean/Mathlib is recorded in the axiom-check row below. Static source audits are marked *(static)*. **As of this pass the axiom check is machine-run, not static** — see [`axiom-check-log.md`](./spec/axiom-check-log.md).
 
 ---
 
@@ -23,7 +23,7 @@
 |---|---|
 | **Charter revision** | REV-0 (charter design unchanged) |
 | **This status file** | v1 — all seven workstreams reported and machine-checked |
-| **Formalization** | `series-4/formal/ws1.lean … ws7.lean`, `Series4.lean`, `AxiomCheck.lean` — builds `sorry`-free, no custom axioms (**41** headline theorems on Mathlib's standard three only), **machine-verified** ([`axiom-check-log.md`](./axiom-check-log.md), Lean 4.15.0 / Mathlib v4.15.0). **Self-contained**: nothing imported from `archive/`. |
+| **Formalization** | `series-4/formal/Series4/ws1.lean … ws7.lean`, `series-4/formal/Series4.lean`, `series-4/formal/Series4/AxiomCheck.lean` — builds `sorry`-free, no custom axioms (**41** headline theorems on Mathlib's standard three only), **machine-verified** ([`axiom-check-log.md`](./spec/axiom-check-log.md), Lean 4.15.0 / Mathlib v4.15.0). Both series build under one `cd lake && lake build` (targets `Series4` + `Series5`); the Series 4 axiom pass is `lake build Series4 Series4.AxiomCheck`. **Self-contained**: nothing imported from `archive/`. |
 | **Central question** (charter §4) | **Answered, split — and sharper after adversarial review.** No-top is a real wall but a **cardinal** one (`ws4_no_top_cardinal`); on R2 faces provably do *not* bound (review S2 + the WS5 M1/M2 negatives), so there is no endogenous face-counting wall. The bound is endogenous only on the loop-spine (WS5), and **globally** groundlessness collapses plurality (WS5, Impossibility). So "grain, not wall" is **not** achieved for bounding/positioning — faces do structural work for *plurality and composition*, not for *bounding*. That sharp localization is the real finding. |
 | **Headline positive** | Parmenides collapse (WS2) ✓; plurality without atoms + unconditional composition-closure via internal faces (WS3) ✓; the coinductive incompleteness at Ω (WS6 B2) ✓; the global-groundlessness Impossibility (WS5) ✓. |
 | **Signature risk** | Trivialization — refuted only on the two mechanized anchor rows; the "one finitude" reduction is **not** mechanized (review R1), so the verdict is downgraded (below). Weak-pullback gate (WS1) — **non-event** on the R2 carrier. |
@@ -35,7 +35,7 @@
 ## Workstream status
 
 ### WS1 — The world and its faces  ·  *blocking*
-**Status: Discharged (R2 carrier).** · Carrier decision made: **R2** (derived intrinsic face on the self-contained `νPk κ` carrier). Machine-checked in `series-4/formal/ws1.lean`.
+**Status: Discharged (R2 carrier).** · Carrier decision made: **R2** (derived intrinsic face on the self-contained `νPk κ` carrier). Machine-checked in `series-4/formal/Series4/ws1.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -48,7 +48,7 @@
 *Escalation watch:* WS3's plurality genuinely needs faces as independent data (faces on R2 are `str`-derived, hence epiphenomenal for distinguishing collapse-equal states). WS3 registers the R3 escalation as a typed obligation rather than reopening this row.
 
 ### WS2 — The collapse, and the forced answer  ·  *the spine*
-**Status: Partial (as pre-registered).** Machine-checked in `series-4/formal/ws2.lean`. Parts A, B, F1 Discharged; F2 dichotomy proved with internal-rigidity conditional, exactly the charter §9 hedge.
+**Status: Partial (as pre-registered).** Machine-checked in `series-4/formal/Series4/ws2.lean`. Parts A, B, F1 Discharged; F2 dichotomy proved with internal-rigidity conditional, exactly the charter §9 hedge.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -61,7 +61,7 @@
 *Exports for downstream:* `ws2_collapse` — WS3 cites it as the forced counterweight for its coincidence theorem; `carrier_card_ge` — WS4 consumes it for the no-top wall.
 
 ### WS3 — Plurality without atoms
-**Status: Discharged.** · **Coincidence: proved** (P3). Machine-checked in `series-4/formal/ws3.lean`.
+**Status: Discharged.** · **Coincidence: proved** (P3). Machine-checked in `series-4/formal/Series4/ws3.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -76,7 +76,7 @@
 *Coincidence (for WS7):* P3's two halves (`ws2_collapse` on `νPk`, `ws3_loopface_ne` on `νLk`) are the same bare successor shape seen without and with faces.
 
 ### WS4 — No top, no view from nowhere  ·  *carries the facing-injectivity crux*
-**Status: Relocated (no-top = cardinal wall; faces do not bound) + Partial (no-view: V1 definitional, V2 absent).** Corrected after adversarial review (`project-review-2.md`, S1/S2/R2). Machine-checked in `series-4/formal/ws4.lean`.
+**Status: Relocated (no-top = cardinal wall; faces do not bound) + Partial (no-view: V1 definitional, V2 absent).** Corrected after adversarial review (`project-review-2.md`, S1/S2/R2). Machine-checked in `series-4/formal/Series4/ws4.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -93,7 +93,7 @@
 *No-view (review R2):* the coincidence is **not** delivered. V1 (`ws4_view_is_positioned`) is `rfl` (definitional); a forced face-routed V2 does not exist (`ws4_no_global_observer` is the cardinal wall observer-side). So no-view is **Partial — V1 definitional, V2 absent**.
 
 ### WS5 — The self-bounding of the world  ·  *the "grain not wall" thesis*
-**Status: Partial + Impossibility proved** (both pre-registered outcomes realized). Machine-checked in `series-4/formal/ws5.lean`.
+**Status: Partial + Impossibility proved** (both pre-registered outcomes realized). Machine-checked in `series-4/formal/Series4/ws5.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -106,7 +106,7 @@
 *Outcome:* the central question is answered sharply at the global scale in the **negative** (`ws5_global_groundless_collapses`): you cannot make the whole world groundless and keep more than one thing in it. On the loop-spine the "grain, not wall" reading *does* hold (Ω's bound is its improper self-face, not a cap). So the bound is endogenous where the world is groundless (the diagonal) and imposed where it is plural — an honest split, exactly the pre-registered Partial.
 
 ### WS6 — The two incompletenesses  ·  *clearest expected win*
-**Status: Partial (A1 scoped after blind review; A3 coexistence; Part C convergence deferred).** Machine-checked in `series-4/formal/ws6.lean`.
+**Status: Partial (A1 scoped after blind review; A3 coexistence; Part C convergence deferred).** Machine-checked in `series-4/formal/Series4/ws6.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
@@ -120,17 +120,17 @@
 *Outcome:* the distinctive new result — B2, the on-diagonal non-termination — lands cleanly (the founding "self is a paradox" made a theorem). Two cruxes are honestly open: A3's blind-spot/diagonal *equality* (delivered as coexistence), and A1's proper self-face for *self-relating* objects (provably unattainable on the R2 derived face — `ws6_selfface_trivial`). Neither is laundered; both are stated as scope/open.
 
 ### WS7 — The anti-trivialization audit  ·  *owns the program verdict*
-**Status: Partial — verdict downgraded to `payoffsEstablished`** (adversarial review `project-review-2.md`, R1: the "one finitude" bundle is a conjunction, not a derivation from finitude). Machine-checked in `series-4/formal/ws7.lean`.
+**Status: Partial — verdict downgraded to `payoffsEstablished`** (adversarial review `project-review-2.md`, R1: the "one finitude" bundle is a conjunction, not a derivation from finitude). Machine-checked in `series-4/formal/Series4/ws7.lean`.
 
 | Obligation | Target | Status |
 |---|---|---|
 | The single finitude | `FinitudeOfFacing` + `ws7_finitude_of_facing` | **Discharged** (face proper off-diagonal, improper on it) |
 | Payoffs hold (a conjunction) | `ws7_payoffs_hold` (T2, was `ws7_one_finitude`) | **Discharged as a conjunction only** — six independently-proved payoffs conjoined. This does **not** show common origin; renamed to say only what it proves (review R1). |
-| Derivation from finitude | `ws7_incompleteness_off_from_finitude` | **Partial** — exactly *one* payoff (off-diagonal incompleteness) is mechanically derived *from* `FinitudeOfFacing`; the rest are established independently, their reduction argued in prose. |
-| Distinctness anchor | `ws7_deductions_dont_collapse` + `ws7_plurality_vs_collapse_distinct` (T3) | **Partial** — mechanized for two rows; a full six-way anchor is the named open. |
+| Derivation from finitude | `ws7_incompleteness_off_from_finitude` | **None mechanized (review-3 W1).** `FinitudeOfFacing` is *defined* as (off-diagonal properness) ∧ (Ω improper); this theorem's proof is `h.1`, so it **projects** the off-diagonal-properness conjunct the definition builds in — it is not a derivation of a payoff from an independent finitude. So *no* payoff is mechanically derived from a substantive single finitude; the reduction is argued in prose only. |
+| Distinctness anchor | `ws7_deductions_dont_collapse` + `ws7_plurality_vs_collapse_distinct` (T3) | **Partial (review-3 W2).** `ws7_deductions_dont_collapse` proves the two incompleteness *predicates* are mutually exclusive (no object is at once improper- and proper-faced) — disjoint domains of application, **not** deduction-independence. `ws7_plurality_vs_collapse_distinct` is the one row with genuine distinctness force (two different carriers, `νLk` vs `νPk`). A full six-way anchor is the named open. |
 | Verdict (typed) | `ProgramVerdict` + `ws7_verdict` + `ws7_verdict_eq` + `ws7_not_trivialized` (T4) | **`payoffsEstablished`** — *not* the stronger `oneFinitude` (would need every payoff derived from finitude), and *not* `Trivialized` (the anchors refute it). The honest middle. |
 
-*Verdict:* **payoffs established; common origin in one finitude argued, not fully mechanized.** Per review R1, `ws7_payoffs_hold` is a conjunction (any six theorems can be conjoined), so "one finitude, *substantively*" is not earned at the Lean level. What is mechanized: the payoffs hold, one of them derives from `FinitudeOfFacing`, and distinctness is anchored for two pairs. The typed verdict is `payoffsEstablished`, honestly below `oneFinitude`.
+*Verdict:* **payoffs established; common origin in one finitude argued, not fully mechanized.** Per review R1, `ws7_payoffs_hold` is a conjunction (any six theorems can be conjoined), so "one finitude, *substantively*" is not earned at the Lean level. What is mechanized: the payoffs hold, and distinctness is anchored for two pairs (`ws7_plurality_vs_collapse_distinct` genuinely, on two carriers; `ws7_deductions_dont_collapse` as predicate-exclusivity — review-3 W2). *No* payoff is mechanically derived from a substantive finitude: `ws7_incompleteness_off_from_finitude` projects the off-diagonal-properness clause that `FinitudeOfFacing` is *defined* to contain (proof `h.1`, review-3 W1). The typed verdict is `payoffsEstablished`, honestly below `oneFinitude`.
 *Self-audit disclosure:* Claude-auditing-Claude — a disclosed limitation; the mechanized anchors (T3) are the objective part.
 *Self-audit disclosure:* Claude-auditing-Claude — a disclosed limitation; T3 is the objective structural anchor.
 
@@ -163,9 +163,9 @@
 6. **GroundlessDiagonal consistency + witness** — WS5. **PARTIAL.** Witness exhibited on the loop-spine (`omegaGroundlessDiagonal`); the *global* extension is refuted (`ws5_global_groundless_collapses` — Impossibility proved). Extending the endogenous bound to carry plurality off the spine remains the named residue.
 7. **Blind-spot = diagonal equality** — WS6. **OPEN.** Both blind spots proved nonempty (`ws6_blindspot_nonempty` + `ws6_lawvere_incomplete`); their *equality* (A3) is downgraded to coexistence per the pre-registered fallback.
 8. **Proper self-face for self-relating objects (A1 general)** — WS6. **OPEN.** `ws6_selfface_trivial` shows the R2 derived self-face is trivial (empty or improper), so a nontrivial proper self-face is unattainable on this carrier; needs the `∪{y}` face variant or an R3 self-model.
-9. **"One finitude" derivation + six-way distinctness anchor** — WS7. **PARTIAL (review R1).** `ws7_payoffs_hold` is a conjunction, not a derivation from `FinitudeOfFacing`; only one payoff (`ws7_incompleteness_off_from_finitude`) is derived from finitude, and distinctness is mechanized for two rows. Verdict downgraded to `payoffsEstablished`. Deriving *every* payoff from a single finitude, and a full six-way anchor, are open.
+9. **"One finitude" derivation + six-way distinctness anchor** — WS7. **PARTIAL (review R1; sharpened by review-3 W1/W2).** `ws7_payoffs_hold` is a conjunction, not a derivation from `FinitudeOfFacing`. Per review-3 W1, *no* payoff is mechanically derived from a substantive finitude: `ws7_incompleteness_off_from_finitude` projects the off-diagonal-properness conjunct that `FinitudeOfFacing` is *defined* to contain (proof `h.1`), not an independent derivation. Per review-3 W2, `ws7_deductions_dont_collapse` anchors predicate-exclusivity (disjoint domains), not deduction-independence; `ws7_plurality_vs_collapse_distinct` is the one genuine distinctness row. Verdict stays `payoffsEstablished`. Deriving *every* payoff from a single finitude, and a full six-way anchor, are open.
 10. **Real face-routed V2 (no-view coincidence)** — WS4. **OPEN (review R2).** V1 is definitional `rfl`; a forced "unpositioned total view impossible, via faces" is absent and unavailable on R2 (faces do not bound). No-view is Partial.
-11. ~~**Machine-checked axiom pass** — all.~~ **CLOSED (this build)** — `AxiomCheck.lean` records all **41** headline theorems on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free; captured in [`axiom-check-log.md`](./axiom-check-log.md) against Lean 4.15.0 / Mathlib v4.15.0. Cite the commit hash + that log in any publication.
+11. ~~**Machine-checked axiom pass** — all.~~ **CLOSED (this build)** — `AxiomCheck.lean` records all **41** headline theorems on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free; captured in [`axiom-check-log.md`](./spec/axiom-check-log.md) against Lean 4.15.0 / Mathlib v4.15.0. Cite the commit hash + that log in any publication.
 
 **Residual opens (not blocking any *correctly-labelled* result):** #2 (internal-rigidity), #5 (face-counting no-top — withdrawn on R2, needs R3), #6 (off-spine endogenous bound), #7 (blind-spot/diagonal equality), #8 (self-relating proper self-face), #9 ("one finitude" derivation + six-way anchor), #10 (face-routed V2); plus Part C quantitative convergence. **Pattern (the review's bottom line):** wherever the charter wanted faces to *bound / position / unify*, the Lean uses the cardinal fact or a `rfl` — faces cannot do that structural work on R2. Wherever faces genuinely work — *plurality, composition, collapse* — the results are solid and correctly labelled.
 
@@ -173,10 +173,16 @@
 
 ## Closed log
 
+### Reconciliation pass 3 — adversarial review `project-review-3.md` addressed
+Whole-program blind review (no SERIOUS findings). Two REAL relabels (W1, W2) and one reproducibility note (A1), applied faithfully — all relabel-or-note, no goalpost moves, verdict unchanged at `payoffsEstablished`. Charter untouched.
+- **W1 — "one genuine derivation from finitude" is a projection, not a derivation.** `FinitudeOfFacing` is *defined* as (off-diagonal properness) ∧ (Ω improper), and `ws7_incompleteness_off_from_finitude`'s proof is `h.1` — it projects the off-diagonal-properness conjunct the definition already contains. Relabelled: *no* payoff is mechanically derived from a substantive single finitude (was "exactly one"). The payoff itself still holds (proved independently as `ws6_selfface_proper_nonselfrelating`); only the derivation gloss is corrected. WS7 table, verdict prose, and register #9 updated; verdict stays `payoffsEstablished` (already honest).
+- **W2 — the distinctness anchor anchors predicates, not deductions.** `ws7_deductions_dont_collapse` proves `¬∃x. face x x = ReachSet x ∧ face x x ⊂ ReachSet x` — the two incompleteness *predicates* cannot co-apply to one state (disjoint domains), which is not the deduction-independence T3 wanted. Relabelled as predicate-exclusivity; `ws7_plurality_vs_collapse_distinct` (genuinely on two carriers, `νLk` vs `νPk`) kept as the one row that carries real distinctness force. The six-way anchor remains the named open.
+- **A1 — axiom check made reproducible from a clean checkout.** The review noted `cd lake && lake build Series4 AxiomCheck` was no longer runnable because the live lakefile targeted Series 5 only. Resolved at the root: the lakefile now builds **both** series under one `cd lake && lake build` (each in its own module namespace, `Series4.*` / `Series5.*`), so the Series 4 axiom pass reproduces via `lake build Series4 Series4.AxiomCheck`. `spec/axiom-check-log.md`'s recorded build command updated to match.
+
 ### Reconciliation pass 2 — adversarial review `project-review-2.md` addressed
 Corrections owed, applied faithfully (the review's own guidance: several are relabel, not fix — faces cannot do bounding/positioning work on R2). Charter untouched.
 - **S1/S2 — no-top.** Overclaim withdrawn. The "endogenous face-routed wall" was a reachability wall with faces painted on; renamed `ws4_no_top_endogenous → ws4_no_top_reach`, re-proved via plain `Reaches.step` to make the point, and documented that faces do no work. No-top relabelled **Relocated (cardinal wall)**; the real wall is `ws4_no_top_cardinal`.
-- **R1 — verdict.** `ws7_one_finitude → ws7_payoffs_hold` (it is a conjunction). Added `ws7_incompleteness_off_from_finitude` (the one payoff genuinely derived from `FinitudeOfFacing`). `ProgramVerdict` gains `payoffsEstablished`; `ws7_verdict` downgraded from `oneFinitude` to `payoffsEstablished`.
+- **R1 — verdict.** `ws7_one_finitude → ws7_payoffs_hold` (it is a conjunction). Added `ws7_incompleteness_off_from_finitude` (then read as the one payoff derived from `FinitudeOfFacing`; **corrected in pass 3, W1** — its proof `h.1` projects a conjunct the definition builds in, so *no* payoff is derived from a substantive finitude). `ProgramVerdict` gains `payoffsEstablished`; `ws7_verdict` downgraded from `oneFinitude` to `payoffsEstablished`.
 - **R2 — no-view.** Relabelled **Partial**: V1 is definitional `rfl`, a face-routed V2 is absent (`ws4_no_global_observer` is the cardinal wall observer-side). Added `ws4_observation_inhabited` (C1: V1 not vacuous).
 - **R3 — left as-is** (already honestly Partial).
 - **C2 — `Luk3 → BotDivisorWitness`**, `ws2_leak_Luk3 → ws2_leak_witness` (the gadget is not genuine Łukasiewicz).
@@ -188,7 +194,7 @@ Charter-strength theorems attempted first per the executor rule; honest Partials
 - **WS3 (composition).** Charter-strength **met**: built a real state-forming operator `lcomp` (via `corec` on `Option`) and proved `ws3_faces_never_annihilate` at its intended meaning (composition of non-atomic states is non-atomic, unconditionally). The old loop-nonemptiness lemma is now `ws3_loop_nonatomic`.
 - **WS6 (A1).** Primary **provably resisted**: `ws6_selfface_trivial` proves the R2 derived self-face is always empty or improper, so a nontrivial proper self-face is unattainable. Scoped `ws6_selfface_proper` → `ws6_selfface_proper_nonselfrelating`; A1 → Partial.
 - **WS7 (anchor).** **Partial**: added a second mechanized distinctness row (`ws7_plurality_vs_collapse_distinct`); verdict scoped to the two mechanized rows, six-way anchor named open.
-- **Axiom check.** Now **machine-run** (39 theorems), captured in `axiom-check-log.md`; the *(static)* qualifier is lifted.
+- **Axiom check.** Now **machine-run** (41 theorems), captured in `spec/axiom-check-log.md`; the *(static)* qualifier is lifted.
 
 ### WS1–WS7 reported — first full machine-checked pass (`series-4/formal/`)
 - **Discharged:** WS1 (carrier + faces + inherited gate); WS2 Parts A/B/F1 and the F2 dichotomy; WS3 (labelled carrier, plurality, coincidence, unconditional composition-closure); WS4 (no-top wall [pass 2: = cardinal wall, Relocated], no-observer, positioned + substantive views, pole residue); WS6 A1/A2/B2/C; WS7 (payoffs + distinctness anchor; verdict [pass 2: downgraded to `payoffsEstablished`]). *[Rows marked [pass 2] were relabelled by the adversarial-review pass above.]*
@@ -196,7 +202,7 @@ Charter-strength theorems attempted first per the executor rule; honest Partials
 - **Partial:** WS2 general internal-rigidity (heuristic under canonicity); WS5 endogenous bound (loop-spine only); WS6 A3 (blind spots coexist, equality open).
 - **Deferred:** WS6 Part C quantitative convergence (Series 3 replicator/pitchfork; not reproduced in the self-contained pass).
 - **Coincidence:** proved for WS3 (P3), WS4 (V1+V2); coexistence for WS6 A3.
-- **Axiom check:** run against the pinned Lean 4.15.0 / Mathlib v4.15.0 build — 39 headline theorems, all on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free (`AxiomCheck.lean`, log in `axiom-check-log.md`).
+- **Axiom check:** run against the pinned Lean 4.15.0 / Mathlib v4.15.0 build — 41 headline theorems, all on `propext` / `Classical.choice` / `Quot.sound` only, `sorry`-free (`AxiomCheck.lean`, log in `spec/axiom-check-log.md`).
 - **Charter touched?** No — status-only. The charter design is unchanged; all shortfalls are stated as explicit hypotheses/typed structures, never relabelled as goals.
 
 *Template for future entries:*

@@ -27,21 +27,21 @@
 
 -- WS1 — the carrier `Proc`, Ω, productivity, and the gate: Ω is the unique productive thread
 -- (`ws1_productive_unique`), so productive plurality is impossible (`ws1_no_productive_plurality`).
-import ws1
+import Series6.ws1
 -- WS2 — the Static Collapse Theorem (`ws2_static_collapse`), escapes-are-imports
 -- (`ws2_escapes_are_imports`), subsumptions, and the forced answer (obstructed on C2).
-import ws2
+import Series6.ws2
 -- WS3 — the engine: the residue IS the Cantor diagonal and the sole definiens of the successor
 -- (`ws3_residue_is_diagonal`, `ws3_diagonal_drives`); the engine identity; the omega orbit.
-import ws3
+import Series6.ws3
 -- WS4 — the arrow: lossy survey / one-to-many residue, a strict order; the endogeneity FAILURE
 -- (a first moment, imported depth axis).
-import ws4
+import Series6.ws4
 -- WS5 — relativity: agreement-is-collapse; the LAUNDERING finding (bare same-depth
 -- incomparability); the Ω-absolute-frame branch (Newton = collapse, and Ω is not it).
-import ws5
+import Series6.ws5
 -- WS6 — the headline: incompleteness inherited, groundlessness-from-the-diagonal, no view from
 -- nowhere; and the achievement as an Impossibility (`ws6_atomless_and_plural_impossible`).
-import ws6
+import Series6.ws6
 -- WS7 — the anti-trivialization audit and the typed program verdict (`payoffsEstablished`).
-import ws7
+import Series6.ws7

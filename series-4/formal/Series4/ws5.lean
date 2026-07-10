@@ -23,7 +23,7 @@ per the pre-registered outcomes:
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws4
+import Series4.ws4
 
 universe u
 

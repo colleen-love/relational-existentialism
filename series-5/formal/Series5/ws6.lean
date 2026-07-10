@@ -18,9 +18,9 @@ cross-level-face objects `ViewAt`, `FaceReaches`, and the core `ws6_tower_unknow
 Design doc: `series-5/spec/ws06-design.md`. Sorry-free; axiom-clean beyond Mathlib's
 standard three.
 -/
-import ws3
+import Series5.ws3
 
-universe u
+universe u w
 
 open Cardinal QPF Functor Series5.WS1 Series5.WS2 Series5.WS3
 
@@ -53,21 +53,65 @@ theorem ws6_crosslevel_never_annihilate (t : LkObj κ (GLabel Q) (νLk κ (GLabe
 def RelatesAtGrade (x y : νLk κ (GLabel Q)) (d : ℤ) : Prop :=
   ∃ q : Q, (((ULift.up d, q) : GLabel Q), y) ∈ (lstr x).1
 
-/-- `x` is composed of `y` at grade `d` (composition side). **HONEST NOTE (project-review-1.md
-S2b):** this is *character-for-character the same definition* as `RelatesAtGrade` — there is
-no second, independently-motivated composition-side definition. The genuine identification
-duty (a composition-side relation built from `lcomp`, proved `↔` the observation side) is
-therefore **OPEN**, not "definitional-only." This alias is kept only to name the two readings
-of the one relation. -/
+/-- `x` is composed of `y` at grade `d` (composition side, ALIAS form). This is
+*character-for-character the same definition* as `RelatesAtGrade`, so the `↔` below is `Iff.rfl`
+and carries no identification content. **Superseded (register #12, `paper-prep-1.md`):** the
+genuine composition-side relation is `ComposedViaLcomp` (built from `lcomp`), and the genuine
+coincidence is `ws6_relating_is_composition_coincidence` (proved via `lcomp_lstr`, not `Iff.rfl`).
+This alias is retained only as a non-load-bearing remark naming the two readings. -/
 def IsComposedOfAtGrade (x y : νLk κ (GLabel Q)) (d : ℤ) : Prop :=
   ∃ q : Q, (((ULift.up d, q) : GLabel Q), y) ∈ (lstr x).1
 
-/-- **Relating-to = being-composed-of, at a grade — `Iff.rfl` on ONE definition, NOT a
-coincidence.** The two sides are identical by definition, so this carries no identification
-content. The charter's coincidence duty for this payoff is **unmet / open** (see the note on
-`IsComposedOfAtGrade`); it is *not* listed as a discharged coincidence. -/
+/-- **Relating-to = being-composed-of, `Iff.rfl` on ONE definition (the empty alias).** The two
+sides are identical by definition, so this carries no identification content. **Non-load-bearing
+remark, superseded by `ws6_relating_is_composition_coincidence`** (register #12, the genuine
+composition-from-`lcomp` coincidence). -/
 theorem ws6_relating_is_composition (x y : νLk κ (GLabel Q)) (d : ℤ) :
     RelatesAtGrade x y d ↔ IsComposedOfAtGrade x y d := Iff.rfl
+
+/-! ### Obligation #12 — a genuine `relating = composed-of` coincidence (not `Iff.rfl`)
+
+The alias above is honest but empty. The genuine identification duty (charter §5.5, register
+#12) wants a composition-side relation built from `lcomp`, proved `↔` the observation side. The
+content is `lcomp_lstr`: `lcomp` reconstitutes a labelled structure faithfully, so observing the
+composite equals observing directly. -/
+
+/-- **Composition is a faithful section of observation.** `lcomp t` is the state whose one-step
+unfolding is `t` itself: `lstr (lcomp t) = t`. The map `s ↦ Cofix.corec (lcompCoalg t) (some s)`
+is a coalgebra endomorphism of the terminal `νLk`, hence the identity (terminality), so the
+composite's grade-`d` successors are exactly `t`'s own. -/
+theorem lcomp_lstr (t : LkObj κ Q (νLk κ Q)) : lstr (lcomp t) = t := by
+  have hφ : (fun s : νLk κ Q => Cofix.corec (lcompCoalg t) (Option.some s)) = id := by
+    apply endo_eq_idLk (nuLk_terminal κ Q)
+    intro s
+    show Cofix.dest (Cofix.corec (lcompCoalg t) (Option.some s))
+        = LkMap (fun s => Cofix.corec (lcompCoalg t) (Option.some s)) (Cofix.dest s)
+    rw [Cofix.dest_corec]
+    show LkMap (Cofix.corec (lcompCoalg t)) (lcompCoalg t (Option.some s))
+        = LkMap (fun s => Cofix.corec (lcompCoalg t) (Option.some s)) (Cofix.dest s)
+    exact (LkMap_comp (Cofix.corec (lcompCoalg t)) Option.some (Cofix.dest s)).symm
+  show Cofix.dest (lcomp t) = t
+  rw [lcomp_dest]
+  show LkMap (Cofix.corec (lcompCoalg t)) (LkMap Option.some t) = t
+  rw [← LkMap_comp]
+  show LkMap (fun s => Cofix.corec (lcompCoalg t) (Option.some s)) t = t
+  rw [hφ, LkMap_id]
+
+/-- Composition side, built from `lcomp` — NOT an alias of `RelatesAtGrade`. `x` is composed of
+`y` at grade `d` iff the `lcomp`-composite of `x`'s own structure relates to `y` at grade `d`. -/
+def ComposedViaLcomp (x y : νLk κ (GLabel Q)) (d : ℤ) : Prop :=
+  RelatesAtGrade (lcomp (lstr x)) y d
+
+/-- **Obligation #12 — relating-to = composed-of, a genuine coincidence.** The observation-side
+relation `RelatesAtGrade` and the composition-side relation `ComposedViaLcomp` (form the `lcomp`
+composite of `x`, then observe it) agree — and NOT by `Iff.rfl`: the proof rewrites through
+`lcomp_lstr` (`lstr (lcomp (lstr x)) = lstr x`, composition faithfully reconstitutes the
+structure). This is "composing-then-observing = observing," the identification the alias
+`ws6_relating_is_composition` could not deliver. -/
+theorem ws6_relating_is_composition_coincidence (x y : νLk κ (GLabel Q)) (d : ℤ) :
+    RelatesAtGrade x y d ↔ ComposedViaLcomp x y d := by
+  unfold ComposedViaLcomp RelatesAtGrade
+  rw [lcomp_lstr (lstr x)]
 
 /-- A groundless descending spine: state `d` has one successor, state `d-1`, on a
 grade-`(d-1)` edge. The state carrier is `ULift.{u} ℤ` (`ℤ : Type 0` cannot be an
@@ -99,6 +143,110 @@ non-atomic (it descends again), so the composite face never drains to empty. -/
 theorem ws6_descent_nonterminating (q0 : Q) (hinf : ℵ₀ ≤ κ) (d : ℤ) :
     ∃ (finer : νLk κ (GLabel Q)) (d' : ℤ), d' < d ∧ RelatesAtGrade (descState q0 hinf d) finer d' :=
   ⟨descState q0 hinf (d - 1), d - 1, by omega, ⟨q0, desc_succ q0 hinf d⟩⟩
+
+/-! ### Obligation #2 — the descent, ported onto the tower carrier `Winf`
+
+The spine above lives on the *standalone* graded carrier. Obligation #2 asks for the descent
+*earned at the tower carrier* `Winf`, so that "no first level" (the `ℤ`-index, no least element)
+does real work for "no atom floor" (the carrier). We port `descState` onto `cardinalTower (GLabel Q)`
+(the cardinal tower over the graded label set — the graded label is exactly what keeps the
+descending states distinct; on the plain unlabelled carrier the chain would collapse by
+`ws2_collapse`). Design fix (`ws06`/`paper-prep-1`): the label set is `GLabel Q`, not `Q` —
+the descent must be graded to survive the strip test. -/
+
+/-- If `(q, y)` is a level-`a` successor of `x`, then in the colimit `toColim x` relates to
+`toColim y` at label `q`. The colimit reading of a level-local edge. -/
+theorem relatesInf_of_mem {Q' : Type u} (T : Tower.{u, w} Q') {a : T.Idx}
+    (x y : (T.lvl a).carrier) (q : Q') (h : (q, y) ∈ (lstr x).1) :
+    RelatesInf T (toColim T x) (toColim T y) := by
+  refine ⟨q, ?_⟩
+  rw [succSet_toColim]
+  exact ⟨(q, y), h, rfl⟩
+
+/-- The descending spine's full one-step unfolding: a single grade-`(d-1)` edge to its finer
+copy (the set form of `desc_succ`). -/
+theorem desc_dest (q0 : Q) (hinf : ℵ₀ ≤ κ) (d : ℤ) :
+    (lstr (descState q0 hinf d)).1
+      = {(((⟨d - 1⟩ : ULift.{u} ℤ), q0), descState q0 hinf (d - 1))} := by
+  have h := Cofix.dest_corec (descCoalg q0 hinf) (⟨d⟩ : ULift.{u} ℤ)
+  show (Cofix.dest (descState q0 hinf d)).1 = _
+  rw [descState, h]
+  show (LkMap (Cofix.corec (descCoalg q0 hinf)) (descCoalg q0 hinf ⟨d⟩)).1 = _
+  simp only [LkMap, descCoalg, PkMap_val, Set.image_singleton, Prod.map_apply, id_eq]
+  rfl
+
+/-- Distinct grades give distinct spine states — the grade label is load-bearing (delete it and
+the states collapse to one self-loop). This is what keeps the tower descent from reawakening the
+collapse. -/
+theorem descState_inj (q0 : Q) (hinf : ℵ₀ ≤ κ) {d₁ d₂ : ℤ}
+    (heq : descState q0 hinf d₁ = descState q0 hinf d₂) : d₁ = d₂ := by
+  have e1 := desc_dest q0 hinf d₁
+  rw [heq, desc_dest q0 hinf d₂] at e1
+  have hpair := Set.singleton_eq_singleton_iff.mp e1
+  have hd : (⟨d₂ - 1⟩ : ULift.{u} ℤ) = ⟨d₁ - 1⟩ := (Prod.ext_iff.mp (Prod.ext_iff.mp hpair).1).1
+  have hdd : d₂ - 1 = d₁ - 1 := congrArg ULift.down hd
+  omega
+
+/-- **The `ℤ`-index of a level is inert for the colimit image.** All levels `(ℵ₀, m)` share the
+carrier `νLk (max ℵ₀ ℵ₀) (GLabel Q)` with identity connecting maps, so `toColim` of a fixed state
+does not depend on the `ℤ`-coordinate of its level. This is what lets a *single* graded carrier's
+descent be read as a descent through strictly-`ℤ`-decreasing tower levels. -/
+theorem descState_colim_idx_indep (q0 : Q) (k m n : ℤ) :
+    toColim (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, m))
+        (descState q0 (le_max_left Cardinal.aleph0 Cardinal.aleph0) k)
+      = toColim (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, n))
+        (descState q0 (le_max_left Cardinal.aleph0 Cardinal.aleph0) k) :=
+  Quot.sound ⟨(Cardinal.aleph0, max m n),
+    Or.inr ⟨rfl, le_max_left m n⟩, Or.inr ⟨rfl, le_max_right m n⟩,
+    (boundRelax_refl _ _).trans (boundRelax_refl _ _).symm⟩
+
+/-- **Obligation #2 — carrier-level non-terminating descent.** On the tower carrier
+`Winf (cardinalTower (GLabel Q))` there is an infinite descending chain of *distinct* colimit
+points, each relating (at a grade) to the next, with no least element — the "no atom floor"
+earned at the carrier, not just at the index. Distinctness is carried by the grade label
+(`descState_inj`); on the stripped unlabelled carrier the chain would collapse (`ws2_collapse`),
+so the labels are load-bearing. It does not reawaken the collapse: it is a *selected path*, never a
+claim that the whole carrier is hereditarily nonempty. -/
+theorem ws6_carrier_descent_nonterminating (Q : Type u) (hQ : Nonempty Q) (q0 : Q) :
+    ∃ chain : ℤ → Winf (cardinalTower (GLabel Q)),
+      ∀ n : ℤ, RelatesInf (cardinalTower (GLabel Q)) (chain n) (chain (n - 1))
+             ∧ (chain (n - 1) ≠ chain n) := by
+  refine ⟨fun n => toColim (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, 0))
+      (descState q0 (le_max_left Cardinal.aleph0 Cardinal.aleph0) n), fun n => ⟨?_, ?_⟩⟩
+  · exact relatesInf_of_mem (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, 0))
+      (descState q0 (le_max_left _ _) n) (descState q0 (le_max_left _ _) (n - 1))
+      (⟨n - 1⟩, q0) (desc_succ q0 (le_max_left _ _) n)
+  · intro hcontra
+    have hst := toColim_level_inj (cardinalTower (GLabel Q)) (Cardinal.aleph0, 0) hcontra
+    exact absurd (descState_inj q0 (le_max_left _ _) hst) (by omega)
+
+/-- **Obligation #2 (cross-level form).** The same chain, exhibited with a representative at a
+tower level `lvlOf n = (ℵ₀, n)` whose index strictly decreases as `n` decreases (`le` holds,
+levels are distinct), with no least level — so the descent is genuinely across strictly-ordered
+tower levels, powered by no-least-index. (The connecting maps between these same-cardinal levels
+are identities, so the descent's *distinctness* rests on the grade, and its *unboundedness below*
+on the `ℤ`-index having no least element — exactly the design's "no first level does real work for
+no atom floor.") -/
+theorem ws6_carrier_descent_crosslevel (Q : Type u) (hQ : Nonempty Q) (q0 : Q) :
+    ∃ (chain : ℤ → Winf (cardinalTower (GLabel Q)))
+      (lvlOf : ℤ → (cardinalTower (GLabel Q)).Idx),
+      ∀ n : ℤ,
+        (∃ x : ((cardinalTower (GLabel Q)).lvl (lvlOf n)).carrier,
+            chain n = toColim (cardinalTower (GLabel Q)) x)
+        ∧ (cardinalTower (GLabel Q)).le (lvlOf (n - 1)) (lvlOf n)
+        ∧ lvlOf (n - 1) ≠ lvlOf n
+        ∧ RelatesInf (cardinalTower (GLabel Q)) (chain n) (chain (n - 1)) := by
+  refine ⟨fun n => toColim (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, n))
+      (descState q0 (le_max_left Cardinal.aleph0 Cardinal.aleph0) n),
+      fun n => (Cardinal.aleph0, n), fun n => ⟨⟨descState q0 (le_max_left _ _) n, rfl⟩, ?_, ?_, ?_⟩⟩
+  · exact Or.inr ⟨rfl, by show (n : ℤ) - 1 ≤ n; omega⟩
+  · intro h
+    have hne : (n : ℤ) - 1 = n := congrArg Prod.snd h
+    omega
+  · have hmem := relatesInf_of_mem (cardinalTower (GLabel Q)) (a := (Cardinal.aleph0, n))
+      (descState q0 (le_max_left _ _) n) (descState q0 (le_max_left _ _) (n - 1))
+      (⟨n - 1⟩, q0) (desc_succ q0 (le_max_left _ _) n)
+    rwa [descState_colim_idx_indep q0 (n - 1) n (n - 1)] at hmem
 
 /-! ## Part C — incompleteness: inherited (INC1) + new (INC2) -/
 

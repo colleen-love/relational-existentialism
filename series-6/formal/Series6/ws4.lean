@@ -20,7 +20,7 @@ Escalation to the richer home (metric C4) is owed for the endogenous arrow.
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws3
+import Series6.ws3
 
 universe u
 

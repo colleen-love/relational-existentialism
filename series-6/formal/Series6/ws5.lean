@@ -23,7 +23,7 @@ richer home. The Lorentzian ceiling stays unbuilt (flagged heuristic, charter §
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws4
+import Series6.ws4
 
 universe u
 

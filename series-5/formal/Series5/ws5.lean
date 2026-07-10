@@ -14,7 +14,7 @@ a residual fiat.
 Design doc: `series-5/spec/ws05-design.md` (G1 + G2, G3 rejected, G4 reported).
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws4
+import Series5.ws4
 
 universe u
 
