@@ -13,7 +13,10 @@ restriction now proved to collapse, not just argued. Extended again with the sub
 probe (`ws4_atomless_recoverable_all_bisimL`, `ws4_atomless_label_distinction_imports`,
 `ws4_subset_selection_survives_as_import`): on an atomless carrier, a free per-state subset-selection
 survives — but as an import (the atom is in the choosing, not the material), so the `atomless`
-hypothesis is tight. 45 headline theorems.
+hypothesis is tight. Capstone `att_cannot_distinguish_atomless_histories`: any attention function of
+the history returns equal values on atomless histories (they are equal, Ω), so a separator must be
+exogenous to the relating — a given (atom) or a choice (will), the same footprint, which the
+formalism cannot and does not decide between. 46 headline theorems.
 
 ```
 'Series7.WS1.ws1_atomless_bisim' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -44,6 +47,7 @@ hypothesis is tight. 45 headline theorems.
 'Series7.WS4.ws4_atomless_recoverable_all_bisimL' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_atomless_label_distinction_imports' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_subset_selection_survives_as_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.att_cannot_distinguish_atomless_histories' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_toy_loop_is_drop2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_index_reuses_label_mechanism' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_program_explained' depends on axioms: [propext, Classical.choice, Quot.sound]

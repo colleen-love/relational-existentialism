@@ -451,4 +451,30 @@ theorem ws4_subset_selection_survives_as_import (hinf : ℵ₀ ≤ κ) :
    ws4_atomless_label_distinction_imports (subsetLoop hinf)
      (subsetLoop_atomless hinf) ⟨true⟩ ⟨false⟩ (subsetLoop_survives hinf)⟩
 
+/-! ## CAPSTONE: separating atomless histories forces an exogenous distinguisher —
+     a given (atom) or a choice (will)
+
+The whole thread lands here. `ws1_productive_unique` gives EQUALITY, not mere bisimilarity: any two
+atomless (productive) histories are the SAME thread, Ω. So any `att : Proc κ → Q` — attention as a
+function of the history, however dynamic — returns the same value on both; a function cannot separate
+equal inputs. Hence to separate two atomless histories the separator must read something the histories
+do not contain: an argument exogenous to the relating.
+
+To the FORMALISM that exogenous argument is a coordinate not carried by the relating — the §4.1
+footprint of an import. But the footprint is all a proof can see, and two philosophically opposite
+things leave the same one: a **given** (a pre-existing atom, moved in) and a **choice** (a distinction
+freely originated). Type theory has no predicate for "freely chosen rather than given"; it proves only
+that the separator is exogenous and is silent on which. That silence is the result, not a gap.
+
+Read as the Parmenides collapse generalized: a groundless, atomless, faithfully-relational world that
+is DETERMINED is the One (`ws1_productive_unique` — the determined process is Ω; Series 6's "failure"
+seen rightly). Plurality requires a distinguisher not carried by the relating — an atom OR a will. The
+theorem forces the disjunction and does not decide the disjunct. The undecided disjunct — choice — is
+the fourth kind the leaf/import dichotomy could never name, because to the relating a free choice and
+an imported atom are the same footprint. -/
+theorem att_cannot_distinguish_atomless_histories {Q : Type*} (hinf : ℵ₀ ≤ κ)
+    (att : Proc κ → Q) (x y : Proc κ) (hx : Productive x) (hy : Productive y) :
+    att x = att y := by
+  rw [ws1_productive_unique hinf x hx, ws1_productive_unique hinf y hy]
+
 end Series7.WS4

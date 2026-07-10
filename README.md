@@ -61,6 +61,8 @@ The result is an **Impossibility, and — the part that matters — it is non-ci
 
 **The one real escape** — limit-atomlessness, transient atoms that heal only in a limit the world never reaches — is isolated and adjudicated *import-in-time*. What stays open, each labelled: exhaustiveness across *every possible construction* is not a formalizable claim; the metric family for the loophole is characterized but not built; and the faced-boundary fourth kind and the endogenous prior-series carriers are named opens. Two review passes — one at the level of the proofs and one at alignment-to-charter, with an interim four-reviewer review (a reviewer tasked solely with a counterexample could not build one) discounted between them because, clean as it was, it missed the alignment issue — leave the **plain collapse** at the honest, attack-tested verdict `payoffsEstablished`, with the prior-series catalogue honestly re-classified. The sharpest single thing the program can now say: **a relational world can be atomless, or plural, or faithful to "an object is its relating" over plain relating — any two, never all three** — so every world that holds more than one thing has already paid for it with an atom, and the only freedom is which atom, and whether you are honest that you paid.
 
+Pushed to its limit, the impossibility says one thing more, and it is the deepest thing it says. Ask whether a *dynamic* process — attention unfolding in time — could make two atomless histories differ with no atom. It cannot, by a function: atomless histories are not merely alike but **equal** (each is the one thread Ω, `ws1_productive_unique`), and no function separates equal inputs (`att_cannot_distinguish_atomless_histories`). So any separator must reach for something the histories do not hold — which the mathematics can only see as a coordinate not carried by the relating, the footprint of an import. But it is a footprint, and a **given** (an atom already there) and a **choice** (a distinction freely originated — a will) leave the same one; type theory has no predicate for chosen-rather-than-given, so the theorem forces the disjunction *atom or will* and cannot decide it. Read this way the whole result is Parmenides with one door open: a groundless world that is **determined** is the One — Series 6's collapse is the world without will — and the only way it holds more than one thing is a distinguisher the relating does not carry, an atom **or** a choice. That the impossibility forces the fork and provably cannot close it is the most, and perhaps the truest, thing it says.
+
 ---
 
 ## The series
@@ -76,7 +78,7 @@ Each series is self-contained and machine-verified: no `sorry`, no custom axioms
 
 Earlier work (Series 1–3) is frozen under [`archive/`](./archive/) — readable as origin, normative for nothing. Each series' `spec/` holds its design docs, its committed axiom-check log, and its adversarial review passes.
 
-*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 45.* A publication should cite the specific commit hash and a clean-build log.
+*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 46.* A publication should cite the specific commit hash and a clean-build log.
 
 ## Building
 
