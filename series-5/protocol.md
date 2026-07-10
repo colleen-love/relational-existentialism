@@ -73,6 +73,8 @@ A build may discover a design was wrong. The one prohibited move is **building p
 
 Because the build is batched, a mid-build discovery that reaches upstream (e.g. WS6 needing a uniform `F_∞` that WS1's `destInf` does not provide) is handled by the pre-registered fallback in the affected design (WS1's colimit-functor escalation), not by an ad hoc patch — the designs anticipate their own escalations precisely so the batched build does not stall.
 
+Please kick the build off as a background task at the start of a session - it takes a bit. 
+
 ### Phase D — Blind series-review (one session) → `series-review.md`
 
 In a fresh session:
