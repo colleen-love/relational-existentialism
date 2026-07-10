@@ -76,7 +76,7 @@ Each series is self-contained and machine-verified: no `sorry`, no custom axioms
 
 Earlier work (Series 1–3) is frozen under [`archive/`](./archive/) — readable as origin, normative for nothing. Each series' `spec/` holds its design docs, its committed axiom-check log, and its adversarial review passes.
 
-*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 38.* A publication should cite the specific commit hash and a clean-build log.
+*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 42.* A publication should cite the specific commit hash and a clean-build log.
 
 ## Building
 

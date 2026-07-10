@@ -164,6 +164,118 @@ theorem ws4_recoverable_not_import {Q X : Type u} (dest : X → LkObj κ Q X)
   let ⟨R, hR, hxy⟩ := h
   ⟨R, hrec R hR, hxy⟩
 
+/-! ## The recoverable label COLLAPSES; the free label IMPORTS (pass-2 S2, mechanized)
+
+Two theorems close the conditional. First (`ws4_recoverable_atomless_collapses`) the abstract
+collapse: a recoverable label imports nothing, so if the plain relating it forgets to is
+behaviorally identified and atomless, the whole labelled carrier is a subsingleton — a recoverable
+label can NEVER be the atom that rescues atomless plurality. Second, the two sides are witnessed:
+`labelLoop` (a FREE label, the state's own identity) is proved NOT recoverable
+(`ws4_labelLoop_not_recoverable`) — a genuine import; `facedLoop` (a RESTRICTION label, a function of
+the relating, the shadow of `x↾(x,y)` on collapse-equal states) is proved `Recoverable`, and its
+plurality is a DROP of behavioral identity, not an import. This is the Series 4 reclassification
+mechanized on minimal witnesses (the drop MECHANISMS, as elsewhere in WS4); the literal `νLk` carrier
+stays prior art, but "the restriction is recoverable, hence collapses" is now a theorem, not prose. -/
+
+/-- **The recoverable-label collapse (abstract, general).** A recoverable label imports nothing: it
+turns every plain bisimulation into a label bisimulation, so behavioral identity on the labels forces
+behavioral identity on the plain relating; with atomlessness, `ws2_import_theorem_static` collapses
+the carrier. This is the theorem the Series 4 restriction falls under — it CANNOT rescue atomless
+plurality. -/
+theorem ws4_recoverable_atomless_collapses {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hrec : Recoverable dest) (hbehav : BehaviorallyIdentifiedL dest)
+    (hatom : ∀ x, SHNE (plainOf dest) x) : Subsingleton X :=
+  Series7.WS2.ws2_import_theorem_static (plainOf dest)
+    (fun R hR x y hxy => hbehav R (hrec R hR) x y hxy) hatom
+
+/-- **A recoverable label cannot rescue plurality.** If the label is recoverable, plurality forces
+dropping behavioral identity or atomlessness of the plain relating — never an import. -/
+theorem ws4_recoverable_plurality_requires_drop {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hrec : Recoverable dest) (h4 : ∃ x y : X, x ≠ y) :
+    ¬ (BehaviorallyIdentifiedL dest ∧ (∀ x, SHNE (plainOf dest) x)) := by
+  rintro ⟨hb, ha⟩
+  obtain ⟨x, y, hxy⟩ := h4
+  haveI := ws4_recoverable_atomless_collapses dest hrec hb ha
+  exact hxy (Subsingleton.elim x y)
+
+/-- **The free label is NOT recoverable — a genuine import.** The plain relating cannot tell the two
+loops apart (`plainOf_labelLoop_true_bisim`), yet no label-bisimulation relates them
+(`ws4_label_survives_quotient`); so `Recoverable`, which would turn the former into the latter, fails.
+This is the escalation `x↾(x,y) ⤳ loopState q`: the coordinate the relating does not carry. -/
+theorem ws4_labelLoop_not_recoverable (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (labelLoop hinf) := by
+  intro hrec
+  exact ws4_label_survives_quotient hinf
+    ⟨fun _ _ => True, hrec _ (plainOf_labelLoop_true_bisim hinf), trivial⟩
+
+/-- **The faced (restriction) witness.** Two self-loops carrying the SAME constant label — a label
+that is a function of the relating, not of the state's identity: the restriction `x↾(x,y)` seen on
+collapse-equal states, where it cannot tell them apart. Lives on the non-plain `P_κ(Unit × Bool)`. -/
+noncomputable def facedLoop (hinf : ℵ₀ ≤ κ) :
+    ULift.{u} Bool → LkObj κ (ULift.{u} Unit) (ULift.{u} Bool) :=
+  fun i => toPk hinf {((⟨()⟩ : ULift.{u} Unit), i)}
+
+@[simp] lemma facedLoop_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (facedLoop hinf i).1 = {((⟨()⟩ : ULift.{u} Unit), i)} := rfl
+
+@[simp] lemma plainOf_facedLoop_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (plainOf (facedLoop hinf) i).1 = {i} := by
+  show Prod.snd '' ({((⟨()⟩ : ULift.{u} Unit), i)} : Set (ULift.{u} Unit × ULift.{u} Bool)) = {i}
+  rw [Set.image_singleton]
+
+/-- **The restriction label is recoverable.** A constant (identity-independent) label adds no
+constraint the plain relating does not already impose: every related pair matches labels for free. -/
+theorem ws4_facedLoop_recoverable (hinf : ℵ₀ ≤ κ) : Recoverable (facedLoop hinf) := by
+  intro R _ x y hxy
+  refine ⟨?_, ?_⟩
+  · intro p hp
+    rw [facedLoop_val, Set.mem_singleton_iff] at hp; subst hp
+    exact ⟨((⟨()⟩ : ULift.{u} Unit), y), by rw [facedLoop_val]; exact rfl, rfl, hxy⟩
+  · intro q hq
+    rw [facedLoop_val, Set.mem_singleton_iff] at hq; subst hq
+    exact ⟨((⟨()⟩ : ULift.{u} Unit), x), by rw [facedLoop_val]; exact rfl, rfl, hxy⟩
+
+lemma plainOf_facedLoop_reaches (hinf : ℵ₀ ≤ κ) (i j : ULift.{u} Bool) :
+    SReaches (plainOf (facedLoop hinf)) i j → j = i := by
+  intro h
+  induction h with
+  | refl => rfl
+  | tail _ hbc ih =>
+      rw [plainOf_facedLoop_val, Set.mem_singleton_iff] at hbc
+      rw [hbc]; exact ih
+
+lemma facedLoop_atomless (hinf : ℵ₀ ≤ κ) : ∀ i, SHNE (plainOf (facedLoop hinf)) i := by
+  intro i v hv
+  rw [plainOf_facedLoop_reaches hinf i v hv, plainOf_facedLoop_val]
+  exact Set.singleton_ne_empty i
+
+/-- The two faced states ARE label-bisimilar (the constant label matches) — so `facedLoop`'s
+plurality is a drop of behavioral identity, not an import. -/
+lemma facedLoop_true_bisimL (hinf : ℵ₀ ≤ κ) :
+    IsBisimL (facedLoop hinf) (fun _ _ => True) := by
+  intro x y _
+  refine ⟨?_, ?_⟩
+  · intro p hp
+    rw [facedLoop_val, Set.mem_singleton_iff] at hp; subst hp
+    exact ⟨((⟨()⟩ : ULift.{u} Unit), y), by rw [facedLoop_val]; exact rfl, rfl, trivial⟩
+  · intro q hq
+    rw [facedLoop_val, Set.mem_singleton_iff] at hq; subst hq
+    exact ⟨((⟨()⟩ : ULift.{u} Unit), x), by rw [facedLoop_val]; exact rfl, rfl, trivial⟩
+
+/-- **The restriction collapses; only the escalation imports — the S4 reclassification, mechanized.**
+Left: the faced (restriction) label is `Recoverable` and atomless, yet its two states are
+label-bisimilar, so its plurality is a DROP of behavioral identity — by
+`ws4_recoverable_atomless_collapses` a recoverable label is import-free and cannot rescue atomless
+plurality. Right: the free label (`labelLoop`) is NOT recoverable — a genuine import. The Series 4
+face is the former; Series 4's plurality is the latter (the free-label escalation). -/
+theorem ws4_restriction_collapses_escalation_imports (hinf : ℵ₀ ≤ κ) :
+    (Recoverable (facedLoop hinf)
+      ∧ (∀ i, SHNE (plainOf (facedLoop hinf)) i)
+      ∧ (∃ R, IsBisimL (facedLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩))
+  ∧ (¬ Recoverable (labelLoop hinf)) :=
+  ⟨⟨ws4_facedLoop_recoverable hinf, facedLoop_atomless hinf,
+     ⟨fun _ _ => True, facedLoop_true_bisimL hinf, trivial⟩⟩,
+   ws4_labelLoop_not_recoverable hinf⟩
+
 /-! ## RECLASSIFICATION of Series 4 (project-review-2/pass-2 S2, recorded in `charter-status.md`)
 
 Pass 2 correctly identified that the charter's paradigm import — the Series 4 face `x↾(x,y)` — is a
@@ -176,7 +288,12 @@ replacing the non-import with an import and keeping the name. So the honest cata
 Series 4's *faithful* restriction is a leaf that collapses; Series 4's *plurality* is a free-label
 escalation, which IS a genuine import (`ws4_free_label_is_import`). The two objects are different.
 This corrects `ws4_program_explained`'s "S4 dropped (1)": what dropped (1) is the escalated free
-label, not the restriction. The full `νLk` face is prior art, not re-transcribed. -/
+label, not the restriction. This reclassification is now MECHANIZED (above): the restriction's
+collapse is `ws4_recoverable_atomless_collapses` (recoverable ⇒ import-free ⇒ cannot rescue atomless
+plurality), witnessed by `facedLoop` (`ws4_facedLoop_recoverable`); the escalation's import is
+`ws4_labelLoop_not_recoverable`. The literal `νLk` carrier stays prior art — what remains prose is
+only the identification of the actual face with the recoverable class, a modeling claim, not the
+collapse itself. -/
 
 /-! ## drop (2): the plain non-reduction (twoLoop), distinct from drop (1) -/
 

@@ -38,6 +38,10 @@ import Series7
 #print axioms Series7.WS4.ws4_label_survives_quotient
 #print axioms Series7.WS4.ws4_free_label_is_import
 #print axioms Series7.WS4.ws4_recoverable_not_import
+#print axioms Series7.WS4.ws4_recoverable_atomless_collapses
+#print axioms Series7.WS4.ws4_recoverable_plurality_requires_drop
+#print axioms Series7.WS4.ws4_labelLoop_not_recoverable
+#print axioms Series7.WS4.ws4_restriction_collapses_escalation_imports
 #print axioms Series7.WS4.ws4_toy_loop_is_drop2
 #print axioms Series7.WS4.ws4_index_reuses_label_mechanism
 #print axioms Series7.WS4.ws4_program_explained
