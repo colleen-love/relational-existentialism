@@ -22,19 +22,21 @@ open Series7.WS1 Series7.WS3 Cardinal
 
 variable {κ : Cardinal.{u}}
 
-/-- **D1 — the provable core.** The static collapse (lemma-driven, WS2), the transcribed
-dynamic collapse (Series 6), and the trichotomy (WS3), conjoined — an explicit disjunction over
-the shapes Series 7 mechanizes, with a genuine ∀ inside each conjunct and NO ∀ over
-"constructions". The honest floor. -/
+/-- **D1 — the provable core.** The static collapse (lemma-driven, WS2), the transcribed dynamic
+collapse (Series 6), and the single-coalgebra dichotomy (WS3, `ws3_dichotomy`), conjoined — an
+explicit disjunction over the shapes Series 7 mechanizes, with a genuine ∀ inside each conjunct
+and NO ∀ over "constructions". The honest floor. (The third, intensional-history kind lives on the
+process and collapses under atomlessness — `WS3.ws3_history_kind_collapses` — it is not a kind of
+distinction on a single coalgebra.) -/
 theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X),
         BehaviorallyIdentified dest → (∀ x, SHNE dest x) → Subsingleton X)
   ∧ (∀ (t : Proc κ), Productive t → t = omegaProc hinf)
   ∧ (∀ {X : Type u} (dest : X → PkObj κ X) (x y : X), x ≠ y →
-        LeafDiff dest x y ∨ ImportDiff dest x y ∨ HistoryDiff dest x y) :=
+        LeafDiff dest x y ∨ ImportDiff dest x y) :=
   ⟨fun dest hb ha => Series7.WS2.ws2_import_theorem_static dest hb ha,
    fun t ht => ws1_productive_unique hinf t ht,
-   fun dest x y h => ws3_trichotomy dest x y h⟩
+   fun dest x y h => ws3_dichotomy dest x y h⟩
 
 /-! ## The universal — attempted, reported heuristic -/
 

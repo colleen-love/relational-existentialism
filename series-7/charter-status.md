@@ -62,21 +62,21 @@
 
 | Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| Every distinction is leaf / import / history | `ws3_trichotomy` | **Discharged** (`≠` in hypothesis, disjunction in conclusion — not the C2 trap) |
-| History collapses under atomlessness | `ws3_history_collapses` | **Discharged** (`ws1_productive_unique`) |
-| Exhaustive (no fourth kind) | `ws3_trichotomy_exhaustive` | **Discharged on a single coalgebra** (the engine forces it); **Partial** across any-construction (the un-rangeable quantifier → WS6) |
+| Distinction on a single coalgebra is leaf or import | `ws3_dichotomy` | **Discharged** (`≠` in hypothesis, disjunction in conclusion — not the C2 trap; honest dichotomy after R1) |
+| Atomless-distinct ⇒ import (consumes no-leaf hyp) | `ws3_atomless_distinct_is_import` | **Discharged** (engine-driven; genuinely uses `¬ LeafDiff`, after R2) |
+| Third kind (history) contentful, inhabited, collapses | `ws3_history_kind_inhabited`, `ws3_history_kind_collapses`, `ws3_history_collapses` | **Discharged** (on `Proc`; no longer a `False` placeholder, after R1) |
 | Three kinds genuinely distinct | `ws3_leaf_not_import`, `ws3_import_not_leaf` | **Discharged** (different extensions — not a partition) |
 
 ### WS4 — The imports catalogued: the program explained  ·  *the capstone unification*
-**Status: Discharged (import phenomenon); S3-weights Partial.**
+**Status: Discharged (drop-1 + drop-2 mechanisms); full carriers + S3-weights Partial.**
 
 | Obligation | Built theorem | Status |
 |---|---|---|
-| The import phenomenon (common shape of every drop) | `ws4_import_witness` | **Discharged** (distinct atomless states, bisimilar — an import) |
-| Labels/faces are the S4 import | `ws4_labels_are_import` | **Discharged** (`twoLoop` = `νLk`'s loops at minimum) |
-| Levels are the S5 import | `ws4_levels_are_import` | **Discharged** (the index behaves as `twoLoop`'s imported coordinate) |
-| Weights are the S3 import | — | **Partial** — the reading is clean (S3 functor is `P_κ(W×X)`), but no S3-specific Lean witness is transcribed; covered generically by `ws4_import_witness`. |
-| The theorem predicts each drop | `ws4_program_explained` | **Discharged** (import witnessed + `ws2_plurality_requires_drop` predicts + S6 collapsed) |
+| **drop (1)** — the label import SURVIVES the quotient | `ws4_labels_are_import`, `ws4_label_survives_quotient` | **Discharged** (labelled `labelLoop` on the non-plain functor: behaviorally identified yet plural; distinction survives the label-bisim quotient — a genuine drop of plainness, after S2/S3) |
+| **drop (2)** — plain non-reduction | `ws4_toy_loop_is_drop2` | **Discharged** (`twoLoop`: atomless, plural, bisimilar-yet-unequal; a drop of behavioral identity — NOT equated with drop-1) |
+| Levels are the S5 import (via index) | `ws4_levels_are_import` | **Discharged** (the index is a label — same drop-1 mechanism) |
+| Weights (S3) / full `νLk`,`Winf` carriers | — | **Partial** — the drop mechanisms are mechanized on minimal witnesses; the full prior CARRIERS remain prior art, not re-transcribed. |
+| The theorem predicts each drop | `ws4_program_explained` | **Discharged** (drop-1 + drop-2 witnessed + `ws2_plurality_requires_drop` predicts + S6 collapsed) |
 
 ### WS5 — The limit-atomlessness loophole  ·  *the one real escape*
 **Status: Discharged (characterization + adjudication); metric family Partial (build-owed).**
@@ -84,9 +84,9 @@
 | Obligation | Built theorem | Status · strip test |
 |---|---|---|
 | Limit-atomlessness reintroduces finite-stage leaves | `ws5_limit_reintroduces_leaves` | **Discharged** (a relaxation of (3), not a counterexample) |
-| Leafy plurality exists | `ws5_leafy_plurality` | **Discharged** (Ω vs the atom; the atom is leafy) |
+| Leafy pair exists (honest: a PERMANENT atom) | `ws5_leafy_pair` | **Discharged** (Ω vs the atom; the atom is a permanent leaf, NOT limit-atomless, after R4) |
 | Metric/Cauchy convergent family | — | **Partial** — the distinct-leafy-family-→-Ω `CauchySeq` packaging is build-owed (per S6's typed-but-unbuilt C4). |
-| Adjudication: genuine escape or import-in-time | `ws5_loophole_adjudication`, `ws5_adjudication_justified`, `ws5_fork_is_genuine` | **Discharged — import-in-time** (the plurality's distinguisher is always a finite-stage atom); `genuineEscape` retained terminal. |
+| Adjudication: genuine escape or import-in-time (a RULING) | `ws5_loophole_adjudication`, `ws5_adjudication_justified`, `ws5_fork_is_genuine` | **Discharged — import-in-time** (a ruling on the horn-neutral theorem, not forced, after R5); `genuineEscape` retained terminal. |
 
 ### WS6 — The heuristic ceiling  ·  *the honest boundary*
 **Status: Discharged (core); universal reported heuristic (pre-registered).**
@@ -101,10 +101,11 @@
 
 | Obligation | Built theorem | Status |
 |---|---|---|
-| Non-circularity audited (escapes refuted, not excluded) | `ws7_non_circularity_audit` | **Discharged** |
-| Trichotomy is not a definitional partition | `ws7_trichotomy_not_definitional` | **Discharged** |
-| Strip ledger aggregated (all clean) | `ws7_strip_ledger`, `ws7_strip_ledger_clean` | **Discharged** |
-| Typed verdict + `Circular` arm live | `ProgramVerdict`, `ws7_verdict_eq`, `ws7_not_circular`, `ws7_circular_if_fiat` | **`payoffsEstablished`** (`rfl`); `Circular` refuted, arm reachable |
+| Non-circularity audited on REAL escapes (drop-1 survives quotient + drop-2) | `ws7_non_circularity_audit` | **Discharged** (`Iff.rfl` demoted to prose usage claim, after S4) |
+| Kinds genuinely distinct (not a partition) | `ws7_kinds_distinct` | **Discharged** |
+| Strip ledger — actual counterexample TERMS | `ws7_strip_ledger` (`leafCoalg`, `labelLoop`, `twoLoop`) | **Discharged** (contingent on the terms typechecking, after R3) |
+| **Verdict wired to the audit certificate** | `Audit`, `ws7_audit`, `verdict`, `ws7_verdict_eq` | **`payoffsEstablished`** (`rfl`) — the verdict DEPENDS on the audit theorems; break one and it fails to build (after S1) |
+| `Circular` arm live and tied to the audit | `ws7_audited_not_circular`, `verdictNoCertificate` | **Discharged** (with a certificate, never Circular; the only route to Circular is a failed audit) |
 
 ---
 
@@ -130,7 +131,7 @@
 
 1. **The general lemma** — WS1. **CLOSED.** `ws1_atomless_bisim` + both `recovers` corollaries.
 2. **Non-circularity of the ingredients** — WS2/WS7. **CLOSED.** `ws2_non_circular` + `ws7_non_circularity_audit`: behavioral identity IS the no-import predicate; the escape refuted by theorem. Verdict NOT `Circular` (`ws7_not_circular`).
-3. **Trichotomy exhaustiveness** — WS3. **PARTIAL (pre-registered, honest).** `ws3_trichotomy_exhaustive` is Discharged on a single plain coalgebra (the engine forces the residue into `ImportDiff`); across *any construction* the quantifier is un-rangeable (charter §5.3) → `trichotomyExhaustive = false`, verdict `payoffsEstablished` not `importForced`. This is the sole reason the verdict is not the ceiling.
+3. **Trichotomy exhaustiveness** — WS3. **PARTIAL (pre-registered, honest).** After pass-1 (R1/R2): on a single plain coalgebra the distinction is a genuine DICHOTOMY (`ws3_dichotomy`: leaf or import), and `ws3_atomless_distinct_is_import` genuinely consumes the no-leaf hypothesis; the third (intensional-history) kind is CONTENTFUL on the process (`ws3_history_kind_inhabited` + `ws3_history_kind_collapses`), no longer a `False` placeholder. Exhaustiveness across *any construction* stays the un-rangeable quantifier (charter §5.3) → verdict `payoffsEstablished` not `importForced`. The "no fourth kind / teeth" overclaim is withdrawn.
 4. **The imports catalogued** — WS4. **CLOSED** (label/index/import phenomenon); **S3-weights Partial** (no S3-specific Lean witness transcribed; covered generically).
 5. **The loophole adjudication** — WS5. **CLOSED — import-in-time.** `ws5_limit_reintroduces_leaves` forces the distinguisher to a finite-stage atom; `genuineEscape` retained as the terminal alternative if a future reviewer privileges the limit-as-object (headline would weaken to "impossible except in the limit").
 6. **The universal quantifier** — WS6. **CLOSED as heuristic** (pre-authorized). `ws6_universal` a defended thesis floored by `ws6_provable_core`.
@@ -158,7 +159,18 @@
 
 - **Phase A (charter)** complete: `charter.md`, `charter-status.md`, and the design batch written.
 - **Phase B (design-all)** complete: `spec/ws1…ws7-design.md` + `spec/readme.md` (moved into `spec/`).
-- **Phase C (build-all)** complete: all seven `Series7/wsN.lean` + `Series7.lean` + `Series7/AxiomCheck.lean` compile, sorry-free and axiom-clean; closure gate passes. The blind series-review (Phase D) has not yet been run — this build session records its own findings above; a fresh blind reviewer should probe: (i) is the abstract-`Static`/`twoLoop` realization a faithful stand-in for the `νPk`/`νLk`/`Winf` witnesses the designs name, or does it dodge the specific non-circularity claims (`ws3_same_succ_diff_face`)? (ii) is `ws3_trichotomy`'s `HistoryDiff := False` on a single coalgebra an honest treatment of the third kind, or does it hide the cross-carrier fourth-kind gap? (iii) is the import-in-time adjudication (WS5) argued or asserted?
+- **Phase C (build-all)** complete: all seven `Series7/wsN.lean` + `Series7.lean` + `Series7/AxiomCheck.lean` compile, sorry-free and axiom-clean; closure gate passes.
+- **Phase D (blind review), pass 1** complete: `spec/project-review-1.md` — three adversarial reviewers, findings verified line-by-line. Core (the Import Theorem + its engine) confirmed genuine, non-vacuous, sorry-free; the interpretive layer flagged.
+- **Phase E (address), pass 1** complete (2026-07-10). Every finding addressed under the executor discipline (prove-more-or-relabel, never lower the bar). Summary:
+  - **S1 (verdict hand-set) — FIXED (proved).** The verdict is now a function of a mechanized `Audit` certificate (`WS7.Audit`, `ws7_audit`) whose every field is a theorem; `ws7_verdict` depends on it, so breaking any audit content breaks the build. The `Circular` arm is genuinely tied to the certificate's existence (`ws7_audited_not_circular`: with a certificate, never Circular).
+  - **S2/S3 (WS4 mechanizes nothing / wrong mechanism) — FIXED (proved a genuine drop-1).** A labelled coalgebra `WS4.labelLoop` on the NON-plain functor `P_κ(Q×X)` whose distinction SURVIVES the label-bisimulation quotient (`ws4_label_survives_quotient`) — behaviorally identified yet plural, a genuine drop of plainness (1), distinct from `twoLoop`'s drop-(2) non-reduction. The two mechanisms are no longer equated. `twoLoop` relabelled `ws4_toy_loop_is_drop2`. Honest scope: the full `νLk`/`Winf`/weight CARRIERS remain prior art, not re-transcribed.
+  - **S4 (non-circularity vacuous) — FIXED.** NC1 (`Iff.rfl`) demoted to a prose usage claim (not a counted anchor); the audit now rests on the real drop-1 label escape + drop-2 refutation, both theorems. The mislabelled "tower drops atomlessness" conjunct removed.
+  - **R1/R2 (dichotomy in trichotomy vocabulary) — FIXED (relabel + contentful third kind).** `ws3_trichotomy → ws3_dichotomy` (honest, single coalgebra); `ws3_trichotomy_exhaustive → ws3_atomless_distinct_is_import` (now consumes its no-leaf hypothesis); `HistoryDiff` made contentful on `Proc`, inhabited + collapsing.
+  - **R3 (self-fulfilling Bool ledger) — FIXED (real terms).** `ws7_strip_ledger` now carries actual counterexample terms — a behaviorally-identified plural coalgebra WITH a leaf (`WS7.leafCoalg`, `leafCoalg_behav`), the labelled carrier, and `twoLoop`.
+  - **R4/R5 (WS5 framing) — FIXED (scope/prose).** `ws5_leafy_plurality → ws5_leafy_pair`, honestly stating `emptyProc` is a PERMANENT atom (not limit-atomless); the convergent metric family stays Partial. The import-in-time adjudication is stated as a RULING, not forced.
+  - **R6 (IsImportWitness vacuous) — FIXED (removed).** The empty `IsImportWitness` predicate is gone; WS4 now uses the genuine drop-1/drop-2 statements.
+  - **C1/C2 (framing) — acknowledged.** Series 7's delta over Series 6 is honestly a reframing + the general bisimilarity lemma; the "live importForced arm" is gated on the open exhaustiveness flag and not implied to be near.
+  Full build re-verified sorry-free, axiom-clean; gate passes. A pass-2 blind review should regenerate against this addressed build.
 
 ---
 

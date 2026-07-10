@@ -36,40 +36,60 @@ unequal, so the distinction is not carried by `dest` (a `BehaviorallyIdentified`
 def ImportDiff {X : Type u} (dest : X → PkObj κ X) (x y : X) : Prop :=
   (∃ R, IsBisim dest R ∧ R x y) ∧ x ≠ y
 
-/-- **(iii) An INTENSIONAL-HISTORY difference** — for a single plain coalgebra there is no
-founded-history dimension, so this kind has no witness here; it lives only on the process
-carrier (where it collapses under atomlessness, `ws3_history_collapses`). -/
-def HistoryDiff {X : Type u} (_dest : X → PkObj κ X) (_x _y : X) : Prop := False
+/-! ## The dichotomy on a single plain coalgebra
 
-/-! ## The trichotomy -/
+REVIEW RESPONSE (project-review-1.md R1/R2, recorded in `charter-status.md`). Pass 1 was right
+that on a SINGLE plain coalgebra there are only two kinds — a leaf or an import — because there
+is no founded-history dimension; the earlier `HistoryDiff := False` made the "trichotomy" a
+dichotomy in trichotomy vocabulary. This is now stated honestly: `ws3_dichotomy` (two kinds on a
+single coalgebra) plus a CONTENTFUL third kind `HistoryDiff` on the PROCESS (inhabited among
+non-productive threads, collapsing under atomlessness). The "no fourth kind / teeth" framing is
+withdrawn; the single-coalgebra exhaustiveness is a genuine dichotomy, not overclaimed. -/
 
-/-- **D1 — the trichotomy.** Any distinction on a plain coalgebra is a leaf, an import, or a
-history difference. `≠` is in the HYPOTHESIS and the disjunction in the CONCLUSION (never the
-definitional-partition trap C2). Proof: if either state fails atomlessness it is a leaf; else
-both are atomless, so the engine (`ws1_atomless_bisim`) relates them by a bisimulation, and
-with `x ≠ y` that is an import. -/
-theorem ws3_trichotomy {X : Type u} (dest : X → PkObj κ X) (x y : X) (h : x ≠ y) :
-    LeafDiff dest x y ∨ ImportDiff dest x y ∨ HistoryDiff dest x y := by
+/-- **D1 — the dichotomy.** Any distinction on a single plain coalgebra is a leaf or an import.
+`≠` is in the HYPOTHESIS and the disjunction in the CONCLUSION (never the definitional-partition
+trap C2). Proof: if either state fails atomlessness it is a leaf; else both are atomless, so the
+engine (`ws1_atomless_bisim`) relates them by a bisimulation, and with `x ≠ y` that is an
+import. -/
+theorem ws3_dichotomy {X : Type u} (dest : X → PkObj κ X) (x y : X) (h : x ≠ y) :
+    LeafDiff dest x y ∨ ImportDiff dest x y := by
   by_cases hx : SHNE dest x
   · by_cases hy : SHNE dest y
-    · exact Or.inr (Or.inl ⟨ws1_atomless_bisim dest x y hx hy, h⟩)
+    · exact Or.inr ⟨ws1_atomless_bisim dest x y hx hy, h⟩
     · exact Or.inl (Or.inr hy)
   · exact Or.inl (Or.inl hx)
 
-/-- **D2 — the third kind collapses.** Under atomlessness the intensional history is Ω's
-(transcribed `ws1_productive_unique`), so `HistoryDiff` has no atomless witness on the
-process. -/
+/-- **D3 — atomless-distinct-⇒-import, using the no-leaf hypothesis.** Ruling out the leaf
+(both states atomless) forces the import — the engine relates any two atomless states by a
+bisimulation. Renamed from "exhaustive" (pass 1 R2): it genuinely consumes `¬ LeafDiff`, and it
+is the non-circular core (engine-driven), not a "no fourth kind" claim. -/
+theorem ws3_atomless_distinct_is_import {X : Type u} (dest : X → PkObj κ X) (x y : X)
+    (h : x ≠ y) (hnl : ¬ LeafDiff dest x y) : ImportDiff dest x y := by
+  simp only [LeafDiff, not_or, not_not] at hnl
+  obtain ⟨hx, hy⟩ := hnl
+  exact ⟨ws1_atomless_bisim dest x y hx hy, h⟩
+
+/-! ## The third kind (intensional history) — contentful, on the process -/
+
+/-- **(iii) An INTENSIONAL-HISTORY difference**, on the PROCESS carrier: two distinct threads at
+least one of which is non-atomless (leafy). This kind is genuinely inhabited (among
+non-productive threads) and collapses under atomlessness. -/
+def HistoryDiff (x y : Proc κ) : Prop := x ≠ y ∧ (¬ Productive x ∨ ¬ Productive y)
+
+/-- **The third kind is inhabited** — Ω and the atom process are a history difference (the atom
+is leafy). So `HistoryDiff` is not a `False` placeholder. -/
+theorem ws3_history_kind_inhabited (hinf : ℵ₀ ≤ κ) : ∃ x y : Proc κ, HistoryDiff x y :=
+  ⟨omegaProc hinf, emptyProc hinf, omega_ne_empty hinf, Or.inr (empty_not_productive hinf)⟩
+
+/-- **D2 — the third kind collapses under atomlessness.** Two productive (atomless) threads
+have no history difference: both are Ω. Transcribes `ws1_productive_unique`. -/
+theorem ws3_history_kind_collapses (_hinf : ℵ₀ ≤ κ) (x y : Proc κ)
+    (hx : Productive x) (hy : Productive y) : ¬ HistoryDiff x y :=
+  fun ⟨_, hor⟩ => hor.elim (fun h => h hx) (fun h => h hy)
+
+/-- The direct collapse fact (Ω unique among atomless threads), transcribed. -/
 theorem ws3_history_collapses (hinf : ℵ₀ ≤ κ) (t : Proc κ) (ht : Productive t) :
     t = omegaProc hinf := ws1_productive_unique hinf t ht
-
-/-- **D3 — exhaustiveness (Discharged on a single coalgebra).** For two ATOMLESS states,
-ruling out the leaf forces import or history — and here it is directly an import, because the
-engine relates any two atomless states by a bisimulation. This falls out of the engine, NOT
-of a definitional disjunction — the non-circular core. -/
-theorem ws3_trichotomy_exhaustive {X : Type u} (dest : X → PkObj κ X) (x y : X)
-    (hx : SHNE dest x) (hy : SHNE dest y) (h : x ≠ y) (_hleaf : ¬ LeafDiff dest x y) :
-    ImportDiff dest x y ∨ HistoryDiff dest x y :=
-  Or.inl ⟨ws1_atomless_bisim dest x y hx hy, h⟩
 
 /-! ## The three kinds are genuinely distinct (not a definitional partition) -/
 

@@ -23,22 +23,25 @@ import Series7
 #print axioms Series7.WS2.ws2_dynamic_instance
 #print axioms Series7.WS2.ws2_non_circular
 
--- WS3 — the trichotomy
-#print axioms Series7.WS3.ws3_trichotomy
+-- WS3 — the single-coalgebra dichotomy + the contentful third kind on the process
+#print axioms Series7.WS3.ws3_dichotomy
+#print axioms Series7.WS3.ws3_atomless_distinct_is_import
+#print axioms Series7.WS3.ws3_history_kind_inhabited
+#print axioms Series7.WS3.ws3_history_kind_collapses
 #print axioms Series7.WS3.ws3_history_collapses
-#print axioms Series7.WS3.ws3_trichotomy_exhaustive
 #print axioms Series7.WS3.ws3_leaf_not_import
 #print axioms Series7.WS3.ws3_import_not_leaf
 
--- WS4 — the imports catalogued
-#print axioms Series7.WS4.ws4_import_witness
+-- WS4 — the imports catalogued: drop (1) [labelled, survives quotient] and drop (2) [plain non-reduction]
 #print axioms Series7.WS4.ws4_labels_are_import
+#print axioms Series7.WS4.ws4_label_survives_quotient
+#print axioms Series7.WS4.ws4_toy_loop_is_drop2
 #print axioms Series7.WS4.ws4_levels_are_import
 #print axioms Series7.WS4.ws4_program_explained
 
 -- WS5 — the limit-atomlessness loophole
 #print axioms Series7.WS5.ws5_limit_reintroduces_leaves
-#print axioms Series7.WS5.ws5_leafy_plurality
+#print axioms Series7.WS5.ws5_leafy_pair
 #print axioms Series7.WS5.ws5_adjudication_justified
 #print axioms Series7.WS5.ws5_fork_is_genuine
 
@@ -46,11 +49,12 @@ import Series7
 #print axioms Series7.WS6.ws6_provable_core
 #print axioms Series7.WS6.ws6_universal_is_heuristic
 
--- WS7 — the audit and the typed verdict
+-- WS7 — the audit and the mechanized (certificate-wired) verdict
+#print axioms Series7.WS7.leafCoalg_behav
 #print axioms Series7.WS7.ws7_non_circularity_audit
-#print axioms Series7.WS7.ws7_trichotomy_not_definitional
-#print axioms Series7.WS7.ws7_strip_ledger_clean
+#print axioms Series7.WS7.ws7_kinds_distinct
+#print axioms Series7.WS7.ws7_strip_ledger
+#print axioms Series7.WS7.ws7_audit
 #print axioms Series7.WS7.ws7_verdict_eq
-#print axioms Series7.WS7.ws7_not_circular
-#print axioms Series7.WS7.ws7_circular_if_fiat
+#print axioms Series7.WS7.ws7_audited_not_circular
 #print axioms Series7.WS7.ws7_import_forced_if_exhaustive

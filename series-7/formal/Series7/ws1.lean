@@ -171,6 +171,46 @@ theorem ws1_no_productive_plurality (hinf : ℵ₀ ≤ κ) :
   rintro ⟨x, y, hne, hx, hy⟩
   exact hne (by rw [ws1_productive_unique hinf x hx, ws1_productive_unique hinf y hy])
 
+/-! ## The atom process — a permanent leaf (a non-productive thread) -/
+
+noncomputable def emptyApprox (hinf : ℵ₀ ≤ κ) : (n : ℕ) → Approx κ n
+  | 0     => PUnit.unit
+  | (n+1) => toPk hinf (∅ : Set (Approx κ n))
+
+theorem empty_compat (hinf : ℵ₀ ≤ κ) :
+    ∀ n, trunc κ n (emptyApprox hinf (n+1)) = emptyApprox hinf n := by
+  intro n
+  induction n with
+  | zero => rfl
+  | succ n _ =>
+      show PkMap κ (trunc κ n) (emptyApprox hinf (n+2)) = emptyApprox hinf (n+1)
+      apply Subtype.ext
+      show (trunc κ n) '' (∅ : Set (Approx κ (n+1))) = (∅ : Set (Approx κ n))
+      rw [Set.image_empty]
+
+noncomputable def emptyProc (hinf : ℵ₀ ≤ κ) : Proc κ :=
+  ⟨emptyApprox hinf, empty_compat hinf⟩
+
+/-- The atom process carries a finite-stage leaf: at stage 1 its successor set is empty. -/
+theorem empty_leafy (hinf : ℵ₀ ≤ κ) : ¬ allNonempty κ 1 ((emptyProc hinf).1 1) := by
+  intro h
+  have hne : ((emptyApprox hinf 1).1).Nonempty := h.1
+  simp only [emptyApprox, toPk_val] at hne
+  exact Set.not_nonempty_empty hne
+
+/-- The atom process is NOT productive — it is a permanent atom, not a limit-atomless thread. -/
+theorem empty_not_productive (hinf : ℵ₀ ≤ κ) : ¬ Productive (emptyProc hinf) :=
+  fun hp => empty_leafy hinf (hp 1)
+
+theorem omega_ne_empty (hinf : ℵ₀ ≤ κ) : omegaProc hinf ≠ emptyProc hinf := by
+  apply ws1_no_collapse (omegaProc hinf) (emptyProc hinf) 1
+  intro h
+  change omegaApprox hinf 1 = emptyApprox hinf 1 at h
+  have hv := congrArg Subtype.val h
+  rw [omegaApprox_succ] at hv
+  simp only [emptyApprox, toPk_val] at hv
+  exact (Set.singleton_ne_empty (omegaApprox hinf 0)) hv
+
 /-! ## Bisimulation, behavioral identity, and the "both-atomless" bisimulation (transcribed) -/
 
 def SReaches {X : Type u} (dest : X → PkObj κ X) : X → X → Prop :=
