@@ -111,7 +111,7 @@ theorem ws3_no_same_limit_haecceity (hinf : ℵ₀ ≤ κ) (x y : Proc κ)
 
 /-! ## The candidate FOURTH kind: the faced boundary (project-review-2/pass-2 R1, a named open)
 
-Pass 3 identified a candidate fourth location the leaf/import dichotomy does not enumerate: the
+Pass 2 identified a candidate fourth location the leaf/import dichotomy does not enumerate: the
 **faced boundary** — a descent boundary (leaf-like: it bottoms out, `¬ SHNE`) that ALSO carries a
 distinguishing quality (import-like: it tells states apart). The Series 4 restriction `x↾(x,y)` is
 exactly this: the relatum cut to a context, where the cut is itself a quality. `LeafDiff` is a bare

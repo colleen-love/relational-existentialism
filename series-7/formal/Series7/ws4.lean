@@ -166,7 +166,7 @@ theorem ws4_recoverable_not_import {Q X : Type u} (dest : X → LkObj κ Q X)
 
 /-! ## RECLASSIFICATION of Series 4 (project-review-2/pass-2 S2, recorded in `charter-status.md`)
 
-Pass 3 correctly identified that the charter's paradigm import — the Series 4 face `x↾(x,y)` — is a
+Pass 2 correctly identified that the charter's paradigm import — the Series 4 face `x↾(x,y)` — is a
 RESTRICTION of the relatum, hence a FUNCTION of the relata, hence `Recoverable`, hence NOT an import
 by `ws4_recoverable_not_import`. It is a **leaf** (a descent boundary, drop of ingredient (3)) — or,
 more precisely, a *faced boundary*: a leaf that also carries a distinguishing quality, a cell the
