@@ -36,6 +36,15 @@ name = "Series6"
 srcDir = "../series-6/formal"
 roots = ["Series6", "Series6.AxiomCheck"]
 
+# `series-7/formal/` — Series 7 (live). `Series7` imports `Series7.ws1`…`Series7.ws7`;
+# `Series7.AxiomCheck` runs the axiom pass. Series 7 is WHOLLY STANDALONE: every Series
+# 4/5/6 lemma it reuses is transcribed into `series-7/formal/Series7/wsNN.lean` and
+# re-namespaced `Series7.WSNN` — nothing is imported across series.
+[[lean_lib]]
+name = "Series7"
+srcDir = "../series-7/formal"
+roots = ["Series7", "Series7.AxiomCheck"]
+
 # mathlib is retained (cache present under `.lake`); all series import it.
 [[require]]
 name = "mathlib"

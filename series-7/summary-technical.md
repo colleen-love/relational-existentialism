@@ -1,0 +1,79 @@
+# Relational Existentialism — Series 7: Technical Status Summary
+
+*A machine-checked proof of the Import Theorem — atomless plurality is impossible without an import — with a precise map of what is proved, what is a defended thesis, and what is a labelled open.*
+
+## 1. What was built
+
+Series 7 asks (charter §8): **is atomless plurality impossible without an import?** Precisely, are the four ingredients jointly unsatisfiable: (1) *plain relating* (the functor is the unlabelled `P_κ`, no imported coordinate), (2) *behavioral identity* (an object is its relating — every bisimulation is contained in equality; this is also exactly "no imported atom"), (3) *genuine every-moment atomlessness* (hereditary non-emptiness, `SHNE`), and (4) *plurality*?
+
+The answer, machine-checked and folded through **two rounds of adversarial review (pass 2 clean, exit criterion met)**, is: **yes — the Import Theorem holds, and non-circularly.** The engine is one lemma, more general than any prior collapse; the escapes are refuted as theorems; the verdict is `payoffsEstablished`, the sole open being an unformalizable universal quantifier.
+
+The deliverable is a **theorem, and it is an Impossibility** — first-class in this program (charter §7), as the Parmenides collapse (Series 4), the Explosion Dilemma (Series 5), and the Static Collapse (Series 6) each were. The objects built, all self-contained:
+
+- the κ-bounded powerset functor `P_κ` (`PkObj`/`PkMap`), plain coalgebras `dest : X → PkObj κ X`, the standard two-sided powerset bisimulation `IsBisim`, behavioral identity `BehaviorallyIdentified` (= `NoImportedAtom`, literally the same predicate), and hereditary non-emptiness `SHNE` (built on `Relation.ReflTransGen`, so genuinely hereditary);
+- the **engine** — the "both-atomless" relation `hneRel` and `hneRel_isBisim` (it is a bisimulation), from which `ws1_atomless_bisim` (any two `SHNE` states are related by *a* bisimulation, on *any* `dest`);
+- the finite-approximation process `Approx`/`trunc`/`Proc`/`allNonempty`/`Productive` and `allNonempty_unique`/`ws1_productive_unique` (Series 6's dynamic collapse, transcribed) — the dynamic instance;
+- the witnesses: `twoLoop` (drop-2: plain, atomless, plural, bisimilar-yet-unequal), `labelLoop` on the **non-plain** functor `LkObj κ Q X = PkObj κ (Q×X)` with its label-respecting bisimulation `IsBisimL` (drop-1: behaviorally identified, plural, distinction **surviving** the label-quotient), `leafCoalg` (a behaviorally-identified plural coalgebra **with a leaf**, with a real 4-case bisimulation proof `leafCoalg_behav`), and `omegaProc`/`emptyProc`.
+
+Series 7 is **completely self-contained**: the `P_κ`/bisimulation/process machinery it reuses is transcribed into `series-7/formal/Series7/`, and nothing is imported from `series-6/`, `series-5/`, `series-4/`, or `archive/` (confirmed by `scripts/gate.sh`). `νLk`/`loopState`/`Winf`/weights occur only in comments (grep-confirmed by both reviews) — the prior CARRIERS are prior art, not re-transcribed; the drop MECHANISMS are mechanized on minimal witnesses.
+
+## 2. Verification status
+
+- **`sorry`-free:** no proof-position `sorry`, `admit`, `native_decide`, `sorryAx`, or custom `axiom` in `ws1`–`ws7`. Every `by decide` discharges a genuinely decidable concrete fact (independently confirmed, pass 2).
+- **No custom axioms:** every headline theorem rests only on Mathlib's standard three — `propext`, `Classical.choice`, `Quot.sound`.
+- **In-build verification, machine-run:** `Series7/AxiomCheck.lean` imports the whole build (`Series7`) and runs `#print axioms` on **37 headline theorems** across WS1–WS7 — including the engine (`ws1_atomless_bisim`), the Import Theorem (`ws2_import_theorem`, `ws2_import_theorem_static`), the dynamic collapse (`ws1_productive_unique`), every witness path (`twoLoop`, `labelLoop`, `leafCoalg`, `omegaProc`), the audit (`ws7_audit`), and the verdict (`ws7_verdict_eq`) — none of the load-bearing headlines omitted (the "AxiomCheck dodge" was checked for and absent, pass 2). Committed at [`spec/axiom-check-log.md`](./spec/axiom-check-log.md) against **Lean 4 v4.15.0 / Mathlib v4.15.0**.
+- **Closure:** `scripts/gate.sh` confirms `series-7/formal/` imports resolve only to Series 7's own roots plus Mathlib.
+
+## 3. Status against the success criteria (charter §8)
+
+| Criterion | Status | Mechanism / honest note |
+|---|---|---|
+| (i) collapses any plain, behaviorally-identified, atomless construction to a subsingleton, via the general lemma, recovering the static and dynamic collapses | **Discharged — the headline (Impossibility).** | `ws2_import_theorem` / `ws2_import_theorem_static` (plain ∧ `BehaviorallyIdentified` ∧ `SHNE` ⇒ `Subsingleton`), from `ws1_atomless_bisim` + behavioral identity. Static instance `ws1_recovers_static`; dynamic instance `ws1_recovers_dynamic` = `ws1_productive_unique`. Attack-tested: no counterexample exists, for the genuine unlabelled-powerset reason (pass 2). |
+| (ii) non-circular — ingredients independently motivated, escapes refuted as theorems | **Discharged.** | `ws2_non_circular` + `ws7_non_circularity_audit`: (2) is literally the founding predicate (NC1, a prose usage claim, deliberately not a counted anchor after pass-1 S4); the drop-(1) escape refuted by `ws4_label_survives_quotient` (no label-bisimulation relates the two loops — the distinction survives the quotient) and the drop-(2) by `twoLoop`. Strip-witnessed by real terms (`ws7_strip_ledger`: `leafCoalg`, `labelLoop`, `twoLoop`). |
+| (iii) exhaustive — every distinction a leaf, an import, or a collapsing history | **Discharged (single coalgebra) / Partial (any construction).** | On a single plain coalgebra it is a genuine **dichotomy** `ws3_dichotomy` (leaf or import), engine-driven; `ws3_atomless_distinct_is_import` consumes its `¬ LeafDiff` hypothesis. The third (process) kind `LeafyThreadDiff` is contentful (`ws3_leafy_thread_inhabited` + `_collapses`). Exhaustiveness across *any construction* is the un-rangeable quantifier (charter §5.3) → `heuristic`. The "no fourth kind / teeth" framing is withdrawn (pass-1 R1). |
+| (iv) explains the program — weights, labels, levels each the forced drop | **Discharged (mechanisms) / Partial (full carriers).** | `ws4_program_explained`: the drop-(1) label mechanism (survives quotient) and drop-(2) plain non-reduction are witnessed, read against `ws2_plurality_requires_drop`; Series 6 is the confirmation (`ws1_productive_unique`). The full `νLk`/`Winf`/weight carriers are prior art, not re-transcribed (honest Partial). |
+| (v) isolates the one loophole — limit-atomlessness, adjudicated | **Discharged (characterization + ruling) / Partial (metric family).** | `ws5_limit_reintroduces_leaves` (any two distinct processes differ at a finite-stage leaf — a relaxation, not a counterexample, via `allNonempty_unique`). `ws5_leafy_pair` honestly a leafy pair with a **permanent** atom, not a limit-atomless family. `ws5_loophole_adjudication := .importInTime` a disclosed RULING; the convergent metric `CauchySeq` family is build-owed (Partial). |
+| (vi) draws its honest scope — provable core vs heuristic universal | **Discharged (core) / heuristic (universal).** | `ws6_provable_core` (static collapse ∧ dynamic collapse ∧ the dichotomy, genuine ∀ inside each); `ws6_universal` a `def` returning a `heuristic`-tagged claim, not asserted. |
+
+**One** criterion is the deliverable Impossibility (i); its non-circularity (ii) is the signature risk, discharged. The verdict `payoffsEstablished` rests on (iii)/(iv)'s honest Partials, not on any laundering.
+
+## 4. What the theorem does — and does not — do
+
+### 4.1 Where it genuinely works (solid, earned, independently attack-tested)
+
+- **The engine `ws1_atomless_bisim`.** The "both-atomless" relation is a genuine bisimulation on any plain `dest`; re-derived by hand in pass 2, load-bearingly using both first-level nonemptiness (to get a matching witness) and hereditarity (to keep the pair in the relation). It generalizes the Parmenides collapse from the terminal object to any construction faithful to relating — the one line that unifies all four prior collapses.
+- **The Import Theorem `ws2_import_theorem`.** Sound, non-vacuous, universally quantified over plain coalgebras. The fresh from-scratch reviewer could not construct a plain, behaviorally-identified, hereditarily-atomless, plural coalgebra and confirmed *why*: under atomlessness every pair satisfies `hneRel`, a genuine bisimulation, so behavioral identity forces equality — the real unlabelled-powerset collapse, not a rigged `IsBisim`.
+- **Non-circularity, wired to a falsifiable certificate.** `ws7_verdict := verdict (ws7_audit hinf) false` names `ws7_audit`, whose four fields are real theorems; break any field and the verdict fails to build. The `Circular` arm is genuinely reachable (`ws7_audited_not_circular`: with a certificate, never Circular). This is the pass-1 S1 fix, confirmed genuine in pass 2.
+- **The drop-(1) label escape `ws4_label_survives_quotient`.** On the non-plain `P_κ(Q×X)`, no label-bisimulation relates the two loops — the distinction survives the behavioral quotient, the real drop-of-plainness, distinct from `twoLoop`'s drop-of-behavioral-identity. `IsBisimL` confirmed the correct induced bisimulation (not artificially strong), pass 2.
+- **The strip witnesses.** `leafCoalg` (behaviorally identified + plural + leaf, a real 4-case proof), `labelLoop` (non-plain, plural, survives quotient), `twoLoop` (plain, atomless, plural, not behaviorally identified) — each ingredient independently shown load-bearing by an honest witness.
+
+### 4.2 What it does not do (labelled honestly)
+
+- **Exhaustiveness across "any construction" is not formalizable (heuristic).** The quantifier over all constructions cannot be honestly ranged over (the WS6 `Construction`-typeclass trilemma: contentless, or a disjunction of known shapes, or false-if-general). Reported `heuristic`, floored by `ws6_provable_core`, exactly as Series 4/5's forced answers.
+- **The full prior carriers are not re-transcribed (Partial).** `νLk`, `Winf`, and the S3 weight algebra are prior art; only the drop MECHANISMS are mechanized (on `labelLoop`/`twoLoop`). `ws4_index_reuses_label_mechanism` (pass-2 C1) is honestly the label mechanism reused for the index reading, not a `Winf` transcription.
+- **The convergent leafy family is not built (Partial).** The loophole is characterized (`ws5_limit_reintroduces_leaves`) but the metric `CauchySeq`-to-Ω family is build-owed; `emptyProc` is a permanent atom, not a limit-atomless witness.
+- **The same-limit haecceity kind is structurally absent (a named open, pass-2 C2).** The delivered third kind `LeafyThreadDiff` is honestly a leaf difference on the process, not "same behaviour, different history." `ws3_no_same_limit_haecceity` records *why* it cannot be otherwise here: any two productive threads are equal, so the "extra to identity" cannot live in behaviour or process-history — only in a non-reduced carrier or an imported label. This is fenced out of `ws6_provable_core` and the verdict (not laundered), and is arguably the seed of a Series 8.
+
+### 4.3 The pattern
+
+For six series the import could not be removed, and each series read that as its own local limitation. Series 7 proves it was a theorem: **a relational world can be atomless, or plural, or behavioral-identity-faithful over plain relating — any two, never all three.** The four prior worlds are four forced drops of one ingredient each (weights/labels/levels drop plainness; Series 6's process kept all three and lost plurality). The delta over Series 6 is honestly the general bisimilarity lemma plus the import reframing — but that reframing is now *earned* (the mechanisms mechanized, the verdict falsifiable, the core attack-tested), not asserted.
+
+## 5. The two review passes
+
+- **`spec/project-review-1.md` (pass 1).** Three reviewers. Found the core (theorem + engine) genuine and sorry-free, but the interpretive layer carried by a 2-element toy, a `False` third kind, and three hand-set Bool flags: S1 (verdict hand-set, audit could not fail), S2/S3 (WS4 mechanized none of the program; `twoLoop` witnessed the wrong drop-mechanism), S4 (non-circularity `Iff.rfl`), plus R1–R6. Addressed by *proving more* — the falsifiable `Audit` certificate, the genuine `labelLoop` drop-(1) escape, the contentful third kind, real strip terms — never by lowering a bar.
+- **`spec/project-review-2.md` (pass 2 — CLEAN).** Four reviewers (two fix-validators, two fresh from-scratch, one solely tasked with a counterexample), against the addressed commit `cdf26d3`. **No SERIOUS finding.** All four pass-1 SERIOUS items confirmed genuinely fixed at the term level; the counterexample attempt failed for a stated mathematical reason; AxiomCheck coverage confirmed complete. The remaining items are two cosmetic over-names (C1, C3), one genuine carrier limitation correctly fenced out of the verdict (C2), and minor dead scaffolding (C4) — all addressed as relabels/removals, no mathematics changed. **Exit criterion met.**
+
+Both passes left `charter.md` untouched: every shortfall is an explicit hypothesis, a `heuristic` tag, or an honest status label — never a relabelled charter target.
+
+## 6. Open problems (each named and routed)
+
+1. **Exhaustiveness across any construction (WS3/WS6, heuristic).** The un-rangeable "construction" quantifier; a defended thesis floored by `ws6_provable_core`, as charter §5.3 pre-authorizes. This is the sole reason the verdict is `payoffsEstablished` and not `importForced`.
+2. **The full prior carriers (WS4, Partial).** Transcribe `νLk`/`Winf`/the weight algebra and prove the drop about *them*, rather than the minimal `labelLoop`/`twoLoop` mechanisms.
+3. **The convergent leafy family (WS5, build-owed).** Build the metric `bdist`/`CauchySeq`/`Tendsto` family of distinct leafy threads converging to Ω.
+4. **The same-limit haecceity witness (WS3, C2, structurally absent).** A same-behaviour-different-identity thing cannot exist on this carrier (`ws3_no_same_limit_haecceity`); expressing it would require a carrier that is neither a non-reduced plain coalgebra nor an imported label — arguably the question a next series opens.
+
+None is hidden; each sits in the open-obligations register of [`charter-status.md`](./charter-status.md), and **none is required for the headline verdict.**
+
+## 7. The honest headline
+
+Series 7 proves, sorry-free and axiom-clean, and confirmed by a clean second review whose fresh attack could not break it: **(1)** the Import Theorem — no plain, behaviorally-identified, hereditarily-atomless coalgebra is plural (`ws2_import_theorem`, an Impossibility); **(2)** its engine, that atomless behavior is unique on *any* plain coalgebra (`ws1_atomless_bisim`), unifying all four prior collapses; **(3)** its non-circularity, wired to a falsifiable audit certificate, with the escapes refuted as theorems and the strips witnessed by real terms; **(4)** the program explained as four forced ingredient-drops, with Series 6 the drop that collapsed; and **(5)** the one loophole (limit-atomlessness) isolated and adjudicated import-in-time. It does **not** formalize exhaustiveness across every construction (an unformalizable quantifier, `heuristic`), re-transcribe the full prior carriers, build the convergent metric family, or express a same-limit haecceity witness (structurally absent) — the verdict is the honest middle **`payoffsEstablished`**, earned, and every shortfall is labelled. The theorem reads the whole program backward: the import was never a failure of nerve; it was forced. Drawing that price list and proving it complete-but-for-an-unformalizable-quantifier is the contribution.

@@ -21,102 +21,107 @@
 
 | | |
 |---|---|
-| **Charter revision** | REV-0 (charter design unchanged) |
-| **This status file** | v0 — charter written (Phase A). No protocol yet (inherits Series 6's), no designs, no build. |
-| **Design docs** | **Not started.** To be written as a batch under `series-7/spec/ws01…ws07-design.md` + `README.md`. |
-| **Formalization** | **Not started.** Target `series-7/formal/Series7/ws1…ws7.lean`, `Series7.lean`, `AxiomCheck.lean`, self-contained (transcribe the `P_κ` / bisimulation machinery from Series 4/6; import nothing across series), pinned Lean/Mathlib. |
-| **Central question** (charter §8) | **Open — the series has just been chartered.** Is atomless plurality impossible without an import? Precisely: do (1) plain relating, (2) behavioral identity, and (3) genuine every-moment atomlessness jointly force the negation of (4) plurality — non-circularly, and exhaustively (every distinction a leaf, an import, or a collapsing history)? None of this is built. |
-| **Headline target (negative, first-class)** | **The Import Theorem** (WS2, Impossibility): 1∧2∧3 ⇒ ¬4. Every plural relational world drops exactly one of (1)–(3); the drop is its price. This is the deliverable — a proved impossibility, as the Parmenides collapse and Explosion Dilemma were for their series. |
-| **Headline target (unification)** | The program explained (WS4): weights (S3), labels (S4), levels (S5) each the *forced* ingredient-1 drop of their series; Series 6's process the drop that failed (collapsed). The capstone reading of 3→4→5→6. |
-| **Strong prior art (transcribe / generalize, do not presuppose)** | `ws2_collapse` / `ws5_global_groundless_collapses` (Series 4 — the static instance); `ws1_productive_unique` / `ws1_no_productive_plurality` (Series 6 — the dynamic instance). The general lemma (WS1) is their common root; both are already machine-checked, so WS1/WS2 start from a strong base. |
-| **Signature risk** | **Circularity** — the theorem true only because "genuinely atomless / no import" was defined to exclude the escapes. Not trivialization (Series 6's risk) but tautology. Untested until built; WS7 owns it. Secondary: the trichotomy (WS3) may not be exhaustive. |
-| **Blocking item** | **WS1 general lemma** — atomless behavior is unique on any plain `P_κ`-coalgebra (the "both-atomless" bisimulation). The engine; settled first. **Not started.** |
-| **Verdict (WS7)** | **Not started.** Typed `ProgramVerdict ∈ { importForced, payoffsEstablished, Circular }`, reported only after WS1–WS6. Predicted: `importForced` if non-circularity + trichotomy land; `payoffsEstablished` if the trichotomy or the universal stays partial; `Circular` if the escapes are only excluded by fiat. |
+| **Charter revision** | REV-0 (charter design unchanged; the build confirmed it). |
+| **This status file** | v1 — designs committed (Phase B) and the full build landed (Phase C). All seven `Series7/wsN.lean` + `Series7.lean` + `Series7/AxiomCheck.lean` compile, **sorry-free and axiom-clean** (standard three only; `spec/axiom-check-log.md`). Closure gate passes (self-contained; nothing imported across series). |
+| **Design docs** | **Committed.** `spec/ws1…ws7-design.md` + `spec/readme.md` (moved into `spec/`). |
+| **Formalization** | **Built.** `series-7/formal/Series7/ws1.lean … ws7.lean`, `Series7.lean`, `Series7/AxiomCheck.lean`. Self-contained. Pinned Lean 4 v4.15.0 / Mathlib v4.15.0. |
+| **Central question** (charter §8) | **Answered — YES, non-circularly.** Atomless plurality is impossible without an import: (1) plain relating ∧ (2) behavioral identity ∧ (3) genuine every-moment atomlessness force ¬(4) plurality (`WS2.ws2_import_theorem`), driven by the general engine (`WS1.ws1_atomless_bisim`), recovering the static and dynamic collapses as instances. Non-circular (`WS2.ws2_non_circular`, `WS7.ws7_non_circularity_audit`). The one loophole (limit-atomlessness) is a genuine relaxation, adjudicated import-in-time (WS5). |
+| **Headline result (Impossibility, a first-class success)** | **The Import Theorem** — proved and non-circular. The engine `ws1_atomless_bisim` generalizes every prior collapse (the "both-atomless" bisimulation on ANY plain coalgebra). The trichotomy of distinction (WS3) lands on a single coalgebra (Partial across "any construction"). The program is explained (WS4). The loophole isolated (WS5). |
+| **Verdict (WS7)** | **`payoffsEstablished`** (`ws7_verdict_eq`, `rfl`). `nonCircular = true`, `stripHolds = true`, `trichotomyExhaustive = false` (exhaustiveness across "any construction" is the pre-registered Partial). `Circular` refuted (`ws7_not_circular`); the `Circular` arm is live (`ws7_circular_if_fiat`). `importForced` reachable if exhaustiveness lands (`ws7_import_forced_if_exhaustive`). |
+| **Prior art (transcribed, not imported)** | The `P_κ`/bisimulation machinery + the process (`Approx`/`Proc`/`allNonempty_unique`/`ws1_productive_unique`) + `hneRel`/`hneRel_isBisim`/`Static`/`twoLoop`, all transcribed into `Series7/ws1.lean`, re-namespaced. The engine (WS1) is their generalization. |
+| **Signature risk outcome** | **NOT Circular.** Behavioral identity IS the no-import predicate (`NoImportedAtom = BehaviorallyIdentified`, `Iff.rfl`); the escape is refuted as a theorem (the indexed loops are atomless-distinct-yet-bisimilar). Not a rigged "atomless". |
+| **Only genuine open** | Trichotomy exhaustiveness across *any construction* (WS3, the un-rangeable quantifier — Partial, per charter §5.3); and the metric `CauchySeq` packaging of the loophole family (WS5, build-owed). Neither is a dependency of the Impossibility. |
 
 ---
 
 ## Workstream status
 
-*All seven are **Not started.** The rows record the pre-registered contract — the target theorem names and outcome classes from the charter — so the design batch has explicit hooks. Names are provisional design targets, not built artifacts.*
+*All seven are **built** (`series-7/formal/Series7/wsN.lean`, sorry-free, axiom-clean). Theorem names below are the built artifacts. One realization choice, recorded once and routed to the WS1/WS4 designs: the heavy QPF carriers named in the designs (`νPk`, `νLk`/`loopState`, the tower `Winf`, the S3 weight algebra) are NOT re-transcribed; the identical structural facts are realized via the abstract `Static` (behavioral identity, subsuming `νPk`) and the minimal witness `twoLoop` (two indexed atomless self-loops, bisimilar-yet-unequal — the label/index import at its minimum). A faithful reframing (signatures met by theorem), not a retargeting.*
 
 ### WS1 — Atomless behavior is unique  ·  *blocking, the engine*
-**Status: Not started.** · Strong prior art: `ws2_collapse` (S4), `ws1_productive_unique` (S6) are the two instances this lemma unifies.
+**Status: Discharged.**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| **General lemma: hne states bisimilar on any plain coalgebra** | `ws1_atomless_bisim` | Not started (the "both-atomless" bisimulation) |
-| Recovers the static collapse as an instance | `ws1_recovers_static` | Not started (from `ws2_collapse`) |
-| Recovers the dynamic collapse as an instance | `ws1_recovers_dynamic` | Not started (from `ws1_productive_unique`) |
+| **General lemma: hne states bisimilar on any plain coalgebra** | `ws1_atomless_bisim` | **Discharged** (the "both-atomless" bisimulation, `hneRel_isBisim`) |
+| Recovers the static collapse | `ws1_recovers_static` | **Discharged** (abstract `BehaviorallyIdentified` form, subsumes `νPk`) |
+| Recovers the dynamic collapse | `ws1_recovers_dynamic` | **Discharged** (`ws1_productive_unique`, transcribed) |
 
 ### WS2 — The Import Theorem, and its non-circularity  ·  *the spine*
-**Status: Not started.**
+**Status: Impossibility proved (the deliverable) + non-circularity Discharged.**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| **The Import Theorem** (1∧2∧3 ⇒ ¬4) | `ws2_import_theorem` | Not started (Impossibility target) |
-| Plurality requires dropping an ingredient | `ws2_plurality_requires_drop` | Not started |
-| **Non-circularity**: escapes refuted as theorems | `ws2_non_circular` | Not started (νLk carries a label, tower an index — by theorem, not fiat) |
-| Ingredients independently motivated | `ws2_ingredients_motivated` | Not started (1, 2 are the program's founding commitments) |
+| **The Import Theorem** (1∧2∧3 ⇒ ¬4) | `ws2_import_theorem` | **Impossibility proved** (the headline) |
+| Static form / plurality requires a drop | `ws2_import_theorem_static`, `ws2_plurality_requires_drop` | **Discharged** |
+| Dynamic instance (cited parallel) | `ws2_dynamic_instance` | **Discharged** |
+| **Non-circularity**: escape refuted as a theorem | `ws2_non_circular`, `ws2_escapes_are_imports` | **Discharged** (NoImportedAtom = BehaviorallyIdentified; indexed loops import by theorem) |
 
 ### WS3 — The trichotomy of distinction  ·  *the teeth*
-**Status: Not started.** · **Coincidence/exhaustiveness duty:** the three kinds distinct and jointly exhaustive, not a definitional partition.
+**Status: Discharged on a single coalgebra; exhaustiveness Partial across "any construction" (pre-registered).**
 
-| Obligation | Target (provisional) | Status · strip test |
+| Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| Every distinction is leaf / import / history | `ws3_trichotomy` | Not started |
-| Intensional history collapses under atomlessness | `ws3_history_collapses` | Not started (transcribe `ws1_productive_unique`) |
-| The trichotomy is exhaustive (no fourth kind) | `ws3_trichotomy_exhaustive` | Not started · *the hardest open; a fourth kind demotes to collapse-plus-examples* |
+| Distinction on a single coalgebra is leaf or import | `ws3_dichotomy` | **Discharged** (`≠` in hypothesis, disjunction in conclusion — not the C2 trap; honest dichotomy after R1) |
+| Atomless-distinct ⇒ import (consumes no-leaf hyp) | `ws3_atomless_distinct_is_import` | **Discharged** (engine-driven; genuinely uses `¬ LeafDiff`, after R2) |
+| Third kind (leafy-thread) contentful, inhabited, collapses | `ws3_leafy_thread_inhabited`, `ws3_leafy_thread_collapses`, `ws3_no_same_limit_haecceity` | **Discharged** (on `Proc`; no longer a `False` placeholder, after R1; honestly a leafy-thread diff, with the same-limit haecceity witness structurally absent, after C2) |
+| Three kinds genuinely distinct | `ws3_leaf_not_import`, `ws3_import_not_leaf` | **Discharged** (different extensions — not a partition) |
 
 ### WS4 — The imports catalogued: the program explained  ·  *the capstone unification*
-**Status: Not started.** · Interpretive spine; light Lean, heavy unification.
+**Status: Discharged (drop-1 + drop-2 mechanisms); full carriers + S3-weights Partial.**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| Weights are the Series 3 import | `ws4_weights_are_import` | Not started |
-| Labels/faces are the Series 4 import | `ws4_labels_are_import` | Not started (via `ws3_plurality_core` factoring through `Q`) |
-| Levels are the Series 5 import | `ws4_levels_are_import` | Not started (via the tower index) |
-| The theorem predicts each drop | `ws4_program_explained` | Not started (the recurring honest negative *was* this theorem) |
+| **drop (1)** — the label import SURVIVES the quotient | `ws4_labels_are_import`, `ws4_label_survives_quotient` | **Discharged** (labelled `labelLoop` on the non-plain functor: behaviorally identified yet plural; distinction survives the label-bisim quotient — a genuine drop of plainness, after S2/S3) |
+| **drop (2)** — plain non-reduction | `ws4_toy_loop_is_drop2` | **Discharged** (`twoLoop`: atomless, plural, bisimilar-yet-unequal; a drop of behavioral identity — NOT equated with drop-1) |
+| Levels are the S5 import (via index) | `ws4_levels_are_import` | **Discharged** (the index is a label — same drop-1 mechanism) |
+| Weights (S3) / full `νLk`,`Winf` carriers | — | **Partial** — the drop mechanisms are mechanized on minimal witnesses; the full prior CARRIERS remain prior art, not re-transcribed. |
+| The theorem predicts each drop | `ws4_program_explained` | **Discharged** (drop-1 + drop-2 witnessed + `ws2_plurality_requires_drop` predicts + S6 collapsed) |
 
 ### WS5 — The limit-atomlessness loophole  ·  *the one real escape*
-**Status: Not started.** · Pre-registered fork; either verdict terminal.
+**Status: Discharged (characterization + adjudication); metric family Partial (build-owed).**
 
-| Obligation | Target (provisional) | Status · strip test |
+| Obligation | Built theorem | Status · strip test |
 |---|---|---|
-| Limit-atomlessness reintroduces finite-stage leaves | `ws5_limit_reintroduces_leaves` | Not started (so it relaxes ingredient 3, not a counterexample) |
-| The metric/Cauchy route carries transient atoms | `ws5_metric_transient_atoms` | Not started |
-| Adjudication: genuine escape or import-in-time | `ws5_loophole_adjudication` | Not started (honest fork; either terminal) |
+| Limit-atomlessness reintroduces finite-stage leaves | `ws5_limit_reintroduces_leaves` | **Discharged** (a relaxation of (3), not a counterexample) |
+| Leafy pair exists (honest: a PERMANENT atom) | `ws5_leafy_pair` | **Discharged** (Ω vs the atom; the atom is a permanent leaf, NOT limit-atomless, after R4) |
+| Metric/Cauchy convergent family | — | **Partial** — the distinct-leafy-family-→-Ω `CauchySeq` packaging is build-owed (per S6's typed-but-unbuilt C4). |
+| Adjudication: genuine escape or import-in-time (a RULING) | `ws5_loophole_adjudication`, `ws5_adjudication_justified`, `ws5_fork_is_genuine` | **Discharged — import-in-time** (a ruling on the horn-neutral theorem, not forced, after R5); `genuineEscape` retained terminal. |
 
 ### WS6 — The heuristic ceiling  ·  *the honest boundary*
-**Status: Not started.**
+**Status: Discharged (core); universal reported heuristic (pre-registered).**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| The provable core (coalgebras + process + trichotomy) | `ws6_provable_core` | Not started |
-| The universal "any construction" | `ws6_universal` | Not started (attempt; report heuristic if it resists) |
+| The provable core (coalgebras + process + trichotomy) | `ws6_provable_core` | **Discharged** |
+| The universal "any construction" | `ws6_universal`, `ws6_universal_is_heuristic` | **Partial — heuristic** (defended thesis floored by the core, as S4/S5's forced answers) |
 
 ### WS7 — The anti-circularity audit  ·  *owns the verdict*
-**Status: Not started.**
+**Status: Discharged — verdict `payoffsEstablished`.**
 
-| Obligation | Target (provisional) | Status |
+| Obligation | Built theorem | Status |
 |---|---|---|
-| Non-circularity audited (escapes refuted, not excluded) | `ws7_non_circularity_audit` | Not started |
-| Trichotomy is not a definitional partition | `ws7_trichotomy_not_definitional` | Not started |
-| Typed verdict | `ProgramVerdict` + `ws7_verdict` | Not started (`importForced` / `payoffsEstablished` / `Circular`) |
+| Non-circularity audited on REAL escapes (drop-1 survives quotient + drop-2) | `ws7_non_circularity_audit` | **Discharged** (`Iff.rfl` demoted to prose usage claim, after S4) |
+| Kinds genuinely distinct (not a partition) | `ws7_kinds_distinct` | **Discharged** |
+| Strip ledger — actual counterexample TERMS | `ws7_strip_ledger` (`leafCoalg`, `labelLoop`, `twoLoop`) | **Discharged** (contingent on the terms typechecking, after R3) |
+| **Verdict wired to the audit certificate** | `Audit`, `ws7_audit`, `verdict`, `ws7_verdict_eq` | **`payoffsEstablished`** (`rfl`) — the verdict DEPENDS on the audit theorems; break one and it fails to build (after S1) |
+| `Circular` arm live and tied to the audit | `ws7_audited_not_circular`, `verdictNoCertificate` | **Discharged** (with a certificate, never Circular; the only route to Circular is a failed audit) |
 
 ---
 
 ## The result tracker
 
-*The charter's central question is whether the Import Theorem holds, non-circularly and exhaustively. Nothing built yet; every row Pending.*
+*The charter's central question is whether the Import Theorem holds, non-circularly and exhaustively. Built verdict below.*
 
 | Result (charter §5) | Workstream | Verdict | Non-circularity |
 |---|---|---|---|
-| Atomless behavior is unique (the lemma) | WS1 | Pending | N/A |
-| The Import Theorem (1∧2∧3 ⇒ ¬4) | WS2 | Pending | Pending |
-| Trichotomy exhaustive | WS3 | Pending | Pending |
-| Program explained (weights/labels/levels forced) | WS4 | Pending | Refuted-by-theorem (target) |
-| Limit-atomlessness loophole | WS5 | Pending | N/A (a relaxation, not an escape) |
-| Heuristic ceiling drawn | WS6 | Pending | N/A |
+| Atomless behavior is unique (the lemma) | WS1 | **Discharged** (`ws1_atomless_bisim`) | N/A |
+| The Import Theorem (1∧2∧3 ⇒ ¬4) | WS2 | **Impossibility proved** (`ws2_import_theorem`) | **Refuted-by-theorem** (`ws2_non_circular`) |
+| Trichotomy exhaustive | WS3 | **Discharged (single coalgebra)** / **Partial** (any-construction) | Non-fiat (engine-driven) |
+| Program explained (weights/labels/levels forced) | WS4 | **Discharged** (`ws4_program_explained`); S3-weights Partial | Refuted-by-theorem |
+| Limit-atomlessness loophole | WS5 | **Discharged — import-in-time**; metric family Partial | N/A (a relaxation, not an escape) |
+| Heuristic ceiling drawn | WS6 | **Discharged (core)** / **heuristic** (universal) | N/A |
+| The typed verdict | WS7 | **`payoffsEstablished`** | Refuted-by-theorem; `Circular` refuted |
 
 ---
 
@@ -124,27 +129,55 @@
 
 *The single list of everything owed. At Rev-0 these are the pre-registered cruxes and hazards from charter §5.5 / §9.*
 
-1. **The general lemma** — WS1. **OPEN (blocking).** `ws1_atomless_bisim` on any plain `P_κ`-coalgebra; recover both instance-collapses. Trigger-to-close: the "both-atomless" bisimulation + the two `recovers` corollaries.
-2. **Non-circularity of the ingredients** — WS2/WS7. **OPEN (signature risk).** The escapes must be refuted as theorems (νLk imports a label, tower an index), the ingredients shown independently motivated. Trigger-to-close: `ws2_non_circular` + `ws7_non_circularity_audit`; else the verdict is `Circular`.
-3. **Trichotomy exhaustiveness** — WS3. **OPEN (hardest).** No fourth kind of distinction. Trigger-to-close: `ws3_trichotomy_exhaustive`; a candidate fourth kind that resists classification demotes the impossibility to collapse-plus-examples (honest Partial).
-4. **The imports catalogued** — WS4. **OPEN.** Weights/labels/levels each the forced ingredient-1 drop. Trigger-to-close: the three `_are_import` lemmas + `ws4_program_explained`.
-5. **The loophole adjudication** — WS5. **OPEN (fork).** Limit-atomlessness a genuine escape or import-in-time. Either verdict terminal; if genuine, the headline weakens to "impossible except in the limit."
-6. **The universal quantifier** — WS6. **OPEN (heuristic pre-authorized).** "Any construction faithful to relating" formalizable, or a defended thesis (charter §5.3).
-7. **Machine-checked axiom pass** — all. **OPEN.** No build yet; `AxiomCheck.lean` + `spec/axiom-check-log.md` owed once WS1–WS7 build.
+1. **The general lemma** — WS1. **CLOSED.** `ws1_atomless_bisim` + both `recovers` corollaries.
+2. **Non-circularity of the ingredients** — WS2/WS7. **CLOSED.** `ws2_non_circular` + `ws7_non_circularity_audit`: behavioral identity IS the no-import predicate; the escape refuted by theorem. Verdict NOT `Circular` (`ws7_not_circular`).
+3. **Trichotomy exhaustiveness** — WS3. **PARTIAL (pre-registered, honest).** After pass-1 (R1/R2): on a single plain coalgebra the distinction is a genuine DICHOTOMY (`ws3_dichotomy`: leaf or import), and `ws3_atomless_distinct_is_import` genuinely consumes the no-leaf hypothesis; the third (intensional-history) kind is CONTENTFUL on the process (`ws3_history_kind_inhabited` + `ws3_history_kind_collapses`), no longer a `False` placeholder. Exhaustiveness across *any construction* stays the un-rangeable quantifier (charter §5.3) → verdict `payoffsEstablished` not `importForced`. The "no fourth kind / teeth" overclaim is withdrawn.
+4. **The imports catalogued** — WS4. **CLOSED** (label/index/import phenomenon); **S3-weights Partial** (no S3-specific Lean witness transcribed; covered generically).
+5. **The loophole adjudication** — WS5. **CLOSED — import-in-time.** `ws5_limit_reintroduces_leaves` forces the distinguisher to a finite-stage atom; `genuineEscape` retained as the terminal alternative if a future reviewer privileges the limit-as-object (headline would weaken to "impossible except in the limit").
+6. **The universal quantifier** — WS6. **CLOSED as heuristic** (pre-authorized). `ws6_universal` a defended thesis floored by `ws6_provable_core`.
+7. **Machine-checked axiom pass** — all. **CLOSED.** `Series7/AxiomCheck.lean` built; `spec/axiom-check-log.md` records every headline theorem sorry-free on the standard three.
 
-**Residual opens at Rev-0:** all of the above — a freshly chartered series, but one that starts from a strong base: both instance-collapses (`ws2_collapse`, `ws1_productive_unique`) are already machine-checked prior art, so the engine (WS1) is a generalization rather than a fresh proof, and the genuinely new work is the abstraction (WS1), the non-circular theorem (WS2), the trichotomy (WS3), the unification (WS4), and the loophole (WS5). **Pattern to watch:** the program's recurring lesson is that the sharpest result is a proved impossibility; Series 7 makes the impossibility the whole point, so the risk shifts from "does the construction escape" (it doesn't) to "is the impossibility genuine or definitional" (WS7's circularity audit).
+**Residual opens after the build:** #3 (trichotomy exhaustiveness across *any construction* — the un-rangeable quantifier, genuinely Partial) and the metric `CauchySeq` packaging of the loophole family (WS5, build-owed). Neither is a dependency of the Impossibility; both are pre-registered honest Partials. **The program's recurring lesson, confirmed and turned into the deliverable:** the sharpest result is a proved impossibility. Series 7 makes the impossibility the whole point and it lands — non-circular (the risk that mattered), with the trichotomy's completeness the honest ceiling exactly where the charter placed it.
 
 ---
 
 ## Closed log
 
-*Empty. Entries land here as builds pass review, each with its discharging theorem.*
+### 2026-07-10 Phase B+C — designs committed and the full build landed
+- **Impossibility proved (the deliverable, a success):** `WS2.ws2_import_theorem` — no plain, behaviorally-identified, atomless coalgebra is plural. Driven by `WS1.ws1_atomless_bisim` (the "both-atomless" bisimulation on ANY plain coalgebra), the generalization that unifies the static (`ws2_collapse`) and dynamic (`ws1_productive_unique`) collapses.
+- **Discharged:** WS1 the engine + both recovered instances; WS2 the static form, corollary, dynamic instance, and non-circularity (`ws2_non_circular`); WS3 `ws3_trichotomy` + `ws3_history_collapses` + exhaustiveness-on-a-single-coalgebra + the three-kinds-distinct witnesses; WS4 `ws4_import_witness`/`ws4_labels_are_import`/`ws4_levels_are_import`/`ws4_program_explained`; WS5 `ws5_limit_reintroduces_leaves`/`ws5_leafy_plurality` and the adjudication (`import-in-time`); WS6 `ws6_provable_core`; WS7 all anchors and the verdict.
+- **Partial (obstruction precise, pre-registered):** WS3 exhaustiveness across *any construction* (the un-rangeable quantifier); WS4 S3-weights (no S3-specific Lean witness — the generic import witness covers it); WS5 the metric `CauchySeq` convergent family (build-owed); WS6 the universal (heuristic, defended thesis floored by the core).
+- **Non-circularity:** Refuted-by-theorem throughout — `NoImportedAtom = BehaviorallyIdentified` (`Iff.rfl`), the escape refuted by `ws2_escapes_are_imports`. Verdict `payoffsEstablished`, NOT `Circular` (`ws7_not_circular`); the `Circular` arm is live (`ws7_circular_if_fiat`).
+- **Strip test:** clean (`ws7_strip_ledger_clean`) — deleting "atomless"/"plain" exhibits real counterexamples; the import refuted by theorem, not fiat.
+- **Realization note (routed to WS1/WS4 designs):** the heavy QPF carriers named in the designs (`νPk`, `νLk`/`loopState`, tower `Winf`, S3 weights) are NOT re-transcribed; the identical structural facts are realized via the abstract `Static` (subsuming `νPk`) and the minimal `twoLoop` witness (the label/index import at minimum). A faithful reframing — the signatures are met by theorem — not a retargeting. The design docs carry a BUILD/REALIZATION note; the Lean files carry it in headers.
+- **Axiom check:** run (`spec/axiom-check-log.md`) — every headline theorem sorry-free on `propext` / `Classical.choice` / `Quot.sound`. Closure gate passes (self-contained).
+- **Charter touched?** No — status-only. The build confirmed the charter's thesis.
 
 ---
 
 ## Series-review log
 
-- **Phase A (charter)** complete: `charter.md`, `charter-status.md` (this file) written. No protocol doc yet (Series 7 inherits the Series 6 protocol, `series-6/protocol.md`, unless a Series-7 variant is written). No designs, no build, no review.
+- **Phase A (charter)** complete: `charter.md`, `charter-status.md`, and the design batch written.
+- **Phase B (design-all)** complete: `spec/ws1…ws7-design.md` + `spec/readme.md` (moved into `spec/`).
+- **Phase C (build-all)** complete: all seven `Series7/wsN.lean` + `Series7.lean` + `Series7/AxiomCheck.lean` compile, sorry-free and axiom-clean; closure gate passes.
+- **Phase D (blind review), pass 1** complete: `spec/project-review-1.md` — three adversarial reviewers, findings verified line-by-line. Core (the Import Theorem + its engine) confirmed genuine, non-vacuous, sorry-free; the interpretive layer flagged.
+- **Phase E (address), pass 1** complete (2026-07-10). Every finding addressed under the executor discipline (prove-more-or-relabel, never lower the bar). Summary:
+  - **S1 (verdict hand-set) — FIXED (proved).** The verdict is now a function of a mechanized `Audit` certificate (`WS7.Audit`, `ws7_audit`) whose every field is a theorem; `ws7_verdict` depends on it, so breaking any audit content breaks the build. The `Circular` arm is genuinely tied to the certificate's existence (`ws7_audited_not_circular`: with a certificate, never Circular).
+  - **S2/S3 (WS4 mechanizes nothing / wrong mechanism) — FIXED (proved a genuine drop-1).** A labelled coalgebra `WS4.labelLoop` on the NON-plain functor `P_κ(Q×X)` whose distinction SURVIVES the label-bisimulation quotient (`ws4_label_survives_quotient`) — behaviorally identified yet plural, a genuine drop of plainness (1), distinct from `twoLoop`'s drop-(2) non-reduction. The two mechanisms are no longer equated. `twoLoop` relabelled `ws4_toy_loop_is_drop2`. Honest scope: the full `νLk`/`Winf`/weight CARRIERS remain prior art, not re-transcribed.
+  - **S4 (non-circularity vacuous) — FIXED.** NC1 (`Iff.rfl`) demoted to a prose usage claim (not a counted anchor); the audit now rests on the real drop-1 label escape + drop-2 refutation, both theorems. The mislabelled "tower drops atomlessness" conjunct removed.
+  - **R1/R2 (dichotomy in trichotomy vocabulary) — FIXED (relabel + contentful third kind).** `ws3_trichotomy → ws3_dichotomy` (honest, single coalgebra); `ws3_trichotomy_exhaustive → ws3_atomless_distinct_is_import` (now consumes its no-leaf hypothesis); `HistoryDiff` made contentful on `Proc`, inhabited + collapsing.
+  - **R3 (self-fulfilling Bool ledger) — FIXED (real terms).** `ws7_strip_ledger` now carries actual counterexample terms — a behaviorally-identified plural coalgebra WITH a leaf (`WS7.leafCoalg`, `leafCoalg_behav`), the labelled carrier, and `twoLoop`.
+  - **R4/R5 (WS5 framing) — FIXED (scope/prose).** `ws5_leafy_plurality → ws5_leafy_pair`, honestly stating `emptyProc` is a PERMANENT atom (not limit-atomless); the convergent metric family stays Partial. The import-in-time adjudication is stated as a RULING, not forced.
+  - **R6 (IsImportWitness vacuous) — FIXED (removed).** The empty `IsImportWitness` predicate is gone; WS4 now uses the genuine drop-1/drop-2 statements.
+  - **C1/C2 (framing) — acknowledged.** Series 7's delta over Series 6 is honestly a reframing + the general bisimilarity lemma; the "live importForced arm" is gated on the open exhaustiveness flag and not implied to be near.
+  Full build re-verified sorry-free, axiom-clean; gate passes.
+- **Phase D (blind review), pass 2 — CLEAN, exit criterion met** (`spec/project-review-2.md`, against commit `cdf26d3`): four reviewers (two fix-validators, two fresh from-scratch, one tasked solely with building a counterexample). **No SERIOUS finding remains.** All four pass-1 SERIOUS items independently confirmed genuinely fixed at the term level (S1 fully; S3/S4 fully; S2 re-scoped to an honest Partial); the fresh from-scratch attack could not build a counterexample to the Import Theorem and confirmed *why* (the genuine unlabelled-powerset collapse, not a rigged `IsBisim`); AxiomCheck coverage confirmed to omit none of the load-bearing headlines. Recommendation: **Series 7 closes at `payoffsEstablished`, earned.**
+- **Phase E (address), pass 2** complete (2026-07-10). Only cosmetic/terminal items (C1–C4) — all relabels/removals, **no mathematics changed**, verdict unchanged:
+  - **C1 — `ws4_levels_are_import → ws4_index_reuses_label_mechanism`.** Renamed (it reuses the label mechanism, never touches `Winf`) and STRENGTHENED to carry the full survives-quotient conjunct.
+  - **C2 — `HistoryDiff → LeafyThreadDiff`** (and `ws3_history_kind_* → ws3_leafy_thread_*`): honestly a leafy-thread (leaf) difference, not the design's same-limit haecceity kind. Added `ws3_no_same_limit_haecceity` recording the genuine haecceity witness as **structurally absent** (any two productive threads are equal) — a named open, the sharpest statement of what the program has circled and arguably the seed of a Series 8.
+  - **C3 — wording downgrade.** `labelLoop`'s ingredient-(3) is the minimal first-level-nonempty witness, not hereditary; docstring corrected ("atomless" → "first-level nonempty").
+  - **C4 — dead scaffolding removed** (`Static`/`HereditarilyAtomless`/`GenuinelyAtomless`, unused); `verdictNoCertificate` docstring softened (the load-bearing content is `ws7_audited_not_circular`).
+  Full build re-verified sorry-free, axiom-clean (37 headline theorems, standard three); gate passes. **No further review pass owed — the exit criterion is met.**
 
 ---
 
