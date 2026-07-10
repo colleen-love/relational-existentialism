@@ -1,4 +1,4 @@
-# Series 7 — Blind Adversarial Review, Pass 3 (`project-review-3.md`)
+# Series 7 — Blind Adversarial Review, Pass 2
 
 **Method.** A single adversarial reviewer was run against the closed build (post pass-2, commit at `charter-status.md` v1) with one seed instruction: *do not re-litigate what pass 1 and pass 2 already graded; instead read the delivered theorems back against the charter's own definition of the deliverable, and ask whether the thing proved is the thing the charter set out to prove.* Pass 1 audited proof validity and the circularity certificate; pass 2 validated the fixes and attacked the core cold. Both graded the Lean as *terms*. This pass grades the Lean as an *answer to the charter's question* — the one dimension a term-level audit structurally cannot catch, because a theorem can be sorry-free, non-vacuous, axiom-clean, attack-tested, and still be a theorem about the wrong object.
 
