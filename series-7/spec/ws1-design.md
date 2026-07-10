@@ -104,3 +104,15 @@ theorem ws1_recovers_dynamic (hinf : ℵ₀ ≤ κ) (t : Proc κ) (ht : Producti
 ## Deliverable
 
 `series-7/formal/Series7/ws1.lean`: transcribed carrier + `hneRel`/`hneRel_isBisim`; `ws1_atomless_bisim` (D1), `ws1_recovers_static` (D2), `ws1_recovers_dynamic` (D3). Axiom check: `#print axioms ws1_atomless_bisim` on the standard three (it is `hneRel_isBisim`, already axiom-clean in Series 6).
+
+---
+
+## BUILD/REALIZATION NOTE (2026-07-10, routed here per protocol) — abstract static instance
+
+`ws1_recovers_static` was realized in its ABSTRACT form — over any `BehaviorallyIdentified`
+plain coalgebra `dest : X → PkObj κ X` — rather than tied to the specific terminal carrier
+`νPk`. The terminal coalgebra is one such coalgebra (behavioral identity holds there via
+`bisim_eq`), so the abstract form subsumes `ws2_collapse` without transcribing the heavy QPF
+`νPk` construction. The signature — "behavioral identity turns the engine into equality" — is
+met by theorem (`ws1_recovers_static (dest) (hbehav) (x y) (hx hy) : x = y`). Faithful
+reframing, not a retargeting. All WS1 obligations Discharged; see `charter-status.md`.

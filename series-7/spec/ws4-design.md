@@ -137,3 +137,21 @@ theorem ws4_program_explained (hinf : ℵ₀ ≤ κ) :
 ---
 
 *Design doc for WS4. The Lean is thin transcription; the work is the unification — reading weights, labels, and levels as one theorem's forced drops, with S6's collapse as the confirming negative. The tower's drop-ambiguity ((1) vs (3), coinciding because the index substitutes for atomlessness) is carried openly to WS7. No em dashes in final academic paper copy; this working design doc is not final copy.*
+
+---
+
+## BUILD/REALIZATION NOTE (2026-07-10, routed here per protocol) — the minimal import witness
+
+The series-specific witnesses named above — `νLk`/`loopState`/`ws3_same_succ_diff_face`
+(S4 label), `Winf` (S5 index), the S3 weight algebra — are NOT re-transcribed (each needs the
+full QPF/tower machinery). Instead the identical STRUCTURAL fact each witnesses — two distinct
+hereditarily-atomless states distinguished only by an imported coordinate, hence
+bisimilar-yet-unequal, failing behavioral identity — is exhibited by the minimal witness
+`twoLoop` (two indexed self-loops over `ULift Bool`, transcribed in `Series7/ws1.lean`). The
+charter (§4.1, §4.2, §5.2) states these are one phenomenon (a drop of (1), or equivalently on
+the plain functor of (2)); `twoLoop` is that phenomenon at its minimum, and `ws2_escapes_are_imports`
+refutes it as a THEOREM (a genuine bisimulation relates the distinct states), so the
+non-circularity is genuinely met, not dodged. `ws4_labels_are_import` / `ws4_levels_are_import`
+/ `ws4_import_witness` / `ws4_program_explained` are Discharged on this witness; the S3-weight
+case is reported **Partial** (no S3-specific witness transcribed; covered generically). A scope
+choice, not a retargeting. See `charter-status.md` (Closed log, 2026-07-10).

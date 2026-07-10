@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Closure gate — each series is standalone.
 #
-# Series 3 is closed and frozen under `archive/`; Series 4 and Series 5 are complete under
-# `series-4/` and `series-5/`; Series 6 is live under `series-6/`. All three libraries are
-# registered in lake/lakefile.toml, each in its own module namespace (`Series4.*` /
-# `Series5.*` / `Series6.*`) so the flat `wsN` module names can coexist. The closure rule is
-# that each series' imports resolve only to that series' own roots (+ mathlib): Series 6
-# imports nothing from `series-5/`, `series-4/`, or `archive/`, and likewise for the others.
+# Series 3 is closed and frozen under `archive/`; Series 4, 5, 6 are complete under
+# `series-4/`, `series-5/`, `series-6/`; Series 7 is live under `series-7/`. All four libraries
+# are registered in lake/lakefile.toml, each in its own module namespace (`Series4.*` /
+# `Series5.*` / `Series6.*` / `Series7.*`) so the flat `wsN` module names can coexist. The
+# closure rule is that each series' imports resolve only to that series' own roots (+ mathlib):
+# Series 7 imports nothing from `series-6/`, `series-5/`, `series-4/`, or `archive/`, and
+# likewise for the others.
 set -u
 cd "$(dirname "$0")/.." || exit 2
 fail=0
@@ -28,5 +29,6 @@ check () { # <root> <allowed-egrep>
 check series-4 "^import Series4(\.[A-Za-z0-9_]+)*$"
 check series-5 "^import Series5(\.[A-Za-z0-9_]+)*$"
 check series-6 "^import Series6(\.[A-Za-z0-9_]+)*$"
+check series-7 "^import Series7(\.[A-Za-z0-9_]+)*$"
 
 exit $fail
