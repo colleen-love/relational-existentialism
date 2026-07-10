@@ -71,8 +71,6 @@ In a single session, realize every design in `formal/wsNN.lean`, building `Serie
 
 A build may discover a design was wrong. The one prohibited move is **building past a broken design**: if a design cannot be realized as written, stop and record the defect in `charter-status.md` (routed to the owning design), and either fix the design in place (same session's artifact) or report the workstream Partial with the obstruction precise. Do not silently retarget a signature to whatever the proof happened to yield. Because the build is batched, a mid-build discovery that reaches upstream (e.g. WS3 needing the carrier to expose the residue as a first-class operation that WS1 did not provide) is handled by the pre-registered fallback in the affected design (WS1's carrier-home escalation: guarded → metric → pro-object), not by an ad hoc patch.
 
-Please make sure to update `charter-status.md` as you complete each workstream.
-
 ### Phase D — Blind series-review (one session) → `series-review.md`
 
 In a fresh session, seeded with the built code, the design signatures, and the charter criteria but **not** the motivating prose, review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim — with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 6, run:
