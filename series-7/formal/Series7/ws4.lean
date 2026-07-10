@@ -339,4 +339,116 @@ theorem ws4_program_explained (hinf : ℵ₀ ≤ κ) :
    fun a b hab => Series7.WS2.ws2_plurality_requires_drop (twoLoop hinf) ⟨a, b, hab⟩,
    fun t ht => ws1_productive_unique hinf t ht⟩
 
+/-! ## SUBSET-OF-A-RESTRICTION: does the collapse eat a distinction with no atom in it?
+
+A probe of the tightness of `ws2_import_theorem`'s `atomless` hypothesis. A restriction `x↾(x,y)` is
+recoverable and collapses; a free tag `q` is an atom and imports. A **subset of a restriction** sits
+between: its material is entirely endogenous (made of the relata), so there is no atom in the
+material. The question is whether the SELECTION of which sub-part to expose is fixed by the relating
+(Case A) or free per state (Case B).
+
+The engine `ws1_atomless_bisim` decides it, and the deciding fact is that atomlessness makes ALL
+states plainOf-bisimilar. So the selection has nowhere to hide: either it agrees across that
+bisimulation (Case A — collapses) or it does not (Case B — then it is a coordinate the relating does
+not carry, i.e. an import, no matter that its values are endogenous subsets). The atom, when Case B
+survives, is not in the material but in the free CHOOSING. There is no third option. -/
+
+/-- **Case A engine — a relating-determined selection cannot distinguish (atomless + recoverable).**
+On an atomless recoverable carrier every pair of states is label-bisimilar: `ws1_atomless_bisim`
+already relates them plainly, and recoverability lifts that to the labels. A subset chosen by the
+relating exposes nothing new; with behavioral identity this is the collapse. -/
+theorem ws4_atomless_recoverable_all_bisimL {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hrec : Recoverable dest) (hatom : ∀ x, SHNE (plainOf dest) x) (x y : X) :
+    ∃ R, IsBisimL dest R ∧ R x y := by
+  obtain ⟨R, hR, hxy⟩ := ws1_atomless_bisim (plainOf dest) x y (hatom x) (hatom y)
+  exact ⟨R, hrec R hR, hxy⟩
+
+/-- **Case B decisive — on an atomless carrier, any surviving label distinction IS an import.**
+If two states are not label-bisimilar yet the carrier is atomless, `ws1_atomless_bisim` makes them
+plainOf-bisimilar, so recoverability would force a label-bisimulation between them — contradiction.
+Hence the carrier is not recoverable: the distinction is a coordinate the relating does not carry
+(§4.1), an import — regardless of what the label is MADE of. Atomlessness is exactly what forbids a
+non-importing per-state distinction; the hypothesis is tight. -/
+theorem ws4_atomless_label_distinction_imports {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hatom : ∀ x, SHNE (plainOf dest) x) (x y : X)
+    (hsurv : ¬ ∃ R, IsBisimL dest R ∧ R x y) : ¬ Recoverable dest := by
+  intro hrec
+  obtain ⟨R, hR, hxy⟩ := ws1_atomless_bisim (plainOf dest) x y (hatom x) (hatom y)
+  exact hsurv ⟨R, hrec R hR, hxy⟩
+
+/-! ### The concrete Case B carrier: labels are literal subsets of the state space -/
+
+/-- The exposed sub-part at state `i`: the singleton `{i}` — a subset of the endogenous state space
+(the "restriction material"), NOT an element of an external alphabet. Distinct states expose distinct
+sub-parts (`{⟨true⟩} ≠ {⟨false⟩}`), a free per-state selection over fully endogenous material. -/
+def subsetLabel (i : ULift.{u} Bool) : Set (ULift.{u} Bool) := {i}
+
+/-- **Case B carrier.** Two atomless self-loops whose labels are honest subsets of the state space,
+freely chosen per state. Lives on the non-plain `P_κ(𝒫(Bool) × Bool)`. -/
+noncomputable def subsetLoop (hinf : ℵ₀ ≤ κ) :
+    ULift.{u} Bool → LkObj κ (Set (ULift.{u} Bool)) (ULift.{u} Bool) :=
+  fun i => toPk hinf {(subsetLabel i, i)}
+
+@[simp] lemma subsetLoop_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (subsetLoop hinf i).1 = {(subsetLabel i, i)} := rfl
+
+@[simp] lemma plainOf_subsetLoop_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (plainOf (subsetLoop hinf) i).1 = {i} := by
+  show Prod.snd '' ({(subsetLabel i, i)} : Set (Set (ULift.{u} Bool) × ULift.{u} Bool)) = {i}
+  rw [Set.image_singleton]
+
+lemma plainOf_subsetLoop_true_bisim (hinf : ℵ₀ ≤ κ) :
+    IsBisim (plainOf (subsetLoop hinf)) (fun _ _ => True) := by
+  intro x y _
+  refine ⟨?_, ?_⟩
+  · intro x' _; exact ⟨y, by rw [plainOf_subsetLoop_val]; exact rfl, trivial⟩
+  · intro y' _; exact ⟨x, by rw [plainOf_subsetLoop_val]; exact rfl, trivial⟩
+
+lemma plainOf_subsetLoop_reaches (hinf : ℵ₀ ≤ κ) (i j : ULift.{u} Bool) :
+    SReaches (plainOf (subsetLoop hinf)) i j → j = i := by
+  intro h
+  induction h with
+  | refl => rfl
+  | tail _ hbc ih =>
+      rw [plainOf_subsetLoop_val, Set.mem_singleton_iff] at hbc
+      rw [hbc]; exact ih
+
+lemma subsetLoop_atomless (hinf : ℵ₀ ≤ κ) : ∀ i, SHNE (plainOf (subsetLoop hinf)) i := by
+  intro i v hv
+  rw [plainOf_subsetLoop_reaches hinf i v hv, plainOf_subsetLoop_val]
+  exact Set.singleton_ne_empty i
+
+/-- The distinction survives at the label level: no label-bisimulation relates the two states,
+because the exposed sub-parts `{⟨true⟩}` and `{⟨false⟩}` are different subsets. -/
+theorem subsetLoop_survives (hinf : ℵ₀ ≤ κ) :
+    ¬ ∃ R, IsBisimL (subsetLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩ := by
+  rintro ⟨R, hR, hRel⟩
+  obtain ⟨hforward, _⟩ := hR ⟨true⟩ ⟨false⟩ hRel
+  obtain ⟨q, hq, hfst, _⟩ :=
+    hforward (subsetLabel ⟨true⟩, ⟨true⟩) (by rw [subsetLoop_val]; exact rfl)
+  rw [subsetLoop_val, Set.mem_singleton_iff] at hq
+  subst hq
+  dsimp only [subsetLabel] at hfst
+  exact absurd (Set.singleton_injective hfst) (by decide)
+
+/-- **The verdict on subset-of-a-restriction (Case B): it SURVIVES, but as an import — no
+counterexample.** The two states are atomless (no leaf) and plainOf-bisimilar, and their labels are
+honest subsets of the state space (`subsetLabel`, no external tag); yet no label-bisimulation relates
+them, so the plurality survives. By `ws4_atomless_label_distinction_imports` the carrier is therefore
+NOT recoverable — the free selection is a coordinate the relating does not carry, an import. The atom
+is not in the endogenous MATERIAL but in the free CHOOSING. So atomless plurality still bought an
+import; `ws2_import_theorem`'s hypothesis is tight (and this is not in its scope — it is labelled),
+and the recoverable-collapse `ws4_recoverable_atomless_collapses` still holds (this carrier is not
+recoverable). -/
+theorem ws4_subset_selection_survives_as_import (hinf : ℵ₀ ≤ κ) :
+    (∀ i, SHNE (plainOf (subsetLoop hinf)) i)                          -- atomless: no leaf
+  ∧ (∃ R, IsBisim (plainOf (subsetLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)    -- plainOf-bisimilar
+  ∧ (¬ ∃ R, IsBisimL (subsetLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)           -- survives at label level
+  ∧ (¬ Recoverable (subsetLoop hinf)) :=                               -- the survival IS an import
+  ⟨subsetLoop_atomless hinf,
+   ⟨fun _ _ => True, plainOf_subsetLoop_true_bisim hinf, trivial⟩,
+   subsetLoop_survives hinf,
+   ws4_atomless_label_distinction_imports (subsetLoop hinf)
+     (subsetLoop_atomless hinf) ⟨true⟩ ⟨false⟩ (subsetLoop_survives hinf)⟩
+
 end Series7.WS4

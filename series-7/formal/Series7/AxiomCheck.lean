@@ -42,6 +42,9 @@ import Series7
 #print axioms Series7.WS4.ws4_recoverable_plurality_requires_drop
 #print axioms Series7.WS4.ws4_labelLoop_not_recoverable
 #print axioms Series7.WS4.ws4_restriction_collapses_escalation_imports
+#print axioms Series7.WS4.ws4_atomless_recoverable_all_bisimL
+#print axioms Series7.WS4.ws4_atomless_label_distinction_imports
+#print axioms Series7.WS4.ws4_subset_selection_survives_as_import
 #print axioms Series7.WS4.ws4_toy_loop_is_drop2
 #print axioms Series7.WS4.ws4_index_reuses_label_mechanism
 #print axioms Series7.WS4.ws4_program_explained

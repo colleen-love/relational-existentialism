@@ -9,7 +9,11 @@ Regenerated 2026-07-10 after the alignment pass (project-review-2 pass 2): the s
 test (`ws4_free_label_is_import`, `ws4_recoverable_not_import`) and the audit re-grounded on it.
 Extended with the mechanized recoverable-label collapse (`ws4_recoverable_atomless_collapses`,
 `ws4_labelLoop_not_recoverable`, `ws4_restriction_collapses_escalation_imports`) — the Series 4
-restriction now proved to collapse, not just argued. 42 headline theorems.
+restriction now proved to collapse, not just argued. Extended again with the subset-of-a-restriction
+probe (`ws4_atomless_recoverable_all_bisimL`, `ws4_atomless_label_distinction_imports`,
+`ws4_subset_selection_survives_as_import`): on an atomless carrier, a free per-state subset-selection
+survives — but as an import (the atom is in the choosing, not the material), so the `atomless`
+hypothesis is tight. 45 headline theorems.
 
 ```
 'Series7.WS1.ws1_atomless_bisim' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -37,6 +41,9 @@ restriction now proved to collapse, not just argued. 42 headline theorems.
 'Series7.WS4.ws4_recoverable_plurality_requires_drop' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_labelLoop_not_recoverable' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_restriction_collapses_escalation_imports' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_atomless_recoverable_all_bisimL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_atomless_label_distinction_imports' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_subset_selection_survives_as_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_toy_loop_is_drop2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_index_reuses_label_mechanism' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_program_explained' depends on axioms: [propext, Classical.choice, Quot.sound]
