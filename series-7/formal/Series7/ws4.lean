@@ -95,8 +95,9 @@ theorem ws4_label_survives_quotient (hinf : ℵ₀ ≤ κ) :
 on the non-plain functor.** So it escapes the Import Theorem exactly by dropping (1). Every
 label-bisimulation is ⊆ equality (the label pins each state), and the two loops are distinct and
 each relates to something. (Interim-review C3: ingredient (3) here is the MINIMAL first-level-nonempty
-witness `(labelLoop i).1 ≠ ∅`, not a hereditary `SHNE` — enough to show the labelled functor
-evades the theorem; `Q = X = ULift Bool` is the minimal alphabet.) -/
+witness `(labelLoop i).1 ≠ ∅`; `ws4_label_drop_atomless` below strengthens this to full hereditary
+`SHNE` on `plainOf (labelLoop)`, meeting ingredient (3) at the theorem's own strength — `Q = X =
+ULift Bool` is the minimal alphabet.) -/
 theorem ws4_labels_are_import (hinf : ℵ₀ ≤ κ) :
     BehaviorallyIdentifiedL (labelLoop hinf)
   ∧ ((⟨true⟩ : ULift.{u} Bool) ≠ ⟨false⟩)
@@ -128,6 +129,37 @@ noncomputable def plainOf {Q X : Type u} (dest : X → LkObj κ Q X) : X → PkO
     (plainOf (labelLoop hinf) i).1 = {i} := by
   show Prod.snd '' ({(i, i)} : Set (ULift.{u} Bool × ULift.{u} Bool)) = {i}
   rw [Set.image_singleton]
+
+/-- **The drop-1 witness's plain relating is HEREDITARILY atomless (R1, series-review-3).** The label
+self-loop's plain reduct never bottoms out — its successor set is always the singleton `{i}` — so it
+meets the theorem's own ingredient (3), `SHNE`, not merely the first-level nonemptiness recorded in
+`ws4_labels_are_import`. Mirrors `twoLoop_HNE`. -/
+lemma plainOf_labelLoop_reaches (hinf : ℵ₀ ≤ κ) (i j : ULift.{u} Bool) :
+    SReaches (plainOf (labelLoop hinf)) i j → j = i := by
+  intro h
+  induction h with
+  | refl => rfl
+  | tail _ hbc ih =>
+      rw [plainOf_labelLoop_val, Set.mem_singleton_iff] at hbc
+      rw [hbc]; exact ih
+
+lemma labelLoop_atomless (hinf : ℵ₀ ≤ κ) : ∀ i, SHNE (plainOf (labelLoop hinf)) i := by
+  intro i v hv
+  rw [plainOf_labelLoop_reaches hinf i v hv, plainOf_labelLoop_val]
+  exact Set.singleton_ne_empty i
+
+/-- **The drop-1 witness at full ingredient-(3) strength (R1).** The labelled world is behaviorally
+identified (2), plural (4), its plain relating is HEREDITARILY atomless (3, `SHNE` on `plainOf`), and
+it escapes by dropping (1): the free label survives the label quotient. This strengthens
+`ws4_labels_are_import`'s first-level-nonempty conjunct to the theorem's own atomlessness, so the
+drop-1 row of the catalogue meets ingredient (3) at the theorem's strength. -/
+theorem ws4_label_drop_atomless (hinf : ℵ₀ ≤ κ) :
+    BehaviorallyIdentifiedL (labelLoop hinf)
+  ∧ ((⟨true⟩ : ULift.{u} Bool) ≠ ⟨false⟩)
+  ∧ (∀ i, SHNE (plainOf (labelLoop hinf)) i)
+  ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
+  ⟨(ws4_labels_are_import hinf).1, by decide, labelLoop_atomless hinf,
+   ws4_label_survives_quotient hinf⟩
 
 lemma plainOf_labelLoop_true_bisim (hinf : ℵ₀ ≤ κ) :
     IsBisim (plainOf (labelLoop hinf)) (fun _ _ => True) := by

@@ -16,7 +16,9 @@ survives — but as an import (the atom is in the choosing, not the material), s
 hypothesis is tight. Capstone `att_cannot_distinguish_atomless_histories`: any attention function of
 the history returns equal values on atomless histories (they are equal, Ω), so a separator must be
 exogenous to the relating — a given (atom) or a choice (will), the same footprint, which the
-formalism cannot and does not decide between. 46 headline theorems.
+formalism cannot and does not decide between. Extended after series-review-3: the drop-1 witness now
+carries full hereditary atomlessness (`ws4_label_drop_atomless`, R1), and the three verdict `def`s
+(`ws7_verdict`, `ws5_loophole_adjudication`, `ws6_universal`) are printed too (C5). 50 headline lines.
 
 ```
 'Series7.WS1.ws1_atomless_bisim' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -37,6 +39,7 @@ formalism cannot and does not decide between. 46 headline theorems.
 'Series7.WS3.ws3_leaf_not_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS3.ws3_import_not_leaf' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_labels_are_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_label_drop_atomless' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_label_survives_quotient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_free_label_is_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_recoverable_not_import' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -65,4 +68,7 @@ formalism cannot and does not decide between. 46 headline theorems.
 'Series7.WS7.ws7_verdict_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS7.ws7_audited_not_circular' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS7.ws7_import_forced_if_exhaustive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS7.ws7_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS5.ws5_loophole_adjudication' does not depend on any axioms
+'Series7.WS6.ws6_universal' does not depend on any axioms
 ```
