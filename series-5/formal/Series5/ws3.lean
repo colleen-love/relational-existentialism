@@ -22,7 +22,7 @@ Design doc: `series-5/spec/ws03-design.md` (candidate B2). Deliverables: `Relate
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws2
+import Series5.ws2
 
 universe u
 

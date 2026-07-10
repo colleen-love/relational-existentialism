@@ -80,18 +80,18 @@ So Series 5 is the **mirror image** of Series 4: where Series 4 found a local su
 - **[Charter](./series-5/charter.md)** and **[charter status](./series-5/charter-status.md)**: the stable program document and its mutable companion (open-obligations register, per-workstream status, three review passes).
 - **[Formalization](./series-5/formal/)** and **[specs](./series-5/spec/)**: the Lean 4 development (WS1–WS7), design docs, three adversarial reviews, and the committed [axiom-check log](./series-5/spec/axiom-check-log.md).
 
-*Verification:* no `sorry`, no custom axioms; all **43** headline theorems rest only on Mathlib's `propext`, `Classical.choice`, `Quot.sound` (two on none) — machine-run and recorded, regenerated against the addressed build. Self-contained — nothing imported from `series-4/` or `archive/` (confirmed by `scripts/gate.sh`).
+*Verification:* no `sorry`, no custom axioms; all **47** headline theorems rest only on Mathlib's `propext`, `Classical.choice`, `Quot.sound` (two on none) — machine-run and recorded, regenerated against the addressed build. Self-contained — nothing imported from `series-4/` or `archive/` (confirmed by `scripts/gate.sh`).
 
 ### Building
 
-Toolchain and Mathlib are pinned in [`lake/`](./lake/). The lake build targets the live series (Series 5):
+Toolchain and Mathlib are pinned in [`lake/`](./lake/). One build compiles both the complete Series 4 and the live Series 5:
 
 ```
 cd lake
 lake build
 ```
 
-This builds `Series5` (`ws1`–`ws7`) and runs `AxiomCheck.lean`, which imports the whole build and emits a `#print axioms` record for every headline theorem. Series 4 is complete prior art under [`series-4/`](./series-4/). Reproducibility claims in any publication should cite the specific commit hash and a clean-build log.
+This builds both `Series4` and `Series5` (each `ws1`–`ws7`, in its own module namespace `Series4.*` / `Series5.*`) and runs each series' `AxiomCheck`, which imports that series' whole build and emits a `#print axioms` record for every headline theorem. To build a single series' axiom pass: `lake build Series4 Series4.AxiomCheck` or `lake build Series5 Series5.AxiomCheck`. Series 4 is complete under [`series-4/`](./series-4/); Series 5 is the live development. Reproducibility claims in any publication should cite the specific commit hash and a clean-build log.
 
 ## Licensing
 

@@ -1,22 +1,36 @@
 name = "RelExist"
-defaultTargets = ["Series5"]
+defaultTargets = ["Series4", "Series5"]
 
-# ── Layout (Series 5 — the live series) ──────────────────────────────────────
-# Series 3 is closed and frozen under `archive/`; Series 4 is complete under
-# `series-4/`. Series 5 is the live development; its formal sources live in
-# `series-5/formal/`, reached via `srcDir = "../series-5/formal"`. The Series 5
-# charter grows it (and the build targets) on the stratified arena.
+# ── Layout (Series 4 complete + Series 5 live, both built) ────────────────────
+# Series 3 is closed and frozen under `archive/`. Series 4 is complete under
+# `series-4/`; Series 5 is the live development under `series-5/`. Both are built
+# here so an artifact-evaluation run of `lake build` verifies the whole program
+# (Paper 2 leans on the Series 4 theorems as well as Series 5).
+#
+# Each series is a distinct module namespace so the two can coexist in one
+# package: Series 4's roots live under `Series4.*` (files in
+# `series-4/formal/Series4/`) and Series 5's under `Series5.*` (files in
+# `series-5/formal/Series5/`). The aggregator roots `Series4` / `Series5`
+# (`<series>/formal/<Series>.lean`) import their workstreams; the `AxiomCheck`
+# root under each namespace runs `#print axioms` over that series' build.
 
-# `series-5/formal/` — the Series 5 root. A skeleton for now: an empty `Series5`
-# root (no theorems yet) plus the owed `AxiomCheck`; the Series 5 charter grows
-# it. As each workstream lands, add its `wsN` root to `roots` below.
+# `series-4/formal/` — Series 4 (complete). `Series4` imports `ws1`…`ws7`;
+# `Series4.AxiomCheck` runs the axiom pass over the whole Series 4 build.
+[[lean_lib]]
+name = "Series4"
+srcDir = "../series-4/formal"
+roots = ["Series4", "Series4.AxiomCheck"]
+
+# `series-5/formal/` — Series 5 (live). `Series5` imports `ws1`…`ws7`;
+# `Series5.AxiomCheck` runs the axiom pass over the whole Series 5 build. The
+# Series 5 charter grows it; as each workstream lands its `Series5.wsN` root is
+# already reached transitively from `Series5`.
 [[lean_lib]]
 name = "Series5"
 srcDir = "../series-5/formal"
-roots = ["Series5", "ws1", "ws2", "ws3", "ws4", "ws5", "ws6", "ws7", "AxiomCheck"]
+roots = ["Series5", "Series5.AxiomCheck"]
 
-# mathlib is retained (cache present under `.lake`) so the dependency is in place
-# when the stratified development needs it; the empty skeleton imports none of it.
+# mathlib is retained (cache present under `.lake`); both series import it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"

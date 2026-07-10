@@ -19,7 +19,7 @@ Design doc: `series-5/spec/ws02-design.md`. Deliverables: `HereditarilyNonempty`
 
 Sorry-free; axiom-clean beyond Mathlib's standard three.
 -/
-import ws1
+import Series5.ws1
 
 universe u
 
