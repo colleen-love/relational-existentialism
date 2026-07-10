@@ -71,8 +71,8 @@ theorem ws3_atomless_distinct_is_import {X : Type u} (dest : X → PkObj κ X) (
 
 /-! ## The third kind (leafy-thread difference) — contentful, on the process
 
-REVIEW RESPONSE (project-review-2.md C2, recorded in `charter-status.md`). Pass 2 was right that
-this kind is honestly a *leafy-thread* difference, NOT the design's intended "same limit, different
+REVIEW RESPONSE (interim review C2, recorded in `charter-status.md`). The (discounted) interim
+review was right that this kind is honestly a *leafy-thread* difference, NOT the design's intended "same limit, different
 finite history" (haecceity) kind — its inhabitant (Ω vs the atom) is really a leaf difference. So
 it is renamed `LeafyThreadDiff`. The genuine same-behaviour-different-history witness is
 **structurally impossible in this model** (`ws3_no_same_limit_haecceity`): any two productive
@@ -100,7 +100,7 @@ theorem ws3_leafy_thread_collapses (_hinf : ℵ₀ ≤ κ) (x y : Proc κ)
 theorem ws3_history_collapses (hinf : ℵ₀ ≤ κ) (t : Proc κ) (ht : Productive t) :
     t = omegaProc hinf := ws1_productive_unique hinf t ht
 
-/-- **The genuine same-limit haecceity witness is structurally absent (pass-2 C2, a named open).**
+/-- **The genuine same-limit haecceity witness is structurally absent (interim-review C2, a named open).**
 Two *productive* (atomless) threads are always EQUAL — so there is no "same behaviour, different
 finite history" distinction on this carrier. The "extra to identity" that plurality needs provably
 cannot live in process-history here; it can appear only as non-reduced carrier (`twoLoop`) or an
@@ -108,6 +108,20 @@ imported label (`labelLoop`). This is the sharpest statement of what the program
 theorem ws3_no_same_limit_haecceity (hinf : ℵ₀ ≤ κ) (x y : Proc κ)
     (hx : Productive x) (hy : Productive y) : x = y := by
   rw [ws1_productive_unique hinf x hx, ws1_productive_unique hinf y hy]
+
+/-! ## The candidate FOURTH kind: the faced boundary (project-review-2/pass-2 R1, a named open)
+
+Pass 2 identified a candidate fourth location the leaf/import dichotomy does not enumerate: the
+**faced boundary** — a descent boundary (leaf-like: it bottoms out, `¬ SHNE`) that ALSO carries a
+distinguishing quality (import-like: it tells states apart). The Series 4 restriction `x↾(x,y)` is
+exactly this: the relatum cut to a context, where the cut is itself a quality. `LeafDiff` is a bare
+`¬ SHNE` with no quality; `ImportDiff` is quality with no leaf; neither has the faced boundary's
+extension. This is the same "extra to identity" that `ws3_no_same_limit_haecceity` shows cannot live
+in behaviour or history — seen from the label side: it lives in the faced boundary. Whether it
+REDUCES to leaf-or-import (restoring the dichotomy) or is a genuine fourth kind (demoting the
+impossibility to collapse-plus-examples, charter §5.2) is the **load-bearing open** — NOT assumed
+either way. It needs a carrier that supports the restriction (the `νLk` face), which Series 7 does
+not transcribe. Recorded as a named open, routed to a possible Series 8. -/
 
 /-! ## The three kinds are genuinely distinct (not a definitional partition) -/
 

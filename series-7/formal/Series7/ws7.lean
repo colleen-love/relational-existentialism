@@ -81,15 +81,22 @@ theorem leafCoalg_behav (hinf : ℵ₀ ≤ κ) : BehaviorallyIdentified (leafCoa
 /-! ## The audit anchors (each a theorem) -/
 
 /-- **D1 — the non-circularity audit, re-grounded on real escapes (S4).** (a) the drop-(1)
-label escape is refuted as a THEOREM: a labelled world, behaviorally identified yet plural, whose
-distinction SURVIVES the label-quotient (drops plainness). (b) the drop-(2) plain non-reduction is
-refuted as a THEOREM: bisimilar-yet-unequal atomless states on the plain functor. Neither is the
-`Iff.rfl` definitional alias (NC1, now a prose usage claim). -/
+label escape is refuted as a THEOREM at CHARTER STRENGTH (pass-2 S1/S3): the SEMANTIC import
+`ws4_free_label_is_import` — the plain (label-forgetting) relating cannot recover the label
+(plain-bisimilar states), yet the label distinguishes (no label-bisimulation relates them), so the
+label is a coordinate NOT carried by the relating (§4.1), not merely "a label in the signature".
+(b) the drop-(2) plain non-reduction is refuted as a THEOREM: bisimilar-yet-unequal atomless states
+on the plain functor. Neither is the `Iff.rfl` definitional alias (NC1, a prose usage claim).
+
+SCOPE (pass-2 S2/S3): this certifies that GENUINE free-label imports exist and are non-circular; it
+does NOT certify that the Series 4 restriction is an import — it is not (recoverable ⇒ not an
+import, `ws4_recoverable_not_import`; reclassified as a leaf/faced-boundary in `ws4.lean`). The
+prior-series catalogue is honestly re-scoped, not certified here. -/
 theorem ws7_non_circularity_audit (hinf : ℵ₀ ≤ κ) :
-    (BehaviorallyIdentifiedL (labelLoop hinf)
+    ((∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
        ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
   ∧ (∃ R, IsBisim (twoLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
-  ⟨⟨(ws4_labels_are_import hinf).1, ws4_label_survives_quotient hinf⟩,
+  ⟨ws4_free_label_is_import hinf,
    ⟨fun _ _ => True, twoLoop_true_bisim hinf, trivial⟩⟩
 
 /-- **D2 — the kinds are genuinely distinct (not a definitional partition).** An import that is
@@ -124,7 +131,7 @@ theorem ws7_strip_ledger (hinf : ℵ₀ ≤ κ) :
 without discharging them, and the verdict is a function of it — so breaking any field breaks the
 verdict's build. This is the fix for the pass-1 hand-set flags (S1). -/
 structure Audit (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) : Prop where
-  nonCircular : (BehaviorallyIdentifiedL (labelLoop hinf)
+  nonCircular : ((∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
                    ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
                 ∧ (∃ R, IsBisim (twoLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
   kindsDistinct : ImportDiff (twoLoop hinf) ⟨true⟩ ⟨false⟩ ∧ ¬ LeafDiff (twoLoop hinf) ⟨true⟩ ⟨false⟩
@@ -163,7 +170,7 @@ theorem ws7_audited_not_circular {hinf : ℵ₀ ≤ κ} (cert : Audit κ hinf) (
 /-- The verdict without a certificate: `Circular`. This is a plain constant naming the
 no-certificate outcome; the load-bearing content is `ws7_audited_not_circular` (with a
 certificate, never `Circular`) — the pass-verdicts require an `Audit`, so a failed
-non-circularity audit leaves only this. (Pass-2 C4: the constant is documentation, not the proof.) -/
+non-circularity audit leaves only this. (Interim-review C4: the constant is documentation, not the proof.) -/
 def verdictNoCertificate : ProgramVerdict := ProgramVerdict.Circular
 
 /-- If exhaustiveness were to land (`exhaustive = true`) with a certificate, the same function

@@ -5,8 +5,18 @@ run via `lake env lean series-7/formal/Series7/AxiomCheck.lean`. Every headline 
 sorry-free and rests only on Mathlib's standard three (`propext`, `Classical.choice`,
 `Quot.sound`) — no `sorryAx`, no custom `axiom`.
 
-Regenerated 2026-07-10 after addressing project-review-2.md (pass 2, clean; cosmetic C1-C4
-relabels/removals only — no mathematics changed).
+Regenerated 2026-07-10 after the alignment pass (project-review-2 pass 2): the semantic import
+test (`ws4_free_label_is_import`, `ws4_recoverable_not_import`) and the audit re-grounded on it.
+Extended with the mechanized recoverable-label collapse (`ws4_recoverable_atomless_collapses`,
+`ws4_labelLoop_not_recoverable`, `ws4_restriction_collapses_escalation_imports`) — the Series 4
+restriction now proved to collapse, not just argued. Extended again with the subset-of-a-restriction
+probe (`ws4_atomless_recoverable_all_bisimL`, `ws4_atomless_label_distinction_imports`,
+`ws4_subset_selection_survives_as_import`): on an atomless carrier, a free per-state subset-selection
+survives — but as an import (the atom is in the choosing, not the material), so the `atomless`
+hypothesis is tight. Capstone `att_cannot_distinguish_atomless_histories`: any attention function of
+the history returns equal values on atomless histories (they are equal, Ω), so a separator must be
+exogenous to the relating — a given (atom) or a choice (will), the same footprint, which the
+formalism cannot and does not decide between. 46 headline theorems.
 
 ```
 'Series7.WS1.ws1_atomless_bisim' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -28,6 +38,16 @@ relabels/removals only — no mathematics changed).
 'Series7.WS3.ws3_import_not_leaf' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_labels_are_import' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_label_survives_quotient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_free_label_is_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_recoverable_not_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_recoverable_atomless_collapses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_recoverable_plurality_requires_drop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_labelLoop_not_recoverable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_restriction_collapses_escalation_imports' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_atomless_recoverable_all_bisimL' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_atomless_label_distinction_imports' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.ws4_subset_selection_survives_as_import' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series7.WS4.att_cannot_distinguish_atomless_histories' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_toy_loop_is_drop2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_index_reuses_label_mechanism' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series7.WS4.ws4_program_explained' depends on axioms: [propext, Classical.choice, Quot.sound]
