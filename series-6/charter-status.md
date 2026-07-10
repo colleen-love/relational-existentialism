@@ -27,9 +27,9 @@
 | **This status file** | v0 — charter written (Phase A). Protocol written. No designs, no build. |
 | **Design docs** | **Not started.** To be written as a batch under `series-6/spec/ws01…ws07-design.md` + `README.md` (protocol §2, Phase B). |
 | **Formalization** | **Not started.** Target layout `series-6/formal/ws1.lean … ws7.lean`, `Series6.lean`, `AxiomCheck.lean`, self-contained (transcribe Series 4/5 machinery; import nothing from `series-5/`, `series-4/`, or `archive/`), pinned Lean/Mathlib per `lake/`. |
-| **Central question** (charter §8) | **Open — the series has just been chartered.** Can a *process* be globally atomless and plural at once (the thing §3 proves no finished object can be), driven from within by the diagonal, with a directed endogenous arrow, and with the one-arrow-or-many question decided by the mathematics? None of this is built. |
-| **Headline target (positive)** | A genuinely built, non-collapsing diagonal-driven process (WS1) that is **globally atomless and plural** (WS6, the achievement the Static Collapse forbids to any static object); the **engine identity** fixed-point-freeness = incompleteness = non-termination (WS3); the **endogenous arrow** (WS4); and the **relativity verdict** on `≺` decided by the two-sided face (WS5). |
-| **Headline target (negative, first-class)** | The **Static Collapse Theorem** (WS2, Impossibility): no static globally-atomless construction is plural, subsuming Parmenides (S4) and the tower (S5). This is the motivating engine, as the Parmenides collapse and Explosion Dilemma were for S4/S5. |
+| **Central question** (charter §8) | **Open — the series has just been chartered.** Can a *process* over the plain carrier `νPk` be *genuinely* globally atomless (no imported atom — no label, index, or weight — to carry its plurality) and plural at once (the thing §3 proves no finished object can be), driven from within by the diagonal, with a directed endogenous arrow, and with the one-arrow-or-many question decided by the mathematics? None of this is built. |
+| **Headline target (positive)** | A genuinely built, non-collapsing diagonal-driven process (WS1) over `νPk` that is **genuinely globally atomless and plural** — the plurality carried by endogenous time, not an imported label (WS6, the achievement the Static Collapse forbids to any static object); the **engine identity** fixed-point-freeness = incompleteness = non-termination (WS3); the **endogenous arrow** (WS4); and the **relativity verdict** on `≺` decided by the two-sided (endogenous) survey (WS5). |
+| **Headline target (negative, first-class)** | The **Static Collapse Theorem** (WS2, Impossibility): no static *genuinely* globally-atomless construction is plural — every static plurality is bought by an imported atom (`νLk`'s labels, the tower's index). Subsumes Parmenides (S4, `ws2_collapse` on `νPk`) and the tower (S5). The motivating engine, as the Parmenides collapse and Explosion Dilemma were for S4/S5. |
 | **Signature risk** | Trivialization — the diagonal *painted on* rather than driving (WS3), and the §5.5 unification a *conjunction* rather than one mechanism (WS6/WS7). The exact failure mode Series 3's attention and Series 5's grade-shift hit. Untested until built. |
 | **Blocking item** | **WS1 gate** — the process must exist as a coherent, non-collapsing object with a plurality-keeping notion of sameness that carries the diagonal transition. Existential; settled first (charter §9). **Not started.** |
 | **Verdict (WS7)** | **Not started.** Typed `ProgramVerdict ∈ { oneDiagonal, payoffsEstablished, Trivialized }` to be reported only after WS1–WS6. |
@@ -41,7 +41,7 @@
 *All seven are **Not started.** The rows below record the *pre-registered contract* — the target theorem names and outcome classes from the charter — so the design batch (Phase B) has explicit hooks. Theorem names are provisional design targets, not built artifacts.*
 
 ### WS1 — The process and its gate  ·  *blocking*
-**Status: Not started.** · Carrier decision **open**: three candidate homes to adjudicate on a paper-decidable gate — **guarded recursion / topos of trees** (lead), **metric completion** (Lawvere-enriched, quality-as-distance), **pro-object / final-chain-without-limit**.
+**Status: Not started.** · Base carrier fixed: the **plain `νPk`** (no imported labels — the honestly atom-free carrier where the static collapse bites). Carrier-*home* decision **open**: three candidate encodings of the process over `νPk` to adjudicate on a paper-decidable gate — **guarded recursion / topos of trees** (lead), **metric completion** (Lawvere-enriched, quality-as-distance), **pro-object / final-chain-without-limit**.
 
 | Obligation | Target (provisional) | Status |
 |---|---|---|
@@ -55,10 +55,11 @@
 
 | Obligation | Target (provisional) | Status |
 |---|---|---|
-| **Static Collapse Theorem (broad)** | `ws2_static_collapse` | Not started (Impossibility target) |
+| **Static Collapse Theorem (broad, genuine-atomlessness form)** | `ws2_static_collapse` | Not started (Impossibility target — no imported atom) |
+| Apparent escapes are imports (`νLk` labels, tower index) | `ws2_escapes_are_imports` | Not started (the diagnosis that makes the theorem true) |
 | Subsumes Parmenides (single carrier) | `ws2_subsumes_parmenides` | Not started |
 | Subsumes the tower (colimit), diagnoses S5 open-#2 | `ws2_subsumes_tower` | Not started |
-| Definition of "static" pinned | `ws2_static_def` | Not started (the definitional spine on which breadth rests) |
+| Definition of "static" + "no imported atom" pinned | `ws2_static_def` | Not started (the definitional spine on which breadth rests) |
 | Forced answer: dynamism is the escape | `ws2_forced_answer` | Not started (essential-uniqueness target; heuristic floor pre-authorized, charter §9) |
 
 ### WS3 — The engine: incompleteness as fuel
@@ -100,7 +101,7 @@
 
 | Obligation | Target (provisional) | Status · coincidence |
 |---|---|---|
-| **Globally atomless AND plural (the achievement)** | `ws6_atomless_and_plural` | Not started (the success the Static Collapse forbids to any finished object) |
+| **Genuinely globally atomless AND plural (the achievement)** | `ws6_atomless_and_plural` | Not started (over `νPk`; plurality by endogenous time, no imported atom — the success the Static Collapse forbids to any finished object) |
 | Groundlessness from the diagonal (no completion ⇒ no atom) | `ws6_groundlessness_from_diagonal` | Not started |
 | Plurality from the diagonal (each residue ⇒ new distinction) | `ws6_plurality_from_diagonal` | Not started |
 | **Coincidence: one engine, not a conjunction** | `ws6_one_engine` | Not started (the reduction S4/S5 downgraded) |
@@ -141,7 +142,7 @@
 *The single list of everything owed. Each item names its owner and its trigger-to-close. At Rev-0 these are the pre-registered cruxes and hazards from charter §5.6 / §9; the register fills in as work proceeds.*
 
 1. **The WS1 gate** — WS1. **OPEN (blocking).** The process must exist as a coherent, non-collapsing object with plurality-keeping sameness that carries the diagonal transition. Trigger-to-close: `ws1_no_collapse` on a chosen carrier (guarded / metric / pro-object), with Ω recovered.
-2. **Definition of "static" for the broad collapse** — WS2. **OPEN.** The breadth of `ws2_static_collapse` rests on a precise, non-circular definition of "static" (behavioral identity on a finished fixed-point object, covering colimits). Trigger-to-close: `ws2_static_def` + the two subsumption lemmas.
+2. **Definition of "static" + "no imported atom" for the broad collapse** — WS2. **OPEN.** The breadth of `ws2_static_collapse` rests on a precise, non-circular definition of "static" (behavioral identity on a finished fixed-point object, covering colimits) *and* of "genuinely globally atomless / no imported atom" (the distinction between objects carried by the relating, not a label alphabet, index, or weight — the sharpening without which `νLk`'s labelled loops refute the theorem). Trigger-to-close: `ws2_static_def` + `ws2_escapes_are_imports` + the subsumption lemmas.
 3. **The diagonal drives, not painted on (signature crux)** — WS3. **OPEN.** Trigger-to-close: `ws3_residue_is_successor` with the transition *definitionally* the residue, surviving the strip of "diagonal"; else **Trivialized**.
 4. **The arrow is endogenous, no imported axis** — WS4. **OPEN.** Trigger-to-close: `ws4_arrow_endogenous` surviving the strip of the external time index (direction carried by the proper-subobject order).
 5. **The relativity fork** — WS5. **OPEN.** Trigger-to-close: `ws5_total_iff_agree` + `ws5_plurality_forbids_agreement` ⇒ partial order (relativity), OR the honest `ws5_omega_absolute_frame` branch ⇒ total order (Newton). Either resolves the fork.
