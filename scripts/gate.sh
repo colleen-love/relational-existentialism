@@ -28,5 +28,6 @@ check () { # <root> <allowed-egrep>
 check series-07 "^import Series07(\.[A-Za-z0-9_]+)*$"
 check series-09 "^import Series09(\.[A-Za-z0-9_]+)*$"
 check series-10 "^import Series10(\.[A-Za-z0-9_]+)*$"
+check series-11 "^import Series11(\.[A-Za-z0-9_]+)*$"
 
 exit $fail
