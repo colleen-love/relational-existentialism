@@ -27,7 +27,7 @@
 | Phase | Name | Status |
 |---|---|---|
 | A | Charter | **Complete (2026-07-11).** `charter.md`, `charter-status.md`, `protocol.md` written. |
-| B | Design-all (seven `spec/wsNN-design.md` + `spec/README.md`) | **Not started.** |
+| B | Design-all (seven `spec/wsNN-design.md` + `spec/README.md`) | **Complete (2026-07-11).** All seven designs + `spec/README.md` committed as a batch. The two Series-9 design duties settled: the hold-reflexive carrier `(dest, insp)` chosen once in WS1 (`spec/README.md` §2.3, ambient for all); the tower order `≺` derived once in WS3 as `Relation.ReflTransGen ReDiagStep` (`spec/README.md` §2.4, consumed by WS3+WS4). |
 | C | Build-all (`formal/Series9/wsNN.lean`, `Series9.lean`, `AxiomCheck.lean`) | **Not started.** |
 | D | Blind series-review → `spec/series-review-1.md` | **Not started.** |
 | E | Address | **Not started.** |
@@ -89,7 +89,16 @@ This is Series 9's atom-or-will door (inheriting Series 7's atom-or-will and Ser
 
 ## Closed log
 
-*(empty; no builds run. Phase A complete 2026-07-11: charter, charter-status, protocol written and committed to the Series 9 working branch. Next action: Phase B, design all seven workstreams against `charter.md`, settling the two Series-9-specific design duties, the hold-reflexive carrier chosen once in WS1 and the tower order derived once in WS3, per protocol §2.)*
+*(no builds run. Phase A complete 2026-07-11: charter, charter-status, protocol written and committed. **Phase B complete 2026-07-11:** seven `spec/wsNN-design.md` + `spec/README.md` written and committed as a batch. Design headlines, per workstream:*
+- *WS1 — the spine `ws1_no_self_total_hold` (self-total fixed-point equation has no solution, `insp t t ↔ ¬ insp t t`), targeted Discharged as an Impossibility INDEPENDENT of relational identity, certified by `ws1_diagonal_not_bisim` (no bisimulation/atomlessness hypothesis; orthogonal to `ws1_symmetric_states_bisimilar`). Twin carrier guards: `ws1_holdreflexive_not_selfloop` (§4.4) and `ws1_unrestricted_carrier_inconsistent` (§5.5, Russell).*
+- *WS2 — `ws2_residue_free` / `ws2_residue_distinct` (residue free and distinct from ONE position, no `x ≠ y` in the premise — the repair of Series 8's circularity), tied to the semantic import test; distributed perspective recovered as mutual residues (special case, scoped).*
+- *WS3 — `ReDiagStep` / `prec` (endogenous tower order = `ReflTransGen ReDiagStep`); (NL) `ws3_redi_no_leaf`, (NF) `ws3_redi_not_function`, `ws3_dynamics_forced` (seriality), `ws3_imported_index_refuted` (2-cycle, §4.2 guard). Monotonicity NOT built into the map.*
+- *WS4 — `ws4_new_blind_spot` (the diagonal escapes its enumeration), `ws4_depth_is_tower` (accumulation `⊆`), `ws4_reaches_is_trace`; universal Partial → WS6.*
+- *WS5 — the monotonicity fork: PREDICTED **Partial** (Refuted-universal via `ws5_kill_condition`/`ws5_retention_refuted` — re-diagonalization closes the blind spot it holds — Discharged on a fresh-chain class). Kill condition pre-registered; not assumed.*
+- *WS6 — floor + defended universals + `ws6_monotonicity_retracted` (strong form retracted, non-triviality survives) + spine-scope ledger.*
+- *WS7 — `Series9Verdict`, the `Audit` (flagship field `diagonalNotBisim`), `ws7_coincidence_check`, four guards; predicted verdict `selfReferenceEstablished`.*
+
+*Next action: Phase C, build all seven in `formal/Series9/wsNN.lean`, WS1 first; the single most important build check is `#print`-ing `ws1_no_self_total_hold` to confirm its proof term is a diagonal fixed-point contradiction and does NOT reduce to `ws1_symmetric_states_bisimilar`.)*
 
 ## Series-review log
 
