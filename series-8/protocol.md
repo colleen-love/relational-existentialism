@@ -43,7 +43,7 @@ Six phases. Phases D and E loop.
 | B | Design-all | 1 | Claude code with repo | **all seven at once** |
 | C | Build-all | 1 | Claude code with repo | **all seven at once** |
 | D | Blind series-review | 1 | incognito with repo | **whole series at once** → writes `series-review.md` |
-| E | Address | 1 | `series-review.md` + all code + designs | **whole series at once** |
+| E | Address | 1 | Claude code with repo | **whole series at once** |
 | — | Accept / route | — | (bookkeeping into `charter-status.md`) | — |
 
 The canonical run is **B → C → D → E → D → E** (two review passes, three code touches counting the initial build), with more D→E loops added only if a review pass still returns SERIOUS findings.
