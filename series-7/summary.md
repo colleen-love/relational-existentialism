@@ -10,13 +10,13 @@ Series 7 asks the question the whole program has circled for six series: **can a
 
 It is a law, and the sharp statement of it is the headline:
 
-> **Atomless plurality is impossible without an import — a distinction based on something the histories do not contain, either externally defined, or internally chosen.**
+> **Atomless, purely relational, behaviorally identified plurality is impossible without a distinction the relating cannot carry, forking undecidably into the given and the chosen.**
 
-The first clause is a theorem, machine-checked in Lean 4 with no gaps and no assumptions beyond the standard mathematical baseline: a world of pure relating, in which an object simply *is* how it relates, and in which nothing anywhere ever bottoms out in a leaf, has at most one thing in it. To hold more than one thing, such a world must import a distinction — something not carried by the relating itself.
+The first part is a theorem, machine-checked in Lean 4 with no gaps and no assumptions beyond the standard mathematical baseline. Three conditions: **atomless** (nothing anywhere ever bottoms out in a leaf), **purely relational** (no coordinate riding alongside the relating), and **behaviorally identified** (an object simply *is* how it relates — two things are the same exactly when they relate alike). A world meeting all three has at most one thing in it. To hold more than one, it must turn on a distinction the relating cannot carry.
 
-The second clause is what this series discovered by pushing the first to its limit, and it is the part that reframes everything. When you ask *what* that imported distinction can be, the answer forks into two, and the fork cannot be closed.
+The rest of the headline — *forking undecidably into the given and the chosen* — is what this series found when it asked *what* that distinction can be. It is not a fact about time; it holds of any such world, whether a finished object or one unfolding as a process. The answer forks into two, and the fork cannot be closed.
 
-## The engine, and why the histories collapse
+## The engine, and why the atomless are one
 
 Everything rests on one short lemma, more general than any collapse the program had proved before: **atomless behavior is unique.** On *any* world of plain relating, all the atomless things are behaviorally identical, because everything atomless relates to everything atomless — "both are atomless" is itself a matching-up. The only way two things in a groundless world can differ is a leaf, a place where descent bottoms out unequally. Forbid leaves and you forbid difference.
 
@@ -33,7 +33,9 @@ So to separate two atomless histories, the separator must reach for something th
 - a **given** — a distinction externally defined, an atom that was already there and got moved in; or
 - a **choice** — a distinction internally originated, made rather than found: a will.
 
-Type theory has no predicate for *chosen rather than given*. It proves only that the distinguisher is not carried by the relating, and it falls silent on which of the two it is. **That silence is the result, not a gap.** The impossibility forces the disjunction — atom or will — and provably cannot decide the disjunct, because deciding it would mean the relating carried the very difference between a given and a choice, and by construction it does not.
+Type theory has no predicate for *chosen rather than given*. It proves only that the distinguisher is not carried by the relating, and it falls silent on which of the two it is. **That silence is the result, not a gap.** The impossibility forces the disjunction — given or chosen — and provably cannot decide the disjunct, because deciding it would mean the relating carried the very difference between a given and a choice, and by construction it does not.
+
+The process was the sharpest way to see it — there the two candidates are provably *the same thread* — but nothing here needs time. In a single static world the three conditions already do the work: behavioral identity makes two atomless things one, so anything that would tell them apart is, equally, a coordinate from outside the relating, forking the same way. The fork is a property of the distinction, not of the dynamics.
 
 ## The program, reframed as Parmenides
 
