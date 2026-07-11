@@ -305,28 +305,44 @@ recover all faces at once is a `ws1_no_gods_eye` node, which does not exist. -/
 theorem ws1_directed_hold_free (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (labelLoop hinf) :=
   ws4_labelLoop_not_recoverable hinf
 
-/-! ## The god's-eye node collapses BY THE ENGINE (series-review-2 S1 — the charter-strength spine)
+/-! ## The god's-eye collapse and its HONEST SCOPE (series-review-3 S1 — a Partial, obstruction precise)
 
-Pass 2 was right that `ws1_no_gods_eye` is a conditional on `Recoverable`, and that the pre-review
-"fork" was a tautological case-split whose free horn merely *asserted* "distributed, not monist." The
-charter's literal spine (§2, §5.1, §5.5) is now built as a theorem with NO `Recoverable` hypothesis:
-the god's-eye node is the **positionless** node — one holding all faces symmetrically, i.e. with **no
-asymmetry anywhere** (`dest x = dest y` for all `x, y`, "the view from everywhere is the view from
-nowhere") — and it is **label-bisimilar to the trivial self-loop** (the all-true relation is a
-label-bisimulation), hence **collapses to the One by the engine** (behavioral identity), annihilating
-the very faces it was meant to hold. Crucially the surviving plural node (`labelLoop`) is provably
-NOT symmetric (`dest ⟨true⟩ ≠ dest ⟨false⟩`), so the charter's pre-registered Failed condition — a
-*symmetric* node that does not collapse — provably does not arise: symmetric ⟹ collapse. -/
+Three review passes flagged the same point, and pass 3 is right: the collapse below is not the
+charter's *independent* dramatic annihilation of a rich totality. It is honestly reported here as a
+**Partial**, with the obstruction precise, per protocol §E and charter §5.5/§9 (which pre-registered
+that the all-faces node might be "only heuristically" bisimilar to the trivial loop — the sharpest
+risk). The precise situation, all theorems below:
 
-/-- **The positionless (god's-eye) property.** A node holds all faces symmetrically, with no asymmetry
-anywhere, iff every position relates identically — the view from everywhere is the same. -/
+1. **A positionless node collapses — but the collapse coincides with relational identity.** `Symmetric
+   dest := ∀ x y, dest x = dest y` makes all states label-bisimilar (`ws1_symmetric_states_bisimilar`),
+   so `ws1_gods_eye_collapses` is behavioral identity applied to that bisimulation. The coincidence
+   rule (protocol §5) FAILS here: "forced collapse" unfolds to "relational identity on a symmetric
+   coalgebra." This is a genuine theorem but NOT an independent derivation of no-god's-eye from
+   relational identity — it *is* relational identity, wearing the perspectival reading.
+
+2. **No genuine multi-face symmetric totality exists to collapse (the obstruction, made a theorem).**
+   On an atomless field a genuine face-distinction is FREE, never recoverable
+   (`ws1_distinct_faces_atomless_not_recoverable`): a node with two states carrying genuinely distinct
+   faces is not a symmetric/recoverable totality at all. So the charter's "rich all-faces symmetric
+   totality" is an EMPTY class on atomless — there is nothing to collapse, because genuine plurality of
+   faces forces freeness (asymmetry). The `symLoop` witness confirms it from the other side: a
+   constant ≥2-face node is *not* relationally identified (`ws1_symLoop_not_behav`).
+
+Honest status: **Impossibility proved for the recoverable/symmetric case** (`ws1_no_gods_eye`) and
+**genuine plurality ⟹ free** (`ws1_distinct_faces_atomless_not_recoverable`); the charter-strength
+*independent* spine (a rich totality collapsing as a fact over and above relational identity) is a
+**Partial** — it provably reduces to relational identity. This does NOT hand victory to monism: the
+plurality is real and distributed (WS2, `ws1_freeness_needs_two_positions`); what is not achieved is
+making no-god's-eye a fact separate from the Series 7 collapse. See `charter-status.md` (pass 3) and
+`ws1-design.md`. -/
+
+/-- **The positionless property.** Every position relates identically — the strongest form of "no
+asymmetry anywhere." (NB: this is `∀ x y, dest x = dest y`, all-nodes-identical, which is why the
+collapse below coincides with relational identity — see the section note.) -/
 def Symmetric {Q X : Type u} (dest : X → LkObj κ Q X) : Prop := ∀ x y, dest x = dest y
 
-/-- **S1 — the positionless node is bisimilar to the trivial self-loop.** On a symmetric coalgebra the
-all-true relation is a label-bisimulation: every position matches every other's faces (they are
-identical), so all nodes are label-bisimilar — bisimilar to a single self-loop, the positionless One.
-This is the charter's literal step "no asymmetry anywhere ⟹ bisimilar to the trivial self-loop", now
-a theorem (no coproduct carrier needed — symmetry makes the identity carrier its own witness). -/
+/-- **On a positionless coalgebra the all-true relation is a label-bisimulation** — every position
+matches every other's faces (identical), so all states are label-bisimilar. -/
 theorem ws1_symmetric_bisim_trivial {Q X : Type u} (dest : X → LkObj κ Q X)
     (hsym : Symmetric dest) : IsBisimL dest (fun _ _ => True) := by
   intro x y _
@@ -334,11 +350,18 @@ theorem ws1_symmetric_bisim_trivial {Q X : Type u} (dest : X → LkObj κ Q X)
   · rw [← hsym x y]; exact hp
   · rw [hsym x y]; exact hq
 
-/-- **S1 — THE SPINE (charter strength, Impossibility proved).** A positionless (symmetric),
-relationally-identified node is a subsingleton: holding all faces symmetrically erases the asymmetry
-that made them faces, so the all-true bisimulation collapses the carrier to the One — the totality
-annihilates its perspectives. No `Recoverable` hypothesis, no atomlessness assumed: the collapse is by
-the engine (behavioral identity) applied to `ws1_symmetric_bisim_trivial`. -/
+/-- **The coincidence, owned (series-review-3 S1).** On a positionless coalgebra ANY two states are
+label-bisimilar. Hence the collapse below is behavioral identity applied to THIS bisimulation — not an
+independent fact. This is disclosed, not hidden: the spine's honest content is relational identity. -/
+theorem ws1_symmetric_states_bisimilar {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hsym : Symmetric dest) (x y : X) : ∃ R, IsBisimL dest R ∧ R x y :=
+  ⟨fun _ _ => True, ws1_symmetric_bisim_trivial dest hsym, trivial⟩
+
+/-- **The positionless collapse (a theorem; scope: coincides with relational identity — see note).** A
+positionless, relationally-identified node is a subsingleton: all its states are label-bisimilar
+(`ws1_symmetric_states_bisimilar`), so behavioral identity forces them equal. Honestly this is
+relational identity on a symmetric coalgebra (the coincidence rule fails), NOT the charter's
+independent collapse of a rich totality — reported as a Partial in `charter-status.md`. -/
 theorem ws1_gods_eye_collapses {Q X : Type u} (dest : X → LkObj κ Q X)
     (hsym : Symmetric dest) (hbehav : BehaviorallyIdentifiedL dest) : Subsingleton X :=
   ⟨fun x y => hbehav (fun _ _ => True) (ws1_symmetric_bisim_trivial dest hsym) x y trivial⟩

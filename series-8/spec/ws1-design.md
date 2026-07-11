@@ -188,3 +188,37 @@ The headline is now genuinely earned: *no relationally-identified positionless (
 node exists — it collapses to the One by the engine; genuine plurality is asymmetric/distributed.*
 All axiom-clean (`axiom-check-log.md`). C3 (coproduct carrier) is subsumed: `ws1_symmetric_bisim_trivial`
 gives the bisimilarity to the trivial loop directly on the identity carrier.
+
+---
+
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-3 S1 — SERIOUS, resolved as an honest PARTIAL)
+
+Pass 3 (independent adversarial) correctly found that the pass-2 `Symmetric := ∀ x y, dest x = dest y`
+spine is "positionless by a definitional clause" — the bisimilarity holds by rewriting the defining
+equality, and the genuine multi-face symmetric witness (`symLoop`) is *excluded* (not behav-id), not
+*collapsed*. This is the §0.5 "asserted positionless / excluded by a definitional clause" pattern.
+
+**Attempted the charter-strength theorem first (per protocol §E); it provably resists.** The precise
+obstruction, now itself a theorem:
+
+- **`ws1_symmetric_states_bisimilar`** — on a positionless coalgebra ANY two states are label-bisimilar.
+  So `ws1_gods_eye_collapses` is *behavioral identity applied to that bisimulation*: the **coincidence
+  rule fails at the spine** (the "forced collapse" unfolds to relational identity on a symmetric
+  coalgebra). This is now OWNED in-code, not hidden.
+- **`ws1_distinct_faces_atomless_not_recoverable`** — a genuine face-plurality on an atomless field is
+  FREE, never recoverable. So a rich *symmetric/recoverable* totality is an EMPTY class on atomless:
+  there is nothing to collapse independently, because genuine plurality of faces forces freeness
+  (asymmetry). The reviewer's requested "collapse a genuine all-faces node" asks to collapse an object
+  that provably does not exist as relationally-identified.
+
+**Honest outcome: the spine is a PARTIAL.** Impossibility-proved core (no recoverable/symmetric god's-eye
+node; genuine plurality ⟹ free/distributed, WS2 + `ws1_freeness_needs_two_positions`); the
+charter-strength *independent* derivation (a rich totality collapsing as a fact over and above
+relational identity) resists — it reduces to the Series 7 relational-identity collapse. The overclaim
+"Impossibility proved at charter strength" is withdrawn from `Series8.lean` and `charter-status.md`.
+
+This is WITHIN the charter's pre-registration: §5.5 names the Spinozist rebuttal as "the sharpest
+risk," and §9 lists "whether the all-faces node is *provably* bisimilar to the trivial loop, or only
+heuristically" as an open problem. So no charter change; the honest Partial is the terminal state, and
+the question "is no-god's-eye separable from relational identity?" is the natural seed for Series 9.
+Monism does not win: the plurality is real and distributed. All theorems axiom-clean (`axiom-check-log.md`).

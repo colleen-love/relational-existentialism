@@ -7,14 +7,16 @@ Part Two of the program: Series 7 proved the determined, groundless, atomless pl
 One; Series 8 finds the fourth thing the collapse did not consider — the finitude of holding — and
 shows the One becomes many, moving, and layered through re-restriction.
 
-The spine (WS1) is a proved Impossibility: no relationally-identified god's-eye node exists. The
-god's-eye node is the POSITIONLESS node — one holding all faces symmetrically, with no asymmetry
-anywhere (`dest x = dest y` for all `x, y`) — and it is label-bisimilar to the trivial self-loop, so
-it collapses to the One by the engine (behavioral identity), annihilating the faces it was meant to
-hold: `ws1_gods_eye_collapses` (no `Recoverable`/atomless hypothesis). The surviving plural node is
-provably NOT symmetric (`ws1_labelLoop_not_symmetric`), so it is genuinely distributed perspective
-(WS2), never a symmetric totality that escaped collapse. From the spine three consequences: plurality
-by free perspective (WS2), forced
+The spine (WS1) is honestly a **Partial** (series-review-3; the charter §5.5/§9 pre-registered this as
+the sharpest risk). What is PROVED: a recoverable/symmetric god's-eye node collapses to the One
+(`ws1_no_gods_eye`), and a genuine plurality of faces on an atomless field is necessarily FREE, never a
+recoverable totality (`ws1_distinct_faces_atomless_not_recoverable`) — so there is no rich symmetric
+totality to host plurality. What is NOT reached at charter strength: an *independent* collapse. The
+positionless collapse `ws1_gods_eye_collapses` provably coincides with relational identity
+(`ws1_symmetric_states_bisimilar`: a positionless node's states are all bisimilar, so the collapse is
+behavioral identity, not a separate fact — the coincidence rule fails). This does not hand victory to
+monism: the plurality is real and distributed (WS2, `ws1_freeness_needs_two_positions`). From the
+spine (in its honest scope) three consequences: plurality by free perspective (WS2), forced
 dynamics (WS3), depth-as-narrowing (WS4). The central open law — conservation of breadth — is TESTED,
 not assumed: the kill condition fires (`ws5_kill_condition`), so strict conservation is Refuted and
 the bound is mere boundedness (WS5/WS6). The verdict is `perspectiveEstablished` (WS7).

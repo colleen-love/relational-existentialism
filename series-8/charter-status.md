@@ -2,7 +2,7 @@
 
 **The mutable companion to `series-8-charter.md`. All progress, revisions, per-workstream status, discharges, and open items live here, the charter stays clean.**
 
-*Initialized at series start. **Phase B (design-all) complete (2026-07-11):** all seven per-workstream designs + the design index are committed under `spec/`. **Phase C (build-all) complete (2026-07-11):** every design is realized in `formal/Series8/wsNN.lean`, `Series8.lean` + `Series8.AxiomCheck` build clean; all `sorry`-free and axiom-clean on the standard three (`spec/axiom-check-log.md`); `scripts/gate.sh` confirms Series 8 imports resolve only to `Series8.*` (+ Mathlib). **Phase D→E review loop run twice** (`spec/series-review-1.md`, `spec/series-review-2.md`): all findings addressed by theorem/relabel. **The current headline count is 37** (Phase C built 30 `#print axioms` headlines; pass 1 added 4; pass 2 removed 2 tautological theorems and added 5 for the charter-strength spine → 37), all re-verified axiom-clean. This file is the honest ledger; it shows Partials and refutations as first-class outcomes, not failures. See the series-review log below.*
+*Initialized at series start. **Phase B (design-all) complete (2026-07-11):** all seven per-workstream designs + the design index are committed under `spec/`. **Phase C (build-all) complete (2026-07-11):** every design is realized in `formal/Series8/wsNN.lean`, `Series8.lean` + `Series8.AxiomCheck` build clean; all `sorry`-free and axiom-clean on the standard three (`spec/axiom-check-log.md`); `scripts/gate.sh` confirms Series 8 imports resolve only to `Series8.*` (+ Mathlib). **Phase D→E review loop run twice** (`spec/series-review-1.md`, `spec/series-review-2.md`): all findings addressed by theorem/relabel. **The current headline count is 38** (Phase C built 30 `#print axioms` headlines; pass 1 added 4; pass 2 removed 2 tautological theorems and added 5 → 37; pass 3 added 1 coincidence-disclosure theorem → 38), all re-verified axiom-clean. This file is the honest ledger; it shows Partials and refutations as first-class outcomes, not failures. See the series-review log below.*
 
 ---
 
@@ -16,10 +16,10 @@
 
 | Item | Status |
 |---|---|
-| **Headline target** | The no-god's-eye theorem: no relationally-identified node holds all perspectival restrictions. **Impossibility proved at charter strength** (`ws1_gods_eye_collapses`, after series-review-2): the god's-eye node is the POSITIONLESS node (`Symmetric := ∀ x y, dest x = dest y`, no asymmetry anywhere), label-bisimilar to the trivial self-loop (`ws1_symmetric_bisim_trivial`), hence collapsed to the One by the engine — NO `Recoverable`/atomless hypothesis. The surviving plural node is provably NOT symmetric (`ws1_labelLoop_not_symmetric`), so the Failed condition does not arise: symmetric ⟹ collapse, plural ⟹ distributed. |
+| **Headline target** | The no-god's-eye theorem. **PARTIAL, obstruction precise (series-review-3).** *Proved:* a recoverable/symmetric god's-eye node collapses (`ws1_no_gods_eye`), and a genuine face-plurality on an atomless field is necessarily FREE, never a recoverable totality (`ws1_distinct_faces_atomless_not_recoverable`) — so no rich symmetric totality exists to host plurality. *Not reached at charter strength:* an INDEPENDENT collapse. The positionless collapse `ws1_gods_eye_collapses` provably COINCIDES with relational identity (`ws1_symmetric_states_bisimilar`: a positionless node's states are all bisimilar, so the collapse is behavioral identity, not a separate fact — the coincidence rule fails). Monism does NOT win: plurality is real and distributed (WS2). Charter §5.5/§9 pre-registered this as the sharpest risk / possibly-only-heuristic, so no charter change. |
 | **The three consequences** | Plurality (`ws2_perspective_breaks_merge`, monism-broken), forced dynamics (`ws3_dynamics_forced`, endogenous order), layering-as-narrowing (`ws4_depth_is_narrowing`). **Discharged on the mechanized core** (review pass 1 addressed). |
 | **The central open law** | Conservation of breadth under narrowing. **Settled by the kill condition: strict form Refuted (`ws5_kill_condition` fires on the atomless self-loop), weak form Discharged on a non-increasing class → verdict Partial** (`ws5_conservation_verdict = partialV`). The "self-limiting universe" is retracted; the bound is mere boundedness. Never assumed. |
-| **Verdict (WS7)** | `perspectiveEstablished` (`ws7_verdict`, tagged onto a discharged `Audit` whose five fields are theorems). Circularity guards discharged: no conservation-by-fiat (`ws7_no_conservation_by_fiat`), no freeness-defined-in (`ws7_freeness_not_defined_in`). Review pass 1 addressed (R2 verdict prose relabelled). |
+| **Verdict (WS7)** | `perspectiveEstablished` (`ws7_verdict`, tagged onto a discharged `Audit`). **Honest scope (series-review-3):** the `Audit.spineCollapses` field is the positionless collapse, which coincides with relational identity — so the verdict certifies the *mechanized core* (bound side clean, plurality-by-free-perspective, recoverable-collapse spine), NOT the charter-strength independent spine (Partial, WS1). `verdict` is a constant selector on a discharged certificate (R2/pass-1, relabelled). |
 | **Relation to Series 7** | Part Two. Transcribes Series 7's engine (`ws1_atomless_bisim`), the recoverable/free-label test (`ws4_*`), and the collapse (`ws2_import_theorem_static`), plus the Series 4 face `x↾(x,y)` (as `Hold`/`afford`). Nothing imported across series (gate-confirmed). |
 
 ## Phase B — the design batch (committed 2026-07-11)
@@ -37,11 +37,11 @@ Per-workstream design status: **WS1–WS7 all Designed** (contracts committed; b
 ## Workstream status
 
 ### WS1, The perspective primitive and the no-god's-eye theorem · *blocking, the spine*
-**Status: Impossibility proved at charter strength (Discharged); Spinozist retreat closed (series-review-2 S1).** Built in `formal/Series8/ws1.lean`. THE SPINE is `ws1_gods_eye_collapses` (positionless/symmetric node collapses by the engine, unconditional) + `ws1_symmetric_bisim_trivial` (bisimilar to the trivial self-loop) + `ws1_symLoop_not_behav` (≥2-face witness) + `ws1_labelLoop_not_symmetric` (survivor not symmetric, Failed condition excluded). The pass-1 tautological-fork theorems were removed. See series-review log pass 2.
+**Status: PARTIAL — Impossibility-proved core, charter-strength independent spine resists (series-review-3 S1).** Built in `formal/Series8/ws1.lean`. *Proved:* `ws1_no_gods_eye` (recoverable/symmetric collapse) + `ws1_distinct_faces_atomless_not_recoverable` (genuine plural faces ⟹ free) + `ws1_freeness_needs_two_positions` (freeness is distributed). *Honest scope:* `ws1_gods_eye_collapses` (positionless collapse) coincides with relational identity — `ws1_symmetric_states_bisimilar` OWNS the coincidence; it is not an independent derivation. Obstruction: a symmetric plurality is behaviorally trivial, so no-god's-eye reduces to the Series 7 collapse. See series-review log pass 3.
 Target: define the hold/restriction on a plain coalgebra; prove the all-restrictions (god's-eye) node is bisimilar to the trivial self-loop, hence collapses to the One by the Series 7 engine; conclude no relationally-identified god's-eye node exists. Success is Discharged OR Impossibility proved. Sharpest risk: the Spinozist retreat (charter §5.5), the rebuttal must be a theorem, not a gloss. Ambition: *derive* no-god's-eye-view from relational identity rather than re-impose the Series 3 design constraint.
 
 ### WS2, Perspective breaks the collapse · *the payoff*
-**Status: Discharged (monism-broken) — review pass 1: CLEAN (freeness a theorem).** Depends on WS1 (freeness). Built in `ws2.lean`.
+**Status: Discharged (monism-broken) — review pass 1: CLEAN; pass 3 R1: scope noted.** Depends on WS1. Built in `ws2.lean`. **R1 (series-review-3):** WS2 delivers *local* freeness — the directed-hold pair `⟨true⟩`/`⟨false⟩` genuinely does not merge (a theorem, `ws2_free_not_recoverable`). The *global* (no-totality) freeness the charter's plurality leans on is only as strong as the WS1 spine, which is Partial — so WS2's local pair-fact is CLEAN, but the global reading inherits WS1's honest shortfall. Labelled, not overclaimed.
 Target: two finite holds of a shared relation fail "relate alike, all the way down," so the Series 7 merge does not apply; plurality with no import (vs. weight), no leaf (vs. limit-atomlessness). Load-bearing dependency: perspective must be *free*, not recoverable (WS1 secures this).
 
 ### WS3, Re-restriction and forced dynamics · *the engine of Part Two*
@@ -72,7 +72,7 @@ Series 8-specific circularity risks: (a) **conservation-by-fiat** (smuggling the
 
 | Result | WS | Status | Non-circular? |
 |---|---|---|---|
-| No god's-eye node (spine) | WS1 | **Impossibility proved (charter strength)** (`ws1_gods_eye_collapses`) | Yes — the positionless (symmetric) node is bisimilar to the trivial self-loop (`ws1_symmetric_bisim_trivial`) and collapsed by the engine, no hypothesis; Failed condition excluded (`ws1_labelLoop_not_symmetric`); ≥2-face witness `ws1_symLoop_not_behav`. |
+| No god's-eye node (spine) | WS1 | **Partial** (Impossibility-proved core; independent spine resists) | Coincidence rule FAILS at the spine (owned by `ws1_symmetric_states_bisimilar`): the positionless collapse IS relational identity. Genuine content: `ws1_no_gods_eye` (recoverable collapse) + `ws1_distinct_faces_atomless_not_recoverable` (plural ⟹ free). Not defined-in; honestly scoped. |
 | Perspective breaks collapse | WS2 | **Discharged** (`ws2_perspective_breaks_merge`, monism-broken) | Yes — freeness is a theorem (`ws2_free_not_recoverable`), not defined-in. Strip flagged. |
 | Re-restriction: no leaf (NL) | WS3 | **Discharged** (`ws3_rerestriction_no_leaf`) | Yes |
 | Re-restriction: not-a-function (NF) | WS3 | **Discharged** (`ws3_rerestriction_not_function`) | Yes |
@@ -185,8 +185,45 @@ was confirmed **CLEAN end-to-end** and pass-1's R1/R2 confirmed properly address
   +4 → 34; pass 2: −2 +5 → **37**). **Resolved.**
 
 Rebuild after Phase E pass 2: clean, `sorry`-free, **37 headlines axiom-clean**; `scripts/gate.sh`
-green. No charter change (all findings were proof-strength/procedural, not design errors), so no
-downstream reopen. **Next: a fresh Phase D pass to confirm no SERIOUS findings remain.**
+green.
+
+### Pass 3 — `spec/series-review-3.md` (independent adversarial, 2026-07-11); addressed (Phase E, 2026-07-11)
+
+Pass 3 (an independent adversarial pass) confirmed the **bound side CLEAN end-to-end** (conservation
+tested, kill condition depth-advancing, verdict Partial honest — "the charter's hardest methodological
+discipline met in full") and WS3/WS4/WS5/WS6 solid. It returned **1 SERIOUS (S1) + 2 REAL (R2, R3)**
+plus R1 (scope note). Disposition — **attempted charter-strength first; it provably resists, so
+delivered an honest Partial with the obstruction precise** (per protocol §E; charter §5.5/§9
+pre-registered this exact risk, so NO charter change):
+
+- **S1 (SERIOUS, WS1) — the positionless collapse is "asserted positionless by a definitional
+  clause," not an independent collapse of a rich totality.** Pass 3 is correct. After genuine analysis
+  I conclude the charter-strength *independent* spine **provably resists**, for a precise reason now
+  made a theorem: (i) `ws1_symmetric_states_bisimilar` — on a positionless coalgebra all states are
+  label-bisimilar, so `ws1_gods_eye_collapses` is *behavioral identity applied to that bisimulation*;
+  the **coincidence rule fails at the spine** (owned, not hidden). (ii) `ws1_distinct_faces_atomless_not_recoverable`
+  — a genuine face-plurality on an atomless field is FREE, never recoverable, so a rich symmetric
+  *totality* is an EMPTY class; there is nothing to collapse independently. **Outcome: the spine is a
+  PARTIAL** — Impossibility-proved core (no recoverable/symmetric god's-eye node; genuine plurality ⟹
+  free/distributed), charter-strength independent derivation resists (it reduces to the Series 7
+  relational-identity collapse). Relabelled everywhere (`Series8.lean`, headline, WS1 rows,
+  `ws1-design.md`); the overclaimed "Impossibility proved at charter strength" is withdrawn. Monism
+  does NOT win — plurality is real and distributed (WS2). This honest obstruction is the natural seed
+  for Series 9 (is no-god's-eye separable from relational identity, or the same fact?).
+- **R2 (REAL, procedural) — axiom log a static transcript.** Re-ran `lake build Series8
+  Series8.AxiomCheck` live; all **38** headlines print exactly `[propext, Classical.choice, Quot.sound]`.
+  `spec/axiom-check-log.md` updated. **Resolved.**
+- **R1 (WS2 scope) — local vs global freeness.** Labelled: WS2 delivers *local* pair-freeness (a
+  theorem); the *global* no-totality freeness inherits WS1's Partial. WS2 row updated. **Resolved (label).**
+- **R3 (WS7) — constant verdict selector.** Already relabelled (pass-1 R2); pass 3 confirmed
+  ACCEPTABLE. Verdict-row scope note added: the certificate certifies the mechanized core, not the
+  charter-strength independent spine. **Resolved (label).**
+
+Rebuild after Phase E pass 3: clean, `sorry`-free, **38 headlines axiom-clean**; `scripts/gate.sh`
+green. No charter change (charter §5.5/§9 pre-registered the spine's Partial risk; the finding is a
+proof-strength ceiling, not a design error), so no downstream reopen. **The spine is now honestly a
+Partial; a further Phase D pass should find the retreat correctly labelled (open/Partial), not
+smuggled — the terminal honest state per the protocol's exit rule.**
 
 ---
 

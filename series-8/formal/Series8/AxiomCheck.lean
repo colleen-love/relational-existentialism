@@ -14,6 +14,7 @@ import Series8
 #print axioms Series8.WS1.ws1_symmetric_hold_recoverable
 #print axioms Series8.WS1.ws1_directed_hold_free
 #print axioms Series8.WS1.ws1_symmetric_bisim_trivial
+#print axioms Series8.WS1.ws1_symmetric_states_bisimilar
 #print axioms Series8.WS1.ws1_gods_eye_collapses
 #print axioms Series8.WS1.ws1_symLoop_not_behav
 #print axioms Series8.WS1.ws1_labelLoop_not_symmetric
