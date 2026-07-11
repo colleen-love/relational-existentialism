@@ -84,7 +84,7 @@ A build may discover a design was wrong. The one prohibited move is **building p
 
 > Please clone https://github.com/colleen-love/relational-existentialism and view the series 8 working branch.
 
-> Review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim, with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 8, run:
+> Review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim, with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 8, without building the code, run:
 
 - **The Spinozist-retreat check (§0.5), the sharpest on the positive side.** Unfold WS1's no-god's-eye theorem. Is the all-faces (god's-eye) node *proved* bisimilar to the trivial self-loop and hence collapsed by the engine, or merely *asserted* positionless / excluded by a definitional clause? If the latter, monism's escape is smuggled past, a SERIOUS finding.
 - **The conservation-by-fiat check (§0.4), the sharpest on the bound side.** Unfold WS3's re-restriction definition. Does "breadth is conserved under narrowing" (WS5) follow from a *fact about the map* or from a *clause inside the map's definition*? If foreclosure is baked into the definition, conservation is assumed, not shown, a SERIOUS finding. Confirm the kill condition (charter §5.4) was actually run: was a depth-opening-without-foreclosure re-restriction *attempted* and either built (Refuted) or shown impossible (Discharged/Partial)?
