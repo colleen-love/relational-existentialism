@@ -29,7 +29,7 @@
 | Phase | Name | Status |
 |---|---|---|
 | A | Charter | **Complete (2026-07-11).** `charter.md`, `charter-status.md`, `protocol.md` written. |
-| B | Design-all (seven `spec/wsNN-design.md` + `spec/README.md`) | **Not started.** |
+| B | Design-all (seven `spec/wsNN-design.md` + `spec/README.md`) | **Complete (2026-07-11).** `spec/README.md` (design index, shared objects) + `spec/ws1..ws7-design.md` written and committed. The two design duties are settled: finite attention defined once in WS1 (`FiniteAttention`, a bounded label-reading hold, finitude load-bearing, `spec/README.md` §2.6) and ambient for all; the κ-removal performed once in WS1 (the bound is the diagonal, κ-free; the large-κ discipline promoted to holding-not-size; the residual carrier branching-κ disclosed, §2.7) and propagated. |
 | C | Build-all (`formal/Series11/wsNN.lean`, `Series11.lean`, `AxiomCheck.lean`) | **Not started.** |
 | D | Blind series-review → `spec/series-review-1.md` | **Not started.** |
 | E | Address | **Not started.** |
@@ -91,7 +91,7 @@ This is the program's TERMINAL door (inheriting Series 07's atom-or-will, Series
 
 ## Closed log
 
-*(empty; no builds run. Phase A complete 2026-07-11: charter, charter-status, protocol written and committed to the Series 11 working branch. The anti-loop discipline (protocol §0.2, §0.2a, Phase D recurrence check, Phase E binary closure) is inherited from Series 10 unchanged, where review-2 confirmed it worked on its first test (all three pass-1 SERIOUS findings closed as honest Relabels, no recurrence). Next action: Phase B, design all seven workstreams against `charter.md`, settling the two Series-11-specific design duties, finite attention defined once in WS1 and the κ-removal performed once in WS1, per protocol §2.)*
+*(no builds run. Phase A complete 2026-07-11: charter, charter-status, protocol written and committed. Phase B complete 2026-07-11: the design index `spec/README.md` and the seven `spec/wsNN-design.md` written and committed. The design settles: (WS1) finite attention as a bounded label-reading hold on the labelled tower (`FiniteAttention`, `AttentionDistinguishes`, `RealFor`), the attention-reality spine `ws1_attention_makes_real := ws4_free_label_is_import` (the reader distinguishes where the plain quotient collapses), the distinction free (`ws4_labelLoop_not_recoverable`), and the κ-removal (the diagonal bound uses no cardinal; carrier branching-κ disclosed); (WS2) the rescue `ws2_attention_embed_fails` — attention-embed fails where `ws2_reify_bisim_embeds`'s bisim-embed holds; (WS3) `ws3_no_total_attention := ws1_no_self_total_hold`, an Impossibility, κ-free; (WS4) the bound holding-not-size, no completed totality, no Russell blowup, finite stages; (WS5) the crown Partial (finite Discharged, transfinite/carrier-κ open, tragic pre-registered live) via a three-horn kill condition; (WS6) the ceiling as theses + the unification + the program close; (WS7) the `Audit`/`Series11Verdict` with the two promoted checks (Bookkeeping-re-hit, κ-readmitted). Predicted verdict `attentionEstablished` on the mechanized core, spine Discharged-on-witness / universal Partial, crown Partial. The anti-loop discipline (protocol §0.2, §0.2a) is inherited from Series 10. Next action: Phase C, build all seven in `formal/Series11/wsNN.lean`, WS1 first, per protocol §2.)*
 
 ## Series-review log
 
