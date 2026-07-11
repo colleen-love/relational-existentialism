@@ -101,13 +101,13 @@ The first incremental build takes longer than two minutes. Please run it as a ba
 
 Write `series-review.md`: findings graded SERIOUS (the verdict rests on it, a flagship payoff laundering, the Spinozist retreat smuggled, conservation assumed-in), REAL (a genuine gap, correctly labelled once fixed), COSMETIC/ACCEPTABLE, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed, no goalpost-moving: "relabel this / prove that / strip and re-prove / run the kill condition," never "lower the bar."
 
+If there is a serious finding, continue to Phase E. If not, conclude with Phase F.
+
 ### Phase E — Address `series-review.md` (one session)
 
 **Prompt to seed the blind review session:**
 
 Please pull your branch, review the most recent `series-review.md` file, and address every finding. **Attempt the charter-strength theorem first**; where it provably resists, deliver an honest Partial/Impossibility/Refuted with the obstruction precise. Many corrections will be *relabels, not fixes* (a payoff shown to be a bare order fact is renamed and demoted; a conservation "proof" shown to unfold to its definition is demoted to a refuted or assumed hypothesis and the "self-limiting" claim retracted), and that is a correct outcome, not a failure. Record every change in `charter-status.md` (the series-review log and the affected workstream rows); keep the charter untouched unless the finding is a genuine design error (then the charter-change log, and reopen downstream).
-
-Then loop back to Phase D for another blind pass. Exit when a review pass returns no SERIOUS findings and the remaining REAL items are correctly-labelled terminal Partials/Impossibilities/Refutations, **not** "the build finally passes at charter strength." Do not grind a genuine impossibility (or a genuinely refuted conservation law) against the review; report it.
 
 ### Phase F
 
