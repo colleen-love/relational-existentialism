@@ -2,7 +2,7 @@
 
 **The mutable companion to `series-8-charter.md`. All progress, revisions, per-workstream status, discharges, and open items live here, the charter stays clean.**
 
-*Initialized at series start. Nothing is built yet. This file is the honest ledger; it will show Partials and refutations as first-class outcomes, not failures.*
+*Initialized at series start. **Phase B (design-all) complete (2026-07-11):** all seven per-workstream designs + the design index are committed under `spec/` (`spec/README.md`, `spec/ws1…ws7-design.md`). Nothing is *built* yet. This file is the honest ledger; it will show Partials and refutations as first-class outcomes, not failures.*
 
 ---
 
@@ -21,6 +21,18 @@
 | **The central open law** | Conservation of breadth under narrowing. **Open by design**, to be settled to {Discharged, Refuted, Partial} by the kill condition, never assumed. **Not started.** |
 | **Verdict (WS7)** | Not started. Series 8 circularity risks: conservation-by-fiat, perspective-recoverable-by-definition. |
 | **Relation to Series 7** | Part Two. Depends on Series 7's engine (`ws1_atomless_bisim`) and the restriction primitive (Series 4). Series 7 is closed and is prior art here. |
+
+## Phase B — the design batch (committed 2026-07-11)
+
+All seven designs are written against `spec/README.md`, which locks the decisions the workstreams share. The two Series-8-specific design duties (protocol §B) are settled:
+
+- **Carrier + hold chosen once (WS1), ambient for all.** Carrier: the transcribed plain `P_κ`-coalgebra `dest : X → PkObj κ X` (Series 7). Hold primitive: `Hold dest := { p : X × X // p.2 ∈ (dest p.1).1 }` with `afford` (Series 4's face, forced), holding-first (`spec/README.md` §2.2). No workstream may pick a different home.
+- **Order `≺` derived once (WS3), consumed by WS4/WS5.** `prec := ReflTransGen ReReStep` on holds, endogenous; the imported-index branch is designed in as a *refuted* failure mode (`ws3_imported_index_refuted`), not a fallback (`spec/README.md` §2.4).
+- **Conservation kept OUT of the map.** `breadth` is measured outside `ReReStep` (`spec/README.md` §2.5); conservation is WS5's tested fact, refutable by witness, never a clause in the definition.
+
+Predicted headline (`spec/README.md` §5): verdict `perspectiveEstablished`, with **conservation Refuted-in-general / Discharged-on-a-narrow-class (Partial)** — the "self-limiting universe" expected to be retracted, the honest first-class refutation the charter pre-registers. Each design's mathematical content and its strip-test surplus are named honestly (WS1 spine = recoverable-collapse; WS2 plurality = free-label import; WS3 forced-dynamics = SHNE-seriality; the perspectival readings are the earned interpretation).
+
+Per-workstream design status: **WS1–WS7 all Designed** (contracts committed; builds not started). Owning docs: `spec/ws1-design.md` … `spec/ws7-design.md`.
 
 ## Workstream status
 
