@@ -46,10 +46,12 @@ structure Audit (κ : Cardinal.{u}) : Prop where
     (h : Hold dest), insp h ≠ residue insp
   orderEndogenous : ∀ {X : Type u} (dest : X → PkObj κ X) (m m' : Hold dest → HoldPred dest),
     prec dest m m' ↔ Relation.ReflTransGen (ReDiagStep dest) m m'
-  noLeaf : ∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest),
-    (∃ h, ¬ insp h h) → ∃ h, diag insp h
-  dynamicsForced : ∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
-    (_h₀ : Hold dest), ∃ insp', ReDiagStep dest insp insp'
+  -- (NL), relabelled (series-review-1 F-7): the residue is a face, and CAN be a full face (witnessed).
+  residueFace : ∀ {X : Type u} (dest : X → PkObj κ X),
+    ∃ insp : Hold dest → HoldPred dest, ∀ h, diag insp h
+  -- forced dynamics FROM incompleteness (series-review-1 F-4): no reachable stage is complete.
+  dynamicsForced : ∀ {X : Type u} (dest : X → PkObj κ X) (m m' : Hold dest → HoldPred dest),
+    prec dest m m' → ¬ Complete m'
   monotonicityTested : ∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
     (h₀ : Hold dest), diag insp h₀ → (∃ insp', ReDiagStep dest insp insp' ∧ ¬ diag insp' h₀)
   carrierConsistent : ∀ {X : Type u} (dest : X → PkObj κ X),
@@ -63,8 +65,8 @@ theorem ws7_audit : Audit κ where
   residueFree := fun dest insp => ws2_residue_free dest insp
   onePosition := fun dest insp h => ws2_residue_distinct dest insp h
   orderEndogenous := fun dest m m' => ws3_order_endogenous dest m m'
-  noLeaf := fun dest insp hne => ws3_redi_no_leaf dest insp hne
-  dynamicsForced := fun dest insp h₀ => ws3_dynamics_forced dest insp h₀
+  residueFace := fun dest => ws3_redi_no_leaf dest
+  dynamicsForced := fun dest m m' hp => ws3_dynamics_forced dest m m' hp
   monotonicityTested := fun dest insp h₀ hb => ws5_kill_condition dest insp h₀ hb
   carrierConsistent := fun dest => ws1_unrestricted_carrier_inconsistent dest
 

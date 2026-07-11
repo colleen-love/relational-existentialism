@@ -144,3 +144,16 @@ theorem ws4_depth_grows_witness {X} (dest : X → PkObj κ X) :
 ## Deliverable
 
 `series-9/formal/Series9/ws4.lean`: transcribed carrier (README §6); `accResidue`; `ws4_new_blind_spot` (D1), `ws4_depth_is_tower` (D2), `ws4_reaches_is_trace` (D3), `ws4_depth_grows_witness` (D4). **Consumes WS3's `ReDiagStep`/`prec`/`ws3_order_endogenous`**; does not redefine the order. The universal (C5) is routed to WS6. Axiom check: `#print axioms ws4_new_blind_spot` reduces through `diag` to `propext` / the standard three. Depth is accumulation (`⊆`), NOT strict growth — the strict/monotone question is WS5's, and WS4 is scoped explicitly away from it.
+
+---
+
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 F-8 SERIOUS + F-5 REAL)
+
+On the strengthened `ReDiagStep` (WS3 note: the next stage inspects the whole prior residue), the depth
+content is now genuine. `ws4_new_blind_spot` (a point-flip on `insp' h₀ = diag insp`) is replaced by
+**`ws4_residue_moves`**: `ReDiagStep insp insp' → ∀ h, diag insp h → ¬ diag insp' h` — re-inspection
+CLOSES the whole prior residue, so the diagonal escapes its enumeration and does not linger; the new
+residue is disjoint from the prior one. `ws4_residue_moves_witness` exhibits the residue moving to a
+fresh hold, tied to `insp` by `ReDiagStep` (not a free constant inspection, the F-8 laundering the review
+flagged). **F-5:** `ws4_depth_is_tower` is relabelled honestly as accumulation (`⊆`) of the accumulated
+residue — a list-membership fact; the tower reading is prose, flagged. All axiom-clean.

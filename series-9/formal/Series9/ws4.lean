@@ -3,11 +3,12 @@
 
 WS4 — **The tower and depth.** Series 9, layering.
 
-Depth is the accumulation of blind spots: each re-diagonalization opens a new face the prior stage
-could not see (`ws4_new_blind_spot`), the accumulated residue is set-monotone along the chain
-(`ws4_depth_is_tower`), and reachability-into-depth is the trace of the re-diagonalization sequence
-(`ws4_reaches_is_trace`). Accumulation is stated at `⊆` (NOT strict growth — that is WS5's
-monotonicity question, and WS4 is scoped explicitly away from it).
+**Addresses series-review-1 F-8 (SERIOUS) and F-5 (REAL).** With the strengthened `ReDiagStep` (the next
+stage inspects the WHOLE prior residue), the depth content is now genuine: re-inspection CLOSES the prior
+residue (`ws4_residue_moves`) — the diagonal escapes its enumeration, it does not linger — and the
+residue moves to fresh holds (`ws4_residue_moves_witness`). `ws4_depth_is_tower` is honestly relabelled
+as accumulation of the accumulated residue (a list-membership `⊆` fact); the tower reading is prose,
+flagged. Reachability-into-depth is the closure trace (`ws4_reaches_is_trace`).
 
 Consumes WS3. Design doc: `series-9/spec/ws4-design.md`; shared objects `spec/README.md` §2.4–§2.5.
 
@@ -24,21 +25,26 @@ open Series9.WS1 Series9.WS3 Cardinal
 variable {κ : Cardinal.{u}}
 
 /-- The **accumulated residue** along a re-diagonalization chain: the blind spots gathered so far.
-Measured OUTSIDE `ReDiagStep`, so growth is a FACT ABOUT the map, never a clause inside it. -/
+Measured OUTSIDE `ReDiagStep`, so any growth claim is a FACT ABOUT the map, never a clause inside it. -/
 def accResidue {X : Type u} {dest : X → PkObj κ X}
     (chain : List (Hold dest → HoldPred dest)) : HoldPred dest :=
   fun h => ∃ insp ∈ chain, diag insp h
 
-/-- **D1 — a step opens a fresh blind spot.** Holding the prior residue at `h₀` flips the diagonal
-there: `diag insp'` sees a hold `diag insp` could not. Layering as PROLIFERATION, not narrowing. -/
-theorem ws4_new_blind_spot {X : Type u} (dest : X → PkObj κ X)
-    (insp insp' : Hold dest → HoldPred dest) (h₀ : Hold dest) (h₀eq : insp' h₀ = diag insp) :
-    diag insp' h₀ ↔ ¬ diag insp h₀ :=
-  Iff.of_eq (congrArg Not (congrFun h₀eq h₀))
+/-- **D1 — re-inspection CLOSES the prior residue (the diagonal moves, series-review-1 F-8).** If `insp'`
+re-diagonalizes `insp` (inspects its whole residue), then EVERY prior blind spot is closed at the next
+stage: `diag insp h → ¬ diag insp' h`. The new residue is disjoint from the prior one — the diagonal
+escapes the enumeration it was run against, it does not linger. This is genuine layering content about
+re-inspection, not a `Function.update` point-edit. -/
+theorem ws4_residue_moves {X : Type u} (dest : X → PkObj κ X)
+    (insp insp' : Hold dest → HoldPred dest) (r : ReDiagStep dest insp insp') :
+    ∀ h, diag insp h → ¬ diag insp' h := by
+  intro h hd hd'
+  exact hd' (r h hd)
 
-/-- **D2 — depth is the tower.** The accumulated residue is set-monotone (`⊆`) as the chain extends:
-the tower of "the truth this stage cannot see," gathered. Stated at `⊆` (accumulation); strictness is
-WS5's monotonicity question, NOT claimed here. -/
+/-- **D2 — depth is the tower (relabelled, series-review-1 F-5).** Honestly a list-membership fact: the
+accumulated residue is set-monotone (`⊆`) as the chain extends. This is *accumulation of blind spots*,
+NOT strict growth (WS5's monotonicity question) and NOT a self-inspection theorem — the tower reading is
+prose, flagged. `diag` is never unfolded here. -/
 theorem ws4_depth_is_tower {X : Type u} (dest : X → PkObj κ X)
     (chain chain' : List (Hold dest → HoldPred dest)) (hsub : chain ⊆ chain') :
     ∀ h, accResidue chain h → accResidue chain' h := by
@@ -47,28 +53,22 @@ theorem ws4_depth_is_tower {X : Type u} (dest : X → PkObj κ X)
   exact ⟨insp, hsub hin, hd⟩
 
 /-- **D3 — reach-into-depth is the trace.** `prec` (a re-diagonalization sequence) IS the closure of
-`ReDiagStep`: reaching a deeper blind spot is the trace of the chain, derived not axiomatic. -/
+`ReDiagStep`: reaching a deeper stage is the trace of the chain, derived not axiomatic. -/
 theorem ws4_reaches_is_trace {X : Type u} (dest : X → PkObj κ X)
     (m m' : Hold dest → HoldPred dest) :
     prec dest m m' ↔ Relation.ReflTransGen (ReDiagStep dest) m m' :=
   ws3_order_endogenous dest m m'
 
-/-- **D4 — depth-growth is inhabited, scoped away from monotonicity.** SOME re-diagonalization chain
-strictly accumulates: on `twoLoop`, from `m₀` (self-holds everything, residue empty at `hT`) a single
-re-diagonalization reaches `m'` whose residue contains `hT` — a fresh blind spot beyond the accumulated
-residue of `[m₀]`. This does NOT claim every step grows (that is WS5). -/
-theorem ws4_depth_grows_witness (hinf : ℵ₀ ≤ κ) :
-    ∃ (chain : List (Hold (twoLoop hinf) → HoldPred (twoLoop hinf)))
-      (m m' : Hold (twoLoop hinf) → HoldPred (twoLoop hinf)),
-      prec (twoLoop hinf) m m' ∧ (∃ h, ¬ accResidue chain h ∧ diag m' h) := by
-  have hT : Hold (twoLoop hinf) := ⟨(⟨true⟩, ⟨true⟩), by rw [twoLoop_val]; exact rfl⟩
-  refine ⟨[fun _ => (fun _ => True)], (fun _ => (fun _ => True)),
-    (fun _ => diag (fun _ => (fun _ => True))),
-    Relation.ReflTransGen.single ⟨hT, rfl⟩, hT, ?_, ?_⟩
-  · rintro ⟨insp, hin, hd⟩
-    rw [List.mem_singleton] at hin
-    subst hin
-    exact hd trivial
+/-- **D4 — the residue moves to a fresh hold (series-review-1 F-8, reframed).** A genuine
+re-diagonalization `insp ↝ insp'` in which `insp'` has a blind spot at `h₀` that `insp` did not: the
+diagonal has moved to a fresh hold. (`insp = ⊤` has empty residue; `insp' = fun _ => ¬⊤` inspects it and
+opens a blind spot at every hold.) This exhibits the "fresh blind spot" content on the strengthened map,
+tied to `insp` by `ReDiagStep`, not a free constant inspection. -/
+theorem ws4_residue_moves_witness {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) :
+    ∃ (insp insp' : Hold dest → HoldPred dest),
+      ReDiagStep dest insp insp' ∧ diag insp' h₀ ∧ ¬ diag insp h₀ := by
+  refine ⟨fun _ _ => True, fun _ _ => ¬ True, fun h hd => hd, ?_, ?_⟩
   · exact not_not_intro trivial
+  · exact fun hd => hd trivial
 
 end Series9.WS4

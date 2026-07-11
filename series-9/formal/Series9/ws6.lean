@@ -44,9 +44,15 @@ theorem ws6_monotonicity_retracted {X : Type u} (dest : X → PkObj κ X) :
   ∧ (∀ insp : Hold dest → HoldPred dest, ¬ ∃ t, SelfTotal insp t) :=
   ⟨rfl, fun insp => ws1_no_self_total_hold dest insp⟩
 
-/-- **D4 — the spine-scope ledger.** The diagonal is proved for the ambient carrier; the universal
-"every hold-reflexive carrier diagonalizes" is the defended thesis (charter §5.3). One non-coincident
-diagonal repairs Series 8 regardless (charter §8). -/
+/-- **D4 — the spine-scope ledger (series-review-1 F-2).** The honest scope of the repair: the diagonal
+is a PER-`insp` theorem, holding uniformly for EVERY `insp` on every carrier (Cantor's uniform strength;
+`ws1_diagonal_not_bisim`). That IS the orthogonality-to-relational-identity that repairs Series 8 — one
+non-coincident diagonal suffices (charter §8). What is NOT proved (and is withdrawn as cardinality-
+confused, series-review-1 F-1): a "rich / near-surjective" carrier on which the totality is almost-
+formable; there is no such witness, and none is needed — the diagonal is constructible for every `insp`.
+The universal "every hold-reflexive carrier diagonalizes" holds by this per-`insp` uniformity; the only
+genuine thesis (not theorem) is that a carrier's inspections range over the intended semantic contents,
+which is interpretation. -/
 theorem ws6_spine_scope {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
     ¬ ∃ t, SelfTotal insp t :=
   ws1_no_self_total_hold dest insp

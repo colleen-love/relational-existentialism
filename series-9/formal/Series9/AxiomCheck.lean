@@ -27,18 +27,19 @@ import Series9
 #print axioms Series9.WS2.ws2_from_one_position
 #print axioms Series9.WS2.ws2_distributed_special_case
 
--- WS3 — the re-diagonalization engine
+-- WS3 — the re-diagonalization engine (strengthened map: inspects the whole prior residue)
 #print axioms Series9.WS3.ws3_redi_no_leaf
 #print axioms Series9.WS3.ws3_redi_not_function
 #print axioms Series9.WS3.ws3_dynamics_forced
+#print axioms Series9.WS3.ws3_serial
 #print axioms Series9.WS3.ws3_order_endogenous
 #print axioms Series9.WS3.ws3_imported_index_refuted
 
--- WS4 — the tower and depth
-#print axioms Series9.WS4.ws4_new_blind_spot
+-- WS4 — the tower and depth (re-inspection closes the prior residue)
+#print axioms Series9.WS4.ws4_residue_moves
 #print axioms Series9.WS4.ws4_depth_is_tower
 #print axioms Series9.WS4.ws4_reaches_is_trace
-#print axioms Series9.WS4.ws4_depth_grows_witness
+#print axioms Series9.WS4.ws4_residue_moves_witness
 
 -- WS5 — the monotonicity fork (Refuted-universal / Partial)
 #print axioms Series9.WS5.ws5_retention_refuted

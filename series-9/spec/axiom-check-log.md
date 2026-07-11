@@ -9,6 +9,13 @@ Run: `lake build Series9.AxiomCheck` (see `formal/Series9/AxiomCheck.lean`). Too
 axioms `[propext, Classical.choice, Quot.sound]` — no `sorry`, no custom axiom. The whole package
 (`lake build`: Series7 + Series8 + Series9) builds clean, sorry-free, warning-free.
 
+**Re-verified as a captured run (2026-07-11, series-review-1 F-10, second review-address pass).** The
+axiom lines below were captured from an actual `lake build Series9.AxiomCheck` invocation (stdout
+`#print axioms` output), not asserted statically. The spine proof term was re-printed and is unchanged
+after the WS3 strengthening (below). Theorem names updated for the WS3/WS4 strengthening (F-8): the map
+`ReDiagStep` now inspects the whole prior residue, `ws3_dynamics_forced` is the incompleteness-forcing
+form, `ws4_residue_moves` replaces the old point-flip `ws4_new_blind_spot`.
+
 ---
 
 ## THE COINCIDENCE CHECK (the reason the series exists) — PASSED
@@ -63,13 +70,16 @@ symmetry) in one statement.
 - `ws2_residue_distinct`, `ws2_residue_free`, `ws2_residue_is_import`, `ws2_from_one_position`,
   `ws2_distributed_special_case` — all [propext, Classical.choice, Quot.sound]
 
-### WS3 — the re-diagonalization engine
-- `ws3_redi_no_leaf` (NL), `ws3_redi_not_function` (NF), `ws3_dynamics_forced`, `ws3_order_endogenous`,
-  `ws3_imported_index_refuted` — all [propext, Classical.choice, Quot.sound]
-
-### WS4 — the tower and depth
-- `ws4_new_blind_spot`, `ws4_depth_is_tower`, `ws4_reaches_is_trace`, `ws4_depth_grows_witness` — all
+### WS3 — the re-diagonalization engine (strengthened: inspects the whole prior residue)
+- `ws3_redi_no_leaf` (NL, relabelled: residue can be a full face), `ws3_redi_not_function` (NF),
+  `ws3_dynamics_forced` (forcing FROM incompleteness: no reachable stage is complete), `ws3_serial`
+  (a successor exists by construction), `ws3_order_endogenous`, `ws3_imported_index_refuted` — all
   [propext, Classical.choice, Quot.sound]
+
+### WS4 — the tower and depth (re-inspection closes the prior residue)
+- `ws4_residue_moves` (re-inspection closes the whole prior residue — the diagonal escapes),
+  `ws4_depth_is_tower` (accumulation `⊆`, relabelled a list fact), `ws4_reaches_is_trace`,
+  `ws4_residue_moves_witness` — all [propext, Classical.choice, Quot.sound]
 
 ### WS5 — the monotonicity fork (Refuted-universal / Partial)
 - `ws5_retention_refuted`, `ws5_kill_condition`, `ws5_monotone_on_fresh`, `ws5_verdict_justified` — all

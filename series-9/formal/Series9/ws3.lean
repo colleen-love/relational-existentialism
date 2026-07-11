@@ -3,10 +3,12 @@
 
 WS3 — **Re-diagonalization and forced dynamics.** Series 9, the engine of the tower.
 
-Genuinely new Lean: `ReDiagStep`, `prec` (the ONE endogenous tower order), the two cheap obligations
-(NL) no leaf and (NF) not-a-function, the forcing of dynamics from the impossibility of self-totality,
-and the imported-index refutation (a 2-cycle, so no strict monotone stage-index fits).
-**Monotonicity (MG) is NOT attempted here and is never folded into `ReDiagStep`** — it is WS5's.
+Genuinely new Lean. **Addresses series-review-1 F-8 (SERIOUS) and F-4/F-7 (REAL):** `ReDiagStep` is
+strengthened so the next stage genuinely INSPECTS THE WHOLE PRIOR RESIDUE (`∀ h, diag insp h → insp' h
+h`), not a single point. Forced dynamics is proved FROM the spine (no reachable stage is complete),
+not from `Function.update`. (NL) is relabelled honestly (the residue is a face by type; inhabitation is
+conditional, witnessed non-vacuously). **Monotonicity (MG) is NOT attempted here and is never folded
+into `ReDiagStep`** — it is WS5's.
 
 Depends on WS1. Design doc: `series-9/spec/ws3-design.md`; shared objects `spec/README.md` §2.4.
 
@@ -22,13 +24,14 @@ open Series9.WS1 Cardinal
 
 variable {κ : Cardinal.{u}}
 
-/-- **Re-diagonalization step**: `insp ↝ insp'` — the next inspection HOLDS the prior residue at some
-hold (incorporates the blind spot as new content) while, by WS1, carrying a fresh residue of its own.
-NF: `insp'` is NOT determined by `insp` — many inspections hold a given residue. Growth is NOT baked in:
-the step says nothing about retaining prior blind spots (that is WS5's open monotonicity test). -/
+/-- **Re-diagonalization step** (strengthened, series-review-1 F-8): the next inspection INSPECTS the
+prior residue — it self-holds every hold the prior stage left blind (`diag insp`), turning toward the
+whole blind-spot face, not a single point. It is free on holds outside the residue (this is (NF)).
+Growth is NOT baked in: the step says "inspect the residue," and that inspection *closes* the residue is
+a THEOREM (WS4 `ws4_residue_moves`), not a clause; monotonicity stays WS5's open test. -/
 def ReDiagStep {X : Type u} (dest : X → PkObj κ X)
     (insp insp' : Hold dest → HoldPred dest) : Prop :=
-  ∃ h₀, insp' h₀ = diag insp
+  ∀ h, diag insp h → insp' h h
 
 /-- **THE TOWER ORDER, derived once.** `m ≺ m'` iff `m'` is reached by a re-diagonalization sequence
 from `m`. Endogenous: the reflexive-transitive closure of `ReDiagStep`, from the diagonal operator
@@ -37,38 +40,48 @@ def prec {X : Type u} (dest : X → PkObj κ X) :
     (Hold dest → HoldPred dest) → (Hold dest → HoldPred dest) → Prop :=
   Relation.ReflTransGen (ReDiagStep dest)
 
-/-- **D1a — (NL) no leaf.** The residue is a full face: on a hold-reflexive carrier some hold is not
-self-held, so `diag insp` is inhabited — there is a genuine face to hold next, never a bare point. -/
-theorem ws3_redi_no_leaf {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
-    (hne : ∃ h, ¬ insp h h) : ∃ h, diag insp h := by
-  obtain ⟨h, hh⟩ := hne
-  exact ⟨h, hh⟩
+/-- A stage is **complete** if some hold captures its complete content (is self-total). -/
+def Complete {X : Type u} {dest : X → PkObj κ X} (insp : Hold dest → HoldPred dest) : Prop :=
+  ∃ t, SelfTotal insp t
 
-/-- **D1b — (NF) not-a-function.** From one inspection, two DISTINCT next inspections both realise the
-residue (each at a different hold): the re-diagonalization is a free facing, not a function of the prior
-inspection. Distinctness uses the spine: no hold's content equals the residue (`ws1_no_self_total_hold`),
-so `update insp h₀ (diag insp)` and `update insp h₁ (diag insp)` differ at `h₀`. -/
+/-- **D1a — (NL), relabelled honestly (series-review-1 F-7).** The residue is a FACE (a `HoldPred`,
+a predicate over holds), never a bare relatum — the leaf trap is avoided by TYPE. Inhabitation is NOT
+universal (e.g. `fun _ _ => True` self-holds everything, so its residue is empty), so (NL) is not an
+inhabitation theorem for every `insp`; it is face-shape-by-type plus this positive, non-vacuous witness:
+the all-unheld inspection has the FULL residue (every hold is a blind spot). -/
+theorem ws3_redi_no_leaf {X : Type u} (dest : X → PkObj κ X) :
+    ∃ insp : Hold dest → HoldPred dest, ∀ h, diag insp h :=
+  ⟨fun _ _ => False, fun _ => not_false⟩
+
+/-- **D1a' — the residue is literally a face-shaped object** (the leaf trap avoided by type). -/
+theorem ws3_residue_is_face {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
+    diag insp = fun h => ¬ insp h h := rfl
+
+/-- **D1b — (NF) not-a-function.** From one inspection, two DISTINCT next inspections both inspect the
+prior residue (`⊤` self-holds everything; `(· = ·)` self-holds every diagonal `h h`), differing
+off-diagonal. Unconditional (needs only two distinct holds); no `Function.update`, no `classical`. -/
 theorem ws3_redi_not_function {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
     (h₀ h₁ : Hold dest) (hne : h₀ ≠ h₁) :
     ∃ insp₁ insp₂, ReDiagStep dest insp insp₁ ∧ ReDiagStep dest insp insp₂ ∧ insp₁ ≠ insp₂ := by
-  classical
-  refine ⟨Function.update insp h₀ (diag insp), Function.update insp h₁ (diag insp),
-    ⟨h₀, ?_⟩, ⟨h₁, ?_⟩, ?_⟩
-  · simp
-  · simp
-  · intro he
-    have h0 := congrFun he h₀
-    simp only [Function.update_self, Function.update_of_ne hne] at h0
-    -- h0 : diag insp = insp h₀ ; but no hold's content is the residue (the spine)
-    exact ws1_no_self_total_hold dest insp ⟨h₀, fun h' => Iff.of_eq (congrFun h0.symm h')⟩
+  refine ⟨fun _ _ => True, fun a b => a = b, fun _ _ => trivial, fun _ _ => rfl, ?_⟩
+  intro he
+  have h2 : True = (h₀ = h₁) := congrFun (congrFun he h₀) h₁
+  exact hne (cast h2 trivial)
 
-/-- **D2 — forced dynamics.** No inspection is terminal: from any inspection there is a further
-re-diagonalization (`Function.update` realises the residue), so `ReDiagStep` is serial — the self must
-be unfolded over succession. Dynamics is forced by the incompletability of self-reference. -/
-theorem ws3_dynamics_forced {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
-    (h₀ : Hold dest) : ∃ insp', ReDiagStep dest insp insp' := by
-  classical
-  exact ⟨Function.update insp h₀ (diag insp), h₀, by simp⟩
+/-- **D2 — forced dynamics FROM incompleteness (series-review-1 F-4).** No stage reachable by
+re-diagonalization is COMPLETE (self-total): the succession never terminates in a complete self-image,
+BECAUSE self-totality is impossible. This genuinely uses the spine `ws1_no_self_total_hold` — the
+forcing is the content of the theorem, not an intuition asserted between definitions. -/
+theorem ws3_dynamics_forced {X : Type u} (dest : X → PkObj κ X)
+    (m m' : Hold dest → HoldPred dest) (_hp : prec dest m m') : ¬ Complete m' :=
+  ws1_no_self_total_hold dest m'
+
+/-- **D2' — seriality (a successor always exists BY CONSTRUCTION).** The honest companion to D2: from
+any stage there is a next re-diagonalization (`⊤` inspects any residue). Labelled as construction, NOT
+as the forcing (D2 is the forcing). -/
+theorem ws3_serial {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
+    ∃ insp', ReDiagStep dest insp insp' :=
+  ⟨fun _ _ => True, fun _ _ => trivial⟩
 
 /-- **D3 — the ONE endogenous order.** `≺` is the closure of re-diagonalization (`Iff.rfl`), defined
 from the diagonal operator alone — no imported index. -/
@@ -76,20 +89,16 @@ theorem ws3_order_endogenous {X : Type u} (dest : X → PkObj κ X)
     (m m' : Hold dest → HoldPred dest) :
     prec dest m m' ↔ Relation.ReflTransGen (ReDiagStep dest) m m' := Iff.rfl
 
-/-- **D4 — the imported-index branch refuted (§4.2 guard).** On the periodic carrier `twoLoop` the order
-CYCLES: a genuine 2-cycle `m₀ ↝ m₁ ↝ m₀` between distinct inspections (each holds the other's residue),
-so `prec m₀ m₀` is a cycle and no strict monotone stage-index represents `≺` (a strict index forbids
-`stage m₀ < stage m₁ < stage m₀`). A 1-cycle is impossible (`ws1_no_self_total_hold`), so the witness is
-a genuine 2-cycle. The order is endogenous, not a disguised counter. -/
-theorem ws3_imported_index_refuted (hinf : ℵ₀ ≤ κ) :
-    ∃ m₀ m₁ : Hold (twoLoop hinf) → HoldPred (twoLoop hinf),
-      ReDiagStep (twoLoop hinf) m₀ m₁ ∧ ReDiagStep (twoLoop hinf) m₁ m₀ ∧ m₀ ≠ m₁ := by
-  have hT : Hold (twoLoop hinf) := ⟨(⟨true⟩, ⟨true⟩), by rw [twoLoop_val]; exact rfl⟩
-  refine ⟨fun _ => (fun _ => True), fun _ => (fun _ => ¬ True), ⟨hT, ?_⟩, ⟨hT, ?_⟩, ?_⟩
-  · funext _; simp [diag]
-  · funext _; simp [diag]
-  · intro he
-    have hcontra := congrFun (congrFun he hT) hT
-    simp at hcontra
+/-- **D4 — the imported-index branch refuted (§4.2 guard).** The order has a genuine 2-cycle between the
+maximally-distinct inspections `⊤` and `⊥` (complementary diagonals, so each inspects the other's
+residue): `⊤ ↝ ⊥ ↝ ⊤`, `⊤ ≠ ⊥`. So `≺` cycles and no strict monotone stage-index represents it. The
+order is endogenous, not a disguised counter. -/
+theorem ws3_imported_index_refuted {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) :
+    ∃ m₀ m₁ : Hold dest → HoldPred dest,
+      ReDiagStep dest m₀ m₁ ∧ ReDiagStep dest m₁ m₀ ∧ m₀ ≠ m₁ := by
+  refine ⟨fun _ _ => True, fun _ _ => False, fun h hd => hd trivial, fun _ _ => trivial, ?_⟩
+  intro he
+  have h2 : True = False := congrFun (congrFun he h₀) h₀
+  exact h2 ▸ trivial
 
 end Series9.WS3

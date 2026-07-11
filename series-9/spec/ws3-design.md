@@ -170,3 +170,34 @@ theorem ws3_imported_index_refuted {X} (dest : X → PkObj κ X) :
 ## Deliverable
 
 `series-9/formal/Series9/ws3.lean` (**the seed of the tower's dynamics**, charter §3): transcribed carrier (README §6); `ReDiagStep`, `prec`; `ws3_redi_no_leaf` (NL), `ws3_redi_not_function` (NF), `ws3_dynamics_forced` (D2), `ws3_order_endogenous` (D3), `ws3_imported_index_refuted` (D4). **The accumulated-residue measure and monotonicity are NOT defined here** — they are WS5's, on this map. Axiom check: `#print axioms ws3_dynamics_forced` reduces through `Function.update` to the standard three. **Consumes WS1's `ws1_no_self_total_hold` (the residue always exists, so the process cannot halt); never bakes growth into `ReDiagStep`.**
+
+---
+
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 F-8 SERIOUS + F-4/F-7 REAL — addressed at charter strength)
+
+**F-8 (SERIOUS).** The blind review found the built `ReDiagStep insp insp' := ∃ h₀, insp' h₀ = diag insp`
+requires the successor to agree with the diagonal at only ONE hold — a single-point `Function.update`
+edit — so "re-diagonalization," "depth," and "the ever-deepening self retracted" were, read across
+workstreams, theorems about point-edits of a predicate, not about a self inspecting itself. **Addressed by
+strengthening the map to the design's intended content:**
+
+```lean
+def ReDiagStep (dest) (insp insp' : Hold dest → HoldPred dest) : Prop := ∀ h, diag insp h → insp' h h
+```
+
+The next stage now INSPECTS THE WHOLE PRIOR RESIDUE (self-holds every prior blind spot), free off the
+residue (NF). This is strictly the charter §3 content ("the next-stage hold that inspects that residue").
+WS4/WS5 re-proved against it and are now genuine: re-inspection CLOSES the whole prior residue
+(`ws4_residue_moves`), and the monotonicity refutation fires because inspecting resolves (not a point-flip).
+
+**F-4 (REAL).** `ws3_dynamics_forced` did not use `ws1_no_self_total_hold`. Re-proved as the genuine
+forcing: `prec dest m m' → ¬ Complete m'` (no reachable stage is self-total), which uses the spine.
+Seriality ("a successor exists by construction") is split off honestly as `ws3_serial`.
+
+**F-7 (REAL).** `ws3_redi_no_leaf : (∃ h, ¬ insp h h) → ∃ h, diag insp h` was `id`. The residue is NOT
+always inhabited (`fun _ _ => True` has empty residue), so (NL) is relabelled: face-shape-by-type
+(`ws3_residue_is_face`) plus a positive full-face witness (`ws3_redi_no_leaf : ∃ insp, ∀ h, diag insp h`).
+The leaf trap is genuinely avoided (the residue is a `HoldPred`, never a bare relatum).
+
+The endogenous order (`Iff.rfl`) and imported-index refutation (now a ⊤/⊥ 2-cycle with complementary
+diagonals) are unchanged in spirit. All axiom-clean (captured run, `spec/axiom-check-log.md`).

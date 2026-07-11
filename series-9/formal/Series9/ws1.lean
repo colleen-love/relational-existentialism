@@ -321,13 +321,20 @@ theorem ws1_unrestricted_carrier_inconsistent {X : Type u} (dest : X → PkObj �
 /-- **D5 — hold-reflexive, not self-loop (§4.4 carrier-strength obligation).** The carrier expresses
 genuine NON-POINT contents: an inspection whose content `⊤` holds two distinct holds `h₀ ≠ h₁` at once
 — a content no self-loop can express, since every `inspLoop` content is a point (`inspLoop h h' ↔
-h' = h`). So a hold genuinely ranges over the space of holds, strictly stronger than a self-loop.
+h' = h`). So a hold genuinely ranges over the space of holds, strictly stronger than a self-loop. That
+the residue can be a genuine FULL face is witnessed separately (`ws3_redi_no_leaf`: `∃ insp, ∀ h, diag
+insp h`).
 
-NB (design correction, recorded in `charter-status.md`): the pre-build design's first horn — an
-inspection "near-surjective onto every content but the diagonal" — is UNREALIZABLE by cardinality (the
-complement of a single point in `HoldPred` still has cardinality `2 ^ |Hold| > |Hold|`, so no map from
-`Hold` covers it). Hold-reflexivity is the correct guard: content is a genuine predicate over holds
-(non-point), witnessed here, NOT near-surjectivity. This is a faithful realization of the §4.4 guard. -/
+NB (design correction, series-review-1 F-1, recorded in `charter-status.md`): the pre-build design's
+first horn — an inspection "near-surjective onto every content but the diagonal, the sole gap" — is both
+UNREALIZABLE and CONCEPTUALLY CONFUSED. Unrealizable: the complement of a single point in `HoldPred`
+still has cardinality `2 ^ |Hold| > |Hold|`, so no map from `Hold` covers it (the range of any `insp` is
+a small `≤ |Hold|` subset of `HoldPred`, missing `2^|Hold|`-many contents, not one). Confused: the
+diagonal is therefore NOT "the sole gap"; it is a CONSTRUCTIBLE gap — Cantor/Lawvere's strength is that
+the diagonal is uniformly exhibitable for EVERY `insp` (`ws1_insp_not_surjective`), which is why the
+spine holds for all `insp` (a feature, not a vacuity). The correct carrier-strength guard is exactly what
+the charter §3/§5.5 asks — content is a genuine predicate over holds (the type `Hold → Prop`), not a
+successor point — witnessed here; the "near-surjective / almost-formable totality" framing is withdrawn. -/
 theorem ws1_holdreflexive_not_selfloop {X : Type u} (dest : X → PkObj κ X)
     (h₀ h₁ : Hold dest) (_hne : h₀ ≠ h₁) :
     (∃ insp : Hold dest → HoldPred dest, insp h₀ h₀ ∧ insp h₀ h₁)
