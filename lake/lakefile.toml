@@ -1,40 +1,16 @@
 name = "RelExist"
-defaultTargets = ["Series4", "Series5", "Series6"]
+defaultTargets = ["Series7"]
 
-# ── Layout (Series 4 complete + Series 5 complete + Series 6 live, all built) ──
-# Series 3 is closed and frozen under `archive/`. Series 4 and Series 5 are complete
-# under `series-4/` and `series-5/`; Series 6 is the live development under `series-6/`.
-# All three are built here so an artifact-evaluation run of `lake build` verifies the
-# whole program.
+# ── Layout (Series 7 live; Series 3–6 closed and frozen under `archive/`) ──
+# Series 3, 4, 5, and 6 are closed and frozen under `archive/series-3/`,
+# `archive/series-4/`, `archive/series-5/`, and `archive/series-6/`; they are no
+# longer registered here. Series 7 is the live development under `series-7/`, built
+# here so `lake build` verifies it.
 #
 # Each series is a distinct module namespace so they can coexist in one package:
-# Series 4's roots live under `Series4.*` (files in `series-4/formal/Series4/`),
-# Series 5's under `Series5.*` (`series-5/formal/Series5/`), and Series 6's under
-# `Series6.*` (`series-6/formal/Series6/`). The aggregator roots `SeriesN`
-# (`<series>/formal/<Series>.lean`) import their workstreams; the `AxiomCheck` root
-# under each namespace runs `#print axioms` over that series' build.
-
-# `series-4/formal/` — Series 4 (complete).
-[[lean_lib]]
-name = "Series4"
-srcDir = "../series-4/formal"
-roots = ["Series4", "Series4.AxiomCheck"]
-
-# `series-5/formal/` — Series 5 (complete).
-[[lean_lib]]
-name = "Series5"
-srcDir = "../series-5/formal"
-roots = ["Series5", "Series5.AxiomCheck"]
-
-# `series-6/formal/` — Series 6 (live). `Series6` imports `Series6.ws1`…`Series6.ws7`;
-# `Series6.AxiomCheck` runs the axiom pass over the whole Series 6 build. Series 6 is
-# WHOLLY STANDALONE (charter §1): every Series 4/5 lemma it reuses is transcribed into
-# `series-6/formal/Series6/wsNN.lean` and re-namespaced `Series6.WSNN` — nothing is
-# imported from `series-5/`, `series-4/`, or `archive/`.
-[[lean_lib]]
-name = "Series6"
-srcDir = "../series-6/formal"
-roots = ["Series6", "Series6.AxiomCheck"]
+# Series 7's roots live under `Series7.*` (files in `series-7/formal/Series7/`). The
+# aggregator root `Series7` (`series-7/formal/Series7.lean`) imports its workstreams;
+# the `AxiomCheck` root runs `#print axioms` over that series' build.
 
 # `series-7/formal/` — Series 7 (live). `Series7` imports `Series7.ws1`…`Series7.ws7`;
 # `Series7.AxiomCheck` runs the axiom pass. Series 7 is WHOLLY STANDALONE: every Series

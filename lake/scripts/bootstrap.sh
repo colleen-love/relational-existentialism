@@ -123,10 +123,9 @@ elan default "leanprover/lean4:v${LEAN_VER}" >/dev/null 2>&1 || true
 log "lean: $(lean --version 2>&1 | head -1)"
 
 # --- 3. Build the series roots (mathlib-backed; slow first time, cached after) -
-# Two libraries are built (see lake/lakefile.toml): `Series4` (complete; sources
-# in ../series-4/formal, namespace Series4.*) and `Series5` (live; sources in
-# ../series-5/formal, namespace Series5.*). Series 3 is closed and frozen under
-# archive/. Both import mathlib, so the build happens after the cache is warmed.
+# One library is built (see lake/lakefile.toml): `Series7` (live; sources in
+# ../series-7/formal, namespace Series7.*). Series 3–6 are closed and frozen under
+# archive/. Series 7 imports mathlib, so the build happens after the cache is warmed.
 cd "$REPO_DIR"
 if [ "${SKIP_MATHLIB:-0}" = "1" ]; then
   log "SKIP_MATHLIB=1 set — skipping mathlib build (series roots not built)."
@@ -143,8 +142,8 @@ else
   else
     log "cache unreachable — will compile mathlib from source (slow first time, cached after)."
   fi
-  log "building both series (Series4 + Series5)..."
-  lake build Series4 Series5
+  log "building series (Series7)..."
+  lake build Series7
   log "series built."
 fi
 

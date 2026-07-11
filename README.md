@@ -36,25 +36,25 @@ Each series is self-contained and machine-verified: no `sorry`, no custom axioms
 
 | Series | Question | Motivating impossibility | Verdict | Docs |
 |---|---|---|---|---|
-| **4** (complete) | quality from inside the relata (the face) | the Parmenides collapse | local success, totality failure — both proved | [summary](./series-4/summary.md) · [technical](./series-4/summary-technical.md) · [charter](./series-4/charter.md) · [status](./series-4/charter-status.md) · [formal](./series-4/formal/) · [spec](./series-4/spec/) |
-| **5** (complete) | boundlessness by refusing to be one world | the Explosion Dilemma | the endogenous bound, earned; unification a conjunction | [summary](./series-5/summary.md) · [technical](./series-5/summary-technical.md) · [charter](./series-5/charter.md) · [status](./series-5/charter-status.md) · [formal](./series-5/formal/) · [spec](./series-5/spec/) |
-| **6** (complete) | dynamism as groundlessness (endogenous time) | the Static Collapse | the process collapses; engine genuine — `payoffsEstablished` | [charter](./series-6/charter.md) · [status](./series-6/charter-status.md) · [protocol](./series-6/protocol.md) · [formal](./series-6/formal/) · [spec](./series-6/spec/) |
+| **4** (complete, archived) | quality from inside the relata (the face) | the Parmenides collapse | local success, totality failure — both proved | [summary](./archive/series-4/summary.md) · [technical](./archive/series-4/summary-technical.md) · [charter](./archive/series-4/charter.md) · [status](./archive/series-4/charter-status.md) · [formal](./archive/series-4/formal/) · [spec](./archive/series-4/spec/) |
+| **5** (complete, archived) | boundlessness by refusing to be one world | the Explosion Dilemma | the endogenous bound, earned; unification a conjunction | [summary](./archive/series-5/summary.md) · [technical](./archive/series-5/summary-technical.md) · [charter](./archive/series-5/charter.md) · [status](./archive/series-5/charter-status.md) · [formal](./archive/series-5/formal/) · [spec](./archive/series-5/spec/) |
+| **6** (complete, archived) | dynamism as groundlessness (endogenous time) | the Static Collapse | the process collapses; engine genuine — `payoffsEstablished` | [charter](./archive/series-6/charter.md) · [status](./archive/series-6/charter-status.md) · [protocol](./archive/series-6/protocol.md) · [formal](./archive/series-6/formal/) · [spec](./archive/series-6/spec/) |
 | **7** (complete) | is atomless plurality impossible without an import? | the Import Theorem | plain collapse holds, non-circular — `payoffsEstablished`; the import forks into externally-defined or internally-chosen | [summary](./series-7/summary.md) · [technical](./series-7/summary-technical.md) · [charter](./series-7/charter.md) · [status](./series-7/charter-status.md) · [formal](./series-7/formal/) · [spec](./series-7/spec/) |
 
-Earlier work (Series 1–3) is frozen under [`archive/`](./archive/) — readable as origin, normative for nothing. Each series' `spec/` holds its design docs, its committed axiom-check log, and its adversarial review passes.
+Earlier work (Series 1–6) is frozen under [`archive/`](./archive/) — readable as origin, normative for nothing; the completed Series 4–6 live under `archive/series-4/`…`archive/series-6/`. Each series' `spec/` holds its design docs, its committed axiom-check log, and its adversarial review passes.
 
 *Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 50.* A publication should cite the specific commit hash and a clean-build log.
 
 ## Building
 
-Toolchain and Mathlib (Lean 4 `v4.15.0` / Mathlib `v4.15.0`) are pinned in [`lake/`](./lake/). One build compiles all four series:
+Toolchain and Mathlib (Lean 4 `v4.15.0` / Mathlib `v4.15.0`) are pinned in [`lake/`](./lake/). One build compiles the live series:
 
 ```
 cd lake
 lake build
 ```
 
-This builds `Series4`, `Series5`, `Series6`, and `Series7` (each `ws1`–`ws7`, in its own module namespace `SeriesN.*`) and runs each series' `AxiomCheck`, which imports that series' whole build and emits a `#print axioms` record for every headline theorem. To build a single series' axiom pass: `lake build Series7 Series7.AxiomCheck` (and likewise for `Series4` / `Series5` / `Series6`). [`scripts/gate.sh`](./scripts/gate.sh) confirms no cross-series imports.
+This builds `Series7` (`ws1`–`ws7`, in its own module namespace `Series7.*`) and runs its `AxiomCheck`, which imports the whole build and emits a `#print axioms` record for every headline theorem. To build the axiom pass alone: `lake build Series7 Series7.AxiomCheck`. The completed Series 4–6 are frozen under `archive/` and no longer registered in the build. [`scripts/gate.sh`](./scripts/gate.sh) confirms no cross-series imports.
 
 ## Licensing
 
