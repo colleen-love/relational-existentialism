@@ -76,6 +76,8 @@ Two Series-8-specific design duties, settled in this batch:
 
 A build may discover a design was wrong. The one prohibited move is **building past a broken design**: if a design cannot be realized as written, stop and record the defect in `charter-status.md` (routed to the owning design), and either fix the design in place (same session's artifact) or report the workstream Partial with the obstruction precise. Do not silently retarget a signature to whatever the proof happened to yield. Because the build is batched, a mid-build discovery that reaches upstream (e.g. WS3 needing the hold to expose re-restriction as a first-class operation WS1 did not provide) is handled by the pre-registered fallback in the affected design, not by an ad hoc patch.
 
+The first incremental build takes longer than two minutes. Please run it as a background task at the start of the session.
+
 **The first file is WS3's re-restriction map** in spirit even though WS1 builds first: WS1 establishes the carrier, hold, and the no-god's-eye spine; but the object the whole of Part Two turns on is the re-restriction map (charter §3), and its two easy obligations, **(NL)** no leaf and **(NF)** not-a-function, should be discharged early as the seed. **Conservation (CB) is NOT attempted in the build until WS5**, and is never built into the re-restriction definition.
 
 ### Phase D — Blind series-review (one session) → `series-review.md`
