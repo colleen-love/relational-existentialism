@@ -6,13 +6,14 @@ Mathlib's standard three (`propext` / `Classical.choice` / `Quot.sound`) — no 
 
 The two most important records (protocol §C):
 - `#print axioms Series10.WS1.ws1_free_reification` reduces to the standard three, and its proof term
-  routes through `ws1_no_self_total_hold` (productive blindness is the diagonal, not a fresh assumption).
-- `#print axioms Series10.WS2.ws2_growth_strict` reduces to the standard three, and it proves the reified
-  relatum's free label survives the bisimulation quotient (growth is not-bisim-embed, not a `List`).
+  routes through `ws1_no_self_total_hold` (freeness is the diagonal, not a fresh assumption — but of the
+  residue content, `reify` absent, R1).
+- `#print axioms Series10.WS2.ws2_reify_bisim_embeds` reduces to the standard three, and it proves the
+  reified `SHNE` relatum bisim-embeds (growth is BOOKKEEPING, the moving-hole re-hit, S1).
 -/
 import Series10
 
--- WS1 — the reifying carrier and productive blindness (the spine)
+-- WS1 — the reifying carrier and productive blindness (the spine; R1: residue-freeness, reify absent)
 #print axioms Series10.WS1.ws1_reify_injective
 #print axioms Series10.WS1.ws1_free_reification
 #print axioms Series10.WS1.ws1_close_forbidden_local
@@ -21,19 +22,19 @@ import Series10
 #print axioms Series10.WS1.ws1_no_self_total_hold
 #print axioms Series10.WS1.ws2_residue_is_import
 
--- WS2 — genuine growth, not bookkeeping (the payoff)
-#print axioms Series10.WS2.ws2_growth_strict
-#print axioms Series10.WS2.ws2_growth_is_free_label
-#print axioms Series10.WS2.ws2_history_not_merged
+-- WS2 — the payoff, RELABELLED BOOKKEEPING (S1): the tower bisim-embeds (moving-hole re-hit)
+#print axioms Series10.WS2.ws2_growth_is_bookkeeping
+#print axioms Series10.WS2.ws2_reify_bisim_embeds
+#print axioms Series10.WS2.ws2_free_label_survives
+#print axioms Series10.WS2.ws2_label_free_import
 #print axioms Series10.WS2.ws2_plain_collapse_persists
-#print axioms Series10.WS2.ws2_not_moving_hole
 
 -- WS3 — the reification tower and its order (the seed)
 #print axioms Series10.WS3.ws3_reify_preserves_SHNE
 #print axioms Series10.WS3.ws3_tower_monotone
 #print axioms Series10.WS3.ws3_order_endogenous
 #print axioms Series10.WS3.ws3_imported_order_refuted
-#print axioms Series10.WS3.ws3_tower_well_founded
+#print axioms Series10.WS3.ws3_tower_monotone_family
 
 -- WS4 — close-or-fold: the dichotomy and CLOSE-forbidden (the structural heart)
 #print axioms Series10.WS4.ws4_close_forbidden
@@ -53,14 +54,14 @@ import Series10
 #print axioms Series10.WS6.ws6_fold_scope
 #print axioms Series10.WS6.ws6_series11_handoff
 
--- WS7 — the audit, the promoted checks, and the typed verdict
+-- WS7 — the audit, the promoted checks, and the typed verdict (RE-GRADED: bookkeeping, S1)
 #print axioms Series10.WS7.ws7_audit
 #print axioms Series10.WS7.ws7_verdict
 #print axioms Series10.WS7.ws7_verdict_eq
+#print axioms Series10.WS7.ws7_audited_is_bookkeeping
+#print axioms Series10.WS7.ws7_audited_not_reificationEstablished
 #print axioms Series10.WS7.ws7_bookkeeping_check
 #print axioms Series10.WS7.ws7_kappa_discipline
-#print axioms Series10.WS7.ws7_no_bookkeeping
-#print axioms Series10.WS7.ws7_no_smuggle
-#print axioms Series10.WS7.ws7_no_kappa_by_fiat
-#print axioms Series10.WS7.ws7_not_import
+#print axioms Series10.WS7.ws7_close_forbidden_inspection_level
+#print axioms Series10.WS7.ws7_spine_is_residue_freeness
 #print axioms Series10.WS7.ws7_strip_ledger

@@ -8,25 +8,29 @@ limitation: on a FIXED carrier the free residue could only MOVE (a moving hole i
 10 lets the free residue REIFY into a new relatum via `reify : PkObj κ Ω → Ω` (a section of `dest`, the
 forward map of `Ω ≅ F(Ω)`), so the carrier GROWS.
 
-The spine (WS1) is **productive blindness, Discharged**: the reified self-relation is FREE, and
-recoverability would reconstruct a self-total hold (`ws1_free_reification` = `ws2_residue_is_import`
-lifted), so the growth is genuine BECAUSE self-reference cannot close (`ws1_no_self_total_hold`). The
-payoff (WS2) is **genuine growth at the labelled level**: the reified relatum's free label survives the
-bisimulation quotient (`ws2_growth_strict` = `ws4_label_survives_quotient`), landing on the free-import
-horn (`ws2_growth_is_free_label`), so the carrier does not label-bisimulation-embed into the prior — the
-break of the Series 07 collapse Series 09's bisimulation-invariant moving hole could not make; the
-plain-level collapse persists (`ws2_plain_collapse_persists`) and is disclosed honestly.
+**PHASE E RE-GRADE (series-review-1). Verdict: `bookkeeping` — engine Discharged, payoff Bookkeeping.**
 
-The tower (WS3) is genuine carrier growth (`towerN`/`reifyStep`, not an external `List`), preserving
-`SHNE` (`ws3_reify_preserves_SHNE`, no leaf), with the ONE endogenous order `prec` (from reification
-sequences, `ws3_order_endogenous`) and the imported-ordinal branch refuted. The structural heart (WS4):
-**CLOSE is forbidden by the diagonal** (`ws4_close_forbidden`, a totality-relatum is a self-total hold),
-an Impossibility; the dichotomy is exhaustive. The central open (WS5): the fold is TESTED — the
-per-step / reifiable-pattern fold is Discharged-on-scaffold (`ws5_fold_on_scaffold`, distributed
-reflexivity, all large κ), but the full crown (every free residue folded — a residue is a `HoldPred`, not
-a κ-bounded pattern) and κ-removal are open, so the verdict is **Partial** with FATAL pre-registered. The
-verdict (WS7) is `reificationEstablished`, with the two promoted checks — bookkeeping (growth not-embed,
-not a `List`) and κ-by-fiat (fold reflexivity, all large κ) — the spine of the audit.
+The spine (WS1) is **residue-freeness through the diagonal, Discharged** (`ws1_free_reification` =
+`ws2_residue_is_import` → `ws1_no_self_total_hold`, genuine routing) — but of the Series 09 residue
+CONTENT (`insp` only); `reify` is NOT in the term, so the reification lift is interpretive, not
+machine-checked (R1). The payoff (WS2) is **BOOKKEEPING** (S1): on the plain carrier the collapse engine
+`ws1_atomless_bisim` makes every reified `SHNE` relatum bisimilar to prior relata, so `Ω_{α+1}`
+bisim-embeds into `Ω_α` (`ws2_reify_bisim_embeds`) — growth is cardinality-only, Series 09's moving hole
+re-hit one level up. The specified strict-internal-growth target provably RESISTS on this carrier; the
+`labelLoop` facts (`ws2_free_label_survives`, `ws2_label_free_import`) are transcribed import-test facts
+about a FIXED 2-state coalgebra, NOT tower growth, retained only as the honest record.
+
+The tower (WS3) is a genuine monotone family of carriers (`towerN`/`reifyStep`, not an external `List`),
+preserving `SHNE` (`ws3_reify_preserves_SHNE`, no leaf — the one place `reify` does real work), with the
+ONE endogenous order `prec` (`ws3_order_endogenous`) and the imported-ordinal branch refuted. The
+structural heart (WS4): **CLOSE-forbidden at the INSPECTION LEVEL** (`ws4_close_forbidden`, a self-total
+hold is forbidden — an Impossibility), tower-independent (S3: the carrier-level tower closure is charter
+§9's OPEN question, not settled). The central open (WS5): the fold verdict is **Partial**, but its
+per-step positive content is DEFINITIONAL (`ws5_fold_on_scaffold` reads back `reifyStep`'s construction,
+S2); the substantive residue-fold and κ-removal are fully open (Series 11), FATAL pre-registered. The
+κ-discipline holds throughout (fold is reachability, all large κ — no κ-by-fiat). The verdict (WS7) is
+**`bookkeeping`**: engine facts Discharged, payoff the moving-hole re-hit, reported honestly — a
+first-class outcome (charter §7) and the correct seed for Series 11.
 
 This file is SELF-CONTAINED: every Series 09/08/07/04 lemma is transcribed into `Series10/wsNN.lean` and
 re-namespaced `Series10.WSn` — nothing is imported from `series-09/`, `series-08/`, `series-07/`,

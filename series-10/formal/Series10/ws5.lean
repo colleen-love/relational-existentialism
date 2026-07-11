@@ -29,18 +29,24 @@ variable {κ : Cardinal.{u}}
 inductive FoldVerdict | dischargedOnScaffold | fatal | partialV
   deriving DecidableEq
 
-/-- **D1 — the per-step fold (Discharged-on-scaffold).** Any reifiable pattern (non-empty, κ-bounded,
-drawn from a stage) is reified into the carrier at the next step — distributed reflexivity at the step
-level, by `reifyStep`'s definition. Measured as reachability, holding for ALL large κ, no reliance on
-small κ. -/
+/-- **D1 — the per-step fold, DEFINITIONAL (series-review-1 S2, relabelled).** Any reifiable pattern
+(non-empty, κ-bounded, drawn from a stage) is reified into the carrier at the next step — but this is NOT
+a discovered reflexivity, it is `reifyStep`'s DEFINITION read back (`reifyStep Ω = Ω ∪ {reify s | s ⊆ Ω,
+s ≠ ∅}` contains `reify s` by construction). It holds for ANY `Ω`, reachable or not. Honest terminus: the
+fold at the reifiable-pattern level is a definitional membership fact, NOT a substantive scaffold
+discharge. It is κ-honest (reachability, all large κ), but it is not evidence for the crown. -/
 theorem ws5_step_fold {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
     (Ω : Set X) (s : PkObj κ X) (hsub : s.1 ⊆ Ω) (hne : s.1 ≠ ∅) :
     reify s ∈ reifyStep dest reify Ω :=
   reify_mem_reifyStep dest reify hsub hne
 
-/-- **D2 — the fold on scaffold.** `Folds` holds: every reifiable pattern at every reachable stage is
-reified at a later stage (take the next step). The crown at the reifiable-pattern level, on the bounded
-carrier, measured as reflexivity NOT cardinality. Discharged-on-scaffold. -/
+/-- **D2 — the fold on scaffold, DEFINITIONAL (series-review-1 S2, relabelled).** `Folds dest reify Ω₀`
+holds, but its proof discards the reachability hypothesis `_hreach` and reads back `reifyStep`'s
+definition — it holds for every `Ω`, reachable or not. So this is NOT "distributed reflexivity discovered
+to hold on the scaffold"; it is the construction of `reifyStep` restated. The SUBSTANTIVE fold question
+(does a free RESIDUE `diag insp` — a `HoldPred`, not a κ-bounded pattern — fold back into range?) is
+entirely open and is the real content of the Partial verdict (§5.4). Do NOT read this as a scaffold
+discharge of the crown. -/
 theorem ws5_fold_on_scaffold {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) (Ω₀ : Set X) :
     Folds dest reify Ω₀ := by
   intro Ω _hreach s hsub hne
@@ -64,10 +70,12 @@ theorem ws5_fold_not_cardinality {X : Type u} (dest : X → PkObj κ X) (reify :
         ∃ Ω' : Set X, prec dest reify Ω Ω' ∧ reify s ∈ Ω') :=
   ws4_fold_is_reflexivity dest reify Ω₀
 
-/-- **D4b — the settled fork.** Verdict Partial: Discharged-on-scaffold for reifiable patterns
-(`ws5_fold_on_scaffold`) AND CLOSE forbidden (`ws4_close_forbidden`), but the FULL crown (every free
-residue folded — the residue is a `HoldPred`, not a κ-bounded pattern) and κ-removal are open (Series 11).
-Justified by theorems, never hand-set; the crown is NEVER folded into `reify`/`reifyStep`. -/
+/-- **D4b — the settled fork.** Verdict Partial. The per-step fold (`ws5_fold_on_scaffold`) is
+DEFINITIONAL (S2), NOT a substantive discharge, so the Partial's positive content is thin; CLOSE is
+forbidden at the inspection level (`ws4_close_forbidden`, S3). The FULL crown — does a free residue (a
+`HoldPred`, not a κ-bounded pattern) fold back — is ENTIRELY OPEN, together with κ-removal (Series 11).
+The verdict is honestly Partial (never Discharged-on-scaffold, since the per-step fold is a tautology),
+never hand-set; the crown is NEVER folded into `reify`/`reifyStep`. -/
 def ws5_fold_verdict : FoldVerdict := .partialV
 
 theorem ws5_verdict_justified {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)

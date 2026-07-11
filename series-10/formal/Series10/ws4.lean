@@ -41,8 +41,15 @@ def Folds {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) (Ω�
 def FoldsByCardinality {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) (Ω₀ : Set X) : Prop :=
   ∀ Ω : Set X, prec dest reify Ω₀ Ω → Cardinal.mk (↥Ω) < κ
 
-/-- **D1 — CLOSE forbidden (Impossibility proved).** A totality-relatum reached in the tower is a
-self-total hold, forbidden by the diagonal. The tower cannot close into a top. -/
+/-- **D1 — CLOSE forbidden at the INSPECTION LEVEL (Impossibility proved; series-review-1 S3, honestly
+restated).** `Closes` conjoins a tower part (`prec … ∧ t.1.1 ∈ Ω`) with `SelfTotal insp t`, but the proof
+discards the tower hypotheses (`_hreach`, `_hmem`): the contradiction is `ws1_no_self_total_hold`, a fact
+about the inspection `insp` alone, INDEPENDENT of the tower (`insp` is a free parameter, not induced by
+`reify`/`dest`). So this genuinely forbids a self-total hold at the inspection level — a real Impossibility
+— but it does NOT show the *carrier-level* tower cannot close: that (the founding-equation iso reaching a
+totality-relatum, charter §9) is the OPEN structural question Series 10 does not settle. The "the tower
+cannot close into a top" gloss is RETRACTED; what is proved is the tower-independent inspection-level
+diagonal. -/
 theorem ws4_close_forbidden {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
     (insp : Hold dest → HoldPred dest) (Ω₀ : Set X) : ¬ Closes dest reify insp Ω₀ := by
   rintro ⟨Ω, _hreach, t, _hmem, htot⟩

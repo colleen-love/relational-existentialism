@@ -340,10 +340,16 @@ theorem ws1_reify_injective {X : Type u} (dest : X → PkObj κ X) (reify : PkOb
   have hd : dest (reify s₁) = dest (reify s₂) := by rw [he]
   rwa [h s₁, h s₂] at hd
 
-/-- **D1 — THE SPINE (productive blindness).** The reified self-relation is FREE, and recoverability
-would reconstruct a self-total hold — the routing through the diagonal is explicit. This IS
-`ws2_residue_is_import`, lifted to the reification: the growth is genuine BECAUSE self-reference cannot
-close. The proof references the diagonal, NOT a fresh freeness assumption. -/
+/-- **D1 — THE SPINE (productive blindness; series-review-1 R1, honestly disclosed).** Freeness routes
+through the diagonal (`ws2_residue_is_import` → `ws1_no_self_total_hold`): the residue content is not
+realised by any hold, and recoverability would reconstruct a self-total hold. This routing is GENUINE and
+is the charter's non-negotiable (through the diagonal, not a fresh assumption). **But the object is the
+Series 09 residue CONTENT (`insp` only) — `reify` does NOT appear in this term.** The design's C2 predicate
+`ReifiedResidueRecoverable dest insp` was, by the design's own admission, `∃ h, insp h = residue insp` =
+`ResidueRecoverable` renamed, so it does not tie `reify` into the statement. So productive blindness is
+**Series 09 residue-freeness transcribed, routing through the diagonal; the lift to relatum-freshness
+(tying `reify` in) is interpretive, NOT machine-checked.** Reported honestly, not as "freeness of the
+reified relatum." -/
 theorem ws1_free_reification {X : Type u} (dest : X → PkObj κ X)
     (insp : Hold dest → HoldPred dest) :
     (¬ ∃ h, insp h = residue insp)

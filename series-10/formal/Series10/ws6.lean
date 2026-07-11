@@ -22,9 +22,11 @@ open Series10.WS1 Series10.WS3 Series10.WS4 Series10.WS5 Cardinal
 
 variable {κ : Cardinal.{u}}
 
-/-- **D1 — the provable core (the floor).** Productive blindness (the reified self-relation is free),
-CLOSE forbidden (no totality-relatum), and the per-step fold on scaffold — the theorems everything above
-rests on. -/
+/-- **D1 — the provable core (the floor), honestly labelled (series-review-1 S2/S3/R1).** The three
+genuine engine facts: residue-freeness through the diagonal (R1: `insp` only, `reify` absent),
+CLOSE-forbidden at the inspection level (S3: tower-independent), and the DEFINITIONAL per-step fold (S2:
+`reifyStep`'s construction, not a substantive discharge). These are the honest floor; the PAYOFF (strict
+internal growth) is NOT here — it is Bookkeeping (WS2, S1). -/
 theorem ws6_provable_core {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
     (insp : Hold dest → HoldPred dest) (Ω₀ : Set X) :
     (¬ ∃ h, insp h = residue insp)

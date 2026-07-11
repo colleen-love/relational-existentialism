@@ -106,12 +106,14 @@ theorem ws3_imported_order_refuted {X : Type u} (dest : X → PkObj κ X) (reify
        Relation.ReflTransGen (fun a b => b = reifyStep dest reify a) a b) :=
   ⟨prec_step dest reify Ω₀, fun a b => ws3_order_endogenous dest reify a b⟩
 
-/-- **D5 — well-foundedness (the κ-scaffolding's job).** Each stage is a genuine object (a `Set X`, by
-type), and the family is monotone, so the tower is well-defined and never a proper-class abuse. The
-κ-bound keeps each `reifyStep` a `PkObj κ`-adjunction — this is the scaffolding's real job, marked for
-κ-removal in Series 11 (no result relies on κ being SMALL). -/
-theorem ws3_tower_well_founded {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) (Ω₀ : Set X) :
-    ∀ m n : ℕ, m ≤ n → towerN dest reify Ω₀ m ⊆ towerN dest reify Ω₀ n :=
+/-- **D5 — the tower is a monotone family of genuine objects (series-review-1 C1, honestly named).** Each
+stage is a `Set X` (a genuine object, by type), and the family is monotone, so the tower is well-defined
+and never a proper-class abuse — the κ-bound keeps each `reifyStep` a `PkObj κ`-adjunction (the
+scaffolding's job, marked for κ-removal in Series 11, no result relies on κ being SMALL). **This is
+monotonicity of the family, NOT well-foundedness of `≺` (which is not claimed and not needed at ℕ-index;
+the transfinite case is deferred).** -/
+theorem ws3_tower_monotone_family {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
+    (Ω₀ : Set X) : ∀ m n : ℕ, m ≤ n → towerN dest reify Ω₀ m ⊆ towerN dest reify Ω₀ n :=
   fun _ _ hmn => ws3_tower_monotone dest reify Ω₀ hmn
 
 end Series10.WS3
