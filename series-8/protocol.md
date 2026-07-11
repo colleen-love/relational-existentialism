@@ -37,13 +37,13 @@ The charter + all designs are what you paste into the build session. The designs
 
 Six phases. Phases D and E loop.
 
-| Phase | Name | Session | Sees | Batching |
+| Phase | Name | Session | Format | Batching |
 |---|---|---|---|---|
-| A | Charter | 1 | (whole program) | once per series |
-| B | Design-all | 1 | charter + repo | **all seven at once** |
-| C | Build-all | 1 | all designs + repo | **all seven at once** |
-| D | Blind series-review | 1 | all built code + all design contracts + charter criteria, **not** motivating prose | **whole series at once** → writes `series-review.md` |
-| E | Address | 1 | `series-review.md` + all code + designs | **whole series at once** |
+| A | Charter | 1 | normal conversation with repo | once per series |
+| B | Design-all | 1 | Claude code with repo | **all seven at once** |
+| C | Build-all | 1 | Claude code with repo | **all seven at once** |
+| D | Blind series-review | 1 | incognito with repo | **whole series at once** → writes `series-review.md` |
+| E | Address | 1 | Claude code with repo | **whole series at once** |
 | — | Accept / route | — | (bookkeeping into `charter-status.md`) | — |
 
 The canonical run is **B → C → D → E → D → E** (two review passes, three code touches counting the initial build), with more D→E loops added only if a review pass still returns SERIOUS findings.
@@ -76,13 +76,17 @@ Two Series-8-specific design duties, settled in this batch:
 
 A build may discover a design was wrong. The one prohibited move is **building past a broken design**: if a design cannot be realized as written, stop and record the defect in `charter-status.md` (routed to the owning design), and either fix the design in place (same session's artifact) or report the workstream Partial with the obstruction precise. Do not silently retarget a signature to whatever the proof happened to yield. Because the build is batched, a mid-build discovery that reaches upstream (e.g. WS3 needing the hold to expose re-restriction as a first-class operation WS1 did not provide) is handled by the pre-registered fallback in the affected design, not by an ad hoc patch.
 
+The first incremental build takes longer than two minutes. Please run it as a background task at the start of the session.
+
 **The first file is WS3's re-restriction map** in spirit even though WS1 builds first: WS1 establishes the carrier, hold, and the no-god's-eye spine; but the object the whole of Part Two turns on is the re-restriction map (charter §3), and its two easy obligations, **(NL)** no leaf and **(NF)** not-a-function, should be discharged early as the seed. **Conservation (CB) is NOT attempted in the build until WS5**, and is never built into the re-restriction definition.
 
 ### Phase D — Blind series-review (one session) → `series-review.md`
 
 **Prompt to seed the blind review session:**
 
-> In a fresh session, seeded with the built Series 8 code, the design signatures, and the charter criteria but **not** the motivating prose, review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim, with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 8, run:
+> Please clone https://github.com/colleen-love/relational-existentialism and view the series 8 working branch.
+
+> Review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' stated targets; do they satisfy the charter criteria they claim, with no `sorry`, no custom axiom, no signature that quietly weakens the target? Specifically for Series 8, without building the code, run:
 
 - **The Spinozist-retreat check (§0.5), the sharpest on the positive side.** Unfold WS1's no-god's-eye theorem. Is the all-faces (god's-eye) node *proved* bisimilar to the trivial self-loop and hence collapsed by the engine, or merely *asserted* positionless / excluded by a definitional clause? If the latter, monism's escape is smuggled past, a SERIOUS finding.
 - **The conservation-by-fiat check (§0.4), the sharpest on the bound side.** Unfold WS3's re-restriction definition. Does "breadth is conserved under narrowing" (WS5) follow from a *fact about the map* or from a *clause inside the map's definition*? If foreclosure is baked into the definition, conservation is assumed, not shown, a SERIOUS finding. Confirm the kill condition (charter §5.4) was actually run: was a depth-opening-without-foreclosure re-restriction *attempted* and either built (Refuted) or shown impossible (Discharged/Partial)?
@@ -97,11 +101,21 @@ A build may discover a design was wrong. The one prohibited move is **building p
 
 Write `series-review.md`: findings graded SERIOUS (the verdict rests on it, a flagship payoff laundering, the Spinozist retreat smuggled, conservation assumed-in), REAL (a genuine gap, correctly labelled once fixed), COSMETIC/ACCEPTABLE, plus a "what survives cleanly" section and an honest bottom line. Each finding names the owning workstream and a precise correction owed, no goalpost-moving: "relabel this / prove that / strip and re-prove / run the kill condition," never "lower the bar."
 
+If there is a serious finding, continue to Phase E. If not, conclude with Phase F.
+
 ### Phase E — Address `series-review.md` (one session)
 
-In a code session with `series-review.md`, all code, and all designs in view, address every finding. **Attempt the charter-strength theorem first**; where it provably resists, deliver an honest Partial/Impossibility/Refuted with the obstruction precise. Many corrections will be *relabels, not fixes* (a payoff shown to be a bare order fact is renamed and demoted; a conservation "proof" shown to unfold to its definition is demoted to a refuted or assumed hypothesis and the "self-limiting" claim retracted), and that is a correct outcome, not a failure. Record every change in `charter-status.md` (the series-review log and the affected workstream rows); keep the charter untouched unless the finding is a genuine design error (then the charter-change log, and reopen downstream).
+**Prompt to seed the blind review session:**
 
-Then loop back to Phase D for another blind pass. Exit when a review pass returns no SERIOUS findings and the remaining REAL items are correctly-labelled terminal Partials/Impossibilities/Refutations, **not** "the build finally passes at charter strength." Do not grind a genuine impossibility (or a genuinely refuted conservation law) against the review; report it.
+Please pull your branch, review the most recent `series-review.md` file, and address every finding. **Attempt the charter-strength theorem first**; where it provably resists, deliver an honest Partial/Impossibility/Refuted with the obstruction precise. Many corrections will be *relabels, not fixes* (a payoff shown to be a bare order fact is renamed and demoted; a conservation "proof" shown to unfold to its definition is demoted to a refuted or assumed hypothesis and the "self-limiting" claim retracted), and that is a correct outcome, not a failure. Record every change in `charter-status.md` (the series-review log and the affected workstream rows); keep the charter untouched unless the finding is a genuine design error (then the charter-change log, and reopen downstream).
+
+### Phase F
+
+**Prompt to seed the blind review session:**
+
+Please pull your branch, review the most recent `series-review.md` file, and address every finding. **Attempt the charter-strength theorem first**; where it provably resists, deliver an honest Partial/Impossibility/Refuted with the obstruction precise. Many corrections will be *relabels, not fixes* (a payoff shown to be a bare order fact is renamed and demoted; a conservation "proof" shown to unfold to its definition is demoted to a refuted or assumed hypothesis and the "self-limiting" claim retracted), and that is a correct outcome, not a failure. Record every change in `charter-status.md` (the series-review log and the affected workstream rows); keep the charter untouched unless the finding is a genuine design error (then the charter-change log, and reopen downstream).
+
+Once you are finished, this series is closed. Please write a `summary.md`, a `summary-technical.md` and update the root readme to reflect your findings. Great work.
 
 ---
 
