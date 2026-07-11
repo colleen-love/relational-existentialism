@@ -82,10 +82,14 @@ theorem ws3_prec_is_reach {X} (dest) (h h' : Hold dest) (hp : prec dest h h') :
 
 ```lean
 -- The imported order: a stage counter stamped from outside, ≺ᵢ m m' := stage m < stage m'.
+-- BUILD FIX (2026-07-11, recorded in charter-status.md): the pre-build sketch stated this with
+-- `h ≠ h'`, which CANNOT hold on `twoLoop` — its holds are the fixed points `(i,i)` (the only
+-- successor of `i` is `i`), so a re-restriction returns the SAME hold. The honest content — the
+-- order CYCLES, so no strict monotone index represents it — is a self-loop STEP `ReReStep h h`:
 theorem ws3_imported_index_refuted (hinf : ℵ₀ ≤ κ) :
-    ∃ (h h' : Hold (twoLoop hinf)), prec (twoLoop hinf) h h' ∧ h.1.2 = h'.1.2  -- ≺ cycles; no monotone stamp fits
+    ∃ h : Hold (twoLoop hinf), ReReStep (twoLoop hinf) h h    -- a genuine re-restriction step, h ↝ h
 ```
-The self-loop re-restricts forever while returning to the same node: `prec` relates `h ≺ h'` with `h' `'s target equal to `h`'s — so **no external monotone stage-index** can represent `prec` (an index would force strict increase, but `prec` cycles). The order is genuinely the endogenous re-restriction closure, not a disguised counter.
+The self-loop re-restricts to itself: there is a genuine `ReReStep h h`, so `prec h h` is a cycle at a single hold — and **no external strict monotone stage-index** can represent it (a strict index forbids `stage h < stage h`). The order is genuinely the endogenous re-restriction closure, not a disguised counter. *(The signature correction preserves the §4.2 intent exactly: `≺` is not a disguised strict stage-index. It is a faithful fix, not a retarget — the `h ≠ h'` form was unrealizable on the chosen witness, and no witness with a genuinely distinct re-restricted hold exists on a self-loop.)*
 
 - **Failure mode of the branch itself:** this is the *refutation*, so its success is showing the imported index does **not** fit. If it *did* fit (a monotone stamp reproducing `≺`), Consequence 2 would be an import (Series 5) and dynamics assumed. The self-loop cycle forecloses that.
 
@@ -146,11 +150,14 @@ theorem ws3_prec_is_reach (dest : X → PkObj κ X) (h h' : Hold dest) (hp : pre
   | refl => exact Relation.ReflTransGen.refl.head h.2  -- x reaches y in one step (the hold's own edge)
   | tail _ hstep ih => exact ih.tail (by rw [hstep.1]; exact hstep.2)  -- append the re-restriction edge
 
-/-- **D4 — the imported-index branch refuted (C5, §4.2 guard).** On the self-loop `≺` returns to the
-    same node, so no external monotone stage-index can represent it: the order is genuinely
-    endogenous, not a disguised counter. -/
+/-- **D4 — the imported-index branch refuted (C5, §4.2 guard).** On the self-loop there is a genuine
+    re-restriction step `h ↝ h`, so `≺` cycles at one hold and no strict monotone stage-index can
+    represent it: the order is genuinely endogenous, not a disguised counter. (Signature corrected
+    from the pre-build `h ≠ h'` sketch — see C5 and `charter-status.md`.) -/
 theorem ws3_imported_index_refuted (hinf : ℵ₀ ≤ κ) :
-    ∃ h h' : Hold (twoLoop hinf), prec (twoLoop hinf) h h' ∧ h ≠ h' ∧ h'.1.2 = h.1.1 := …
+    ∃ h : Hold (twoLoop hinf), ReReStep (twoLoop hinf) h h := by
+  have hmem : (⟨true⟩ : ULift.{u} Bool) ∈ (twoLoop hinf ⟨true⟩).1 := by rw [twoLoop_val]; exact rfl
+  exact ⟨⟨(⟨true⟩, ⟨true⟩), hmem⟩, rfl, hmem⟩
 ```
 
 **D1a/D1b (NL, NF)** are the seed obligations (protocol §C): short, map-only, no breadth clause — so conservation is *not* baked in. **D2 (forced dynamics)** is (NL) sharpened to seriality: no terminal hold, hence forced unfolding — a genuine theorem, not an asserted intuition. **D3 (the order)** fixes `≺` and proves reach = trace. **D4 (index refuted)** discharges the §4.2 guard as a *refutation*, pre-registering the imported index as a failure mode, never a fallback.

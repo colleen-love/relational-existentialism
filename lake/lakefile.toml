@@ -1,18 +1,17 @@
 name = "RelExist"
-defaultTargets = ["Series7"]
+defaultTargets = ["Series7", "Series8"]
 
-# ── Layout (Series 7 live; Series 3–6 closed and frozen under `archive/`) ──
-# Series 3, 4, 5, and 6 are closed and frozen under `archive/series-3/`,
-# `archive/series-4/`, `archive/series-5/`, and `archive/series-6/`; they are no
-# longer registered here. Series 7 is the live development under `series-7/`, built
-# here so `lake build` verifies it.
+# ── Layout (Series 7 complete + Series 8 live; Series 3–6 closed under `archive/`) ──
+# Series 3, 4, 5, and 6 are closed and frozen under `archive/series-3/`…`archive/series-6/`;
+# they are no longer registered here. Series 7 is complete under `series-7/`; Series 8 is
+# the live development under `series-8/`. Both are built here so `lake build` verifies them.
 #
 # Each series is a distinct module namespace so they can coexist in one package:
-# Series 7's roots live under `Series7.*` (files in `series-7/formal/Series7/`). The
-# aggregator root `Series7` (`series-7/formal/Series7.lean`) imports its workstreams;
-# the `AxiomCheck` root runs `#print axioms` over that series' build.
+# Series 7's roots live under `Series7.*`, Series 8's under `Series8.*`. Each aggregator
+# root `SeriesN` (`<series>/formal/<Series>.lean`) imports its workstreams; the `AxiomCheck`
+# root under each namespace runs `#print axioms` over that series' build.
 
-# `series-7/formal/` — Series 7 (live). `Series7` imports `Series7.ws1`…`Series7.ws7`;
+# `series-7/formal/` — Series 7 (complete). `Series7` imports `Series7.ws1`…`Series7.ws7`;
 # `Series7.AxiomCheck` runs the axiom pass. Series 7 is WHOLLY STANDALONE: every Series
 # 4/5/6 lemma it reuses is transcribed into `series-7/formal/Series7/wsNN.lean` and
 # re-namespaced `Series7.WSNN` — nothing is imported across series.
@@ -20,6 +19,16 @@ defaultTargets = ["Series7"]
 name = "Series7"
 srcDir = "../series-7/formal"
 roots = ["Series7", "Series7.AxiomCheck"]
+
+# `series-8/formal/` — Series 8 (live). `Series8` imports `Series8.ws1`…`Series8.ws7`;
+# `Series8.AxiomCheck` runs the axiom pass. Series 8 is WHOLLY STANDALONE: every Series
+# 7/4 lemma it reuses is transcribed into `series-8/formal/Series8/wsNN.lean` and
+# re-namespaced `Series8.WSNN` — nothing is imported from `series-7/`, `series-4/`, or
+# `archive/`.
+[[lean_lib]]
+name = "Series8"
+srcDir = "../series-8/formal"
+roots = ["Series8", "Series8.AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`); all series import it.
 [[require]]

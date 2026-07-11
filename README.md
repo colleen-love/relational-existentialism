@@ -40,21 +40,22 @@ Each series is self-contained and machine-verified: no `sorry`, no custom axioms
 | **5** (complete, archived) | boundlessness by refusing to be one world | the Explosion Dilemma | the endogenous bound, earned; unification a conjunction | [summary](./archive/series-5/summary.md) · [technical](./archive/series-5/summary-technical.md) · [charter](./archive/series-5/charter.md) · [status](./archive/series-5/charter-status.md) · [formal](./archive/series-5/formal/) · [spec](./archive/series-5/spec/) |
 | **6** (complete, archived) | dynamism as groundlessness (endogenous time) | the Static Collapse | the process collapses; engine genuine — `payoffsEstablished` | [charter](./archive/series-6/charter.md) · [status](./archive/series-6/charter-status.md) · [protocol](./archive/series-6/protocol.md) · [formal](./archive/series-6/formal/) · [spec](./archive/series-6/spec/) |
 | **7** (complete) | is atomless plurality impossible without an import? | the Import Theorem | plain collapse holds, non-circular — `payoffsEstablished`; the import forks into externally-defined or internally-chosen | [summary](./series-7/summary.md) · [technical](./series-7/summary-technical.md) · [charter](./series-7/charter.md) · [status](./series-7/charter-status.md) · [formal](./series-7/formal/) · [spec](./series-7/spec/) |
+| **8** (live) | what makes the One many, moving, and layered? | the no-god's-eye theorem (finite perspective) | spine an Impossibility (no god's-eye node); plurality free, dynamics forced, depth = narrowing; conservation **Refuted**, bound is mere boundedness — `perspectiveEstablished` (build complete, pre-review) | [charter](./series-8/charter.md) · [status](./series-8/charter-status.md) · [protocol](./series-8/protocol.md) · [formal](./series-8/formal/) · [spec](./series-8/spec/) |
 
 Earlier work (Series 1–6) is frozen under [`archive/`](./archive/) — readable as origin, normative for nothing; the completed Series 4–6 live under `archive/series-4/`…`archive/series-6/`. Each series' `spec/` holds its design docs, its committed axiom-check log, and its adversarial review passes.
 
-*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 50.* A publication should cite the specific commit hash and a clean-build log.
+*Verification, per series (the AxiomCheck run emits a `#print axioms` record for every headline theorem, all on the standard three): Series 4 — 42; Series 5 — 48; Series 6 — 44; Series 7 — 50; Series 8 — 29.* A publication should cite the specific commit hash and a clean-build log.
 
 ## Building
 
-Toolchain and Mathlib (Lean 4 `v4.15.0` / Mathlib `v4.15.0`) are pinned in [`lake/`](./lake/). One build compiles the live series:
+Toolchain and Mathlib (Lean 4 `v4.15.0` / Mathlib `v4.15.0`) are pinned in [`lake/`](./lake/). One build compiles both live series:
 
 ```
 cd lake
 lake build
 ```
 
-This builds `Series7` (`ws1`–`ws7`, in its own module namespace `Series7.*`) and runs its `AxiomCheck`, which imports the whole build and emits a `#print axioms` record for every headline theorem. To build the axiom pass alone: `lake build Series7 Series7.AxiomCheck`. The completed Series 4–6 are frozen under `archive/` and no longer registered in the build. [`scripts/gate.sh`](./scripts/gate.sh) confirms no cross-series imports.
+This builds `Series7` and `Series8` (each `ws1`–`ws7`, in its own module namespace `SeriesN.*`) and runs each series' `AxiomCheck`, which imports that series' whole build and emits a `#print axioms` record for every headline theorem. To build a single series' axiom pass: `lake build Series8 Series8.AxiomCheck` (and likewise for `Series7`). The completed Series 4–6 are frozen under `archive/` and no longer registered in the build. [`scripts/gate.sh`](./scripts/gate.sh) confirms no cross-series imports.
 
 ## Licensing
 
