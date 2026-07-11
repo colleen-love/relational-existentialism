@@ -155,30 +155,36 @@ theorem ws1_directed_hold_free (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (labelLoo
 
 ---
 
-## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 S1 — SERIOUS, addressed) — the fork closed as theorems
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 S1 → series-review-2 S1 — SERIOUS, now closed at charter strength)
 
-The blind review (`series-review-1.md` S1) correctly found that `ws1_no_gods_eye` collapses a node
-only *under the hypothesis* `Recoverable`, and that the sole concrete `Recoverable` witness
-(`facedLoop`, `|Q| = 1`) is a single-face node — so the bridge "all-faces-symmetric ⟹ `Recoverable`"
-was never proved on a genuine plurality, leaving the Spinozist retreat formally ajar. Addressed by
-**proving the fork** (charter §5.5 ambition, not a relabel-down):
+**Pass 1 (`series-review-1.md` S1)** found `ws1_no_gods_eye` collapses only *under the hypothesis*
+`Recoverable`, witnessed only by the one-face `facedLoop`. The Phase-E-pass-1 response added a
+`Recoverable`-based "fork" (`ws1_no_recoverable_plurality`, `ws1_gods_eye_dichotomy`, …).
 
-- **`ws1_distinct_faces_atomless_not_recoverable`** — on an ATOMLESS field the engine
-  (`ws1_atomless_bisim`) makes any two states plain-bisimilar, so any genuine face-distinction (a pair
-  not label-bisimilar) is necessarily FREE: recoverability would upgrade the plain bisimulation to a
-  label one, contradicting the distinction. Genuine face-plurality on an atomless field is free, never
-  a recoverable/symmetric totality.
-- **`ws1_no_recoverable_plurality`** — contrapositive of the collapse: a plural atomless behav-id node
-  is not recoverable. So plurality ⟹ free.
-- **`ws1_gods_eye_dichotomy`** — every atomless behav-id labelled coalgebra either collapses to a
-  subsingleton (recoverable/symmetric — the totality annihilates its faces) or is not recoverable
-  (free — distributed perspective). No third horn.
-- **`ws1_plural_faces_free_witness`** — the `|Q| = 2` witness (`labelLoop`, genuinely distinct faces)
-  inhabiting the free horn non-degenerately, answering the "one-face witness" objection.
+**Pass 2 (`series-review-2.md` S1) correctly rejected that response** as a tautological case-split
+(`Subsingleton X ∨ ¬ Recoverable dest` is `by_cases`), whose free horn *asserted* "distributed, not
+monist" in a docstring rather than proving it — silently renaming the charter's pre-registered Failed
+antecedent. Those two theorems were **removed**.
 
-**The fork's horn (b) does NOT hand victory to monism** (the review's fear): a plural face-space being
-free means it is *distributed perspective* (WS2), not a held totality. Monism would need a plural
-totality that is recoverable-and-uncollapsed, which the dichotomy forbids. So the honest headline is
-sharpened, not lowered: *no atomless node is a recoverable totality hosting a genuine plurality of
-faces — symmetric ⟹ collapse to the One, plural ⟹ free/distributed.* All axiom-clean; see
-`axiom-check-log.md`.
+**Now closed at charter strength (§2, §5.1, §5.5) — the literal spine, no `Recoverable` hypothesis:**
+
+- **`ws1_gods_eye_collapses`** *(THE SPINE)* — the god's-eye node is the **positionless** node,
+  `Symmetric dest := ∀ x y, dest x = dest y` ("no asymmetry anywhere," the view from everywhere is the
+  view from nowhere). On it the all-true relation is a label-bisimulation
+  (**`ws1_symmetric_bisim_trivial`** — the charter's literal "bisimilar to the trivial self-loop," a
+  theorem, no coproduct carrier needed), so behavioral identity collapses it to a subsingleton. The
+  collapse is **by the engine**, unconditional (no `Recoverable`, no atomlessness).
+- **`ws1_symLoop_not_behav`** — a concrete ≥2-face symmetric node (`symLoop`, labels `⟨true⟩`/`⟨false⟩`)
+  cannot host relationally-identified plurality: its states are label-bisimilar, so behav-id forces
+  them equal. The collapse bites on a genuine multi-face totality, not just one-face `facedLoop`.
+- **`ws1_labelLoop_not_symmetric`** — the surviving plural node is provably NOT symmetric
+  (`dest ⟨true⟩ ≠ dest ⟨false⟩`). So the charter's **Failed condition — a *symmetric* node that does
+  not collapse — provably does not arise**: symmetric ⟹ collapse (spine lands); the plural survivor is
+  asymmetric = distributed perspective (WS2), and this is now a *theorem* about the witness, not a
+  docstring assertion. `ws1_freeness_needs_two_positions` further shows freeness is irreducibly a
+  between-two-positions phenomenon, never a lone free totality.
+
+The headline is now genuinely earned: *no relationally-identified positionless (all-faces-symmetric)
+node exists — it collapses to the One by the engine; genuine plurality is asymmetric/distributed.*
+All axiom-clean (`axiom-check-log.md`). C3 (coproduct carrier) is subsumed: `ws1_symmetric_bisim_trivial`
+gives the bisimilarity to the trivial loop directly on the identity carrier.

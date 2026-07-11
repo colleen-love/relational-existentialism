@@ -7,9 +7,14 @@ Part Two of the program: Series 7 proved the determined, groundless, atomless pl
 One; Series 8 finds the fourth thing the collapse did not consider — the finitude of holding — and
 shows the One becomes many, moving, and layered through re-restriction.
 
-The spine (WS1) is a proved Impossibility: no relationally-identified god's-eye node exists (the
-all-faces / symmetric-hold node is a recoverable-face coalgebra, hence collapses to the One by the
-engine — `ws1_no_gods_eye`). From it three consequences: plurality by free perspective (WS2), forced
+The spine (WS1) is a proved Impossibility: no relationally-identified god's-eye node exists. The
+god's-eye node is the POSITIONLESS node — one holding all faces symmetrically, with no asymmetry
+anywhere (`dest x = dest y` for all `x, y`) — and it is label-bisimilar to the trivial self-loop, so
+it collapses to the One by the engine (behavioral identity), annihilating the faces it was meant to
+hold: `ws1_gods_eye_collapses` (no `Recoverable`/atomless hypothesis). The surviving plural node is
+provably NOT symmetric (`ws1_labelLoop_not_symmetric`), so it is genuinely distributed perspective
+(WS2), never a symmetric totality that escaped collapse. From the spine three consequences: plurality
+by free perspective (WS2), forced
 dynamics (WS3), depth-as-narrowing (WS4). The central open law — conservation of breadth — is TESTED,
 not assumed: the kill condition fires (`ws5_kill_condition`), so strict conservation is Refuted and
 the bound is mere boundedness (WS5/WS6). The verdict is `perspectiveEstablished` (WS7).

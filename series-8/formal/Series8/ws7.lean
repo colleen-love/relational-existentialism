@@ -33,8 +33,8 @@ inductive Series8Verdict
 /-- The mechanized audit certificate. Every field is a THEOREM from WS1–WS5; you cannot construct an
 `Audit` without discharging them, and the verdict is a function of it. -/
 structure Audit (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) : Prop where
-  spineCollapses : ∀ {Q X : Type u} (dest : X → LkObj κ Q X), Recoverable dest →
-                     BehaviorallyIdentifiedL dest → (∀ x, SHNE (plainOf dest) x) → Subsingleton X
+  spineCollapses : ∀ {Q X : Type u} (dest : X → LkObj κ Q X), Symmetric dest →
+                     BehaviorallyIdentifiedL dest → Subsingleton X
   freenessTheorem : ¬ Recoverable (labelLoop hinf)
                     ∧ (∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
                     ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
@@ -47,7 +47,7 @@ structure Audit (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) : Prop where
 
 /-- **D1 — the audit is discharged.** Every field a theorem from WS1–WS5. -/
 theorem ws7_audit (hinf : ℵ₀ ≤ κ) : Audit κ hinf where
-  spineCollapses := fun {_Q _X} dest hrec hbeh hatom => ws1_no_gods_eye dest hrec hbeh hatom
+  spineCollapses := fun {_Q _X} dest hsym hbeh => ws1_gods_eye_collapses dest hsym hbeh
   freenessTheorem := ⟨ws2_free_not_recoverable hinf,
                       (ws4_free_label_is_import hinf).1, (ws4_free_label_is_import hinf).2⟩
   orderEndogenous := ws3_imported_index_refuted hinf
@@ -93,10 +93,10 @@ theorem ws7_no_conservation_by_fiat (hinf : ℵ₀ ≤ κ) :
 
 theorem ws7_freeness_not_defined_in (hinf : ℵ₀ ≤ κ) :
     (¬ Recoverable (labelLoop hinf))
-  ∧ (∀ {Q X : Type u} (dest : X → LkObj κ Q X), Recoverable dest →
-       BehaviorallyIdentifiedL dest → (∀ x, SHNE (plainOf dest) x) → Subsingleton X) :=
+  ∧ (∀ {Q X : Type u} (dest : X → LkObj κ Q X), Symmetric dest →
+       BehaviorallyIdentifiedL dest → Subsingleton X) :=
   ⟨ws4_labelLoop_not_recoverable hinf,
-   fun {_Q _X} dest hrec hbeh hatom => ws1_no_gods_eye dest hrec hbeh hatom⟩
+   fun {_Q _X} dest hsym hbeh => ws1_gods_eye_collapses dest hsym hbeh⟩
 
 /-- **D5 — the strip ledger.** Each payoff, stripped of its structural word, is a bare
 recoverable-collapse / free-label / seriality / breadth-constancy fact — all real, the perspectival

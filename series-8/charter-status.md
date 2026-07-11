@@ -2,7 +2,7 @@
 
 **The mutable companion to `series-8-charter.md`. All progress, revisions, per-workstream status, discharges, and open items live here, the charter stays clean.**
 
-*Initialized at series start. **Phase B (design-all) complete (2026-07-11):** all seven per-workstream designs + the design index are committed under `spec/`. **Phase C (build-all) complete (2026-07-11):** every design is realized in `formal/Series8/wsNN.lean`, `Series8.lean` + `Series8.AxiomCheck` build clean; 29 headline theorems, all `sorry`-free and axiom-clean on the standard three (`spec/axiom-check-log.md`); `scripts/gate.sh` confirms Series 8 imports resolve only to `Series8.*` (+ Mathlib). This file is the honest ledger; it shows Partials and refutations as first-class outcomes, not failures. **Phase D (blind whole-series review) run — `spec/series-review-1.md` (1 SERIOUS, 3 REAL). Phase E (address) complete (2026-07-11):** all findings addressed by theorem/relabel; rebuild clean, 34 headlines axiom-clean; see the series-review log below.*
+*Initialized at series start. **Phase B (design-all) complete (2026-07-11):** all seven per-workstream designs + the design index are committed under `spec/`. **Phase C (build-all) complete (2026-07-11):** every design is realized in `formal/Series8/wsNN.lean`, `Series8.lean` + `Series8.AxiomCheck` build clean; all `sorry`-free and axiom-clean on the standard three (`spec/axiom-check-log.md`); `scripts/gate.sh` confirms Series 8 imports resolve only to `Series8.*` (+ Mathlib). **Phase D→E review loop run twice** (`spec/series-review-1.md`, `spec/series-review-2.md`): all findings addressed by theorem/relabel. **The current headline count is 37** (Phase C built 30 `#print axioms` headlines; pass 1 added 4; pass 2 removed 2 tautological theorems and added 5 for the charter-strength spine → 37), all re-verified axiom-clean. This file is the honest ledger; it shows Partials and refutations as first-class outcomes, not failures. See the series-review log below.*
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Item | Status |
 |---|---|
-| **Headline target** | The no-god's-eye theorem: no relationally-identified node holds all perspectival restrictions. **Impossibility proved and sharpened post-review** (`ws1_no_gods_eye`; the Spinozist-retreat fork now closed as theorems — `ws1_distinct_faces_atomless_not_recoverable`, `ws1_no_recoverable_plurality`, `ws1_gods_eye_dichotomy`): on an atomless field a genuine face-plurality is necessarily FREE (distributed), and a recoverable/symmetric node collapses to the One — no node is a recoverable totality with genuine face-plurality. |
+| **Headline target** | The no-god's-eye theorem: no relationally-identified node holds all perspectival restrictions. **Impossibility proved at charter strength** (`ws1_gods_eye_collapses`, after series-review-2): the god's-eye node is the POSITIONLESS node (`Symmetric := ∀ x y, dest x = dest y`, no asymmetry anywhere), label-bisimilar to the trivial self-loop (`ws1_symmetric_bisim_trivial`), hence collapsed to the One by the engine — NO `Recoverable`/atomless hypothesis. The surviving plural node is provably NOT symmetric (`ws1_labelLoop_not_symmetric`), so the Failed condition does not arise: symmetric ⟹ collapse, plural ⟹ distributed. |
 | **The three consequences** | Plurality (`ws2_perspective_breaks_merge`, monism-broken), forced dynamics (`ws3_dynamics_forced`, endogenous order), layering-as-narrowing (`ws4_depth_is_narrowing`). **Discharged on the mechanized core** (review pass 1 addressed). |
 | **The central open law** | Conservation of breadth under narrowing. **Settled by the kill condition: strict form Refuted (`ws5_kill_condition` fires on the atomless self-loop), weak form Discharged on a non-increasing class → verdict Partial** (`ws5_conservation_verdict = partialV`). The "self-limiting universe" is retracted; the bound is mere boundedness. Never assumed. |
 | **Verdict (WS7)** | `perspectiveEstablished` (`ws7_verdict`, tagged onto a discharged `Audit` whose five fields are theorems). Circularity guards discharged: no conservation-by-fiat (`ws7_no_conservation_by_fiat`), no freeness-defined-in (`ws7_freeness_not_defined_in`). Review pass 1 addressed (R2 verdict prose relabelled). |
@@ -37,7 +37,7 @@ Per-workstream design status: **WS1–WS7 all Designed** (contracts committed; b
 ## Workstream status
 
 ### WS1, The perspective primitive and the no-god's-eye theorem · *blocking, the spine*
-**Status: Impossibility proved (Discharged); Spinozist-retreat fork closed post-review (S1).** Built in `formal/Series8/ws1.lean`. Fork theorems `ws1_distinct_faces_atomless_not_recoverable` / `ws1_no_recoverable_plurality` / `ws1_gods_eye_dichotomy` / `ws1_plural_faces_free_witness` (see series-review log).
+**Status: Impossibility proved at charter strength (Discharged); Spinozist retreat closed (series-review-2 S1).** Built in `formal/Series8/ws1.lean`. THE SPINE is `ws1_gods_eye_collapses` (positionless/symmetric node collapses by the engine, unconditional) + `ws1_symmetric_bisim_trivial` (bisimilar to the trivial self-loop) + `ws1_symLoop_not_behav` (≥2-face witness) + `ws1_labelLoop_not_symmetric` (survivor not symmetric, Failed condition excluded). The pass-1 tautological-fork theorems were removed. See series-review log pass 2.
 Target: define the hold/restriction on a plain coalgebra; prove the all-restrictions (god's-eye) node is bisimilar to the trivial self-loop, hence collapses to the One by the Series 7 engine; conclude no relationally-identified god's-eye node exists. Success is Discharged OR Impossibility proved. Sharpest risk: the Spinozist retreat (charter §5.5), the rebuttal must be a theorem, not a gloss. Ambition: *derive* no-god's-eye-view from relational identity rather than re-impose the Series 3 design constraint.
 
 ### WS2, Perspective breaks the collapse · *the payoff*
@@ -72,7 +72,7 @@ Series 8-specific circularity risks: (a) **conservation-by-fiat** (smuggling the
 
 | Result | WS | Status | Non-circular? |
 |---|---|---|---|
-| No god's-eye node (spine) | WS1 | **Impossibility proved, fork closed** (`ws1_no_gods_eye` + `ws1_gods_eye_dichotomy`) | Yes — collapsed by the engine, not by fiat; the Spinozist-retreat bridge is now a theorem (`ws1_distinct_faces_atomless_not_recoverable`): plural face-space ⟹ free, never a recoverable totality. ≥2-face free witness `ws1_plural_faces_free_witness`. |
+| No god's-eye node (spine) | WS1 | **Impossibility proved (charter strength)** (`ws1_gods_eye_collapses`) | Yes — the positionless (symmetric) node is bisimilar to the trivial self-loop (`ws1_symmetric_bisim_trivial`) and collapsed by the engine, no hypothesis; Failed condition excluded (`ws1_labelLoop_not_symmetric`); ≥2-face witness `ws1_symLoop_not_behav`. |
 | Perspective breaks collapse | WS2 | **Discharged** (`ws2_perspective_breaks_merge`, monism-broken) | Yes — freeness is a theorem (`ws2_free_not_recoverable`), not defined-in. Strip flagged. |
 | Re-restriction: no leaf (NL) | WS3 | **Discharged** (`ws3_rerestriction_no_leaf`) | Yes |
 | Re-restriction: not-a-function (NF) | WS3 | **Discharged** (`ws3_rerestriction_not_function`) | Yes |
@@ -130,13 +130,10 @@ CLEAN; the strip test, endogenous order, no-leaf, and freeness verdict all passe
 
 - **S1 (SERIOUS, WS1) — the Spinozist retreat not fully closed as a theorem.** The spine collapsed a
   node only *under the hypothesis* `Recoverable`, witnessed non-degenerately only by the one-face
-  `facedLoop`; the bridge "genuine-plural-faces-symmetric ⟹ recoverable" was unproved. **Addressed by
-  proving the fork** (not relabelled down): `ws1_distinct_faces_atomless_not_recoverable` (on an
-  atomless field the engine makes all states plain-bisimilar, so any genuine face-distinction is FREE,
-  not recoverable), `ws1_no_recoverable_plurality`, `ws1_gods_eye_dichotomy` (collapse ∨ free, no third
-  horn), and the ≥2-face free witness `ws1_plural_faces_free_witness`. The free horn is *distributed
-  perspective* (WS2), NOT a monist victory. Headline sharpened, not lowered. Routed to `spec/ws1-design.md`
-  (review-response note). **Resolved.**
+  `facedLoop`. Pass-1 response added a `Recoverable`-based "fork" (`ws1_distinct_faces_atomless_not_recoverable`
+  plus two theorems `ws1_no_recoverable_plurality` / `ws1_gods_eye_dichotomy`). **[SUPERSEDED by pass 2:
+  the latter two were a tautological case-split whose free horn asserted "distributed, not monist" by
+  docstring; they were removed and the spine rebuilt at charter strength. See pass 2 below.]**
 - **R1 (REAL, WS5) — kill condition witnessed only at a self-loop `h→h` (depth not advancing).**
   **Addressed by building the depth-advancing witness** `pingPong` (two states `⟨true⟩↔⟨false⟩`,
   constant breadth 1): `ws5_kill_condition` now delivers `h ≠ h'` (depth opens) with breadth preserved.
@@ -152,10 +149,44 @@ CLEAN; the strip test, endogenous order, no-leaf, and freeness verdict all passe
   `[propext, Classical.choice, Quot.sound]`; `spec/axiom-check-log.md` updated and marked re-verified.
   **Resolved.**
 
-Rebuild after Phase E: clean, `sorry`-free, 34 headlines axiom-clean; `scripts/gate.sh` green. Net new
-theorems: 4 (WS1 fork) + the depth-advancing `pingPong` machinery in WS5. No charter change (the
-findings were build/proof-strength items, not design errors), so no downstream reopen. **Next: a fresh
-Phase D pass to confirm no SERIOUS findings remain.**
+Rebuild after Phase E pass 1: clean, `sorry`-free, 34 headlines axiom-clean; `scripts/gate.sh` green.
+
+### Pass 2 — `spec/series-review-2.md` (blind, Phase D, 2026-07-11); addressed (Phase E, 2026-07-11)
+
+Pass 2 re-audited whether pass-1's S1 response *closed* the retreat or *relabelled around* it, and
+returned **1 SERIOUS (S1 stands) + 2 REAL (R3 procedural, R4 count)**. The bound side (conservation)
+was confirmed **CLEAN end-to-end** and pass-1's R1/R2 confirmed properly addressed. Dispositions:
+
+- **S1 (SERIOUS, WS1) — pass-1's "fork" was a tautological case-split; free horn relabelled the Failed
+  antecedent.** Pass 2 was correct: `ws1_gods_eye_dichotomy` (`Subsingleton X ∨ ¬ Recoverable dest`)
+  is `by_cases`, content-free; `ws1_no_recoverable_plurality` established exactly the charter's
+  pre-registered Failed antecedent (a plural node not recoverable) and the docstring *asserted*
+  "distributed, not monist" rather than proving it. **Addressed by closing the spine at charter strength
+  (attempted the charter-strength theorem first, per §5.5, and it lands):**
+  - Removed the two tautological theorems.
+  - **`ws1_gods_eye_collapses`** (THE SPINE): the god's-eye node is the POSITIONLESS node
+    `Symmetric dest := ∀ x y, dest x = dest y` (no asymmetry anywhere); the all-true relation is a
+    label-bisimulation (**`ws1_symmetric_bisim_trivial`** — the charter's literal "bisimilar to the
+    trivial self-loop," a theorem, no coproduct carrier needed), so behavioral identity collapses it to
+    a subsingleton **by the engine, with no `Recoverable` or atomless hypothesis**.
+  - **`ws1_symLoop_not_behav`** — a concrete ≥2-face symmetric node (`symLoop`) cannot host
+    relationally-identified plurality (the collapse bites on a genuine multi-face totality).
+  - **`ws1_labelLoop_not_symmetric`** — the surviving plural node is provably NOT symmetric, so the
+    charter's **Failed condition (a symmetric node that does not collapse) provably does not arise**;
+    the plural survivor is asymmetric = distributed perspective (WS2). This is now a *theorem* about the
+    witness, not a docstring. `ws1_freeness_needs_two_positions` shows freeness is irreducibly a
+    two-position (distributed) phenomenon. WS7's `Audit.spineCollapses` now depends on the genuine
+    `ws1_gods_eye_collapses`, not the `Recoverable`-conditional. Routed to `spec/ws1-design.md`.
+    **Resolved (charter strength).**
+- **R3 (REAL, procedural) — re-verify axioms live.** Re-ran `lake build Series8 Series8.AxiomCheck`;
+  all **37** headlines print exactly `[propext, Classical.choice, Quot.sound]`; `spec/axiom-check-log.md`
+  updated. **Resolved.**
+- **R4 (cosmetic) — 29-vs-34 count inconsistency.** Reconciled in the intro above (Phase C: 30; pass 1:
+  +4 → 34; pass 2: −2 +5 → **37**). **Resolved.**
+
+Rebuild after Phase E pass 2: clean, `sorry`-free, **37 headlines axiom-clean**; `scripts/gate.sh`
+green. No charter change (all findings were proof-strength/procedural, not design errors), so no
+downstream reopen. **Next: a fresh Phase D pass to confirm no SERIOUS findings remain.**
 
 ---
 
