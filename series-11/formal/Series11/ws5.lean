@@ -8,14 +8,19 @@ attention as a sufficient endogenous bound) and run the pre-committed kill condi
 Discharged / TRAGIC (refuted) / Partial — never assumed, never re-importing κ, never folding the bound
 into attention's definition.
 
-**Verdict: Partial (Discharged on finite stages, transfinite/carrier-κ open).** No-total-attention is a
-diagonal fact, stage-independent, so it holds at every finite stage (WS4); the attention-distinction is
-free at the witness (WS1). So the crown is Discharged on finite stages. But (i) whether no-total-attention
-survives the TRANSFINITE limit and (ii) whether the residual carrier branching-κ is genuinely not the
-removed κ are un-rangeable — the tragic edge. So the verdict is **Partial**, mirroring Series 10's WS5. The
-TRAGIC horn is pre-registered and live: if the transfinite limit re-admits a total attention, or the
-distinction is recoverable at the tower, or the carrier-κ is judged the removed κ returning, the crown is
-TRAGIC (a success, the program's honest terminus).
+**Verdict: Partial, FLOORED on the genuine bound (series-review-1 S1/R1).** After Phase E the crown's two
+halves separate cleanly: the BOUND half (no-total-attention / EB) is a genuine κ-free inspection-level
+diagonal, Discharged; the READER half (attention makes the reified relatum real) is **Bookkeeping re-hit**
+(WS1/WS2/WS7, S1) — the attention-distinction is on the fixed `labelLoop`, not the tower. So "finite
+attention as a sufficient endogenous bound" is NOT established as a unified crown: self-bounding VIA
+ATTENTION fails on the reality axis (the many is not made real from the structure's own resources without an
+external label), while the whole IS bounded on the diagonal axis (κ-free). The verdict is **Partial floored
+on "NT/EB are the genuine κ-free diagonal; the attention-reader is Bookkeeping re-hit"** — not the Phase C
+Partial that rested on the spine being a genuine tower reader (which S1 refuted). Two things remain genuinely
+open even for the bound half: (i) whether NT survives the TRANSFINITE limit and (ii) whether the residual
+carrier branching-κ is the removed κ returning. `ws5_crown_on_finite_stages` and `ws5_crown_verdict_justified`
+below carry ONLY the genuine facts (the diagonal + `¬ Recoverable dest` about `labelLoop`); they do NOT
+certify a tower reader, so they must not be read as a rescue of the reality axis.
 
 Depends on WS4 (and consumes WS1/WS3). Design doc: `series-11/spec/ws5-design.md`.
 

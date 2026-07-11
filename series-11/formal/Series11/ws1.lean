@@ -16,14 +16,18 @@ distinguishes the reified relatum WHERE THE PLAIN BISIMULATION COLLAPSES (the `w
 horn: `plainOf`-bisimilar but NOT label-bisimilar), and the distinction is FREE (not recoverable,
 `ws4_labelLoop_not_recoverable`), routing through the diagonal residue.
 
-**Honest scope (as Series 10 disclosed for `ws1_free_reification`).** The spine `ws1_attention_makes_real`
-is `ws4_free_label_is_import`, read as a reader: the object is the FIXED `labelLoop` labelled coalgebra,
-not the `reifyStep`-tower. The advance over Series 10 is genuine — Series 10 had the free label but nothing
-READ it (inert, Bookkeeping); Series 11 exhibits the label-reading attention and certifies it is not the
-plain quotient and is free. But whether the attention reads the actual reification tower's relata is the
-universal Partial, and Bookkeeping-re-hit is the pre-registered live negative (charter §5.5). The label-
-is-the-residue tie (routing through the diagonal) is interpretive, machine-checked only at residue-
-freeness (`ws2_residue_is_import`, `insp` only), flagged not hidden.
+**Outcome: BOOKKEEPING RE-HIT (series-review-1 S1, Phase E).** The spine `ws1_attention_makes_real` is
+`ws4_free_label_is_import` — a fact about the FIXED `labelLoop` labelled coalgebra, NOT the `reifyStep`-tower
+(`reify`/`reifyStep`/`towerN` occur in no attention theorem). "Attention" is Series 10's free label under a
+new name: the distinction is drawn on two fixed Booleans, not on the tower's reified relata, which on the
+tower bisim-embed (`Series11.WS7.ws7_tower_collapses` = Series 10's `ws2_reify_bisim_embeds`). This is
+exactly the Bookkeeping re-hit the charter pre-registered as the gravest inheritance (§4.3, §5.5). Per the
+§0.2a binary, the honest close is to REPORT it: the WS7 verdict is re-graded to `bookkeepingReHit` (not
+`attentionEstablished`), as Series 10 re-graded ITS verdict to the negative branch. The Phase C framing
+("Discharged-on-witness with the universal Partial") was the target-avoiding third theorem and is retracted.
+The freeness (`ws1_attention_distinction_free`) and the residue-routing (`ws1_attention_routes_through_diagonal`)
+are genuine, but about `labelLoop` / the residue — objects different from the tower — so they do not earn the
+rescue. The κ-removal (WS3/WS4) survives as a genuine, separable positive.
 
 Design doc: `series-11/spec/ws1-design.md`; shared objects `series-11/spec/README.md` §2.
 
@@ -428,11 +432,16 @@ neighbor it reads — the reified relatum the plain engine merges but the reader
 def RealFor {Q X : Type u} (dest : X → LkObj κ Q X) (att : FiniteAttention dest) (x : X) : Prop :=
   ∃ y, y ∈ att.reads ∧ AttentionDistinguishes dest x y
 
-/-- **D1 — THE SPINE (attention makes real).** The reified relatum is distinguished where the plain
-quotient collapses: `plainOf`-bisimilar (the collapse engine is blind, first conjunct) but NOT
-label-bisimilar (the reader distinguishes, second conjunct). This IS `ws4_free_label_is_import`, read as a
-reader. Discharged on the finite labelled witness; the tower-level tie is WS2's, the universal a WS6
-thesis; Bookkeeping-re-hit is the pre-registered live negative (charter §5.5). -/
+/-- **D1 — THE SPINE — reported BOOKKEEPING RE-HIT (series-review-1 S1).** The term IS
+`ws4_free_label_is_import`: a fact about the FIXED `labelLoop` coalgebra (`⟨true⟩` vs `⟨false⟩` are
+`plainOf`-bisimilar but not label-bisimilar). `reify`/`reifyStep`/`towerN` do NOT occur — the distinction
+is drawn on two fixed Booleans, NOT on the reification tower's reified relata, which on the tower bisim-embed
+(`Series11.WS7.ws7_tower_collapses`). So "attention makes real" is Series 10's `labelLoop` free-label fact
+relabelled: **Bookkeeping re-hit**, the gravest inheritance the charter pre-registered (§4.3, §5.5), the
+attempt honestly reported (not "Discharged-on-witness / universal Partial" — that framing was the Phase C
+over-claim §0.2a forbids). The WS7 verdict is `bookkeepingReHit`. The freeness (`ws1_attention_distinction_free`)
+and the diagonal residue-routing (`ws1_attention_routes_through_diagonal`) are genuine facts about `labelLoop`
+/ the residue respectively, but on objects DIFFERENT from the tower, so they do not earn the rescue. -/
 theorem ws1_attention_makes_real (hinf : ℵ₀ ≤ κ) :
     (∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
   ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=

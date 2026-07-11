@@ -3,16 +3,20 @@
 
 WS4 — **The endogenous bound, κ removed.** Series 11, the structural heart.
 
-With κ removed, no-total-attention (WS3) plus bounded-holding means the tower never assembles into a
-COMPLETED TOTALITY, so it does not Russell-explode despite being unboundedly many. The bound is
+With κ removed, no-total-attention (WS3) plus bounded-holding means no completed totality is ever formed
+(no self-total hold), so the carrier does not Russell-explode despite being unboundedly many. The bound is
 HOLDING-NOT-SIZE (`ws4_bound_is_holding_not_size`) — the guard against κ readmitted (charter §4.4). The
-κ-free bound is Discharged on FINITE stages; the transfinite limit is handed to WS5.
+κ-free bound is Discharged; the transfinite limit is handed to WS5.
 
-**Honest scope (protocol §0.5).** The bound is `¬ ∃ t, SelfTotal insp t` (holding), refutable by a total
-attention, holding even on an infinite tower (`Infinite X`) — no cardinality ceiling. The diagonal
-references no cardinal (`ws4_kappa_free`), the genuine κ-removal. The residual carrier branching-κ (in
-`PkObj κ`, the section `reify`'s existence condition) is disclosed as scaffolding, NOT a proliferation or
-holding bound; whether it counts as κ readmitted is the WS5/WS7 verdict.
+**Honest scope (protocol §0.5; series-review-1 R1).** The bound is `¬ ∃ t, SelfTotal insp t` (holding),
+refutable by a total attention, holding even on an infinite carrier (`Infinite X`) — no cardinality
+ceiling. The diagonal references no cardinal (`ws4_kappa_free`), the genuine κ-removal. The residual carrier
+branching-κ (in `PkObj κ`, the section `reify`'s existence condition) is disclosed as scaffolding, NOT a
+proliferation or holding bound; whether it counts as κ readmitted is the WS5/WS7 verdict. **R1 correction:**
+EB is an INSPECTION-LEVEL diagonal fact — `Assembled insp := ∃ t, SelfTotal insp t` is about `insp`, and
+`ws4_bound_finite_stages` takes `reify`/`Ω₀`/`n` and DISCARDS them. So this is a bound on self-inspection
+(tower-independent, κ-free), not a proved bound on the `reifyStep`-tower; the "tower never assembles" /
+"finite stages" reading is interpretive, carried in Series 10 Phase E's honest inspection-level wording.
 
 Depends on WS3. Design doc: `series-11/spec/ws4-design.md`.
 
@@ -64,8 +68,10 @@ theorem ws4_kappa_free {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest 
     (∀ {Y : Type u} (d : Y → PkObj κ Y) (ins : Hold d → HoldPred d), ¬ ∃ t, SelfTotal ins t) :=
   (ws1_diagonal_not_bisim dest insp).2
 
-/-- **D5 — the bound at every finite stage (transfinite → WS5).** At every ℕ-indexed stage of the tower, no
-hold assembles the stage (no-total-attention is stage-independent). The transfinite limit is WS5's. -/
+/-- **D5 — no self-total hold, uniformly (transfinite → WS5).** The no-self-total-hold fact is stage- and
+tower-INDEPENDENT: the `reify`/`Ω₀`/`n` arguments are taken and DISCARDED, the proof is the diagonal over
+`insp`. So this is the inspection-level bound stated per-stage as an interpretive gloss (R1); the genuine
+transfinite/tower claim is WS5's, not established here. -/
 theorem ws4_bound_finite_stages {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
     (insp : Hold dest → HoldPred dest) (Ω₀ : Set X) (n : ℕ) : ¬ ∃ t, SelfTotal insp t :=
   ws1_no_self_total_hold dest insp

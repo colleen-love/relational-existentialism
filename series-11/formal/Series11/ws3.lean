@@ -1,18 +1,22 @@
 /-
 `series-11/formal/Series11/ws3.lean`
 
-WS3 — **No total attention (the bound's engine).** Series 11, the diagonal at tower scale, the cleanest
+WS3 — **No total attention (the bound's engine).** Series 11, the inspection-level diagonal, the cleanest
 result of the series, the seed the bound turns on.
 
-`(NT)` no finite attention holds the whole tower — a total attention is a self-total hold at tower scale,
-forbidden by the diagonal `ws1_no_self_total_hold`, an Impossibility. `(NL)` attention reads full relata,
-never leaves (`ws3_reify_preserves_SHNE`). Bounded-holding derived ENDOGENOUSLY from finitude (the guard
-against κ-readmitted, charter §4.4). The bound (EB) and the crown are NOT attempted here — WS4/WS5's.
+`(NT)` no self-total hold exists — a total attention is a self-total hold, forbidden by the diagonal
+`ws1_no_self_total_hold`, an Impossibility. `(NL)` attention reads full relata, never leaves
+(`ws3_reify_preserves_SHNE`). Bounded-holding derived ENDOGENOUSLY from finitude (the guard against
+κ-readmitted, charter §4.4). The bound (EB) and the crown are NOT attempted here — WS4/WS5's.
 
-**Honest scope (protocol §0.5).** `ws3_no_total_attention` is `ws1_no_self_total_hold` re-read: its proof
-references NO cardinal, so NT is κ-free — the genuine κ-removal, the bound as a diagonal fact, not a
-cardinal fact. Bounded-holding is `att.reads.Finite` (holding), refutable by an unbounded hold, on a tower
-that may be `Infinite X` — not a size ceiling.
+**Honest scope (protocol §0.5; series-review-1 R1).** `ws3_no_total_attention` is `ws1_no_self_total_hold`
+re-read: its proof references NO cardinal, so NT is κ-free — the genuine κ-removal, the bound as a diagonal
+fact, not a cardinal fact. Bounded-holding is `att.reads.Finite` (holding), refutable by an unbounded hold,
+on a carrier that may be `Infinite X` — not a size ceiling. **R1 correction:** NT is an
+INSPECTION-LEVEL diagonal fact — `TotalAttention insp t := SelfTotal insp t` ranges over a single-coalgebra
+`Hold dest` with `insp` a FREE parameter, NOT over the `towerN`/`reifyStep` tower (which appears in no NT/EB
+term). The "at tower scale" reading is interpretive, tower-independent, as Series 10 Phase E honestly
+restated its inspection-level `ws4_close_forbidden`; the machine-checked content is the diagonal over `insp`.
 
 Depends on WS1. Design doc: `series-11/spec/ws3-design.md`.
 
@@ -36,8 +40,9 @@ definitional clause. -/
 def TotalAttention {X : Type u} {dest : X → PkObj κ X}
     (insp : Hold dest → HoldPred dest) (t : Hold dest) : Prop := SelfTotal insp t
 
-/-- **D1 — (NT) THE IMPOSSIBILITY.** No hold holds the whole tower: a total attention is a self-total hold,
-forbidden by the diagonal. The bound's engine. -/
+/-- **D1 — (NT) THE IMPOSSIBILITY.** No self-total hold exists: a total attention is a self-total hold,
+forbidden by the diagonal. The bound's engine. (Inspection-level, `insp` a free parameter; the tower
+reading is interpretive, R1.) -/
 theorem ws3_no_total_attention {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
     ¬ ∃ t, TotalAttention insp t :=
   ws1_no_self_total_hold dest insp

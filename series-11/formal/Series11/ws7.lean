@@ -119,40 +119,69 @@ theorem ws7_audit : Audit κ := by
   · exact ws7_holding_not_size
   · exact fun X dest insp => ws4_kappa_free dest insp
 
-/-- **D2 — the typed verdict**, a function of the discharged audit. -/
-def verdict (_cert : Audit κ) : Series11Verdict := .attentionEstablished
+/-- **D2 — the typed verdict, RE-GRADED to `bookkeepingReHit` (Phase E, series-review-1 S1).** A function
+of the discharged audit, not hand-set. It is `.bookkeepingReHit`, NOT `.attentionEstablished`: the audit
+certifies the `labelLoop` free-label fact (`AuditMakesReal`/`AuditNotPlainQuotient`) and the κ-free diagonal
+(`AuditNoTotal`/`AuditHoldingNotSize`/`AuditKappaFree`), but it does NOT — because no such theorem exists —
+certify that attention reads the reification TOWER. `reify`/`reifyStep`/`towerN` occur in no attention
+theorem, and on the tower the reified relatum bisim-embeds into every prior `SHNE` relatum
+(`ws7_tower_collapses`, transcribing Series 10's `ws2_reify_bisim_embeds`). So the attention-distinction is
+a reader of the fixed `labelLoop` coalgebra, not of the tower's reified relata: **Series 10's Bookkeeping
+re-hit, honestly reported** (charter §5.5, §8 criterion 1; a first-class outcome, §7). This inverts the
+Phase C over-claim (`attentionEstablished`) exactly as Series 10 re-graded ITS verdict to the negative
+branch. The κ-removal (WS3/WS4) survives as a genuine, separable positive. -/
+def verdict (_cert : Audit κ) : Series11Verdict := .bookkeepingReHit
 
 def ws7_verdict : Series11Verdict := verdict (ws7_audit (κ := κ))
 
-theorem ws7_verdict_eq : ws7_verdict (κ := κ) = Series11Verdict.attentionEstablished := rfl
+theorem ws7_verdict_eq : ws7_verdict (κ := κ) = Series11Verdict.bookkeepingReHit := rfl
 
-/-- **D3 — with a certificate, never Bookkeeping-re-hit / κ-readmitted / total-hold / tragic / Circular.**
-The only route to those is a FAILED audit. Falsifiable, not hand-set. `cert` is discharged (via `show`)
-before `noConfusion` closes the CLOSED enum inequality, so the audit term is never reduced. -/
-theorem ws7_audited_not_bookkeepingReHit (cert : Audit κ) : verdict cert ≠ .bookkeepingReHit := by
-  show Series11Verdict.attentionEstablished ≠ .bookkeepingReHit
+/-- **The Bookkeeping-re-hit antecedent, PROVED (as Series 10 proved its Bookkeeping).** On the tower a
+reified non-empty `SHNE` pattern is bisimilar to every prior `SHNE` relatum (the collapse engine
+`ws1_atomless_bisim`), so `Ω_{α+1}` bisim-embeds into `Ω_α`: the plain quotient sees no growth. The
+attention-distinction is drawn on `labelLoop` (a different coalgebra), NOT on these reified relata, so it
+does not rescue the tower. This is the honest Bookkeeping re-hit, transcribed from Series 10's
+`ws2_reify_bisim_embeds`. -/
+theorem ws7_tower_collapses {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
+    (h : IsReify dest reify) (s : PkObj κ X) (hs : s.1 ≠ ∅) (hsucc : ∀ z ∈ s.1, SHNE dest z)
+    (y : X) (hy : SHNE dest y) : ∃ R, IsBisim dest R ∧ R (reify s) y :=
+  ws2_bookkeeping_transcribed dest reify h s hs hsucc y hy
+
+/-- **D3 — with a certificate the verdict IS `bookkeepingReHit`, and is never the others.** The verdict is
+a function of the discharged audit (falsifiable, not hand-set); it is the honest negative, NOT
+`attentionEstablished`. `cert` is discharged (via `show`) before `noConfusion` closes the CLOSED enum
+inequality, so the audit term is never reduced. -/
+theorem ws7_audited_is_bookkeepingReHit (cert : Audit κ) : verdict cert = .bookkeepingReHit := rfl
+
+theorem ws7_audited_not_attentionEstablished (cert : Audit κ) :
+    verdict cert ≠ .attentionEstablished := by
+  show Series11Verdict.bookkeepingReHit ≠ .attentionEstablished
   exact fun h => Series11Verdict.noConfusion h
 
 theorem ws7_audited_not_kappaReadmitted (cert : Audit κ) : verdict cert ≠ .kappaReadmitted := by
-  show Series11Verdict.attentionEstablished ≠ .kappaReadmitted
+  show Series11Verdict.bookkeepingReHit ≠ .kappaReadmitted
   exact fun h => Series11Verdict.noConfusion h
 
 theorem ws7_audited_not_totalAttentionSmuggled (cert : Audit κ) :
     verdict cert ≠ .totalAttentionSmuggled := by
-  show Series11Verdict.attentionEstablished ≠ .totalAttentionSmuggled
+  show Series11Verdict.bookkeepingReHit ≠ .totalAttentionSmuggled
   exact fun h => Series11Verdict.noConfusion h
 
 theorem ws7_audited_not_tragic (cert : Audit κ) : verdict cert ≠ .tragic := by
-  show Series11Verdict.attentionEstablished ≠ .tragic
+  show Series11Verdict.bookkeepingReHit ≠ .tragic
   exact fun h => Series11Verdict.noConfusion h
 
 theorem ws7_audited_not_circular (cert : Audit κ) : verdict cert ≠ .Circular := by
-  show Series11Verdict.attentionEstablished ≠ .Circular
+  show Series11Verdict.bookkeepingReHit ≠ .Circular
   exact fun h => Series11Verdict.noConfusion h
 
-/-- **D4 — the Bookkeeping-re-hit check (the flagship, PROMOTED).** The attention distinguishes WHERE the
-plain bisimulation collapses (the reader is not the plain quotient), and the distinction is FREE (not
-recoverable), landing on the `ws4_free_label_is_import` horn, NOT the recoverable horn (Bookkeeping). -/
+/-- **D4 — the Bookkeeping-re-hit check (the flagship, PROMOTED) — surfaces the re-hit (S1).** The
+free-label distinction holds on the FIXED `labelLoop` coalgebra (`⟨true⟩`/`⟨false⟩`): they are
+`plainOf`-bisimilar but not label-bisimilar, and not recoverable. This is genuine ON `labelLoop` — but it
+is NOT a distinction on the reification tower's reified relata (`reify`/`reifyStep`/`towerN` are absent).
+So this check surfaces the Bookkeeping re-hit: the reader is on the fixed coalgebra, not the tower (cf.
+`ws7_tower_collapses`, where the tower's reified relatum bisim-embeds). Honestly the object of the re-hit,
+not a tower rescue. -/
 theorem ws7_bookkeeping_rehit_check (hinf : ℵ₀ ≤ κ) :
     ((∃ R : ULift.{u} Bool → ULift.{u} Bool → Prop,
         IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
@@ -186,9 +215,13 @@ theorem ws7_not_import {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest 
     (¬ ResidueRecoverable insp) ∧ (ResidueRecoverable insp → ∃ t, SelfTotal insp t) :=
   ws2_residue_is_import dest insp
 
-/-- **D7 — the strip ledger.** The spine strips to a free-label non-embedding (the reader is where the
-collapse is); no-total-attention and the bound strip to the diagonal (κ-free). All real facts, the
-attention readings the earned surplus. -/
+/-- **D7 — the strip ledger (honest annotation, S1).** The spine strips to `ws4_free_label_is_import` — a
+bare free-label / non-bisimulation fact about the FIXED 2-state `labelLoop` coalgebra, NOT an earned
+attention theorem (delete "attention" and no tower content remains). No-total-attention and the bound strip
+to `ws1_no_self_total_hold` — the bare Cantor/Lawvere diagonal, κ-free (this survival is CORRECT: the bound
+should route through the diagonal). So: the reality/rescue payoffs strip to the `labelLoop` free-label fact
+(the Bookkeeping re-hit); the bound payoffs strip to the diagonal (genuine). The attention reading is NOT
+earned surplus on the reality axis — that is exactly S1. -/
 theorem ws7_strip_ledger {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest)
     (hinf : ℵ₀ ≤ κ) :
     ((∃ R : ULift.{u} Bool → ULift.{u} Bool → Prop,

@@ -1,19 +1,24 @@
 /-
 `series-11/formal/Series11/ws2.lean`
 
-WS2 — **Reification rescued from Bookkeeping.** Series 11, the payoff.
+WS2 — **Reification rescued from Bookkeeping — REPORTED BOOKKEEPING RE-HIT (series-review-1 S1).**
+Series 11, the payoff.
 
-The direct repair of Series 10's proved Bookkeeping: `Ω_{α+1}` does NOT ATTENTION-embed into `Ω_α` (a
-finite attention distinguishes the reified relatum), even as it DOES bisim-embed at the plain level
-(Series 10's `ws2_reify_bisim_embeds`, transcribed and unappealed — Series 07's floor). The many is real at
-the attended level, where the plain engine is blind but a finite hold is not.
+The intended repair was: `Ω_{α+1}` does NOT ATTENTION-embed into `Ω_α` (a finite attention distinguishes
+the reified relatum) even as it bisim-embeds at the plain level (Series 10's `ws2_reify_bisim_embeds`).
+**That target is NOT built.** Every payoff term (`ws2_attention_embed_fails`, `ws2_rescue_where_bisim_collapses`,
+`ws2_reified_real_for_attention`) is `ws4_free_label_is_import` on the FIXED `labelLoop` — a distinction
+between two fixed Booleans, NOT between a reified tower relatum and the relata it plain-collapses with.
+`reify`/`reifyStep`/`towerN` occur in no payoff term; `ws2_reified_real_for_attention` even takes a
+`FiniteAttention` and DISCARDS it. So the payoff is Series 10's `labelLoop` fact relabelled: **Bookkeeping
+re-hit**, honestly reported (WS7 verdict `bookkeepingReHit`).
 
-**Honest scope (protocol §0.4).** The rescue `ws2_attention_embed_fails` is `ws4_free_label_is_import`:
-the plain bisim-embedding holds (first conjunct, the collapse engine merges) AND the label bisim-embedding
-fails (second conjunct, the reader distinguishes), for the SAME pair. The reader is genuinely not the plain
-quotient. But the witness is the FIXED `labelLoop` coalgebra; whether it lifts to every `reifyStep`-relatum
-is the universal Partial, Bookkeeping-re-hit the pre-registered live negative. The plain collapse PERSISTS
-(`ws2_plain_collapse_persists`) — the rescue is a new READER, not a new plain-level fact.
+**Honest scope (protocol §0.4).** `ws2_bookkeeping_transcribed` (= Series 10's `ws2_reify_bisim_embeds`,
+also re-exported as `Series11.WS7.ws7_tower_collapses`) is the PROVED Bookkeeping antecedent: on the tower
+the reified relatum bisim-embeds into every prior `SHNE` relatum. `ws2_plain_collapse_persists` records the
+plain collapse. The `labelLoop` free-label facts below are genuine facts about a fixed 2-state field — but
+about a different object than the tower, so they do not effect the rescue. The plain collapse is not
+overturned and no attention-embed-failure is proved ON the tower: Bookkeeping re-hit.
 
 Depends on WS1. Design doc: `series-11/spec/ws2-design.md`.
 
@@ -39,26 +44,29 @@ theorem ws2_bookkeeping_transcribed {X : Type u} (dest : X → PkObj κ X) (reif
     (y : X) (hy : SHNE dest y) : ∃ R, IsBisim dest R ∧ R (reify s) y :=
   ws1_atomless_bisim dest (reify s) y (ws3_reify_preserves_SHNE dest reify h s hs hsucc) hy
 
-/-- **D2 — THE RESCUE.** Bisim-embeds at the plain level (the collapse engine merges), does NOT
-attention-embed at the attended level (the finite attention distinguishes). `Ω_{α+1}` does not
-ATTENTION-embed into `Ω_α` where it DOES bisim-embed. -/
+/-- **D2 — the `labelLoop` free-label fact (S1: NOT the rescue).** On the FIXED `labelLoop`, `⟨true⟩`/`⟨false⟩`
+are `plainOf`-bisimilar but not label-bisimilar. This does NOT mention the tower: `Ω`/`reifyStep`/`towerN`
+are absent, so it is not "`Ω_{α+1}` does not ATTENTION-embed into `Ω_α`" (the specified target, not built).
+It is Series 10's free-label fact, the object of the Bookkeeping re-hit. -/
 theorem ws2_attention_embed_fails (hinf : ℵ₀ ≤ κ) :
     (∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R ⟨true⟩ ⟨false⟩)
   ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩) :=
   ws4_free_label_is_import hinf
 
-/-- **D3 — the rescue is where the collapse is (the Bookkeeping-re-hit certificate).** The SAME pair the
-collapse engine merges is the pair the attention keeps apart — so the attention-distinction is genuinely
-not the plain quotient, discharged WHERE the plain quotient is blind. -/
+/-- **D3 — the distinction is on two fixed Booleans (S1).** `AttentionDistinguishes` holds for the fixed
+`labelLoop` pair — a plain-bisimilar pair the label-reading keeps apart. But this is a distinction between
+two Booleans on a fixed coalgebra, NOT between a reified tower relatum `reify s` and the prior relata it
+bisim-embeds with (`ws2_bookkeeping_transcribed`). "Where the collapse is" is on `labelLoop`, not the tower. -/
 theorem ws2_rescue_where_bisim_collapses (hinf : ℵ₀ ≤ κ) :
     ∃ x y : ULift.{u} Bool,
       (∃ R, IsBisim (plainOf (labelLoop hinf)) R ∧ R x y)
     ∧ AttentionDistinguishes (labelLoop hinf) x y :=
   ⟨⟨true⟩, ⟨false⟩, (ws4_free_label_is_import hinf).1, ws4_free_label_is_import hinf⟩
 
-/-- **D4 — the reified relatum is real for a finite attention.** Given a finite attention that reads the
-neighbor, the reified relatum is distinguished from it — real for that attention, though Bookkeeping to the
-plain engine. -/
+/-- **D4 — the `FiniteAttention` is INERT here (S1).** The theorem takes a `FiniteAttention att` and a
+membership hypothesis `hmem` and DISCARDS both; the proof is the `labelLoop` fact. So "real for a finite
+attention" is the fixed-Boolean distinction with an unused attention wrapper — not a hold on real reified
+relata. This is the clearest single witness that the payoff is Bookkeeping re-hit. -/
 theorem ws2_reified_real_for_attention (hinf : ℵ₀ ≤ κ) (att : FiniteAttention (labelLoop hinf))
     (hmem : (⟨false⟩ : ULift.{u} Bool) ∈ att.reads) :
     AttentionDistinguishes (labelLoop hinf) ⟨true⟩ ⟨false⟩ :=

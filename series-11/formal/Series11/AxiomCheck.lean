@@ -4,12 +4,14 @@
 The axiom pass over the whole Series 11 build. Each `#print axioms` confirms the headline reduces to
 Mathlib's standard three (`propext` / `Classical.choice` / `Quot.sound`) — no `sorry`, no custom axiom.
 
-The two most important records (protocol §D):
-- `#print axioms Series11.WS1.ws1_attention_makes_real` reduces to the standard three, and its FIRST
-  conjunct is the plain quotient's blindness (the collapse engine merges) — so the reader genuinely
-  distinguishes WHERE the plain bisimulation collapses (the Bookkeeping-re-hit check).
+The two most important records (protocol §D), honestly stated after the Phase E re-grade (S1):
+- `#print axioms Series11.WS1.ws1_attention_makes_real` reduces to the standard three — but the term IS
+  `ws4_free_label_is_import`, a fact about the FIXED `labelLoop` coalgebra (`reify`/`reifyStep`/`towerN`
+  absent). The distinction is on `labelLoop`, NOT the reification tower, so the spine is Series 10's
+  Bookkeeping RE-HIT; the WS7 verdict is `bookkeepingReHit` (`ws7_verdict_eq`), the honest negative.
 - `#print axioms Series11.WS3.ws3_no_total_attention` reduces to `propext` alone — the diagonal uses no
-  choice and no cardinal, so the bound is holding-not-size, κ-free (the κ-readmitted check).
+  choice and no cardinal, so the bound is holding-not-size, κ-free (the κ-readmitted check PASSES; the one
+  half Series 11 delivers cleanly).
 -/
 import Series11
 
@@ -54,11 +56,13 @@ import Series11
 #print axioms Series11.WS6.ws6_provable_core
 #print axioms Series11.WS6.ws6_unification
 
--- WS7 — the audit, the promoted checks, and the typed verdict (attentionEstablished)
+-- WS7 — the audit, the promoted checks, and the typed verdict (RE-GRADED: bookkeepingReHit, S1)
 #print axioms Series11.WS7.ws7_audit
 #print axioms Series11.WS7.ws7_verdict
 #print axioms Series11.WS7.ws7_verdict_eq
-#print axioms Series11.WS7.ws7_audited_not_bookkeepingReHit
+#print axioms Series11.WS7.ws7_tower_collapses
+#print axioms Series11.WS7.ws7_audited_is_bookkeepingReHit
+#print axioms Series11.WS7.ws7_audited_not_attentionEstablished
 #print axioms Series11.WS7.ws7_audited_not_kappaReadmitted
 #print axioms Series11.WS7.ws7_audited_not_tragic
 #print axioms Series11.WS7.ws7_bookkeeping_rehit_check

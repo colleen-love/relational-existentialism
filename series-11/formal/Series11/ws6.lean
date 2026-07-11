@@ -47,10 +47,12 @@ def ws6_universal_theses : Prop :=
     (∀ {Q X : Type u} (dest : X → LkObj κ Q X), (¬ Recoverable dest) → True)
   ∧ (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest), ¬ ∃ t, SelfTotal insp t)
 
-/-- **D3 — the unification (theorem + thesis).** Series 08's finite hold IS Series 11's finite attention: a
-finite attention is a finite reachable hold (the structural tie, a theorem), now reading a GROWING
-(reifying) field. The universal equivalence is a defended thesis; the structural identification is a
-theorem, never a gloss (charter §5.5). -/
+/-- **D3 — the unification is a GLOSS, not a theorem (series-review-1 R2, as the charter predicted §5.5).**
+The machine-checked content below is only a PROJECTION: a `FiniteAttention`'s finite grounded reading is
+finite and grounded (`⟨att.fin, att.grounded.2⟩`). It is NOT an equivalence tying Series 08's finite hold to
+Series 11's attention — no Series 08 object appears. **Consequence 3 (Series 08's finite hold IS Series 11's
+attention) is therefore a DEFENDED THESIS, not a theorem**, and is recorded as such (charter-status). The
+name `ws6_unification` denotes the projection that grounds the thesis, not the unification itself. -/
 theorem ws6_unification {Q X : Type u} (dest : X → LkObj κ Q X) (att : FiniteAttention dest) :
     att.reads.Finite ∧ (∀ z ∈ att.reads, SReaches (plainOf dest) att.focus z) :=
   ws1_attention_is_finite_hold dest att

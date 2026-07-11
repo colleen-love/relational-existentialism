@@ -12,37 +12,40 @@ label. Series 11's answer: finite attention is the reader (rescuing Bookkeeping)
 the scaffold κ), because the same incompletability that generates the many (the diagonal) prevents any hold
 from grasping the whole (no-total-attention at tower scale).
 
-**Verdict: `attentionEstablished` on the mechanized core; the spine Discharged-on-witness / universal
-Partial; the crown Partial.**
+**Verdict (after Phase E / series-review-1): `bookkeepingReHit` on the reality axis; κ-removal Discharged
+on the bound axis.** Series 11 set out to do two things with one mechanism — make Series 10's reified label
+REAL by supplying a reader (rescue Bookkeeping), and BOUND the tower by the finitude of that reader (remove
+κ). It delivered the second and re-hit Bookkeeping on the first. Reported honestly, this is the pre-registered
+terminus (charter §5.5, §7, §8 criterion 1), the direct analogue of Series 10's honest close.
 
-- The spine (WS1) is **attention-reality, Discharged on a witness** (`ws1_attention_makes_real =
-  ws4_free_label_is_import`): a finite attention distinguishes the reified relatum WHERE THE PLAIN
-  BISIMULATION COLLAPSES (`plainOf`-bisimilar but not label-bisimilar), and the distinction is FREE
-  (`ws1_attention_distinction_free = ws4_labelLoop_not_recoverable`, not recoverable). This is the reader
-  Series 10 lacked — the free label, now READ, by something the plain quotient is not
-  (`ws1_attention_not_plain_quotient`). The witness is the FIXED `labelLoop` coalgebra; the tower-level tie
-  (`reifyStep`) and the universal are Partial, Bookkeeping-re-hit the pre-registered live negative. The
-  label-is-the-residue routing (`ws1_attention_routes_through_diagonal`) is interpretive at the residue-
-  freeness level, flagged not hidden (as Series 10 disclosed for `ws1_free_reification`).
-- The payoff (WS2) is **the rescue at the attended level, Discharged on a witness**
-  (`ws2_attention_embed_fails`): the reified relatum bisim-embeds at the plain level
-  (`ws2_bookkeeping_transcribed`, Series 10's Bookkeeping, unappealed) but does NOT attention-embed
-  (`ws2_rescue_where_bisim_collapses`, for the SAME pair). The plain collapse PERSISTS
-  (`ws2_plain_collapse_persists`) — the rescue is a new reader, not a new plain fact.
-- No-total-attention (WS3) is **`ws3_no_total_attention = ws1_no_self_total_hold`, an Impossibility**, the
-  bound's engine, and **κ-free** (`ws3_no_total_attention_kappa_free`, the proof uses no cardinal — the
-  genuine κ-removal). (NL) holds (`ws3_attention_reads_full_relata`), bounded-holding is endogenous
-  finitude (`ws3_bounded_holding_endogenous`, on a possibly-infinite tower — holding, not size).
-- The bound (WS4) is **holding-not-size, Discharged on finite stages**: no completed totality
-  (`ws4_no_completed_totality`), no Russell blowup (`ws4_no_russell_blowup`), κ-free (`ws4_kappa_free`).
-  The residual carrier branching-κ is disclosed as the section's existence condition (§2.7), not a bound.
-- The crown (WS5) is **Partial** (`ws5_crown_verdict = .partialV`): Discharged on finite stages
-  (`ws5_crown_on_finite_stages`), the transfinite limit and carrier-κ open, the TRAGIC horn pre-registered
-  and live via a three-horn kill condition (`ws5_kill_condition_shape`).
-- The ceiling (WS6): the universals are theses floored by the core (`ws6_provable_core`,
-  `ws6_universal_theses`); the unification is a theorem-and-thesis (`ws6_unification`).
-- The verdict (WS7) is **`attentionEstablished`** (`ws7_verdict`), a function of a discharged `Audit` whose
-  flagship fields carry the two promoted checks (Bookkeeping-re-hit, κ-readmitted), never hand-set.
+- The spine (WS1) is **BOOKKEEPING RE-HIT** (`ws1_attention_makes_real = ws4_free_label_is_import`): a fact
+  about the FIXED `labelLoop` coalgebra (`⟨true⟩` vs `⟨false⟩`), with `reify`/`reifyStep`/`towerN` absent from
+  every attention theorem. "Attention" is Series 10's free label relabelled; the distinction is drawn on two
+  fixed Booleans, not on the tower's reified relata (which bisim-embed, `ws7_tower_collapses`). The freeness
+  (`ws1_attention_distinction_free`) and residue-routing (`ws1_attention_routes_through_diagonal`) are genuine
+  but about objects different from the tower, so they do not earn the rescue. The Phase C "Discharged-on-witness
+  / universal Partial" framing was the §0.2a-forbidden third theorem and is retracted.
+- The payoff (WS2) is **the same `labelLoop` fact** (`ws2_attention_embed_fails` etc.), with the
+  `FiniteAttention` argument discarded in `ws2_reified_real_for_attention`. The specified target (`Ω_{α+1}`
+  does not ATTENTION-embed into `Ω_α`) is NOT built; the tower collapses (`ws2_bookkeeping_transcribed` =
+  Series 10's `ws2_reify_bisim_embeds`), and the plain collapse persists (`ws2_plain_collapse_persists`).
+- No-total-attention (WS3) is **`ws3_no_total_attention = ws1_no_self_total_hold`, an Impossibility, κ-free**
+  — an INSPECTION-LEVEL diagonal (`insp` a free parameter; the "tower scale" reading interpretive, R1). (NL)
+  holds (`ws3_attention_reads_full_relata`, the one place `reify` does real work); bounded-holding is
+  endogenous finitude on a possibly-infinite carrier (holding, not size).
+- The bound (WS4) is **holding-not-size, κ genuinely removed** (`ws4_no_completed_totality`,
+  `ws4_no_russell_blowup`, `ws4_kappa_free`) — the inspection-level diagonal, tower-independent (R1). The
+  κ-readmitted check PASSES; the residual carrier branching-κ is disclosed, not used as a bound. **This is the
+  half of the charter's ambition Series 11 delivers cleanly.**
+- The crown (WS5) is **Partial, floored on the genuine bound** (`ws5_crown_verdict = .partialV`): the κ-free
+  diagonal (NT/EB) is genuine; the attention-READER is Bookkeeping re-hit; so self-bounding VIA ATTENTION is
+  not established. `ws5_kill_condition_shape` is a pre-registration marker (`⟨id, id⟩`), not a run.
+- The ceiling (WS6): the universals are theses floored by the core; the "unification" (`ws6_unification`) is
+  a bare projection, so Consequence 3 is a DEFENDED THESIS, not a theorem (R2).
+- The verdict (WS7) is **`bookkeepingReHit`** (`ws7_verdict`), a function of a discharged `Audit`, never
+  hand-set; `ws7_audited_not_attentionEstablished` proves the success verdict is NOT returned, and
+  `ws7_tower_collapses` proves the Bookkeeping antecedent. The verdict machinery is sound; it now carries the
+  honest label. The κ-removal, (NL), and the diagonal stand on their own.
 
 This file is SELF-CONTAINED: every Series 10/09/08/07/04 lemma is transcribed into `Series11/wsNN.lean` and
 re-namespaced `Series11.WSn` — nothing is imported from `series-10/`, `series-09/`, `series-08/`,
