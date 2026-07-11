@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series7", "Series8"]
+defaultTargets = ["Series7", "Series8", "Series9"]
 
 # ── Layout (Series 7 complete + Series 8 live; Series 3–6 closed under `archive/`) ──
 # Series 3, 4, 5, and 6 are closed and frozen under `archive/series-3/`…`archive/series-6/`;
@@ -29,6 +29,16 @@ roots = ["Series7", "Series7.AxiomCheck"]
 name = "Series8"
 srcDir = "../series-8/formal"
 roots = ["Series8", "Series8.AxiomCheck"]
+
+# `series-9/formal/` — Series 9 (live). `Series9` imports `Series9.ws1`…`Series9.ws7`;
+# `Series9.AxiomCheck` runs the axiom pass. Series 9 is WHOLLY STANDALONE: every Series
+# 8/7/4 lemma it reuses is transcribed into `series-9/formal/Series9/wsNN.lean` and
+# re-namespaced `Series9.WSNN` — nothing is imported from `series-8/`, `series-7/`,
+# `series-4/`, or `archive/`.
+[[lean_lib]]
+name = "Series9"
+srcDir = "../series-9/formal"
+roots = ["Series9", "Series9.AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`); all series import it.
 [[require]]
