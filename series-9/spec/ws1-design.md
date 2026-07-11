@@ -198,7 +198,16 @@ theorem ws1_holdreflexive_not_selfloop {X : Type u} (dest : X → PkObj κ X) (h
 
 **D3 — the coincidence check.** This is the payoff the whole series turns on. The spine's *statement* carries no bisimulation hypothesis (contrast `ws1_symmetric_states_bisimilar`, which needs `Symmetric dest` and *produces* a bisimulation), and its *proof* carries no bisimulation lemma. So no-self-total-hold is the separable second fact Series 8's series-review-3 named as the open question: independent of relational identity by construction.
 
-**D5 — the carrier-strength obligation.** The honest hazard on scope (charter §5.3): the near-surjective (genuine-gap) inspection may be constructible only for a specific carrier, leaving the universal "every hold-reflexive carrier admits the diagonal" as WS6's ceiling. The disjunction (`near-surjective` ∨ `injective/separating`) is the honest fallback: even a *separating* inspection makes the carrier strictly stronger than a self-loop (content distinguishes holds), so the diagonal runs; near-surjectivity sharpens "genuine gap" but is not required for independence.
+**D5 — the carrier-strength obligation.** The honest hazard on scope (charter §5.3): the genuine-gap inspection may be constructible only for a specific carrier, leaving the universal "every hold-reflexive carrier admits the diagonal" as WS6's ceiling.
+
+**BUILD CORRECTION (2026-07-11, recorded in `charter-status.md` Phase C, per protocol §C).** The pre-build D5 first horn — an inspection "near-surjective onto every content except the diagonal" — is **UNREALIZABLE by cardinality**: the complement of a single point in `HoldPred dest = Hold dest → Prop` still has cardinality `2^|Hold| > |Hold|`, so no map from `Hold` covers it (you cannot surject `Hold` onto `HoldPred` minus one point any more than onto all of `HoldPred`). Hold-reflexivity is **not** near-surjectivity. The corrected, faithful guard (built as `ws1_holdreflexive_not_selfloop`): the carrier expresses a genuine **non-point** content — an inspection whose content `⊤` holds two distinct holds `h₀ ≠ h₁` at once, which a self-loop cannot, since every `inspLoop` content is a point (`inspLoop h h' ↔ h' = h`). This is what "a hold ranges over the space of holds" means (content is a predicate over holds, not a successor point), and it makes the carrier strictly stronger than a self-loop — the §4.4 guard, stated correctly. Independence of the spine does not depend on the gap-inspection at all (the diagonal `ws1_no_self_total_hold` holds for every `insp`); D5 is the carrier-strength witness that the diagonal is *run*, not asserted on a degenerate self-loop. No downstream workstream depended on the near-surjective horn.
+
+```lean
+theorem ws1_holdreflexive_not_selfloop {X : Type u} (dest : X → PkObj κ X)
+    (h₀ h₁ : Hold dest) (_hne : h₀ ≠ h₁) :
+    (∃ insp : Hold dest → HoldPred dest, insp h₀ h₀ ∧ insp h₀ h₁)      -- a genuine non-point content
+  ∧ (∀ (h h' : Hold dest), inspLoop (dest := dest) h h' ↔ h' = h)      -- every self-loop content is a point
+```
 
 ## Outcome classes (per charter §7)
 
