@@ -37,12 +37,12 @@ The charter + all designs are what you paste into the build session. The designs
 
 Six phases. Phases D and E loop.
 
-| Phase | Name | Session | Sees | Batching |
+| Phase | Name | Session | Format | Batching |
 |---|---|---|---|---|
-| A | Charter | 1 | (whole program) | once per series |
-| B | Design-all | 1 | charter + repo | **all seven at once** |
-| C | Build-all | 1 | all designs + repo | **all seven at once** |
-| D | Blind series-review | 1 | all built code + all design contracts + charter criteria, **not** motivating prose | **whole series at once** → writes `series-review.md` |
+| A | Charter | 1 | normal conversation with repo | once per series |
+| B | Design-all | 1 | Claude code with repo | **all seven at once** |
+| C | Build-all | 1 | Claude code with repo | **all seven at once** |
+| D | Blind series-review | 1 | incognito with repo | **whole series at once** → writes `series-review.md` |
 | E | Address | 1 | `series-review.md` + all code + designs | **whole series at once** |
 | — | Accept / route | — | (bookkeeping into `charter-status.md`) | — |
 
