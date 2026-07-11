@@ -13,17 +13,17 @@
 #     silently grind through a from-source mathlib build.
 #
 # Usage:
-#   scripts/build.sh                 # Series07 + Series08 (both mathlib-backed)
-#   scripts/build.sh Series08         # one series only
+#   scripts/build.sh                 # Series07 + Series09 + Series10 (all mathlib-backed)
+#   scripts/build.sh Series10         # one series only
 #   NO_CACHE_GET=1 scripts/build.sh  # skip the cache refresh (offline / fast)
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."          # -> lake/
 export PATH="$HOME/.elan/bin:$PATH"
 
-TARGETS=("$@"); [ ${#TARGETS[@]} -eq 0 ] && TARGETS=(Series07 Series08)
+TARGETS=("$@"); [ ${#TARGETS[@]} -eq 0 ] && TARGETS=(Series07 Series09 Series10)
 
-# Both series import mathlib, so any real build needs the mathlib oleans present.
+# All series import mathlib, so any real build needs the mathlib oleans present.
 needs_mathlib=1
 
 MATHLIB_LIB=".lake/packages/mathlib/.lake/build/lib"

@@ -1,15 +1,15 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series08", "Series09", "Series10"]
+defaultTargets = ["Series07", "Series09", "Series10"]
 
-# ── Layout (Series 07 complete + Series 08 live; Series 03–06 closed under `archive/`) ──
-# Series 03, 04, 05, and 06 are closed and frozen under `archive/series-03/`…`archive/series-06/`;
-# they are no longer registered here. Series 07 is complete under `series-07/`; Series 08 is
-# the live development under `series-08/`. Both are built here so `lake build` verifies them.
+# ── Layout (Series 07 complete; Series 09 + Series 10 live; Series 03–06, 08 closed under `archive/`) ──
+# Series 03, 04, 05, 06, and 08 are closed and frozen under `archive/series-03/`…`archive/series-08/`;
+# they are no longer registered here. Series 07 is complete under `series-07/`; Series 09 and
+# Series 10 are the live development. All registered series are built here so `lake build` verifies them.
 #
 # Each series is a distinct module namespace so they can coexist in one package:
-# Series 07's roots live under `Series07.*`, Series 08's under `Series08.*`. Each aggregator
-# root `SeriesN` (`<series>/formal/<Series>.lean`) imports its workstreams; the `AxiomCheck`
-# root under each namespace runs `#print axioms` over that series' build.
+# each series' roots live under `SeriesNN.*`. Each aggregator root `SeriesNN`
+# (`<series>/formal/<Series>.lean`) imports its workstreams; the `AxiomCheck` root under each
+# namespace runs `#print axioms` over that series' build.
 
 # `series-07/formal/` — Series 07 (complete). `Series07` imports `Series07.ws1`…`Series07.ws7`;
 # `Series07.AxiomCheck` runs the axiom pass. Series 07 is WHOLLY STANDALONE: every Series
@@ -20,15 +20,8 @@ name = "Series07"
 srcDir = "../series-07/formal"
 roots = ["Series07", "Series07.AxiomCheck"]
 
-# `series-08/formal/` — Series 08 (live). `Series08` imports `Series08.ws1`…`Series08.ws7`;
-# `Series08.AxiomCheck` runs the axiom pass. Series 08 is WHOLLY STANDALONE: every Series
-# 7/4 lemma it reuses is transcribed into `series-08/formal/Series08/wsNN.lean` and
-# re-namespaced `Series08.WSNN` — nothing is imported from `series-07/`, `series-04/`, or
-# `archive/`.
-[[lean_lib]]
-name = "Series08"
-srcDir = "../series-08/formal"
-roots = ["Series08", "Series08.AxiomCheck"]
+# Series 08 is CLOSED and frozen under `archive/series-08/`; it is no longer registered here
+# (its formal sources remain readable at `archive/series-08/formal/` but are not built).
 
 # `series-09/formal/` — Series 09 (live). `Series09` imports `Series09.ws1`…`Series09.ws7`;
 # `Series09.AxiomCheck` runs the axiom pass. Series 09 is WHOLLY STANDALONE: every Series
