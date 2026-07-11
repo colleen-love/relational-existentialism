@@ -48,18 +48,51 @@ theorem ws5_strict_refuted (hinf : ℵ₀ ≤ κ) : ¬ ConservesStrict (twoLoop 
   let h : Hold (twoLoop hinf) := ⟨(⟨true⟩, ⟨true⟩), hmem⟩
   exact lt_irrefl _ (hcs h h ⟨rfl, hmem⟩)
 
-/-- **D2 — the kill condition fires.** A depth-opening re-restriction on a GENUINELY ATOMLESS field
-(`twoLoop_HNE`) that forecloses no breadth. Conservation is Refuted; the bound is mere boundedness;
-the "self-limiting universe" is retracted (charter §5.4). -/
+/-! ## The ping-pong carrier — constant breadth, DEPTH-ADVANCING (series-review-1 R1)
+
+The self-loop `twoLoop` forecloses no breadth but its re-restriction returns the same hold (depth
+does not advance). The charter's kill condition (§5.4) demands a re-restriction that *opens depth*
+without foreclosing breadth. `pingPong` supplies it: two states `⟨true⟩ ↔ ⟨false⟩`, each with a single
+successor (constant breadth 1), so a re-restriction `h → h'` moves to a genuinely DIFFERENT hold
+(`h ≠ h'`, depth advances) while breadth is preserved — depth opens, nothing foreclosed. -/
+
+noncomputable def pingPong (hinf : ℵ₀ ≤ κ) : ULift.{u} Bool → PkObj κ (ULift.{u} Bool) :=
+  fun i => toPk hinf {(⟨!i.down⟩ : ULift.{u} Bool)}
+
+@[simp] lemma pingPong_val (hinf : ℵ₀ ≤ κ) (i : ULift.{u} Bool) :
+    (pingPong hinf i).1 = {(⟨!i.down⟩ : ULift.{u} Bool)} := rfl
+
+lemma pingPong_HNE (hinf : ℵ₀ ≤ κ) : ∀ i, SHNE (pingPong hinf) i := by
+  intro i v _
+  rw [pingPong_val]; exact Set.singleton_ne_empty _
+
+lemma pingPong_breadth (hinf : ℵ₀ ≤ κ) (g : Hold (pingPong hinf)) :
+    breadth (pingPong hinf) g = 1 := by
+  show Cardinal.mk (↥(pingPong hinf g.1.2).1) = 1
+  rw [pingPong_val, Cardinal.mk_singleton]
+
+/-- **D2 — the kill condition fires, DEPTH-ADVANCING (R1).** A re-restriction on a genuinely atomless
+field (`pingPong_HNE`) that OPENS depth — `h ≠ h'`, the hold genuinely descends from resolving one
+node to resolving the other — while foreclosing no breadth (`breadth h' = breadth h`). This is the
+charter §5.4 kill condition in full: depth opens, nothing foreclosed. Conservation is Refuted; the
+bound is mere boundedness; the "self-limiting universe" is retracted. -/
 theorem ws5_kill_condition (hinf : ℵ₀ ≤ κ) :
-    ∃ (h h' : Hold (twoLoop hinf)),
-      ReReStep (twoLoop hinf) h h'
-      ∧ ¬ (breadth (twoLoop hinf) h' < breadth (twoLoop hinf) h)
-      ∧ SHNE (twoLoop hinf) h.1.1 := by
-  have hmem : (⟨true⟩ : ULift.{u} Bool) ∈ (twoLoop hinf ⟨true⟩).1 := by
-    rw [twoLoop_val]; exact rfl
-  let h : Hold (twoLoop hinf) := ⟨(⟨true⟩, ⟨true⟩), hmem⟩
-  exact ⟨h, h, ⟨rfl, hmem⟩, lt_irrefl _, twoLoop_HNE hinf _⟩
+    ∃ (h h' : Hold (pingPong hinf)),
+      ReReStep (pingPong hinf) h h' ∧ h ≠ h'
+      ∧ breadth (pingPong hinf) h' = breadth (pingPong hinf) h
+      ∧ (∀ z, SHNE (pingPong hinf) z) := by
+  have hmT : (⟨false⟩ : ULift.{u} Bool) ∈ (pingPong hinf ⟨true⟩).1 := by
+    rw [pingPong_val]; exact rfl
+  have hmF : (⟨true⟩ : ULift.{u} Bool) ∈ (pingPong hinf ⟨false⟩).1 := by
+    rw [pingPong_val]; exact rfl
+  let h : Hold (pingPong hinf) := ⟨(⟨true⟩, ⟨false⟩), hmT⟩
+  let h' : Hold (pingPong hinf) := ⟨(⟨false⟩, ⟨true⟩), hmF⟩
+  refine ⟨h, h', ⟨rfl, hmF⟩, ?_, ?_, pingPong_HNE hinf⟩
+  · intro he
+    have hp : ((⟨true⟩, ⟨false⟩) : ULift.{u} Bool × ULift.{u} Bool) = (⟨false⟩, ⟨true⟩) :=
+      congrArg Subtype.val he
+    exact absurd ((Prod.mk.injEq _ _ _ _).mp hp).1 (by decide)
+  · rw [pingPong_breadth hinf h', pingPong_breadth hinf h]
 
 /-- **D3 — conservation on a non-increasing atomless class (honestly weak).** Where successor sets do
 not grow along edges, breadth is weakly conserved. Stated as a hypothesis on `dest`, NOT on the map. -/
@@ -75,11 +108,11 @@ the non-increasing class (D3). Justified by theorems — not hand-set. -/
 def ws5_conservation_verdict : ConservationVerdict := .partialV
 
 theorem ws5_verdict_justified (hinf : ℵ₀ ≤ κ) :
-    (∃ (h h' : Hold (twoLoop hinf)), ReReStep (twoLoop hinf) h h'
-        ∧ ¬ breadth (twoLoop hinf) h' < breadth (twoLoop hinf) h)
+    (∃ (h h' : Hold (pingPong hinf)), ReReStep (pingPong hinf) h h' ∧ h ≠ h'
+        ∧ breadth (pingPong hinf) h' = breadth (pingPong hinf) h)
   ∧ ¬ ConservesStrict (twoLoop hinf) := by
   refine ⟨?_, ws5_strict_refuted hinf⟩
-  obtain ⟨h, h', hr, hnf, _⟩ := ws5_kill_condition hinf
-  exact ⟨h, h', hr, hnf⟩
+  obtain ⟨h, h', hr, hne, heq, _⟩ := ws5_kill_condition hinf
+  exact ⟨h, h', hr, hne, heq⟩
 
 end Series8.WS5

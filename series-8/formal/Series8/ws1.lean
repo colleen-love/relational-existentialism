@@ -305,4 +305,64 @@ recover all faces at once is a `ws1_no_gods_eye` node, which does not exist. -/
 theorem ws1_directed_hold_free (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (labelLoop hinf) :=
   ws4_labelLoop_not_recoverable hinf
 
+/-! ## The Spinozist-retreat fork, closed as theorems (series-review-1 S1)
+
+The pre-review spine `ws1_no_gods_eye` collapses a node *under the hypothesis* `Recoverable`, and its
+one concrete witness (`facedLoop`, `|Q| = 1`) is a single-face node. S1 asked: is a node with a
+genuine plurality of faces (`|Q| ≥ 2`, distinct labels) held symmetrically recoverable (so the
+collapse lands on the real totality) or free (so — S1 feared — monism wins)? The answer is a theorem,
+and it does NOT hand victory to monism: on an ATOMLESS field the engine (`ws1_atomless_bisim`) makes
+any two states plain-bisimilar, so any genuine face-distinction is necessarily FREE — hence
+distributed perspective (WS2), never a recoverable symmetric totality. A plural god's-eye node cannot
+be recoverable; a recoverable god's-eye node cannot be plural (it collapses to the One). Either way no
+node is a recoverable totality hosting a genuine plurality of faces. -/
+
+/-- **S1 — genuine face-distinctions on an atomless field are FREE, not recoverable.** If two states
+carry genuinely distinct faces (no label-bisimulation relates them) on an atomless carrier, then the
+structure is not `Recoverable`: the engine relates them by a plain bisimulation, and recoverability
+would upgrade that to a label bisimulation, contradicting their distinctness. So a genuine plurality
+of faces on an atomless field is free (distributed), never a symmetric/recoverable totality. -/
+theorem ws1_distinct_faces_atomless_not_recoverable {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hatom : ∀ z, SHNE (plainOf dest) z) (x y : X)
+    (hdistinct : ¬ ∃ R, IsBisimL dest R ∧ R x y) : ¬ Recoverable dest := by
+  intro hrec
+  obtain ⟨R, hR, hxy⟩ := ws1_atomless_bisim (plainOf dest) x y (hatom x) (hatom y)
+  exact hdistinct ⟨R, hrec R hR, hxy⟩
+
+/-- **S1 — no recoverable plurality: a plural atomless behav-identified node is NOT recoverable.**
+Contrapositive of the collapse: if such a node had two distinct states it would be a subsingleton
+(`ws1_no_gods_eye`), absurd. So genuine plurality forces freeness — the faces are distributed across
+positions, not held symmetrically at one node. The horn "(b) the plural node is free" of S1's fork,
+and it is NOT a monist victory: freeness is distribution (WS2), not a held totality. -/
+theorem ws1_no_recoverable_plurality {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hbehav : BehaviorallyIdentifiedL dest) (hatom : ∀ z, SHNE (plainOf dest) z)
+    (x y : X) (hxy : x ≠ y) : ¬ Recoverable dest := by
+  intro hrec
+  haveI := ws1_no_gods_eye dest hrec hbehav hatom
+  exact hxy (Subsingleton.elim x y)
+
+/-- **S1 — the no-god's-eye dichotomy (the fork, resolved as a theorem).** Every atomless,
+behaviorally-identified labelled coalgebra EITHER collapses to a subsingleton (the recoverable /
+symmetric case — the totality annihilates its faces, `ws1_no_gods_eye`) OR is not recoverable (the
+free case — a genuine plurality of faces, distributed across positions, `ws1_distinct_faces_*`).
+There is no third horn: no node is a recoverable totality with a genuine face-plurality. -/
+theorem ws1_gods_eye_dichotomy {Q X : Type u} (dest : X → LkObj κ Q X)
+    (hbehav : BehaviorallyIdentifiedL dest) (hatom : ∀ z, SHNE (plainOf dest) z) :
+    Subsingleton X ∨ ¬ Recoverable dest := by
+  by_cases hrec : Recoverable dest
+  · exact Or.inl (ws1_no_gods_eye dest hrec hbehav hatom)
+  · exact Or.inr hrec
+
+/-- **S1 — the ≥2-face witness that the fork's free horn is inhabited non-degenerately.** `labelLoop`
+carries genuinely distinct faces (`⟨true⟩` and `⟨false⟩` are not label-bisimilar) on an atomless
+field, and is provably NOT recoverable — a genuine `|Q| = 2` plural face-space that is free, exactly
+as the dichotomy predicts (contrast the degenerate one-face `facedLoop`). -/
+theorem ws1_plural_faces_free_witness (hinf : ℵ₀ ≤ κ) :
+    (∀ z, SHNE (plainOf (labelLoop hinf)) z)
+  ∧ (¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
+  ∧ ¬ Recoverable (labelLoop hinf) :=
+  ⟨labelLoop_atomless hinf, ws4_label_survives_quotient hinf,
+   ws1_distinct_faces_atomless_not_recoverable (labelLoop hinf) (labelLoop_atomless hinf)
+     ⟨true⟩ ⟨false⟩ (ws4_label_survives_quotient hinf)⟩
+
 end Series8.WS1

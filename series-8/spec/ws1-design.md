@@ -152,3 +152,33 @@ theorem ws1_directed_hold_free (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (labelLoo
 ## Deliverable
 
 `series-8/formal/Series8/ws1.lean`: transcribed carrier + labelled/face machinery (README §6); `Hold`, `afford`; `ws1_hold_forced` (D5), `ws1_symmetric_hold_recoverable` (D2), `ws1_no_gods_eye` (D1), `ws1_no_gods_eye_node` (D4), `ws1_directed_hold_free` (D3). Axiom check: `#print axioms ws1_no_gods_eye` reduces through `ws4_recoverable_atomless_collapses` / `ws2_import_theorem_static` to the standard `propext` / `Classical.choice` / `Quot.sound` (axiom-clean in Series 7). **This file is built first (charter §6): it fixes the carrier and the hold for WS2–WS6.**
+
+---
+
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 S1 — SERIOUS, addressed) — the fork closed as theorems
+
+The blind review (`series-review-1.md` S1) correctly found that `ws1_no_gods_eye` collapses a node
+only *under the hypothesis* `Recoverable`, and that the sole concrete `Recoverable` witness
+(`facedLoop`, `|Q| = 1`) is a single-face node — so the bridge "all-faces-symmetric ⟹ `Recoverable`"
+was never proved on a genuine plurality, leaving the Spinozist retreat formally ajar. Addressed by
+**proving the fork** (charter §5.5 ambition, not a relabel-down):
+
+- **`ws1_distinct_faces_atomless_not_recoverable`** — on an ATOMLESS field the engine
+  (`ws1_atomless_bisim`) makes any two states plain-bisimilar, so any genuine face-distinction (a pair
+  not label-bisimilar) is necessarily FREE: recoverability would upgrade the plain bisimulation to a
+  label one, contradicting the distinction. Genuine face-plurality on an atomless field is free, never
+  a recoverable/symmetric totality.
+- **`ws1_no_recoverable_plurality`** — contrapositive of the collapse: a plural atomless behav-id node
+  is not recoverable. So plurality ⟹ free.
+- **`ws1_gods_eye_dichotomy`** — every atomless behav-id labelled coalgebra either collapses to a
+  subsingleton (recoverable/symmetric — the totality annihilates its faces) or is not recoverable
+  (free — distributed perspective). No third horn.
+- **`ws1_plural_faces_free_witness`** — the `|Q| = 2` witness (`labelLoop`, genuinely distinct faces)
+  inhabiting the free horn non-degenerately, answering the "one-face witness" objection.
+
+**The fork's horn (b) does NOT hand victory to monism** (the review's fear): a plural face-space being
+free means it is *distributed perspective* (WS2), not a held totality. Monism would need a plural
+totality that is recoverable-and-uncollapsed, which the dichotomy forbids. So the honest headline is
+sharpened, not lowered: *no atomless node is a recoverable totality hosting a genuine plurality of
+faces — symmetric ⟹ collapse to the One, plural ⟹ free/distributed.* All axiom-clean; see
+`axiom-check-log.md`.

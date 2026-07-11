@@ -41,8 +41,8 @@ structure Audit (κ : Cardinal.{u}) (hinf : ℵ₀ ≤ κ) : Prop where
   orderEndogenous : ∃ h : Hold (twoLoop hinf), ReReStep (twoLoop hinf) h h
   noLeaf : ∀ {Y : Type u} (dest : Y → PkObj κ Y) (h : Hold dest), SHNE dest h.1.2 →
              ∃ h', ReReStep dest h h' ∧ SHNE dest h'.1.1
-  conservationTested : (∃ (h h' : Hold (twoLoop hinf)), ReReStep (twoLoop hinf) h h'
-                          ∧ ¬ breadth (twoLoop hinf) h' < breadth (twoLoop hinf) h)
+  conservationTested : (∃ (h h' : Hold (pingPong hinf)), ReReStep (pingPong hinf) h h' ∧ h ≠ h'
+                          ∧ breadth (pingPong hinf) h' = breadth (pingPong hinf) h)
                        ∧ ¬ ConservesStrict (twoLoop hinf)
 
 /-- **D1 — the audit is discharged.** Every field a theorem from WS1–WS5. -/
@@ -54,8 +54,13 @@ theorem ws7_audit (hinf : ℵ₀ ≤ κ) : Audit κ hinf where
   noLeaf := fun {_Y} dest h hs => ws3_rerestriction_no_leaf dest h hs
   conservationTested := ws5_verdict_justified hinf
 
-/-- **D2 — the typed verdict**, a function of the discharged audit and the (settled) conservation
-flag. -/
+/-- **D2 — the typed verdict** (series-review-1 R2, relabelled honestly). The LOAD-BEARING content is
+the `Audit` *structure*: its five fields are theorems, so you cannot construct a certificate without
+discharging them, and `ws7_audit` does. `verdict` then tags a discharged certificate with the outcome
+— it is a constant selector on *having a certificate*, NOT a decision procedure that reads the
+certificate's contents (a `Prop` certificate is proof-irrelevant, so it cannot be branched on). The
+earned fact is "a certificate exists ⟹ the tag is `perspectiveEstablished`"; the anti-hand-setting
+guarantee lives in the certificate's fields, not in this selector. -/
 def verdict {hinf : ℵ₀ ≤ κ} (_cert : Audit κ hinf) (_settled : Bool) : Series8Verdict :=
   .perspectiveEstablished
 
@@ -64,8 +69,11 @@ def ws7_verdict (hinf : ℵ₀ ≤ κ) : Series8Verdict := verdict (ws7_audit hi
 theorem ws7_verdict_eq (hinf : ℵ₀ ≤ κ) :
     ws7_verdict hinf = Series8Verdict.perspectiveEstablished := rfl
 
-/-- **D3 — with a certificate, never monism, never Circular.** The only route to those is a FAILED
-audit (no certificate). So the verdict is falsifiable, not hand-set. -/
+/-- **D3 — with a discharged certificate the tag is neither monism nor Circular.** Since `verdict` is
+a constant selector, these are facts about the three distinct constructors — the substantive content
+is upstream: without an `Audit` (which requires all five theorems) there is no `perspectiveEstablished`
+tag at all. The certificate is the falsifiable object; this records that the tag on it is never the
+failure outcomes. -/
 theorem ws7_audited_not_monism {hinf : ℵ₀ ≤ κ} (cert : Audit κ hinf) (b : Bool) :
     verdict cert b ≠ Series8Verdict.monismStands := by
   show Series8Verdict.perspectiveEstablished ≠ Series8Verdict.monismStands; decide
@@ -78,8 +86,8 @@ theorem ws7_audited_not_circular {hinf : ℵ₀ ≤ κ} (cert : Audit κ hinf) (
 freeness-defined-in (freeness a theorem; the god's-eye node collapsed by the engine). -/
 theorem ws7_no_conservation_by_fiat (hinf : ℵ₀ ≤ κ) :
     (¬ ConservesStrict (twoLoop hinf))
-  ∧ (∃ (h h' : Hold (twoLoop hinf)), ReReStep (twoLoop hinf) h h'
-        ∧ ¬ breadth (twoLoop hinf) h' < breadth (twoLoop hinf) h) := by
+  ∧ (∃ (h h' : Hold (pingPong hinf)), ReReStep (pingPong hinf) h h' ∧ h ≠ h'
+        ∧ breadth (pingPong hinf) h' = breadth (pingPong hinf) h) := by
   obtain ⟨kill, refuted⟩ := ws5_verdict_justified hinf
   exact ⟨refuted, kill⟩
 
@@ -100,8 +108,8 @@ theorem ws7_strip_ledger (hinf : ℵ₀ ≤ κ) :
        ∧ ¬ ∃ R, IsBisimL (labelLoop hinf) R ∧ R ⟨true⟩ ⟨false⟩)
   ∧ (∀ {Y : Type u} (dest : Y → PkObj κ Y) (h : Hold dest), SHNE dest h.1.2 →
        ∃ h', ReReStep dest h h' ∧ SHNE dest h'.1.2)
-  ∧ (∃ (h h' : Hold (twoLoop hinf)), ReReStep (twoLoop hinf) h h'
-       ∧ ¬ breadth (twoLoop hinf) h' < breadth (twoLoop hinf) h) := by
+  ∧ (∃ (h h' : Hold (pingPong hinf)), ReReStep (pingPong hinf) h h' ∧ h ≠ h'
+       ∧ breadth (pingPong hinf) h' = breadth (pingPong hinf) h) := by
   refine ⟨fun {_Q _X} dest hrec hbeh hatom => ws1_no_gods_eye dest hrec hbeh hatom,
           ws4_free_label_is_import hinf,
           fun {_Y} dest h hs => ws3_dynamics_forced dest h hs, ?_⟩

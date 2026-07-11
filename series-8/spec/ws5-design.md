@@ -156,3 +156,19 @@ theorem ws5_verdict_justified (hinf : ℵ₀ ≤ κ) :
 ## Deliverable
 
 `series-8/formal/Series8/ws5.lean`: transcribed carrier (README §6); `breadth`, `Conserves`, `ConservesStrict`, `ConservationVerdict`; `ws5_strict_refuted` (D1), `ws5_kill_condition` (D2), `ws5_conserves_if_nonincreasing` (D3), `ws5_conservation_verdict` + `ws5_verdict_justified` (D4). **Consumes WS3's `ReReStep`/`prec`; never redefines them; `breadth` is measured outside the map.** Axiom check: `#print axioms ws5_kill_condition` reduces through `twoLoop_HNE` / `Cardinal.mk_singleton` to the standard three. **Conservation is open by design; the kill condition is run; the verdict is Partial (Refuted-universal). This workstream is forbidden from assuming its answer, and does not.**
+
+---
+
+## REVIEW-RESPONSE NOTE (2026-07-11, series-review-1 R1 — REAL, addressed) — the depth-advancing kill witness
+
+The blind review (`series-review-1.md` R1) correctly found that the original `ws5_kill_condition`
+witnessed the kill condition on a self-loop `h → h` (`twoLoop`): breadth is genuinely unforeclosed and
+the field genuinely atomless, but *depth does not advance* (`h' = h`), so the charter §5.4 phrase "opens
+depth" was only met degenerately. Addressed by **building the depth-advancing witness**: `pingPong`
+(two states `⟨true⟩ ↔ ⟨false⟩`, each single-successor, constant breadth 1). `ws5_kill_condition` now
+delivers `∃ h h', ReReStep h h' ∧ h ≠ h' ∧ breadth h' = breadth h ∧ (∀ z, SHNE)` — the hold genuinely
+descends from resolving one node to resolving the other (`h ≠ h'`, depth opens) while breadth is
+preserved. `ws5_strict_refuted` (the `twoLoop` `1 < 1` refutation) is unchanged and still independently
+valid; `ws5_verdict_justified`, WS7's `Audit`, and the strip ledger now consume the depth-advancing
+witness. The verdict is unchanged (Partial; strict conservation Refuted). Conservation remains measured
+OUTSIDE the map (the §0.4 guard the review confirmed CLEAN). All axiom-clean.

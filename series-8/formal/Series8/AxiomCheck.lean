@@ -7,12 +7,16 @@ axiom. See `series-8/spec/axiom-check-log.md` for the committed record.
 -/
 import Series8
 
--- WS1 — the no-god's-eye spine (Impossibility proved)
+-- WS1 — the no-god's-eye spine (Impossibility proved) + the S1 fork (series-review-1)
 #print axioms Series8.WS1.ws1_no_gods_eye
 #print axioms Series8.WS1.ws1_no_gods_eye_node
 #print axioms Series8.WS1.ws1_hold_forced
 #print axioms Series8.WS1.ws1_symmetric_hold_recoverable
 #print axioms Series8.WS1.ws1_directed_hold_free
+#print axioms Series8.WS1.ws1_distinct_faces_atomless_not_recoverable
+#print axioms Series8.WS1.ws1_no_recoverable_plurality
+#print axioms Series8.WS1.ws1_gods_eye_dichotomy
+#print axioms Series8.WS1.ws1_plural_faces_free_witness
 
 -- WS2 — perspective breaks the collapse (plurality by free perspective)
 #print axioms Series8.WS2.ws2_perspective_breaks_merge
