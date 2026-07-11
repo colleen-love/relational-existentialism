@@ -1,14 +1,14 @@
 # Relational Existentialism — Series 7: Technical Status Summary
 
-*A machine-checked proof of the Import Theorem — atomless plurality is impossible without an import — and the finding that pushing it to its dynamic limit forces a disjunction the formalism cannot close: the imported distinction is either externally defined or internally chosen.*
+*A machine-checked proof of the Import Theorem — atomless, purely relational, behaviorally identified plurality is impossible without a distinction the relating cannot carry — and the finding that the required distinction forks undecidably into the given and the chosen, a fork the formalism cannot close.*
 
 ## 1. The headline
 
-> **Atomless plurality is impossible without an import — a distinction based on something the histories do not contain, either externally defined, or internally chosen.**
+> **Atomless, purely relational, behaviorally identified plurality is impossible without a distinction the relating cannot carry, forking undecidably into the given and the chosen.**
 
-The first clause is the Import Theorem: no construction satisfies all four of (1) *plain relating* (the functor is the unlabelled `P_κ`, no imported coordinate), (2) *behavioral identity* (an object is its relating — every bisimulation is contained in equality; equivalently "no imported atom"), (3) *genuine every-moment atomlessness* (`SHNE`, hereditary non-emptiness), and (4) *plurality*. Proved, machine-checked, non-vacuous, arbitrary carrier.
+The first part is the Import Theorem: no construction satisfies all four of (1) *plain relating* (the functor is the unlabelled `P_κ`, no imported coordinate), (2) *behavioral identity* (an object is its relating — every bisimulation is contained in equality; equivalently "no imported atom"), (3) *genuine every-moment atomlessness* (`SHNE`, hereditary non-emptiness), and (4) *plurality*. Proved, machine-checked, non-vacuous, arbitrary carrier. To violate the impossibility while keeping (1)–(3) you need a distinction the relating cannot carry.
 
-The second clause is what the capstone extracts by pushing (1)–(4) onto the dynamic picture. Atomless histories are not merely bisimilar but **equal** (`ws1_productive_unique`: every productive thread is Ω), so any *function* of the history returns the same value on two atomless histories (`att_cannot_distinguish_atomless_histories`). A separator must therefore read an argument exogenous to the relating — which, to the formalism, is a coordinate not carried by the relating: the §4.1 footprint of an import. But the footprint is all a proof can see, and a **given** (a pre-existing atom) and a **choice** (a freely-originated distinction, a will) leave the same one. Type theory has no predicate for *chosen rather than given*; the theorem forces the disjunction and is silent on the disjunct. That silence is the result.
+The fork is a property of that distinction, not of any dynamics — it holds on a single static coalgebra as much as on a process. It is sharpest at the dynamic limit, where the two candidates are provably *equal*, not merely bisimilar: atomless histories are **equal** (`ws1_productive_unique`: every productive thread is Ω), so any *function* of the history returns the same value on two of them (`att_cannot_distinguish_atomless_histories`). Under (2), the static case is the same: two atomless states are behaviorally identified, hence one, so any separator is equally exogenous. That exogenous separator is, to the formalism, a coordinate not carried by the relating — the §4.1 footprint of an import. But the footprint is all a proof can see, and a **given** (a pre-existing atom) and a **choice** (a freely-originated distinction, a will) leave the same one. Type theory has no predicate for *chosen rather than given*; the theorem forces the disjunction and is silent on the disjunct. That silence is the result.
 
 Read as Parmenides generalized: a groundless, atomless, faithfully-relational world that is **determined** is the One — Series 6's collapse is exactly the world without will — and the only way it holds more than one thing is a distinguisher the relating does not carry, externally defined or internally chosen, undecidably.
 
@@ -27,7 +27,7 @@ Read as Parmenides generalized: a groundless, atomless, faithfully-relational wo
 - **The recovered instances.** `ws1_recovers_static` (abstract behavioral-identity form subsuming the terminal `νPk`) and `ws1_productive_unique` (the dynamic collapse — Ω the unique productive thread), both genuine instances of the one engine.
 - **The semantic import test — `ws4_free_label_is_import`, `ws4_recoverable_not_import`, `ws4_recoverable_atomless_collapses`.** "Import" is the charter's §4.1 *semantic* predicate (a coordinate the plain relating cannot recover), not "a `Q` in the signature." A free label is an import (plain-bisimilar yet label-distinct); a recoverable label is not, and collapses.
 
-## 4. The dynamic limit and the atom-or-will capstone
+## 4. The exogenous distinction, and the atom-or-will fork
 
 The chain, each link its own theorem:
 
