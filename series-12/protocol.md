@@ -102,7 +102,7 @@ The first incremental build takes longer than two minutes. Run it as a backgroun
 
 **Prompt to seed the blind review session:**
 
-> Please clone the repository and view the Series 12 working branch.
+> Please clone [the repository](https://github.com/colleen-love/relational-existentialism) and view the Series 12 working branch.
 
 > Review adversarially across the whole series at once: does the code prove these theorems; do the theorems meet the designs' targets; do they satisfy the charter criteria they claim, with no `sorry`, no custom axiom, no signature that quietly weakens the target? **On the second and later passes, run the recurrence check FIRST (§0.2a):** for every finding graded SERIOUS in the prior `spec/series-review-{N-1}.md`, unfold the actual proof term and determine whether Phase E BUILT the originally-specified target (name it) or RELABELED to a pre-registered honest outcome; a finding "addressed" by a target-avoiding theorem is re-graded SERIOUS and marked RECURRING with its count, and its correction is the binary "build the named target OR report the pre-registered outcome, no third theorem." Then, specifically for Series 12, without building the code, run:
 
