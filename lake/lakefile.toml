@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07"]
+defaultTargets = ["Series07", "Series12"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -23,6 +23,16 @@ roots = ["Series07", "Series07.AxiomCheck"]
 # Series 08, 09, 10, and 11 are CLOSED and frozen under `archive/series-08/`…`archive/series-11/`;
 # they are no longer registered here (their formal sources remain readable at
 # `archive/series-NN/formal/` but are not built).
+
+# `series-12/formal/` — Series 12 (the program's terminal series). `Series12` imports
+# `Series12.ws1`…`Series12.ws7`; `Series12.AxiomCheck` runs the axiom pass. Series 12 is WHOLLY
+# STANDALONE: the one prior result it presupposes and names is Series 07, transcribed (not imported)
+# into `series-12/formal/Series12/wsNN.lean` and re-namespaced `Series12.WSNN` — nothing is imported
+# across series.
+[[lean_lib]]
+name = "Series12"
+srcDir = "../series-12/formal"
+roots = ["Series12", "Series12.AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`); Series 07 imports it.
 [[require]]

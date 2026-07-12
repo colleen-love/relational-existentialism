@@ -25,5 +25,6 @@ check () { # <root> <allowed-egrep>
 # Each series' roots (the aggregator `SeriesN`, the per-workstream `SeriesN.wsX`, and
 # `SeriesN.AxiomCheck`) may import each other (+ mathlib); nothing outside the namespace is allowed.
 check series-07 "^import Series07(\.[A-Za-z0-9_]+)*$"
+check series-12 "^import Series12(\.[A-Za-z0-9_]+)*$"
 
 exit $fail
