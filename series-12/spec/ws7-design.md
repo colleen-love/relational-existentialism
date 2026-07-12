@@ -69,7 +69,7 @@ theorem ws7_no_evaluation (hinf : ℵ₀ ≤ κ) :
         Converges dest reify c x W ↔ c.raise x W (c.orient x) = c.orient W)   -- parametric, definitional
   ∧ (∃ c, ∃ x y, (∃ R, IsBisim (destW hinf) R ∧ R x y) ∧ c.orient x ≠ c.orient y) := …  -- concrete only inside ∃
 ```
-The central check: the convergence relation is parametric (an `Iff` for ALL `c`), and the only concrete compass is inside an existential. A canonical inhabitant used non-existentially would be the central sin; unfolding confirms none exists.
+The central check (honest formulation, series-review-1 SR1-1): the convergence relation is parametric (an `Iff` for ALL `c`), and NO compass-parametric obligation is discharged by evaluating a distinguished compass; the only concrete compasses (`cHold`/`cFail`, the WS3 inline witnesses) occur as model-pair / existential-witness constructions, never selected to prove a `∀`-compass statement. A canonical inhabitant used to discharge a parametric obligation would be the central sin; the grep+unfold confirms none exists. (The meta clause is what the review runs; the theorem records the parametric `Iff` and the exogeneity existential it leans on.)
 
 - **Ambient:** `Converges`, `Compass`, `ws3_compass_exogenous`.
 - **Success condition (Shape-drawn):** every compass-theorem parametric; concrete compasses only inside `∃`.

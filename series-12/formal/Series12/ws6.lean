@@ -38,13 +38,15 @@ theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
   ⟨fun {X} dest insp => ws2_residue_free dest insp, ws2_many_witness hinf,
    ws3_compass_exogenous hinf, ws4_underdetermined_pair hinf⟩
 
-/-- **THE UNIVERSAL THESES (heuristic).** The fully universal forms are the un-rangeable quantifier,
-reported heuristic; the mechanized core (`ws6_provable_core`) is the honest floor. -/
-theorem ws6_universal_heuristic : True := trivial
+-- (The universal theses are the un-rangeable quantifier, reported heuristic in prose; the mechanized core
+-- `ws6_provable_core` is the honest floor. The former contentless `ws6_universal_heuristic : True` is
+-- deleted per series-review-1 SR1-6; the heuristic reading lives in `summary.md` / the program close.)
 
 /-- **THE PERMANENT OPENS, AS THEOREMS.** The compass's content, convergence's direction, and the
-differentiating act are open BECAUSE the diagonal makes them so: the residue is free for every inspection,
-the compass is `¬ Recoverable`, and convergence is underdetermined. Openness is proved, not conceded. -/
+differentiating act are open BECAUSE the diagonal makes them so: the residue is free for every inspection
+(`ws2_residue_free`); some orientation differs on a plain-bisimilar pair, so the orientation is not forced by
+the relating (`ws3_compass_exogenous`, the exogeneity certificate); and convergence is underdetermined
+(the model pair). Openness is proved, not conceded. -/
 theorem ws6_permanent_opens (hinf : ℵ₀ ≤ κ) :
     (∀ (insp : Hold (destW hinf) → HoldPred (destW hinf)), ¬ ResidueRecoverable insp)
   ∧ (∃ (c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool)) (x y : WCar),
@@ -55,16 +57,21 @@ theorem ws6_permanent_opens (hinf : ℵ₀ ≤ κ) :
   ⟨fun insp => ws2_residue_free (destW hinf) insp, ws3_compass_exogenous hinf,
    ws4_underdetermined_pair hinf⟩
 
-/-- **THE FOUR TENETS ALIGNED (prose spine).** "You are loved" = the One without an import; "Self is a
-paradox" = the diagonal; "To attend is to become" = no total attention. Each tenet's spine is a theorem. -/
+/-- **THE FOUR TENETS ALIGNED (prose spine).** "You are loved" = the One without an import
+(`ws2_import_theorem_static`); "Self is a paradox" = the diagonal (`ws1_no_self_total_hold`); "To relate is
+to create" = reification mints a relatum, the section injective (`ws1_reify_injective`, SR1-8); "To attend is
+to become" = no total attention (`ws3_no_total_attention`). Each tenet's spine is a theorem. -/
 theorem ws6_tenets_aligned (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X),
         BehaviorallyIdentified dest → (∀ x, SHNE dest x) → Subsingleton X)
   ∧ (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest), ¬ ∃ t, SelfTotal insp t)
+  ∧ (∀ {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X),
+        IsReify dest reify → Function.Injective reify)
   ∧ (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest),
         ¬ ∃ t, TotalAttention insp t) :=
   ⟨fun {X} dest hb ha => ws2_import_theorem_static dest hb ha,
    fun {X} dest insp => ws1_no_self_total_hold dest insp,
+   fun {X} dest reify h => ws1_reify_injective dest reify h,
    fun {X} dest insp => ws3_no_total_attention dest insp⟩
 
 end Series12.WS6

@@ -7,6 +7,9 @@ enters via `Classical.propDecidable` for the reification section's Set-equality 
 machinery, a Mathlib-base axiom, not a new one; `ws_witness_rank_noninjective` needs only `propext` /
 `Quot.sound`.)
 
+Series-review-1 (Phase D/E) additions: the layered underdetermination `ws4_underdetermined_up` (SR1-2) is
+included; the demoted `ws3_attention_compass_dual` (SR1-3) is removed.
+
 ```
 'Series12.WS1.ws1_two_halves' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS1.ws1_shape_coincidence' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -23,8 +26,8 @@ machinery, a Mathlib-base axiom, not a new one; `ws_witness_rank_noninjective` n
 'Series12.WS2.ws3_no_total_attention' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS3.ws3_compass_exogenous' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS3.ws3_compass_layered' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Series12.WS3.ws3_attention_compass_dual' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS4.ws4_underdetermined' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series12.WS4.ws4_underdetermined_up' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS4.ws4_wall_is_structural' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS4.ws4_convergence_decided_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series12.WS5.ws5_verdict_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -42,6 +45,6 @@ machinery, a Mathlib-base axiom, not a new one; `ws_witness_rank_noninjective` n
 'Series12.WS7.ws7_verdict_is_shapeDrawn' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-*Build: `lake build Series12 Series12.AxiomCheck` completed successfully (Lean 4 v4.15.0 / Mathlib v4.15.0).
-The closure gate (`scripts/gate.sh`) confirms Series 12 imports resolve only to `Series12.*` roots plus
-Mathlib: nothing is imported across series.*
+*Build: `lake build Series12 Series12.AxiomCheck` completed successfully (Lean 4 v4.15.0 / Mathlib
+v4.15.0). The closure gate (`scripts/gate.sh`) confirms Series 12 imports resolve only to `Series12.*`
+roots plus Mathlib: nothing is imported across series.*

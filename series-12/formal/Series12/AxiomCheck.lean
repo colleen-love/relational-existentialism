@@ -29,10 +29,10 @@ import Series12
 -- WS3 - feeling: the compass TYPE, parametric, exogenous, layered
 #print axioms Series12.WS3.ws3_compass_exogenous
 #print axioms Series12.WS3.ws3_compass_layered
-#print axioms Series12.WS3.ws3_attention_compass_dual
 
--- WS4 - convergence defined and underdetermined (the wall)
+-- WS4 - convergence defined and underdetermined (the wall), one-layer and layered (ConvergesUp)
 #print axioms Series12.WS4.ws4_underdetermined
+#print axioms Series12.WS4.ws4_underdetermined_up
 #print axioms Series12.WS4.ws4_wall_is_structural
 #print axioms Series12.WS4.ws4_convergence_decided_shape
 

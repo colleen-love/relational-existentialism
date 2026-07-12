@@ -58,8 +58,9 @@ theorem ws3_edge_aW_bW (hinf : ℵ₀ ≤ κ) : ConstituentOf (destW hinf) (reif
 
 /-! ## The compass is exogenous (`¬ Recoverable`), the Series 07 necessity -/
 
-/-- **THE COMPASS IS EXOGENOUS.** SOME compass assigns different orientations to a plain-bisimilar pair, so
-`orient` is not recoverable from the plain relating: the compass ITSELF inhabits the opening shape. An
+/-- **THE COMPASS IS EXOGENOUS.** The precise content (SR1-9): SOME compass assigns different orientations to
+a plain-bisimilar pair (`aW`, `bW`), so orientations are unconstrained by bisimilarity, hence `orient` is not
+forced by the plain relating (the exogeneity certificate, the Series 07 necessity read for the compass). An
 EXISTENTIAL, never a distinguished compass. -/
 theorem ws3_compass_exogenous (hinf : ℵ₀ ≤ κ) :
     ∃ (c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool)) (x y : WCar),
@@ -69,29 +70,29 @@ theorem ws3_compass_exogenous (hinf : ℵ₀ ≤ κ) :
 
 /-! ## The compass is layered over genuine tower edges (two-sided freedom, Finding 2) -/
 
-/-- **THE COMPASS IS LAYERED (two-sided freedom over a genuine tower edge).** Over a genuine constituency
-edge, the coupling channel exists and the coupling's VALUE is free in both directions: some compass coheres
-(the raise-equation holds), some does not. The raise-equation is `Converges` unfolded (WS4). Coupled without
-being one (some compass does not cohere) and without being independent of the tower (only over tower edges).
--/
-theorem ws3_compass_layered (hinf : ℵ₀ ≤ κ)
-    (hedge : ConstituentOf (destW hinf) (reifyW hinf) aW bW) :
-    (∃ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+/-- **THE COMPASS IS LAYERED (two-sided freedom over a genuine tower edge).** Over the genuine constituency
+edge `(aW, bW)` (`ConstituentOf`, a conjunct of the conclusion so the edge sites the statement, SR1-5), the
+coupling's VALUE is free in both directions: some compass coheres (the raise-equation holds), some does not.
+The raise-equation is `Converges` unfolded (WS4). Coupled without being one (some compass does not cohere)
+and without being independent of the tower (only over tower edges). -/
+theorem ws3_compass_layered (hinf : ℵ₀ ≤ κ) :
+    ConstituentOf (destW hinf) (reifyW hinf) aW bW
+  ∧ (∃ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
         c.raise aW bW (c.orient aW) = c.orient bW)
   ∧ (∃ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
         c.raise aW bW (c.orient aW) ≠ c.orient bW) :=
-  -- the `not` raising coheres (rfl: both sides ⟨false⟩); the `id` raising does not (up_tf)
-  ⟨⟨⟨fun z => if z = aW then ⟨true⟩ else ⟨false⟩, fun _ _ o => ⟨!o.down⟩⟩, rfl⟩,
+  -- the edge is genuine; the `not` raising coheres (rfl: both sides ⟨false⟩); the `id` raising does not (up_tf)
+  ⟨ws3_edge_aW_bW hinf,
+   ⟨⟨fun z => if z = aW then ⟨true⟩ else ⟨false⟩, fun _ _ o => ⟨!o.down⟩⟩, rfl⟩,
    ⟨⟨fun z => if z = aW then ⟨true⟩ else ⟨false⟩, fun _ _ o => o⟩, up_tf⟩⟩
 
-/-! ## The duality with attention (WS2 knowable, WS3 typeable) -/
-
-/-- **THE DUALITY.** Attention is the knowable SUBTRACTION (a bounded reader with values, `att.reads.Finite`);
-the compass is the typeable ORIENTATION whose values the structure cannot supply (`¬ Recoverable`). -/
-theorem ws3_attention_compass_dual (hinf : ℵ₀ ≤ κ) :
-    (∀ (att : FiniteAttention (destWL hinf)), att.reads.Finite)
-  ∧ (∃ (c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool)) (x y : WCar),
-        (∃ R, IsBisim (destW hinf) R ∧ R x y) ∧ c.orient x ≠ c.orient y) :=
-  ⟨fun att => att.fin, ws3_compass_exogenous hinf⟩
+/- **The duality with attention (SR1-3): demoted to prose.** Attention is the knowable SUBTRACTION (a bounded
+reader with values, `att.reads.Finite`, true by construction of `FiniteAttention`); the compass is the
+typeable ORIENTATION whose values the structure cannot supply (`ws3_compass_exogenous`). This contrast is
+INTERPRETIVE: no single theorem with contrastive content joins the two facts (the earlier
+`ws3_attention_compass_dual` was a bare conjunction of a field projection and a restatement of exogeneity,
+carrying the duality only in its docstring), so per series-review-1 SR1-3 it is demoted here to prose and to
+the program close (WS6 / §8), not a proof term. The two facts stand on their own: `att.fin` (a field) and
+`ws3_compass_exogenous` (a theorem). -/
 
 end Series12.WS3

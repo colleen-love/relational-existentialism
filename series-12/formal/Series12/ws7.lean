@@ -66,9 +66,13 @@ theorem ws7_audit_verdict (hinf : ℵ₀ ≤ κ) :
 
 /-! ## The five promoted first-class checks -/
 
-/-- **THE NO-EVALUATION CHECK (the central check, discipline 2).** The convergence relation is PARAMETRIC
-(an `Iff` for ALL `c`), and the only concrete compass is inside an existential; no theorem has a
-distinguished compass as a non-existential subterm. -/
+/-- **THE NO-EVALUATION CHECK (the central check, discipline 2).** The precise honest formulation
+(series-review-1 SR1-1): the convergence relation is PARAMETRIC over the compass type (an `Iff` for ALL `c`,
+the first conjunct), and NO compass-parametric obligation is discharged by evaluating a distinguished
+compass; the only concrete compasses (`cHold`/`cFail` in WS4, the inline witnesses in WS3) occur solely as
+model-pair / existential-witness constructions, never selected to prove a `∀`-compass statement. (This last
+clause is meta-level and is the check this audit run performs by grep + unfold; the second conjunct here
+records the exogeneity existential the check leans on.) -/
 theorem ws7_no_evaluation (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) {Or : Type u}
         (c : Compass dest reify Or) (x W : X),
@@ -99,8 +103,11 @@ theorem ws7_inhabitation_genuine (hinf : ℵ₀ ≤ κ) :
   ⟨ws2_many_witness hinf, ⟨(reifyW_sW₂ hinf).symm, bW_mem_sW₂ hinf, by decide⟩,
    ws_witness_rank_noninjective, fun {X} dest hb ha => ws2_import_theorem_static dest hb ha⟩
 
-/-- **THE NAMES-NOT-TERMS CHECK (discipline 5).** The neutrality theorem IS the certificate: any name is a
-tagging that changes no payoff, so no name does discharge work. -/
+/-- **THE NAMES-NOT-TERMS CHECK (discipline 5).** The neutrality theorem IS the object-level surrogate: the
+`name` parameter is phantom (unused), so any name is a tagging that changes no payoff. The ENFORCEABLE check
+is the meta-level grep over `formal/Series12/` for a proof term / definition named consciousness, God, choice,
+or compass-as-content (run by series-review-1: clean); this theorem records that the payoffs are `name`-free
+(SR1-7). -/
 theorem ws7_names_not_terms {Name : Type u} (name : ULift.{u} Bool → Name) (hinf : ℵ₀ ≤ κ) :
     Many (destWL hinf)
   ∧ (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
@@ -108,17 +115,22 @@ theorem ws7_names_not_terms {Name : Type u} (name : ULift.{u} Bool → Name) (hi
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW) :=
   ws5_name_neutral name hinf
 
-/-- **THE STRIP-TEST LEDGER.** The three payoffs reduced to their bare facts: the coincidence to the two
-non-recoverability facts; the plurality to the labelled-separation; the convergence to the model pair. -/
+/-- **THE STRIP-TEST LEDGER.** The payoffs reduced to their bare facts: the coincidence to the two
+non-recoverability facts (junk label AND the genuine tower witness); the plurality to the labelled-separation;
+the convergence to the model pair, at BOTH the one-layer (`Converges`) and the layered (`ConvergesUp`, SR1-2)
+relation. -/
 theorem ws7_strip_ledger (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest), ¬ ResidueRecoverable insp)
   ∧ (¬ Recoverable (labelLoop hinf))
   ∧ Many (destWL hinf)
   ∧ (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
         Converges (destW hinf) (reifyW hinf) c₁ aW bW
-      ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW) :=
+      ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW)
+  ∧ (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        ConvergesUp (destW hinf) (reifyW hinf) c₁ aW bW
+      ∧ ¬ ConvergesUp (destW hinf) (reifyW hinf) c₂ aW bW) :=
   ⟨fun {X} dest insp => ws2_residue_free dest insp, ws4_labelLoop_not_recoverable hinf,
-   ws2_many_witness hinf, ws4_underdetermined_pair hinf⟩
+   ws2_many_witness hinf, ws4_underdetermined_pair hinf, ws4_underdetermined_up hinf⟩
 
 /-! ## The verdict falsifiability and the pre-registered branches -/
 

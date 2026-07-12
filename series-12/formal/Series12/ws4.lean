@@ -114,4 +114,47 @@ theorem ws4_convergence_decided_shape (hinf : ℵ₀ ≤ κ) :
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW) :=
   Or.inr (Or.inr (ws4_underdetermined_pair hinf))
 
+/-! ## The LAYERED underdetermination (`ConvergesUp`, up the tower edges) — SR1-2 -/
+
+/-- **Edge classification from `aW`.** The only constituency edge out of `aW` on the witness carrier goes to
+`bW`: any `s` with the pointwise reification fact and `aW ∈ s.1` forces `reifyW s = bW`. (The tower graph is
+the path `aW → bW → cW`.) -/
+private lemma constituentOf_aW (hinf : ℵ₀ ≤ κ) {y : WCar}
+    (h : ConstituentOf (destW hinf) (reifyW hinf) aW y) : y = bW := by
+  obtain ⟨s, hpt, hmem, hy⟩ := h
+  by_cases h1 : s.1 = {aW}
+  · rw [hy]; simp only [reifyW]; rw [if_pos h1]
+  · by_cases h2 : s.1 = {bW}
+    · rw [h2, Set.mem_singleton_iff] at hmem; exact absurd hmem (by decide)
+    · exfalso
+      have hrs : reifyW hinf s = aW := by simp only [reifyW]; rw [if_neg h1, if_neg h2]
+      rw [hrs, destW_aW] at hpt
+      exact h1 (by rw [← hpt]; exact toPk_val hinf {aW})
+
+/-- Positive side of the layered pair: `cHold` coheres up the single tower edge `aW → bW`. -/
+private lemma up_cHold (hinf : ℵ₀ ≤ κ) :
+    ConvergesUp (destW hinf) (reifyW hinf) (cHold hinf) aW bW :=
+  Relation.ReflTransGen.single ⟨ws3_edge_aW_bW hinf, cHold_converges hinf⟩
+
+/-- Negative side of the layered pair: `cFail` does not cohere up any tower chain from `aW` to `bW`. The only
+first edge is `aW → bW` (`constituentOf_aW`), whose `Converges cFail` step fails. -/
+private lemma no_up_cFail (hinf : ℵ₀ ≤ κ) :
+    ¬ ConvergesUp (destW hinf) (reifyW hinf) (cFail hinf) aW bW := by
+  intro h
+  rcases Relation.ReflTransGen.cases_head h with heq | ⟨y, hR, _⟩
+  · exact absurd heq (by decide)
+  · obtain ⟨hcon, hconv⟩ := hR
+    have hy : y = bW := constituentOf_aW hinf hcon
+    subst hy
+    exact cFail_not_converges hinf hconv
+
+/-- **THE LAYERED UNDERDETERMINATION (SR1-2).** Convergence UP THE LAYERS is underdetermined too: two
+compasses on one structure, one cohering up the tower edge and one not. Existential (the concrete compasses
+confined to the witness, never named in the statement). -/
+theorem ws4_underdetermined_up (hinf : ℵ₀ ≤ κ) :
+    ∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        ConvergesUp (destW hinf) (reifyW hinf) c₁ aW bW
+      ∧ ¬ ConvergesUp (destW hinf) (reifyW hinf) c₂ aW bW :=
+  ⟨cHold hinf, cFail hinf, up_cHold hinf, no_up_cFail hinf⟩
+
 end Series12.WS4
