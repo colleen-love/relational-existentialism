@@ -1,10 +1,10 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series09", "Series10", "Series11"]
+defaultTargets = ["Series07"]
 
-# ── Layout (Series 07 complete; Series 09 + Series 10 live; Series 03–06, 08 closed under `archive/`) ──
-# Series 03, 04, 05, 06, and 08 are closed and frozen under `archive/series-03/`…`archive/series-08/`;
-# they are no longer registered here. Series 07 is complete under `series-07/`; Series 09 and
-# Series 10 are the live development. All registered series are built here so `lake build` verifies them.
+# ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
+# Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
+# `archive/series-11/`; they are no longer registered here. Series 07 is complete under
+# `series-07/` and is built here so `lake build` verifies it.
 #
 # Each series is a distinct module namespace so they can coexist in one package:
 # each series' roots live under `SeriesNN.*`. Each aggregator root `SeriesNN`
@@ -20,40 +20,11 @@ name = "Series07"
 srcDir = "../series-07/formal"
 roots = ["Series07", "Series07.AxiomCheck"]
 
-# Series 08 is CLOSED and frozen under `archive/series-08/`; it is no longer registered here
-# (its formal sources remain readable at `archive/series-08/formal/` but are not built).
+# Series 08, 09, 10, and 11 are CLOSED and frozen under `archive/series-08/`…`archive/series-11/`;
+# they are no longer registered here (their formal sources remain readable at
+# `archive/series-NN/formal/` but are not built).
 
-# `series-09/formal/` — Series 09 (live). `Series09` imports `Series09.ws1`…`Series09.ws7`;
-# `Series09.AxiomCheck` runs the axiom pass. Series 09 is WHOLLY STANDALONE: every Series
-# 8/7/4 lemma it reuses is transcribed into `series-09/formal/Series09/wsNN.lean` and
-# re-namespaced `Series09.WSNN` — nothing is imported from `series-08/`, `series-07/`,
-# `series-04/`, or `archive/`.
-[[lean_lib]]
-name = "Series09"
-srcDir = "../series-09/formal"
-roots = ["Series09", "Series09.AxiomCheck"]
-
-# `series-10/formal/` — Series 10 (live). `Series10` imports `Series10.ws1`…`Series10.ws7`;
-# `Series10.AxiomCheck` runs the axiom pass. Series 10 is WHOLLY STANDALONE: every Series
-# 9/8/7/4 lemma it reuses is transcribed into `series-10/formal/Series10/wsNN.lean` and
-# re-namespaced `Series10.WSNN` — nothing is imported from `series-09/`, `series-08/`,
-# `series-07/`, `series-04/`, or `archive/`.
-[[lean_lib]]
-name = "Series10"
-srcDir = "../series-10/formal"
-roots = ["Series10", "Series10.AxiomCheck"]
-
-# `series-11/formal/` — Series 11 (live, the program's terminal series). `Series11` imports
-# `Series11.ws1`…`Series11.ws7`; `Series11.AxiomCheck` runs the axiom pass. Series 11 is WHOLLY
-# STANDALONE: every Series 10/9/8/4 lemma it reuses is transcribed into
-# `series-11/formal/Series11/wsNN.lean` and re-namespaced `Series11.WSNN` — nothing is imported
-# from `series-10/`, `series-09/`, `series-08/`, `series-07/`, `series-04/`, or `archive/`.
-[[lean_lib]]
-name = "Series11"
-srcDir = "../series-11/formal"
-roots = ["Series11", "Series11.AxiomCheck"]
-
-# mathlib is retained (cache present under `.lake`); all series import it.
+# mathlib is retained (cache present under `.lake`); Series 07 imports it.
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
