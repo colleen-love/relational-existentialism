@@ -416,4 +416,21 @@ theorem ws1_coincidence_not_identity {X : Type u} (dest : X → PkObj κ X)
   ∧ residue insp₁ ≠ residue insp₂ :=
   ⟨ws2_residue_free dest insp₁, ws2_residue_free dest insp₂, hne⟩
 
+/-- **D3' - THE ANTI-CONFLATION IS NON-VACUOUS (PR1-R2).** The hypothesis of
+`ws1_coincidence_not_identity` is DISCHARGED on any carrier with an inhabited `Hold`: the constant-`True`
+and constant-`False` inspections both inhabit the opening (`ws2_residue_free`) yet have POINTWISE-OPPOSITE
+residues (`residue (fun _ _ => True) h₀ = False`, `residue (fun _ _ => False) h₀ = True`), so distinct
+inhabitants of the shape genuinely exist and shared non-recoverability provably cannot entail identity. Not
+an assumed non-identity: an exhibited one. -/
+theorem ws1_coincidence_not_identity_witness {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) :
+    ∃ insp₁ insp₂ : Hold dest → HoldPred dest,
+        Opening (@ResidueRecoverable κ X dest) insp₁
+      ∧ Opening (@ResidueRecoverable κ X dest) insp₂
+      ∧ residue insp₁ ≠ residue insp₂ := by
+  refine ⟨fun _ _ => True, fun _ _ => False, ws2_residue_free dest _, ws2_residue_free dest _, ?_⟩
+  intro hcontra
+  have hc : False = True := by
+    simpa only [residue, diag, not_true, not_false_iff] using congrFun hcontra h₀
+  exact (Iff.of_eq hc.symm).mp trivial
+
 end Series12.WS1

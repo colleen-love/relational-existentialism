@@ -69,7 +69,7 @@ theorem ws7_audit_verdict (hinf : ℵ₀ ≤ κ) :
 /-- **THE NO-EVALUATION CHECK (the central check, discipline 2).** The precise honest formulation
 (series-review-1 SR1-1): the convergence relation is PARAMETRIC over the compass type (an `Iff` for ALL `c`,
 the first conjunct), and NO compass-parametric obligation is discharged by evaluating a distinguished
-compass; the only concrete compasses (`cHold`/`cFail` in WS4, the inline witnesses in WS3) occur solely as
+compass; the only concrete compasses (`cHoldF`/`cFailF` in WS4, the inline witnesses in WS3) occur solely as
 model-pair / existential-witness constructions, never selected to prove a `∀`-compass statement. (This last
 clause is meta-level and is the check this audit run performs by grep + unfold; the second conjunct here
 records the exogeneity existential the check leans on.) -/
@@ -81,15 +81,28 @@ theorem ws7_no_evaluation (hinf : ℵ₀ ≤ κ) :
         (∃ R, IsBisim (destW hinf) R ∧ R x y) ∧ c.orient x ≠ c.orient y) :=
   ⟨fun {X} dest reify {Or} c x W => Iff.rfl, ws3_compass_exogenous hinf⟩
 
-/-- **THE MODEL-PAIR CHECK (discipline 3).** Two non-degenerate inhabitants on one structure, the relation
-holding in one and failing in the other. -/
+/-- **THE MODEL-PAIR CHECK (discipline 3).** Two non-degenerate FAITHFUL inhabitants on one structure, the
+relation holding in one and failing in the other: the underdetermination is over a genuinely constrained
+class, not the free-raising typing tautology (PR1-S1). -/
 theorem ws7_model_pair_genuine (hinf : ℵ₀ ≤ κ) :
     ∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
-        Converges (destW hinf) (reifyW hinf) c₁ aW bW
+        Faithful c₁ ∧ Faithful c₂
+      ∧ Converges (destW hinf) (reifyW hinf) c₁ aW bW
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW
       ∧ NonDegenerate (destW hinf) (reifyW hinf) c₁ aW bW
       ∧ NonDegenerate (destW hinf) (reifyW hinf) c₂ aW bW :=
   (ws4_underdetermined hinf).2
+
+/-- **THE FORK-OPEN CHECK (falsifiability, PR1-S1).** The trichotomy is genuinely open: at the reflexive
+locus `(aW, aW)` every faithful compass coheres, so `convergenceDecided` is constructible, and the verdict
+function reaches BOTH `shapeDrawn` (at the edge `(aW, bW)`) and `convergenceDecided` (at `(aW, aW)`). SHAPE-
+DRAWN is therefore an earned, falsifiable value, not the single reachable output of a constant. -/
+theorem ws7_fork_can_close (hinf : ℵ₀ ≤ κ) :
+    (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c → Converges (destW hinf) (reifyW hinf) c aW aW)
+  ∧ verdictOfFork (s12_fork hinf) = Series12Verdict.shapeDrawn
+  ∧ verdictOfFork (s12_fork_open hinf) = Series12Verdict.convergenceDecided :=
+  ⟨ws4_fork_open hinf, (ws5_verdict_reaches_both hinf).1, (ws5_verdict_reaches_both hinf).2⟩
 
 /-- **THE INHABITATION CHECK (discipline 4, Finding 1).** The separated relatum `cW` is a reified relatum
 carrying the reified constituent `bW` (rank 1), rank is NON-INJECTIVE, and the without-import side is genuine
@@ -127,7 +140,8 @@ theorem ws7_strip_ledger (hinf : ℵ₀ ≤ κ) :
         Converges (destW hinf) (reifyW hinf) c₁ aW bW
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW)
   ∧ (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
-        ConvergesUp (destW hinf) (reifyW hinf) c₁ aW bW
+        Faithful c₁ ∧ Faithful c₂
+      ∧ ConvergesUp (destW hinf) (reifyW hinf) c₁ aW bW
       ∧ ¬ ConvergesUp (destW hinf) (reifyW hinf) c₂ aW bW) :=
   ⟨fun {X} dest insp => ws2_residue_free dest insp, ws4_labelLoop_not_recoverable hinf,
    ws2_many_witness hinf, ws4_underdetermined_pair hinf, ws4_underdetermined_up hinf⟩

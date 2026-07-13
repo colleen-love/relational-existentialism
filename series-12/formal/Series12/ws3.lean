@@ -86,6 +86,60 @@ theorem ws3_compass_layered (hinf : ℵ₀ ≤ κ) :
    ⟨⟨fun z => if z = aW then ⟨true⟩ else ⟨false⟩, fun _ _ o => ⟨!o.down⟩⟩, rfl⟩,
    ⟨⟨fun z => if z = aW then ⟨true⟩ else ⟨false⟩, fun _ _ o => o⟩, up_tf⟩⟩
 
+/-! ## The compass exogeneity IS an import (`¬ Recoverable`), as a proof term (PR1-R1) -/
+
+/-- The witness orientation (`⟨true⟩` on `aW`, `⟨false⟩` elsewhere), shared by the exogeneity theorems. -/
+def witnessOrient : WCar → ULift.{u} Bool := fun z => if z = aW then ⟨true⟩ else ⟨false⟩
+
+lemma witnessOrient_aW : witnessOrient aW = ⟨true⟩ := by simp [witnessOrient]
+lemma witnessOrient_bW : witnessOrient bW = ⟨false⟩ := by simp [witnessOrient, bW_ne_aW]
+
+/-- **The orientation lift.** Broadcast a compass's orientation as the successor label (the `orient` analog
+of `rankLift`): a labelled lift whose plain quotient forgets the orientation. -/
+noncomputable def orientLift {X : Type u} (dest : X → PkObj κ X) {Or : Type u} (orient : X → Or) :
+    X → LkObj κ Or X :=
+  fun x => PkMap κ (fun z => (orient x, z)) (dest x)
+
+lemma plainOf_orientLift {X : Type u} (dest : X → PkObj κ X) {Or : Type u} (orient : X → Or) :
+    plainOf (orientLift dest orient) = dest := by
+  funext x
+  apply Subtype.ext
+  show Prod.snd '' ((fun z => (orient x, z)) '' (dest x).1) = (dest x).1
+  rw [Set.image_image]; simp
+
+/-- **Orientation-difference on a plain-bisimilar pair is an import.** If `orient` separates two SHNE states
+`x`, `y` (`orient x ≠ orient y`) that are plain-bisimilar, then the orientation lift is not recoverable: the
+plain quotient merges `x`, `y` but the orientation label distinguishes their edges. The general mechanism. -/
+theorem orientLift_not_recoverable {X : Type u} (dest : X → PkObj κ X) {Or : Type u} (orient : X → Or)
+    (x y : X) (hx : SHNE dest x) (hy : SHNE dest y) (hne : orient x ≠ orient y) :
+    ¬ Recoverable (orientLift dest orient) := by
+  intro hrec
+  have hplain : ∃ R : X → X → Prop, IsBisim (plainOf (orientLift dest orient)) R ∧ R x y := by
+    rw [plainOf_orientLift]; exact ws1_atomless_bisim dest x y hx hy
+  obtain ⟨R, hR, hRel⟩ := ws4_recoverable_not_import (orientLift dest orient) hrec x y hplain
+  obtain ⟨hfwd, _⟩ := hR x y hRel
+  obtain ⟨w, hw⟩ := Set.nonempty_iff_ne_empty.mpr hx.ne_empty
+  have hedge : (orient x, w) ∈ (orientLift dest orient x).1 := by
+    show (orient x, w) ∈ (fun z => (orient x, z)) '' (dest x).1
+    exact ⟨w, hw, rfl⟩
+  obtain ⟨q, hq, hfst, _⟩ := hfwd _ hedge
+  have hq1 : q.1 = orient y := by
+    obtain ⟨w', _, hw'⟩ := (hq : q ∈ (fun z => (orient y, z)) '' (dest y).1); rw [← hw']
+  rw [hq1] at hfst
+  exact hne hfst
+
+/-- **THE COMPASS EXOGENEITY IS AN IMPORT (`¬ Recoverable`, PR1-R1).** The witness orientation, lifted to
+labels, is NOT recoverable from the plain relating: `aW` and `bW` are plain-bisimilar (the collapse engine)
+yet the orientation label separates them, so `orientLift` of the exogenous orientation is a genuine import,
+the Series 07 necessity read for the compass, now a proof term and not only a docstring gloss. An
+existential (the witness compass confined to the existential, never a distinguished compass). -/
+theorem ws3_compass_exogenous_import (hinf : ℵ₀ ≤ κ) :
+    ∃ (c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool)),
+        ¬ Recoverable (orientLift (destW hinf) c.orient) :=
+  ⟨⟨witnessOrient, fun _ _ o => o⟩,
+   orientLift_not_recoverable (destW hinf) witnessOrient aW bW (ws_SHNE hinf aW) (ws_SHNE hinf bW)
+     (by rw [witnessOrient_aW, witnessOrient_bW]; exact up_tf)⟩
+
 /- **The duality with attention (SR1-3): demoted to prose.** Attention is the knowable SUBTRACTION (a bounded
 reader with values, `att.reads.Finite`, true by construction of `FiniteAttention`); the compass is the
 typeable ORIENTATION whose values the structure cannot supply (`ws3_compass_exogenous`). This contrast is
