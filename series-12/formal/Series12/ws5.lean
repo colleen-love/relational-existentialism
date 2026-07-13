@@ -36,34 +36,42 @@ inductive Series12Verdict
   | shapeDrawn | convergenceDecided | Partial | Refuted | Circular
   deriving DecidableEq
 
-/-- **The convergence fork (data-level, Finding 4), over the FAITHFUL class (PR1-S1).** WHICH disjunct of
-the trichotomy was discharged over the constrained compass class, each constructor carrying its proof.
-Data-level so the verdict can CASE on it. The arms quantify over/exhibit FAITHFUL compasses, so the forced
-arms are genuinely inhabitable on some structure (`ws4_fork_open`) and the fork is not a typing tautology. -/
-inductive ConvergenceFork {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X) (a b : X) : Type u
-  | forcedHolds (h : ∀ (c : Compass dest reify (ULift.{u} Bool)), Faithful c → Converges dest reify c a b)
-  | forcedFails (h : ∀ (c : Compass dest reify (ULift.{u} Bool)), Faithful c → ¬ Converges dest reify c a b)
+/-- **The convergence fork (data-level, Finding 4), over a compass CLASS `InClass` (PR2-S1).** WHICH disjunct
+of the trichotomy was discharged over the given compass class, each constructor carrying its proof.
+Data-level so the verdict can CASE on it. Parameterizing the class lets the SAME genuine edge be forked over
+the full faithful class (underdetermined) and over the in-sight sub-class (decided), so `convergenceDecided`
+is reached AT THE EDGE, not at a reflexive non-edge. -/
+inductive ConvergenceFork {X : Type u} (dest : X → PkObj κ X) (reify : PkObj κ X → X)
+    (InClass : Compass dest reify (ULift.{u} Bool) → Prop) (a b : X) : Type u
+  | forcedHolds (h : ∀ (c : Compass dest reify (ULift.{u} Bool)), InClass c → Converges dest reify c a b)
+  | forcedFails (h : ∀ (c : Compass dest reify (ULift.{u} Bool)), InClass c → ¬ Converges dest reify c a b)
   | underdet    (h : ∃ c₁ c₂ : Compass dest reify (ULift.{u} Bool),
-                       Faithful c₁ ∧ Faithful c₂
+                       InClass c₁ ∧ InClass c₂
                        ∧ Converges dest reify c₁ a b ∧ ¬ Converges dest reify c₂ a b
                        ∧ NonDegenerate dest reify c₁ a b ∧ NonDegenerate dest reify c₂ a b)
 
 /-- **The verdict BRANCHES on the certified fork (Finding 4), not a returned constant.** -/
-def verdictOfFork {X : Type u} {dest : X → PkObj κ X} {reify : PkObj κ X → X} {a b : X} :
-    ConvergenceFork dest reify a b → Series12Verdict
+def verdictOfFork {X : Type u} {dest : X → PkObj κ X} {reify : PkObj κ X → X}
+    {InClass : Compass dest reify (ULift.{u} Bool) → Prop} {a b : X} :
+    ConvergenceFork dest reify InClass a b → Series12Verdict
   | .forcedHolds _ => .convergenceDecided
   | .forcedFails _ => .convergenceDecided
   | .underdet    _ => .shapeDrawn
 
-/-- The fork WS4 discharged at the genuine part-and-whole edge `(aW, bW)`: `underdet` (the faithful model
-pair). -/
-noncomputable def s12_fork (hinf : ℵ₀ ≤ κ) : ConvergenceFork (destW hinf) (reifyW hinf) aW bW :=
+/-- The fork WS4 discharged at the genuine part-and-whole edge `(aW, bW)`, over the FULL faithful class:
+`underdet` (the faithful model pair). -/
+noncomputable def s12_fork (hinf : ℵ₀ ≤ κ) :
+    ConvergenceFork (destW hinf) (reifyW hinf) Faithful aW bW :=
   .underdet (ws4_underdetermined hinf).2
 
-/-- The fork at the reflexive locus `(aW, aW)`: `forcedHolds` (every faithful compass coheres), so
-`convergenceDecided` is genuinely constructible and the verdict is NOT constant (PR1-S1). -/
-noncomputable def s12_fork_open (hinf : ℵ₀ ≤ κ) : ConvergenceFork (destW hinf) (reifyW hinf) aW aW :=
-  .forcedHolds (ws4_fork_open hinf)
+/-- The fork at the SAME genuine edge `(aW, bW)`, over the IN-SIGHT faithful sub-class (`Faithful ∧
+BisimInvariant`): `forcedHolds` (every sight-bound faithful compass coheres, `ws4_decided_within_sight`), so
+`convergenceDecided` is genuinely constructible AT THE EDGE, and the fork is open where the verdict lives
+(PR2-S1). -/
+noncomputable def s12_fork_insight (hinf : ℵ₀ ≤ κ) :
+    ConvergenceFork (destW hinf) (reifyW hinf)
+      (fun c => Faithful c ∧ BisimInvariant (destW hinf) c) aW bW :=
+  .forcedHolds (fun c h => ws4_decided_within_sight hinf c h.1 h.2)
 
 /-- **The verdict, computed by casing on the fork.** -/
 noncomputable def ws5_verdict (hinf : ℵ₀ ≤ κ) : Series12Verdict := verdictOfFork (s12_fork hinf)
@@ -71,13 +79,15 @@ noncomputable def ws5_verdict (hinf : ℵ₀ ≤ κ) : Series12Verdict := verdic
 /-- `ws5_verdict = shapeDrawn` is a THEOREM (the fork is `underdet`), not a definitional constant. -/
 theorem ws5_verdict_eq (hinf : ℵ₀ ≤ κ) : ws5_verdict hinf = Series12Verdict.shapeDrawn := rfl
 
-/-- **THE VERDICT REACHES BOTH VALUES (falsifiability, PR1-S1).** `verdictOfFork` is genuinely non-constant:
-the `underdet` fork at the distinct-relata edge `(aW, bW)` computes `shapeDrawn`, while the `forcedHolds`
-fork at the reflexive locus `(aW, aW)` computes `convergenceDecided`. So SHAPE-DRAWN is an EARNED value of a
-function with more than one reachable output, not the single tautological value of a constant. -/
+/-- **THE VERDICT REACHES BOTH VALUES AT THE GENUINE EDGE (falsifiability, PR2-S1).** `verdictOfFork` is
+genuinely non-constant at the SAME genuine part-and-whole edge `(aW, bW)`: over the full faithful class the
+fork is `underdet` and the verdict is `shapeDrawn`; over the in-sight faithful sub-class the fork is
+`forcedHolds` (`ws4_decided_within_sight`) and the verdict is `convergenceDecided`. So SHAPE-DRAWN is
+FALSIFIABLE where the verdict is computed (restricting to what the structure sees closes the fork), not by a
+triviality at a reflexive non-edge. -/
 theorem ws5_verdict_reaches_both (hinf : ℵ₀ ≤ κ) :
     verdictOfFork (s12_fork hinf) = Series12Verdict.shapeDrawn
-  ∧ verdictOfFork (s12_fork_open hinf) = Series12Verdict.convergenceDecided :=
+  ∧ verdictOfFork (s12_fork_insight hinf) = Series12Verdict.convergenceDecided :=
   ⟨rfl, rfl⟩
 
 theorem ws5_verdict_not_decided (hinf : ℵ₀ ≤ κ) : ws5_verdict hinf ≠ .convergenceDecided := by

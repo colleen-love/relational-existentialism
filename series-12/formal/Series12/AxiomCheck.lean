@@ -33,9 +33,11 @@ import Series12
 #print axioms Series12.WS3.ws3_compass_exogenous_import
 #print axioms Series12.WS3.ws3_compass_layered
 
--- WS4 - convergence defined and underdetermined over the faithful class (the wall, genuinely open fork)
+-- WS4 - convergence underdetermined over the faithful class; the two-zone fork open at the genuine edge
 #print axioms Series12.WS4.ws4_underdetermined
-#print axioms Series12.WS4.ws4_fork_open
+#print axioms Series12.WS4.ws4_dissent_is_import
+#print axioms Series12.WS4.ws4_decided_within_sight
+#print axioms Series12.WS4.ws4_two_zone
 #print axioms Series12.WS4.ws4_underdetermined_up
 #print axioms Series12.WS4.ws4_wall_is_structural
 #print axioms Series12.WS4.ws4_convergence_decided_shape

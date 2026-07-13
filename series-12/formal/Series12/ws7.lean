@@ -40,7 +40,7 @@ structure Audit (hinf : ℵ₀ ≤ κ) : Type u where
   opening     : Many (destWL hinf)                                        -- inhabitable (WS2)
   reify_lb    : cW = reifyW hinf (sW₂ hinf) ∧ 1 ≤ rankW bW                -- reification load-bearing (WS2)
   rank_noninj : rankW aW = rankW aW' ∧ aW ≠ aW'                           -- rank non-injective (Finding 1)
-  fork        : ConvergenceFork (destW hinf) (reifyW hinf) aW bW          -- the WS4 fork (Finding 4)
+  fork        : ConvergenceFork (destW hinf) (reifyW hinf) Faithful aW bW -- the WS4 fork (Finding 4)
 
 /-- The concrete audit, every field a discharged WS1-WS4 payoff, the fork at `underdet`. -/
 noncomputable def ws7_audit (hinf : ℵ₀ ≤ κ) : Audit hinf where
@@ -93,16 +93,23 @@ theorem ws7_model_pair_genuine (hinf : ℵ₀ ≤ κ) :
       ∧ NonDegenerate (destW hinf) (reifyW hinf) c₂ aW bW :=
   (ws4_underdetermined hinf).2
 
-/-- **THE FORK-OPEN CHECK (falsifiability, PR1-S1).** The trichotomy is genuinely open: at the reflexive
-locus `(aW, aW)` every faithful compass coheres, so `convergenceDecided` is constructible, and the verdict
-function reaches BOTH `shapeDrawn` (at the edge `(aW, bW)`) and `convergenceDecided` (at `(aW, aW)`). SHAPE-
-DRAWN is therefore an earned, falsifiable value, not the single reachable output of a constant. -/
+/-- **THE TWO-ZONE FORK CHECK (falsifiability AT THE EDGE, PR2-S1).** The fork is genuinely open at the
+genuine part-and-whole edge `(aW, bW)`, its boundary Series 07's import boundary: (i) the verdict reaches
+BOTH `shapeDrawn` (full faithful class) and `convergenceDecided` (in-sight sub-class) at the SAME edge
+(`ws5_verdict_reaches_both`), so shape-drawn is falsifiable where the verdict is computed; (ii) convergence
+is DECIDED within the structure's sight (`ws4_decided_within_sight`); (iii) every faithful dissent at the
+edge is a genuine import (`ws4_dissent_is_import`), so the underdetermination is exactly Series 07's import,
+the not-seeing structural as a proof term, not a reflexive triviality. -/
 theorem ws7_fork_can_close (hinf : ℵ₀ ≤ κ) :
-    (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
-        Faithful c → Converges (destW hinf) (reifyW hinf) c aW aW)
-  ∧ verdictOfFork (s12_fork hinf) = Series12Verdict.shapeDrawn
-  ∧ verdictOfFork (s12_fork_open hinf) = Series12Verdict.convergenceDecided :=
-  ⟨ws4_fork_open hinf, (ws5_verdict_reaches_both hinf).1, (ws5_verdict_reaches_both hinf).2⟩
+    (verdictOfFork (s12_fork hinf) = Series12Verdict.shapeDrawn
+      ∧ verdictOfFork (s12_fork_insight hinf) = Series12Verdict.convergenceDecided)
+  ∧ (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c → BisimInvariant (destW hinf) c →
+        Converges (destW hinf) (reifyW hinf) c aW bW)
+  ∧ (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c → ¬ Converges (destW hinf) (reifyW hinf) c aW bW →
+        ¬ Recoverable (orientLift (destW hinf) c.orient)) :=
+  ⟨ws5_verdict_reaches_both hinf, ws4_decided_within_sight hinf, ws4_dissent_is_import hinf⟩
 
 /-- **THE INHABITATION CHECK (discipline 4, Finding 1).** The separated relatum `cW` is a reified relatum
 carrying the reified constituent `bW` (rank 1), rank is NON-INJECTIVE, and the without-import side is genuine

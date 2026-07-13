@@ -130,11 +130,11 @@ theorem ws4_underdetermined_pair (hinf : ℵ₀ ≤ κ) :
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW :=
   ⟨cHoldF hinf, cFailF hinf, cHoldF_converges hinf, cFailF_not_converges hinf⟩
 
-/-- **THE FORK IS OPEN (the forced arm is inhabitable, PR1-S1).** At the reflexive locus `(aW, aW)` EVERY
-faithful compass coheres (the part is the whole; the identity raising carries its orientation to itself), so
-the `forcedHolds` arm of the trichotomy is genuinely inhabitable and `convergenceDecided` is constructible.
-Together with `ws4_underdetermined` this makes the trichotomy genuinely open: the verdict is NOT constant
-across structures/loci, so SHAPE-DRAWN at `(aW, bW)` is an earned, falsifiable finding, not a tautology. -/
+/-- **REMARK (NOT load-bearing, PR2-S1).** At the reflexive locus `(aW, aW)` every faithful compass coheres
+by `rfl` (the part is the whole). This is a trivial arm at a NON-edge (`aW → aW` is not a `ConstituentOf`
+edge; the witness tower has no self-membered reified pattern), so it does NOT carry the falsifiability of the
+verdict. The genuine falsifiability lives at the actual edge `(aW, bW)` via the two-zone fork below
+(`ws4_decided_within_sight` / `ws4_dissent_is_import`); this lemma is kept only as a remark. -/
 theorem ws4_fork_open (hinf : ℵ₀ ≤ κ) :
     ∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
       Faithful c → Converges (destW hinf) (reifyW hinf) c aW aW := by
@@ -151,6 +151,65 @@ theorem ws4_wall_is_structural (hinf : ℵ₀ ≤ κ) :
   ∧ Converges (destW hinf) (reifyW hinf) (cHoldF hinf) aW bW
   ∧ ¬ Converges (destW hinf) (reifyW hinf) (cFailF hinf) aW bW :=
   ⟨rfl, cHoldF_converges hinf, cFailF_not_converges hinf⟩
+
+/-! ## The TWO-ZONE fork at the genuine edge: decided within sight, an import across the boundary (PR2-S1) -/
+
+/-- **Bisimulation-invariant orientation (what the structure can SEE).** An orientation is within the
+structure's sight iff it agrees on every plain-bisimilar pair: plain bisimilarity (the collapse engine) is
+exactly what the relating can detect, so a `BisimInvariant` orientation is one the structure fixes. -/
+def BisimInvariant {X : Type u} (dest : X → PkObj κ X) {reify : PkObj κ X → X} {Or : Type u}
+    (c : Compass dest reify Or) : Prop :=
+  ∀ x y : X, (∃ R, IsBisim dest R ∧ R x y) → c.orient x = c.orient y
+
+/-- **DISSENT FROM CONVERGENCE IS AN IMPORT (Series 07's work, as a proof term, PR2-S1).** EVERY faithful
+compass that FAILS convergence at the genuine edge `(aW, bW)` does so by a genuine import: its orientation,
+lifted to labels, is `¬ Recoverable`. The not-seeing is therefore literally Series 07's import necessity
+(`orientLift_not_recoverable`, resting on the plain-bisimilarity of `aW`, `bW`), not a gap. Universally
+quantified over compasses (the parametricity discipline holds in the fix). -/
+theorem ws4_dissent_is_import (hinf : ℵ₀ ≤ κ) :
+    ∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+      Faithful c → ¬ Converges (destW hinf) (reifyW hinf) c aW bW →
+      ¬ Recoverable (orientLift (destW hinf) c.orient) := by
+  intro c hf hdiss
+  have hne : c.orient aW ≠ c.orient bW := fun h =>
+    hdiss ((faithful_converges_iff (destW hinf) (reifyW hinf) c hf aW bW).mpr h)
+  exact orientLift_not_recoverable (destW hinf) c.orient aW bW
+    (ws_SHNE hinf aW) (ws_SHNE hinf bW) hne
+
+/-- **CONVERGENCE IS DECIDED WITHIN SIGHT (the holding direction, PR2-S1).** Every faithful compass whose
+orientation is within the structure's sight (`BisimInvariant`) COHERES at the genuine edge `(aW, bW)`:
+`aW` and `bW` are plain-bisimilar (the collapse engine), so a sight-bound orientation is forced to agree on
+them, and the faithful raising then makes convergence hold. So over the in-sight faithful sub-class the fork
+at the SAME edge is CLOSED (convergence-decided), per charter §2-WS4 alternative (a) at the sub-class level. -/
+theorem ws4_decided_within_sight (hinf : ℵ₀ ≤ κ) :
+    ∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+      Faithful c → BisimInvariant (destW hinf) c →
+      Converges (destW hinf) (reifyW hinf) c aW bW := by
+  intro c hf hbi
+  rw [faithful_converges_iff (destW hinf) (reifyW hinf) c hf aW bW]
+  exact hbi aW bW (ws1_atomless_bisim (destW hinf) aW bW (ws_SHNE hinf aW) (ws_SHNE hinf bW))
+
+/-- **THE TWO-ZONE FORK, at the genuine edge `(aW, bW)` (PR2-S1).** The fork is open AT THE EDGE where the
+verdict is computed, and its boundary is structurally defined (Series 07's import boundary), not a reflexive
+triviality: (i) over the full faithful class convergence is UNDERDETERMINED (the `cHoldF`/`cFailF` pair);
+(ii) over the in-sight faithful sub-class (`BisimInvariant`) it is DECIDED, forced to hold
+(`ws4_decided_within_sight`), so `shape-drawn` is FALSIFIABLE at the edge (restricting to what the structure
+sees closes the fork); (iii) every faithful dissent at the edge is a genuine import (`ws4_dissent_is_import`),
+so the underdetermination is EXACTLY the import Series 07 characterizes. -/
+theorem ws4_two_zone (hinf : ℵ₀ ≤ κ) :
+    (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c₁ ∧ Faithful c₂
+      ∧ Converges (destW hinf) (reifyW hinf) c₁ aW bW
+      ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW)
+  ∧ (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c → BisimInvariant (destW hinf) c →
+        Converges (destW hinf) (reifyW hinf) c aW bW)
+  ∧ (∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        Faithful c → ¬ Converges (destW hinf) (reifyW hinf) c aW bW →
+        ¬ Recoverable (orientLift (destW hinf) c.orient)) :=
+  ⟨⟨cHoldF hinf, cFailF hinf, cHoldF_faithful hinf, cFailF_faithful hinf,
+     cHoldF_converges hinf, cFailF_not_converges hinf⟩,
+   ws4_decided_within_sight hinf, ws4_dissent_is_import hinf⟩
 
 /-- **THE HONEST FORK (the trichotomy), over the faithful class.** Convergence is forced-for-all-faithful,
 forbidden-for-all-faithful, or underdetermined within the faithful class; WS4 proves it lands in the third
