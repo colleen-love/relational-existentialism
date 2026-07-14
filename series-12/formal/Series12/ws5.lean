@@ -67,7 +67,9 @@ noncomputable def s12_fork (hinf : ℵ₀ ≤ κ) :
 /-- The fork at the SAME genuine edge `(aW, bW)`, over the IN-SIGHT faithful sub-class (`Faithful ∧
 BisimInvariant`): `forcedHolds` (every sight-bound faithful compass coheres, `ws4_decided_within_sight`), so
 `convergenceDecided` is genuinely constructible AT THE EDGE, and the fork is open where the verdict lives
-(PR2-S1). -/
+(PR2-S1). The class is inhabited (`ws4_insight_inhabited`, not a vacuous `forcedHolds`); DISCLOSED (PR3-R1):
+on this carrier its members are orientation-uniform (`ws4_sight_is_uniform`), so the decided arm's compasses
+are all orientation-constant, decided because sight collapses to the One. -/
 noncomputable def s12_fork_insight (hinf : ℵ₀ ≤ κ) :
     ConvergenceFork (destW hinf) (reifyW hinf)
       (fun c => Faithful c ∧ BisimInvariant (destW hinf) c) aW bW :=

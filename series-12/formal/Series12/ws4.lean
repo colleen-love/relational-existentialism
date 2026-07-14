@@ -10,16 +10,21 @@ Consumes WS3 (the compass type, `ConstituentOf`) and WS2 (the carrier). Defines 
 
 The independence is stated over a COMPASS CLASS that carries a genuine structural constraint, `Faithful`
 (the raising is the identity: a part's orientation is carried UNCHANGED up to the whole, so convergence
-tests genuine orientation-coherence and not a free re-labelling). Over the faithful class the fork is
-GENUINELY OPEN, not a typing tautology (program-review-1 PR1-S1): at the distinct-relata constituency edge
-`(aW, bW)` convergence is UNDERDETERMINED (two faithful compasses sharing the identical raising, differing
-only in the orientation the structure does not fix, one cohering and one not, both non-degenerate,
-`ws4_underdetermined`); but at a reflexive locus `(aW, aW)` EVERY faithful compass coheres, so the forced
-arm is inhabitable (`ws4_fork_open`) and `convergenceDecided` is constructible. The verdict therefore has
-more than one reachable value (WS5 `ws5_verdict_reaches_both`): SHAPE-DRAWN is EARNED at the genuine
-part-and-whole edge and is FALSIFIABLE, not landed on by typing. `ws4_wall_is_structural` proves the real
-independence (shared faithful raising, opposite verdicts on the free orientation) with the bridge IN the
-proof term.
+tests genuine orientation-coherence and not a free re-labelling). At the genuine part-and-whole edge
+`(aW, bW)` the fork is a TWO-ZONE fork whose boundary is Series 07's import boundary
+(program-review-2 PR2-S1): over the full faithful class convergence is UNDERDETERMINED (two faithful
+compasses sharing the identical raising, differing only in the orientation the structure does not fix, one
+cohering and one not, both non-degenerate, `ws4_underdetermined`); over the IN-SIGHT faithful sub-class
+(`BisimInvariant`) it is DECIDED, forced to hold (`ws4_decided_within_sight`), and every faithful DISSENT at
+the edge is a genuine import (`ws4_dissent_is_import`, `¬ Recoverable` of `orientLift`, Series 07's work as a
+proof term). `ws4_two_zone` packages this; `ws5_verdict_reaches_both` reaches BOTH verdict values at the
+SAME edge, so SHAPE-DRAWN is EARNED and FALSIFIABLE where the verdict is computed. On this every-moment
+atomless carrier the in-sight class is inhabited (`ws4_insight_inhabited`) and its members are
+orientation-UNIFORM (`ws4_sight_is_uniform`: what the structure can see is the One at the orientation level),
+so the decided zone is decided BECAUSE sight collapses to the uniform orientation. `ws4_wall_is_structural`
+proves the real independence (shared faithful raising, opposite verdicts on the free orientation) with the
+bridge IN the proof term; `ws4_fork_open` (a reflexive locus) is kept only as a remark, no longer
+load-bearing (PR2-S1/PR3-R2).
 
 Design doc: `series-12/spec/ws4-design.md`.
 
@@ -180,7 +185,11 @@ theorem ws4_dissent_is_import (hinf : ℵ₀ ≤ κ) :
 orientation is within the structure's sight (`BisimInvariant`) COHERES at the genuine edge `(aW, bW)`:
 `aW` and `bW` are plain-bisimilar (the collapse engine), so a sight-bound orientation is forced to agree on
 them, and the faithful raising then makes convergence hold. So over the in-sight faithful sub-class the fork
-at the SAME edge is CLOSED (convergence-decided), per charter §2-WS4 alternative (a) at the sub-class level. -/
+at the SAME edge is CLOSED (convergence-decided), per charter §2-WS4 alternative (a) at the sub-class level.
+DISCLOSED (PR3-R1): on THIS every-moment-atomless carrier the in-sight class is inhabited but its members
+are orientation-UNIFORM (`ws4_insight_inhabited`, `ws4_sight_is_uniform`), so the coherence in fact holds at
+EVERY pair, not only the edge; the edge is where the underdet arm lives, the decided arm merely also passes
+through it. -/
 theorem ws4_decided_within_sight (hinf : ℵ₀ ≤ κ) :
     ∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
       Faithful c → BisimInvariant (destW hinf) c →
@@ -188,6 +197,27 @@ theorem ws4_decided_within_sight (hinf : ℵ₀ ≤ κ) :
   intro c hf hbi
   rw [faithful_converges_iff (destW hinf) (reifyW hinf) c hf aW bW]
   exact hbi aW bW (ws1_atomless_bisim (destW hinf) aW bW (ws_SHNE hinf aW) (ws_SHNE hinf bW))
+
+/-- **THE IN-SIGHT CLASS IS INHABITED (PR3-R1).** The constant-orientation faithful compass is in the
+in-sight sub-class (`Faithful ∧ BisimInvariant`), so `s12_fork_insight` / `convergenceDecided` rest on a
+genuinely inhabited class, not a vacuously-quantified `forcedHolds`. An existential (witnesses the class,
+never discharges a `∀`-obligation). -/
+theorem ws4_insight_inhabited (hinf : ℵ₀ ≤ κ) :
+    ∃ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+      Faithful c ∧ BisimInvariant (destW hinf) c :=
+  ⟨⟨fun _ => ⟨true⟩, fun _ _ o => o⟩, (fun _ _ => rfl), (fun _ _ _ => rfl)⟩
+
+/-- **WITHIN SIGHT IS THE ONE, AT THE ORIENTATION LEVEL (PR3-R1, and it strengthens the reading).** On this
+carrier every state is `SHNE`, so every pair is plain-bisimilar (the collapse engine merges the whole
+carrier); hence a `BisimInvariant` orientation is UNIFORM (constant on all of `WCar`). The decided zone is
+decided BECAUSE what the structure can see admits only the One orientation, Series 07 replayed at the
+orientation level. This exposes that every member of the in-sight class is orientation-constant, the
+`NonDegenerate.orient_nonconst` degeneracy, disclosed here rather than hidden on the decided side. -/
+theorem ws4_sight_is_uniform (hinf : ℵ₀ ≤ κ) :
+    ∀ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+      BisimInvariant (destW hinf) c → ∀ x y : WCar, c.orient x = c.orient y := by
+  intro c hbi x y
+  exact hbi x y (ws1_atomless_bisim (destW hinf) x y (ws_SHNE hinf x) (ws_SHNE hinf y))
 
 /-- **THE TWO-ZONE FORK, at the genuine edge `(aW, bW)` (PR2-S1).** The fork is open AT THE EDGE where the
 verdict is computed, and its boundary is structurally defined (Series 07's import boundary), not a reflexive

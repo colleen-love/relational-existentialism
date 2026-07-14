@@ -37,6 +37,8 @@ import Series12
 #print axioms Series12.WS4.ws4_underdetermined
 #print axioms Series12.WS4.ws4_dissent_is_import
 #print axioms Series12.WS4.ws4_decided_within_sight
+#print axioms Series12.WS4.ws4_insight_inhabited
+#print axioms Series12.WS4.ws4_sight_is_uniform
 #print axioms Series12.WS4.ws4_two_zone
 #print axioms Series12.WS4.ws4_underdetermined_up
 #print axioms Series12.WS4.ws4_wall_is_structural
