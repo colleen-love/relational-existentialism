@@ -46,16 +46,24 @@ def AttentionDistinguishes {Q X : Type u} (dest : X → LkObj κ Q X) (x y : X) 
 def RealFor {Q X : Type u} (dest : X → LkObj κ Q X) (att : FiniteAttention dest) (x : X) : Prop :=
   ∃ y, y ∈ att.reads ∧ AttentionDistinguishes dest x y
 
-/-- **Total attention = self-total hold (the pin).** -/
+/-- **Total attention = self-total hold (the pin).** DISCLOSED (PR1-R3): this is a DEFINITIONAL RENAME of
+the diagonal's `SelfTotal`, NOT a predicate about the built `FiniteAttention` type. It does not relate a
+bounded reader (`reads`/`fin`/`grounded`) to self-total holds; the "attention" reading is prose, the theorem
+below is the transcribed diagonal. `FiniteAttention`'s genuine theorem is `ws2_attention_makes_real`. -/
 def TotalAttention {X : Type u} {dest : X → PkObj κ X}
     (insp : Hold dest → HoldPred dest) (t : Hold dest) : Prop := SelfTotal insp t
 
-/-- **(NT) THE IMPOSSIBILITY.** No self-total hold: no attention holds the whole. -/
+/-- **(NT) THE IMPOSSIBILITY (the transcribed diagonal, PR1-R3).** No self-total hold: `ws1_no_self_total_hold`
+verbatim, under the `TotalAttention` name. The subtractive reading of `FiniteAttention` is carried in prose,
+not by this theorem (which is the diagonal); the reader-level content is `ws2_attention_makes_real`. -/
 theorem ws3_no_total_attention {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
     ¬ ∃ t, TotalAttention insp t :=
   ws1_no_self_total_hold dest insp
 
-/-- **D1 - attention is subtractive and never total.** -/
+/-- **D1 - the diagonal, plus residue-distinctness (a bare conjunction, PR1-R3/SR1-3).** The two conjuncts do
+not interact: `ws3_no_total_attention` (the transcribed diagonal) AND `ws2_residue_distinct` (the residue is
+distinct from every hold's content). Recorded honestly as a conjunction of two independent diagonal facts;
+the "attention is subtractive" reading is prose. -/
 theorem ws2_attention_subtractive {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest) :
     (¬ ∃ t, TotalAttention insp t) ∧ (∀ h : Hold dest, insp h ≠ residue insp) :=
   ⟨ws3_no_total_attention dest insp, ws2_residue_distinct dest insp⟩
@@ -204,11 +212,13 @@ theorem ws2_reification_loadbearing (hinf : ℵ₀ ≤ κ) :
   ∧ bW ∈ (sW₂ hinf).1 ∧ 1 ≤ rankW bW :=
   ⟨(reifyW_sW₂ hinf).symm, ws_reify_pointwise_sW₂ hinf, bW_mem_sW₂ hinf, by decide⟩
 
-/-- **THE PLURALITY (`Many`, on a genuine tower-distinction).** `cW` (a reified relatum carrying the reified
-constituent `bW`) and the base relatum `aW` are plain-bisimilar (`ws1_atomless_bisim`) yet rank-separated,
-an INSTANCE of `ws2_many_general`. -/
-theorem ws2_many_witness (hinf : ℵ₀ ≤ κ) : Many (destWL hinf) := by
-  refine ⟨cW, aW, ?_, ?_⟩
+/-- **The witness attention-distinction.** The reified relatum `cW` and the base relatum `aW` are
+plain-bisimilar (`ws1_atomless_bisim`, the collapse engine) yet NOT label-bisimilar over the rank lift
+(`ws2_many_general` at `sW₂`): exactly `AttentionDistinguishes`. Shared by the plurality (`ws2_many_witness`)
+and the reader payoff (`ws2_attention_makes_real`). -/
+theorem ws2_cW_distinguishes_aW (hinf : ℵ₀ ≤ κ) :
+    AttentionDistinguishes (destWL hinf) cW aW := by
+  refine ⟨?_, ?_⟩
   · rw [ws_plainOf hinf]
     exact ws1_atomless_bisim (destW hinf) cW aW (ws_SHNE hinf cW) (ws_SHNE hinf aW)
   · have hgen :=
@@ -227,6 +237,26 @@ theorem ws2_many_witness (hinf : ℵ₀ ≤ κ) : Many (destWL hinf) := by
         (ws_SHNE hinf aW)).2
     rw [reifyW_sW₂ hinf] at hgen
     exact hgen
+
+/-- **THE PLURALITY (`Many`, on a genuine tower-distinction).** `cW` (a reified relatum carrying the reified
+constituent `bW`) and the base relatum `aW` are plain-bisimilar (`ws1_atomless_bisim`) yet rank-separated,
+an INSTANCE of `ws2_many_general`. -/
+theorem ws2_many_witness (hinf : ℵ₀ ≤ κ) : Many (destWL hinf) :=
+  ⟨cW, aW, (ws2_cW_distinguishes_aW hinf).1, (ws2_cW_distinguishes_aW hinf).2⟩
+
+/-- **KNOWING MAKES THE MANY REAL, READER-WISE (program-review-1 PR1-S2).** There is a genuine FINITE
+ATTENTION, a bounded reader (focus `aW`, reading `{aW}`, finite by `Set.finite_singleton`, grounded by
+`ReflTransGen.refl`), FOR WHICH the tower relatum `cW` is real: `cW` is plain-bisimilar to the read relatum
+`aW` yet label-separated from it (`RealFor` via `ws2_cW_distinguishes_aW`). The attention (`att.reads`
+membership, the reader) is LOAD-BEARING in the statement, restoring the charter's attention-relative reality
+that `Many` alone (reader-erased) does not carry. `FiniteAttention`'s first genuine theorem. -/
+theorem ws2_attention_makes_real (hinf : ℵ₀ ≤ κ) :
+    ∃ att : FiniteAttention (destWL hinf), RealFor (destWL hinf) att cW := by
+  refine ⟨⟨aW, {aW}, Set.finite_singleton aW, ⟨Set.mem_singleton aW, ?_⟩⟩,
+          aW, Set.mem_singleton aW, ws2_cW_distinguishes_aW hinf⟩
+  intro z hz
+  rw [Set.mem_singleton_iff] at hz; subst hz
+  exact Relation.ReflTransGen.refl
 
 /-! ## Without an import, the One; and the distinction free -/
 

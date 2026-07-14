@@ -6,7 +6,7 @@
 
 ## The object at stake
 
-The charter's WS2 (§2): the opening is INHABITABLE, and any inhabitant makes the many real. Two facts, one carrier. (1) **Inhabitability with plurality:** adjoin an inhabitant as a labelled direction over the plain structure (the labelled lift, with the plain quotient forgetting it), and prove `Many`: a reified tower relatum and a base relatum genuinely plain-bisimilar (the Series 07 engine merges them, `ws1_atomless_bisim`) yet separated at the labelled level, the reification facts LOAD-BEARING, generalized across the tower. (2) **Without an import, the One:** `ws2_import_theorem_static`, a plain, behaviorally-identified, atomless coalgebra is a subsingleton. The plurality's distinction is non-recoverable (`ws1_attention_distinction_free`), which is its CERTIFICATE: by Series 07 (WS1's required half) a genuine atomless distinction MUST be non-recoverable, so non-recoverability is the sign the distinction is real, not the sign it cheats.
+The charter's WS2 (§2): the opening is INHABITABLE, and any inhabitant makes the many real. Two facts, one carrier. (1) **Inhabitability with plurality:** adjoin an inhabitant as a labelled direction over the plain structure (the labelled lift, with the plain quotient forgetting it), and prove `Many`: a reified tower relatum and a base relatum genuinely plain-bisimilar (the Series 07 engine merges them, `ws1_atomless_bisim`) yet separated at the labelled level, the reification facts LOAD-BEARING, generalized across the tower. (2) **Without an import, the One:** `ws2_import_theorem_static`, a plain, behaviorally-identified, atomless coalgebra is a subsingleton. The plurality's distinction is non-recoverable (`ws2_distinction_free`), which is its CERTIFICATE: by Series 07 (WS1's required half) a genuine atomless distinction MUST be non-recoverable, so non-recoverability is the sign the distinction is real, not the sign it cheats. (Inhabitation is also proved reader-relative: `ws2_attention_makes_real`, a genuine finite attention for which the reified relatum is real, program-review-1 PR1-S2.)
 
 The design's whole burden is discipline 4, and it is the program's gravest inherited risk. Series 10 (`ws2_reify_bisim_embeds`) and Series 11 (`ws1_attention_makes_real`) both drew their distinction on `labelLoop`, two fixed Booleans where `reify`/`reifyStep`/`towerN` never occur, and were honestly re-graded Bookkeeping re-hit. **WS2 must not repeat that:** the separated pair is a genuine reified relatum `reifyW sW` and its base constituent `aW`, and the label is the tower RANK (`dir := rank`), defined from `towerN`/`reifyStep`. The witness is fully designed in `spec/ws4-witness-design.md`; WS2 states the plurality it discharges.
 
@@ -98,7 +98,7 @@ theorem ws2_distinction_free (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (destWL hin
 ```
 The certificate: the plurality's distinction is `¬ Recoverable`. By WS1's required half, a genuine atomless distinction is non-recoverable; so this is the sign the distinction is real, not the sign it cheats, the lesson the whole series turns on.
 
-- **Ambient:** `Recoverable`, `plainOf`, the rank-separation, `ws1_attention_distinction_free` (the shape).
+- **Ambient:** `Recoverable`, `plainOf`, the rank-separation, `ws2_distinction_free` (the shape).
 - **Success condition (Shape-drawn):** `¬ Recoverable destWL`, the distinction is free, its certificate.
 - **Failure mode:** *reading non-recoverability as a defect.* Foreclosed by WS1: non-recoverability is what a genuine distinction must be. **Winner (the certificate).**
 

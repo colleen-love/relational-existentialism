@@ -13,6 +13,7 @@ import Series12
 #print axioms Series12.WS1.ws1_two_halves
 #print axioms Series12.WS1.ws1_shape_coincidence
 #print axioms Series12.WS1.ws1_coincidence_not_identity
+#print axioms Series12.WS1.ws1_coincidence_not_identity_witness
 #print axioms Series12.WS1.ws2_import_theorem
 #print axioms Series12.WS1.ws3_atomless_distinct_is_import
 
@@ -20,24 +21,32 @@ import Series12
 #print axioms Series12.WS2.ws2_attention_subtractive
 #print axioms Series12.WS2.ws2_many_general
 #print axioms Series12.WS2.ws2_many_witness
+#print axioms Series12.WS2.ws2_attention_makes_real
 #print axioms Series12.WS2.ws2_reification_loadbearing
 #print axioms Series12.WS2.ws_witness_rank_noninjective
 #print axioms Series12.WS2.ws2_no_import_is_one
 #print axioms Series12.WS2.ws2_distinction_free
 #print axioms Series12.WS2.ws3_no_total_attention
 
--- WS3 - feeling: the compass TYPE, parametric, exogenous, layered
+-- WS3 - feeling: the compass TYPE, parametric, exogenous (an import), layered
 #print axioms Series12.WS3.ws3_compass_exogenous
+#print axioms Series12.WS3.ws3_compass_exogenous_import
 #print axioms Series12.WS3.ws3_compass_layered
 
--- WS4 - convergence defined and underdetermined (the wall), one-layer and layered (ConvergesUp)
+-- WS4 - convergence underdetermined over the faithful class; the two-zone fork open at the genuine edge
 #print axioms Series12.WS4.ws4_underdetermined
+#print axioms Series12.WS4.ws4_dissent_is_import
+#print axioms Series12.WS4.ws4_decided_within_sight
+#print axioms Series12.WS4.ws4_insight_inhabited
+#print axioms Series12.WS4.ws4_sight_is_uniform
+#print axioms Series12.WS4.ws4_two_zone
 #print axioms Series12.WS4.ws4_underdetermined_up
 #print axioms Series12.WS4.ws4_wall_is_structural
 #print axioms Series12.WS4.ws4_convergence_decided_shape
 
--- WS5 - the verdict as a function of the fork, and the generalized neutrality
+-- WS5 - the verdict as a function of the fork, non-constant, and the generalized neutrality
 #print axioms Series12.WS5.ws5_verdict_eq
+#print axioms Series12.WS5.ws5_verdict_reaches_both
 #print axioms Series12.WS5.ws5_name_neutral
 #print axioms Series12.WS5.ws5_verdict_not_decided
 
@@ -50,6 +59,7 @@ import Series12
 #print axioms Series12.WS7.ws7_verdict_eq
 #print axioms Series12.WS7.ws7_no_evaluation
 #print axioms Series12.WS7.ws7_model_pair_genuine
+#print axioms Series12.WS7.ws7_fork_can_close
 #print axioms Series12.WS7.ws7_inhabitation_genuine
 #print axioms Series12.WS7.ws7_names_not_terms
 #print axioms Series12.WS7.ws7_strip_ledger

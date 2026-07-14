@@ -25,18 +25,21 @@ set_option linter.unusedVariables false
 variable {κ : Cardinal.{u}}
 
 /-- **THE PROVABLE CORE.** What Series 12 proved: the opening forced (residue free for every inspection),
-the opening inhabitable (the many real), the compass exogenous (typed, `¬ Recoverable`), convergence defined
-and underdetermined. The terminus is a THEOREM. -/
+the opening inhabitable (the many real), the compass exogenous (orientation-freedom `ws3_compass_exogenous`,
+AND an import as a proof term, `¬ Recoverable` `ws3_compass_exogenous_import`, PR1-R1/PR2-C1), convergence
+defined and underdetermined. The terminus is a THEOREM. -/
 theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest), ¬ ResidueRecoverable insp)
   ∧ Many (destWL hinf)
   ∧ (∃ (c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool)) (x y : WCar),
         (∃ R, IsBisim (destW hinf) R ∧ R x y) ∧ c.orient x ≠ c.orient y)
+  ∧ (∃ c : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
+        ¬ Recoverable (orientLift (destW hinf) c.orient))
   ∧ (∃ c₁ c₂ : Compass (destW hinf) (reifyW hinf) (ULift.{u} Bool),
         Converges (destW hinf) (reifyW hinf) c₁ aW bW
       ∧ ¬ Converges (destW hinf) (reifyW hinf) c₂ aW bW) :=
   ⟨fun {X} dest insp => ws2_residue_free dest insp, ws2_many_witness hinf,
-   ws3_compass_exogenous hinf, ws4_underdetermined_pair hinf⟩
+   ws3_compass_exogenous hinf, ws3_compass_exogenous_import hinf, ws4_underdetermined_pair hinf⟩
 
 -- (The universal theses are the un-rangeable quantifier, reported heuristic in prose; the mechanized core
 -- `ws6_provable_core` is the honest floor. The former contentless `ws6_universal_heuristic : True` is
