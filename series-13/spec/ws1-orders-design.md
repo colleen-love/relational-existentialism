@@ -147,6 +147,23 @@ Order by "d₂ is at least as label-distinguishing as d₁" (finer labels = fewe
 
 As A-C5. **Reject (connection by fiat).** The non-triviality theorem is the certificate.
 
+#### B-C6, the order reverse-engineered from the mint's output (the fifth fiat mode, B-C3's own exposure)
+
+```lean
+instance : LE (Lab dest) where le d₁ d₂ := (readInsp d₁) ≤ (readInsp d₂)      -- pullback of instLEInsp along the adjoint
+-- or, equivalently in spirit: any le crafted case-by-case so that mintL is monotone and mintL ∘ readInsp ≠ id,
+-- with no independent justification for WHY the ⟨false⟩ position is compared antitonically.
+```
+The failure mode B-C3 is MOST EXPOSED to, and the one the discrete/indiscrete/iso-in-disguise triad does not name: an order **reverse-engineered from the mint's own output** to force monotonicity and non-iso, as opposed to an order whose variances are fixed by the objects independently of the mint. B-C3 pairs a covariant residue-position with an ANTITONE reference-position; a reviewer is entitled to ask whether that antitone choice is PRINCIPLED (forced by what the reference-content is) or TUNED (chosen because it is what makes `mintL` monotone and `mintL ∘ readInsp` non-identity). If tuned, the connection is genuine only by fiat: the order was solved for the map, and any map would then look adjoint. **Reject the tuned reading; B-C3 survives only if the antitone reference-position is principled**, which the defense below establishes checkably.
+
+- **Failure mode:** *the reverse-engineered order (a fifth connection-by-fiat mode, discipline 2), SERIOUS if tuned.* Distinct from A-C5/B-C5 (trivial orders) and from B-C2 (iso in disguise): here the order is non-trivial and the connection non-iso, but for the WRONG reason, because it was fitted to the mint. **Reject unless the variance is independently justified (the defense).**
+
+**The principled-contravariance defense (stated so the blind reviewer can confirm or break it).** The antitone reference-position of B-C3 is NOT tuned to the mint; it is forced by where the reference-content sits in the diagonal. The claim, checkable without seeing the mint:
+
+> The order-direction of the `⟨false⟩` (reference) position matches the SIGN with which the self-application enters the residue, and that sign is negative, fixed by `residue = diag` (`diag insp h = ¬ insp h h`), independently of `mintL`.
+
+Concretely: the residue `residue insp` depends on the self-application `insp h₀ h₀` NEGATIVELY, `residue insp h₀ = ¬ insp h₀ h₀`. The reference-position broadcasts exactly the self-application data (`insp h₀`, seen at `h₀` as the self-bit `insp h₀ h₀`). A position that enters the diagonal negatively is a CONTRAVARIANT (order-dual) position, so comparing it antitonically is the variance the diagonal dictates, not a tuning knob. The check a reviewer runs: (i) confirm `instLELab`'s `⟨false⟩` clause is antitone (the `d₁, d₂` swap); (ii) confirm the residue's dependence on the `⟨false⟩` data is negation (`residue insp h₀ = ¬ insp h₀ h₀`, definitional, `rfl`); (iii) confirm these two signs AGREE. If they agree, the contravariance is principled (the order-dual tracks the diagonal's sign, which exists before any mint). If a reviewer exhibits an order that makes `mintL` monotone and the connection non-iso WHILE comparing the reference-position covariantly (against the diagonal's sign), B-C3's variance was a coincidence and the fiat charge stands; the design's position is that no such order exists, because covariant-reference would make `mintL` non-monotone at the reference-position (the diagonal's negative sign forces it), which is the variance wall from the other side. **The defense is a claim, not a silence: the reference-position is antitone because the diagonal is negative there, and the reviewer can break it by producing a covariant-reference order that still works.**
+
 ### Winner (labelled coalgebras): B-C3, residue-position covariant + reference-bit antitone
 
 ```lean

@@ -177,7 +177,7 @@ inductive Series13Verdict
   deriving DecidableEq
 ```
 
-The verdict is `verdictOfFit` applied to an `Audit` whose fields are the WS1–WS4 theorems (§3, WS5), so it BRANCHES on the certified defect and cannot be hand-set. The pre-registered value is `Dual`.
+The verdict is `verdictOfFit` applied to an `Audit` whose fields are the WS1–WS4 theorems (§3, WS5), so it BRANCHES on the certified fork and cannot be hand-set. **The verdict is COMPUTED, not led:** on carriers of interest (`|Hold| ≥ 2`) the fork is `defectStructural` and the verdict `Dual`, but only because the TOTAL target (every `¬ Recoverable` coalgebra `≈` some mint) was ATTEMPTED and refuted; on a degenerate single-hold carrier the fork is `mintSurjective` and the verdict `Total`. TOTAL (substance monism, every import diagonal-born) is a live outcome the series can genuinely reach, not a foreclosed one.
 
 ---
 
@@ -188,19 +188,21 @@ The verdict is `verdictOfFit` applied to an `Audit` whose fields are the WS1–W
 | WS1 | `instLEInsp`, `instLELab`, non-triviality | `residue`, `ws2_residue_distinct`, `ws1_coincidence_not_identity_witness` | `ws1_orders_insp_nontrivial`, `ws1_orders_lab_nontrivial` | connection by fiat: a trivial order (discipline 2) |
 | WS2 | `mintL`, transport, exogeneity | WS1 orders, `ws2_residue_distinct`, `plainOf`, `Recoverable` | `ws2_mint_lands_in_opening`, `ws2_mint_exogenous` | mint below the plain line (discipline 3) |
 | WS3 | `readInsp`, the `GaloisConnection`, round trips | WS1 orders, `mintL` (WS2) | `ws3_galois`, `ws3_roundtrip_closure`, `ws3_roundtrip_interior`, `ws3_roundtrip_not_identity` | iso in disguise (discipline 2) |
-| WS4 | the out-of-image witness, structural exclusion | `mintL` (WS2), `ws1_no_self_total_hold` | `ws4_mint_not_surjective`, `ws4_exclusion_structural` | the fork closed / the defect artifactual (disciplines 1, 4) |
+| WS4 | mintability up to `≈`, both directions | `mintL` (WS2), `ws1_no_self_total_hold`, `instLELab` | `ws4_mint_not_surjective` (DUAL, `\|Hold\| ≥ 2`), `ws4_exclusion_structural`, `ws4_mint_essentially_surjective_degenerate` (TOTAL, `\|Hold\| = 1`) | the fork closed / the defect artifactual / DUAL-by-construction (disciplines 1, 4; literal-equality too fine) |
 | WS5 | the verdict-as-a-function + the audit | WS1–WS4 payoffs | `Series13Verdict`, `ws5_verdict`, `ws5_verdict_eq`, the audit | verdict hand-set; a discipline breached; a name a term |
 
 `ws1-orders-design.md` (the two orders, the knot) is registered here (§6), owned by WS1, consumed by WS2–WS4. It is designed most carefully; DISCONNECTED is its pre-registered honest outcome.
 
 ---
 
-## 4. The four outcomes (pre-registered), and the dependency law
+## 4. The four outcomes (COMPUTED, none the lead), and the dependency law
 
-- **Dual** (expected): WS1 orders non-trivial, WS2 transport with exogeneity, WS3 connection with a genuine non-identity round trip, WS4 defect structural. The fit drawn.
-- **Total** (honorable, first-class): WS4 falls surjective, every import mintable. Reported in its direction; would press the fork toward the generated and require the positioning rewritten honestly. If it falls, WS5 records `Total` and WS4 states the surjectivity as a theorem.
-- **Disconnected** (honorable, first-class): WS1 fails, no non-trivial pair of orders admits a monotone mint and a non-vacuous connection. The obstruction (e.g. the variance wall, `ws1-orders-design.md` §triage) is the result, and Phase C builds only WS1's obstruction. **If WS1 lands DISCONNECTED, the whole series reports Disconnected and WS2–WS5 are not built.**
-- **Partial**: any obligation lands only per-instance or degenerate (a per-inspection transport, an iso-in-disguise connection, an artifactual defect).
+The verdict is a function of what the build proves, computed by WS5 (§2.8); DUAL is not privileged. WS1 (orders non-trivial), WS2 (transport with exogeneity), and WS3 (connection with a non-identity round trip) are near-certain and shared by the DUAL and TOTAL branches; the DIRECTION is decided by WS4, at the honest resolution (mintability up to `≈`, not literal equality), from the carrier's hold count.
+
+- **Dual** (`|Hold| ≥ 2`, carriers of interest): WS4's mint is NOT essentially surjective up to `≈`, some `¬ Recoverable` coalgebra (`outWit`, off the diagonal link) is `≈` no mint, the exclusion structural. Reached BECAUSE the TOTAL target was attempted and refuted, not assumed.
+- **Total** (`|Hold| = 1`, degenerate; and a LIVE outcome the series is genuinely open to), AT THE FLAT LAYER: WS4's mint IS essentially surjective up to `≈` over FLAT imports, every flat `¬ Recoverable` coalgebra `≈` some mint. Substance monism at the flat layer. Reported in its direction, bounded by the tower (tower-laden imports untestable, the layer-stability open), the positioning rewritten honestly, not defended. Degenerate on the single-hold carrier here, but stated first-class so that were a carrier of interest to fall surjective, "TOTAL at the flat layer, tower open" would be the finding.
+- **Disconnected** (first-class): WS1 fails, no non-trivial pair of orders admits a monotone mint and a non-vacuous connection. The obstruction (the variance wall, `ws1-orders-design.md` §triage) is the result. **If WS1 lands DISCONNECTED, the whole series reports Disconnected and WS2–WS5 are not built.**
+- **Partial**: any obligation lands only per-instance or degenerate (a per-inspection transport, an iso-in-disguise connection, a literal-equality-only defect that fails to survive `≈`).
 
 **The dependency law (protocol §4).** WS1 blocks WS2–WS4; WS2 blocks WS3 (adjoint) and WS4 (defect is about the WS2 mint); WS5 consumes all and cannot compute until WS4 settles. Upstream changes invalidate downstream builds; the ledger shows it.
 
@@ -212,7 +214,7 @@ For every payoff, delete "duality / fit / wound / rescue / given / chosen / mint
 
 - **Transport** (`ws2_mint_lands_in_opening`) SHOULD strip to: *"for every inspection, the two-region labelled coalgebra whose regions broadcast the residue and the reference-content is not `Recoverable`, because at `h₀` the residue-label `¬ insp h₀ h₀` differs from the reference-label's self-value `insp h₀ h₀` (`ws2_residue_distinct`)."* A `Recoverable`/diagonal fact.
 - **Connection** (`ws3_galois` + `ws3_roundtrip_not_identity`) SHOULD strip to: *"a `GaloisConnection` between two non-trivial preorders whose interior round trip is not the identity on a named element."* A bare Galois-connection fact.
-- **Defect** (`ws4_mint_not_surjective`) SHOULD strip to: *"a `¬ Recoverable` labelled coalgebra not in the image of `mintL`, excluded because `mintL insp ⟨false⟩`'s reference-bit at `h₀` is forced to be `¬ (residue-label h₀)` and the witness violates that link (`ws1_no_self_total_hold`)."* An out-of-image `¬ Recoverable` fact with structural exclusion.
+- **Defect** (`ws4_mint_not_surjective`) SHOULD strip to: *"a `¬ Recoverable` labelled coalgebra order-equivalent (`≈`) to no `mintL insp`, excluded because every `mintL insp` satisfies the diagonal link `bT h₀ = ¬ bF h₀`, `≈` preserves that link data, and the witness violates it (`ws1_no_self_total_hold`)."* An out-of-image-up-to-`≈` `¬ Recoverable` fact with structural exclusion. (Its companion, `ws4_mint_essentially_surjective_degenerate`, strips to *"on a single-hold carrier every `¬ Recoverable` coalgebra `≈` some mint"*, the TOTAL fact.)
 
 Any payoff that survives stripping as something OTHER than its named fact, or that needs the deleted word, is flagged. Any name doing a proof's work is SERIOUS.
 
@@ -226,6 +228,8 @@ Re-namespaced `Series13.WSn`, transcribed (not imported), as every prior series 
 - **The labelled / import test:** `LkObj`, `IsBisimL`, `BehaviorallyIdentifiedL`, `plainOf`, `Recoverable`, `ws4_recoverable_not_import`, `labelLoop`, `labelLoop_val`, `ws4_label_survives_quotient`, `plainOf_labelLoop_val`, `plainOf_labelLoop_reaches`, `labelLoop_atomless`, `plainOf_labelLoop_true_bisim`, `ws4_free_label_is_import`, `ws4_labelLoop_not_recoverable`.
 - **The diagonal spine and the free residue:** `Hold`, `afford`, `HoldPred`, `diag`, `SelfTotal`, `ws1_no_self_total_hold`, `ws1_insp_not_surjective`, `ws1_diagonal_not_bisim`, `residue`, `ResidueRecoverable`, `ws2_residue_distinct`, `ws2_residue_free`, `ws2_residue_is_import`.
 - **The opening (Series 12 WS1):** `Opening`, `ws1_two_halves`, `ws1_shape_coincidence`, `ws1_coincidence_not_identity`, `ws1_coincidence_not_identity_witness`.
+
+**Deliberately NOT transcribed (the single-layer scope, a named open, not a silent omission):** the reification tower (`IsReify`, `reifyStep`, `towerN`, `prec`, `ws3_reify_preserves_SHNE`). Series 13's carrier is FLAT; every labelled coalgebra in scope is a flat two-region self-loop. So the whole fit is drawn at the flat layer, and the LAYER-STABILITY question, does the mint commute with reification, does any tower-carrying import survive outside the mint's image up to `≈`, is left OPEN as a theorem-shaped question (WS5, the close). Any TOTAL is TOTAL AT THE FLAT LAYER (essentially surjective over flat imports, the tower unexamined), a bounded finding whose bound is the tower; any DUAL is DUAL at the flat layer (a flat import `≈` no mint).
 
 The **genuinely new Series 13 Lean**, defined here and expanded in the designs: `Insp`, `⊑c`, `instLEInsp`/`instPreorderInsp`, `MCar`, `Lab`, `instLELab`/`instPreorderLab`, and the non-triviality theorems (WS1); `mintL`, `ws2_mint_lands_in_opening`, `ws2_mint_exogenous` (WS2); `readInsp`, `ws3_mint_monotone`, `ws3_read_monotone`, `ws3_galois`, `ws3_roundtrip_closure`, `ws3_roundtrip_interior`, `ws3_roundtrip_not_identity` (WS3); the out-of-image witness `outWit`, `ws4_outWit_not_recoverable`, `ws4_mint_not_surjective`, `ws4_exclusion_structural` (WS4); `Series13Verdict`, `FitFork`, `verdictOfFit`, the `Audit`, `ws5_verdict`, `ws5_verdict_eq`, and the audit checks (WS5). Nothing is `import`ed across series.
 
