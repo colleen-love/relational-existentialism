@@ -16,7 +16,7 @@ The project proceeds in **series**, each a self-contained charter that states it
 
 ## The Result
 
-> **Atomless, purely relational, behaviorally identified plurality is impossible without a distinction the relating cannot carry, forking undecidably into the given and the chosen.**
+> **Atomless, purely relational, relationally identified plurality is impossible without a distinction the relating cannot carry, forking undecidably into the given and the chosen.**
 
 The first clause is a theorem, machine-checked in Lean 4 with no gaps and nothing beyond the standard mathematical baseline. Over **plain relating** (no imported coordinate), with an object *being* its relating (**behavioral identity** — two things are the same exactly when they relate alike), and with genuine **every-moment atomlessness** (nothing anywhere ever bottoms out in a leaf), a world has **at most one thing** in it. To hold more than one, it must import a distinction the relating does not itself carry.
 
