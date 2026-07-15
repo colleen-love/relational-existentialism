@@ -168,6 +168,42 @@ theorem ws5_audit_structural_defect {X : Type u} (dest : X → PkObj κ X) (h₀
   ∧ ((outWit h₀ h₁).cT h₀ = (outWit h₀ h₁).cF h₀) :=
   ws4_exclusion_structural h₀ h₁ hne hinf
 
+/-! ### Concrete carriers: the verdict is UNCONDITIONAL on carrier existence (`series-review-2.md` SR2-2)
+
+The headlines quantify over an arbitrary `dest` and take the carrier's hold-count as a hypothesis. Here we
+DISCHARGE those hypotheses at concrete carriers, so `Dual` (two-hold carrier) and `Total` (single-hold
+carrier) hold with `hinf` the only remaining (intrinsic) assumption, not merely `if a carrier exists`. -/
+
+/-- A two-hold carrier: `ULift Bool` with each state self-looping. `Hold` is the diagonal, two elements. -/
+def dest2 (hinf : ℵ₀ ≤ κ) : ULift.{u} Bool → PkObj κ (ULift.{u} Bool) := fun i => pkSingleton hinf i
+
+def h0two (hinf : ℵ₀ ≤ κ) : Hold (dest2 hinf) :=
+  ⟨(⟨true⟩, ⟨true⟩), by simp [dest2]⟩
+def h1two (hinf : ℵ₀ ≤ κ) : Hold (dest2 hinf) :=
+  ⟨(⟨false⟩, ⟨false⟩), by simp [dest2]⟩
+
+theorem h1two_ne_h0two (hinf : ℵ₀ ≤ κ) : h1two hinf ≠ h0two hinf := by
+  intro he
+  have hb : (⟨false⟩ : ULift.{u} Bool) = ⟨true⟩ := congrArg (fun h => (Subtype.val h).1) he
+  exact absurd hb (by decide)
+
+/-- **`Dual` at a concrete two-hold carrier**, the carrier hypotheses discharged. -/
+theorem ws5_dual_witnessed (hinf : ℵ₀ ≤ κ) :
+    ws5_verdict (dest2 hinf) (h0two hinf) hinf = Series13Verdict.Dual :=
+  ws5_verdict_eq (dest2 hinf) (h0two hinf) (h1two hinf) (h1two_ne_h0two hinf) hinf
+
+/-- A single-hold carrier: `PUnit`, one state self-looping. `Hold` is a subsingleton, one element. -/
+def destOne (hinf : ℵ₀ ≤ κ) : PUnit.{u+1} → PkObj κ PUnit.{u+1} := fun _ => pkSingleton hinf PUnit.unit
+
+def h0one (hinf : ℵ₀ ≤ κ) : Hold (destOne hinf) :=
+  ⟨(PUnit.unit, PUnit.unit), by simp [destOne]⟩
+
+/-- **`Total` at a concrete single-hold carrier** (the degenerate case, at the flat layer), discharged. -/
+theorem ws5_total_witnessed (hinf : ℵ₀ ≤ κ) :
+    ws5_verdict (destOne hinf) (h0one hinf) hinf = Series13Verdict.Total :=
+  ws5_verdict_degenerate (destOne hinf) (h0one hinf)
+    (fun h => Subtype.ext (Subsingleton.elim h.1 (h0one hinf).1)) hinf
+
 -- OPEN (layer-stability, single-layer scope): does the mint commute with reification, and does any
 -- tower-carrying import survive outside the mint's image up to `≈`? The flat carrier here cannot test it;
 -- left open, prose only, never a proof term. Any TOTAL above is TOTAL AT THE FLAT LAYER.

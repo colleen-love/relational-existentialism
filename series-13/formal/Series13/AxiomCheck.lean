@@ -45,6 +45,11 @@ import Series13
 #print axioms Series13.WS5.ws5_verdict_eq
 #print axioms Series13.WS5.ws5_verdict_degenerate
 #print axioms Series13.WS5.ws5_verdict_not_total
+#print axioms Series13.WS5.ws5_verdict_not_disconnected
+#print axioms Series13.WS5.ws5_verdict_not_partial
 #print axioms Series13.WS5.ws5_audit_genuine_connection
 #print axioms Series13.WS5.ws5_audit_exogeneity
 #print axioms Series13.WS5.ws5_audit_structural_defect
+-- concrete carriers: the verdict unconditional on carrier existence (series-review-2 SR2-2)
+#print axioms Series13.WS5.ws5_dual_witnessed
+#print axioms Series13.WS5.ws5_total_witnessed

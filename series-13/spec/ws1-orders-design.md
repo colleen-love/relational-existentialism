@@ -178,9 +178,12 @@ instance instPreorderLab {X} (dest) (h₀) : Preorder (Lab dest) where
   le_refl d := ⟨fun p hp => ⟨p, hp, rfl, fun x => x⟩, fun p hp => ⟨p, hp, rfl, fun x => x⟩⟩
   le_trans d₁ d₂ d₃ h12 h23 := …   -- residue-part: compose ⊑c; reference-part: compose implications with the swap
 
+> **UNBUILDABLE AS WRITTEN — realized across WS1+WS2 (`series-review-1.md` SR1-2, `series-review-2.md` SR2-3, closed Fixed).** The signature below witnesses with `mintL dest h₀`, but `mintL` is defined in **WS2**, which `import Series13.ws1`; a WS1 theorem naming `mintL` is a genuine import cycle, so this exact theorem CANNOT be built. The obligation (a §0.5 certificate exercising the antitone reference position AND the mint points) is realized as two theorems: `ws1_orders_lab_nontrivial` (WS1, now with a THIRD conjunct `∃ a b, a.cT = b.cT ∧ ¬ a ≤ b` isolating the antitone-reference-clause failure on an OFF-link witness) and `ws2_mint_nontrivial` (WS2, the mint-point non-triviality), consumed jointly by `ws5_audit_genuine_connection`. See the Build-realization note below and `charter-status.md` (SR1-2 / SR2-3 closures). The block below is retained as the design's intent, NOT as a buildable contract.
+
+```lean
 /-- **The labelled order is non-trivial (WS1).** Not discrete: the empty coalgebra `d⊥ := fun _ => toPk hinf ∅`
     is `≤ mintL insp` (vacuously, no edges to dominate) and unequal. Not indiscrete: `mintL ⊥i ≰ mintL ⊤i`,
-    because the residue-position labels are `⊤` and `⊥` and `⊤ ⋢c ⊥` at `h₀`. -/
+    because the residue-position labels are `⊤` and `⊥` and `⊤ ⋢c ⊥` at `h₀`. (UNBUILDABLE: `mintL` is WS2.) -/
 theorem ws1_orders_lab_nontrivial {X} (dest) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) :
     (∃ a b : Lab dest, a ≤ b ∧ a ≠ b)
   ∧ (∃ a b : Lab dest, ¬ a ≤ b) := by

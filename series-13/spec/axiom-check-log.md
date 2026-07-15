@@ -6,23 +6,22 @@ Captured from `lake build Series13.AxiomCheck` (`#print axioms` over every headl
 enters via `Classical.propDecidable` for `residue`'s `not_not`, the reference-fold, and the verdict's
 carrier case-split, and via `toPk` / `Cardinal` machinery — Mathlib-base axioms, not new ones.)
 
-**Capture provenance.** Phase E (series-review-1 closure), branch `claude/series-13-design-docs-s7uthq`,
-after merging `origin/main`. Re-run confirming `series-review-1.md` SR1-6 (the review could not run Lean).
-The strengthened non-triviality (`ws1_orders_lab_nontrivial` third conjunct, `ws2_mint_nontrivial`) is
-included and axiom-clean. The three-series `lake build` (07/12/13) succeeds and `scripts/gate.sh` is green
-on all three (SR1-4 closed).
+**Capture provenance.** Phase E (series-review-2 closure), branch `claude/series-13-design-docs-s7uthq`,
+after merging `origin/main`. 34 headline records, all `[propext, Classical.choice, Quot.sound]`. Includes the
+strengthened non-triviality (`ws1_orders_lab_nontrivial` third conjunct, `ws2_mint_nontrivial`, SR1-1/SR1-2)
+and the concrete carriers (`ws5_dual_witnessed`, `ws5_total_witnessed`, SR2-2) making the verdict
+unconditional on carrier existence. The three-series `lake build` (07/12/13) succeeds; `scripts/gate.sh` is
+green on all three.
 
-**The four critical checks, all confirmed:**
-1. Fork OPEN — `ws4_mint_not_surjective` locates up to `≈`, never sorts; no `Origin`/`genealogy` term.
-2. Connection GENUINE — orders non-trivial with the ANTITONE REFERENCE POSITION now load-bearing in the
-   certificate (`ws1_orders_lab_nontrivial` third conjunct) and non-triviality at MINT POINTS
-   (`ws2_mint_nontrivial`), plus `ws3_roundtrip_not_identity` (SR1-1, SR1-2 closed Fixed).
-3. Mint EXOGENOUS — `ws2_mint_exogenous` / `ws2_mint_not_plain_function`.
-4. Defect STRUCTURAL — `ws4_exclusion_structural`, the diagonal link surviving `≈`.
-
-**Computed verdict.** `ws5_verdict = Dual` on any carrier with a second hold (`ws5_verdict_eq`), `= Total`
-on the degenerate single-hold carrier (`ws5_verdict_degenerate`). FLAT-LAYER scope; layer-stability a named
-open. Domain narrowing (`Lab` vs `LkObj`) disclosed as charter discrepancy CD-1 (SR1-3).
+**Attestation status (`series-review-2.md` SR2-1, recorded per its explicit request).** Axiom-cleanliness is
+**BUILDER-ATTESTED and REVIEWER-UNVERIFIED** in this program: no reviewing session has reproduced this log,
+two review passes running, because the review sandbox has no Lean toolchain and `leanprover-community` is off
+its network allowlist (`403 host_not_allowed`). What the reviews DID verify mechanically: source hygiene is
+clean (no `sorry`/`admit`/custom `axiom`/`native_decide` in `formal/`, all grep hits docstring prose), and
+this log is internally consistent — every `#print axioms` target in `AxiomCheck.lean` diffs exactly against a
+record here (no gaps either direction), all standard three, zero non-standard records. The log is coherent
+and consistent with the source; it remains a builder self-report until a review environment with the Mathlib
+cache reproduces it.
 
 ```
 'Series13.WS1.ws1_orders_insp_nontrivial' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -52,7 +51,11 @@ open. Domain narrowing (`Lab` vs `LkObj`) disclosed as charter discrepancy CD-1 
 'Series13.WS5.ws5_verdict_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS5.ws5_verdict_degenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS5.ws5_verdict_not_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series13.WS5.ws5_verdict_not_disconnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series13.WS5.ws5_verdict_not_partial' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS5.ws5_audit_genuine_connection' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS5.ws5_audit_exogeneity' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS5.ws5_audit_structural_defect' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series13.WS5.ws5_dual_witnessed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series13.WS5.ws5_total_witnessed' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```

@@ -17,6 +17,8 @@ The whole coda turns on getting four signs right; each is a design constraint AN
 
 And the wall inherited from the prose side (protocol §0.6b): **names are names, not terms.** No proof term, definition, or discharged obligation is named "given," "chosen," "consciousness," "God," "choice," or "compass" (as content). The names live in docstrings and prose only.
 
+**Blind-review seed (`series-review-2.md` SR2-4).** The mathematical bar and the five discipline checks, prose-free, are extracted to `spec/success-criteria.md`. A blind reviewer is seeded with that file (plus the built code and the design signatures), NOT `charter.md`, so the motivating positioning is never in view — blindness by construction rather than by promise.
+
 ---
 
 ## 1. The one-paragraph design
