@@ -171,6 +171,9 @@ noncomputable def plainOf {Q X : Type u} (dest : X → LkObj κ Q X) : X → PkO
 def Recoverable {Q X : Type u} (dest : X → LkObj κ Q X) : Prop :=
   ∀ R, IsBisim (plainOf dest) R → IsBisimL dest R
 
+-- Touchstones (`series-review-1.md` SR1-11): the Series-07 import-theorem chain (`ws2_import_theorem` …)
+-- and `ws4_recoverable_not_import` are transcribed as NAMED PREMISES (charter §3), not consumed by the new
+-- WS1–WS5 payoffs; kept for transcription fidelity and the AxiomCheck record, not surplus.
 theorem ws4_recoverable_not_import {Q X : Type u} (dest : X → LkObj κ Q X)
     (hrec : Recoverable dest) (x y : X)
     (h : ∃ R, IsBisim (plainOf dest) R ∧ R x y) :
@@ -392,12 +395,23 @@ theorem ws1_orders_insp_nontrivial {X : Type u} (dest : X → PkObj κ X) (h₀ 
     simp only [residue, diag] at this
     exact absurd (this (by simp)) (by simp)
 
-/-- **The labelled order is NON-TRIVIAL.** Not discrete: `⟨⊥,⊥⟩ ≤ ⟨⊤,⊥⟩` and they are unequal. Not
-indiscrete: `¬ (⟨⊤,⊥⟩ ≤ ⟨⊥,⊥⟩)`, the residue-position `⊤ ⋢c ⊥` at `h₀`. -/
+/-- **The labelled order is NON-TRIVIAL, and BOTH positions are load-bearing.** (1) Not discrete:
+`⟨⊥,⊥⟩ ≤ ⟨⊤,⊥⟩` and they are unequal. (2) Not indiscrete via the RESIDUE position: `¬ (⟨⊤,⊥⟩ ≤ ⟨⊥,⊥⟩)`,
+`⊤ ⋢c ⊥` at `h₀`. (3) The ANTITONE REFERENCE position is load-bearing (the third conjunct): `⟨⊤,⊥⟩` and
+`⟨⊤,⊤⟩` share `cT` yet `¬ (⟨⊤,⊥⟩ ≤ ⟨⊤,⊤⟩)`, the failure ISOLATED to the reference clause (`⊤ h₀ → ⊥ h₀`,
+a NON-vacuous `True → False`). This is the certificate the design's `mintL`-witnessed statement intended but
+could not carry (the mint lives in WS2, so WS1 cannot name it; `ws2_mint_nontrivial` certifies the mint
+points, WS2). The reference witness `⟨⊤,⊤⟩` is genuinely OFF the diagonal link (`cT h₀ = ⊤ ≠ ¬ ⊤ = ¬ cF h₀`),
+so this non-triviality IS the off-link-coalgebra fact the WS4 defect and the WS3 non-iso both rest on:
+the reference position is non-trivial precisely because off-link coalgebras exist, which is principled,
+not tuned (addresses `series-review-1.md` SR1-1, SR1-2). -/
 theorem ws1_orders_lab_nontrivial {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) :
-    (∃ a b : Lab dest h₀, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Lab dest h₀, ¬ a ≤ b) := by
+    (∃ a b : Lab dest h₀, a ≤ b ∧ a ≠ b)
+  ∧ (∃ a b : Lab dest h₀, ¬ a ≤ b)
+  ∧ (∃ a b : Lab dest h₀, a.cT = b.cT ∧ ¬ a ≤ b) := by
   refine ⟨⟨⟨(fun _ => False), (fun _ => False)⟩, ⟨(fun _ => True), (fun _ => False)⟩, ⟨?_, ?_⟩, ?_⟩,
-          ⟨⟨(fun _ => True), (fun _ => False)⟩, ⟨(fun _ => False), (fun _ => False)⟩, ?_⟩⟩
+          ⟨⟨(fun _ => True), (fun _ => False)⟩, ⟨(fun _ => False), (fun _ => False)⟩, ?_⟩,
+          ⟨⟨(fun _ => True), (fun _ => False)⟩, ⟨(fun _ => True), (fun _ => True)⟩, rfl, ?_⟩⟩
   · -- residue-part: ⊥ ⊑c ⊤
     intro h hh; exact absurd hh (by simp)
   · -- reference-part: ⊥ h₀ → ⊥ h₀
@@ -410,5 +424,8 @@ theorem ws1_orders_lab_nontrivial {X : Type u} (dest : X → PkObj κ X) (h₀ :
   · -- ¬ (⟨⊤,⊥⟩ ≤ ⟨⊥,⊥⟩) : residue-part ⊤ ⊑c ⊥ fails at h₀
     rintro ⟨hcT, _⟩
     exact absurd (hcT h₀ (by simp)) (by simp)
+  · -- ¬ (⟨⊤,⊥⟩ ≤ ⟨⊤,⊤⟩) : the ANTITONE reference clause fails (⊤ h₀ → ⊥ h₀, non-vacuous), same cT
+    rintro ⟨_, href⟩
+    exact href trivial
 
 end Series13.WS1

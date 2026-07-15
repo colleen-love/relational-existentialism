@@ -6,27 +6,23 @@ Captured from `lake build Series13.AxiomCheck` (`#print axioms` over every headl
 enters via `Classical.propDecidable` for `residue`'s `not_not`, the reference-fold, and the verdict's
 carrier case-split, and via `toPk` / `Cardinal` machinery — Mathlib-base axioms, not new ones.)
 
-**Capture provenance.** Phase C build-all (branch `claude/series-13-design-docs-s7uthq`), the full five
-workstreams plus the transcribed premises. The whole Series 13 build compiles `sorry`-free and axiom-clean;
-the three-series `lake build` (Series 07, Series 12, Series 13) succeeds.
+**Capture provenance.** Phase E (series-review-1 closure), branch `claude/series-13-design-docs-s7uthq`,
+after merging `origin/main`. Re-run confirming `series-review-1.md` SR1-6 (the review could not run Lean).
+The strengthened non-triviality (`ws1_orders_lab_nontrivial` third conjunct, `ws2_mint_nontrivial`) is
+included and axiom-clean. The three-series `lake build` (07/12/13) succeeds and `scripts/gate.sh` is green
+on all three (SR1-4 closed).
 
-**The four critical checks (the series' reasons to exist), all confirmed at build:**
-1. The fork stays OPEN — WS4's `ws4_mint_not_surjective` LOCATES an import outside the mint's image up to `≈`
-   (`¬ ∃ insp, mintL insp ≈ outWit`); no theorem sorts an out-of-image import into given/chosen (grep-clean:
-   no `Origin`/`genealogy` term, `given`/`chosen` in prose only).
-2. The connection is GENUINE — both orders proved non-trivial (`ws1_orders_insp_nontrivial`,
-   `ws1_orders_lab_nontrivial`), and the interior round trip proved non-identity at `bRefActive`
-   (`ws3_roundtrip_not_identity`): not an isomorphism in disguise.
-3. The mint is EXOGENOUS — `ws2_mint_exogenous` a genuine proof term: `plainOf ∘ mintL` is constant in the
-   inspection yet the mint is not, so the plain relating cannot perform it (`ws2_mint_not_plain_function`).
-4. The defect is STRUCTURAL — `ws4_exclusion_structural`: `≈` preserves the diagonal-link data, every mint is
-   on the link, `outWit` is off it. The label (the diagonal) excludes, not a cardinality/universe/typing
-   artifact.
+**The four critical checks, all confirmed:**
+1. Fork OPEN — `ws4_mint_not_surjective` locates up to `≈`, never sorts; no `Origin`/`genealogy` term.
+2. Connection GENUINE — orders non-trivial with the ANTITONE REFERENCE POSITION now load-bearing in the
+   certificate (`ws1_orders_lab_nontrivial` third conjunct) and non-triviality at MINT POINTS
+   (`ws2_mint_nontrivial`), plus `ws3_roundtrip_not_identity` (SR1-1, SR1-2 closed Fixed).
+3. Mint EXOGENOUS — `ws2_mint_exogenous` / `ws2_mint_not_plain_function`.
+4. Defect STRUCTURAL — `ws4_exclusion_structural`, the diagonal link surviving `≈`.
 
-**Computed verdict.** `ws5_verdict = Dual` on any carrier with a second hold (`ws5_verdict_eq`, the TOTAL
-target refuted by `outWit`), `= Total` on the degenerate single-hold carrier (`ws5_verdict_degenerate`). The
-verdict is COMPUTED (branches on the carrier's hold count), never hand-set. FLAT-LAYER scope: the reification
-tower is deliberately outside the transcription; layer-stability is a named open (WS5).
+**Computed verdict.** `ws5_verdict = Dual` on any carrier with a second hold (`ws5_verdict_eq`), `= Total`
+on the degenerate single-hold carrier (`ws5_verdict_degenerate`). FLAT-LAYER scope; layer-stability a named
+open. Domain narrowing (`Lab` vs `LkObj`) disclosed as charter discrepancy CD-1 (SR1-3).
 
 ```
 'Series13.WS1.ws1_orders_insp_nontrivial' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -43,6 +39,7 @@ tower is deliberately outside the transcription; layer-stability is a named open
 'Series13.WS2.ws2_transport_forall' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS2.ws2_mint_exogenous' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS2.ws2_mint_not_plain_function' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Series13.WS2.ws2_mint_nontrivial' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS3.ws3_galois' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS3.ws3_mint_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Series13.WS3.ws3_read_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]

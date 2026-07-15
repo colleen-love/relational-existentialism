@@ -44,8 +44,14 @@ inductive FitFork {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hin
             ∧ ¬ ∃ insp, labEquiv h₀ (mintL h₀ insp) (outWit h₀ h₁))
   | mintSurjective
       (hs : ∀ b : Lab dest h₀, (¬ Recoverable (coalg hinf b)) → ∃ insp, labEquiv h₀ (mintL h₀ insp) b)
+  -- `ordersTrivial` (DISCONNECTED) carries the inspection-order trivialities only; a full DISCONNECTED
+  -- report would add the labelled-order disjuncts (`series-review-1.md` SR1-10). Unreached here (WS1 landed
+  -- non-trivial), so latent; reserved for a build where an order proves vacuous.
   | ordersTrivial
       (ht : (∀ a b : Insp dest, a ≤ b) ∨ (∀ a b : Insp dest, a ≤ b → a = b))
+  -- `perInstance` (PARTIAL) is a reserved hand-report constructor with no computable payload; `ws5_fork`
+  -- never produces it (`series-review-1.md` SR1-9), so `Partial` is not computed on this build, only
+  -- reachable by an explicit Partial report. `ws5_verdict_not_partial` is therefore true, if uninteresting.
   | perInstance (hp : True)
 
 def verdictOfFit {X : Type u} {dest : X → PkObj κ X} {h₀ : Hold dest} {hinf : ℵ₀ ≤ κ} :
@@ -59,7 +65,8 @@ def verdictOfFit {X : Type u} {dest : X → PkObj κ X} {h₀ : Hold dest} {hinf
 structure Audit {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) where
   orders_nontrivial :
       ((∃ a b : Insp dest, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Insp dest, ¬ a ≤ b))
-    ∧ ((∃ a b : Lab dest h₀, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Lab dest h₀, ¬ a ≤ b))
+    ∧ ((∃ a b : Lab dest h₀, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Lab dest h₀, ¬ a ≤ b)
+        ∧ (∃ a b : Lab dest h₀, a.cT = b.cT ∧ ¬ a ≤ b))     -- the antitone reference position is load-bearing
   transport  : ∀ insp : Insp dest, ¬ Recoverable (coalg hinf (mintL h₀ insp))
   exogenous  : ∃ i₁ i₂ : Insp dest,
       plainOf (coalg hinf (mintL h₀ i₁)) = plainOf (coalg hinf (mintL h₀ i₂))
@@ -130,12 +137,21 @@ theorem ws5_verdict_not_partial {X : Type u} (dest : X → PkObj κ X) (h₀ h�
 
 /-! ### The audit folded in -/
 
-/-- **Genuine-connection check.** Orders non-trivial AND a non-identity round trip. -/
+/-- **Genuine-connection check** (`series-review-1.md` SR1-1, SR1-2). Orders non-trivial — the inspection
+order, the labelled order with its ANTITONE REFERENCE POSITION load-bearing (third conjunct), AND the
+labelled order at MINT POINTS (`ws2_mint_nontrivial`) — together with a proved non-identity round trip. The
+certificate now exercises the contested antitone half and the mint points, not two constant literals. -/
 theorem ws5_audit_genuine_connection {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) :
     ((∃ a b : Insp dest, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Insp dest, ¬ a ≤ b))
+  ∧ ((∃ a b : Lab dest h₀, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Lab dest h₀, ¬ a ≤ b)
+      ∧ (∃ a b : Lab dest h₀, a.cT = b.cT ∧ ¬ a ≤ b))                       -- reference position load-bearing
+  ∧ (mintL h₀ (fun _ _ => True) ≤ mintL h₀ (fun _ _ => False)
+      ∧ mintL h₀ (fun _ _ => True) ≠ mintL h₀ (fun _ _ => False)
+      ∧ ¬ (mintL h₀ (fun _ _ => False) ≤ mintL h₀ (fun _ _ => True)))        -- non-triviality AT MINT POINTS
   ∧ (mintL h₀ (readInsp h₀ (bRefActive dest h₀)) ≤ bRefActive dest h₀
      ∧ ¬ (bRefActive dest h₀ ≤ mintL h₀ (readInsp h₀ (bRefActive dest h₀)))) :=
-  ⟨ws1_orders_insp_nontrivial dest h₀, ws3_roundtrip_not_identity h₀⟩
+  ⟨ws1_orders_insp_nontrivial dest h₀, ws1_orders_lab_nontrivial dest h₀,
+   ws2_mint_nontrivial h₀, ws3_roundtrip_not_identity h₀⟩
 
 /-- **Exogeneity check.** The mint above the plain layer, a proof term. -/
 theorem ws5_audit_exogeneity {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) :

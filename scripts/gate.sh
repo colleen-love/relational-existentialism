@@ -26,5 +26,6 @@ check () { # <root> <allowed-egrep>
 # `SeriesN.AxiomCheck`) may import each other (+ mathlib); nothing outside the namespace is allowed.
 check series-07 "^import Series07(\.[A-Za-z0-9_]+)*$"
 check series-12 "^import Series12(\.[A-Za-z0-9_]+)*$"
+check series-13 "^import Series13(\.[A-Za-z0-9_]+)*$"
 
 exit $fail

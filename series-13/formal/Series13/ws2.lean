@@ -99,6 +99,33 @@ theorem ws2_mint_exogenous {X : Type u} {dest : X → PkObj κ X} (h₀ : Hold d
     simp only [residue, diag] at this
     exact absurd this (by simp)
 
+/-- **Non-triviality certified AT MINT POINTS** (`series-review-1.md` SR1-1, SR1-2). The labelled order is
+non-trivial among coalgebras the mint actually produces: `mintL ⊤i ≤ mintL ⊥i` (a related pair of MINTS),
+`mintL ⊤i ≠ mintL ⊥i` (unequal, the exogeneity pair), and `¬ (mintL ⊥i ≤ mintL ⊤i)` (unrelated, the residue
+position). The design's `mintL`-witnessed non-triviality lives HERE (WS2, where `mintL` is defined), not in
+WS1 (which cannot name the mint); together with `ws1_orders_lab_nontrivial`'s reference-position witness the
+certificate covers both the mint points and the antitone reference clause. -/
+theorem ws2_mint_nontrivial {X : Type u} {dest : X → PkObj κ X} (h₀ : Hold dest) :
+    mintL h₀ (fun _ _ => True) ≤ mintL h₀ (fun _ _ => False)
+  ∧ mintL h₀ (fun _ _ => True) ≠ mintL h₀ (fun _ _ => False)
+  ∧ ¬ (mintL h₀ (fun _ _ => False) ≤ mintL h₀ (fun _ _ => True)) := by
+  refine ⟨⟨?_, ?_⟩, ?_, ?_⟩
+  · intro h hh
+    simp only [mintL_cT, residue, diag] at hh
+    exact (hh trivial).elim
+  · intro _
+    simp [mintL_cF]
+  · intro he
+    have hcT := congrArg Lab.cT he
+    simp only [mintL_cT] at hcT
+    have := congrFun hcT h₀
+    simp only [residue, diag] at this
+    exact absurd this (by simp)
+  · rintro ⟨hcT, _⟩
+    have := hcT h₀
+    simp only [mintL_cT, residue, diag] at this
+    exact (this (by simp)) trivial
+
 /-- **The sharp corollary.** There is NO function from the plain relating that reproduces the mint. -/
 theorem ws2_mint_not_plain_function {X : Type u} {dest : X → PkObj κ X} (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) :
     ¬ ∃ g : (MCar dest → PkObj κ (MCar dest)) → Lab dest h₀,

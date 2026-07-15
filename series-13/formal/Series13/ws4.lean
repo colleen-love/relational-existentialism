@@ -32,7 +32,9 @@ set_option linter.unusedVariables false
 
 variable {κ : Cardinal.{u}}
 
-/-- **The equivalence.** Order-equivalence in `instLELab`. -/
+/-- **The equivalence.** Order-equivalence in `instLELab`. Written `≈` in the module prose and docstrings
+(`series-review-1.md` SR1-8): `b ≈ b'` denotes `labEquiv h₀ b b'`; it is not registered as `Setoid`/`≈`
+notation to avoid clashing with Mathlib's `Setoid` `≈`. -/
 def labEquiv {X : Type u} {dest : X → PkObj κ X} (h₀ : Hold dest) (b b' : Lab dest h₀) : Prop :=
   b ≤ b' ∧ b' ≤ b
 
@@ -60,8 +62,14 @@ lemma coalg_recoverable_of_eq {X : Type u} {dest : X → PkObj κ X} {h₀ : Hol
 /-! ## DUAL (carriers with a second hold): the defect up to `≈` -/
 
 /-- **THE DEFECT (up to `≈`).** `outWit` fails `Recoverable` (an import) and is `≈` NO mint: order-equivalence
-forces `residue insp h₀` and `insp h₀ h₀` both true, contradicting the diagonal link. The theorem LOCATES the
-import outside the image at the honest resolution; it never classifies it. -/
+forces `residue insp h₀` and `insp h₀ h₀` both true, contradicting the diagonal link. The theorem LOCATES an
+out-of-image import at the honest resolution; it never classifies it.
+
+DOMAIN (`series-review-1.md` SR1-3, charter discrepancy CD-1): the first conjunct `¬ Recoverable (coalg …)`
+is a genuine COALGEBRA fact (an import in the labelled-coalgebra sense); the second is non-mintability up to
+`labEquiv` over the two-region self-loop coalgebras represented by `Lab`, NOT over all labelled coalgebras
+over `dest`. The narrowing is disclosed in `charter-status.md` CD-1 and bounded further by the flat-layer
+scope (WS5). -/
 theorem ws4_mint_not_surjective {X : Type u} {dest : X → PkObj κ X} (h₀ h₁ : Hold dest) (hne : h₁ ≠ h₀)
     (hinf : ℵ₀ ≤ κ) :
     ¬ Recoverable (coalg hinf (outWit h₀ h₁))

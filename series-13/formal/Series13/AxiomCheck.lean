@@ -26,6 +26,7 @@ import Series13
 #print axioms Series13.WS2.ws2_transport_forall
 #print axioms Series13.WS2.ws2_mint_exogenous
 #print axioms Series13.WS2.ws2_mint_not_plain_function
+#print axioms Series13.WS2.ws2_mint_nontrivial
 
 -- WS3 - the adjoint, the Galois connection, closure/interior, the non-identity round trip (the fit)
 #print axioms Series13.WS3.ws3_galois
