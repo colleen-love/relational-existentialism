@@ -1,4 +1,4 @@
--- `Series12` - the live Lean root (Spec Series 12), the program's genuine terminal series.
+-- `Series12` - the live Lean root (Spec Series 12).
 --
 -- Series 03-06, 08-11 are closed and frozen under `archive/`; Series 07 is complete under `series-07/`.
 -- Series 12 is WHOLLY STANDALONE (charter §1): the one prior result it presupposes and names is Series 07,

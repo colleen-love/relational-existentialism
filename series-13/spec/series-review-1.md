@@ -136,7 +136,7 @@ The engine and the two payoffs the series was most likely to fake.
 
 **WS4's structural-exclusion argument survives the check it was designed against.** Testing up to `labEquiv` rather than literal equality is the honest resolution and is reasoned for explicitly (literal equality would make DUAL true by construction). `ws4_exclusion_structural`'s three conjuncts do the work jointly: the equivalence preserves the link data, every mint is on the link by `rfl`, `outWit` is off it. That is exclusion by the label, which is what §4.d and §0.6a demand. The degenerate TOTAL branch is built and reported rather than hidden, and bounded to the flat layer.
 
-**The fork stays open.** The check the whole coda turns on. Grep-clean, structurally clean: WS4 locates and never sorts, and there is no type, function, or obligation anywhere that partitions the out-of-image remainder. The prose does the interpretive work and stays in the prose.
+**The fork stays open.** The check the whole series turns on. Grep-clean, structurally clean: WS4 locates and never sorts, and there is no type, function, or obligation anywhere that partitions the out-of-image remainder. The prose does the interpretive work and stays in the prose.
 
 **The verdict is computed and falsifiable.** `ws5_fork` cases on the carrier; both branches fire; both are theorems; the falsifiability triple is real. `Dual` is an earned output of a function that would have said `Total` on a different carrier — and does, in `ws5_verdict_degenerate`.
 

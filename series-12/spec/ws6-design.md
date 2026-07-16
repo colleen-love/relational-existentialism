@@ -1,12 +1,12 @@
 # WS6 — The program's close
 
-**Design doc. Series 12, the honest boundary, the terminal series' close. Owns: the statement of what the whole arc established (the collapse and import necessity, Series 07; self-reference forcing an unclosable residue; reification proliferating it into a layered tower; finite attention bounding every reading; and this series — the coincidence of the required and the generated in one shape, the plurality of knowing over it, the typed-unevaluated compass, and the proved undecidability of convergence) and what remains PERMANENTLY OPEN, and why its openness is a THEOREM: the content of the compass, the direction of convergence, the differentiating act itself, never built, only its shape drawn. The program closes not on a filled slot but on an exactly-drawn edge, and the drawing is the completion.**
+**Design doc. Series 12, the honest boundary, the series' close. Owns: the statement of what the whole arc established (the collapse and import necessity, Series 07; self-reference forcing an unclosable residue; reification proliferating it into a layered tower; finite attention bounding every reading; and this series — the coincidence of the required and the generated in one shape, the plurality of knowing over it, the typed-unevaluated compass, and the proved undecidability of convergence) and what remains PERMANENTLY OPEN, and why its openness is a THEOREM: the content of the compass, the direction of convergence, the differentiating act itself, never built, only its shape drawn. Series 12 closes not on a filled slot but on an exactly-drawn edge, and the drawing is the result.**
 
-*Series 12 is standalone and terminal; WS6 CONSUMES the WS1–WS5 payoffs and states the program-level synthesis. The mechanized core is `ws6_provable_core` (the conjunction of what Series 12 proved); the universal theses (every κ-free tower, every inhabitant) are reported HEURISTIC (the un-rangeable quantifier, as every terminal series has done); the permanent opens are stated as THEOREMS of openness (the diagonal makes them open, not want of effort). The prose deliverables — `summary.md`, `summary-technical.md`, the root `README.md` program-level synthesis — are Phase F; this design fixes their mathematical spine. The one signature risk is the terminal temptation: filling the shape (claiming which inhabitant, which direction) rather than drawing the edge.*
+*Series 12 is standalone; WS6 CONSUMES the WS1–WS5 payoffs and states the program-level synthesis. The mechanized core is `ws6_provable_core` (the conjunction of what Series 12 proved); the universal theses (every κ-free tower, every inhabitant) are reported HEURISTIC (the un-rangeable quantifier, as prior series closes have done); the permanent opens are stated as THEOREMS of openness (the diagonal makes them open, not want of effort). The prose deliverables — `summary.md`, `summary-technical.md`, the root `README.md` program-level synthesis — are Phase F; this design fixes their mathematical spine. The one signature risk is the temptation: filling the shape (claiming which inhabitant, which direction) rather than drawing the edge.*
 
 ## The object at stake
 
-The charter's WS6 (§2): as the genuine terminal series, state what the whole arc established, what remains permanently open, and WHY its openness is a theorem. The program closes on the exactly-drawn edge, and the drawing is the completion. Three obligations. (1) **The provable core, mechanized:** a single conjunction of what Series 12 proved (the coincidence shape-honest, the opening inhabitable, the compass typed, convergence underdetermined), so the terminus is a theorem, not a claim. (2) **The universal theses, heuristic:** the fully universal forms (every κ-free tower is inhabitable; every compass type underdetermines convergence) are the un-rangeable quantifiers, reported heuristic, defended not mechanized. (3) **The permanent opens as theorems:** the compass's content, convergence's direction, and the differentiating act are open BECAUSE the diagonal makes them so (`ws1_no_self_total_hold`, `ws2_residue_free`, `ws3_compass_exogenous`, `ws4_underdetermined`), a theorem of openness, not a gap.
+The charter's WS6 (§2): state what the whole arc established, what remains permanently open, and WHY its openness is a theorem. Series 12 closes on the exactly-drawn edge, and the drawing is the result. Three obligations. (1) **The provable core, mechanized:** a single conjunction of what Series 12 proved (the coincidence shape-honest, the opening inhabitable, the compass typed, convergence underdetermined), so the verdict is a theorem, not a claim. (2) **The universal theses, heuristic:** the fully universal forms (every κ-free tower is inhabitable; every compass type underdetermines convergence) are the un-rangeable quantifiers, reported heuristic, defended not mechanized. (3) **The permanent opens as theorems:** the compass's content, convergence's direction, and the differentiating act are open BECAUSE the diagonal makes them so (`ws1_no_self_total_hold`, `ws2_residue_free`, `ws3_compass_exogenous`, `ws4_underdetermined`), a theorem of openness, not a gap.
 
 **Ambient theory.** The WS1–WS5 payoffs; `spec/README.md` §5 (predicted headline).
 
@@ -17,7 +17,7 @@ The charter's WS6 (§2): as the genuine terminal series, state what the whole ar
 ```lean
 /-- **THE PROVABLE CORE.** What Series 12 proved, as one conjunction: the coincidence shape-honest, the
     opening inhabitable non-degenerately, the compass exogenous (typed, `¬ Recoverable`), convergence
-    defined and underdetermined. The terminus is a THEOREM. -/
+    defined and underdetermined. The verdict is a THEOREM. -/
 theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
     (∀ {X} (dest : X → PkObj κ X) (insp), Opening (ResidueRecoverable) insp)   -- WS1: the opening, forced
   ∧ (Many (destWL hinf))                                                       -- WS2: inhabitable, plural
@@ -26,10 +26,10 @@ theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
   ⟨fun {X} dest insp => ws2_residue_free dest insp, ws2_many_witness hinf,
    ws3_compass_exogenous hinf, ws4_underdetermined_pair hinf⟩
 ```
-The provable core: the four Series-12 facts as one theorem. The shape drawn (WS1), the opening inhabited (WS2), the compass typed and exogenous (WS3), convergence underdetermined (WS4) — the terminus mechanized.
+The provable core: the four Series-12 facts as one theorem. The shape drawn (WS1), the opening inhabited (WS2), the compass typed and exogenous (WS3), convergence underdetermined (WS4) — the verdict mechanized.
 
 - **Ambient:** the WS1–WS4 payoffs.
-- **Success condition (Shape-drawn):** the conjunction typechecks — the terminus is a theorem, not a claim.
+- **Success condition (Shape-drawn):** the conjunction typechecks — the verdict is a theorem, not a claim.
 - **Failure mode:** *filling the shape.* Foreclosed: the core states the shape drawn and the opening inhabited, never WHICH inhabitant or WHICH direction. **Winner (the core).**
 
 ### C2 — The universal theses, reported heuristic (the ceiling)
@@ -38,10 +38,10 @@ The provable core: the four Series-12 facts as one theorem. The shape drawn (WS1
 /-- **THE UNIVERSAL THESES (heuristic).** The fully universal forms — every κ-free tower is inhabitable,
     every compass type underdetermines convergence — are the un-rangeable quantifiers ("every construction"),
     reported HEURISTIC and defended, not mechanized. The witness (WS2) and the model pair (WS4) discharge the
-    existential; the universal is the ceiling every terminal series draws. -/
+    existential; the universal is the ceiling every series close draws. -/
 theorem ws6_universal_heuristic : True := trivial   -- the universal is prose; the mechanized core is C1
 ```
-The heuristic ceiling: the universal forms are not formalizable (the "every construction" quantifier), so they are stated in prose and defended, with the mechanized core (C1) the honest floor. This is the pattern every terminal series has used (Series 07's `ws6_universal` heuristic).
+The heuristic ceiling: the universal forms are not formalizable (the "every construction" quantifier), so they are stated in prose and defended, with the mechanized core (C1) the honest floor. This is the pattern prior series closes have used (Series 07's `ws6_universal` heuristic).
 
 - **Ambient:** C1 (the floor); the un-rangeable universal.
 - **Success condition (Partial, honest):** the universal reported heuristic, the existential mechanized.
@@ -87,14 +87,14 @@ The four tenets' final alignment (charter §8), each with its theorem spine — 
 - **Success condition (Shape-drawn):** each tenet anchored to a theorem, the alignment prose.
 - **Failure mode:** *a tenet doing proof work (a name a term).* Foreclosed: the tenets are prose glosses; the theorems are the transcribed impossibilities. **Winner (the synthesis spine).**
 
-### C5 — Claiming the terminus fills the shape (the temptation, rejected)
+### C5 — Claiming the verdict fills the shape (the temptation, rejected)
 
 ```lean
 theorem ws6_convergence_holds : ∀ c, Converges … c aW bW := …   -- claiming the loving direction
 ```
 Close by claiming which inhabitant fills the opening, or which direction convergence falls.
 
-- **Failure mode:** *filling the shape rather than drawing the edge, SERIOUS (disciplines 2/3).* This is the terminal temptation: ending on a filled slot. **Reject.** The program closes on the exactly-drawn edge (C1/C3); the compass's content and convergence's direction are permanent opens, proved open (C3). The drawing, not the filling, is the terminus.
+- **Failure mode:** *filling the shape rather than drawing the edge, SERIOUS (disciplines 2/3).* This is the closing temptation: ending on a filled slot. **Reject.** Series 12 closes on the exactly-drawn edge (C1/C3); the compass's content and convergence's direction are permanent opens, proved open (C3). The drawing, not the filling, is the verdict.
 
 ## Paper-decidable triage
 
@@ -104,7 +104,7 @@ Close by claiming which inhabitant fills the opening, or which direction converg
 | C2 | the universal theses heuristic | C1; the un-rangeable universal | yes — prose ceiling | **win (the ceiling)** |
 | C3 | the permanent opens as theorems | `ws2_residue_free`, `ws3_compass_exogenous`, `ws4_underdetermined` | yes — each certified | **win (openness-as-theorem)** |
 | C4 | the four tenets aligned | `ws2_import_theorem_static`, `ws1_no_self_total_hold`, `ws3_no_total_attention` | yes — theorem spines | **win (synthesis spine)** |
-| C5 | the terminus fills the shape | — | yes — the temptation | **reject (SERIOUS)** |
+| C5 | the verdict fills the shape | — | yes — the temptation | **reject (SERIOUS)** |
 
 ## Winning candidates: C1 (core) + C2 (ceiling) + C3 (openness-as-theorem) + C4 (synthesis spine)
 
@@ -119,13 +119,13 @@ namespace Series12.WS6
 -- D3 ws6_permanent_opens (C3) ; D4 ws6_tenets_aligned (C4).
 ```
 
-**Proof architecture.** D1 conjoins the four Series-12 facts — the terminus mechanized. D2 states the universal ceiling as prose (the un-rangeable quantifier), the existential mechanized. D3 certifies each permanent open by a theorem of openness (the residue free, the compass exogenous, convergence underdetermined) — the openness the deepest result. D4 anchors the four tenets to their theorem spines, the alignment prose. **Dependencies:** the WS1–WS5 payoffs; no new mathematics, only the honest statement of the terminus and its openness. **Phase F expands D1–D4 into `summary.md`, `summary-technical.md`, and the root `README.md` program-level synthesis.**
+**Proof architecture.** D1 conjoins the four Series-12 facts — the verdict mechanized. D2 states the universal ceiling as prose (the un-rangeable quantifier), the existential mechanized. D3 certifies each permanent open by a theorem of openness (the residue free, the compass exogenous, convergence underdetermined) — the openness the deepest result. D4 anchors the four tenets to their theorem spines, the alignment prose. **Dependencies:** the WS1–WS5 payoffs; no new mathematics, only the honest statement of the verdict and its openness. **Phase F expands D1–D4 into `summary.md`, `summary-technical.md`, and the root `README.md` program-level synthesis.**
 
 ## Outcome classes (per charter §5)
 
-- **Shape-drawn (the payoff):** D1 (the provable core), D3 (the permanent opens as theorems), D4 (the four tenets aligned). The terminus mechanized, the openness proved, the program closing on the exactly-drawn edge.
-- **Partial (heuristic, honest):** D2 (the universal theses) — the fully universal forms reported heuristic, the existential mechanized, as every terminal series has done.
-- **SERIOUS (pre-registered, disciplines 2/3):** claiming the terminus fills the shape (C5) — which inhabitant, which direction. Foreclosed: the compass's content and convergence's direction are permanent opens, proved open (D3).
+- **Shape-drawn (the payoff):** D1 (the provable core), D3 (the permanent opens as theorems), D4 (the four tenets aligned). The verdict mechanized, the openness proved, Series 12 closing on the exactly-drawn edge.
+- **Partial (heuristic, honest):** D2 (the universal theses) — the fully universal forms reported heuristic, the existential mechanized, as prior series closes have done.
+- **SERIOUS (pre-registered, disciplines 2/3):** claiming the verdict fills the shape (C5) — which inhabitant, which direction. Foreclosed: the compass's content and convergence's direction are permanent opens, proved open (D3).
 - **Strip test.** Delete **"undefinable / opening / compass / convergence / consciousness / God"** from `ws6_permanent_opens` and it is the bare fact **"the residue is free for every inspection (`ws2_residue_free`), some exogenous assignment is not recoverable from the relating (`ws3_compass_exogenous`), and a defined relation is underdetermined by a non-degenerate model pair (`ws4_underdetermined`)"** — three transcribed impossibility/underdetermination facts. The openness survives the strip AS the conjunction of a free residue, a non-recoverable assignment, and an independence — which is exactly what the charter demands: the permanent opens are open BECAUSE of the diagonal, and no name is a term.
 
 ## Deliverable

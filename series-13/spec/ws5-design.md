@@ -1,12 +1,12 @@
 # WS5, The verdict, and the audit folded in
 
-**Design doc. Series 13, the computed terminus. Owns: the verdict COMPUTED from WS1–WS4 (never hand-set), DUAL (orders non-trivial + transport with exogeneity + connection with a genuine non-identity round trip + defect structural) / TOTAL (the mint essentially surjective, reported in its direction) / DISCONNECTED (the WS1 orders vacuous, obstruction precise) / PARTIAL, AND the audit folded in: the fork-open check (no theorem sorts an out-of-image import into given/chosen), the genuine-connection check (orders non-trivial, round trip non-identity), the exogeneity check (`ws2_mint_exogenous` a proof term), the structural-defect check (the label excludes), the strip test on every payoff, and the names-not-terms check. The verdict BRANCHES on a certified fork and cannot be hand-set.**
+**Design doc. Series 13, the computed verdict. Owns: the verdict COMPUTED from WS1–WS4 (never hand-set), DUAL (orders non-trivial + transport with exogeneity + connection with a genuine non-identity round trip + defect structural) / TOTAL (the mint essentially surjective, reported in its direction) / DISCONNECTED (the WS1 orders vacuous, obstruction precise) / PARTIAL, AND the audit folded in: the fork-open check (no theorem sorts an out-of-image import into given/chosen), the genuine-connection check (orders non-trivial, round trip non-identity), the exogeneity check (`ws2_mint_exogenous` a proof term), the structural-defect check (the label excludes), the strip test on every payoff, and the names-not-terms check. The verdict BRANCHES on a certified fork and cannot be hand-set.**
 
 *Series 13 is standalone; the verdict type `Series13Verdict` (README §2.8) is defined here. WS5 CONSUMES the WS1–WS4 payoffs (`ws1_orders_nontrivial`, `ws2_mint_lands_in_opening`, `ws2_mint_exogenous`, `ws3_galois`, `ws3_roundtrip_not_identity`, `ws4_mint_not_surjective`, `ws4_exclusion_structural`) and computes the verdict as a function of a mechanized `Audit` certificate whose every field is one of those theorems; it does not re-prove them. The genuinely new Lean is `FitFork`, `verdictOfFit`, the `Audit`, `ws5_verdict`, `ws5_verdict_eq`, and the audit checks. WS5 depends on WS4 settling (the verdict cannot be computed until the defect, or TOTAL, is in hand). The signature risks: the verdict a returned constant ignoring its certificate, and a discipline breached (any of the four) or a name a term.*
 
 ## The object at stake
 
-The charter's WS5 (§2): compute the verdict from WS1–WS4 as a function, never hand-set, on the model of Series 12's `verdictOfFork`; fold in the audit checks promoted from the standing set. Two obligations. (1) **The verdict as a function:** a `FitFork` carrying WHICH outcome the code delivered (each constructor holding its proof), and `verdictOfFit` casing on it, so the verdict tracks WS4's honest terminus and cannot be hand-set. (2) **The audit:** the five checks (fork-open, genuine-connection, exogeneity, structural-defect, names-not-terms) plus the strip test, each a check the review runs, several first-class here.
+The charter's WS5 (§2): compute the verdict from WS1–WS4 as a function, never hand-set, on the model of Series 12's `verdictOfFork`; fold in the audit checks promoted from the standing set. Two obligations. (1) **The verdict as a function:** a `FitFork` carrying WHICH outcome the code delivered (each constructor holding its proof), and `verdictOfFit` casing on it, so the verdict tracks WS4's honest outcome and cannot be hand-set. (2) **The audit:** the five checks (fork-open, genuine-connection, exogeneity, structural-defect, names-not-terms) plus the strip test, each a check the review runs, several first-class here.
 
 **Ambient theory.** `spec/README.md` §2.8 (`Series13Verdict`); the WS1–WS4 payoffs; the `Audit`/`verdict` certificate pattern (Series 07–12).
 
@@ -17,7 +17,7 @@ inductive Series13Verdict
   | Dual | Total | Disconnected | Partial | Refuted | Circular
   deriving DecidableEq
 
-/-- **The fit fork (data-level).** WHICH terminus the code discharged, each constructor carrying its proof
+/-- **The fit fork (data-level).** WHICH outcome the code discharged, each constructor carrying its proof
     AT THE HONEST RESOLUTION (mintability up to `≈`, WS4). Data-level (a `Type`-valued inductive) so the
     verdict can CASE on it. On `|Hold| ≥ 2` (carriers of interest) WS4 discharges `defectStructural` via
     `outWit` (an import `≈` no mint); on `|Hold| = 1` (degenerate) it discharges `mintSurjective` (every
@@ -49,7 +49,7 @@ def verdictOfFit {X} {dest} {h₀} {hinf} : FitFork dest h₀ hinf → Series13V
 
 ```lean
 /-- **The audit certificate.** Every field is a WS1–WS4 theorem, so the verdict is a FUNCTION of the audit,
-    falsifiable, never hand-set. The `fork` field carries WHICH terminus WS4 delivered (Finding-style). -/
+    falsifiable, never hand-set. The `fork` field carries WHICH outcome WS4 delivered (Finding-style). -/
 structure Audit {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) where
   orders_nontrivial   : (∃ a b : Insp dest, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Insp dest, ¬ a ≤ b)
                         ∧ (∃ a b : Lab dest, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Lab dest, ¬ a ≤ b)   -- WS1
@@ -59,7 +59,7 @@ structure Audit {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf 
   connection          : GaloisConnection (mintL dest h₀) (fun b => readInsp dest h₀ b)        -- WS3
   roundtrip_defect    : mintL dest h₀ (readInsp dest h₀ (bRefActive dest hinf)) ≤ bRefActive dest hinf
                         ∧ ¬ (bRefActive dest hinf ≤ mintL dest h₀ (readInsp dest h₀ (bRefActive dest hinf)))  -- WS3 non-identity
-  fork                : FitFork dest h₀ hinf                                                  -- WS4: which terminus, COMPUTED
+  fork                : FitFork dest h₀ hinf                                                  -- WS4: which outcome, COMPUTED
 
 /-- **The verdict BRANCHES on the certified fork**, not a returned constant. -/
 def verdict {X} {dest} {h₀} {hinf} (cert : Audit dest h₀ hinf) : Series13Verdict := verdictOfFit cert.fork
@@ -171,7 +171,7 @@ def ws5_verdict : Series13Verdict := .Dual   -- a constant, ignoring WS1–WS4
 ```
 Return `Dual` as a constant.
 
-- **Failure mode:** *the verdict hand-set, ignoring its certificate, SERIOUS.* A constant cannot track WS4's terminus; it would report `Dual` even if the defect failed. **Reject.** The verdict is `verdictOfFit cert.fork` (V-C1), branching on the certified fork; `ws5_verdict = Dual` is then a THEOREM (`ws5_verdict_eq`), not a definition.
+- **Failure mode:** *the verdict hand-set, ignoring its certificate, SERIOUS.* A constant cannot track WS4's outcome; it would report `Dual` even if the defect failed. **Reject.** The verdict is `verdictOfFit cert.fork` (V-C1), branching on the certified fork; `ws5_verdict = Dual` is then a THEOREM (`ws5_verdict_eq`), not a definition.
 
 ## Paper-decidable triage
 
@@ -211,9 +211,9 @@ Series 13's carrier is FLAT: the reification tower (`IsReify`, `reifyStep`, `tow
 
 > **The layer-stability open.** Whether the mint COMMUTES WITH REIFICATION, and whether any TOWER-CARRYING import survives outside the mint's image up to `≈`, is untestable in this flat carrier and is left OPEN as a theorem-shaped question, exactly as Series 12's permanent opens were left. The verdict, whichever way it falls, is a FLAT-LAYER verdict: DUAL at the flat layer (a flat import `≈` no mint) or, on a degenerate carrier, TOTAL at the flat layer (the mint essentially surjective over FLAT imports, the tower unexamined). A flat mint essentially surjective over flat imports, with the tower unexamined, is a BOUNDED finding whose bound is the tower.
 
-This open is prose and docstring only (a `-- OPEN:` note in `ws5.lean`), never a proof term; naming it does not sort the fork or classify any import, it bounds the coda's claim.
-- **Strip test (aggregated here, protocol §0.3).** WS5 runs the strip on every payoff: transport strips to the `ws2_residue_distinct`-driven non-recoverability fact; exogeneity to the `plainOf`-constancy fact; connection to the `GaloisConnection`-with-non-identity-round-trip fact; defect to the out-of-image `¬ Recoverable` fact with the diagonal-link exclusion. `ws5_verdict` itself strips to *"the verdict inductive's value computed by casing on which terminus (defect / surjective / trivial-order / degenerate) the build discharged"*, a certificate-branching fact. No payoff survives as something other than its named fact; no name is a term.
+This open is prose and docstring only (a `-- OPEN:` note in `ws5.lean`), never a proof term; naming it does not sort the fork or classify any import, it bounds Series 13's claim.
+- **Strip test (aggregated here, protocol §0.3).** WS5 runs the strip on every payoff: transport strips to the `ws2_residue_distinct`-driven non-recoverability fact; exogeneity to the `plainOf`-constancy fact; connection to the `GaloisConnection`-with-non-identity-round-trip fact; defect to the out-of-image `¬ Recoverable` fact with the diagonal-link exclusion. `ws5_verdict` itself strips to *"the verdict inductive's value computed by casing on which outcome (defect / surjective / trivial-order / degenerate) the build discharged"*, a certificate-branching fact. No payoff survives as something other than its named fact; no name is a term.
 
 ## Deliverable
 
-`series-13/formal/Series13/ws5.lean`: `Series13Verdict`, `FitFork`, `verdictOfFit` (README §2.8); the WS1–WS4 payoffs consumed; `Audit`, `verdict`, `ws5_audit`, `ws5_verdict`, `ws5_verdict_eq` (V-C1), `ws5_verdict_not_*` (V-C2), the audit checks (V-C3), the DISCONNECTED/TOTAL routing (V-C4). **WS5 consumes WS1–WS4; cannot compute until WS4 settles; the verdict branches on the fork.** Axiom check: `#print axioms ws5_verdict` and each audit check reduce through the WS1–WS4 payoffs to the standard three. **The verdict is computed from a discharged audit and branches on the certified fork (never hand-set), the fork left open (the defect locates, never sorts), and the four disciplines are folded into the audit: the coda's terminus, computed.**
+`series-13/formal/Series13/ws5.lean`: `Series13Verdict`, `FitFork`, `verdictOfFit` (README §2.8); the WS1–WS4 payoffs consumed; `Audit`, `verdict`, `ws5_audit`, `ws5_verdict`, `ws5_verdict_eq` (V-C1), `ws5_verdict_not_*` (V-C2), the audit checks (V-C3), the DISCONNECTED/TOTAL routing (V-C4). **WS5 consumes WS1–WS4; cannot compute until WS4 settles; the verdict branches on the fork.** Axiom check: `#print axioms ws5_verdict` and each audit check reduce through the WS1–WS4 payoffs to the standard three. **The verdict is computed from a discharged audit and branches on the certified fork (never hand-set), the fork left open (the defect locates, never sorts), and the four disciplines are folded into the audit: the series' verdict, computed.**
