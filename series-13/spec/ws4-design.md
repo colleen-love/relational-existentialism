@@ -41,7 +41,7 @@ Series 13 deliberately does NOT transcribe the reification tower (`IsReify`, `re
 - **DUAL** here is DUAL AT THE FLAT LAYER: `outWit` is a flat import order-equivalent to no mint. Whether some tower-carrying import (a coalgebra whose labels track reification rank) also survives outside the mint's image up to `≈` is UNTESTABLE in this carrier and is a **named open** (WS5, `the layer-stability open`), not a silent omission.
 - **TOTAL** here would be TOTAL AT THE FLAT LAYER: the mint essentially surjective over FLAT imports. It would NOT license "every import diagonal-born" outright, because tower-laden imports are unexamined. The honest report is "TOTAL at the flat layer, tower open," a BOUNDED finding whose bound is the tower.
 
-The layer-stability question, named for the close: **does the mint commute with reification, and does any tower-carrying import survive outside the mint's image up to `≈`?** Series 13 is a single-layer result and says so; the coda does not extend to the tower, and this open is recorded as a theorem-shaped question the coda leaves for a successor, exactly as Series 12's permanent opens were left.
+The layer-stability question, named for the close: **does the mint commute with reification, and does any tower-carrying import survive outside the mint's image up to `≈`?** Series 13 is a single-layer result and says so; it does not extend to the tower, and this open is recorded as a theorem-shaped question Series 13 leaves for a successor, exactly as Series 12's permanent opens were left.
 
 ## The test article, fixed
 

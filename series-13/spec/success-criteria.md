@@ -28,7 +28,7 @@ Delete "duality/fit/wound/rescue/given/chosen/mint/factory/connection/defect" an
 - **Connection** should strip to: a `GaloisConnection` between two non-trivial preorders whose interior round trip is not the identity on a named element.
 - **Defect** should strip to: a `¬ Recoverable` coalgebra outside the mint's image (up to the equivalence), excluded by the diagonal link.
 
-## The terminal fork
+## The verdict fork
 
 Dual / Total / Disconnected / Partial (Circular for the audit). The verdict must be a FUNCTION of the WS1–WS4 payoffs (never hand-set), honestly labelled, matching its object, and neither assumed nor reached by closing the fork or faking the connection.
 

@@ -1,7 +1,7 @@
 /-
 `series-13/formal/Series13/ws5.lean`
 
-WS5 - The verdict, and the audit folded in. Series 13, the computed terminus.
+WS5 - The verdict, and the audit folded in. Series 13, the computed verdict.
 
 Consumes WS1-WS4. The verdict is COMPUTED (never hand-set): `verdictOfFit` branches on a `FitFork` discharged
 by CASING ON THE CARRIER (the hold count). On a carrier with a second hold the DUAL branch fires
@@ -36,7 +36,7 @@ inductive Series13Verdict
   | Dual | Total | Disconnected | Partial | Refuted | Circular
   deriving DecidableEq
 
-/-- **The fit fork (data-level).** WHICH terminus the code discharged, each constructor carrying its proof
+/-- **The fit fork (data-level).** WHICH outcome the code discharged, each constructor carrying its proof
 at the honest resolution (mintability up to `≈`). -/
 inductive FitFork {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) : Type u
   | defectStructural (h₁ : Hold dest) (hne : h₁ ≠ h₀)
@@ -61,7 +61,7 @@ def verdictOfFit {X : Type u} {dest : X → PkObj κ X} {h₀ : Hold dest} {hinf
   | .ordersTrivial    _     => .Disconnected
   | .perInstance      _     => .Partial
 
-/-- **The audit certificate.** Every field is a WS1-WS4 theorem, plus the `fork` (which terminus). -/
+/-- **The audit certificate.** Every field is a WS1-WS4 theorem, plus the `fork` (which outcome). -/
 structure Audit {X : Type u} (dest : X → PkObj κ X) (h₀ : Hold dest) (hinf : ℵ₀ ≤ κ) where
   orders_nontrivial :
       ((∃ a b : Insp dest, a ≤ b ∧ a ≠ b) ∧ (∃ a b : Insp dest, ¬ a ≤ b))

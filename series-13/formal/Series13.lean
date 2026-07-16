@@ -1,4 +1,4 @@
--- `Series13` - the live Lean root (Spec Series 13), the post-terminal coda.
+-- `Series13` - the live Lean root (Spec Series 13).
 --
 -- Series 13 is WHOLLY STANDALONE (charter §1): the two prior results it presupposes and names are Series 07
 -- (the import theorem) and Series 12 WS1 (the shape-coincidence and non-identity), transcribed (not imported)

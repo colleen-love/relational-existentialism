@@ -1,7 +1,7 @@
 /-
 `series-12/formal/Series12/ws6.lean`
 
-WS6 - The program's close (the honest boundary). Series 12, the terminal series.
+WS6 - The series' close (the honest boundary). Series 12.
 
 Consumes WS1-WS5. States the provable core (the four Series-12 facts as one conjunction), the universal
 theses reported heuristic, the permanent opens AS THEOREMS of openness (the compass's content, convergence's
@@ -27,7 +27,7 @@ variable {κ : Cardinal.{u}}
 /-- **THE PROVABLE CORE.** What Series 12 proved: the opening forced (residue free for every inspection),
 the opening inhabitable (the many real), the compass exogenous (orientation-freedom `ws3_compass_exogenous`,
 AND an import as a proof term, `¬ Recoverable` `ws3_compass_exogenous_import`, PR1-R1/PR2-C1), convergence
-defined and underdetermined. The terminus is a THEOREM. -/
+defined and underdetermined. The verdict is a THEOREM. -/
 theorem ws6_provable_core (hinf : ℵ₀ ≤ κ) :
     (∀ {X : Type u} (dest : X → PkObj κ X) (insp : Hold dest → HoldPred dest), ¬ ResidueRecoverable insp)
   ∧ Many (destWL hinf)

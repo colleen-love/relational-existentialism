@@ -74,11 +74,11 @@ No payoff survives the strip as something other than its named fact. No name doe
 
 **The verdict is computed, not hand-set. PASS.** `ws5_fork` cases on `∃ h₁, h₁ ≠ h₀` via `dite`; both branches are reached by theorems (`ws5_verdict_eq → Dual`, `ws5_verdict_degenerate → Total`), and the DUAL branch fires *because* the TOTAL target was refuted by `outWit`, not because it was preferred. `verdictOfFit` branches over a four-constructor data-level fork. The verdict tracks the carrier. But see **SR2-2**: nothing proves a carrier of either kind exists.
 
-**The coda discipline. PASS.** Nothing in `formal/Series13/` decides the compass's content, convergence's direction, or the differentiating act. The layer-stability open is confined to comments (`ws5.lean:172-174`) and is prose, not a term. The single-layer/flat scope is stated and bounds the TOTAL branch honestly ("TOTAL AT THE FLAT LAYER"). CD-1 bounds the domain claim. These are the honest-reporting discipline working.
+**The non-reopening discipline. PASS.** Nothing in `formal/Series13/` decides the compass's content, convergence's direction, or the differentiating act. The layer-stability open is confined to comments (`ws5.lean:172-174`) and is prose, not a term. The single-layer/flat scope is stated and bounds the TOTAL branch honestly ("TOTAL AT THE FLAT LAYER"). CD-1 bounds the domain claim. These are the honest-reporting discipline working.
 
 **The axiom-check status. See SR2-1.** The log is internally consistent but unreproduced.
 
-**The terminal fork, stated plainly.** The code delivers **DUAL at the flat layer, on the narrowed `Lab` domain, on any carrier possessing a second hold** (`ws5_verdict_eq`), and **TOTAL at the flat layer on a single-hold carrier** (`ws5_verdict_degenerate`). Both are honestly labelled, both match their objects, neither is assumed, and the DUAL is not reached by closing the fork or faking the connection.
+**The verdict fork, stated plainly.** The code delivers **DUAL at the flat layer, on the narrowed `Lab` domain, on any carrier possessing a second hold** (`ws5_verdict_eq`), and **TOTAL at the flat layer on a single-hold carrier** (`ws5_verdict_degenerate`). Both are honestly labelled, both match their objects, neither is assumed, and the DUAL is not reached by closing the fork or faking the connection.
 
 ---
 
@@ -93,7 +93,7 @@ What this review verified mechanically, which is more than pass 1 did:
 - **The log is internally consistent.** Extracted every `#print axioms` target from `AxiomCheck.lean` (30 declarations) and every record from `axiom-check-log.md` (30 records) and diffed both directions: **exact match, no gaps either way.** All 30 records show `[propext, Classical.choice, Quot.sound]`; **zero** non-standard records, no `sorryAx`, no custom axiom.
 - The log's provenance note is specific and falsifiable (branch named, post-merge, states the strengthened non-triviality is included — and `ws2_mint_nontrivial` does appear in the log, consistent with a genuine post-Phase-E re-capture rather than a stale copy).
 
-So the log is coherent and consistent with the source. It is still a self-report. **Correction owed:** re-run `lake build Series13 Series13.AxiomCheck` on a machine with the Mathlib cache before Phase F, and, if the coda's honesty claims are to be mechanical, record that no *reviewing* session has ever reproduced it.
+So the log is coherent and consistent with the source. It is still a self-report. **Correction owed:** re-run `lake build Series13 Series13.AxiomCheck` on a machine with the Mathlib cache before Phase F, and, if Series 13's honesty claims are to be mechanical, record that no *reviewing* session has ever reproduced it.
 
 **Recommendation (structural).** Two passes blocked by the same allowlist is a process defect, not bad luck. Either add `leanprover-community.github.io` (and the toolchain hosts) to the review sandbox's allowlist, or accept in writing that axiom-cleanliness is builder-attested and reviewer-unverified in this program.
 
@@ -137,7 +137,7 @@ The disclosure discipline is working — both reviews caught and reported their 
 
 **WS2 remains the strongest work in the series.** The transport genuinely runs on the diagonal, and the diagonal is genuine Cantor proved from nothing. `plainOf_coalg_val` proves rather than assumes the ground of exogeneity. `ws2_mint_not_plain_function` overshoots the contract in the honest direction.
 
-**The fork stays open.** Grep-clean and structurally clean, two passes running. The defect locates and stops. The interpretive vocabulary is entirely in prose. This is the check the whole coda turns on and it is not close to failing.
+**The fork stays open.** Grep-clean and structurally clean, two passes running. The defect locates and stops. The interpretive vocabulary is entirely in prose. This is the check the whole series turns on and it is not close to failing.
 
 **The connection is genuine and the defect is structural.** `ws3_roundtrip_not_identity` discharges both disjuncts of the fold rather than asserting the gap. `ws4_exclusion_structural` excludes by the label via the diagonal link, not by cardinality, universe, or typing — and testing up to `≈` (rather than the cheaper literal equality that would have made DUAL true by construction) is a place where the build chose the harder honest option unprompted.
 
@@ -157,4 +157,4 @@ The mathematics under the verdict is sound as far as this reviewer traced it. `D
 
 There is a pattern worth naming across SR2-1, SR2-2, and SR2-4. This series' distinctive discipline is *certificate, not argument* — it is what made SR1-1/SR1-2 SERIOUS and what their fix delivered. That discipline is applied rigorously to the mathematics and less rigorously to the scaffolding around it: the axiom claim, the carrier's existence, and the reviewer's own blindness are each currently discharged by attestation. None is likely false. All three are the kind of thing this program, elsewhere, refuses to accept on someone's word.
 
-**Recommended:** take SR2-2 and SR2-3 mechanically (both are small), resolve SR2-1 by either fixing the review sandbox's allowlist or recording in writing that axiom-cleanliness is builder-attested and reviewer-unverified, and put SR2-4 to Phase F as a protocol amendment. Since no finding is SERIOUS, protocol §2 Phase D directs the series to **Phase F (Close)** rather than another D→E loop; the four REAL findings can be closed in the course of Phase F. If DUAL is the recorded terminus, Phase F must state the one new permanent open — the classification of the out-of-image imports, open by the same theorem that locates them.
+**Recommended:** take SR2-2 and SR2-3 mechanically (both are small), resolve SR2-1 by either fixing the review sandbox's allowlist or recording in writing that axiom-cleanliness is builder-attested and reviewer-unverified, and put SR2-4 to Phase F as a protocol amendment. Since no finding is SERIOUS, protocol §2 Phase D directs the series to **Phase F (Close)** rather than another D→E loop; the four REAL findings can be closed in the course of Phase F. If DUAL is the recorded verdict, Phase F must state the one new permanent open — the classification of the out-of-image imports, open by the same theorem that locates them.

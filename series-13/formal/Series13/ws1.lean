@@ -1,7 +1,7 @@
 /-
 `series-13/formal/Series13/ws1.lean`
 
-WS1 - The two orders (the knot). Series 13, the post-terminal coda, the blocking workstream.
+WS1 - The two orders (the knot). Series 13, the blocking workstream.
 
 This file is SELF-CONTAINED. It transcribes (re-namespaced `Series13.WS1`) the plain `P_κ` /
 bisimulation machinery and the collapse engine, the Series 07 import theorem (`ws2_import_theorem`,

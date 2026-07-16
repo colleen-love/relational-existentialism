@@ -1,6 +1,6 @@
-# Relational Existentialism, Series 13 (coda): Technical Status Summary
+# Relational Existentialism, Series 13: Technical Status Summary
 
-*A machine-checked account of the FIT: the Series 12 shape-coincidence upgraded to a Galois connection between inspections and labelled coalgebras, via a mint that carries the diagonal's total residue into the class of imports, with the mint's non-surjectivity up to equivalence the payoff. A post-terminal coda; the verdict is DUAL at the flat layer.*
+*A machine-checked account of the FIT: the Series 12 shape-coincidence upgraded to a Galois connection between inspections and labelled coalgebras, via a mint that carries the diagonal's total residue into the class of imports, with the mint's non-surjectivity up to equivalence the payoff. The verdict is DUAL at the flat layer.*
 
 ## 1. The headline
 
@@ -30,14 +30,14 @@ Four machine-checked payoffs, one computed verdict:
 
 - **The verdict is computed, not chosen.** `FitFork` is a data-level inductive recording which disjunct WS4 discharged; `verdictOfFit` branches. `ws5_verdict_eq : verdictOfFit … = .dual` on `h₁ ≠ h₀` and `ws5_verdict_degenerate : … = .total` on the single-hold carrier are THEOREMS, not definitional constants, and the same function reaches both values. The falsifiability triple proves the verdict is not the other three. `ws5_dual_witnessed` / `ws5_total_witnessed` exhibit both branches firing.
 - **Disclosed realization CD-1 (the `Lab`-vs-`LkObj` narrowing, per SR1-3).** The charter speaks of an order on "labelled coalgebras"; the build realizes the mint-codomain as `Lab dest h₀`, a two-field struct of contents, with `coalg` realizing it as a genuine `LkObj` on the two-region carrier `MCar = ULift Bool`. Every `Recoverable` fact IS about a real coalgebra (`coalg b`), so `¬ Recoverable (coalg (outWit …))` is a genuine coalgebra import fact; the narrowing is only in SCOPE, non-surjectivity proved onto the two-region self-loop coalgebras up to `labEquiv` rather than onto all labelled coalgebras over `dest`. A faithful realization, disclosed, not a retarget.
-- **The flat-layer bound.** The reification tower (`IsReify`, `reifyStep`, `towerN`) is deliberately outside the transcribed carrier. The coda is a single-layer result and says so: whether the connection commutes with reification (LAYER STABILITY) is a named open, and every TOTAL is scoped as "TOTAL at the flat layer," bounded by the unexamined tower.
+- **The flat-layer bound.** The reification tower (`IsReify`, `reifyStep`, `towerN`) is deliberately outside the transcribed carrier. Series 13 is a single-layer result and says so: whether the connection commutes with reification (LAYER STABILITY) is a named open, and every TOTAL is scoped as "TOTAL at the flat layer," bounded by the unexamined tower.
 
 ## 5. What is open, by design and by theorem
 
-The program's permanent opens are untouched: the content of the compass, the direction of convergence, and the differentiating act itself. Series 12 remains the terminus; this coda fills none of them and adds no name.
+The program's permanent opens are untouched: the content of the compass, the direction of convergence, and the differentiating act itself. Series 12's result stands; this series fills none of them and adds no name.
 
 **One new permanent open joins them, open AS A THEOREM by the same result that locates it: the classification of the out-of-image imports.** `ws4_mint_not_surjective` proves an import lies outside the mint's reach up to `≈`. No theorem, definition, or discharged obligation sorts it into the given or the chosen; grep-clean across two review passes, and the central sin the charter names (§4.a) was never approached. The defect LOCATES and stops.
 
 Two further bounds are named rather than glossed: **layer stability** (does the fit survive reification?) and the **CD-1 scope** (does non-surjectivity hold onto all labelled coalgebras, not only the realized two-region class?).
 
-The honest terminus is **DUAL at the flat layer** (`ws5_verdict_eq`), on the domain (CD-1) and the layer the series openly draws it, unconditional at a named two-hold carrier. The required and the generated do not merely share a shape; they face each other as an adjoint pair, the adjunction has a genuine defect, and the defect is the door Series 07 left open, now located exactly and still unopened.
+The honest verdict is **DUAL at the flat layer** (`ws5_verdict_eq`), on the domain (CD-1) and the layer the series openly draws it, unconditional at a named two-hold carrier. The required and the generated do not merely share a shape; they face each other as an adjoint pair, the adjunction has a genuine defect, and the defect is the door Series 07 left open, now located exactly and still unopened.

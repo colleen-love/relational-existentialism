@@ -167,7 +167,7 @@ theorem ws7_verdict_not_partial {hinf : ℵ₀ ≤ κ} (cert : Audit hinf) : ver
 theorem ws7_verdict_not_decided (hinf : ℵ₀ ≤ κ) : ws7_verdict hinf ≠ .convergenceDecided := by
   rw [ws7_verdict_eq hinf]; decide
 
-/-- **The terminal verdict: SHAPE-DRAWN.** Computed from the audit (never hand-set), via the `underdet` fork. -/
+/-- **The verdict: SHAPE-DRAWN.** Computed from the audit (never hand-set), via the `underdet` fork. -/
 theorem ws7_verdict_is_shapeDrawn (hinf : ℵ₀ ≤ κ) : ws7_verdict hinf = Series12Verdict.shapeDrawn :=
   ws7_verdict_eq hinf
 
