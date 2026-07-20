@@ -28,4 +28,9 @@ check program-1/series-07 "^import Series07(\.[A-Za-z0-9_]+)*$"
 check program-1/series-12 "^import Series12(\.[A-Za-z0-9_]+)*$"
 check program-1/series-13 "^import Series13(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 foundation (`program-2/formal/`): the `P1` library imports only its own `P1.*` roots (+ mathlib);
+# it must not reach into any series tree or `archive/`. Program 2 series (added later under
+# `program-2/series-NN/formal/`) get their own checks when registered.
+check program-2 "^import P1(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
