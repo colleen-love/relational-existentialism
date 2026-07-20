@@ -28,6 +28,11 @@ Two emphases specific to this series:
 
 7. **The fork must be genuine, not a tautology.** Both WS4 arms are witnessed on a structure carrying a genuine concurrent pair (non-empty causally-independent pair) and a genuine causal pair, and the order relation carries a structural constraint. An ordering total by construction or a concurrency that is empty is the PR1-S1 defect. Audit clause (d).
 
+**8. The two watch-points (where this series is most likely to fail silently, for executor and reviewer alike).** Program 1's two SERIOUS findings both took the shape of a plausible-but-vacuous theorem that a motivated reader waves through. This series has two exact analogues; press hardest here.
+- **WS1 — does the cycle genuinely reify?** The composite must be a real relatum of the same field with a genuine composed `FiniteAttention`, built from the transcribed reification section, not a fresh opaque constructor that *names* a cycle-object while importing its structure. If `reify` of the cycle-pattern is assumed rather than discharged pointwise (as `P1.Reader.ws_reify_pointwise_*` discharges it on the witness carrier), the construction is smuggled. The reviewer confirms the composite's well-formedness is proved from `IsReify`/`reifyStep`, not posited.
+- **WS4 — is the concurrency order a genuine constraint?** `ws4_linearization_import` is vacuous unless a causally-independent pair provably exists and is not orderable by the relating. The reviewer confirms `ws4_causal_order_endogenous` is exercised on a witnessed causal pair AND `ws4_linearization_import` on a witnessed concurrent pair, both on the SAME structure, with the order relation carrying a structural constraint (strip test: it must read as a bare `prec`/causal-consumption/`¬ Recoverable` fact). A total-by-construction order or an empty concurrency re-runs PR1-S1.
+Both watch-points are checked at Phase C (are the designs non-vacuous?) and again at Phase F (does the code discharge them?).
+
 ---
 
 ## 1. The documents
@@ -37,7 +42,8 @@ Two emphases specific to this series:
 - **`spec/README.md` (design index).** The shared carrier (what is transcribed and from where), the primitive decision (three additions over the carrier: partial attention load-bearing, the cycle-composite, the two orders on ticks), the discipline (no smuggled clock, stream exogenous, reader load-bearing, fork genuine), the cross-workstream triage summary, the outcomes, and the names-live-in-prose rule.
 - **`spec/blind-seed-C.md` / `spec/blind-seed-F.md` (generated at review time).** The exact, motivation-free material handed to the reviewer (section 4). Regenerated on each review pass.
 - **`charter-status.md` (living ledger).** Phase, verdict, carrier, targets, audit clauses, findings ledger with the recurrence guard, disclosed deviations, permanent opens, phase log. Updated at the end of every phase.
-- **`formal/` (built at Phase E).** The Lean sources, one module per workstream plus an `AxiomCheck`, in the series' own namespace.
+- **`program-2/formal/P1` (the foundation, already built).** The Program 1 carrier consolidated under the `P1` namespace (`P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim), the single verified source Phase E transcribes from. Read its `P1.lean` banner for the two guardrails before Phase E. The environment is prepared on container creation (Lean `v4.15.0`, Mathlib cached), so the foundation and Mathlib build without manual bootstrap.
+- **`formal/` (built at Phase E).** The series' Lean sources, one module per workstream plus an `AxiomCheck`, in the series' own `P2S1` namespace.
 - **`summary.md` / `summary-technical.md` (written after the verdict).** Plain-language and technical accounts. Not required to reach the verdict.
 
 ---
@@ -48,7 +54,7 @@ Two emphases specific to this series:
 The charter is written and committed, the scaffold exists, `charter-status.md` is initialized. Nothing further.
 
 ### Phase B — Design [executor]
-For each of WS1–WS5, write `spec/wsNN-design.md`:
+Read the canonical templates first: `program-1/series-13/spec/*` for the design-doc format (candidates, triage table, typed signatures, strip annotation) and `program-1/series-13/formal/Series13/*` for the Lean house style. For each of WS1–WS5, write `spec/wsNN-design.md`:
 1. List the candidate constructions (at least the charter's and one alternative where one exists).
 2. Triage them on paper against non-triviality, the strip test, and the audit clauses; collapse to a decision table with the rejected candidates and the reason each was rejected recorded.
 3. Write the winning construction to typed Lean signatures (the exact theorem statements the build will discharge), naming the transcribed carrier pieces each depends on.
@@ -64,7 +70,21 @@ Address every SERIOUS finding by the section 2a binary: Fixed (build the specifi
 **Loop:** if any SERIOUS finding was closed by editing a design (not merely relabeled), return to Phase C with a fresh blind seed and re-review. Continue C/D until a Phase C pass returns zero SERIOUS findings. The recurrence guard applies: a finding "addressed" by a target-avoiding theorem is re-graded SERIOUS and RECURRING.
 
 ### Phase E — Code [executor]
-Build `formal/` to the Phase B (post-repair) signatures, one module per workstream plus `AxiomCheck`. Transcribe the carrier by name and content from the named Program 1 sources (do not import across series; the gate forbids it). The build must be:
+Build `formal/` to the Phase B (post-repair) signatures, one module per workstream plus `AxiomCheck`. **Transcribe the carrier from the P1 foundation** at `program-2/formal/P1` (namespaces `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim), copying the pieces you need into the series' own namespace and re-namespacing them, exactly as each Program 1 series did (do not import across series; the gate forbids it). The foundation is the single verified source of truth to transcribe from; it is built green, so any drift fails to compile. Heed the foundation's two guardrails (`P1.lean` banner): do NOT transcribe or reconstruct the Series 12 WS3/WS4 compass/convergence machinery (PR1-S1), and use `P1.Reader.ws2_attention_makes_real` / `RealFor` (reader-load-bearing) as the template for any plurality/perspective payoff, never `Many` (PR1-S2).
+
+**Register the series in the build (do this at Phase E, never earlier — an empty lib in `defaultTargets` breaks `lake build` for everything).** Pick the namespace `P2S1` (Program 2, Series 1; keeps out of Program 1's global `SeriesNN` numbering). Then:
+- In `lake/lakefile.toml`, add a library block and the target:
+  ```
+  [[lean_lib]]
+  name = "P2S1"
+  srcDir = "../program-2/series-1/formal"
+  roots = ["P2S1", "P2S1.AxiomCheck"]
+  ```
+  and append `"P2S1"` to `defaultTargets`.
+- In `scripts/gate.sh`, add: `check program-2/series-1 "^import P2S1(\.[A-Za-z0-9_]+)*$"` (the series may import its own `P2S1.*` roots and Mathlib only; the P1 foundation is transcribed from, not imported).
+- Lay out `program-2/series-1/formal/` as `P2S1.lean` (aggregator, imports `P2S1.ws1`…`P2S1.ws5`), `P2S1/wsN.lean`, `P2S1/AxiomCheck.lean` — mirroring `program-1/series-13/formal/Series13/`.
+
+The build must be:
 - **sorry-free:** `grep -rn "sorry" formal/` clean (docstring prose excepted).
 - **axiom-clean:** `AxiomCheck` emits `#print axioms` for every headline theorem, resting on no axioms beyond Mathlib's standard three (`propext`, `Classical.choice`, `Quot.sound`).
 - **gate-green:** `scripts/gate.sh` confirms no cross-series imports.
@@ -120,10 +140,10 @@ For Phase F the reviewer may run read-only checks (`lake build` for a compile co
 ## 6. The mechanical checks (run by the executor at Phase E and after each Phase G)
 
 ```
-cd lake && lake build <Series2_1 modules> <AxiomCheck>   # compiles
+cd lake && lake build P2S1 P2S1.AxiomCheck   # compiles (P1 foundation + Mathlib already cached)
 grep -rn "sorry" ../program-2/series-1/formal            # sorry-free (prose excepted)
-lake build <AxiomCheck>                                   # axiom record; standard three only
-../scripts/gate.sh                                        # no cross-series imports
+lake build P2S1.AxiomCheck                                # axiom record; standard three only
+../scripts/gate.sh                                        # no cross-series imports (P2S1 self + Mathlib)
 grep -rniE "\b(time|now|clock|before|after|moment|self|other|chance|choice|subjectivity)\b" \
   ../program-2/series-1/formal   # names-not-terms: hits must be docstring prose only
 ```

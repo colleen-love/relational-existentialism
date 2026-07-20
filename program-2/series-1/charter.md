@@ -61,8 +61,9 @@ The target: the composite well-formed (WS1), genuinely new reader-wise with a pr
 - Whether the causal order admits a non-vacuous concurrent pair, so the linearization import is not a claim about an empty set (the PR1-S1 danger, guarded by audit (d)).
 - Whether the composite's novelty survives with the reader load-bearing, or collapses to a point-tag (the PR1-S2 danger, guarded by audit (c)).
 - Whether TIME-IS-IMPORT falls, which would press Program 2 toward a second required import for time itself and require the positioning rewritten honestly rather than defended.
+- **GRAIN (a WS4-enrichment or later-series candidate).** Different relata have different smallest units: a composite's tick subsumes several of its components', so grain is a refinement order (coarser = subsumes-more), not a metric. The conjecture is the clock knot's twin: grain is endogenous where the tower can see it (`prec`-comparable relata, ordered by rank-strictness under reification) and an import where it cannot (`prec`-incomparable relata, cross-comparison `¬ Recoverable`). If it lands, self and other generically share no smallest unit, sharpening 2.3's coherence question. Developed on paper in `spec/grain-exploration.md`; Phase B decides whether it enters WS4 or waits for a later series.
 - The permanent opens, inherited and untouched: the content of the compass, the direction of convergence, the differentiating act, and the classification of the out-of-image imports.
-- The Lean module naming and whether Series 2.1 registers in the existing `lake/` package or a sibling: deferred to Phase B (design), recorded in `charter-status.md`.
+- Lean naming is fixed: the series builds in the existing `lake/` package under namespace `P2S1`, transcribing from the built P1 foundation (`program-2/formal/P1`); the exact registration recipe is in `protocol.md` (Phase E).
 
 ## 8. Positioning
 

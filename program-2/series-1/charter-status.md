@@ -10,23 +10,37 @@
 
 - **Phase:** A complete (charter committed). B (design) not started.
 - **Verdict:** TBD.
-- **Build state:** no `formal/` sources yet. Not registered in `lake/`.
-- **Axiom state:** N/A (no build).
-- **Gate state:** N/A (no cross-series imports yet; gate applies once `formal/` exists).
+- **Build state:** no series `formal/` sources yet. The **P1 foundation** (`program-2/formal/P1`) is built and
+  registered in `lake/` (`P1`, `P1.AxiomCheck`).
+- **Axiom state:** foundation clean — every headline carrier theorem on the standard three (`propext` /
+  `Classical.choice` / `Quot.sound`); `ws_witness_rank_noninjective` on `propext` / `Quot.sound`. Series build N/A.
+- **Gate state:** green (`scripts/gate.sh` passes; the `P1` library imports only `P1.*` + Mathlib).
 - **Open SERIOUS findings:** none (no review has run).
 
-## 1. The carrier (to be transcribed, not imported, at Phase E)
+## 1. The carrier — the P1 foundation (built and verified)
 
-Transcribed unchanged from Program 1, sources to be named in the WS designs at Phase B:
+The carrier is consolidated in the **P1 foundation** at `program-2/formal/P1`, built green (sorry-free,
+axiom-clean on the standard three; `P1.AxiomCheck`). At Phase E the series transcribes the pieces it needs
+from here into its own `P2S1` namespace (Program 1's transcribe-not-import discipline). Source map:
 
-- Reification tower and the fixed-point relating (Ω ≅ F(Ω)).
-- Diagonal apparatus: `residue`, `diag`, `ws2_residue_free` (from Series 12 / Series 13).
-- Bounded reader: `FiniteAttention` (`reads` / `fin` / `grounded`), `RealFor`, `AttentionDistinguishes` (from Series 12).
-- Recoverability: `Recoverable`, `plainOf` (from Series 07 / Series 12).
-- Labelled lift and `labelLoop` (the quarantined point-tag failure shape).
-- Collapse engine: atomless states are bisimilar (from Series 07).
+| Carrier piece | Location |
+|---|---|
+| κ-bounded powerset functor `PkObj` / `PkMap` / `toPk` | `P1.Core` |
+| Reaching, `SHNE`, bisimulation `IsBisim`, `BehaviorallyIdentified` | `P1.Core` |
+| Collapse engine: `ws1_atomless_bisim` (atomless states bisimilar) | `P1.Core` |
+| Import Theorem: `ws2_import_theorem`, `ws2_import_theorem_static`, `ws3_atomless_distinct_is_import` | `P1.Core` |
+| Labelled functor `LkObj`, `IsBisimL`, `plainOf`, `Recoverable`; `labelLoop` + `ws4_labelLoop_not_recoverable` | `P1.Core` |
+| Diagonal: `Hold`, `HoldPred`, `diag`, `SelfTotal`, `ws1_no_self_total_hold`; `residue`, `ResidueRecoverable`, `ws2_residue_free` | `P1.Core` |
+| Reification: `IsReify`, `ws1_reify_injective`; tower `reifyStep`, `towerN`, `prec`, `ws3_reify_preserves_SHNE`, `ws3_order_endogenous` | `P1.Core` |
+| The `Opening` shape and the coincidence (`ws1_shape_coincidence`, `ws1_coincidence_not_identity_witness`) | `P1.Core` |
+| Bounded reader: `FiniteAttention` (`focus`/`reads`/`fin`/`grounded`), `AttentionDistinguishes`, `RealFor` | `P1.Reader` |
+| General rank-separation `ws2_many_general`; reader-load-bearing plurality `ws2_attention_makes_real` (PR1-S2 fix) | `P1.Reader` |
+| The worked witness carrier (`WCar`, `destW`, `reifyW`, `rankW`, `destWL`) and `ws2_distinction_free` | `P1.Reader` |
 
-Transcription fidelity is a Phase F check: every transcribed name matches its Program 1 source by name and content.
+`P1.Core` is Series 12 WS1 verbatim; `P1.Reader` is Series 12 WS2 verbatim; both re-namespaced. **Deliberately
+excluded** (guardrails, see `program-2/formal/P1.lean`): Series 12 WS3/WS4 compass/convergence (PR1-S1) is not
+transcribed; `Many` is present but is not a payoff template (use `RealFor`, PR1-S2). Transcription fidelity
+into `P2S1` is a Phase F check.
 
 ## 2. Targets (all OPEN until built and reviewed)
 
@@ -71,4 +85,5 @@ Series 2.1 adds none and closes none of these.
 
 ## 7. Phase log
 
-- **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any build.
+- **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series scaffold created (`spec/`, `formal/`). Status initialized.
+- **2026-07-20 — Foundation.** The P1 foundation (`program-2/formal/P1`: `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim) transcribed, registered in `lake/lakefile.toml` + `scripts/gate.sh`, built green (sorry-free, axiom-clean). Guardrails documented in `P1.lean` (PR1-S1 machinery excluded; `RealFor` not `Many`, PR1-S2). Grain preorder explored on paper (`spec/grain-exploration.md`) ahead of Phase B. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.

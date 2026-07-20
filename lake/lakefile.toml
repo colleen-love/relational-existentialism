@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -42,6 +42,15 @@ roots = ["Series12", "Series12.AxiomCheck"]
 name = "Series13"
 srcDir = "../program-1/series-13/formal"
 roots = ["Series13", "Series13.AxiomCheck"]
+
+# `program-2/formal/` — the Program 2 FOUNDATION (`P1`): the Program 1 carrier consolidated under a `P1`
+# namespace for Program 2 to transcribe from. `P1` imports `P1.Core` (Series 12 WS1, verbatim) and `P1.Reader`
+# (Series 12 WS2, verbatim); `P1.AxiomCheck` runs the axiom pass. The `P1` namespace prefix avoids collision
+# with the still-registered `Series12.*` libraries. Standalone: imports only Mathlib and itself.
+[[lean_lib]]
+name = "P1"
+srcDir = "../program-2/formal"
+roots = ["P1", "P1.AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`); Series 07 imports it.
 [[require]]
