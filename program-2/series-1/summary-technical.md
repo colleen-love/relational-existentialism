@@ -24,11 +24,11 @@ All finite obligations reduce by the kernel (`decide`/`rfl`), as in the S0 `atte
 | WS1 | `ws1_cycle_reifies` | the 2-cycle reifies into `kA : TCar`, section `attendsT (reifyT cycleA) = cycleA`, distinct cycles → distinct composites | a `FinReify`/section fact |
 | WS1 | `ws1_composite_attention_finite` | out-neighborhoods `< ℵ₀` (S0's bound, no ceiling), `attendsT kA = cycleA`, bounded by components | a bound-and-set fact |
 | WS2 | `ws2_composite_distinguishes` | `AttentionDistinguishes (rankLift (outDest hinf attendsT) rankT) kA p0` (plain-bisim via collapse engine + rank-1-vs-0 separation) | an `AttentionDistinguishes` fact |
-| WS2 | `ws2_composite_residue` | `¬ ResidueRecoverable insp` (the global diagonal `ws2_residue_free`) ∧ a witnessed hold at `kA` (honest bare conjunction) | a `residue`-freeness fact |
-| WS2 | `ws2_composite_real_for` | a named `FiniteAttention` (focus `p0`, reads `{p0}`) for which `kA` is `RealFor` — reader load-bearing, not `Many` | a `RealFor` fact |
-| WS2 | `ws2_tick_irreversible` | `¬ Recoverable (rankLift (outDest hinf attendsT) rankT)` (the reification height is an import) | a `¬ Recoverable` fact |
-| WS3 | `ws3_stream_exogenous` | `∀ Q f, f true ≠ f false →` plain-identified ∧ label-separated (`ws4_import_breaks_baseline`, quantified) | an import-separation fact |
-| WS3 | `ws3_tick_needs_stream` | plain projection identifies the options ∧ `¬ Recoverable (impLift hinf id)` | a `¬ Recoverable` fact |
+| WS2 | `ws2_composite_residue` | (Ext-1 R3, load-bearing) attention ⊊ relating: `∃ y, IsBisim(outDest attendsT) kA y ∧ y ∉ attendsT kA` (`y = kC`) — the finite attention subtracts | a bisim/membership fact |
+| WS2 | `ws2_composite_real_for` | a named `FiniteAttention` (focus `p0`, reads `{p0}`) for which `kA` is `RealFor` — reader load-bearing, not `Many` (audit (c)) | a `RealFor` fact |
+| WS2 | `ws2_tick_irreversible` | (Ext-1 R1, directional) `(∀ x ∈ attendsT kA, rankT x < rankT kA)` (composite strictly outranks components, acyclic) ∧ `¬ Recoverable (rankLift … rankT)` companion | a rank-order + import fact |
+| WS3 | `ws3_stream_exogenous` | (Ext-1 R2, tick-specific on `TCar`) `∀ ch : TCar → ℕ, ch kA ≠ ch kB →` `AttentionDistinguishes (rankLift (outDest attendsT) ch) kA kB` ∧ `¬ Recoverable` — the choice among concurrent closures `kA`,`kB` | an import-separation fact on `TCar` |
+| WS3 | `ws3_tick_needs_stream` | (Ext-1 R2) `kA`,`kB` plain-identified on `TCar` (collapse engine) ∧ every distinguishing `ch`-lift `¬ Recoverable` | a `¬ Recoverable` fact on `TCar` |
 | WS4 | `ws4_causal_order_endogenous` | `causal kA kC ∧ causal kB kC`; `∀ t u, causal t u → rankT t < rankT u`; `kA,kB` incomparable | a membership/rank fact |
 | WS4 | `ws4_linearization_import` | `∀ ord : TCar → ℕ, ord kA ≠ ord kB →` `AttentionDistinguishes (rankLift … ord) kA kB` ∧ `¬ Recoverable (rankLift … ord)` | an import (`¬ Recoverable`) fact |
 | WS4 | `ws4_two_zone` | the aggregate: causal partial+endogenous, linearization import, quantified over `ord` | the two facts above |
@@ -57,7 +57,8 @@ never named (audit (e)). This is the import boundary: the causal order recoverab
 - (a) No smuggled clock: no `Nat` step counter, no background index; the only order-relevant labels are the
   reification height `rankT` (used only to separate composites from bases, never to order the concurrent pair)
   and the exogenous `ord` (the import). Verified by the strip test and the §6 grep.
-- (b) Stream exogenous: `ws3_stream_exogenous` / `ws5_audit_stream_exogenous` are `¬ Recoverable` proof terms.
+- (b) Stream exogenous: `ws3_stream_exogenous` / `ws5_audit_stream_exogenous` are `¬ Recoverable` proof terms,
+  now on the real carrier `TCar` (the choice label `ch : TCar → ℕ` among `kA`,`kB`; Ext-1 R2).
 - (c) Reader load-bearing: `ws2_composite_real_for` binds a `FiniteAttention` and uses `att.reads`; `Many` unused.
 - (d) Fork genuine: concurrent pair (`kA ≠ kB`, incomparable) and causal pair (`causal kA kC`) both witnessed on
   `TCar`; order rank-constrained. No PR1-S1 tautology (concurrency non-empty, order not total).
@@ -86,3 +87,14 @@ never named (audit (e)). This is the import boundary: the causal order recoverab
 Every SERIOUS finding in the run (C1-S1, C1-S2, both the unrestricted-causal-order defect) closed **Fixed** (the
 specified rank-constrained partial causal order was built), never Relabeled. The verdict is the residue of the
 process, computed honestly with the fork left open: TWO-ZONE.
+
+- **Charter Extension 1** (post-exit, WS2/WS3/WS5; WS1/WS4 untouched): an independent review re-graded three
+  disclosed items to REAL and raised the bar. Rebuilt at strength: the arrow made DIRECTIONAL (`∀ x ∈ attendsT
+  kA, rankT x < rankT kA`, the composite strictly outranks its components — acyclic) with `¬ Recoverable` as
+  companion (R1); the stream made TICK-SPECIFIC on `TCar` (the exogenous choice label `ch : TCar → ℕ` among the
+  concurrent closures `kA`,`kB`, non-recoverable via the collapse engine, quantified) rather than S0's generic
+  `impLift` (R2); the residue made LOAD-BEARING (attention ⊊ relating: `kA` is behaviorally identified with `kC`
+  yet does not attend it, so the finite attention subtracts) (R3). WS5's `arrow` and `exo` flags re-pointed to
+  the strengthened theorems. Blind code review: zero SERIOUS/REAL (one COSMETIC, acceptable). **EXT-F1/F2/F3 all
+  close (Fixed).** The verdict remains TWO-ZONE, now on strengthened foundations — the tick's supporting
+  workstreams (arrow, stream) hold their own weight before S2 (the Other) builds on them.

@@ -2,9 +2,10 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress. At program close it is the honest account of where Series 2.1 landed against its own charter.**
 
-*Series COMPLETE. Phase F closed (zero SERIOUS). Verdict: TWO-ZONE (computed by `ws5_verdict_eq`, by `rfl`).
-Build sorry-free, axiom-clean, gate-green, names-clean. All five success criteria met; all audit clauses (a)-(e)
-VERIFIED. `summary.md` / `summary-technical.md` written.*
+*Series COMPLETE, incl. Charter Extension 1 (WS2 arrow directional, WS2 residue load-bearing, WS3 stream
+tick-specific on `TCar`; all (Fixed)). Verdict: TWO-ZONE (computed by `ws5_verdict_eq`, by `rfl`), now resting
+on the strengthened arrow/stream flags. Build sorry-free, axiom-clean, gate-green, names-clean. All five success
+criteria met; all audit clauses (a)-(e) VERIFIED. `summary.md` / `summary-technical.md` written.*
 
 ---
 
@@ -135,7 +136,16 @@ the bar (strengthens only, honest under §0.2a). The re-run runs the affected wo
 | EXT-F2 | Ext review (WS2) | REAL | `ws2_tick_irreversible` proved `¬ Recoverable` (non-recoverability / distinction-freeness), NOT directional irreversibility; the arrow was carried by prose over a non-recoverability fact. | **(Fixed)** — rebuilt directional (R1): `∀ x ∈ attendsT kA, rankT x < rankT kA` (the composite strictly outranks its components, acyclic), with `¬ Recoverable` retained as the companion import. WS5's `arrow` flag re-pointed to the directional theorem. |
 | EXT-F3 | Ext review (WS2) | REAL | `ws2_composite_residue` was an honest bare conjunction (global diagonal + non-vacuity witness); the composite's partial attention did no work. | **(Fixed)** — rebuilt load-bearing (R3): `∃ y, (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA y) ∧ y ∉ attendsT kA` (attention ⊊ relating: `kA` is behaviorally identified with `kC` yet does not attend it), so the finite attention genuinely subtracts. |
 
-Closures confirmed BUILT at Ext Phase E and blind-reviewed at Ext Phase F (below).
+Closures confirmed BUILT at Ext Phase E and blind-reviewed at Ext Phase F:
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| EF1-S1 | Ext F (code) | COSMETIC | `ws2_composite_residue`: the bisimulation `R kA kC` is the universal both-SHNE collapse relation (`hneRel`), so `kA` is behaviorally identified with every SHNE node, not `kC` uniquely. | Acceptable, not a defect. This IS the Series-07 collapse content and is what makes the residue load-bearing (finite attention `{p0,p1}` ⊊ the relating that identifies `kA` with `kC`, which it does not attend). Both conjuncts reference the same `y`/`kA` — genuinely "attention ⊊ relating", not the disavowed bare conjunction. No change. |
+
+**Ext Phase F is CLOSED: zero SERIOUS, zero REAL** (one COSMETIC, acceptable). The reviewer independently reran
+the build, axiom check, and greps and confirmed all three strengthened obligations (EXT-F1/F2/F3) and the WS5
+re-points prove their stated propositions, WS1/WS4 genuinely unchanged. **All three EXT findings close (Fixed).**
+The verdict still computes TWO-ZONE, now resting on the directional arrow (R1) and the tick-specific stream (R2).
 
 ## 5. Deviations from charter (disclosed)
 
@@ -201,3 +211,10 @@ Series 2.1 adds none and closes none of these.
   axiom-clean (standard three), gate-green; names grep clean; the verdict computes TWO-ZONE and
   `charter-status.md` records it; every SERIOUS finding (C1-S1, C1-S2) closed **Fixed**. `summary.md` and
   `summary-technical.md` written. **Series 2.1 COMPLETE — verdict TWO-ZONE.**
+- **2026-07-20 — Charter Extension 1 (re-run B/E/F).** Independent post-exit review re-graded three disclosed
+  items to REAL and RAISED the bar (strengthens only, §0.2a). Re-opened WS2, WS3, WS5 (WS1/WS4 untouched):
+  the arrow rebuilt DIRECTIONAL (`∀ x ∈ attendsT kA, rankT x < rankT kA`, R1); the stream rebuilt TICK-SPECIFIC
+  on `TCar` (`ch : TCar → ℕ` picking among `kA`,`kB`, R2); the residue rebuilt LOAD-BEARING (attention ⊊
+  relating, R3). Rebuilt green (all §6 checks pass; verdict still TWO-ZONE, resting on the strengthened flags).
+  Blind code review (Ext Phase F): zero SERIOUS/REAL, one COSMETIC (acceptable). **EXT-F1/F2/F3 all close
+  (Fixed).** **Series 2.1 + Extension 1 COMPLETE — verdict TWO-ZONE, on strengthened foundations.**

@@ -17,10 +17,12 @@ of the field. Series 2.1 adds three things on top of that ground, and nothing el
    field, and the construction is discharged, not asserted. It generalizes the ground's "first other" (the
    simplest closure, a thing attending only itself) to genuine cycles.
 
-2. **The moment is genuinely new, and it does not run backward.** The composite carries a residue of what made
-   it that no attention inside it can recover, so it is real for a specific, named reader and is not a mere
-   label. Because the closure loses that residue, it cannot be inverted: the arrow of the tick is a theorem
-   about the relating, not a stipulation and not a hidden step counter.
+2. **The moment is genuinely new, and it does not run backward.** The composite's finite attention is a proper
+   part of what it relates to — it is behaviorally identified with things it does not attend, so the closure
+   genuinely loses (subtracts) what its partial attention drops, and it is real for a specific, named reader,
+   not a mere label. And the closure is directional: reification strictly raises the tower height from a
+   moment's components to the composite, so the tick cannot run backward — a directional theorem about the
+   relating, not a stipulation and not a hidden step counter.
 
 3. **The order of moments forks on an import boundary.** Two orders live on the ticks. The causal order — which
    tick consumed which tick's product — is read directly off the relating; it is forced, and it is a genuine
