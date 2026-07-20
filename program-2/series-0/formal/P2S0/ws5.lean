@@ -60,15 +60,13 @@ theorem ws5_verdict_not_partial : verdict true true true ≠ Outcome.partial' :=
 knowing direction is non-recoverable (WS3), and the import separates plain-bisimilar states (WS4). The
 verdict's inputs are theorems, not choices. -/
 theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    (∃ (X : Type) (attends : X → Finset X) (reify : Finset X → X), FinReify attends reify)
+    (AttentionDistinguishes (rankLift (outDest hinf attendsU) rankU) s1 s0)
   ∧ (¬ Recoverable (knowLiftD hinf))
   ∧ (∀ {Q : Type} (f : Bool → Q), f true ≠ f false →
         ¬ ∃ R, IsBisimL (impLift hinf f) R ∧ R true false) := by
-  refine ⟨?_, ws3_direction_not_recoverable hinf, ?_⟩
-  · obtain ⟨X, att, r, h, _⟩ := ws1_reification_exists
-    exact ⟨X, att, r, h⟩
-  · intro Q f hf
-    exact (ws4_import_breaks_baseline hinf f hf).2
+  refine ⟨(ws1_first_other hinf).2.2, ws3_direction_not_recoverable hinf, ?_⟩
+  intro Q f hf
+  exact (ws4_import_breaks_baseline hinf f hf).2
 
 /-! ## The five audit clauses (a)-(e) -/
 
@@ -77,11 +75,16 @@ theorem ws5_audit_no_ceiling {κ : Cardinal.{u}} (hinf : ℵ₀ ≤ κ) {X : Typ
     ∀ x, Cardinal.mk (↥((outDest hinf attends x).1)) < Cardinal.aleph0 :=
   ws1_bound_is_finite_attention hinf attends
 
-/-- **(b) THE ASYMMETRY IS NOT A LABEL.** A genuine reader: `a` and `b` are plain-bisimilar yet label-
-separated (`AttentionDistinguishes`), with `b` passive (`attendsD b = ∅`). Load-bearing, not a bare tag. -/
+/-- **(b) THE ASYMMETRY IS NOT A LABEL.** A genuine reader, over the unified first-other witness: the first
+other `s1` and the self `s0` are plain-bisimilar over the bare relating yet tower-separated
+(`AttentionDistinguishes`), with `s1` actively attending `s0` while `s0` does not attend back (the passive
+asymmetry). Load-bearing (Charter Extension 1), the separation derived from the passive/reification structure,
+not a bare tag. -/
 theorem ws5_audit_asymmetry_not_label {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    AttentionDistinguishes (knowLiftD hinf) a b ∧ attendsD b = ∅ :=
-  ⟨(ws3_passive_constitution hinf).2, (ws3_passive_constitution hinf).1.2⟩
+    AttentionDistinguishes (rankLift (outDest hinf attendsU) rankU) s1 s0
+  ∧ (s1 ∈ attendedBy attendsU s0 ∧ s1 ∉ attendsU s0) :=
+  ⟨(ws3_active_passive_distinct hinf).2,
+   (ws3_active_passive_distinct hinf).1.2.1, (ws3_active_passive_distinct hinf).1.2.2⟩
 
 /-- **(c) DIRECTION IS NON-RECOVERABLE.** A proof term. -/
 theorem ws5_audit_direction_free {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :

@@ -86,32 +86,46 @@ theorem ws3_direction_not_recoverable (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (k
     ws1_atomless_bisim (plainOf (knowLiftD hinf)) a b (ws3_SHNE hinf a) (ws3_SHNE hinf b)
   exact ws3_label_sep hinf ⟨R, hrec R hR, hab⟩
 
-/-- **PASSIVE CONSTITUTION IS REAL AND LOAD-BEARING (audit (b)).** `b` is attended by `a` (`a ∈ attendedBy b`)
-and attends nothing (`attendsD b = ∅`): PASSIVE. Yet `b` is plain-bisimilar to the ACTIVE `a`
-(`AttentionDistinguishes`, imported) and NOT label-bisimilar: what makes `b` passive is the directed reader,
-not the plain relating. `attends`/`attendedBy` are load-bearing in the statement; the directed structure does
-work the plain relating cannot (`ws3_direction_not_recoverable`), so the asymmetry is a genuine reader, not
-the Series 11 Bookkeeping tag. -/
-theorem ws3_passive_constitution (hinf : ℵ₀ ≤ κ) :
-    (a ∈ attendedBy attendsD b ∧ attendsD b = ∅)
-  ∧ AttentionDistinguishes (knowLiftD hinf) a b := by
-  refine ⟨⟨?_, ?_⟩, ?_, ?_⟩
-  · show b ∈ attendsD a
-    decide
-  · decide
-  · exact ws1_atomless_bisim (plainOf (knowLiftD hinf)) a b (ws3_SHNE hinf a) (ws3_SHNE hinf b)
-  · exact ws3_label_sep hinf
+/-- **PASSIVE CONSTITUTION IS REAL AND LOAD-BEARING (audit (b), Charter Extension 1 R3, an IMPLICATION not a
+bare conjunction).** Stated over the unified witness (`ws1.lean`): IF a relatum `o` reifies the self-relation
+(`reifyU {s0} = o`) and attends the self (`s0 ∈ attendsU o`), THEN `o` is plain-bisimilar to the self `s0` over
+the bare relating yet NOT recoverable from it (tower-separated). The passive/reification premises DRIVE the
+separation: `hreify` places `o` strictly above the self in the tower (that is what separates them), and
+`hattend` is the incoming edge the separation is read on. The self is passively constituted by the first
+other's attention, and that constitution is non-recoverable from the bare relating. Not a conjunction of an
+inert passivity fact with the separation: the passivity is what produces the separation. -/
+theorem ws3_passive_constitution (hinf : ℵ₀ ≤ κ)
+    (o : Fin 3) (hreify : reifyU {s0} = o) (hattend : s0 ∈ attendsU o) :
+    AttentionDistinguishes (rankLift (outDest hinf attendsU) rankU) o s0 := by
+  -- the reification places o strictly above the self in the tower (this is what separates them)
+  have hrank : rankU s0 < rankU o := by rw [← hreify]; decide
+  refine ⟨?_, ?_⟩
+  · rw [plainOf_rankLift]
+    exact ws1_atomless_bisim (outDest hinf attendsU) o s0 (SHNE_U hinf o) (SHNE_U hinf s0)
+  · rintro ⟨R, hR, hRel⟩
+    obtain ⟨hfwd, _⟩ := hR o s0 hRel
+    have hedge : ((⟨rankU o⟩ : ULift.{0} ℕ), s0)
+        ∈ (rankLift (outDest hinf attendsU) rankU o).1 := by
+      rw [rankLiftU_val]; exact ⟨s0, Finset.mem_coe.mpr hattend, rfl⟩
+    obtain ⟨q, hq, hfst, _⟩ := hfwd _ hedge
+    rw [rankLiftU_val] at hq
+    obtain ⟨w, hw, rfl⟩ := hq
+    have heq : rankU o = rankU s0 := congrArg ULift.down hfst
+    omega
 
-/-- **ACTIVE AND PASSIVE ARE TWO.** Active constitution (`attendsD a = {b}`, `a` made by what it reaches) and
-passive constitution (`attendsD b = ∅`, `b` made only by what reaches it) yield the SAME plain position
-(plain-bisimilar) but the directed structure tells them apart (label-separated). The reaching and the
-being-reached are two becomings, not one. -/
+/-- **ACTIVE AND PASSIVE ARE TWO (Charter Extension 1 R3).** On the unified witness: the first other `s1` is
+ACTIVELY constituted, made by reifying the self-relation it attends (`s1 = reifyU {s0}`, `s0 ∈ attendsU s1`);
+the self `s0` is PASSIVELY constituted, attended by the first other (`s1 ∈ attendedBy attendsU s0`) while not
+attending it back (`s1 ∉ attendsU s0`). The two occupy the same bare-relating position yet the directed
+reification structure tells them apart, and the separation is DERIVED from `ws3_passive_constitution` (the
+passive/reification structure), not conjoined beside it. The reaching and the being-reached are two becomings. -/
 theorem ws3_active_passive_distinct (hinf : ℵ₀ ≤ κ) :
-    (attendsD a ≠ attendsD b)
-  ∧ (∃ R, IsBisim (plainOf (knowLiftD hinf)) R ∧ R a b)
-  ∧ (¬ ∃ R, IsBisimL (knowLiftD hinf) R ∧ R a b) := by
-  refine ⟨by decide, ?_, ?_⟩
-  · exact ws1_atomless_bisim (plainOf (knowLiftD hinf)) a b (ws3_SHNE hinf a) (ws3_SHNE hinf b)
-  · exact ws3_label_sep hinf
+    (s1 = reifyU {s0} ∧ s1 ∈ attendedBy attendsU s0 ∧ s1 ∉ attendsU s0)
+  ∧ AttentionDistinguishes (rankLift (outDest hinf attendsU) rankU) s1 s0 := by
+  refine ⟨⟨rfl, ?_, ?_⟩, ws3_passive_constitution hinf s1 rfl (by decide)⟩
+  · show s0 ∈ attendsU s1
+    decide
+  · show s1 ∉ attendsU s0
+    decide
 
 end P2S0

@@ -25,7 +25,7 @@ universe u
 
 namespace P2S0
 
-open P1.Core Cardinal
+open P1.Core P1.Reader Cardinal
 
 set_option linter.unusedVariables false
 
@@ -123,5 +123,86 @@ theorem ws1_tower_monotone {X : Type u} (reify : Finset X → X) (Ω₀ : Set X)
   induction hmn with
   | refl => exact subset_refl _
   | step _ ih => exact ih.trans (ws1_tower_step_subset reify Ω₀ _)
+
+/-! ## The unified witness (Charter Extension 1): the self, its reified self-relation, the first other
+
+One witness (`Fin 3`, at `Cardinal.{0}`) carrying the self `s0` (self-loop, the self-relation), its reified
+self-relation `s1` (the FIRST OTHER, `= reifyU {s0}`), and the reification iterated `s2`. Reification CREATES
+`s1`, non-recoverable from `s0` at the tower level; the WS3 asymmetry (`ws3.lean`) is the self against this
+SAME first other. This is the shared witness the extension (`spec/ext1-design.md`, R1-R2) requires, drawing the
+separation from the imported `P1.Reader.rankLift` / `ws2_many_general` mechanism (a reified relatum ranks above
+its constituent, so it is plain-bisimilar to a base relatum yet label-separated). The first other is a MINTED,
+self-manufactured distinction (non-recoverable, hence a genuine import, consistent with the inherited collapse),
+NOT multiplicity from relating alone. -/
+
+/-- The self (self-relation: the self-loop). -/
+def s0 : Fin 3 := 0
+/-- The reified self-relation: the FIRST OTHER (`= reifyU {s0}`). -/
+def s1 : Fin 3 := 1
+/-- The reification iterated (the proliferation). -/
+def s2 : Fin 3 := 2
+
+/-- `s0` self-loops (attends itself); `s1` attends `s0`; `s2` attends `s1`. -/
+def attendsU : Fin 3 → Finset (Fin 3) := fun x => if x = s0 then {s0} else if x = s1 then {s0} else {s1}
+/-- The tower level: `s0` at 0 (base/self), `s1` at 1 (reified self-relation), `s2` at 2. -/
+def rankU : Fin 3 → ℕ := fun x => if x = s0 then 0 else if x = s1 then 1 else 2
+/-- Pointwise reification: the self-relation `{s0}` reifies to `s1`; `{s1}` to `s2`. -/
+def reifyU : Finset (Fin 3) → Fin 3 := fun s => if s = {s0} then s1 else if s = {s1} then s2 else s0
+
+lemma attendsU_s1 : attendsU s1 = {s0} := rfl
+lemma reifyU_self : reifyU {s0} = s1 := rfl
+lemma reify_sections_self : attendsU (reifyU {s0}) = {s0} := rfl
+
+lemma attendsU_nonempty : ∀ x : Fin 3, (attendsU x).Nonempty := by decide
+
+lemma outDestU_ne_empty {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) (x : Fin 3) :
+    (outDest hinf attendsU x).1 ≠ ∅ := by
+  show (↑(attendsU x) : Set (Fin 3)) ≠ ∅
+  exact Set.Nonempty.ne_empty (Finset.coe_nonempty.mpr (attendsU_nonempty x))
+
+lemma SHNE_U {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) (x : Fin 3) : SHNE (outDest hinf attendsU) x :=
+  fun v _ => outDestU_ne_empty hinf v
+
+/-- The general fact `plainOf (rankLift dest rank) = dest` (the tower label forgets to the bare relating). -/
+lemma plainOf_rankLift {κ : Cardinal.{0}} (dest : Fin 3 → PkObj κ (Fin 3)) (rank : Fin 3 → ℕ) :
+    plainOf (rankLift dest rank) = dest := by
+  funext x; apply Subtype.ext
+  show Prod.snd '' ((fun z => ((⟨rank x⟩ : ULift.{0} ℕ), z)) '' (dest x).1) = (dest x).1
+  rw [Set.image_image]; simp
+
+/-- The tower-labelled edge set at `x`. -/
+lemma rankLiftU_val {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) (x : Fin 3) :
+    (rankLift (outDest hinf attendsU) rankU x).1
+      = (fun z => ((⟨rankU x⟩ : ULift.{0} ℕ), z)) '' (↑(attendsU x) : Set (Fin 3)) := rfl
+
+/-- **The first other is label-separated from the self.** No tower-bisimulation relates `s1` and `s0`:
+`s1`'s edge carries tower level `rankU s1 = 1`, `s0`'s only edge carries `rankU s0 = 0`. The mechanism of
+`P1.Reader.ws2_many_general` (a reified relatum outranks its base). -/
+lemma firstOther_label_sep {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
+    ¬ ∃ R, IsBisimL (rankLift (outDest hinf attendsU) rankU) R ∧ R s1 s0 := by
+  rintro ⟨R, hR, hRel⟩
+  obtain ⟨hfwd, _⟩ := hR s1 s0 hRel
+  have hedge : ((⟨rankU s1⟩ : ULift.{0} ℕ), s0)
+      ∈ (rankLift (outDest hinf attendsU) rankU s1).1 := by
+    rw [rankLiftU_val]; exact ⟨s0, by simp [attendsU_s1], rfl⟩
+  obtain ⟨q, hq, hfst, _⟩ := hfwd _ hedge
+  rw [rankLiftU_val] at hq
+  obtain ⟨w, hw, rfl⟩ := hq
+  have : rankU s1 = rankU s0 := congrArg ULift.down hfst
+  exact absurd this (by decide)
+
+/-- **THE FIRST OTHER (Charter Extension 1, R1).** Reifying the self-relation `{s0}` yields `s1`, which
+SECTIONS it (`attendsU (reifyU {s0}) = {s0}`, a real pointwise section), and `s1` is plain-bisimilar to the
+self `s0` over the bare out-attention relating (the imported collapse engine `ws1_atomless_bisim`) yet NOT
+recoverable from it (tower-separated, `firstOther_label_sep`): a genuine, non-recoverable first other, created
+by reification and participating in the WS3 asymmetry. This is the reification target the ground actually
+needs, replacing the inert counting-bijection as the WS5 flag (R4). -/
+theorem ws1_first_other {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
+    reifyU {s0} = s1
+  ∧ attendsU (reifyU {s0}) = {s0}
+  ∧ AttentionDistinguishes (rankLift (outDest hinf attendsU) rankU) s1 s0 := by
+  refine ⟨rfl, rfl, ?_, firstOther_label_sep hinf⟩
+  rw [plainOf_rankLift]
+  exact ws1_atomless_bisim (outDest hinf attendsU) s1 s0 (SHNE_U hinf s1) (SHNE_U hinf s0)
 
 end P2S0

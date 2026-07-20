@@ -10,11 +10,13 @@ axioms, not new ones. `ws5_verdict_eq` depends on NO axioms.)
 -/
 import P2S0
 
--- WS1 - the carrier and the finite-functor reification, and the finite bound (audit (a))
+-- WS1 - the carrier and the finite-functor reification, the finite bound (audit (a)), and the FIRST OTHER
+-- (Charter Extension 1: reification creates a genuine, non-recoverable other on the unified witness)
 #print axioms P2S0.ws1_reification_exists
 #print axioms P2S0.ws1_finreify_injective
 #print axioms P2S0.ws1_bound_is_finite_attention
 #print axioms P2S0.ws1_tower_monotone
+#print axioms P2S0.ws1_first_other
 
 -- WS2 - the inherited collapse (the imported engine applied to the symmetric relating)
 #print axioms P2S0.ws2_collapse_inherited
