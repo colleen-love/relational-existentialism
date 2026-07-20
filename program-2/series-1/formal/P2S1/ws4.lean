@@ -80,12 +80,11 @@ theorem ws4_linearization_import (hinf : ℵ₀ ≤ κ) :
 endogenous order (arm 1); every linearization of the concurrent pair is an import (arm 2). The wall between the
 conjuncts is Series 07's import boundary: the causal order recoverable, the linearization not. -/
 theorem ws4_two_zone (hinf : ℵ₀ ≤ κ) :
-    (causal kA kC ∧ ¬ causal kA kB ∧ ¬ causal kB kA)
+    ((causal kA kC ∧ causal kB kC)
+      ∧ (∀ t u : TCar, causal t u → rankT t < rankT u)
+      ∧ (¬ causal kA kB ∧ ¬ causal kB kA))
   ∧ (∀ ord : TCar → ℕ, ord kA ≠ ord kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ord)) := by
-  refine ⟨⟨?_, ?_, ?_⟩, ?_⟩
-  · decide
-  · decide
-  · decide
-  · intro ord hord; exact (ws4_linearization_import hinf ord hord).2
+  refine ⟨ws4_causal_order_endogenous, ?_⟩
+  intro ord hord; exact (ws4_linearization_import hinf ord hord).2
 
 end P2S1

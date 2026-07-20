@@ -97,10 +97,14 @@ supplies"; `ord` is the exogenous order, quantified, never named (audit (e)). No
 
 ```lean
 theorem ws4_two_zone {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    (causal kA kC ∧ ¬ causal kA kB ∧ ¬ causal kB kA)            -- causal: a witnessed, partial, endogenous order
+    ((causal kA kC ∧ causal kB kC)                               -- causal: the FULL endogeneity headline,
+      ∧ (∀ t u : TCar, causal t u → rankT t < rankT u)           --  rank-constrained (structural constraint)
+      ∧ (¬ causal kA kB ∧ ¬ causal kB kA))                       --  and genuinely partial
   ∧ (∀ ord : TCar → ℕ, ord kA ≠ ord kB →
         ¬ Recoverable (rankLift (outDest hinf attendsT) ord))    -- linearization: import, quantified
 ```
+Arm 1 is exactly `ws4_causal_order_endogenous` (the full headline including the rank clause, D1-S1 repair), so
+the aggregate carries the structural-constraint content, not a lighter slice.
 The conjunction of the two arms, one object for WS5. The wall between the conjuncts is Series 07's boundary:
 the causal order is on the recoverable side, the linearization on the non-recoverable side. **Winner (aggregate).**
 
