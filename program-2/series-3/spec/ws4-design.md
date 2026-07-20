@@ -2,7 +2,7 @@
 
 **Target (charter §2-WS4).** Prove `Converges₂` UNDECIDED by the structure over the full faithful class and
 DECIDED over the in-sight sub-class, the two zones separated by Series 07's import boundary
-(`ws4_two_zone_convergence`). The fork must genuinely reach BOTH values on witnessed valuations, and the faithful
+(`ws4_two_zone`). The fork must genuinely reach BOTH values on witnessed valuations, and the faithful
 class must carry a structural constraint (no PR1-S1 tautology). This is the knot, and its danger is precisely
 PR1-S1.
 
@@ -54,7 +54,7 @@ theorem ws4_insight_proper (hinf : ℵ₀ ≤ κ) :
     is UNDERDETERMINED (`cUnif` converges, `cDiss` fails, both faithful); (ii) over the in-sight faithful
     sub-class it is DECIDED, forced to hold; (iii) every faithful dissent is a genuine import. The boundary is
     Series 07's import boundary, not a reflexive triviality; both zones reached on witnessed valuations. -/
-theorem ws4_two_zone_convergence (hinf : ℵ₀ ≤ κ) :
+theorem ws4_two_zone (hinf : ℵ₀ ≤ κ) :
     (∃ c₁ c₂ : Valuation RCar (ULift.{0} Bool),
         Faithful₂ c₁ ∧ Faithful₂ c₂ ∧ Converges₂ c₁ slf oth ∧ ¬ Converges₂ c₂ slf oth)
   ∧ (∀ (Or : Type) (c : Valuation RCar Or),
@@ -63,7 +63,7 @@ theorem ws4_two_zone_convergence (hinf : ℵ₀ ≤ κ) :
         Faithful₂ c → ¬ Converges₂ c slf oth → ¬ Recoverable (valLift (outDest hinf attendsR) c.val))
 ```
 
-`ws4_two_zone_convergence := ⟨⟨cUnif, cDiss, cUnif_faithful, cDiss_faithful, cUnif_converges,
+`ws4_two_zone := ⟨⟨cUnif, cDiss, cUnif_faithful, cDiss_faithful, cUnif_converges,
 cDiss_not_converges⟩, ws2_converges_decided_in_sight hinf, ws3_dissent_is_import hinf⟩`. `ws4_insight_proper`: the
 proper witness `cDiss` — if it were in-sight it would agree on the plain-bisimilar `slf`, `oth` (contradicting
 `cDiss_not_converges` via `faithful_converges_iff`).
@@ -71,13 +71,13 @@ proper witness `cDiss` — if it were in-sight it would agree on the plain-bisim
 ## 4. Outcome classes
 
 - **shapeDrawn** (expected, this WS): the fork reaches both values on a constrained class.
-- **convergenceDecided:** the underdetermination arm's negative witness `cDiss` is what keeps `shapeDrawn` from
-  collapsing to `convergenceDecided`; without a faithful dissent the verdict would be `convergenceDecided`
+- **forcedFull:** the underdetermination arm's negative witness `cDiss` is what keeps `shapeDrawn` from
+  collapsing to `forcedFull`; without a faithful dissent the verdict would be `forcedFull`
   (reachable, pre-registered — never hand-set on this witness).
 
 ## 5. Strip-test annotation
 
-`ws4_two_zone_convergence` strips (delete "convergence"/"two-zone"/"in-sight") to: "(i) two identity-raising
+`ws4_two_zone` strips (delete "convergence"/"two-zone"/"in-sight") to: "(i) two identity-raising
 valuations, one agreeing and one disagreeing on `slf`, `oth`; (ii) any identity-raising valuation agreeing on all
 plain-bisimilar pairs agrees on `slf`, `oth`; (iii) any identity-raising valuation disagreeing on `slf`, `oth`
 has a `¬ Recoverable` lift" — three bare equality/`IsBisim`/`Recoverable` facts, both zones witnessed. Survives.

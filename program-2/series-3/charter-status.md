@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: D (design repair, Phase C returned zero SERIOUS). Current verdict: TBD (not computed until WS5). No formal build committed yet. All targets below are OPEN.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** B complete (design committed as one batch: `spec/README.md` + `spec/ws1-design.md`…`ws5-design.md`). C (design review) next. **Precondition:** Series 2.2 has landed (TWO-FACING).
+- **Phase:** C complete (blind design review, zero SERIOUS; three REAL/COSMETIC naming fixes). D applied the renames. E (code) next. **Precondition:** Series 2.2 has landed (TWO-FACING).
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The **Series 2.2 pair** (`P2S2`, TWO-FACING) is built and registered, reaching `P2S1` / `P2S0` / `P1` transitively.
 - **Axiom state:** the imported layers (P2S2, P2S1, P2S0, P1) are axiom-clean on the standard three. Series build N/A.
@@ -30,15 +30,25 @@
 
 ## 2. Targets (all OPEN until built and reviewed)
 
-| WS | Target theorem(s) | Status | Closed how |
+| WS | Target theorem(s) (exact, Phase B) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `Converges₂` (typed), `ws1_no_orientation_evaluated` | OPEN | — |
+| WS1 | `Converges₂` (typed), `ws1_converges_typed`, `ws1_two_sided_free` | OPEN | — |
 | WS2 | `ws2_converges_decided_in_sight` (forced over a genuine in-sight class) | OPEN | — |
-| WS3 | `ws3_dissent_is_import` (every failing orientation non-recoverable, on Series 07) | OPEN | — |
-| WS4 (the knot) | `ws4_two_zone_convergence` / `ws4_shape_drawn` (both zones reached, no PR1-S1 tautology) | OPEN | — |
+| WS3 | `ws3_dissent_is_import` (every failing valuation non-recoverable, on Series 07) | OPEN | — |
+| WS4 (the knot) | `ws4_two_zone` / `ws4_insight_proper` (both zones reached, class proper, no PR1-S1 tautology) | OPEN | — |
 | WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
 
-Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here with its reason.
+**Renames from the charter's provisional target names (recorded per this section's note), reason: audit (e) —
+the charter's provisional names embed the forbidden content-NOUNS `orientation`/`convergence` (as opposed to the
+allowed relation-VERB `Converges₂`/`converges`), flagged REAL by Phase C (C1-S1, C1-S2, C1-S3):**
+- `ws1_no_orientation_evaluated` → **`ws1_two_sided_free`** (drops "orientation"; content unchanged — two-sided
+  freedom, the "no valuation evaluated" discipline).
+- `ws4_two_zone_convergence` → **`ws4_two_zone`** (drops "convergence"; the Series 12 house name).
+- Outcome constructor `convergenceDecided` → **`forcedFull`** (drops "convergence"; the outcome where the in-sight
+  forcing extends to the FULL faithful class, i.e. the pre-registered CONVERGENCE-DECIDED).
+
+Names are the charter's provisional targets; Phase B fixed exact signatures, and each rename above is recorded
+with its reason.
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
@@ -54,7 +64,17 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
-| — | — | — | (none yet) | — |
+| C1-S1 | C | REAL | Outcome constructor `convergenceDecided` embeds the forbidden noun `convergence` (audit e). | **Fixed** — renamed `Outcome.forcedFull` (drops the noun; verdict/discriminates updated). |
+| C1-S2 | C | REAL | Theorem `ws1_no_orientation_evaluated` embeds the forbidden noun `orientation` (audit e). | **Fixed** — renamed `ws1_two_sided_free`. |
+| C1-S3 | C | REAL/COSMETIC | `ws4_two_zone_convergence` re-embeds `convergence`; and is a packaging conjunction (accepted S12 pattern). | **Fixed** (name) — renamed `ws4_two_zone`; packaging framing kept, disclosed in docstring (S12 `ws4_two_zone` precedent). |
+| C1-S4 | C | COSMETIC | `ws5_flags_justified` seed-abbreviation read as conjoining names; the built statement writes full props applied to `hinf`. | Noted — no defect in the built signature. |
+| C1-S5 | C | COSMETIC | The in-sight class is degenerate (constant valuations only) on this SHNE carrier; still proper and inhabited, fork stands. | Noted/disclosed — `ws2_sight_is_uniform` states it (the S12 PR3-R1 disclosure). |
+
+Phase C returned **zero SERIOUS**. Audit (c) (the fork genuine, no PR1-S1 tautology) PASSED under the hardest
+press: the reviewer confirmed the in-sight forcing genuinely consumes `slf`/`oth` plain-bisimilarity (would fail
+on a non-bisimilar carrier), `InSight ⊊ Faithful₂` is proper and inhabited, and both zones are witnessed on the
+same pair. The four REAL/COSMETIC findings are all naming/packaging; no design change beyond the three renames.
+No SERIOUS finding closed by editing a design, so no re-run of Phase C is required.
 
 ## 5. Deviations from charter (disclosed)
 
@@ -80,4 +100,5 @@ Series 2.3 adds none and closes none.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series 2.3 established as the COHERENCE: define the orientation (typed, never evaluated) and `Converges₂` over the S2 pair, prove it forced in-sight and its dissent an import, and at the knot prove the two-zone fork SHAPE-DRAWN (both zones reached, no PR1-S1 tautology). The direction of convergence is never decided. Scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase C + D.** Blind design review (`spec/blind-seed-C.md`, one reviewer, read the seed only) returned **zero SERIOUS**. Audit (c) passed hardest press (fork genuine, load-bearing on `outDest`, not a PR1-S1 tautology); (a)/(b)/(d)/strip-test all passed. Three REAL/COSMETIC naming findings (C1-S1..S3): identifiers embedding the forbidden nouns `convergence`/`orientation`. Phase D applied the three renames (`ws1_two_sided_free`, `ws4_two_zone`, `Outcome.forcedFull`) across `spec/` and recorded them in §2/§4. No SERIOUS ⇒ no Phase C re-run. Next: Phase E, build `formal/`.
 - **2026-07-20 — Phase B.** Design committed as one batch (`spec/README.md`, `spec/ws1-design.md`…`ws5-design.md`), before any `formal/` file. Winning constructions fixed to typed signatures: the primitive `Valuation`/`Converges₂` (fresh, neutral-named — `Valuation`/`val`/`raise`/`Converges₂`, none matching the forbidden greps), the structural constraint `Faithful₂` and the sight class `InSight` (dest load-bearing), the fresh `valLift`/`valLift_not_recoverable` (transcribed in spirit from Series 12, never imported), and the two-zone fork over `(slf, oth)` foreclosing PR1-S1 by (i) forcing that uses `slf`/`oth` plain-bisimilarity, (ii) a genuinely constrained proper in-sight class (`ws4_insight_proper`), (iii) both zones witnessed. PX-1 weighed and declined (§5). Module naming `P2S3` fixed (registration deferred to Phase E per protocol). Next: Phase C, blind design review pressing hardest on audit (c) — is the fork genuine or a PR1-S1 tautology?

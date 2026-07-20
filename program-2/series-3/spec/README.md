@@ -77,7 +77,7 @@ the S2 pair, and forecloses the tautology by the SAME device, load-bearing on th
   is inhabited (`cUnif`, the uniform valuation) AND properly contained in the faithful class (`cDiss`, the
   dissenting valuation, is faithful but NOT in-sight — it separates the plain-bisimilar `slf`, `oth`). So
   restricting to in-sight is a REAL constraint that excludes a genuine faithful valuation, not a vacuous relabel.
-- **Both zones reached on witnessed valuations at the SAME pair.** `ws4_two_zone_convergence`: `cUnif` converges
+- **Both zones reached on witnessed valuations at the SAME pair.** `ws4_two_zone`: `cUnif` converges
   and `cDiss` fails, both faithful, both at `(slf, oth)`; and every faithful dissent is a genuine import
   (`ws3_dissent_is_import`). The verdict is a discriminating function reaching more than one value
   (`ws5_verdict_discriminates`).
@@ -90,14 +90,14 @@ the S2 pair, and forecloses the tautology by the SAME device, load-bearing on th
 
 - **No valuation evaluated (audit (a), the central sin of the feeling side).** Every theorem quantifies over `Or`
   and over `c : Valuation …`; the concrete witness valuations (`cUnif`, `cDiss`) appear ONLY inside existentials
-  and never discharge a `∀`-obligation. `ws1_no_orientation_evaluated` witnesses the two-sided freedom (a
+  and never discharge a `∀`-obligation. `ws1_two_sided_free` witnesses the two-sided freedom (a
   converging and a non-converging faithful valuation both exist), so `Converges₂` fixes no valuation.
 - **The direction is never decided (audit (b), the central sin, a permanent open).** No theorem, definition, or
   discharged obligation states that `slf` and `oth` DO cohere or DO NOT cohere. The in-sight forcing
   (`ws2_converges_decided_in_sight`) is a conditional over a PROPER sub-class ("wherever the structure can see"),
   never a global decision; the fork LOCATES both values (`ws5_verdict_discriminates`) and fills neither.
   `ws5_audit_direction_open` carries this as the correct non-decision (a `True` about identifiers, grep-certified).
-- **The fork is genuine (audit (c)).** §3 above. `ws4_two_zone_convergence` + `ws4_insight_proper`, both zones on
+- **The fork is genuine (audit (c)).** §3 above. `ws4_two_zone` + `ws4_insight_proper`, both zones on
   witnessed valuations, the class properly constrained, the boundary Series 07's import boundary.
 - **Dissent is an import (audit (d)).** `ws3_dissent_is_import` is a proof term resting on Series 07 (via
   `valLift_not_recoverable` → `ws1_atomless_bisim` + `ws4_recoverable_not_import`).
@@ -147,12 +147,12 @@ proof term or headline is named for the interpretive content. `Converges₂`/`co
 
 ## 7. The outcomes (WS5, per charter §5)
 
-`Outcome := shapeDrawn | convergenceDecided | disconnected | partial'`. The verdict is COMPUTED from the WS1-WS4
+`Outcome := shapeDrawn | forcedFull | disconnected | partial'`. The verdict is COMPUTED from the WS1-WS4
 flags by `verdict` (WS5), never hand-set:
 
 - **shapeDrawn** (expected): WS1 `Converges₂` typed and two-sided free, WS2 forced in-sight on a genuine
   (proper, inhabited) class, WS3 dissent an import, WS4 the fork reaching BOTH values on witnessed valuations.
-- **convergenceDecided**: the in-sight forcing extends to the FULL faithful class (no faithful dissent) — the
+- **forcedFull**: the in-sight forcing extends to the FULL faithful class (no faithful dissent) — the
   pre-registered stronger, stranger outcome that would DECIDE the program's oldest question, reported honestly in
   whichever direction with the positioning rewritten. A reachable input to the discriminating verdict, never
   hand-set on this witness (on which a faithful dissent DOES exist, so `shapeDrawn` is the computed outcome).

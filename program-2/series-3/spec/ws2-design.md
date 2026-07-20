@@ -64,8 +64,8 @@ slf) (ws1_rcar_SHNE hinf oth)`. `ws2_insight_inhabited := ⟨⟨fun _ => ⟨true
 ## 4. Outcome classes
 
 - **shapeDrawn contribution:** the in-sight forcing over a genuine (proper, inhabited) class.
-- **convergenceDecided:** if the in-sight forcing extended to the FULL faithful class (no faithful dissent), the
-  verdict would be `convergenceDecided`. Foreclosed on this witness by `ws4`'s `cDiss` (a faithful dissent).
+- **forcedFull:** if the in-sight forcing extended to the FULL faithful class (no faithful dissent), the
+  verdict would be `forcedFull`. Foreclosed on this witness by `ws4`'s `cDiss` (a faithful dissent).
 - **partial':** if the in-sight class were vacuous, the WS2 flag is false and the verdict is `partial'`.
   Pre-registered, not reached (`ws2_insight_inhabited`).
 

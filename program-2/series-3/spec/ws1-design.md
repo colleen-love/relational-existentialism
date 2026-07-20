@@ -3,7 +3,7 @@
 **Target (charter §2-WS1).** Define the VALUATION (a per-perspective valuation, typed, held as a quantified
 parameter, never selected or read off) and `Converges₂` (the self's valuation carried to the other coheres with
 the other's own). Prove it well-typed and non-vacuous, and prove the discipline: every theorem quantified over all
-valuations, none evaluated (`ws1_no_orientation_evaluated`). This is the primitive.
+valuations, none evaluated (`ws1_two_sided_free`). This is the primitive.
 
 ## 1. Candidates
 
@@ -22,7 +22,7 @@ valuations, none evaluated (`ws1_no_orientation_evaluated`). This is the primiti
 
 | Criterion | (C) verdict |
 |---|---|
-| Non-triviality | `Converges₂` is neither `True` nor `False`: `ws1_no_orientation_evaluated` exhibits `c₁` converging and `c₂` not, at `(slf, oth)`. |
+| Non-triviality | `Converges₂` is neither `True` nor `False`: `ws1_two_sided_free` exhibits `c₁` converging and `c₂` not, at `(slf, oth)`. |
 | Strip test | Strips to a bare equation `raise x y (val x) = val y` in `Or`; under `Faithful₂` to `val x = val y`. No word load-bearing. |
 | Audit (a) | No canonical valuation: `val`/`raise` are structure FIELDS quantified over `c`; witnesses `cUnif`/`cDiss` live only in existentials (WS4). |
 | Audit (e) | `Valuation`/`val`/`raise`/`Converges₂`/`Faithful₂` carry no forbidden content-name (`\borientation\b`/`\bconvergence\b`/`\bcompass\b` do not match). |
@@ -57,7 +57,7 @@ theorem ws1_converges_typed (hinf : ℵ₀ ≤ κ) :
     valuation: a faithful valuation under which it holds AND a faithful valuation under which it fails both
     exist at `(slf, oth)`, so the relation is two-sided free (neither `True` nor `False` nor reflexive), and
     the core reads off no canonical valuation. -/
-theorem ws1_no_orientation_evaluated (hinf : ℵ₀ ≤ κ) :
+theorem ws1_two_sided_free (hinf : ℵ₀ ≤ κ) :
     ∃ c₁ c₂ : Valuation RCar (ULift.{0} Bool),
         Faithful₂ c₁ ∧ Faithful₂ c₂ ∧ Converges₂ c₁ slf oth ∧ ¬ Converges₂ c₂ slf oth
 ```
@@ -74,6 +74,6 @@ slf then ⟨true⟩ else ⟨false⟩, fun _ _ o => o⟩` (fails, `decide`: `val 
 
 ## 5. Strip-test annotation
 
-`ws1_no_orientation_evaluated` strips (delete "valuation"/"convergence") to: "there exist `c₁`, `c₂` with identity
+`ws1_two_sided_free` strips (delete "valuation"/"convergence") to: "there exist `c₁`, `c₂` with identity
 raising such that `c₁.val slf = c₁.val oth` and `c₂.val slf ≠ c₂.val oth`" — a bare statement that the field
 `val` is free to agree or disagree on `slf`, `oth`. Survives. No word is load-bearing.
