@@ -93,8 +93,8 @@ theorem ws5_audit_no_evaluation :
   ws1_two_sided_free
 
 /-- **(b) THE DIRECTION IS NEVER DECIDED.** No theorem, definition, or discharged obligation states that `slf`
-and `oth` DO or DO NOT cohere; the verdict LOCATES the fork (`ws5_verdict_discriminates` reaches both `shapeDrawn`
-and `forcedFull`) and fills neither. A NAMES/absence property about the build, carried as a grep-certified `True`
+and `oth` DO or DO NOT cohere; the verdict LOCATES the fork (`ws5_verdict_eq` reaches `shapeDrawn`,
+`ws5_verdict_discriminates` reaches `forcedFull`) and fills neither. A NAMES/absence property about the build, carried as a grep-certified `True`
 (the CORRECT non-decision — the direction is left open, not decided; charter §4.a). -/
 theorem ws5_audit_direction_open : True := trivial
 

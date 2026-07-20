@@ -42,7 +42,7 @@ structure Valuation (X Or : Type) where
 
 /-- **`Converges₂ c x y`.** The valuation at `x`, raised toward `y`, agrees with the valuation at `y`. A genuine
 equation in `Or` depending on `c`; instantiated at `(slf, oth)`. NOT `True`, NOT `False`, NOT `val x = val x`
-(`ws1_no_orientation_evaluated`). -/
+(`ws1_two_sided_free`). -/
 def Converges₂ {X Or : Type} (c : Valuation X Or) (x y : X) : Prop :=
   c.raise x y (c.val x) = c.val y
 
