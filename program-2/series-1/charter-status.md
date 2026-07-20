@@ -20,8 +20,10 @@
 ## 1. The carrier — the P1 foundation (built and verified)
 
 The carrier is consolidated in the **P1 foundation** at `program-2/formal/P1`, built green (sorry-free,
-axiom-clean on the standard three; `P1.AxiomCheck`). At Phase E the series transcribes the pieces it needs
-from here into its own `P2S1` namespace (Program 1's transcribe-not-import discipline). Source map:
+axiom-clean on the standard three; `P1.AxiomCheck`). At Phase E the series builds on it: **Program 2 permits
+importing** (`import P1`, using `P1.Core.*` / `P1.Reader.*` directly — sound because the foundation is
+axiom-checked), or transcribing into `P2S1` where a workstream wants to restate at its own strength. See §5
+for the discipline decision. Source map:
 
 | Carrier piece | Location |
 |---|---|
@@ -66,13 +68,23 @@ Theorem names are the charter's provisional targets; the Phase B designs fix the
 
 Empty. Findings from Phase C (design review) and Phase F (code review) are recorded here with stable IDs, grades (SERIOUS / REAL / COSMETIC), and closure (Fixed: original target built, name it; or Relabeled: obstruction recorded, payoff demoted to a pre-registered outcome). A finding closed by a target-avoiding theorem is re-graded SERIOUS and marked RECURRING with its count.
 
+No Series 2.1 design/code findings yet (Phase C/F not run). One out-of-band verification recorded:
+
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
-| — | — | — | (none yet) | — |
+| FND-1 | Foundation | COSMETIC | Delegated transcription audit of `program-2/formal/P1`: 0 SERIOUS, 0 REAL. Fidelity confirmed (body byte-identical to Series 12 WS1/WS2 modulo the intended renames), build green + axiom-clean, guardrails accurate (S1 absent, S2 fix present and reader-load-bearing, `Many` demoted). One forward-note: `gate.sh` does not yet cover future `program-2/series-NN/formal/` trees. | Handled — the Phase E registration recipe adds the per-series `check program-2/series-1 …` line when the series formal lands. Fidelity + guardrail claims independently spot-checked (diffs, greps). |
 
 ## 5. Deviations from charter (disclosed)
 
-None yet. Any narrowing of a target between charter and design, or between design and build, is disclosed here at the moment it happens; an undisclosed narrowing is the PR1-S2 defect and is prohibited.
+**Discipline decision (2026-07-20): importing the P1 foundation is PERMITTED.** Program 1 held a
+transcribe-only discipline (each series standalone, prior results transcribed not imported). Program 2
+relaxes it: a series may `import P1` and use the carrier directly. This is a deliberate, recorded departure,
+sound because the foundation is built and axiom-checked (importing a verified library introduces no gap and
+removes transcription drift). It changes the *provenance* of the carrier, not any target; it is not a target
+narrowing. Importing any other series' tree remains forbidden (gate-enforced).
+
+Otherwise none yet. Any narrowing of a target between charter and design, or between design and build, is
+disclosed here at the moment it happens; an undisclosed narrowing is the PR1-S2 defect and is prohibited.
 
 ## 6. Permanent opens (inherited from Program 1, untouched)
 
@@ -86,4 +98,6 @@ Series 2.1 adds none and closes none of these.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series scaffold created (`spec/`, `formal/`). Status initialized.
-- **2026-07-20 — Foundation.** The P1 foundation (`program-2/formal/P1`: `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim) transcribed, registered in `lake/lakefile.toml` + `scripts/gate.sh`, built green (sorry-free, axiom-clean). Guardrails documented in `P1.lean` (PR1-S1 machinery excluded; `RealFor` not `Many`, PR1-S2). Grain preorder explored on paper (`spec/grain-exploration.md`) ahead of Phase B. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Foundation.** The P1 foundation (`program-2/formal/P1`: `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim) transcribed, registered in `lake/lakefile.toml` + `scripts/gate.sh`, built green (sorry-free, axiom-clean). Guardrails documented in `P1.lean` (PR1-S1 machinery excluded; `RealFor` not `Many`, PR1-S2). Grain preorder explored on paper (`spec/grain-exploration.md`) ahead of Phase B.
+- **2026-07-20 — Import permitted.** Program 2 relaxes Program 1's transcribe-only discipline: a series may `import P1`. Recorded in §5; banner/protocol/charter updated.
+- **2026-07-20 — Foundation audit (FND-1).** Delegated transcription review returned 0 SERIOUS / 0 REAL / 1 COSMETIC (see §4); fidelity and guardrails independently spot-checked and confirmed. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.

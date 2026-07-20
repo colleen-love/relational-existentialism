@@ -70,7 +70,7 @@ Address every SERIOUS finding by the section 2a binary: Fixed (build the specifi
 **Loop:** if any SERIOUS finding was closed by editing a design (not merely relabeled), return to Phase C with a fresh blind seed and re-review. Continue C/D until a Phase C pass returns zero SERIOUS findings. The recurrence guard applies: a finding "addressed" by a target-avoiding theorem is re-graded SERIOUS and RECURRING.
 
 ### Phase E — Code [executor]
-Build `formal/` to the Phase B (post-repair) signatures, one module per workstream plus `AxiomCheck`. **Transcribe the carrier from the P1 foundation** at `program-2/formal/P1` (namespaces `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim), copying the pieces you need into the series' own namespace and re-namespacing them, exactly as each Program 1 series did (do not import across series; the gate forbids it). The foundation is the single verified source of truth to transcribe from; it is built green, so any drift fails to compile. Heed the foundation's two guardrails (`P1.lean` banner): do NOT transcribe or reconstruct the Series 12 WS3/WS4 compass/convergence machinery (PR1-S1), and use `P1.Reader.ws2_attention_makes_real` / `RealFor` (reader-load-bearing) as the template for any plurality/perspective payoff, never `Many` (PR1-S2).
+Build `formal/` to the Phase B (post-repair) signatures, one module per workstream plus `AxiomCheck`. **Build on the P1 foundation** at `program-2/formal/P1` (namespaces `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim). Program 2 PERMITS importing it: `import P1` and use `P1.Core.*` / `P1.Reader.*` directly, which is sound because the foundation is built and axiom-checked (no transcription drift). Transcription into the `P2S1` namespace remains available where a workstream wants to restate a carrier result at its own strength, but is not required. Importing any OTHER series' tree is still forbidden; the gate enforces it. Heed the foundation's two guardrails (`P1.lean` banner): do NOT reuse or reconstruct the Series 12 WS3/WS4 compass/convergence machinery (PR1-S1, not present in the foundation), and use `P1.Reader.ws2_attention_makes_real` / `RealFor` (reader-load-bearing) as the template for any plurality/perspective payoff, never `Many` (PR1-S2).
 
 **Register the series in the build (do this at Phase E, never earlier — an empty lib in `defaultTargets` breaks `lake build` for everything).** Pick the namespace `P2S1` (Program 2, Series 1; keeps out of Program 1's global `SeriesNN` numbering). Then:
 - In `lake/lakefile.toml`, add a library block and the target:
@@ -81,7 +81,7 @@ Build `formal/` to the Phase B (post-repair) signatures, one module per workstre
   roots = ["P2S1", "P2S1.AxiomCheck"]
   ```
   and append `"P2S1"` to `defaultTargets`.
-- In `scripts/gate.sh`, add: `check program-2/series-1 "^import P2S1(\.[A-Za-z0-9_]+)*$"` (the series may import its own `P2S1.*` roots and Mathlib only; the P1 foundation is transcribed from, not imported).
+- In `scripts/gate.sh`, add: `check program-2/series-1 "^import (P1|P2S1)(\.[A-Za-z0-9_]+)*$"` (the series may import the P1 foundation and its own `P2S1.*` roots, plus Mathlib; importing any other series' tree is forbidden).
 - Lay out `program-2/series-1/formal/` as `P2S1.lean` (aggregator, imports `P2S1.ws1`…`P2S1.ws5`), `P2S1/wsN.lean`, `P2S1/AxiomCheck.lean` — mirroring `program-1/series-13/formal/Series13/`.
 
 The build must be:

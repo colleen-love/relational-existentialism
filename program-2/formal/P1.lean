@@ -13,12 +13,16 @@ so this foundation is standalone: it imports only Mathlib and itself, and the cl
 Sorry-free; axiom-clean beyond Mathlib's standard `propext` / `Classical.choice` / `Quot.sound`
 (`P1.AxiomCheck`).
 
-HOW PROGRAM 2 USES THIS. A Program 2 series states its own question and, keeping Program 1's discipline,
-TRANSCRIBES the carrier pieces it needs into its own `PkSeriesNN.*` namespace rather than importing them,
-exactly as each Program 1 series did. This library is the single verified source of truth to transcribe FROM,
-and it is built so any drift from it fails to compile. (Whether a Program 2 series may instead IMPORT this
-foundation directly — a deliberate relaxation of the transcribe-only discipline — is a per-series charter
-decision, not settled here.)
+HOW PROGRAM 2 USES THIS. Program 2 PERMITS importing this foundation directly — a deliberate, recorded
+relaxation of Program 1's transcribe-only discipline. A Program 2 series may `import P1` (or `import P1.Core` /
+`import P1.Reader`) and use the carrier under its `P1.Core.*` / `P1.Reader.*` names, rather than transcribing
+it into the series namespace. This is sound precisely because the foundation is built and axiom-checked here:
+importing a verified library cannot introduce a gap, and it removes transcription drift as a failure mode.
+Transcription remains available where a series deliberately wants to restate a result at its own strength (as
+each Program 1 series did), but it is no longer required. The closure gate for a Program 2 series therefore
+allows imports of `P1.*` and the series' own roots (plus Mathlib), and nothing else — importing any OTHER
+series' tree is still forbidden. What a series must still supply itself: its own question, its own new
+structure (the tick, the stream, the orders), and its own theorems; the foundation is the floor, not the work.
 
 TWO GUARDRAILS, from the Program 1 adversarial program review (`program-1/spec/program-review-1.md`). Both
 are load-bearing for Program 2 and are why this foundation is scoped as it is:
