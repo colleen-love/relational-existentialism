@@ -78,12 +78,13 @@ No Series 2.1 design/code findings yet (Phase C/F not run). One out-of-band veri
 
 ## 5. Deviations from charter (disclosed)
 
-**Discipline decision (2026-07-20): importing the P1 foundation is PERMITTED.** Program 1 held a
-transcribe-only discipline (each series standalone, prior results transcribed not imported). Program 2
-relaxes it: a series may `import P1` and use the carrier directly. This is a deliberate, recorded departure,
-sound because the foundation is built and axiom-checked (importing a verified library introduces no gap and
-removes transcription drift). It changes the *provenance* of the carrier, not any target; it is not a target
-narrowing. Importing any other series' tree remains forbidden (gate-enforced).
+**Discipline decision (2026-07-20): layered import chain.** Program 1 held a transcribe-only discipline (each
+series standalone, prior results transcribed not imported). Program 2 relaxes it into a layered chain
+`P1 → S0 → S1 → S2 → S3` (program charter §2): each series imports the one before it. S1 imports S0 only; the
+P1 prior art is reached transitively through S0, not imported directly, so all Program 1 machinery stays
+mediated by S0's finite-attention ground. Sound because every layer is built and axiom-checked before the next
+imports it. It changes the *provenance* of the carrier, not any target; not a target narrowing. Importing
+outside the chain remains forbidden (gate-enforced).
 
 Otherwise none yet. Any narrowing of a target between charter and design, or between design and build, is
 disclosed here at the moment it happens; an undisclosed narrowing is the PR1-S2 defect and is prohibited.
