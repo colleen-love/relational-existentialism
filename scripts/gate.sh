@@ -37,4 +37,9 @@ check program-2 "^import P1(\.[A-Za-z0-9_]+)*$"
 # (Program 2 permits it) and its own `P2S0.*` roots (+ mathlib); any other series' tree is forbidden.
 check program-2/series-0 "^import (P1|P2S0)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 1 (`program-2/series-1/formal/`): the `P2S1` library imports its predecessor `P2S0` and its
+# own `P2S1.*` roots (+ mathlib); the `P1` prior art is reached transitively through S0, not imported directly;
+# any other series' tree is forbidden.
+check program-2/series-1 "^import (P2S0|P2S1)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
