@@ -67,8 +67,12 @@ exercised on the SAME structure (audit (d)). Carrier `TCar := Fin 7`.
   `s ∈ {cycleA, cycleB, {kA,kB}}` (the FinReify section, pointwise; total `FinReify` is unsatisfiable on the
   finite carrier, as in S0). All these hold by `decide`.
 - **The causal edge.** `kA ∈ attendsT kC` and `kB ∈ attendsT kC`: `kC` consumes the products `kA`, `kB`. The
-  causal order between ticks is `attends`-membership among composites (acyclic: a DAG, not a cycle - the cycle
-  is WITHIN each tick, the causal order is BETWEEN ticks).
+  causal order is `causal t u := isTick t ∧ isTick u ∧ t ∈ attendsT u` (`isTick x := x = kA ∨ x = kB ∨ x = kC`):
+  `attends`-membership among the PRODUCED relata (ticks) only. It is acyclic (a DAG, not a cycle - the cycle is
+  WITHIN each tick, the causal order is BETWEEN ticks) and rank-constrained (`causal t u → rankT t < rankT u`).
+  The base 2-cycle edges (`p1 ∈ attendsT p0`, equal rank) are WITHIN-tick relating, correctly NOT causal edges
+  (the C1-S1/S2 repair: an unrestricted `attends`-membership would wrongly make the base cycles violate the
+  rank constraint).
 - **The concurrent pair.** `kA ≠ kB`, `kA ∉ attendsT kB`, `kB ∉ attendsT kA`: neither consumes the other. They
   are the genuine concurrent (causally-independent) pair the linearization import needs (audit (d) non-vacuity).
 - **SHNE.** Every node's `attendsT` is a nonempty singleton or doubleton, and every reachable node has nonempty
@@ -81,7 +85,8 @@ discharge the finite obligations, exactly as S0's `attendsU` witness does.
 ## 4. The discipline (the honesty invariants, applied)
 
 - **No smuggled clock.** No `Nat` step counter, no background time index orders the ticks. The causal order is
-  `attends`-membership; the linearization is an exogenous label. `rankT` is the reification-tower height (a
+  `attends`-membership among ticks (`causal`, `isTick`); the linearization is an exogenous label. `rankT` is the
+  reification-tower height (a
   structural fact about who reifies whom), NOT a clock: it is used only to separate a composite from its base,
   never to order concurrent ticks (`rankT kA = rankT kB = 1`, so rank does NOT linearize the concurrent pair -
   that is the whole point).
@@ -122,7 +127,8 @@ WS1-WS4 flags by `verdict` (WS5), never hand-set:
 - **twoZone** (expected): WS1 well-formed, WS2 arrow with the reader named, WS3 exogenous, WS4 causal order
   endogenous AND linearization import, both arms witnessed.
 - **endogenous**: WS4's linearization proves forced too (`linImport = false`).
-- **timeIsImport**: WS4's causal order proves non-recoverable (`causEndo = false`).
+- **causalImport** (the charter's TIME-IS-IMPORT outcome, renamed so no identifier embeds a forbidden
+  content-name): WS4's causal order proves non-recoverable (`causEndo = false`).
 - **partial'**: an obligation lands only per-instance / degenerate.
 - **disconnected**: WS1's construction imports structure beyond the stream (`wf = false`).
 

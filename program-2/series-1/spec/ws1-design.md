@@ -32,10 +32,15 @@ theorem ws1_cycle_reifies :
     (p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1)            -- cycle A is a genuine 2-cycle
   ∧ reifyT cycleA = kA                                 -- the cycle reifies into kA
   ∧ attendsT (reifyT cycleA) = cycleA                  -- the section: kA attends exactly the cycle
-  ∧ Function.Injective reifyTOn                         -- distinct cycles give distinct composites
+  ∧ (reifyT cycleA ≠ reifyT cycleB                     -- distinct cycles give distinct composites
+      ∧ reifyT cycleA ≠ reifyT ({kA, kB} : Finset TCar)
+      ∧ reifyT cycleB ≠ reifyT ({kA, kB} : Finset TCar))
 ```
-where `cycleA : Finset TCar := {p0, p1}` and `reifyTOn` is `reifyT` restricted to the three sectioned patterns
-(injective by `decide`; total `FinReify` is unsatisfiable on the finite carrier, disclosed as in S0).
+where `cycleA : Finset TCar := {p0, p1}`, `cycleB := {q0, q1}`. The last conjunct is the explicit distinctness
+triple (C1-S6 repair: replacing an under-specified `Function.Injective reifyTOn`): distinct cycles reify to
+distinct composites on the three sectioned patterns, by `decide`. Total `FinReify` is unsatisfiable on the
+finite carrier (disclosed as in S0), so injectivity is stated as pointwise distinctness, not as injectivity of
+the fallback-carrying total `reifyT`.
 
 - **Ambient:** `attendsT`, `reifyT`, `cycleA` (README §3); the pattern of `ws1_first_other`.
 - **Success condition:** all four conjuncts by `decide`/`rfl`; `kA : TCar` (same field), no new type.
@@ -93,8 +98,9 @@ Define `kA` as an abstract "cycle object" `⟨cycleA, proof⟩` in a fresh type,
 
 **Proof architecture.** The witness `TCar`/`attendsT`/`reifyT`/`rankT`/`cycleA` is defined in `formal/P2S1/ws1.lean`
 (README §3). `ws1_cycle_reifies` and `ws1_composite_attention_finite` discharge by `decide`/`rfl` plus S0's
-`ws1_bound_is_finite_attention`. `kA : TCar` is a relatum of the same field: no new type, no atom. Injectivity
-of the section on its domain is `decide`. The base case (`ws1_first_other`) is cited in prose (C3).
+`ws1_bound_is_finite_attention`. `kA : TCar` is a relatum of the same field: no new type, no atom. The
+distinctness of the three composites (distinct cycles reify to distinct relata) is `decide`. The base case
+(`ws1_first_other`) is cited in prose (C3).
 
 ## Outcome classes (per charter §5)
 
@@ -105,8 +111,8 @@ of the section on its domain is `decide`. The base case (`ws1_first_other`) is c
   Disconnected, WS2-WS5 not built. The obstruction (which pattern fails to section) is recorded in
   `charter-status.md`.
 - **Strip test.** Delete "cycle", "tick", "composite", "moment" from `ws1_cycle_reifies` and it reads: *"a
-  finite pattern `cycleA` has a section `reifyT` with `attendsT (reifyT cycleA) = cycleA`, and `reifyT` is
-  injective on its domain"* - a bare `FinReify`/section fact. From `ws1_composite_attention_finite`: *"the
+  finite pattern `cycleA` has a section `reifyT` with `attendsT (reifyT cycleA) = cycleA`, and distinct
+  patterns reify to distinct values"* - a bare `FinReify`/section fact. From `ws1_composite_attention_finite`: *"the
   out-neighborhoods are finite (`< ℵ₀`), and `attendsT kA = cycleA`"* - a bound-and-set fact. No name is a term.
 
 ## Deliverable

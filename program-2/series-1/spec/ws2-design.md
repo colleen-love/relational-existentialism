@@ -21,28 +21,32 @@ load-bearing, exactly the PR1-S2 fix `ws2_attention_makes_real` carries.
 
 ## Candidates
 
-### C1, the residue is free at the cycle level (the subtractivity payoff)
+### C1, the residue is free, and the composite genuinely has inspections (the subtractivity payoff, an HONEST bare conjunction)
 
-The composite's self-inspection has a diagonal residue no hold realises - the transcribed diagonal
-(`ws2_residue_free`) applied to the tick's relating, with the composite's holds inhabited so the residue is a
-genuine content over `kA`.
+The residue of any inspection of the tick's relating is non-recoverable - the transcribed Cantor/Lawvere
+diagonal (`ws2_residue_free`), which holds for EVERY coalgebra and EVERY inspection with no hypotheses. AND the
+composite `kA` genuinely has holds (it attends `p0`), so the free residue is a content of a relatum with real
+inspections, not a claim over an empty inspection space.
 
 ```lean
 theorem ws2_composite_residue {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ)
     (insp : Hold (outDest hinf attendsT) → HoldPred (outDest hinf attendsT)) :
-    (¬ ResidueRecoverable insp)                          -- the residue is non-recoverable (subtractive)
-  ∧ (∃ h : Hold (outDest hinf attendsT), h.1.1 = kA)     -- kA has a genuine hold: the residue is over the tick
+    (¬ ResidueRecoverable insp)                          -- the residue is non-recoverable (the diagonal)
+  ∧ (∃ h : Hold (outDest hinf attendsT), h.1.1 = kA)     -- kA genuinely has inspections (non-vacuity)
 ```
-The first conjunct is `ws2_residue_free (outDest hinf attendsT) insp` (S0's diagonal). The second exhibits a
-hold based at `kA` (`kA` attends `p0`, so `⟨(kA, p0), _⟩ : Hold`), so the free residue is a content of the
-composite's own inspection, not a vacuous global fact. The conjuncts interact: the residue is free FOR the
-inspections of a relatum that genuinely has holds.
+**This is an HONEST BARE CONJUNCTION (C1-S4 repair).** The two conjuncts do NOT interact: conjunct 1 is
+`ws2_residue_free (outDest hinf attendsT) insp`, the global diagonal (any coalgebra, any inspection, no
+hypotheses, `kA` not mentioned); conjunct 2 is the bare membership `p0 ∈ attendsT kA`. The subtractivity payoff
+IS the transcribed diagonal (exactly as P1's `ws2_residue_free` / S0's inherited residue carry it, and as P1
+itself discloses the same shape honestly in `ws2_attention_subtractive`: "a bare conjunction, the two conjuncts
+do not interact"). The second conjunct is a non-vacuity witness (the composite has real holds), NOT an
+interaction claim. The design does not claim the residue is "scoped to `kA`."
 
-- **Ambient:** `ws2_residue_free`, `Hold`, `attendsT kA = {p0,p1}` (WS1).
+- **Ambient:** `ws2_residue_free`, `Hold`, `p0 ∈ attendsT kA` (WS1).
 - **Success condition:** `ws2_residue_free` discharges conjunct 1 for every `insp`; the hold witness by the
   membership `p0 ∈ attendsT kA` (`decide`).
-- **Failure mode:** *the residue does not touch the composite* (a vacuous global diagonal). Foreclosed by the
-  hold witness at `kA`. **Winner.**
+- **Failure mode:** *mis-disclosing the conjunction as interacting (C1-S4).* Foreclosed by the honest labelling
+  above. The subtractivity is the diagonal, not a scoped residue. **Winner (subtractivity, honestly labelled).**
 
 ### C2, the composite is REAL FOR a named finite attention (the reader payoff, audit (c))
 
@@ -100,7 +104,7 @@ theorem ws2_tick_irreversible_bad : ∀ n, stepCounter (tickAt (n+1)) > stepCoun
 
 | Cand | Claims | Ambient | Paper-decidable? | Verdict |
 |---|---|---|---|---|
-| C1 | residue free at `kA` | `ws2_residue_free`, hold at `kA` | yes | **win (subtractivity)** |
+| C1 | residue free (global diagonal) + hold at `kA` (honest bare conjunction) | `ws2_residue_free`, hold at `kA` | yes | **win (subtractivity)** |
 | C2 | `kA` real for a named reader | `ws1_atomless_bisim`, `RealFor`, `rankLift` | yes (S0 pattern) | **win (audit c)** |
 | C3 | tick non-invertible = `¬ Recoverable` | `ws2_distinction_free` pattern | yes | **win (arrow)** |
 | C4 | step-counter monotone | `Nat` counter | yes | **reject (smuggled clock)** |

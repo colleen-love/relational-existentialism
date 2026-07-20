@@ -9,7 +9,7 @@ self-contained (the S0 `ws5` pattern). No motivating prose enters a proof term (
 
 ## The object at stake
 
-The charter's WS5 (§2, §5): the verdict is computed - twoZone (all payoffs), endogenous / timeIsImport (the
+The charter's WS5 (§2, §5): the verdict is computed - twoZone (all payoffs), endogenous / causalImport (the
 WS4 alternatives), partial, disconnected - and the audit checks (a)-(e) are propositions, not prose. The
 verdict must DISCRIMINATE (a different flag pattern computes a different outcome) so it is falsifiable, and the
 flags must be EARNED by theorems, not chosen.
@@ -18,8 +18,12 @@ flags must be EARNED by theorems, not chosen.
 
 ### C1, the verdict function computed from five flags (the lead)
 
+The charter's pre-registered outcome "TIME-IS-IMPORT" (the causal order itself proves non-recoverable) is named
+`causalImport` in Lean (C1-S5 repair: no identifier embeds a forbidden content-name such as `time`); the mapping
+is recorded here and in README §7.
+
 ```lean
-inductive Outcome | twoZone | endogenous | timeIsImport | partial' | disconnected
+inductive Outcome | twoZone | endogenous | causalImport | partial' | disconnected
   deriving DecidableEq
 
 def verdict (wf arrow exo causEndo linImport : Bool) : Outcome :=
@@ -27,7 +31,7 @@ def verdict (wf arrow exo causEndo linImport : Bool) : Outcome :=
   else if !(arrow && exo) then Outcome.partial'          -- WS2/WS3 land only per-instance
   else if causEndo && linImport then Outcome.twoZone     -- the expected fork
   else if causEndo && !linImport then Outcome.endogenous -- linearization forced too
-  else Outcome.timeIsImport                              -- causal order non-recoverable
+  else Outcome.causalImport                              -- causal order non-recoverable
 
 theorem ws5_verdict_eq : verdict true true true true true = Outcome.twoZone := rfl
 ```
@@ -39,14 +43,14 @@ theorem ws5_verdict_eq : verdict true true true true true = Outcome.twoZone := r
 
 ```lean
 theorem ws5_verdict_not_endogenous  : verdict true true true true true ≠ Outcome.endogenous := by decide
-theorem ws5_verdict_not_import      : verdict true true true true true ≠ Outcome.timeIsImport := by decide
+theorem ws5_verdict_not_import      : verdict true true true true true ≠ Outcome.causalImport := by decide
 theorem ws5_verdict_not_partial     : verdict true true true true true ≠ Outcome.partial' := by decide
 theorem ws5_verdict_discriminates :
     verdict true true true true false = Outcome.endogenous          -- had linearization fallen forced
-  ∧ verdict true true true false true = Outcome.timeIsImport        -- had the causal order fallen import
+  ∧ verdict true true true false true = Outcome.causalImport        -- had the causal order fallen import
   ∧ verdict false true true true true = Outcome.disconnected := by decide
 ```
-The verdict is not constant: flipping `linImport` yields endogenous, flipping `causEndo` yields timeIsImport,
+The verdict is not constant: flipping `linImport` yields endogenous, flipping `causEndo` yields causalImport,
 flipping `wf` yields disconnected. The two-zone verdict is a genuine computed discrimination, not a tautology.
 
 - **Failure mode:** *a constant verdict* (any flags give twoZone). Foreclosed by `ws5_verdict_discriminates`.
@@ -61,20 +65,25 @@ theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
         RealFor (rankLift (outDest hinf attendsT) rankT) att kA)                   -- arrow (WS2)
   ∧ (∀ {Q : Type} (f : Bool → Q), f true ≠ f false →
         ¬ ∃ R, IsBisimL (impLift hinf f) R ∧ R true false)                         -- exo   (WS3)
-  ∧ (causal kA kC ∧ ¬ causal kA kB ∧ ¬ causal kB kA)                               -- causEndo (WS4 arm 1)
+  ∧ ((causal kA kC ∧ causal kB kC)                                                 -- causEndo (WS4 arm 1,
+      ∧ (∀ t u, causal t u → rankT t < rankT u)                                    --  the FULL headline,
+      ∧ (¬ causal kA kB ∧ ¬ causal kB kA))                                         --  rank clause included)
   ∧ (∀ ord : TCar → ℕ, ord kA ≠ ord kB →
         ¬ Recoverable (rankLift (outDest hinf attendsT) ord))                      -- linImport (WS4 arm 2)
 ```
-Each conjunct is the headline of its workstream (`ws1_cycle_reifies`, `ws2_composite_real_for`,
-`ws3_stream_exogenous`, `ws4_causal_order_endogenous`, `ws4_linearization_import`), so the verdict's five `true`
-inputs are theorems, not choices.
+The `causEndo` conjunct is the FULL `ws4_causal_order_endogenous` headline, rank-constraint clause included
+(C1-S3 repair: no weakened substitute, no narrowing). The `wf`, `exo`, and `linImport` conjuncts are the
+LOAD-BEARING halves of their headlines (the section conjunct of `ws1_cycle_reifies`; the non-recoverability
+conjunct of `ws3_stream_exogenous` / `ws4_linearization_import`), each an individually-provable theorem
+(C1-S7: stated as halves, not overclaimed as whole headlines). The verdict's five `true` inputs are theorems,
+not choices.
 
 - **Failure mode:** *a flag asserted, not proved.* Foreclosed: each conjunct is a built theorem. **Winner.**
 
 ### C4, the five audit clauses as propositions (a)-(e)
 
 ```lean
-theorem ws5_audit_no_smuggled_clock {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :          -- (a)
+theorem ws5_audit_no_smuggled_index {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :          -- (a)
     ∀ ord : TCar → ℕ, ord kA ≠ ord kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ord)
 theorem ws5_audit_stream_exogenous {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :           -- (b)
     ¬ Recoverable (impLift hinf (id : Bool → Bool))
@@ -115,7 +124,7 @@ the process: on the built theorems it is twoZone, computed, not premised.
 ## Outcome classes (per charter §5)
 
 - **twoZone (computed here):** all five flags earned.
-- The alternatives (endogenous, timeIsImport, partial', disconnected) are pre-registered in `verdict` and
+- The alternatives (endogenous, causalImport, partial', disconnected) are pre-registered in `verdict` and
   reachable by `ws5_verdict_discriminates`; whichever the build earns is reported.
 - **Strip test.** `verdict` names outcomes, not terms; `ws5_flags_justified` strips to the five workstream facts
   (reification section, `RealFor`, import separation, causal membership, `ord`-lift non-recoverability). No name

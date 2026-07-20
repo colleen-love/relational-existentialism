@@ -23,10 +23,12 @@ empty). The order relation must carry a structural constraint, not be decided by
 
 ## The witnessed pairs (audit (d) non-vacuity, fixed first)
 
-On `TCar` (README §3): the ticks are the composites `kA` (cycle A), `kB` (cycle B), `kC = reifyT {kA,kB}`.
-- **Causal pair (non-empty):** `kA ∈ attendsT kC` and `kB ∈ attendsT kC` - `kC` consumes both (`decide`).
-- **Concurrent pair (non-empty):** `kA ≠ kB`, `kA ∉ attendsT kB`, `kB ∉ attendsT kA` - neither consumes the
-  other (`decide`).
+On `TCar` (README §3): the ticks (`isTick`) are the composites `kA` (cycle A), `kB` (cycle B), `kC = reifyT
+{kA,kB}`.
+- **Causal pair (non-empty):** `causal kA kC` and `causal kB kC` - `kC` (a tick) consumes both `kA`,`kB` (a
+  tick each), `kA,kB ∈ attendsT kC` (`decide`).
+- **Concurrent pair (non-empty):** `kA ≠ kB`, `¬ causal kA kB`, `¬ causal kB kA` - neither consumes the other
+  (`decide`).
 Both on `TCar`. The concurrency is genuinely non-empty and the causal order is genuinely partial (not total:
 `kA`,`kB` are incomparable), foreclosing PR1-S1.
 
@@ -39,14 +41,21 @@ causal pair, is a genuine strict order (rank-constrained: consuming a product ra
 concurrent pair incomparable.
 
 ```lean
-def causal (t u : TCar) : Prop := t ∈ attendsT u          -- u's closure consumes t (endogenous, off attendsT)
+def isTick (x : TCar) : Prop := x = kA ∨ x = kB ∨ x = kC   -- the produced relata (ticks/closures)
+def causal (t u : TCar) : Prop := isTick t ∧ isTick u ∧ t ∈ attendsT u   -- u (a tick) consumes t (a produced tick)
 
 theorem ws4_causal_order_endogenous :
-    causal kA kC ∧ causal kB kC                            -- the causal pair is witnessed (non-empty)
+    (causal kA kC ∧ causal kB kC)                          -- the causal pair is witnessed (non-empty)
   ∧ (∀ t u : TCar, causal t u → rankT t < rankT u)         -- structurally constrained: consuming raises rank
   ∧ (¬ causal kA kB ∧ ¬ causal kB kA)                      -- the concurrent pair is incomparable (partial, not total)
 ```
-The order is ENDOGENOUS: `causal` is defined from `attendsT`, the plain relating, with no exogenous label. It
+**The causal order is BETWEEN ticks, not within them (C1-S1/S2 repair).** `causal` is the "which tick consumes
+which tick's product" relation on the produced relata (`isTick`), NOT bare `attendsT`-membership over the whole
+carrier: the base 2-cycle edges (`p1 ∈ attendsT p0`, equal rank 0) are WITHIN-tick relating and are correctly
+NOT causal edges. The only tick-to-tick consumption edges are `kA, kB ∈ attendsT kC`, so `causal t u → rankT t
+< rankT u` holds (`decide`) - the between-tick order is acyclic (a DAG), rank-constrained, and genuinely partial
+(the concurrent pair `kA`,`kB` is incomparable). The order is ENDOGENOUS: `causal` is defined from `attendsT`
+and `isTick`, the plain relating, with no exogenous label. It
 is forced (recoverable): reading `attendsT` determines it. The rank constraint (`decide`, using that composites
 outrank their constituents) is the structural constraint audit (d) demands - the order is not total by
 construction (the concurrent pair refutes totality).
@@ -142,8 +151,9 @@ and `linImport = true` for WS5. **Dependencies:** WS1's witness, `ws1_tcar_SHNE`
 - **TIME-IS-IMPORT (pre-registered, first-class):** if the causal order proves NON-recoverable (`causEndo`
   refuted), reported TIME-IS-IMPORT - Program 2 would need a second import for time itself. Foreclosed here by
   C1 (`causal` is `attendsT`-membership, manifestly recoverable), but pre-registered.
-- **Strip test.** `ws4_causal_order_endogenous` strips to *"`kA ∈ attendsT kC`, `kB ∈ attendsT kC`, membership
-  implies strict rank increase, and `kA`,`kB` are `attendsT`-incomparable"* - a bare membership/rank fact.
+- **Strip test.** `ws4_causal_order_endogenous` strips to *"`causal kA kC`, `causal kB kC` (both a conjunction
+  of `isTick` flags and `attendsT`-membership), `causal` implies strict rank increase, and `kA`,`kB` are
+  `causal`-incomparable"* - a bare membership/rank fact.
   `ws4_linearization_import` strips to *"for every `ord` with `ord kA ≠ ord kB`, the `ord`-lift over
   `outDest attendsT` is plain-bisimilar on `kA`,`kB` yet label-separated, hence not `Recoverable`"* - a bare
   import fact. Both survive deletion of "clock", "time", "before", "after", "order"; no name is a term.
