@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition:** Series 2.1 (with its Charter Extension 1) must have landed before Phase B begins.
+- **Phase:** B complete (design committed as one batch: `spec/README.md`, `spec/ws1`–`ws5-design.md`). C (design review) next. **Precondition met:** Series 2.1 (TWO-ZONE after Extension 1) has landed.
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The **Series 2.1 ground** (`P2S1`, the tick, TWO-ZONE after Extension 1) is built and registered, reaching the **Series 2.0 ground** (`P2S0`, GROUND-ESTABLISHED) and the **P1 foundation** transitively.
 - **Axiom state:** the imported layers (P2S1, P2S0, P1) are axiom-clean on the standard three. Series build N/A.
@@ -72,3 +72,4 @@ Series 2.2 adds none and closes none.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series 2.2 established as the OTHER: upgrade Series 2.0's first other into a genuine second attending locus, prove self and other genuinely two reader-wise, type the four readings (asymmetric and partial), and at the knot test whether mutual reading collapses, totalizes, or leaves a residue. The coherence of the two readings is deferred to Series 2.3. Scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build — once Series 2.1 has landed.
+- **2026-07-20 — Phase B.** Design committed as one batch: `spec/README.md` (the shared `Fin 3` witness `RCar` = self `slf` / other `oth` / higher reader `bnd`, the imports, the discipline, the outcomes) and `spec/ws1`–`ws5-design.md`. The construction: the other `oth = reifyR {slf,oth}` is the reified shared-field pattern upgraded to a locus reading back (WS1); genuinely two reader-wise via a NAMED `FiniteAttention` (`RealFor`, not `Many`) and `¬ Recoverable` (WS2); the four readings typed, the facing asymmetric (the reading-direction `¬ Recoverable`, `faceLift`) and partial (the diagonal) (WS3); the mutual residue the JOINT attention subtracting the bisimilar `bnd` (load-bearing on mutuality, not the bare diagonal), NOT COLLAPSE and NOT TOTALIZED discharged, the coherence never decided (WS4); the verdict COMPUTED `twoFacing` and discriminating (WS5). Next: Phase C, generate `spec/blind-seed-C.md` and delegate a blind design review.
