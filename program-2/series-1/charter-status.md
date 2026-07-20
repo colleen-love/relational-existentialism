@@ -8,24 +8,35 @@
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started.
+- **Phase:** A complete (charter committed). B (design) not started. **Precondition MET:** the Series 2.0 ground has landed.
 - **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The **P1 foundation** (`program-2/formal/P1`) is built and
-  registered in `lake/` (`P1`, `P1.AxiomCheck`).
-- **Axiom state:** foundation clean — every headline carrier theorem on the standard three (`propext` /
-  `Classical.choice` / `Quot.sound`); `ws_witness_rank_noninjective` on `propext` / `Quot.sound`. Series build N/A.
-- **Gate state:** green (`scripts/gate.sh` passes; the `P1` library imports only `P1.*` + Mathlib).
+- **Build state:** no series `formal/` sources yet. The **Series 2.0 ground** (`P2S0`) is BUILT — verdict
+  GROUND-ESTABLISHED (resting on `ws1_first_other` after Charter Extension 1), sorry-free, axiom-clean,
+  gate-green — and registered in `lake/` alongside the **P1 foundation** (`P1`). S1's Phase B may begin.
+- **Axiom state:** S0 and the P1 foundation clean on the standard three (`ws1_first_other` included; S0's
+  `ws5_verdict_*` axiom-free). Series build N/A.
+- **Gate state:** green. S1's `formal/` will import `P2S0` only (gate `(P2S0|P2S1)`), reaching the P1 prior art
+  transitively through S0.
 - **Open SERIOUS findings:** none (no review has run).
 
-## 1. The carrier — the P1 foundation (built and verified)
+## 1. The carrier — the Series 2.0 ground (S1 imports S0)
 
-**S1 now stands on the Series 2.0 ground** (`program-2/series-0`, relating is finite attending), which supplies the carrier and imports the Program 1 prior art below. S1's Phase B may only begin once S0 has landed. The pieces below are the ultimate (P1) source of that machinery.
+**S1 stands on the Series 2.0 ground** (`program-2/series-0`, namespace `P2S0`): relating is finite attending.
+S1 imports `P2S0` (Program 2's layered chain); the Program 1 prior art is reached transitively through S0, not
+imported directly. S0's OWN API is the carrier S1 builds on — not P1's `PkObj κ` / `FiniteAttention`:
 
-The carrier is consolidated in the **P1 foundation** at `program-2/formal/P1`, built green (sorry-free,
-axiom-clean on the standard three; `P1.AxiomCheck`). At Phase E the series builds on it: **Program 2 permits
-importing** (`import P1`, using `P1.Core.*` / `P1.Reader.*` directly — sound because the foundation is
-axiom-checked), or transcribing into `P2S1` where a workstream wants to restate at its own strength. See §5
-for the discipline decision. Source map:
+| S0 carrier piece | Where |
+|---|---|
+| `attends : X → Finset X`, `sym`, `knows`, `attendedBy`; coalgebra views `outDest` / `symDest` | `P2S0.ws1` |
+| Reification (finite functor): `FinReify`, `reifyU`, `finReifyStep`, `finTowerN`, `ws1_finreify_injective` | `P2S0.ws1` |
+| The first other (the tick's base case): `ws1_first_other`; the tower separation `rankLift` | `P2S0.ws1` |
+| Finite bound, no cardinal ceiling: `ws1_bound_is_finite_attention` | `P2S0.ws1` |
+| Inherited collapse (baseline): `ws2_collapse_inherited` | `P2S0.ws2` |
+| Knowing lift, direction non-recoverable: `knowLiftD`, `ws3_direction_not_recoverable` | `P2S0.ws3` |
+| The seated exogenous import: `impLift`, `ws4_import_breaks_baseline`, `ws4_import_quantified` | `P2S0.ws4` |
+
+Beneath S0, reached transitively, is the Program 1 prior art (the deep machinery S0 draws on: the collapse
+engine, the diagonal, the recoverability test, the reader). Source map of that P1 layer:
 
 | Carrier piece | Location |
 |---|---|
