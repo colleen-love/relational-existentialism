@@ -2,22 +2,27 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress. At program close it is the honest account of where Series 2.1 landed against its own charter.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Series COMPLETE, incl. Charter Extension 1 (WS2 arrow directional, WS2 residue load-bearing, WS3 stream
+tick-specific on `TCar`; all (Fixed)). Verdict: TWO-ZONE (computed by `ws5_verdict_eq`, by `rfl`), now resting
+on the strengthened arrow/stream flags. Build sorry-free, axiom-clean, gate-green, names-clean. All five success
+criteria met; all audit clauses (a)-(e) VERIFIED. `summary.md` / `summary-technical.md` written.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition MET:** the Series 2.0 ground has landed.
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The **Series 2.0 ground** (`P2S0`) is BUILT — verdict
-  GROUND-ESTABLISHED (resting on `ws1_first_other` after Charter Extension 1), sorry-free, axiom-clean,
-  gate-green — and registered in `lake/` alongside the **P1 foundation** (`P1`). S1's Phase B may begin.
-- **Axiom state:** S0 and the P1 foundation clean on the standard three (`ws1_first_other` included; S0's
-  `ws5_verdict_*` axiom-free). Series build N/A.
-- **Gate state:** green. S1's `formal/` will import `P2S0` only (gate `(P2S0|P2S1)`), reaching the P1 prior art
-  transitively through S0.
-- **Open SERIOUS findings:** none (no review has run).
+- **Phase:** COMPLETE. Phase C CLOSED (pass 2: zero SERIOUS/REAL); Phase E build green; Phase F CLOSED (zero
+  SERIOUS/REAL). **Precondition MET:** the Series 2.0 ground has landed.
+- **Verdict:** TWO-ZONE (computed, `ws5_verdict_eq : verdict true true true true true = Outcome.twoZone`, `rfl`).
+- **Build state:** `program-2/series-1/formal/P2S1` BUILT — `lake build P2S1 P2S1.AxiomCheck` green, sorry-free,
+  axiom-clean, gate-green, names-grep clean (prose only). Registered in `lake/lakefile.toml` (P2S1 lib +
+  `defaultTargets`) and `scripts/gate.sh` (`check program-2/series-1`). Built on the **Series 2.0 ground**
+  (`P2S0`, itself GROUND-ESTABLISHED) and the **P1 foundation** reached transitively.
+- **Axiom state:** every `P2S1` headline rests on the standard three only; `ws5_verdict_eq` /
+  `ws5_verdict_discriminates` / `ws5_audit_names_not_terms` axiom-free; `ws4_causal_order_endogenous` /
+  `ws5_audit_fork_genuine` on `[propext, Quot.sound]`.
+- **Gate state:** green. `P2S1` imports `P2S0` + its own `P2S1.*` roots + Mathlib only (P1 transitive).
+- **Open SERIOUS findings:** none. Phase C pass 2 returned zero SERIOUS/REAL. Phase F pending.
 
 ## 1. The carrier — the Series 2.0 ground (S1 imports S0)
 
@@ -61,31 +66,86 @@ into `P2S1` is a Phase F check.
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_cycle_reifies`, `ws1_composite_attention_finite` | OPEN | — |
-| WS2 | `ws2_composite_residue`, `ws2_composite_real_for`, `ws2_tick_irreversible` | OPEN | — |
-| WS3 | `ws3_stream_exogenous`, `ws3_tick_needs_stream` | OPEN | — |
-| WS4 | `ws4_causal_order_endogenous`, `ws4_linearization_import` | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, audit clauses a–e) | OPEN | — |
+| WS1 | `ws1_cycle_reifies`, `ws1_composite_attention_finite` | BUILT | discharged on `TCar` (`decide`/`rfl` + `ws1_bound_is_finite_attention`) |
+| WS2 | `ws2_composite_distinguishes`, `ws2_composite_residue`, `ws2_composite_real_for`, `ws2_tick_irreversible` | BUILT | collapse engine + rank separation; `ws2_residue_free`; named `FiniteAttention`; `¬ Recoverable` |
+| WS3 | `ws3_stream_exogenous`, `ws3_tick_needs_stream` | BUILT | reused S0 `impLift` / `ws4_import_breaks_baseline` / `ws4_import_quantified` at the choice-point |
+| WS4 | `ws4_causal_order_endogenous`, `ws4_linearization_import`, `ws4_two_zone` | BUILT | causal = `isTick`-restricted `attendsT`-membership (endogenous, rank-constrained, partial); `ord`-lift import quantified |
+| WS5 | `verdict`, `ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit (a)-(e) | BUILT | verdict computed = TWO-ZONE; flags earned; audit propositions |
+
+Theorem names are as built (WS1 provisional target `ws1_cycle_reifies` kept; WS2 adds the shared engine
+`ws2_composite_distinguishes`). Audit clause verification is Phase F.
 
 Theorem names are the charter's provisional targets; the Phase B designs fix the exact signatures, and any rename is recorded here with its reason (never to record progress, only to fix a design error).
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
-- (a) NO SMUGGLED CLOCK — strip test over every temporal fact. UNVERIFIED.
-- (b) THE STREAM IS EXOGENOUS — `ws3_stream_exogenous` a proof term. UNVERIFIED.
-- (c) THE READER IS LOAD-BEARING — `ws2_composite_real_for` names a genuine attention. UNVERIFIED.
-- (d) THE FORK IS GENUINE — both WS4 arms witnessed, order structurally constrained, concurrent pair non-empty. UNVERIFIED.
-- (e) NAMES-NOT-TERMS — grep clean of the forbidden content-names. UNVERIFIED.
+Built at Phase E; blind-confirmed at Phase F (zero SERIOUS). All five VERIFIED.
+
+- (a) NO SMUGGLED CLOCK — `ws5_audit_no_smuggled_index`; the strip test passes on every temporal fact; no `Nat`
+  step counter; `rankT kA = rankT kB` so rank cannot order the concurrent pair. VERIFIED (Phase F).
+- (b) THE STREAM IS EXOGENOUS — `ws5_audit_stream_exogenous` / `ws3_stream_exogenous`, `¬ Recoverable` proof
+  terms. VERIFIED (Phase F).
+- (c) THE READER IS LOAD-BEARING — `ws5_audit_reader_loadbearing` / `ws2_composite_real_for` names a genuine
+  `FiniteAttention`, `att.reads` used; no `Many`. VERIFIED (Phase F).
+- (d) THE FORK IS GENUINE — `ws5_audit_fork_genuine`: concurrent pair (`kA ≠ kB`, incomparable) and causal pair
+  (`causal kA kC`) witnessed on `TCar`, order rank-constrained. VERIFIED (Phase F).
+- (e) NAMES-NOT-TERMS — the §6 grep is clean of forbidden content-names (identifiers; prose-only hits).
+  VERIFIED (Phase F).
 
 ## 4. Findings ledger (recurrence guard, protocol section 0.2a)
 
 Empty. Findings from Phase C (design review) and Phase F (code review) are recorded here with stable IDs, grades (SERIOUS / REAL / COSMETIC), and closure (Fixed: original target built, name it; or Relabeled: obstruction recorded, payoff demoted to a pre-registered outcome). A finding closed by a target-avoiding theorem is re-graded SERIOUS and marked RECURRING with its count.
 
-No Series 2.1 design/code findings yet (Phase C/F not run). One out-of-band verification recorded:
+One out-of-band verification (FND-1) and the Phase C design-review pass (C1) recorded.
 
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
 | FND-1 | Foundation | COSMETIC | Delegated transcription audit of `program-2/formal/P1`: 0 SERIOUS, 0 REAL. Fidelity confirmed (body byte-identical to Series 12 WS1/WS2 modulo the intended renames), build green + axiom-clean, guardrails accurate (S1 absent, S2 fix present and reader-load-bearing, `Many` demoted). One forward-note: `gate.sh` does not yet cover future `program-2/series-NN/formal/` trees. | Handled — the Phase E registration recipe adds the per-series `check program-2/series-1 …` line when the series formal lands. Fidelity + guardrail claims independently spot-checked (diffs, greps). |
+| C1-S1 | C (design) | SERIOUS | `ws4_causal_order_endogenous`: `causal t u := t ∈ attendsT u` is unrestricted, so the base 2-cycles (`p1 ∈ attendsT p0`, equal rank 0) make `∀ t u, causal t u → rankT t < rankT u` FALSE (0<0). The rank-constrained-partial-order arm (audit (d)) is unprovable as stated. | **Fixed (Phase D).** `causal` restricted to produced relata (ticks): `causal t u := isTick t ∧ isTick u ∧ t ∈ attendsT u`, `isTick x := x = kA ∨ x = kB ∨ x = kC`. The only tick→tick consumption edges are `kA,kB ∈ attendsT kC`, so `causal t u → rankT t < rankT u` holds (`decide`); the base cycles are WITHIN-tick relating, not between-tick causal order. The specified target (a rank-constrained, genuinely partial causal order) is built; `ws4_causal_order_endogenous` compiles. |
+| C1-S2 | C (design) | SERIOUS | `ws5_audit_fork_genuine`: same false `∀ t u, causal t u → rankT t < rankT u` conjunct; audit (d) "order structurally constrained" not dischargeable. | **Fixed (Phase D).** Same `causal` restriction; the audit theorem compiles with the rank constraint true. |
+| C1-S3 | C (design) | REAL | `ws5_flags_justified` `causEndo` conjunct was a weakened substitute (omitting the rank clause) for the then-false named headline; undisclosed narrowing. | **Fixed (Phase D).** With C1-S1 fixed the headline `ws4_causal_order_endogenous` is true INCLUDING the rank constraint; `ws5_flags_justified` now carries the full headline (rank clause included), no narrowing. |
+| C1-S4 | C (design) | REAL | `ws2_composite_residue` presented `(¬ ResidueRecoverable insp) ∧ (∃ hold at kA)` as INTERACTING, but conjunct 1 is the global diagonal `ws2_residue_free` (any coalgebra, any inspection, no hypotheses) and conjunct 2 a bare membership; they do not interact (same shape P1 discloses honestly as `ws2_attention_subtractive`). | **Fixed (Phase D).** Relabeled honestly as a bare conjunction: the transcribed global diagonal (the composite's relating carries the free residue) AND a witnessed hold at `kA` (the composite genuinely has inspections, non-vacuity). Docstring + `ws2-design.md` corrected to not claim interaction. Not a narrowing: the subtractivity payoff is the diagonal, as in P1/S0. |
+| C1-S5 | C (design) | COSMETIC | `Outcome.timeIsImport` embeds the forbidden content-name `time` (evades `\btime\b` only by camelCase). | **Fixed (Phase D).** Renamed `Outcome.timeIsImport → Outcome.causalImport` (the causal order itself proves an import); README §7 / `ws5-design.md` mapping to the charter's TIME-IS-IMPORT outcome noted in prose. No forbidden name in any identifier. |
+| C1-S6 | C (design) | COSMETIC | `ws1_cycle_reifies`'s `Function.Injective reifyTOn` under-specified (`reifyTOn` domain unshown; on full `reifyT` injectivity is false). | **Fixed (Phase D).** Replaced with the explicit distinctness triple `reifyT cycleA ≠ reifyT cycleB ∧ … ≠ reifyT {kA,kB} ∧ …` (distinct cycles reify to distinct composites, `decide`); no restricted function. `ws1-design.md` updated. |
+| C1-S7 | C (design) | COSMETIC | `ws5_flags_justified` prose "each conjunct is the headline" overclaimed; `wf`/`exo`/`linImport` are the load-bearing HALVES of their headlines. | **Fixed (Phase D).** Prose softened in `ws5-design.md`: the flags are the load-bearing halves (the non-recoverability / section conjuncts); `causEndo` carries the full headline. |
+| C1-S8 | C (design) | COSMETIC | `ws5_audit_names_not_terms : True` is a placeholder, not a formalized proposition. | Acceptable, disclosed. Audit (e) is a NAMES property, certified by the §6 mechanical grep, not a Lean proposition; the `True` placeholder is retained as in the design. |
+| D1-S1 | C pass 2 (design) | COSMETIC | `ws4_two_zone` arm 1 was a lighter slice (`causal kA kC ∧ ¬causal kA kB ∧ ¬causal kB kA`) than the prose "witnessed, partial, endogenous order" (omitting `causal kB kC` and the rank clause). Not on the verdict path (WS5 `causEndo` uses the full `ws5_flags_justified` headline). | **Fixed (pre-Phase-F).** `ws4_two_zone` arm 1 is now exactly `ws4_causal_order_endogenous` (full headline, rank clause included); rebuilt green. |
+| D1-S2 | C pass 2 (design) | ACCEPTABLE | `ws5_audit_names_not_terms : True` — `True`-bodied audit theorem, no proof content. | Same as C1-S8: disclosed placeholder for the mechanical §6 grep. No change. |
+| D1-S3 | C pass 2 (design) | ACCEPTABLE | `ws5_flags_justified` `wf`/`exo`/`linImport` are the load-bearing halves of their headlines (not full), correctly disclosed. | No defect; disclosed (C1-S7). `arrow` and `causEndo` are full headlines. No change. |
+
+**Phase C is CLOSED: pass 2 returned zero SERIOUS and zero REAL findings** (three COSMETIC/ACCEPTABLE, all
+handled above). The C/D loop terminates per protocol §2 Phase D.
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| F1-S1 | F (code) | COSMETIC | `ws2_composite_residue` docstring said the free residue is "a content of the composite's own inspection, not a vacuous global fact" - mild rhetoric; the residue-freeness IS the global diagonal, the `kA`-hold an independent non-vacuity witness. The Lean statement is honest (correctly a bare conjunction, not falsely scoped to `kA`). | **Handled (Phase G).** Docstring rewritten to state the honest bare conjunction explicitly (global diagonal + non-vacuity hold witness), no "not a vacuous global fact" rhetoric. No proof change (the theorem was already correct). |
+| F2-S1 | F (code) | ACCEPTABLE | `ws5_audit_names_not_terms : True` is the disclosed placeholder for the mechanical §6 grep, not a proposition. | Acceptable, disclosed (= C1-S8 / D1-S2). Audit (e) is certified by the grep, which the reviewer ran clean. No change. |
+
+**Phase F is CLOSED: zero SERIOUS, zero REAL** (two COSMETIC/ACCEPTABLE, handled above). The reviewer
+independently ran the build, the axiom check, and the greps and confirmed every headline proves its stated
+proposition. The F/G loop terminates; no code repair beyond the F1 docstring was needed.
+
+### Charter Extension 1 re-run (WS2, WS3, WS5; WS1/WS4 untouched)
+
+An independent post-exit review (`charter-extension.md`) re-grades three disclosed items to **REAL** and RAISES
+the bar (strengthens only, honest under §0.2a). The re-run runs the affected workstreams through B/C/D/E/F/G.
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| EXT-F1 | Ext review (WS3) | REAL | `ws3_stream_exogenous` was S0's generic `impLift` on `Bool`, disconnected from the actual tick machinery on `TCar`; the tick's choice-point was prose, not a proved tie. | **(Fixed)** — rebuilt on `TCar` (R2): the stream is the exogenous choice label `ch : TCar → ℕ` among the concurrent closures `kA`,`kB`, non-recoverable via the collapse engine on `outDest attendsT`, quantified, never named. `ws3_stream_exogenous` / `ws3_tick_needs_stream` now live on the real carrier. |
+| EXT-F2 | Ext review (WS2) | REAL | `ws2_tick_irreversible` proved `¬ Recoverable` (non-recoverability / distinction-freeness), NOT directional irreversibility; the arrow was carried by prose over a non-recoverability fact. | **(Fixed)** — rebuilt directional (R1): `∀ x ∈ attendsT kA, rankT x < rankT kA` (the composite strictly outranks its components, acyclic), with `¬ Recoverable` retained as the companion import. WS5's `arrow` flag re-pointed to the directional theorem. |
+| EXT-F3 | Ext review (WS2) | REAL | `ws2_composite_residue` was an honest bare conjunction (global diagonal + non-vacuity witness); the composite's partial attention did no work. | **(Fixed)** — rebuilt load-bearing (R3): `∃ y, (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA y) ∧ y ∉ attendsT kA` (attention ⊊ relating: `kA` is behaviorally identified with `kC` yet does not attend it), so the finite attention genuinely subtracts. |
+
+Closures confirmed BUILT at Ext Phase E and blind-reviewed at Ext Phase F:
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| EF1-S1 | Ext F (code) | COSMETIC | `ws2_composite_residue`: the bisimulation `R kA kC` is the universal both-SHNE collapse relation (`hneRel`), so `kA` is behaviorally identified with every SHNE node, not `kC` uniquely. | Acceptable, not a defect. This IS the Series-07 collapse content and is what makes the residue load-bearing (finite attention `{p0,p1}` ⊊ the relating that identifies `kA` with `kC`, which it does not attend). Both conjuncts reference the same `y`/`kA` — genuinely "attention ⊊ relating", not the disavowed bare conjunction. No change. |
+
+**Ext Phase F is CLOSED: zero SERIOUS, zero REAL** (one COSMETIC, acceptable). The reviewer independently reran
+the build, axiom check, and greps and confirmed all three strengthened obligations (EXT-F1/F2/F3) and the WS5
+re-points prove their stated propositions, WS1/WS4 genuinely unchanged. **All three EXT findings close (Fixed).**
+The verdict still computes TWO-ZONE, now resting on the directional arrow (R1) and the tick-specific stream (R2).
 
 ## 5. Deviations from charter (disclosed)
 
@@ -96,6 +156,18 @@ P1 prior art is reached transitively through S0, not imported directly, so all P
 mediated by S0's finite-attention ground. Sound because every layer is built and axiom-checked before the next
 imports it. It changes the *provenance* of the carrier, not any target; not a target narrowing. Importing
 outside the chain remains forbidden (gate-enforced).
+
+**Scope decision (2026-07-20, Phase B): GRAIN deferred to a later series.** The grain fork
+(`spec/grain-exploration.md`) is the clock knot's twin (resolution endogenous where the tower sees it, an import
+where it does not). Phase B (`ws4-design.md` C5) DEFERS it: carrying a second fork on the same WS4 structure
+risks overloading the clock knot and diluting its non-vacuity. Not a target narrowing (grain was never a charter
+target; charter §7 lists it as a "WS4-enrichment or later-series candidate"). The exploration stands for 2.x.
+
+**Scope decision (2026-07-20, Phase B): the STREAM is S0's `impLift`, located at the tick's choice-point.** WS3
+reuses S0's proven import machinery (`impLift` / `ws4_import_breaks_baseline` / `ws4_import_quantified`) rather
+than reconstructing a fresh stream, per charter §3 ("the stream generalizing S0's `impLift` into time"). The two
+available closures `kA`/`kB` are the choice, encoded as `Bool`. Provenance disclosure, not a target narrowing:
+the exogeneity and load-bearing obligations are proved, not assumed.
 
 Otherwise none yet. Any narrowing of a target between charter and design, or between design and build, is
 disclosed here at the moment it happens; an undisclosed narrowing is the PR1-S2 defect and is prohibited.
@@ -115,3 +187,34 @@ Series 2.1 adds none and closes none of these.
 - **2026-07-20 — Foundation.** The P1 foundation (`program-2/formal/P1`: `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim) transcribed, registered in `lake/lakefile.toml` + `scripts/gate.sh`, built green (sorry-free, axiom-clean). Guardrails documented in `P1.lean` (PR1-S1 machinery excluded; `RealFor` not `Many`, PR1-S2). Grain preorder explored on paper (`spec/grain-exploration.md`) ahead of Phase B.
 - **2026-07-20 — Import permitted.** Program 2 relaxes Program 1's transcribe-only discipline: a series may `import P1`. Recorded in §5; banner/protocol/charter updated.
 - **2026-07-20 — Foundation audit (FND-1).** Delegated transcription review returned 0 SERIOUS / 0 REAL / 1 COSMETIC (see §4); fidelity and guardrails independently spot-checked and confirmed. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase B (design).** `spec/README.md` (shared carrier, the `Fin 7` witness `TCar`, discipline,
+  outcomes) and `spec/ws1-design.md`…`ws5-design.md` written against the real `P2S0` API and committed as one
+  batch before any `formal/` file exists (Phase B gate). Winning constructions: WS1 the cycle reified pointwise
+  into `kA` (generalizing `ws1_first_other`); WS2 the residue free + `RealFor` named reader + `¬ Recoverable`
+  arrow; WS3 the stream = S0 `impLift` at the choice-point; WS4 causal order = `attendsT`-membership (endogenous,
+  rank-constrained, partial), linearization = exogenous `ord`-lift (import, quantified), grain deferred; WS5 the
+  verdict computed to twoZone. Scope decisions (grain deferred, stream = `impLift`) disclosed in §5. Next: Phase C
+  blind design review.
+- **2026-07-20 — Phase C (design review).** Pass 1: blind reviewer returned one SERIOUS root defect (C1-S1/S2,
+  the unrestricted causal order breaking the rank constraint on the base cycles), two REAL, five COSMETIC.
+  Phase D repaired all (see §4). Pass 2 (fresh blind seed): zero SERIOUS, zero REAL, three COSMETIC/ACCEPTABLE
+  (D1-S1 fixed, D1-S2/S3 acceptable). **C/D loop CLOSED.**
+- **2026-07-20 — Phase E (code).** `formal/P2S1` built (WS1-WS5 + aggregator + AxiomCheck) on the `TCar` witness.
+  `lake build P2S1 P2S1.AxiomCheck` green; sorry-free; axiom-clean (standard three; `ws5_verdict_*` axiom-free);
+  gate-green; names-grep clean (prose only). Registered in `lakefile.toml` + `gate.sh`. Verdict computed:
+  TWO-ZONE (`ws5_verdict_eq`, `rfl`). Next: Phase F blind code review.
+- **2026-07-20 — Phase F (code review).** Blind reviewer (pointed at the built `formal/P2S1` sources) returned
+  zero SERIOUS / zero REAL, two COSMETIC/ACCEPTABLE (F1 residue docstring rhetoric, handled; F2 audit-(e)
+  placeholder, disclosed). Reviewer independently reran the build, axiom check, and greps and confirmed every
+  headline proves its stated proposition. **F/G loop CLOSED** with only the F1 docstring softening.
+- **2026-07-20 — Exit.** All exit criteria (protocol §7) met: Phase F zero SERIOUS; build sorry-free,
+  axiom-clean (standard three), gate-green; names grep clean; the verdict computes TWO-ZONE and
+  `charter-status.md` records it; every SERIOUS finding (C1-S1, C1-S2) closed **Fixed**. `summary.md` and
+  `summary-technical.md` written. **Series 2.1 COMPLETE — verdict TWO-ZONE.**
+- **2026-07-20 — Charter Extension 1 (re-run B/E/F).** Independent post-exit review re-graded three disclosed
+  items to REAL and RAISED the bar (strengthens only, §0.2a). Re-opened WS2, WS3, WS5 (WS1/WS4 untouched):
+  the arrow rebuilt DIRECTIONAL (`∀ x ∈ attendsT kA, rankT x < rankT kA`, R1); the stream rebuilt TICK-SPECIFIC
+  on `TCar` (`ch : TCar → ℕ` picking among `kA`,`kB`, R2); the residue rebuilt LOAD-BEARING (attention ⊊
+  relating, R3). Rebuilt green (all §6 checks pass; verdict still TWO-ZONE, resting on the strengthened flags).
+  Blind code review (Ext Phase F): zero SERIOUS/REAL, one COSMETIC (acceptable). **EXT-F1/F2/F3 all close
+  (Fixed).** **Series 2.1 + Extension 1 COMPLETE — verdict TWO-ZONE, on strengthened foundations.**
