@@ -78,4 +78,11 @@ never named (audit (e)). This is the import boundary: the causal order recoverab
   constraint on the base cycles), two REAL, five COSMETIC. Repaired in Phase D (causal restricted to ticks; the
   residue conjunction relabelled honestly; the `timeIsImport`/`no_smuggled_clock` identifiers renamed). Pass 2
   returned zero SERIOUS.
-- Phase F (code): see `charter-status.md` §4 for the ledger and closures.
+- Phase F (code), blind review of the built sources: zero SERIOUS, zero REAL (two COSMETIC/ACCEPTABLE - the
+  residue docstring rhetoric, softened; the audit-(e) `True` placeholder, disclosed). The reviewer independently
+  reran the build, the axiom check, and the greps and confirmed every headline proves its stated proposition.
+  The F/G loop closed with only a docstring change. See `charter-status.md` §4 for the full ledger and closures.
+
+Every SERIOUS finding in the run (C1-S1, C1-S2, both the unrestricted-causal-order defect) closed **Fixed** (the
+specified rank-constrained partial causal order was built), never Relabeled. The verdict is the residue of the
+process, computed honestly with the fork left open: TWO-ZONE.

@@ -2,15 +2,16 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress. At program close it is the honest account of where Series 2.1 landed against its own charter.**
 
-*Current phase: E complete (build green, all checks pass; C/D loop closed at pass 2). Current verdict: TWO-ZONE
-(computed by `ws5_verdict_eq`, by `rfl`). Phase F (blind code review) next.*
+*Series COMPLETE. Phase F closed (zero SERIOUS). Verdict: TWO-ZONE (computed by `ws5_verdict_eq`, by `rfl`).
+Build sorry-free, axiom-clean, gate-green, names-clean. All five success criteria met; all audit clauses (a)-(e)
+VERIFIED. `summary.md` / `summary-technical.md` written.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** E complete (build green). Phase C CLOSED (pass 2: zero SERIOUS/REAL). Phase F (blind code review)
-  next. **Precondition MET:** the Series 2.0 ground has landed.
+- **Phase:** COMPLETE. Phase C CLOSED (pass 2: zero SERIOUS/REAL); Phase E build green; Phase F CLOSED (zero
+  SERIOUS/REAL). **Precondition MET:** the Series 2.0 ground has landed.
 - **Verdict:** TWO-ZONE (computed, `ws5_verdict_eq : verdict true true true true true = Outcome.twoZone`, `rfl`).
 - **Build state:** `program-2/series-1/formal/P2S1` BUILT — `lake build P2S1 P2S1.AxiomCheck` green, sorry-free,
   axiom-clean, gate-green, names-grep clean (prose only). Registered in `lake/lakefile.toml` (P2S1 lib +
@@ -77,19 +78,18 @@ Theorem names are the charter's provisional targets; the Phase B designs fix the
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
-Built and self-checked at Phase E; blind confirmation at Phase F (status below is BUILT-SUPPORTED, → VERIFIED
-after a clean Phase F).
+Built at Phase E; blind-confirmed at Phase F (zero SERIOUS). All five VERIFIED.
 
 - (a) NO SMUGGLED CLOCK — `ws5_audit_no_smuggled_index`; the strip test passes on every temporal fact; no `Nat`
-  step counter; `rankT kA = rankT kB` so rank cannot order the concurrent pair. BUILT-SUPPORTED.
+  step counter; `rankT kA = rankT kB` so rank cannot order the concurrent pair. VERIFIED (Phase F).
 - (b) THE STREAM IS EXOGENOUS — `ws5_audit_stream_exogenous` / `ws3_stream_exogenous`, `¬ Recoverable` proof
-  terms. BUILT-SUPPORTED.
+  terms. VERIFIED (Phase F).
 - (c) THE READER IS LOAD-BEARING — `ws5_audit_reader_loadbearing` / `ws2_composite_real_for` names a genuine
-  `FiniteAttention`, `att.reads` used; no `Many`. BUILT-SUPPORTED.
+  `FiniteAttention`, `att.reads` used; no `Many`. VERIFIED (Phase F).
 - (d) THE FORK IS GENUINE — `ws5_audit_fork_genuine`: concurrent pair (`kA ≠ kB`, incomparable) and causal pair
-  (`causal kA kC`) witnessed on `TCar`, order rank-constrained. BUILT-SUPPORTED.
+  (`causal kA kC`) witnessed on `TCar`, order rank-constrained. VERIFIED (Phase F).
 - (e) NAMES-NOT-TERMS — the §6 grep is clean of forbidden content-names (identifiers; prose-only hits).
-  BUILT-SUPPORTED.
+  VERIFIED (Phase F).
 
 ## 4. Findings ledger (recurrence guard, protocol section 0.2a)
 
@@ -114,6 +114,15 @@ One out-of-band verification (FND-1) and the Phase C design-review pass (C1) rec
 
 **Phase C is CLOSED: pass 2 returned zero SERIOUS and zero REAL findings** (three COSMETIC/ACCEPTABLE, all
 handled above). The C/D loop terminates per protocol §2 Phase D.
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| F1-S1 | F (code) | COSMETIC | `ws2_composite_residue` docstring said the free residue is "a content of the composite's own inspection, not a vacuous global fact" - mild rhetoric; the residue-freeness IS the global diagonal, the `kA`-hold an independent non-vacuity witness. The Lean statement is honest (correctly a bare conjunction, not falsely scoped to `kA`). | **Handled (Phase G).** Docstring rewritten to state the honest bare conjunction explicitly (global diagonal + non-vacuity hold witness), no "not a vacuous global fact" rhetoric. No proof change (the theorem was already correct). |
+| F2-S1 | F (code) | ACCEPTABLE | `ws5_audit_names_not_terms : True` is the disclosed placeholder for the mechanical §6 grep, not a proposition. | Acceptable, disclosed (= C1-S8 / D1-S2). Audit (e) is certified by the grep, which the reviewer ran clean. No change. |
+
+**Phase F is CLOSED: zero SERIOUS, zero REAL** (two COSMETIC/ACCEPTABLE, handled above). The reviewer
+independently ran the build, the axiom check, and the greps and confirmed every headline proves its stated
+proposition. The F/G loop terminates; no code repair beyond the F1 docstring was needed.
 
 ## 5. Deviations from charter (disclosed)
 
@@ -171,3 +180,11 @@ Series 2.1 adds none and closes none of these.
   `lake build P2S1 P2S1.AxiomCheck` green; sorry-free; axiom-clean (standard three; `ws5_verdict_*` axiom-free);
   gate-green; names-grep clean (prose only). Registered in `lakefile.toml` + `gate.sh`. Verdict computed:
   TWO-ZONE (`ws5_verdict_eq`, `rfl`). Next: Phase F blind code review.
+- **2026-07-20 — Phase F (code review).** Blind reviewer (pointed at the built `formal/P2S1` sources) returned
+  zero SERIOUS / zero REAL, two COSMETIC/ACCEPTABLE (F1 residue docstring rhetoric, handled; F2 audit-(e)
+  placeholder, disclosed). Reviewer independently reran the build, axiom check, and greps and confirmed every
+  headline proves its stated proposition. **F/G loop CLOSED** with only the F1 docstring softening.
+- **2026-07-20 — Exit.** All exit criteria (protocol §7) met: Phase F zero SERIOUS; build sorry-free,
+  axiom-clean (standard three), gate-green; names grep clean; the verdict computes TWO-ZONE and
+  `charter-status.md` records it; every SERIOUS finding (C1-S1, C1-S2) closed **Fixed**. `summary.md` and
+  `summary-technical.md` written. **Series 2.1 COMPLETE — verdict TWO-ZONE.**

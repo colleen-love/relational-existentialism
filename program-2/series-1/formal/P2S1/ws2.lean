@@ -48,10 +48,12 @@ theorem ws2_composite_distinguishes (hinf : ℵ₀ ≤ κ) :
     have : rankT kA = rankT p0 := congrArg ULift.down hfst
     exact absurd this (by decide)
 
-/-- **THE COMPOSITE CARRIES A FREE RESIDUE (subtractivity, WS2).** The diagonal residue of any inspection of
-the composite's relating is non-recoverable (`ws2_residue_free`, the transcribed diagonal), and `kA` has a
-genuine hold (it attends `p0`), so the free residue is a content of the composite's own inspection, not a
-vacuous global fact. Partial attention is subtractive: the closure loses what the residue holds. -/
+/-- **THE COMPOSITE CARRIES A FREE RESIDUE (subtractivity, WS2).** An HONEST BARE CONJUNCTION (the two conjuncts
+do not interact, as P1 discloses for `ws2_attention_subtractive`): (1) the diagonal residue of any inspection is
+non-recoverable - the GLOBAL diagonal `ws2_residue_free`, holding for every coalgebra and inspection, `kA` not
+mentioned; (2) `kA` genuinely has a hold (it attends `p0`), a non-vacuity witness that the composite is a
+relatum with real inspections. The subtractivity payoff IS the transcribed diagonal; conjunct (2) is not an
+interaction claim. Partial attention is subtractive: the closure's relating carries the free residue. -/
 theorem ws2_composite_residue (hinf : ℵ₀ ≤ κ)
     (insp : Hold (outDest hinf attendsT) → HoldPred (outDest hinf attendsT)) :
     (¬ ResidueRecoverable insp) ∧ (∃ h : Hold (outDest hinf attendsT), h.1.1 = kA) := by
