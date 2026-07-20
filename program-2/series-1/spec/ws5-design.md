@@ -61,22 +61,21 @@ flipping `wf` yields disconnected. The two-zone verdict is a genuine computed di
 ```lean
 theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     (attendsT (reifyT cycleA) = cycleA)                                            -- wf   (WS1)
-  ∧ (∃ att : FiniteAttention (rankLift (outDest hinf attendsT) rankT),
-        RealFor (rankLift (outDest hinf attendsT) rankT) att kA)                   -- arrow (WS2)
-  ∧ (∀ {Q : Type} (f : Bool → Q), f true ≠ f false →
-        ¬ ∃ R, IsBisimL (impLift hinf f) R ∧ R true false)                         -- exo   (WS3)
+  ∧ (∀ x ∈ attendsT kA, rankT x < rankT kA)                                        -- arrow (WS2, DIRECTIONAL, Ext-1 R1)
+  ∧ (∀ ch : TCar → ℕ, ch kA ≠ ch kB →
+        ¬ Recoverable (rankLift (outDest hinf attendsT) ch))                       -- exo   (WS3, tick-specific, Ext-1 R2)
   ∧ ((causal kA kC ∧ causal kB kC)                                                 -- causEndo (WS4 arm 1,
       ∧ (∀ t u, causal t u → rankT t < rankT u)                                    --  the FULL headline,
       ∧ (¬ causal kA kB ∧ ¬ causal kB kA))                                         --  rank clause included)
   ∧ (∀ ord : TCar → ℕ, ord kA ≠ ord kB →
         ¬ Recoverable (rankLift (outDest hinf attendsT) ord))                      -- linImport (WS4 arm 2)
 ```
-The `causEndo` conjunct is the FULL `ws4_causal_order_endogenous` headline, rank-constraint clause included
-(C1-S3 repair: no weakened substitute, no narrowing). The `wf`, `exo`, and `linImport` conjuncts are the
-LOAD-BEARING halves of their headlines (the section conjunct of `ws1_cycle_reifies`; the non-recoverability
-conjunct of `ws3_stream_exogenous` / `ws4_linearization_import`), each an individually-provable theorem
-(C1-S7: stated as halves, not overclaimed as whole headlines). The verdict's five `true` inputs are theorems,
-not choices.
+**Charter Extension 1 re-points two flags.** The `arrow` flag is now R1's DIRECTIONAL theorem (`∀ x ∈ attendsT
+kA, rankT x < rankT kA`, the composite strictly outranks its components) — not the reader (which feeds audit (c))
+and not `¬ Recoverable`. The `exo` flag is now R2's TICK-SPECIFIC stream on `TCar` (`∀ ch, ch kA ≠ ch kB → ¬
+Recoverable (rankLift … ch)`) — not S0's generic `impLift`. The `causEndo` conjunct is the FULL
+`ws4_causal_order_endogenous` headline (untouched). `wf`, `exo`, `linImport` are the load-bearing halves of their
+headlines. The verdict's five `true` inputs are theorems, not choices.
 
 - **Failure mode:** *a flag asserted, not proved.* Foreclosed: each conjunct is a built theorem. **Winner.**
 
@@ -85,8 +84,8 @@ not choices.
 ```lean
 theorem ws5_audit_no_smuggled_index {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :          -- (a)
     ∀ ord : TCar → ℕ, ord kA ≠ ord kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ord)
-theorem ws5_audit_stream_exogenous {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :           -- (b)
-    ¬ Recoverable (impLift hinf (id : Bool → Bool))
+theorem ws5_audit_stream_exogenous {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :           -- (b, Ext-1 R2: on TCar)
+    ∀ ch : TCar → ℕ, ch kA ≠ ch kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ch)
 theorem ws5_audit_reader_loadbearing {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :         -- (c)
     ∃ att : FiniteAttention (rankLift (outDest hinf attendsT) rankT),
       RealFor (rankLift (outDest hinf attendsT) rankT) att kA

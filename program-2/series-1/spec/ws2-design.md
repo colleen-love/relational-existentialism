@@ -21,32 +21,31 @@ load-bearing, exactly the PR1-S2 fix `ws2_attention_makes_real` carries.
 
 ## Candidates
 
-### C1, the residue is free, and the composite genuinely has inspections (the subtractivity payoff, an HONEST bare conjunction)
+### C1, the composite's partial attention DRIVES a genuine loss (subtractivity — LOAD-BEARING, Charter Extension 1 R3)
 
-The residue of any inspection of the tick's relating is non-recoverable - the transcribed Cantor/Lawvere
-diagonal (`ws2_residue_free`), which holds for EVERY coalgebra and EVERY inspection with no hypotheses. AND the
-composite `kA` genuinely has holds (it attends `p0`), so the free residue is a content of a relatum with real
-inspections, not a claim over an empty inspection space.
+**Charter Extension 1 (EXT-F3, R3) raises the bar here.** The first build proved a bare conjunction of the
+global diagonal `ws2_residue_free` (which never mentions `kA`) with a non-vacuity hold witness — the composite's
+partial attention did no work. The rebuild makes the subtractivity LOAD-BEARING: the composite's FINITE
+attention is a PROPER PART of its relating — `kA` is behaviorally related (the collapse engine) to a relatum it
+does NOT attend, so the finite attention genuinely subtracts.
 
 ```lean
-theorem ws2_composite_residue {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ)
-    (insp : Hold (outDest hinf attendsT) → HoldPred (outDest hinf attendsT)) :
-    (¬ ResidueRecoverable insp)                          -- the residue is non-recoverable (the diagonal)
-  ∧ (∃ h : Hold (outDest hinf attendsT), h.1.1 = kA)     -- kA genuinely has inspections (non-vacuity)
+theorem ws2_composite_residue {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
+    ∃ y : TCar, (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA y) ∧ y ∉ attendsT kA
 ```
-**This is an HONEST BARE CONJUNCTION (C1-S4 repair).** The two conjuncts do NOT interact: conjunct 1 is
-`ws2_residue_free (outDest hinf attendsT) insp`, the global diagonal (any coalgebra, any inspection, no
-hypotheses, `kA` not mentioned); conjunct 2 is the bare membership `p0 ∈ attendsT kA`. The subtractivity payoff
-IS the transcribed diagonal (exactly as P1's `ws2_residue_free` / S0's inherited residue carry it, and as P1
-itself discloses the same shape honestly in `ws2_attention_subtractive`: "a bare conjunction, the two conjuncts
-do not interact"). The second conjunct is a non-vacuity witness (the composite has real holds), NOT an
-interaction claim. The design does not claim the residue is "scoped to `kA`."
+The composite `kA` relates behaviorally (plain-bisimilar, via `ws1_atomless_bisim`, both `SHNE`) to `kC`, yet
+`kC ∉ attendsT kA = {p0,p1}`: `kA`'s attention is strictly less than what it relates to. The witness is `y = kC`
+(`decide` for `kC ∉ attendsT kA`; the collapse engine for the bisimulation). The composite's partial attention
+IS the loss — it subtracts everything beyond `{p0,p1}`, including relata it is behaviorally identified with. The
+statement mentions `kA` essentially and the finite `attendsT kA` is what does the subtracting (audit: attention
+⊊ relating).
 
-- **Ambient:** `ws2_residue_free`, `Hold`, `p0 ∈ attendsT kA` (WS1).
-- **Success condition:** `ws2_residue_free` discharges conjunct 1 for every `insp`; the hold witness by the
-  membership `p0 ∈ attendsT kA` (`decide`).
-- **Failure mode:** *mis-disclosing the conjunction as interacting (C1-S4).* Foreclosed by the honest labelling
-  above. The subtractivity is the diagonal, not a scoped residue. **Winner (subtractivity, honestly labelled).**
+- **Ambient:** `ws1_atomless_bisim`, `ws1_tcar_SHNE`, `IsBisim`, `attendsT kA` (WS1).
+- **Success condition:** typechecks; `y = kC` witnesses attention ⊊ relating for `kA`.
+- **Failure mode (foreclosed by R3):** *a bare conjunction where the composite does no work (EXT-F3).* The
+  statement now ties the loss to `kA`'s finite attention essentially. **Pre-registered honest fallback:** if no
+  genuine tie were achievable, Relabel explicitly (the transcribed global diagonal, subtractivity in prose,
+  recorded (Relabel)) — but the tie IS achievable here (attention ⊊ relating), so it closes (Fixed). **Winner.**
 
 ### C2, the composite is REAL FOR a named finite attention (the reader payoff, audit (c))
 
@@ -75,22 +74,32 @@ pattern. `ws2_composite_real_for` packages it with the reader `⟨p0, {p0}, fini
 - **Failure mode:** *the reader quantified out (PR1-S2, SERIOUS).* Foreclosed: `RealFor` binds `att` and uses
   `att.reads`; `Many` is not used. **Winner (audit (c)).**
 
-### C3, the tick does not invert (the arrow, a theorem over the relating)
+### C3, the tick does not invert (the arrow — DIRECTIONAL, Charter Extension 1 R1)
 
-Because the closure raises the tower and the height is non-recoverable from the plain relating, no plain
-bisimulation runs the closure backward: the rank label separating `kA` from its base is not recoverable.
+**Charter Extension 1 (EXT-F2, R1) raises the bar here.** The first build proved `¬ Recoverable (rankLift …
+rankT)` — non-recoverability (the `ws2_distinction_free` pattern), which is a genuine import fact but NOT
+directional irreversibility. The rebuild makes the DIRECTIONAL content primary: reification strictly raises the
+tower height from a tick's components to the composite, so the closure does not run backward (the composite is
+not a predecessor of its own components; the tick relation is acyclic). The `¬ Recoverable` fact is retained as
+the COMPANION import (Series 07: a genuine distinction is non-recoverable).
 
 ```lean
 theorem ws2_tick_irreversible {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    ¬ Recoverable (rankLift (outDest hinf attendsT) rankT)
+    (∀ x ∈ attendsT kA, rankT x < rankT kA)                     -- DIRECTIONAL: composite strictly outranks its components (acyclic)
+  ∧ ¬ Recoverable (rankLift (outDest hinf attendsT) rankT)      -- COMPANION import: the arrow is non-recoverable
 ```
-Proved as `ws2_distinction_free`: from `ws2_composite_distinguishes` (a plain-bisimilar, label-separated pair),
-recoverability would make the plain bisimulation a label bisimulation, contradicting the separation. The arrow
-is a theorem, not a stipulation: the direction is the non-recoverability of the height the closure adds.
+Conjunct 1 (the arrow proper) is `decide`: `attendsT kA = {p0,p1}`, `rankT p0 = rankT p1 = 0 < 1 = rankT kA`,
+so every component ranks strictly below the composite — the closure raises the tower and cannot invert. The
+general acyclicity of the between-tick order is WS4's `causal t u → rankT t < rankT u` (untouched). Conjunct 2
+is the previous proof (`ws2_composite_distinguishes` + `ws4_recoverable_not_import`).
 
-- **Ambient:** `Recoverable`, `ws4_recoverable_not_import`, `ws2_composite_distinguishes`.
-- **Failure mode:** *irreversibility posited as a `Nat` order.* Foreclosed: the statement is `¬ Recoverable`, a
-  bare recoverability fact; the strip test passes. **Winner.**
+- **Ambient:** `attendsT kA`, `rankT` (WS1); `Recoverable`, `ws4_recoverable_not_import`,
+  `ws2_composite_distinguishes`.
+- **Success condition:** both conjuncts typecheck; WS5's arrow flag rests on conjunct 1 (the directional theorem),
+  not the reader and not `¬ Recoverable`.
+- **Failure mode (foreclosed by R1):** *the arrow carried by prose over a non-recoverability fact (EXT-F2).* The
+  directional statement is now the theorem; the strip test reads it as "every member of the finite pattern
+  `attendsT kA` has strictly smaller `rankT` than `reifyT` of it" — a bare rank-order fact. **Winner.**
 
 ### C4, irreversibility as a step-counter monotonicity (the smuggled clock)
 
@@ -104,30 +113,33 @@ theorem ws2_tick_irreversible_bad : ∀ n, stepCounter (tickAt (n+1)) > stepCoun
 
 | Cand | Claims | Ambient | Paper-decidable? | Verdict |
 |---|---|---|---|---|
-| C1 | residue free (global diagonal) + hold at `kA` (honest bare conjunction) | `ws2_residue_free`, hold at `kA` | yes | **win (subtractivity)** |
+| C1 | attention ⊊ relating: `kA` bisimilar to `kC ∉ attendsT kA` (LOAD-BEARING, Ext-1 R3) | `ws1_atomless_bisim`, `attendsT kA` | yes | **win (subtractivity)** |
 | C2 | `kA` real for a named reader | `ws1_atomless_bisim`, `RealFor`, `rankLift` | yes (S0 pattern) | **win (audit c)** |
-| C3 | tick non-invertible = `¬ Recoverable` | `ws2_distinction_free` pattern | yes | **win (arrow)** |
+| C3 | tick DIRECTIONAL: `∀ x ∈ attendsT kA, rankT x < rankT kA` ∧ `¬ Recoverable` companion (Ext-1 R1) | `attendsT kA`, `rankT`, `ws2_composite_distinguishes` | yes | **win (arrow)** |
 | C4 | step-counter monotone | `Nat` counter | yes | **reject (smuggled clock)** |
 
 ## Winning candidates: C1 + C2 + C3
 
 **Proof architecture.** `ws2_composite_distinguishes` is the shared engine (plain-bisim + rank-separation on
-`kA`,`p0`), reused by `ws2_composite_real_for` (wraps it in a reader) and `ws2_tick_irreversible` (derives
-non-recoverability). `ws2_composite_residue` applies the general diagonal to the tick's relating with a hold
-witnessed at `kA`. All three land the `arrow = true` flag for WS5. **Dependencies:** WS1's witness and
-`ws1_tcar_SHNE`, `plainOf_rankLiftT`, `rankLiftT_val`.
+`kA`,`p0`), reused by `ws2_composite_real_for` (wraps it in a reader) and by `ws2_tick_irreversible`'s companion
+`¬ Recoverable` conjunct. `ws2_tick_irreversible`'s directional conjunct (`∀ x ∈ attendsT kA, rankT x < rankT
+kA`) is `decide`. `ws2_composite_residue` (Ext-1 R3) witnesses attention ⊊ relating via the collapse engine
+(`kA` bisimilar to `kC ∉ attendsT kA`). The DIRECTIONAL `ws2_tick_irreversible` feeds the WS5 `arrow` flag (Ext-1
+R1); the reader (`ws2_composite_real_for`) feeds audit (c). **Dependencies:** WS1's witness and `ws1_tcar_SHNE`,
+`plainOf_rankLiftT`, `rankLiftT_val`.
 
 ## Outcome classes (per charter §5)
 
-- **Arrow proved (the WS2 payoff, feeds `arrow = true`):** residue free, composite real for a named reader,
-  tick non-invertible.
-- **Partial (pre-registered):** the residue is free but the reader goes inert (C2 collapses to `Many`), so the
-  novelty is real but not reader-relative; reported Partial, `arrow` demoted.
-- **Strip test.** `ws2_composite_residue` strips to *"the diagonal residue of an inspection of `outDest attendsT`
-  is non-recoverable, and `kA` has a hold"* (by `ws2_residue_free`). `ws2_composite_real_for` strips to *"there
-  is a finite attention for which `kA` is plain-bisimilar to `p0` yet label-separated"* (`RealFor`).
-  `ws2_tick_irreversible` strips to *"the rank lift over `outDest attendsT` is not `Recoverable`"*. All three
-  survive; no name is a term.
+- **Arrow proved (the WS2 payoff, feeds `arrow = true`):** the composite's attention subtracts (load-bearing
+  residue), it is real for a named reader (audit (c)), and the tick is DIRECTIONAL (strictly outranks its
+  components, acyclic).
+- **Partial (pre-registered):** the reader goes inert (C2 collapses to `Many`) or the subtractivity fails to tie
+  to `kA` (R3's Relabel fallback); reported Partial / Relabel, `arrow` demoted.
+- **Strip test.** `ws2_composite_residue` strips to *"`kA` is plain-bisimilar to some `y ∉ attendsT kA`"* — a
+  bare bisimulation/membership fact (attention ⊊ relating). `ws2_composite_real_for` strips to *"there is a
+  finite attention for which `kA` is plain-bisimilar to `p0` yet label-separated"* (`RealFor`).
+  `ws2_tick_irreversible` strips to *"every member of `attendsT kA` has strictly smaller `rankT` than `kA`, and
+  the rank lift is not `Recoverable`"* — a bare rank-order + import fact. All three survive; no name is a term.
 
 ## Deliverable
 

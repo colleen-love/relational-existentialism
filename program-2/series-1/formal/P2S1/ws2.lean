@@ -48,18 +48,17 @@ theorem ws2_composite_distinguishes (hinf : ℵ₀ ≤ κ) :
     have : rankT kA = rankT p0 := congrArg ULift.down hfst
     exact absurd this (by decide)
 
-/-- **THE COMPOSITE CARRIES A FREE RESIDUE (subtractivity, WS2).** An HONEST BARE CONJUNCTION (the two conjuncts
-do not interact, as P1 discloses for `ws2_attention_subtractive`): (1) the diagonal residue of any inspection is
-non-recoverable - the GLOBAL diagonal `ws2_residue_free`, holding for every coalgebra and inspection, `kA` not
-mentioned; (2) `kA` genuinely has a hold (it attends `p0`), a non-vacuity witness that the composite is a
-relatum with real inspections. The subtractivity payoff IS the transcribed diagonal; conjunct (2) is not an
-interaction claim. Partial attention is subtractive: the closure's relating carries the free residue. -/
-theorem ws2_composite_residue (hinf : ℵ₀ ≤ κ)
-    (insp : Hold (outDest hinf attendsT) → HoldPred (outDest hinf attendsT)) :
-    (¬ ResidueRecoverable insp) ∧ (∃ h : Hold (outDest hinf attendsT), h.1.1 = kA) := by
-  refine ⟨ws2_residue_free (outDest hinf attendsT) insp, ⟨(kA, p0), ?_⟩, rfl⟩
-  show p0 ∈ (↑(attendsT kA) : Set TCar)
-  exact Finset.mem_coe.mpr (by decide)
+/-- **THE COMPOSITE'S PARTIAL ATTENTION DRIVES A GENUINE LOSS (subtractivity, LOAD-BEARING; Charter Extension 1
+R3).** The composite's FINITE attention is a PROPER PART of its relating: `kA` is behaviorally identified (the
+collapse engine, `ws1_atomless_bisim`) with `kC`, a relatum it does NOT attend (`kC ∉ attendsT kA = {p0,p1}`).
+So the finite attention genuinely SUBTRACTS - it loses `kC` (and everything beyond its cycle) that the relating
+still identifies it with. The composite's partial attention does the work (attention ⊊ relating), not a bare
+conjunction of a global diagonal with a non-vacuity witness (the EXT-F3 repair). -/
+theorem ws2_composite_residue (hinf : ℵ₀ ≤ κ) :
+    ∃ y : TCar, (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA y) ∧ y ∉ attendsT kA := by
+  refine ⟨kC, ws1_atomless_bisim (outDest hinf attendsT) kA kC (ws1_tcar_SHNE hinf kA) (ws1_tcar_SHNE hinf kC),
+          ?_⟩
+  decide
 
 /-- **THE COMPOSITE IS REAL FOR A NAMED ATTENTION (audit (c), WS2).** There is a genuine `FiniteAttention` (a
 bounded reader: focus `p0`, reading `{p0}`, finite, grounded) FOR WHICH `kA` is real: `kA` is plain-bisimilar
@@ -74,11 +73,16 @@ theorem ws2_composite_real_for (hinf : ℵ₀ ≤ κ) :
   rw [Set.mem_singleton_iff] at hz; subst hz
   exact Relation.ReflTransGen.refl
 
-/-- **THE TICK DOES NOT INVERT (the arrow, WS2).** The reification height that separates `kA` from its base is
-NOT recoverable from the plain relating: no plain bisimulation runs the closure backward. The direction is a
-theorem (`¬ Recoverable`), not a stipulation and not a step counter. The `ws2_distinction_free` pattern. -/
+/-- **THE TICK DOES NOT INVERT (the arrow, DIRECTIONAL; Charter Extension 1 R1).** Reification strictly raises
+the tower height from a tick's components to the composite: every member of `kA`'s cycle ranks strictly below
+`kA` (`∀ x ∈ attendsT kA, rankT x < rankT kA`). So the closure does not run backward - the composite is not a
+predecessor of its own components; the tick relation is acyclic. This is the DIRECTIONAL arrow (the EXT-F2
+repair), not non-recoverability. The `¬ Recoverable` fact is RETAINED as the companion import (Series 07: a
+genuine distinction is non-recoverable). WS5's `arrow` flag rests on the directional conjunct. -/
 theorem ws2_tick_irreversible (hinf : ℵ₀ ≤ κ) :
-    ¬ Recoverable (rankLift (outDest hinf attendsT) rankT) := by
+    (∀ x ∈ attendsT kA, rankT x < rankT kA)
+  ∧ ¬ Recoverable (rankLift (outDest hinf attendsT) rankT) := by
+  refine ⟨by decide, ?_⟩
   intro hrec
   obtain ⟨hbisim, hsep⟩ := ws2_composite_distinguishes hinf
   exact hsep (ws4_recoverable_not_import (rankLift (outDest hinf attendsT) rankT) hrec _ _ hbisim)

@@ -124,6 +124,19 @@ handled above). The C/D loop terminates per protocol §2 Phase D.
 independently ran the build, the axiom check, and the greps and confirmed every headline proves its stated
 proposition. The F/G loop terminates; no code repair beyond the F1 docstring was needed.
 
+### Charter Extension 1 re-run (WS2, WS3, WS5; WS1/WS4 untouched)
+
+An independent post-exit review (`charter-extension.md`) re-grades three disclosed items to **REAL** and RAISES
+the bar (strengthens only, honest under §0.2a). The re-run runs the affected workstreams through B/C/D/E/F/G.
+
+| ID | Phase | Grade | Summary | Closure |
+|----|-------|-------|---------|---------|
+| EXT-F1 | Ext review (WS3) | REAL | `ws3_stream_exogenous` was S0's generic `impLift` on `Bool`, disconnected from the actual tick machinery on `TCar`; the tick's choice-point was prose, not a proved tie. | **(Fixed)** — rebuilt on `TCar` (R2): the stream is the exogenous choice label `ch : TCar → ℕ` among the concurrent closures `kA`,`kB`, non-recoverable via the collapse engine on `outDest attendsT`, quantified, never named. `ws3_stream_exogenous` / `ws3_tick_needs_stream` now live on the real carrier. |
+| EXT-F2 | Ext review (WS2) | REAL | `ws2_tick_irreversible` proved `¬ Recoverable` (non-recoverability / distinction-freeness), NOT directional irreversibility; the arrow was carried by prose over a non-recoverability fact. | **(Fixed)** — rebuilt directional (R1): `∀ x ∈ attendsT kA, rankT x < rankT kA` (the composite strictly outranks its components, acyclic), with `¬ Recoverable` retained as the companion import. WS5's `arrow` flag re-pointed to the directional theorem. |
+| EXT-F3 | Ext review (WS2) | REAL | `ws2_composite_residue` was an honest bare conjunction (global diagonal + non-vacuity witness); the composite's partial attention did no work. | **(Fixed)** — rebuilt load-bearing (R3): `∃ y, (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA y) ∧ y ∉ attendsT kA` (attention ⊊ relating: `kA` is behaviorally identified with `kC` yet does not attend it), so the finite attention genuinely subtracts. |
+
+Closures confirmed BUILT at Ext Phase E and blind-reviewed at Ext Phase F (below).
+
 ## 5. Deviations from charter (disclosed)
 
 **Discipline decision (2026-07-20): layered import chain.** Program 1 held a transcribe-only discipline (each

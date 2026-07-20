@@ -20,46 +20,51 @@ definable function of the relating, hence recoverable, hence the deterministic-r
 
 ## Candidates
 
-### C1, the choice-point as S0's exogenous import, quantified (the lead)
+### C1, the stream is a TICK-SPECIFIC choice label on `TCar` (Charter Extension 1 R2, the lead)
 
-The witness carries two concurrent available closures, `kA` (cycle A) and `kB` (cycle B), plain-bisimilar
-(neither is forced by the relating). Which one the tick closes is an exogenous label: model the two options as
-`Bool` and the stream as `impLift`. The choice is non-recoverable, quantified over ALL import value-spaces and
-functions, none named.
+**Charter Extension 1 (EXT-F1, R2) raises the bar here.** The first build reused S0's generic `impLift` on
+`Bool` — exogeneity genuine but disconnected from the actual tick machinery (`kA`/`kB`/`attendsT` on `TCar`).
+The rebuild puts the stream's choice ON the real carrier: the choice among the concurrent available closures
+`kA`, `kB` is an exogenous label `ch : TCar → ℕ` distinguishing them, non-recoverable, proved via the collapse
+engine on `outDest attendsT`, quantified over all such labels, never named. (This is the WS4-linearization
+pattern reused for the choice; WS4 itself is untouched.)
 
 ```lean
 theorem ws3_stream_exogenous {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    ∀ {Q : Type} (f : Bool → Q), f true ≠ f false →
-        (∃ R, IsBisim (plainOf (impLift hinf f)) R ∧ R true false)   -- the options are plain-identified
-      ∧ (¬ ∃ R, IsBisimL (impLift hinf f) R ∧ R true false)          -- the choice is NOT plain-recoverable
+    ∀ ch : TCar → ℕ, ch kA ≠ ch kB →
+        AttentionDistinguishes (rankLift (outDest hinf attendsT) ch) kA kB   -- plain-identified, choice-separated
+      ∧ (¬ Recoverable (rankLift (outDest hinf attendsT) ch))                -- the choice is NOT recoverable
 ```
-This is exactly `ws4_import_breaks_baseline hinf f hf` (S0), reused: the plain relating identifies the two
-available closures, the exogenous choice separates them. `Bool` encodes {close-A, close-B}. No proof term names
-which closes; `f` is quantified.
+The two concurrent closures `kA`, `kB` are plain-bisimilar on the real carrier (`ws1_atomless_bisim` on
+`outDest attendsT`, both `SHNE` from WS1) — the relating does not force which closes. The exogenous choice label
+`ch` separates them (the edge argument, `ch kA ≠ ch kB`), and no choice is recoverable (Series 07). `ch` is the
+picker among concurrent closures, quantified, never named. **This is the tick's actual choice-point on `TCar`,
+not a generic `Bool`.**
 
-- **Ambient:** `impLift`, `ws4_import_breaks_baseline` (S0).
-- **Success condition:** the reuse typechecks; `∀ Q f` quantification holds (audit (e)).
-- **Failure mode:** *the choice recoverable (charter §4.c, SERIOUS).* Foreclosed: the second conjunct is
-  `¬ ∃ label-bisim`, S0's proven separation. **Winner.**
+- **Ambient:** `ws1_atomless_bisim`, `rankLift`, `AttentionDistinguishes`, `Recoverable`, `plainOf_rankLiftT`,
+  `ws1_tcar_SHNE`, `rankLiftT_val` (WS1) — no S0 `impLift`.
+- **Success condition:** typechecks `∀ ch`; both conjuncts on `TCar`. The stream lives at the tick (EXT-F1 fixed).
+- **Failure mode (foreclosed by R2):** *the stream generic, disconnected from the tick (EXT-F1)* — now on the
+  real carrier; *the choice recoverable (§4.c)* — foreclosed, `¬ Recoverable` proved. **Winner.**
 
-### C2, the choice is load-bearing: without it, the One (the obligation)
+### C2, the choice is load-bearing: without it, the closures are one (Charter Extension 1 R2)
 
-If the tick required no choice, the plain relating would already determine the closure, and by the collapse the
-two options are behaviorally identified - a genuine determinate tick REQUIRES the exogenous entry.
+If the tick required no choice, the plain relating on `TCar` would already determine which closure fires; but
+`kA`, `kB` are plain-identified there (the collapse engine), so the choice is genuinely indeterminate without
+the stream.
 
 ```lean
 theorem ws3_tick_needs_stream {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    (∃ R, IsBisim (plainOf (impLift hinf (id : Bool → Bool))) R ∧ R true false)  -- plain: the options are one
-  ∧ (¬ Recoverable (impLift hinf (id : Bool → Bool)))                            -- so the choice is an import
+    (∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA kB)                       -- the closures are plain-identified on TCar
+  ∧ (∀ ch : TCar → ℕ, ch kA ≠ ch kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ch))  -- so any choice is an import
 ```
-The first conjunct: the plain projection identifies the options (the collapse - without the import they are the
-One). The second: the identity import (the canonical non-choice, not a content-name) is non-recoverable, so the
-choice is genuinely load-bearing rather than cosmetic. This is `ws4_import_quantified.2` plus the plain-bisim
-witness. Together: the stream's entry is what makes the tick determinate, an obligation not an assumption.
+The first conjunct: `kA`, `kB` are plain-bisimilar on the real carrier (`ws1_atomless_bisim`), so the relating
+alone does not determine the closure. The second: every exogenous choice label is non-recoverable, so the
+stream's entry is load-bearing rather than cosmetic. On `TCar`, not `Bool` (EXT-F1 fixed).
 
-- **Ambient:** `ws4_import_quantified`, `plainOf_impLift_true_bisim` (S0).
-- **Failure mode:** *the choice cosmetic* (the tick determinate without the stream). Foreclosed: the plain
-  identification shows the relating alone does not determine the closure. **Winner.**
+- **Ambient:** `ws1_atomless_bisim`, `ws1_tcar_SHNE`, `rankLift`, `Recoverable` (WS1).
+- **Failure mode:** *the choice cosmetic.* Foreclosed: the plain identification on `TCar` shows the relating
+  does not determine the closure. **Winner.**
 
 ### C3, name the stream's selection (the forbidden fill)
 
@@ -82,32 +87,34 @@ def choice (x : Bool) : Bool := decide (x ∈ attendsSomething)   -- recovered f
 
 | Cand | Claims | Ambient | Paper-decidable? | Verdict |
 |---|---|---|---|---|
-| C1 | choice exogenous, quantified | `ws4_import_breaks_baseline` | yes (S0 reuse) | **win (exogeneity)** |
-| C2 | choice load-bearing, else One | `ws4_import_quantified` | yes | **win (obligation)** |
+| C1 | choice exogenous on `TCar`, quantified over `ch : TCar → ℕ` (Ext-1 R2) | `ws1_atomless_bisim`, `rankLift` | yes | **win (exogeneity)** |
+| C2 | choice load-bearing on `TCar` (closures plain-identified) (Ext-1 R2) | `ws1_atomless_bisim` | yes | **win (obligation)** |
 | C3 | name the selection | — | selects a tick | **reject (audit e, SERIOUS)** |
 | C4 | choice definable from field | — | recoverable | **reject (§4.c, SERIOUS)** |
 
-## Winning candidates: C1 + C2
+## Winning candidates: C1 + C2 (Charter Extension 1 R2 — on `TCar`)
 
-**Proof architecture.** Both reuse S0's proven `impLift` machinery, located at the tick's choice-point (the two
-concurrent available closures `kA`/`kB`, encoded as `Bool`). `ws3_stream_exogenous` = `ws4_import_breaks_baseline`
-quantified over all `Q`, `f`; `ws3_tick_needs_stream` = the plain identification plus `ws4_import_quantified.2`
-non-recoverability. Together they land `exo = true` for WS5. The stream is quantified, never named (audit (e));
-the reuse is disclosed in `charter-status.md` §5 (the stream is S0's import, generalized to succession).
+**Proof architecture.** Both live on the real carrier `TCar` (Ext-1 R2), reusing the WS4-linearization pattern
+(WS4 untouched): the choice among the concurrent closures `kA`,`kB` is an exogenous label `ch : TCar → ℕ`.
+`ws3_stream_exogenous` proves, for every `ch` distinguishing them, that they are plain-bisimilar
+(`ws1_atomless_bisim` on `outDest attendsT`) yet choice-separated (the edge argument), hence `¬ Recoverable`.
+`ws3_tick_needs_stream` gives the plain identification of `kA`,`kB` on `TCar` plus the quantified
+non-recoverability. Together they land `exo = true` for WS5, now genuinely at the tick. The stream is quantified,
+never named (audit (e)); it stays non-recoverable (a recoverable stream would collapse the dynamics, Series 07).
 
 ## Outcome classes (per charter §5)
 
-- **Exogenous and load-bearing (the WS3 payoff, feeds `exo = true`):** both theorems typecheck; the choice
-  non-recoverable and quantified.
-- **Partial (pre-registered):** the choice is exogenous but not shown load-bearing (C2 fails), so exogeneity is
-  real but the tick's dependence on it is not; reported Partial, `exo` demoted.
-- **Strip test.** `ws3_stream_exogenous` strips to *"for all `Q`, `f` with `f true ≠ f false`, `impLift f` is
-  plain-bisimilar yet label-separated on `true`,`false`"* - a bare import fact. `ws3_tick_needs_stream` strips
-  to *"the plain projection of `impLift id` identifies `true`,`false`, and `impLift id` is not `Recoverable`"*.
-  No name is a term; the stream is `impLift`, quantified.
+- **Exogenous and load-bearing (the WS3 payoff, feeds `exo = true`):** both theorems typecheck on `TCar`; the
+  choice non-recoverable, quantified, tick-specific.
+- **Partial (pre-registered):** the choice is exogenous but not shown load-bearing (C2 fails); reported Partial,
+  `exo` demoted.
+- **Strip test.** `ws3_stream_exogenous` strips to *"for all `ch : TCar → ℕ` with `ch kA ≠ ch kB`, the `ch`-lift
+  over `outDest attendsT` is plain-bisimilar yet label-separated on `kA`,`kB`, hence not `Recoverable`"* — a bare
+  import fact on the real carrier. `ws3_tick_needs_stream` strips to *"`kA`,`kB` are plain-bisimilar, and every
+  distinguishing `ch`-lift is not `Recoverable`"*. No name is a term; `ch` is quantified.
 
 ## Deliverable
 
-`formal/P2S1/ws3.lean`: `ws3_stream_exogenous`, `ws3_tick_needs_stream`, reusing S0's `impLift` /
-`ws4_import_breaks_baseline` / `ws4_import_quantified` at the choice-point. The stream is quantified, never
-named (audit (e)). Axiom check reduces through the S0 import machinery to the standard three.
+`formal/P2S1/ws3.lean`: `ws3_stream_exogenous`, `ws3_tick_needs_stream`, on `TCar` (Ext-1 R2), via
+`ws1_atomless_bisim` + the `rankLift`/`ch` separation (the WS4-linearization pattern, WS4 untouched). The stream
+is quantified, never named (audit (e)); it stays non-recoverable. Axiom check reduces to the standard three.

@@ -66,22 +66,23 @@ theorem ws5_verdict_discriminates :
 /-! ## The flags are earned -/
 
 /-- **THE FLAGS ARE JUSTIFIED.** The verdict's five `true` inputs are EARNED by the WS1-WS4 headlines: the WS1
-section (`wf`), the named-reader reality (`arrow`), the stream separation (`exo`), the FULL causal-order
-headline with its rank-constraint clause (`causEndo`), and the linearization import (`linImport`). The `wf`,
-`exo`, `linImport` conjuncts are the load-bearing halves of their headlines; `causEndo` is the whole headline. -/
+section (`wf`); the DIRECTIONAL arrow (`arrow`, Ext-1 R1: the composite strictly outranks its components); the
+TICK-SPECIFIC stream on `TCar` (`exo`, Ext-1 R2: every choice label distinguishing `kA`,`kB` is non-recoverable);
+the FULL causal-order headline with its rank clause (`causEndo`); and the linearization import (`linImport`). The
+reader (audit (c)) is separate. The `wf`, `exo`, `linImport` conjuncts are load-bearing halves; `causEndo` and
+`arrow` are full theorems. -/
 theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     (attendsT (reifyT cycleA) = cycleA)
-  ∧ (∃ att : FiniteAttention (rankLift (outDest hinf attendsT) rankT),
-        RealFor (rankLift (outDest hinf attendsT) rankT) att kA)
-  ∧ (∀ {Q : Type} (f : Bool → Q), f true ≠ f false →
-        ¬ ∃ R, IsBisimL (impLift hinf f) R ∧ R true false)
+  ∧ (∀ x ∈ attendsT kA, rankT x < rankT kA)
+  ∧ (∀ ch : TCar → ℕ, ch kA ≠ ch kB →
+        ¬ Recoverable (rankLift (outDest hinf attendsT) ch))
   ∧ ((causal kA kC ∧ causal kB kC)
       ∧ (∀ t u : TCar, causal t u → rankT t < rankT u)
       ∧ (¬ causal kA kB ∧ ¬ causal kB kA))
   ∧ (∀ ord : TCar → ℕ, ord kA ≠ ord kB →
         ¬ Recoverable (rankLift (outDest hinf attendsT) ord)) := by
-  refine ⟨section_cycleA, ws2_composite_real_for hinf, ?_, ws4_causal_order_endogenous, ?_⟩
-  · intro Q f hf; exact (ws3_stream_exogenous hinf f hf).2
+  refine ⟨section_cycleA, (ws2_tick_irreversible hinf).1, ?_, ws4_causal_order_endogenous, ?_⟩
+  · intro ch hch; exact (ws3_stream_exogenous hinf ch hch).2
   · intro ord hord; exact (ws4_linearization_import hinf ord hord).2
 
 /-! ## The five audit clauses (a)-(e) -/
@@ -93,10 +94,11 @@ theorem ws5_audit_no_smuggled_index {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     ∀ ord : TCar → ℕ, ord kA ≠ ord kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ord) :=
   fun ord hord => (ws4_linearization_import hinf ord hord).2
 
-/-- **(b) THE STREAM IS EXOGENOUS.** A proof term: the identity import is non-recoverable. -/
+/-- **(b) THE STREAM IS EXOGENOUS, TICK-SPECIFIC (Ext-1 R2).** A proof term on the real carrier: every exogenous
+choice label distinguishing the concurrent closures `kA`,`kB` is non-recoverable. -/
 theorem ws5_audit_stream_exogenous {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    ¬ Recoverable (impLift hinf (id : Bool → Bool)) :=
-  (ws4_import_quantified hinf).2
+    ∀ ch : TCar → ℕ, ch kA ≠ ch kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ch) :=
+  fun ch hch => (ws3_stream_exogenous hinf ch hch).2
 
 /-- **(c) THE READER IS LOAD-BEARING.** A named `FiniteAttention` for which `kA` is real; not `Many`. -/
 theorem ws5_audit_reader_loadbearing {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
