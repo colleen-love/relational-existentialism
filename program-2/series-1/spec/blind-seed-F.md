@@ -1,4 +1,9 @@
-# Blind seed, Phase F (code review). Series 2.1.
+# Blind seed, Phase F (code review) — Charter Extension 1 re-run. Series 2.1.
+
+*(This pass reviews the STRENGTHENED WS2/WS3/WS5 after Charter Extension 1. WS1 and WS4 are unchanged and
+already reviewed; focus on whether the three strengthened obligations below now hold at the raised bar. The §1
+list reflects the current built signatures.)*
+
 
 **You are reviewing built Lean 4 code against a fixed mathematical bar. You are NOT told what the work is
 "about." Judge only whether the code proves the claimed signatures, whether each payoff survives the strip test,
@@ -33,15 +38,23 @@ one), with no `sorry` and resting only on the standard axioms.
 - `P2S1.ws1_composite_attention_finite` — the out-neighborhoods are `< ℵ₀` (uniform in κ), and `kA`'s attention
   is exactly its cycle and bounded by its components.
 - `P2S1.ws2_composite_distinguishes` — `AttentionDistinguishes (rankLift (outDest hinf attendsT) rankT) kA p0`.
-- `P2S1.ws2_composite_residue` — `¬ ResidueRecoverable insp` (for every `insp`) AND a hold based at `kA` exists.
-  (Confirm this is the global diagonal plus a non-vacuity witness, honestly a bare conjunction; NOT a claim that
-  the residue is scoped to `kA`.)
+- `P2S1.ws2_composite_residue` (STRENGTHENED, Ext-1 R3) — `∃ y : TCar, (∃ R, IsBisim (outDest hinf attendsT) R
+  ∧ R kA y) ∧ y ∉ attendsT kA`. Confirm this is genuinely LOAD-BEARING: the composite's finite attention is a
+  PROPER PART of its relating (`kA` behaviorally identified with a relatum it does not attend), the finite
+  attention doing the subtracting — NOT a bare conjunction of a global diagonal with a non-vacuity witness.
 - `P2S1.ws2_composite_real_for` — there is a `FiniteAttention` for which `kA` is `RealFor`, with `att.reads`
-  genuinely used (the reader load-bearing, NOT `Many`, NOT quantified out).
-- `P2S1.ws2_tick_irreversible` — `¬ Recoverable (rankLift (outDest hinf attendsT) rankT)`.
-- `P2S1.ws3_stream_exogenous` — `∀ Q f, f true ≠ f false →` plain-bisimilar on `true,false` AND not
-  label-bisimilar (the choice non-recoverable), quantified over all import value-spaces.
-- `P2S1.ws3_tick_needs_stream` — the plain projection identifies the options AND `¬ Recoverable (impLift hinf id)`.
+  genuinely used (the reader load-bearing, NOT `Many`, NOT quantified out). [audit (c), unchanged]
+- `P2S1.ws2_tick_irreversible` (STRENGTHENED, Ext-1 R1) — `(∀ x ∈ attendsT kA, rankT x < rankT kA) ∧ ¬
+  Recoverable (rankLift (outDest hinf attendsT) rankT)`. Confirm conjunct 1 is a genuine DIRECTIONAL / acyclic
+  statement (reification strictly raises rank from components to composite), NOT non-recoverability relabelled;
+  conjunct 2 is the retained companion import.
+- `P2S1.ws3_stream_exogenous` (STRENGTHENED, Ext-1 R2) — `∀ ch : TCar → ℕ, ch kA ≠ ch kB → AttentionDistinguishes
+  (rankLift (outDest hinf attendsT) ch) kA kB ∧ ¬ Recoverable (rankLift (outDest hinf attendsT) ch)`. Confirm the
+  stream lives on the REAL carrier `TCar` (the choice among concurrent closures `kA`,`kB`), non-recoverable via
+  the collapse engine, quantified over all `ch`, never named — NOT S0's generic `impLift` on `Bool`. The stream
+  must STAY non-recoverable.
+- `P2S1.ws3_tick_needs_stream` (STRENGTHENED, Ext-1 R2) — `(∃ R, IsBisim (outDest hinf attendsT) R ∧ R kA kB) ∧
+  (∀ ch : TCar → ℕ, ch kA ≠ ch kB → ¬ Recoverable (rankLift (outDest hinf attendsT) ch))`, on `TCar`.
 - `P2S1.ws4_causal_order_endogenous` — `causal kA kC ∧ causal kB kC`; `∀ t u, causal t u → rankT t < rankT u`
   (the order rank-constrained); `¬ causal kA kB ∧ ¬ causal kB kA` (partial). Confirm `causal` is defined from
   `attendsT`/`isTick`, endogenous, with NO exogenous label, and that the rank-constraint universal is TRUE (check
@@ -53,8 +66,11 @@ one), with no `sorry` and resting only on the standard axioms.
 - `P2S1.ws4_two_zone` — the aggregate of the two arms.
 - `P2S1.verdict`, `ws5_verdict_eq` (= `twoZone` by `rfl`), `ws5_verdict_discriminates` (the function is not
   constant; a flipped flag gives a different outcome), `ws5_flags_justified` (the five flags EARNED by the
-  WS1-WS4 headlines; confirm the `causEndo` conjunct is the FULL `ws4_causal_order_endogenous` headline including
-  the rank clause), and the five audit theorems.
+  headlines; confirm the `causEndo` conjunct is the FULL `ws4_causal_order_endogenous` headline including the
+  rank clause; and — Ext-1 — the `arrow` flag is now the DIRECTIONAL `∀ x ∈ attendsT kA, rankT x < rankT kA`
+  (not the reader, not `¬ Recoverable`), and the `exo` flag is the TICK-SPECIFIC `∀ ch : TCar → ℕ, ch kA ≠ ch kB
+  → ¬ Recoverable (rankLift (outDest hinf attendsT) ch)` (not S0's `impLift`)), and the five audit theorems
+  (audit (b) `ws5_audit_stream_exogenous` is now the `TCar` stream non-recoverability, quantified over `ch`).
 
 ## 2. The success criteria (mathematical obligation only)
 
