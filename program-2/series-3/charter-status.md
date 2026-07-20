@@ -2,18 +2,19 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: D (design repair, Phase C returned zero SERIOUS). Current verdict: TBD (not computed until WS5). No formal build committed yet. All targets below are OPEN.*
+*Current phase: E complete (formal built, verdict computed SHAPE-DRAWN). Awaiting Phase F (blind code review). All WS1–WS5 targets BUILT.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** C complete (blind design review, zero SERIOUS; three REAL/COSMETIC naming fixes). D applied the renames. E (code) next. **Precondition:** Series 2.2 has landed (TWO-FACING).
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The **Series 2.2 pair** (`P2S2`, TWO-FACING) is built and registered, reaching `P2S1` / `P2S0` / `P1` transitively.
-- **Axiom state:** the imported layers (P2S2, P2S1, P2S0, P1) are axiom-clean on the standard three. Series build N/A.
-- **Gate state:** green upstream. S3's `formal/` will import `P2S2` only (gate `(P2S2|P2S3)`), reaching S1/S0/P1 transitively.
-- **Open SERIOUS findings:** none (no review has run).
+- **Phase:** E complete (`formal/P2S3/ws1`…`ws5` + aggregator + AxiomCheck built and registered). F (blind code review) next. **Precondition:** Series 2.2 has landed (TWO-FACING).
+- **Verdict:** **SHAPE-DRAWN** (computed, `ws5_verdict_eq : verdict true true true true = Outcome.shapeDrawn`, by `rfl`, no axioms). The flags are earned by `ws5_flags_justified` (WS1–WS4 headlines); `forcedFull` (CONVERGENCE-DECIDED) is a reachable input, not reached on this witness (`cDiss` is a genuine faithful dissent).
+- **Build state:** `P2S3` built (`lake build P2S3 P2S3.AxiomCheck` green), registered in `lake/lakefile.toml` (`defaultTargets` + `[[lean_lib]] P2S3`) and `scripts/gate.sh` (`check program-2/series-3 "^import (P2S2|P2S3)…"`). Builds on the `P2S2` pair, reaching `P2S1`/`P2S0`/`P1` transitively.
+- **Axiom state:** every P2S3 payoff reduces to the standard three (`propext`, `Classical.choice`, `Quot.sound`) or fewer (`faithful_converges_iff`, `ws5_verdict_eq`, `ws5_verdict_discriminates` depend on NO axioms). Confirmed by `P2S3.AxiomCheck`.
+- **Gate state:** green (`scripts/gate.sh` exit 0). S3's `formal/` imports `P2S2` and its own `P2S3.*` roots only.
+- **Names grep:** clean — every hit of the forbidden-noun grep is docstring prose; no identifier embeds `orientation`/`convergence`/`coherence`/`compass`/`self`/`other`/… as content.
+- **Open SERIOUS findings:** none (Phase C zero SERIOUS; Phase F pending).
 
 ## 1. The carrier — the Series 2.2 pair (S3 imports S2)
 
@@ -32,11 +33,11 @@
 
 | WS | Target theorem(s) (exact, Phase B) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `Converges₂` (typed), `ws1_converges_typed`, `ws1_two_sided_free` | OPEN | — |
-| WS2 | `ws2_converges_decided_in_sight` (forced over a genuine in-sight class) | OPEN | — |
-| WS3 | `ws3_dissent_is_import` (every failing valuation non-recoverable, on Series 07) | OPEN | — |
-| WS4 (the knot) | `ws4_two_zone` / `ws4_insight_proper` (both zones reached, class proper, no PR1-S1 tautology) | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
+| WS1 | `Converges₂` / `Faithful₂` (typed), `ws1_converges_typed`, `ws1_two_sided_free` | BUILT | Phase E, axiom-clean |
+| WS2 | `ws2_converges_decided_in_sight` (forced over the inhabited in-sight class), `ws2_insight_inhabited`, `ws2_sight_is_uniform` | BUILT | Phase E, axiom-clean |
+| WS3 | `ws3_dissent_is_import` (every failing valuation non-recoverable, on Series 07), `valLift_not_recoverable` | BUILT | Phase E, axiom-clean |
+| WS4 (the knot) | `ws4_two_zone` / `ws4_insight_proper` (both zones reached, class proper/inhabited, no PR1-S1 tautology) | BUILT | Phase E, axiom-clean |
+| WS5 | `verdict` + `ws5_verdict_eq` (SHAPE-DRAWN), `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e + K1 anchor | BUILT | Phase E, axiom-clean |
 
 **Renames from the charter's provisional target names (recorded per this section's note), reason: audit (e) —
 the charter's provisional names embed the forbidden content-NOUNS `orientation`/`convergence` (as opposed to the
@@ -100,5 +101,6 @@ Series 2.3 adds none and closes none.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series 2.3 established as the COHERENCE: define the orientation (typed, never evaluated) and `Converges₂` over the S2 pair, prove it forced in-sight and its dissent an import, and at the knot prove the two-zone fork SHAPE-DRAWN (both zones reached, no PR1-S1 tautology). The direction of convergence is never decided. Scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase E.** `formal/P2S3/ws1`…`ws5` + aggregator `P2S3.lean` + `AxiomCheck.lean` written and registered (`lake/lakefile.toml`, `scripts/gate.sh`). The convergence machinery (`Valuation`/`Converges₂`/`Faithful₂`/`InSight`/`valLift`) is built FRESH on the S2 pair, never imported from Series 12. Build green first try (`lake build P2S3 P2S3.AxiomCheck`), sorry-free, gate-green, names-grep clean (prose only), every payoff on the standard three axioms or fewer. Verdict COMPUTED: SHAPE-DRAWN (`ws5_verdict_eq`, `rfl`). Mechanical checks (§6) all pass. Next: Phase F, blind code review pressing hardest on audit (c)/(b).
 - **2026-07-20 — Phase C + D.** Blind design review (`spec/blind-seed-C.md`, one reviewer, read the seed only) returned **zero SERIOUS**. Audit (c) passed hardest press (fork genuine, load-bearing on `outDest`, not a PR1-S1 tautology); (a)/(b)/(d)/strip-test all passed. Three REAL/COSMETIC naming findings (C1-S1..S3): identifiers embedding the forbidden nouns `convergence`/`orientation`. Phase D applied the three renames (`ws1_two_sided_free`, `ws4_two_zone`, `Outcome.forcedFull`) across `spec/` and recorded them in §2/§4. No SERIOUS ⇒ no Phase C re-run. Next: Phase E, build `formal/`.
 - **2026-07-20 — Phase B.** Design committed as one batch (`spec/README.md`, `spec/ws1-design.md`…`ws5-design.md`), before any `formal/` file. Winning constructions fixed to typed signatures: the primitive `Valuation`/`Converges₂` (fresh, neutral-named — `Valuation`/`val`/`raise`/`Converges₂`, none matching the forbidden greps), the structural constraint `Faithful₂` and the sight class `InSight` (dest load-bearing), the fresh `valLift`/`valLift_not_recoverable` (transcribed in spirit from Series 12, never imported), and the two-zone fork over `(slf, oth)` foreclosing PR1-S1 by (i) forcing that uses `slf`/`oth` plain-bisimilarity, (ii) a genuinely constrained proper in-sight class (`ws4_insight_proper`), (iii) both zones witnessed. PX-1 weighed and declined (§5). Module naming `P2S3` fixed (registration deferred to Phase E per protocol). Next: Phase C, blind design review pressing hardest on audit (c) — is the fork genuine or a PR1-S1 tautology?

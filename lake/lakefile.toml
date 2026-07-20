@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -82,3 +82,13 @@ roots = ["P2S2", "P2S2.AxiomCheck"]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.15.0"
+
+# `program-2/series-3/formal/` — Program 2 Series 3 (2.3), the COHERENCE. Imports the `P2S2` pair (and through it,
+# transitively, `P2S1` / `P2S0` / the `P1` foundation); it does NOT import `P2S1` / `P2S0` / `P1` directly. `P2S3`
+# imports `P2S3.ws1`…`P2S3.ws5`; `P2S3.AxiomCheck` runs the axiom pass. The convergence machinery is built FRESH
+# and constrained, never imported from Series 12 (excluded for program-review-1's PR1-S1). Gate:
+# `check program-2/series-3 "^import (P2S2|P2S3)…"`.
+[[lean_lib]]
+name = "P2S3"
+srcDir = "../program-2/series-3/formal"
+roots = ["P2S3", "P2S3.AxiomCheck"]

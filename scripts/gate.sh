@@ -47,4 +47,10 @@ check program-2/series-1 "^import (P2S0|P2S1)(\.[A-Za-z0-9_]+)*$"
 # imported directly; any other series' tree is forbidden.
 check program-2/series-2 "^import (P2S1|P2S2)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 3 (`program-2/series-3/formal/`): the `P2S3` library imports its predecessor `P2S2` and its
+# own `P2S3.*` roots (+ mathlib); the `P2S1` / `P2S0` ground and `P1` prior art are reached transitively through
+# S2, not imported directly; any other series' tree is forbidden. The convergence machinery is built fresh in
+# `P2S3.*`, never imported from Series 12.
+check program-2/series-3 "^import (P2S2|P2S3)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
