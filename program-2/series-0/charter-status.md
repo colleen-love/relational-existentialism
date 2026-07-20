@@ -2,15 +2,16 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: E (code built, mechanical checks green). Current verdict: GROUND-ESTABLISHED (computed from the built WS1/WS3/WS4 theorems). The formal build exists and compiles. Targets below are BUILT (pending the Phase F blind code review).*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** D complete (Phase C returned zero SERIOUS; no design repair needed). E (code) next.
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. Design settled in `spec/` (`README.md`, `ws1-design.md`…`ws5-design.md`). The **P1 foundation** (`program-2/formal/P1`) is built and axiom-clean, available to import (Program 2 permits importing); verified building cleanly at Phase B start.
+- **Phase:** E complete (`formal/` built, mechanical checks §6 green). F (blind code review) next.
+- **Verdict:** **GROUND-ESTABLISHED** (computed, not hand-set): `ws5_verdict_eq : verdict true true true = groundEstablished` by `rfl`, with the three flags EARNED by `ws5_flags_justified` (reification exists, direction non-recoverable, the import separates); `ws5_verdict_not_obstructed` / `ws5_verdict_not_partial` show the function discriminates.
+- **Build state:** `formal/P2S0.lean` + `formal/P2S0/{ws1..ws5,AxiomCheck}.lean` built. `lake build P2S0 P2S0.AxiomCheck` completes successfully. `P2S0` registered in `lake/lakefile.toml` (`[[lean_lib]]`, appended to `defaultTargets`) and `scripts/gate.sh` (`check program-2/series-0 "^import (P1|P2S0)…"`). The **P1 foundation** (`program-2/formal/P1`) is built and axiom-clean, imported (Program 2 permits it).
+- **Mechanical checks (§6, at Phase E):** compiles ✓; sorry-free ✓ (the only `sorry` string is the `sorry-free` docstring prose); axiom record ✓ (every headline on the standard three `propext`/`Classical.choice`/`Quot.sound`; the three `ws5_verdict_*` theorems depend on NO axioms); gate ✓ (`OK program-2/series-0`); names-not-terms grep ✓ (all hits are docstring/comment prose or the `import` keyword; NO code identifier or proof term is named for the interpretive content).
 - **Module naming (fixed at Phase B):** namespace `P2S0`; layout `formal/P2S0.lean` + `formal/P2S0/{ws1..ws5,AxiomCheck}.lean`, mirroring `program-1/series-13/formal/Series13/`. Registration recipe (lakefile `[[lean_lib]] P2S0`, gate `check program-2/series-0 "^import (P1|P2S0)…"`) applied at Phase E, never earlier.
 - **Design decisions (fixed at Phase B, normative):** the ONE new carrier `attends : X → Finset X` (finite out-attention the sole bound), viewed as a `PkObj κ`-coalgebra via `finsetToPk` (out-neighborhoods finite, `< ℵ₀ ≤ κ`, so κ never bounds the world); the symmetric reduct `symDest` uses `hcar : mk X < κ` as AMBIENT CARRIER SIZE only (audit a); the ONE new distinction, the knowing-labelled lift `knowLift` with `plainOf knowLift = symDest`. Reification is on the FINITE functor (`FinReify : ∀ s : Finset X, attends (reify s) = s`), NOT total `IsReify` on `PkObj κ` (unsatisfiable for the finite functor; disclosed, §5 below).
 - **Axiom state:** N/A (no series build). Prior art (P1) is axiom-clean on the standard three.
@@ -32,13 +33,13 @@ What Series 0 does NOT reuse: `PkObj κ` as the ontology. Series 0's ontological
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_reification_exists`, `ws1_bound_is_finite_attention` | OPEN | — |
-| WS2 | `ws2_collapse_inherited` (baseline, transcribed) | OPEN | — |
-| WS3 (the knot) | `ws3_direction_not_recoverable`, `ws3_passive_constitution`, `ws3_active_passive_distinct` | OPEN | — |
-| WS4 | `ws4_import_breaks_baseline`, `ws4_import_quantified` | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, audit clauses a–e) | OPEN | — |
+| WS1 | `ws1_reification_exists`, `ws1_bound_is_finite_attention` (+ `ws1_finreify_injective`, `ws1_tower_monotone`) | BUILT (Phase E) | — |
+| WS2 | `ws2_collapse_inherited` (baseline, imported engine applied) | BUILT (Phase E) | — |
+| WS3 (the knot) | `ws3_direction_not_recoverable`, `ws3_passive_constitution`, `ws3_active_passive_distinct` | BUILT (Phase E) | — |
+| WS4 | `ws4_import_breaks_baseline`, `ws4_import_quantified` | BUILT (Phase E) | — |
+| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_flags_justified`, `ws5_verdict_not_*`, `ws5_audit_*` a–e) | BUILT (Phase E) | — |
 
-Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here with its reason.
+Names are the charter's provisional targets; Phase B fixed exact signatures and they built unchanged (the reification target is `FinReify`, the finite-functor section, disclosed §5). BUILT = compiles sorry-free and axiom-clean; VERIFICATION against the blind seed is Phase F.
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
@@ -77,6 +78,7 @@ Series 0 adds none and closes none.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series 0 established as the Program 2 ground: relating is finite attending, with the asymmetry of knowing as the knot, the collapse inherited as baseline, and the import seated as a quantified ingredient. Scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase E (code).** Built `formal/P2S0.lean` + `formal/P2S0/{ws1..ws5,AxiomCheck}.lean` to the Phase B signatures (one `P2S0` namespace across files; the general WS1/WS2 machinery universe-polymorphic, the WS3/WS4 witnesses monomorphic `Bool` at `Cardinal.{0}`). Registered `P2S0` in `lake/lakefile.toml` and `scripts/gate.sh`. `lake build P2S0 P2S0.AxiomCheck` succeeds. Ran the §6 mechanical checks: compiles, sorry-free, axiom-clean (standard three; `ws5_verdict_*` axiom-free), gate-green, names grep clean (prose/keyword only). Computed the WS5 verdict from the built theorems: **GROUND-ESTABLISHED** (`ws5_verdict_eq`, flags earned by `ws5_flags_justified`, discriminating by `ws5_verdict_not_*`). Next: Phase F, generate `spec/blind-seed-F.md` and spawn a blind reviewer against the `formal/` sources.
 - **2026-07-20 — Phase C (blind design review, DELEGATED).** Generated `spec/blind-seed-C.md` (motivation-free: signatures, mechanical success criteria, audit checks a–e, strip test, names-not-terms list, rubric). Spawned a blind `general-purpose` reviewer pointed at the blind seed, the `spec/wsNN-design.md` signature blocks, and the imported `P1/{Core,Reader}.lean` ONLY (forbidden the charter/status/README/summaries). Reviewer confirmed compliance (no forbidden file opened). Result: **zero SERIOUS, zero REAL, four COSMETIC** (C1-S1, C3-S1, C4-S1, C5-S1, recorded in §4); NO signature UNSATISFIABLE. Each of the eight pointed risks (WS1 witness constructibility, `FinReify` honesty, WS3 non-recoverability/load-bearing/audit-b, WS4 quantification, WS5 verdict-a-function/audit-d) verified clean.
 - **2026-07-20 — Phase D (design repair).** No SERIOUS or REAL findings to address; the four COSMETIC notes are accepted as disclosed (they restate the design's own pre-registered choices: modular WS1 existence, the honest bare conjunction in `ws3_passive_constitution` mirroring `P1.Reader.ws2_attention_subtractive`, the `id` non-vacuity witness, the standard flag-encoding). No design edits, so NO Phase C re-loop (a fresh C is required only when a SERIOUS is closed by editing a design). The C→D loop terminates with zero SERIOUS. Independently, the executor prototyped the full build in scratch and confirmed by `lake env lean` that every signature COMPILES sorry-free and every headline is axiom-clean on the standard three (`propext`/`Classical.choice`/`Quot.sound`; `ws5_verdict_eq` needs none), so no signature is unsatisfiable in fact. Next: Phase E, register `P2S0` and build `formal/`.
 - **2026-07-20 — Phase B.** Read the canonical templates (`program-1/series-13/spec/*` for design-doc format, `program-1/series-13/formal/Series13/*` and `program-2/formal/P1/{Core,Reader}.lean` for Lean house style; `program-2/series-1/` for the sibling Tick framing). Verified the P1 foundation builds clean and axiom-clean. Wrote and committed the six design files as one batch (gate honored, before any `formal/` file): `spec/README.md` (design index, the imported prior art, the one new carrier `attends`, the one new distinction `knowLift`, the five disciplines, the strip annotations) and `spec/ws1-design.md`…`spec/ws5-design.md` (candidate triage, winning signatures, outcome classes, strip tests). Fixed the `P2S0` module naming (recorded in §0). Two disclosures recorded (§5): reification on the finite functor (not total `IsReify`), and κ as ambient carrier size. Next: Phase C, generate `spec/blind-seed-C.md` and spawn a blind reviewer against the design signatures only.
