@@ -19,6 +19,8 @@
 
 ## 1. The carrier — the P1 foundation (built and verified)
 
+**S1 now stands on the Series 2.0 ground** (`program-2/series-0`, relating is finite attending), which supplies the carrier and imports the Program 1 prior art below. S1's Phase B may only begin once S0 has landed. The pieces below are the ultimate (P1) source of that machinery.
+
 The carrier is consolidated in the **P1 foundation** at `program-2/formal/P1`, built green (sorry-free,
 axiom-clean on the standard three; `P1.AxiomCheck`). At Phase E the series builds on it: **Program 2 permits
 importing** (`import P1`, using `P1.Core.*` / `P1.Reader.*` directly — sound because the foundation is
