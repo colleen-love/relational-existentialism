@@ -22,18 +22,21 @@ without importing structure beyond the symmetry-breaker, that is the pre-registe
 ## The carrier (README §3, fixed here)
 
 ```lean
-abbrev RCar : Type := Fin 3
+abbrev RCar : Type := Fin 4
 def slf : RCar := 0   -- the self (base of the constitution tower), rank 0
-def oth : RCar := 1   -- the OTHER: the reified self-relation upgraded to a locus, rank 1
-def bnd : RCar := 2   -- a higher closure the pair does not jointly attend (WS4 residue witness), rank 2
+def oth : RCar := 1   -- the OTHER: the reified self-relation upgraded to a locus reading back, rank 1
+def sh  : RCar := 2   -- a shared relatum in the other's wider reach (makes the two reaches distinct), rank 0
+def bnd : RCar := 3   -- a higher closure the pair does not jointly attend (WS4 residue witness), rank 2
 
 def attendsR : RCar → Finset RCar := fun x =>
-  if x = slf then {slf, oth} else if x = oth then {slf, oth} else {oth}
+  if x = slf then {slf, oth} else if x = oth then {slf, oth, sh} else if x = sh then {sh} else {oth}
 def rankR : RCar → ℕ := fun x => if x = oth then 1 else if x = bnd then 2 else 0
 def reifyR : Finset RCar → RCar := fun s =>
-  if s = {slf, oth} then oth else if s = {oth} then bnd else slf
-def rfield : Finset RCar := {slf, oth}   -- the shared field of the facing (self, other)
+  if s = {slf, oth, sh} then oth else if s = {oth} then bnd else slf
+def rfield : Finset RCar := {slf, oth, sh}   -- the shared field: self, other, and what they attend
 ```
+The self's reach `{slf,oth}` is a proper subset of the other's `{slf,oth,sh}` (the C3-S1 repair: distinct
+reaches, so WS4's joint residue `bnd` is missed by two DIFFERENT attentions, not one membership).
 
 Carrier lemmas (all `decide`/`rfl`): `attendsR_slf`, `attendsR_oth`, `attendsR_bnd`; `attendsR_nonempty`;
 `outDestR_ne_empty`; `ws1_rcar_SHNE` (every node `SHNE`, by reduction to `attendsR_ne_empty`, the S1
@@ -51,7 +54,7 @@ oth`). This is S0's `ws1_first_other` with the reified relatum given its own rea
 
 ```lean
 theorem ws1_other_is_locus (hinf : ℵ₀ ≤ κ) :
-    (reifyR {slf, oth} = oth ∧ attendsR (reifyR {slf, oth}) = {slf, oth})      -- seeded by reification; sections
+    (reifyR {slf, oth, sh} = oth ∧ attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})  -- seeded by reification; sections
   ∧ oth ≠ slf                                                                   -- distinct from the self
   ∧ (attendsR oth).Nonempty                                                     -- its attention a genuine finite attends
   ∧ (slf ∈ rfield ∧ oth ∈ rfield                                               -- the shared field contains both,

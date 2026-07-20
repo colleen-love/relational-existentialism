@@ -2,18 +2,18 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: D/E (design repaired after Phase C; `formal/` built and validated; Phase C re-review in progress). Current verdict: twoFacing (computed by `ws5_verdict_eq`, pending Phase F confirmation). All WS1-WS5 targets BUILT.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** B complete (design committed as one batch: `spec/README.md`, `spec/ws1`–`ws5-design.md`). C (design review) next. **Precondition met:** Series 2.1 (TWO-ZONE after Extension 1) has landed.
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The **Series 2.1 ground** (`P2S1`, the tick, TWO-ZONE after Extension 1) is built and registered, reaching the **Series 2.0 ground** (`P2S0`, GROUND-ESTABLISHED) and the **P1 foundation** transitively.
-- **Axiom state:** the imported layers (P2S1, P2S0, P1) are axiom-clean on the standard three. Series build N/A.
-- **Gate state:** green upstream. S2's `formal/` will import `P2S1` only (gate `(P2S1|P2S2)`), reaching S0 and P1 transitively.
-- **Open SERIOUS findings:** none (no review has run).
+- **Phase:** C complete (pass 1: one SERIOUS C1-S1, closed by repair); D applied (named reader, `Fin 4` distinct reaches); `formal/` BUILT and validated (Phase E work done early to validate the design); Phase C pass-2 re-review in progress (SERIOUS closed by editing the design ⇒ re-seed and re-review per protocol §2 loop). **Precondition met:** Series 2.1 (TWO-ZONE after Extension 1) has landed.
+- **Verdict:** **twoFacing** — `ws5_verdict_eq : verdict true true true true true = Outcome.twoFacing` by `rfl`, on the flags `ws5_flags_justified` earns. Pending Phase F.
+- **Build state:** `formal/P2S2/ws1`–`ws5` + aggregator + `AxiomCheck` BUILT sorry-free, registered in `lake/lakefile.toml` (`P2S2` added to `defaultTargets`) and `scripts/gate.sh` (`check program-2/series-2 "^import (P2S1|P2S2)…"`). Built on the **Series 2.1 ground** (`P2S1`), reaching **P2S0** and **P1** transitively.
+- **Axiom state:** every payoff axiom-clean on the standard three (`propext`, `Classical.choice`, `Quot.sound`); `ws5_verdict_eq`/`ws5_verdict_discriminates`/`ws5_audit_coherence_open`/`ws5_audit_names_not_terms` depend on NO axioms.
+- **Gate state:** green — S2's `formal/` imports `P2S1` and its own `P2S2.*` roots only.
+- **Open SERIOUS findings:** none (C1-S1 closed **(Fixed)**; pass-2 re-review pending).
 
 ## 1. The carrier — the Series 2.1 ground (S2 imports S1)
 
@@ -32,13 +32,13 @@
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_other_is_locus` (+ the shared field well-formed) | OPEN | — |
-| WS2 (the reader knot) | `ws2_other_reader_wise`, `ws2_other_non_recoverable` | OPEN | — |
-| WS3 | `ws3_facing_asymmetric`, `ws3_facing_partial` | OPEN | — |
-| WS4 (the knot) | `ws4_mutual_residue` (or ONE / TOTALIZED reported) | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_flags_justified`, `ws5_verdict_discriminates`, audit a–e) | OPEN | — |
+| WS1 | `ws1_other_is_locus` (section + distinctness + finite attends + shared field + finite bound) | **BUILT** | discharged `decide`/`rfl` + S0 `ws1_bound_is_finite_attention` |
+| WS2 (the reader knot) | `ws2_other_distinguishes`, `selfReader` (named), `ws2_other_reader_wise`, `ws2_other_non_recoverable` | **BUILT** | `RealFor` on the NAMED `selfReader` (K1, C1-S1 Fixed); `¬ Recoverable` import |
+| WS3 | `faces`, `ws3_four_readings`, `faceLift`, `ws3_facing_asymmetric`, `ws3_facing_partial` | **BUILT** | direction `¬ Recoverable (faceLift)`; diagonal `ws1_no_self_total_hold` |
+| WS4 (the knot) | `ws4_mutual_residue` (RESIDUE arm; ONE / TOTALIZED pre-registered) | **BUILT** | joint-unattended residue (distinct reaches, C3-S1) + `¬ Recoverable` + diagonal |
+| WS5 | `Outcome`, `verdict`, `ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e | **BUILT** | verdict computes **twoFacing** by `rfl`, discriminating |
 
-Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here with its reason.
+Names: the charter's provisional targets are kept verbatim as the built theorem names (`ws1_other_is_locus`, `ws2_other_reader_wise`, `ws2_other_non_recoverable`, `ws3_facing_asymmetric`, `ws3_facing_partial`, `ws4_mutual_residue`); the words "self"/"other"/"perspective" appear only underscore-embedded in identifiers (no `\bself\b`/`\bother\b`/`\bperspective\b` whole-word match) and freely in docstring prose, per protocol §6. The reader is named `selfReader`, the direction lift `faceLift`, the residue witness `bnd` (neutral). No rename needed.
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
@@ -54,7 +54,12 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
-| — | — | — | (none yet) | — |
+| C1-S1 | C | SERIOUS | `ws2_other_reader_wise`: the `FiniteAttention` is existentially bound, so the payoff collapses to a `Many`-style `∃ y, AttentionDistinguishes oth y` — the reader quantified out (K1). Audit (a). | **(Fixed)** — the reader is now a NAMED `def selfReader`; `ws2_other_reader_wise : RealFor … (selfReader hinf) oth` is proved for that fixed reader, so it cannot be tailored per witness. The other's OWN attention (`attendsR oth`, the four readings) is load-bearing (reviewer confirmed `oth` cannot be an inert tag). Target built: `ws2_other_reader_wise`. |
+| C3-S1 | C | REAL | `ws4_mutual_residue` residue conjunct: with `attendsR slf = attendsR oth`, "jointly unattended" collapsed to one membership; mutuality decorative for that conjunct (the bisim is the generic collapse engine). | **(Fixed)** — the carrier is now `Fin 4`: the other's attention `{slf,oth,sh}` strictly extends the self's `{slf,oth}`, so the residue `bnd` is jointly unattended by two DISTINCT reaches (`bnd ∉ {slf,oth}` AND `bnd ∉ {slf,oth,sh}`); disclosed that the bisim is the collapse engine (Series 07), the honest import structure, the mutual content being the joint blind spot. |
+| C2-S1 | C | REAL | WS5 flags are hand-set Bools with no Prop→Bool bridge; `nonCollapse`/`nonTotal` unconditionally true on this witness, so `one`/`totalized` arms are unreachable by THIS structure. | **(Addressed, disclosed)** — the accepted house pattern (S1 `ws5.lean`): `ws5_flags_justified` proves the WS1-WS4 headline Props that earn each flag; `ws5_verdict_discriminates` certifies falsifiability of the pure function; ONE / TOTALIZED are PRE-REGISTERED outcomes the same `verdict` computes for OTHER structures (charter §7), not hand-set claims about this witness. Disclosed in §5 and the WS5 docstrings. |
+| C4-S1 | C | COSMETIC | `ws4_mutual_residue` (5) and `ws3_facing_partial` (2) are the universal diagonal (structure-independent). | Noted — carried as a DISCLOSED companion conjunct (not the payoff); the payoff is the residue + structural conjuncts (reviewer confirmed the tautology defect avoided). |
+| C5-S1 | C | COSMETIC | `ws5_audit_coherence_open`/`ws5_audit_names_not_terms : True` are vacuous certificates. | Noted — the grep-certified pattern (S1 `ws5_audit_names_not_terms`); the properties are about identifiers, not propositions. (d-iv) `True` is the CORRECT non-decision of the coherence. |
+| C6-S1 | C | COSMETIC | `ws3_facing_asymmetric`'s `¬ Recoverable (faceLift)` and WS2's `¬ Recoverable (rankLift)` share the witnessing pair `slf ~ oth`. | Noted — coherent: `faceLift`'s label is target-dependent (reading DIRECTION), genuinely distinct from `rankLift`'s source-rank; both read structurally by `IsBisimL` (reviewer confirmed distinct). |
 
 ## 5. Deviations from charter (disclosed)
 

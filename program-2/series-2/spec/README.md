@@ -45,33 +45,36 @@ other), asymmetric because knowing is directed, and partial because no reader to
 ## 3. The shared witness (`§WITNESS`, fixed here, built in WS1, used by WS2-WS4)
 
 One monomorphic carrier at `Cardinal.{0}` carries every payoff, so WS4's residue and collapse arms and the
-reader payoff are exercised on the SAME structure (audit (a), (d)). Carrier `RCar := Fin 3`.
+reader payoff are exercised on the SAME structure (audit (a), (d)). Carrier `RCar := Fin 4`.
 
 | Node | def | role | `attendsR` | `rankR` |
 |---|---|---|---|---|
 | `slf` | `0` | the self (base of the constitution tower) | `{slf, oth}` | 0 |
-| `oth` | `1` | the OTHER: the reified self-relation, upgraded to a locus | `{slf, oth}` | 1 |
-| `bnd` | `2` | a higher closure the pair does NOT jointly attend (the residue witness) | `{oth}` | 2 |
+| `oth` | `1` | the OTHER: the reified self-relation, upgraded to a locus reading back | `{slf, oth, sh}` | 1 |
+| `sh`  | `2` | a shared relatum in the other's wider reach (makes the two reaches distinct) | `{sh}` | 0 |
+| `bnd` | `3` | a higher closure the pair does NOT jointly attend (the residue witness) | `{oth}` | 2 |
 
-- **The other is seeded by reification.** `reifyR : Finset RCar → RCar` is pointwise: `{slf,oth} ↦ oth`,
-  `{oth} ↦ bnd`, else `slf`. It sections `attendsR` at these patterns: `attendsR (reifyR {slf,oth}) = {slf,oth}`
-  and `attendsR (reifyR {oth}) = {oth}` (the `FinReify` section, pointwise; total `FinReify` is unsatisfiable on
-  the finite carrier, as in S0/S1). The other `oth` is the reified shared-field pattern `{slf,oth}` (which
-  contains the self-relation `{slf}`), a relatum of the SAME field `RCar`, `rankR oth = 1 > 0 = rankR slf`. This
-  GENERALIZES S0's `ws1_first_other` (the self-loop `{slf}` reified into the first other is the base case) by
-  giving the reified relatum its OWN attention that reads back into the field.
+- **The other is seeded by reification.** `reifyR : Finset RCar → RCar` is pointwise: `{slf,oth,sh} ↦ oth`,
+  `{oth} ↦ bnd`, else `slf`. It sections `attendsR` at these patterns: `attendsR (reifyR {slf,oth,sh}) =
+  {slf,oth,sh}` and `attendsR (reifyR {oth}) = {oth}` (the `FinReify` section, pointwise; total `FinReify` is
+  unsatisfiable on the finite carrier, as in S0/S1). The other `oth` is the reified reach pattern `{slf,oth,sh}`
+  (which contains the self-relation `{slf}`), a relatum of the SAME field `RCar`, `rankR oth = 1 > 0 = rankR
+  slf`. This GENERALIZES S0's `ws1_first_other` (the self-loop `{slf}` reified into the first other is the base
+  case) by giving the reified relatum its OWN attention that reads back into the field and reaches STRICTLY
+  FURTHER than the self's (the C3-S1 repair: distinct reaches make WS4's joint residue non-decorative).
 - **The four readings, all four witnessed on the carrier.** self-of-self `slf ∈ attendsR slf`; self-of-other
   `oth ∈ attendsR slf`; other-of-self `slf ∈ attendsR oth`; other-of-other `oth ∈ attendsR oth`. All by `decide`.
 - **The direction of the facing (WS3).** The self reads UP the constitution tower (`slf → oth`, `rankR slf = 0 <
-  1 = rankR oth`), the other reads DOWN and FLAT (`oth → slf`, `oth → oth`; no strictly-upward edge from `oth`).
-  Knowing is directed: the up/down direction of a reading is non-recoverable from the symmetric relating, which
-  forgets it (WS3, `faceLift`).
+  1 = rankR oth`), the other reads DOWN and FLAT (`oth → slf`, `oth → oth`, `oth → sh`; no strictly-upward edge
+  from `oth`). Knowing is directed: the up/down direction of a reading is non-recoverable from the symmetric
+  relating, which forgets it (WS3, `faceLift`).
 - **The residue witness (WS4, audit (d) non-vacuity).** `bnd` is plain-bisimilar to the pair (the collapse
-  engine, every node `SHNE`) yet JOINTLY UNATTENDED: `bnd ∉ attendsR slf ∧ bnd ∉ attendsR oth`. So the mutual
-  reading (the pair reading `{slf,oth}` between them) genuinely SUBTRACTS `bnd` — the residue the mutuality
-  cannot close, load-bearing on the JOINT attention (neither perspective alone, the pair). The higher reader
-  `bnd` is rank-constrained: `∀ x ∈ attendsR bnd, rankR x < rankR bnd` (`decide`), so the reading order is not
-  free/total (PR1-S1 foreclosed).
+  engine, every node `SHNE`) yet JOINTLY UNATTENDED by two DISTINCT reaches: `bnd ∉ attendsR slf = {slf,oth}`
+  AND `bnd ∉ attendsR oth = {slf,oth,sh}`. So the mutual reading, combining the self's reach and the other's
+  WIDER reach, genuinely SUBTRACTS `bnd` — the joint blind spot the mutuality cannot close, load-bearing on the
+  JOINT attention (the C3-S1 repair: two distinct reaches, not one membership). The higher reader `bnd` is
+  rank-constrained: `∀ x ∈ attendsR bnd, rankR x < rankR bnd` (`decide`), so the reading order is not free/total
+  (PR1-S1 foreclosed).
 - **SHNE.** Every node's `attendsR` is a nonempty finite set, and every reachable node has nonempty `attends`,
   so every node is `SHNE (outDest hinf attendsR)`. Proved `ws1_rcar_SHNE` by reduction to `attendsR_ne_empty`
   (`decide`), so the collapse engine `ws1_atomless_bisim` applies to every pair.
@@ -81,10 +84,11 @@ discharge the finite obligations, exactly as S0's `attendsU` and S1's `attendsT`
 
 ## 4. The discipline (the honesty invariants, applied)
 
-- **The other is a READER, not a label (K1, the central sin, audit (a)).** WS2's `ws2_other_reader_wise` names a
-  genuine `FiniteAttention` for which `oth` is `RealFor`; the reader's `att.reads` membership is load-bearing.
-  `Many` is not used, the reader is never quantified out. The other's own `attendsR` reads back into the field
-  (all four readings witnessed), so it is a locus, never a point-tag.
+- **The other is a READER, not a label (K1, the central sin, audit (a)).** WS2's `ws2_other_reader_wise` proves
+  `RealFor` for a NAMED `def selfReader` (a fixed bounded attention, not an existential over readers — the C1-S1
+  repair); the reader's `reads` membership is load-bearing. `Many` is not used, the reader is never quantified
+  out. The other's own `attendsR` reads back into the field (all four readings witnessed), so it is a locus,
+  never a point-tag.
 - **The twoness is non-recoverable (audit (b)).** `ws2_other_non_recoverable` is a proof term: the self/other
   separation is `¬ Recoverable` (an import, Series 07), the collapse never smuggled shut.
 - **The facing is asymmetric (audit (c)) and directed.** `ws3_facing_asymmetric` marks the up/down direction of
@@ -112,15 +116,15 @@ discharge the finite obligations, exactly as S0's `attendsU` and S1's `attendsT`
 
 ## 5. The two watch-points (protocol §0.8)
 
-- **WS2 — is the other a genuine reader, or a label (K1)?** `ws2_other_reader_wise` is a genuine `RealFor` on a
-  NAMED `FiniteAttention` (the `ws2_composite_real_for` shape), the other's `attendsR` reading back into the
-  field (all four readings, `decide`). The other is never the reader quantified out; the twoness is
-  `¬ Recoverable` (`ws2_other_non_recoverable`), an import.
+- **WS2 — is the other a genuine reader, or a label (K1)?** `ws2_other_reader_wise` is a `RealFor` on a NAMED
+  `def selfReader` (a fixed bounded reader, not existential — the C1-S1 repair), the other's `attendsR` reading
+  back into the field (all four readings, `decide`). The other is never the reader quantified out; the twoness
+  is `¬ Recoverable` (`ws2_other_non_recoverable`), an import.
 - **WS4 — is the mutual residue genuine, or the global diagonal in disguise (PR1-S1)?** `ws4_mutual_residue` is
-  read off the JOINT attention subtracting the bisimilar `bnd` (`bnd ∉ attendsR slf ∧ bnd ∉ attendsR oth`, both
-  by `decide`), on the witnessed pair with all four readings and the rank-constrained higher reader; the
-  diagonal is a disclosed companion. Both arms reachable, the concurrency of the collapse arm exhibited by the
-  verdict discriminating.
+  read off the JOINT attention subtracting the bisimilar `bnd` by two DISTINCT reaches (`bnd ∉ attendsR slf =
+  {slf,oth}` AND `bnd ∉ attendsR oth = {slf,oth,sh}`, both by `decide` — the C3-S1 repair), on the witnessed
+  pair with all four readings and the rank-constrained higher reader; the diagonal is a disclosed companion.
+  Both arms reachable, the concurrency of the collapse arm exhibited by the verdict discriminating.
 
 ## 6. The mechanical checks (Phase E)
 

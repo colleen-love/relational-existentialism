@@ -28,12 +28,14 @@ and both arms must be tested on a witnessed pair with a real mutual-reading stru
 On `RCar`: the two loci `slf`, `oth` read the shared field `{slf, oth}` BETWEEN them — all four readings
 witnessed (`ws3_four_readings`): `slf` reads `slf` and `oth`, `oth` reads `slf` and `oth` (`decide`). The
 recursion is genuine: `oth` reads `slf`, which reads `oth`, which reads `slf`. The residue witness is `bnd`:
-- **The residue (non-empty, load-bearing on MUTUALITY):** `bnd` is plain-bisimilar to the pair (the collapse
-  engine, every node `SHNE`) yet JOINTLY UNATTENDED — `bnd ∉ attendsR slf ∧ bnd ∉ attendsR oth` (both `decide`).
-  So the mutual reading, the pair reading the shared field between them, genuinely SUBTRACTS `bnd`: it is
-  bisimilar to what they are yet in NEITHER's attention, the residue the mutuality cannot close. This is the
-  `ws2_composite_residue` move (bisimilar yet unattended = the finite attention subtracts) lifted from ONE reader
-  to the JOINT attention of the pair — the mutuality is load-bearing (neither perspective alone attends `bnd`).
+- **The residue (non-empty, load-bearing on MUTUALITY, the C3-S1 repair):** `bnd` is plain-bisimilar to the pair
+  (the collapse engine, every node `SHNE`) yet JOINTLY UNATTENDED by two DISTINCT reaches — `bnd ∉ attendsR slf =
+  {slf,oth}` AND `bnd ∉ attendsR oth = {slf,oth,sh}` (both `decide`), where the other's reach STRICTLY EXTENDS
+  the self's. So the mutual reading, combining the self's reach and the other's WIDER reach, genuinely SUBTRACTS
+  `bnd`: it is bisimilar to what they are yet in NEITHER's (different) attention, the joint blind spot the
+  mutuality cannot close. This is the `ws2_composite_residue` move (bisimilar yet unattended = the finite
+  attention subtracts) lifted from ONE reader to the JOINT attention of the pair — the mutuality is load-bearing
+  because the two reaches DIFFER (Phase C flagged that coinciding reaches made "jointly" a single membership).
 - **The reading order structurally constrained:** `∀ z ∈ attendsR bnd, rankR z < rankR bnd` (`bnd` reads only
   `oth`, `rankR oth = 1 < 2`, `decide`). The higher reader strictly outranks what it reads: the reading order is
   rank-constrained (a DAG on the constitution tower), NOT free or total by construction (PR1-S1 foreclosed).
@@ -72,10 +74,12 @@ theorem ws4_mutual_residue (hinf : ℵ₀ ≤ κ) :
 
 **Why the mutuality is load-bearing (audit (d)).** The concern is that `ws1_no_self_total_hold` (4) holds on
 EVERY structure regardless of mutuality — the PR1-S1 tautology. The load-bearing content is (1): `bnd` is
-subtracted by the JOINT attention (`bnd ∉ attendsR slf ∧ bnd ∉ attendsR oth`), a fact about the ACTUAL mutual
-structure on the witness, not a global diagonal. (1) is what tests whether mutual reading leaves a residue; (4)
-is a disclosed companion certifying no composite totalizes. Strip (1): *"there is a relatum bisimilar to `oth`
-yet in neither `attendsR slf` nor `attendsR oth`"* — a bare bisim/membership fact, mutuality genuine.
+subtracted by the JOINT attention (`bnd ∉ attendsR slf ∧ bnd ∉ attendsR oth`, and since `attendsR slf ⊊ attendsR
+oth` these are two DISTINCT reaches — the C3-S1 repair), a fact about the ACTUAL mutual structure on the witness,
+not a global diagonal. (1) is what tests whether mutual reading leaves a residue; (4) is a disclosed companion
+certifying no composite totalizes. Strip (1): *"there is a relatum bisimilar to `oth` yet in neither the self's
+reach nor the other's wider reach"* — a bare bisim/membership fact, mutuality genuine (the DISCLOSED point: the
+bisim `oth ~ bnd` is the collapse engine, Series 07, the honest import structure the residue rests on).
 
 ### C2, the residue as the bare global diagonal (the PR1-S1 tautology to avoid)
 

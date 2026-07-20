@@ -36,24 +36,28 @@ theorem ws2_other_distinguishes (hinf : ℵ₀ ≤ κ) :
 
 ### C1, the reader is load-bearing (the K1 payoff, the lead)
 
-There is a genuine `FiniteAttention` (a bounded reader: focus `slf`, reading `{slf}`, finite, grounded) FOR
-WHICH the other `oth` is real: `oth` is plain-bisimilar to the read relatum `slf` yet label-separated from it
-(`RealFor` via `ws2_other_distinguishes`). The reader (`att.reads` membership) is LOAD-BEARING in the statement;
-`Many` is not used. The `ws2_attention_makes_real` / `ws2_composite_real_for` shape.
+The reader is a NAMED `def selfReader` (a fixed bounded reader: focus `slf`, reading `{slf}`, finite, grounded),
+NOT an existential over readers (the C1-S1 repair — the blind Phase C review flagged the existential form as the
+reader quantified out, a `Many`-style claim). The other `oth` is real FOR that fixed named reader: `oth` is
+plain-bisimilar to the read relatum `slf ∈ selfReader.reads` yet label-separated from it (`RealFor` via
+`ws2_other_distinguishes`). The reader's `reads` membership is LOAD-BEARING; `Many` is not used; the reader
+cannot be tailored per witness.
 
 ```lean
+noncomputable def selfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift (outDest hinf attendsR) rankR) :=
+  ⟨slf, {slf}, Set.finite_singleton slf, ⟨Set.mem_singleton slf, …grounded by ReflTransGen.refl…⟩⟩
+
 theorem ws2_other_reader_wise (hinf : ℵ₀ ≤ κ) :
-    ∃ att : FiniteAttention (rankLift (outDest hinf attendsR) rankR),
-      RealFor (rankLift (outDest hinf attendsR) rankR) att oth
+    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth
 ```
 - **Ambient:** `FiniteAttention`, `RealFor`, `ws2_other_distinguishes`, `Set.finite_singleton`,
   `ReflTransGen.refl`.
-- **Success condition:** the `ws2_composite_real_for` proof term, `slf` reading `{slf}`, grounded by
-  `ReflTransGen.refl`.
-- **Failure mode:** *the reader quantified out / the other a bare label (K1, SERIOUS).* Foreclosed: the reader is
-  a NAMED `FiniteAttention` whose `reads` membership is used to witness `RealFor`; the other's reading (its own
-  `attendsR`, all four readings from WS1) is what the separation distinguishes. `Many` (reader-erased) is not
-  used. **Winner (K1 payoff).**
+- **Success condition:** `⟨slf, Set.mem_singleton slf, ws2_other_distinguishes hinf⟩` for the FIXED reader
+  `selfReader` (focus `slf`, reads `{slf}`, grounded by `ReflTransGen.refl`).
+- **Failure mode:** *the reader quantified out / the other a bare label (K1, SERIOUS).* Foreclosed by the C1-S1
+  repair: the reader is a NAMED `def` (not existential), its `reads` membership used to witness `RealFor`; the
+  other's own reading (`attendsR oth`, all four readings from WS3) is what the separation distinguishes; `Many`
+  (reader-erased) is not used. **Winner (K1 payoff).**
 
 ### C2, the twoness is non-recoverable (the import, audit (b))
 

@@ -47,26 +47,28 @@ the verdict is falsifiable and the WS4 fork's arms (ONE, TOTALIZED) are genuine 
 
 ```lean
 theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :
-    (attendsR (reifyR {slf, oth}) = {slf, oth})                                              -- wf: WS1 section
-  ∧ (∃ att : FiniteAttention (rankLift (outDest hinf attendsR) rankR),                        -- readerTwo: WS2 reader load-bearing
-        RealFor (rankLift (outDest hinf attendsR) rankR) att oth)
+    (attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})                                       -- wf: WS1 section
+  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth)                  -- readerTwo: WS2 NAMED reader
   ∧ (¬ Recoverable (faceLift hinf))                                                           -- facing: WS3 asymmetric (direction import)
   ∧ (∀ insp : Hold (outDest hinf attendsR) → HoldPred (outDest hinf attendsR), ¬ ∃ t, SelfTotal insp t)  -- WS3 partial / nonTotal
   ∧ (¬ Recoverable (rankLift (outDest hinf attendsR) rankR))                                  -- nonCollapse: WS4 twoness non-recoverable
   ∧ (∃ y : RCar, (∃ R, IsBisim (outDest hinf attendsR) R ∧ R oth y)                           -- residue: WS4 joint-unattended
         ∧ y ∉ attendsR slf ∧ y ∉ attendsR oth)
 ```
-- **Proof:** `refine ⟨(ws1_other_is_locus hinf).1.2, ws2_other_reader_wise hinf, (ws3_facing_asymmetric
-  hinf).2.2.2, (ws3_facing_partial hinf).2, ws2_other_non_recoverable hinf, ?_⟩` and the residue from
-  `(ws4_mutual_residue hinf).2.1`. Each flag is EARNED by the corresponding WS1-WS4 headline, none hand-set.
+- **Proof:** `refine ⟨by decide, ws2_other_reader_wise hinf, (ws3_facing_asymmetric hinf).2.2.2,
+  (ws3_facing_partial hinf).2, ws2_other_non_recoverable hinf, (ws4_mutual_residue hinf).2.1⟩`. Each flag is
+  EARNED by the corresponding WS1-WS4 headline (the reader flag by the NAMED `selfReader`), none hand-set.
+- **DISCLOSED (C2-S1):** the flags are the accepted house pattern (S1 `ws5.lean`); the ONE / TOTALIZED arms are
+  PRE-REGISTERED outcomes the same `verdict` computes for OTHER structures (charter §7), reachable inputs to the
+  discriminating function, not hand-set claims about THIS witness (on which the twoness is genuinely
+  `¬ Recoverable` and the diagonal genuinely holds, so `twoFacing` is the computed outcome).
 
 ## The five audit clauses (a)-(e)
 
 ```lean
--- (a) THE OTHER IS A READER, NOT A LABEL: a named FiniteAttention for which oth is RealFor (not Many, not a tag)
+-- (a) THE OTHER IS A READER, NOT A LABEL: the NAMED selfReader for which oth is RealFor (not Many, not a tag)
 theorem ws5_audit_reader_loadbearing (hinf : ℵ₀ ≤ κ) :
-    ∃ att : FiniteAttention (rankLift (outDest hinf attendsR) rankR),
-      RealFor (rankLift (outDest hinf attendsR) rankR) att oth := ws2_other_reader_wise hinf
+    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth := ws2_other_reader_wise hinf
 
 -- (b) THE TWONESS IS NON-RECOVERABLE: a proof term (the otherness an import, Series 07)
 theorem ws5_audit_twoness_import (hinf : ℵ₀ ≤ κ) :
