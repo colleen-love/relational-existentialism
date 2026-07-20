@@ -6,7 +6,7 @@ distinct from the self, seeded by reifying the shared-field pattern (which conta
 shared field that contains both. The sin (charter §4, DISCONNECTED): a second locus constructible only by
 importing structure beyond the symmetry-breaker.**
 
-*Imports `P2S1`; builds the `Fin 3` witness on the S0 `attends`/`outDest`/`FinReify` API, generalizing S0's
+*Imports `P2S1`; builds the `Fin 5` witness on the S0 `attends`/`outDest`/`FinReify` API, generalizing S0's
 `ws1_first_other` (the self-loop reified into the first other) by giving the reified relatum its OWN attention
 that reads back into the field. Every obligation reduces by the kernel (`decide`/`rfl`).*
 
@@ -22,21 +22,24 @@ without importing structure beyond the symmetry-breaker, that is the pre-registe
 ## The carrier (README §3, fixed here)
 
 ```lean
-abbrev RCar : Type := Fin 4
+abbrev RCar : Type := Fin 5
 def slf : RCar := 0   -- the self (base of the constitution tower), rank 0
 def oth : RCar := 1   -- the OTHER: the reified self-relation upgraded to a locus reading back, rank 1
-def sh  : RCar := 2   -- a shared relatum in the other's wider reach (makes the two reaches distinct), rank 0
-def bnd : RCar := 3   -- a higher closure the pair does not jointly attend (WS4 residue witness), rank 2
+def p   : RCar := 2   -- a relatum in the SELF's reach only (self reads it, the other does not), rank 0
+def q   : RCar := 3   -- a relatum in the OTHER's reach only (the other reads it, the self does not), rank 0
+def bnd : RCar := 4   -- a higher closure the pair does not jointly attend (WS4 residue witness), rank 2
 
 def attendsR : RCar → Finset RCar := fun x =>
-  if x = slf then {slf, oth} else if x = oth then {slf, oth, sh} else if x = sh then {sh} else {oth}
+  if x = slf then {slf, oth, p} else if x = oth then {slf, oth, q}
+  else if x = p then {p} else if x = q then {q} else {oth}
 def rankR : RCar → ℕ := fun x => if x = oth then 1 else if x = bnd then 2 else 0
 def reifyR : Finset RCar → RCar := fun s =>
-  if s = {slf, oth, sh} then oth else if s = {oth} then bnd else slf
-def rfield : Finset RCar := {slf, oth, sh}   -- the shared field: self, other, and what they attend
+  if s = {slf, oth, q} then oth else if s = {oth} then bnd else slf
+def rfield : Finset RCar := {slf, oth, p, q}   -- the shared field: self, other, and what they attend
 ```
-The self's reach `{slf,oth}` is a proper subset of the other's `{slf,oth,sh}` (the C3-S1 repair: distinct
-reaches, so WS4's joint residue `bnd` is missed by two DIFFERENT attentions, not one membership).
+The two reaches `{slf,oth,p}` and `{slf,oth,q}` are INCOMPARABLE (`p ∈ slf∖oth`, `q ∈ oth∖slf`; the C2p2-R1
+repair), so WS4's joint residue `bnd` is missed by two reaches neither of which contains the other — both
+non-membership conjuncts load-bearing, not one effective membership.
 
 Carrier lemmas (all `decide`/`rfl`): `attendsR_slf`, `attendsR_oth`, `attendsR_bnd`; `attendsR_nonempty`;
 `outDestR_ne_empty`; `ws1_rcar_SHNE` (every node `SHNE`, by reduction to `attendsR_ne_empty`, the S1
@@ -47,14 +50,14 @@ pattern); `rankLiftR_val` (the labelled edge set at `x`).
 
 ### C1, the other as the reified shared-field pattern, reading back (the lead)
 
-The other `oth = reifyR {slf, oth}` reifies the shared-field pattern `{slf, oth}` (which contains the
-self-relation `{slf}`), sections it (`attendsR (reifyR {slf,oth}) = {slf,oth}`), is a relatum of the SAME field
-`RCar`, ranks strictly above the self (`rankR oth = 1 > 0`), and reads back into the field (`slf, oth ∈ attendsR
-oth`). This is S0's `ws1_first_other` with the reified relatum given its own reading.
+The other `oth = reifyR {slf, oth, q}` reifies its reach pattern `{slf, oth, q}` (which contains the
+self-relation `{slf}`), sections it (`attendsR (reifyR {slf,oth,q}) = {slf,oth,q}`), is a relatum of the SAME
+field `RCar`, ranks strictly above the self (`rankR oth = 1 > 0`), and reads back into the field (`slf, oth ∈
+attendsR oth`). This is S0's `ws1_first_other` with the reified relatum given its own reading.
 
 ```lean
 theorem ws1_other_is_locus (hinf : ℵ₀ ≤ κ) :
-    (reifyR {slf, oth, sh} = oth ∧ attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})  -- seeded by reification; sections
+    (reifyR {slf, oth, q} = oth ∧ attendsR (reifyR {slf, oth, q}) = {slf, oth, q})  -- seeded by reification; sections
   ∧ oth ≠ slf                                                                   -- distinct from the self
   ∧ (attendsR oth).Nonempty                                                     -- its attention a genuine finite attends
   ∧ (slf ∈ rfield ∧ oth ∈ rfield                                               -- the shared field contains both,
@@ -72,12 +75,12 @@ theorem ws1_other_is_locus (hinf : ℵ₀ ≤ κ) :
 ### C2, the shared field genuinely contains both and their attentions (the well-formedness half, folded into C1)
 
 The `rfield` conjunct of C1: `slf, oth ∈ rfield` and every relatum either perspective attends is in `rfield`
-(`attendsR slf = attendsR oth = {slf,oth} ⊆ rfield`). This is the "reading a shared field that contains both"
-clause. Folded into `ws1_other_is_locus`, not a separate theorem.
+(`attendsR slf = {slf,oth,p} ⊆ rfield` and `attendsR oth = {slf,oth,q} ⊆ rfield`). This is the "reading a shared
+field that contains both" clause. Folded into `ws1_other_is_locus`, not a separate theorem.
 
 ### C3, the reification section is a genuine `FinReify` fact, not an opaque constructor (the honesty half)
 
-`attendsR (reifyR {slf,oth}) = {slf,oth}` is a real pointwise `FinReify` section (`decide`), exactly as S1's
+`attendsR (reifyR {slf,oth,q}) = {slf,oth,q}` is a real pointwise `FinReify` section (`decide`), exactly as S1's
 `section_cycleA`. The other's well-formedness is DISCHARGED from the section, never posited by an opaque
 `Nonempty` constructor (the PR1-S2 sin). Injective at the used patterns via `ws1_finreify_injective` where
 needed; the section is pointwise (total `FinReify` unsatisfiable on the finite carrier, disclosed as in S0/S1).
@@ -116,7 +119,7 @@ the carrier (this doc), `ws1_bound_is_finite_attention` (S0), `ws1_rcar_SHNE`, `
   bounded, reading a shared field containing both.
 - **DISCONNECTED (pre-registered, first-class):** if the second locus required importing structure beyond the
   symmetry-breaker (e.g. a new atom, a cardinal ceiling, an opaque non-`FinReify` constructor), reported
-  DISCONNECTED with the obstruction precise. Foreclosed here: `oth` is a `Fin 3` relatum minted by a genuine
+  DISCONNECTED with the obstruction precise. Foreclosed here: `oth` is a `Fin 5` relatum minted by a genuine
   `reifyR` section, no import beyond the tower rank.
 
 ## Strip test

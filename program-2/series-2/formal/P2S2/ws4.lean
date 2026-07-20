@@ -7,9 +7,9 @@ The genuinely open question: when two perspectives each read the other AND thems
 COLLAPSE them (recover one from the other), let one TOTALIZE the pair, or leave a RESIDUE. `ws4_mutual_residue`
 bundles the honest fork on the witnessed mutual structure: (0) all four readings witnessed (the recursion
 genuine); (1) the RESIDUE, load-bearing on MUTUALITY — a relatum `bnd` plain-bisimilar to `oth` (the collapse
-engine, Series 07, the honest import structure) yet JOINTLY unattended by two DISTINCT reaches (`bnd ∉ attendsR
-slf = {slf,oth}` AND `bnd ∉ attendsR oth = {slf,oth,sh}`), so the mutual reading, combining the self's and the
-other's WIDER reach, still subtracts it (the C3-S1 repair: distinct reaches, not one membership); (2) the reading
+engine, Series 07, the honest import structure) yet JOINTLY unattended by two INCOMPARABLE reaches (`bnd ∉
+attendsR slf = {slf,oth,p}` AND `bnd ∉ attendsR oth = {slf,oth,q}`, `p ∈ slf∖oth`, `q ∈ oth∖slf`), so the mutual
+reading, combining the two reaches, still subtracts it (the C2p2-R1 repair: both conjuncts biting); (2) the reading
 order rank-constrained (not free/total, PR1-S1 foreclosed); (3) NOT COLLAPSE (the twoness non-recoverable); (4)
 NOT TOTALIZED (the diagonal survives mutual inspection, a DISCLOSED companion, never the whole payoff). ONE and
 TOTALIZED are pre-registered (WS5's verdict computes them for other structures). The coherence is NEVER decided.
@@ -32,13 +32,15 @@ variable {κ : Cardinal.{0}}
 
 /-- **THE MUTUAL RESIDUE (WS4, the knot).** On the witnessed mutual structure: (0) all four readings hold (the
 recursion self reads other reads self is genuine); (1) the RESIDUE — `bnd` is plain-bisimilar to `oth` (the
-collapse engine identifies all atomless relata, Series 07) yet in NEITHER the self's reach `{slf,oth}` NOR the
-other's WIDER reach `{slf,oth,sh}`, so the mutual reading, combining two DISTINCT reaches, subtracts it (the
-joint blind spot the mutuality cannot close); (2) the reading order is rank-constrained (`bnd` strictly outranks
-what it reads); (3) NOT COLLAPSE (the twoness `¬ Recoverable`, not ONE); (4) NOT TOTALIZED (no inspection is
-self-total, the diagonal surviving mutual inspection — a DISCLOSED companion, structure-independent, never the
-whole payoff). The mutuality is load-bearing in (1) via the two distinct reaches; the coherence of the two
-readings is NEVER decided (Series 2.3's question, charter §4.d). -/
+collapse engine identifies all atomless relata, Series 07) yet in NEITHER the self's reach `{slf,oth,p}` NOR the
+other's reach `{slf,oth,q}`, which are INCOMPARABLE (`p ∈ slf∖oth`, `q ∈ oth∖slf`), so both non-membership
+conjuncts are load-bearing (`p` excluded only by the self's, `q` only by the other's) and the mutual reading,
+combining two genuinely distinct reaches, subtracts `bnd` (the joint blind spot the mutuality cannot close, the
+C2p2-R1 repair); (2) the reading order is rank-constrained (`bnd` strictly outranks what it reads); (3) NOT
+COLLAPSE (the twoness `¬ Recoverable`, not ONE); (4) NOT TOTALIZED (no inspection is self-total, the diagonal
+surviving mutual inspection — a DISCLOSED companion, structure-independent, never the whole payoff). The
+mutuality is load-bearing in (1) via the two incomparable reaches; the coherence of the two readings is NEVER
+decided (Series 2.3's question, charter §4.d). -/
 theorem ws4_mutual_residue (hinf : ℵ₀ ≤ κ) :
     ((oth ∈ attendsR slf ∧ slf ∈ attendsR oth) ∧ (slf ∈ attendsR slf ∧ oth ∈ attendsR oth))
   ∧ (∃ y : RCar, (∃ R, IsBisim (outDest hinf attendsR) R ∧ R oth y)

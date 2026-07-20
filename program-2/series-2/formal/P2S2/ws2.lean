@@ -6,7 +6,7 @@ WS2 - Genuinely two reader-wise (the reader knot, the central sin, K1). Program 
 The self and the other are genuinely two READER-WISE: `oth` and `slf` are plain-bisimilar over the bare
 out-attention relating (the collapse engine `ws1_atomless_bisim`) yet rank-separated (`ws2_other_distinguishes`,
 the `ws1_first_other` / `ws2_composite_distinguishes` pattern), so the other is real FOR a NAMED finite attention
-`selfReader` (`ws2_other_reader_wise`, a genuine `RealFor` witness on a FIXED reader — not existentially tailored,
+`slfReader` (`ws2_other_reader_wise`, a genuine `RealFor` witness on a FIXED reader — not existentially tailored,
 not `Many`), and the separation is NON-RECOVERABLE (`ws2_other_non_recoverable`, an import, Series 07). The
 reader is a fixed named bounded attention (its `reads` membership load-bearing), and the OTHER's own attention
 (`attendsR oth`, the four readings of WS3) is what does the distinguishing; the other is never a point-tag, never
@@ -51,7 +51,7 @@ theorem ws2_other_distinguishes (hinf : ℵ₀ ≤ κ) :
 /-- **THE NAMED READER (the C1-S1 repair).** A FIXED bounded reader — focus `slf`, reading `{slf}`, finite,
 grounded — over the rank lift. It is a `def`, not an existential witness, so the WS2 payoff cannot be tailored
 per structure: the reader is named and its `reads = {slf}` is fixed. -/
-noncomputable def selfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift (outDest hinf attendsR) rankR) :=
+noncomputable def slfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift (outDest hinf attendsR) rankR) :=
   ⟨slf, {slf}, Set.finite_singleton slf,
     ⟨Set.mem_singleton slf, by
       intro z hz
@@ -59,15 +59,15 @@ noncomputable def selfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift 
       exact Relation.ReflTransGen.refl⟩⟩
 
 /-- **GENUINELY TWO READER-WISE, THE READER LOAD-BEARING AND NAMED (audit (a), K1).** The other `oth` is real
-FOR the NAMED finite attention `selfReader` (not an existential over readers, the C1-S1 repair): `oth` is
-plain-bisimilar to the read relatum `slf ∈ selfReader.reads` yet label-separated from it (`RealFor` via
+FOR the NAMED finite attention `slfReader` (not an existential over readers, the C1-S1 repair): `oth` is
+plain-bisimilar to the read relatum `slf ∈ slfReader.reads` yet label-separated from it (`RealFor` via
 `ws2_other_distinguishes`). The reader is a fixed named bounded attention whose `reads` membership is
 LOAD-BEARING; `Many` is not used, and the reader is not quantified out. This is the reader-relative reality (a
 relatum is real for a bounded reader that reads a relatum it is plain-bisimilar-yet-label-separated from) that
 `Many` alone does not carry; the OTHER's own attention (`attendsR oth`, WS3's four readings) does the
 distinguishing. -/
 theorem ws2_other_reader_wise (hinf : ℵ₀ ≤ κ) :
-    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth :=
+    RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth :=
   ⟨slf, Set.mem_singleton slf, ws2_other_distinguishes hinf⟩
 
 /-- **THE TWONESS IS NON-RECOVERABLE (audit (b)).** The self/other separation is NOT recoverable from the plain

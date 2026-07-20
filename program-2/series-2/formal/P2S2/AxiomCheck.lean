@@ -27,7 +27,7 @@ namespace P2S2
 #print axioms ws5_audit_twoness_import
 #print axioms ws5_audit_facing_asymmetric
 #print axioms ws5_audit_residue_genuine
-#print axioms ws5_audit_coherence_open
+#print axioms ws5_audit_downstream_open
 #print axioms ws5_audit_names_not_terms
 
 end P2S2

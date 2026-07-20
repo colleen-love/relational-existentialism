@@ -8,7 +8,7 @@
 
 ## 0. Snapshot
 
-- **Phase:** C complete (pass 1: one SERIOUS C1-S1, closed by repair); D applied (named reader, `Fin 4` distinct reaches); `formal/` BUILT and validated (Phase E work done early to validate the design); Phase C pass-2 re-review in progress (SERIOUS closed by editing the design ⇒ re-seed and re-review per protocol §2 loop). **Precondition met:** Series 2.1 (TWO-ZONE after Extension 1) has landed.
+- **Phase:** C complete and CONVERGED (pass 1: one SERIOUS C1-S1 Fixed; pass 2: ZERO SERIOUS, one REAL C2p2-R1 Fixed); D applied (named `slfReader`; `Fin 5` INCOMPARABLE reaches `p ∈ slf∖oth`, `q ∈ oth∖slf`); `formal/` BUILT and validated (Phase E). Phase F (blind code review) next. **Precondition met:** Series 2.1 (TWO-ZONE after Extension 1) has landed.
 - **Verdict:** **twoFacing** — `ws5_verdict_eq : verdict true true true true true = Outcome.twoFacing` by `rfl`, on the flags `ws5_flags_justified` earns. Pending Phase F.
 - **Build state:** `formal/P2S2/ws1`–`ws5` + aggregator + `AxiomCheck` BUILT sorry-free, registered in `lake/lakefile.toml` (`P2S2` added to `defaultTargets`) and `scripts/gate.sh` (`check program-2/series-2 "^import (P2S1|P2S2)…"`). Built on the **Series 2.1 ground** (`P2S1`), reaching **P2S0** and **P1** transitively.
 - **Axiom state:** every payoff axiom-clean on the standard three (`propext`, `Classical.choice`, `Quot.sound`); `ws5_verdict_eq`/`ws5_verdict_discriminates`/`ws5_audit_coherence_open`/`ws5_audit_names_not_terms` depend on NO axioms.
@@ -60,6 +60,10 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 | C4-S1 | C | COSMETIC | `ws4_mutual_residue` (5) and `ws3_facing_partial` (2) are the universal diagonal (structure-independent). | Noted — carried as a DISCLOSED companion conjunct (not the payoff); the payoff is the residue + structural conjuncts (reviewer confirmed the tautology defect avoided). |
 | C5-S1 | C | COSMETIC | `ws5_audit_coherence_open`/`ws5_audit_names_not_terms : True` are vacuous certificates. | Noted — the grep-certified pattern (S1 `ws5_audit_names_not_terms`); the properties are about identifiers, not propositions. (d-iv) `True` is the CORRECT non-decision of the coherence. |
 | C6-S1 | C | COSMETIC | `ws3_facing_asymmetric`'s `¬ Recoverable (faceLift)` and WS2's `¬ Recoverable (rankLift)` share the witnessing pair `slf ~ oth`. | Noted — coherent: `faceLift`'s label is target-dependent (reading DIRECTION), genuinely distinct from `rankLift`'s source-rank; both read structurally by `IsBisimL` (reviewer confirmed distinct). |
+| C2p2-R1 | C (pass 2) | REAL | `ws4_mutual_residue` conjunct (1): the C3-S1 repair made the two reaches distinct but NESTED (`attendsR slf ⊊ attendsR oth`), so `y ∉ attendsR oth ⟹ y ∉ attendsR slf` — the `slf` conjunct is redundant, the joint framing still partly decorative. | **(Fixed)** — the carrier is now `Fin 5` with INCOMPARABLE reaches: `attendsR slf = {slf,oth,p}` and `attendsR oth = {slf,oth,q}` with `p ∈ slf∖oth`, `q ∈ oth∖slf`. Now `p` is excluded from the residue ONLY by the `slf` conjunct and `q` ONLY by the `oth` conjunct, so BOTH conjuncts are load-bearing and neither implies the other — the residue `bnd` is genuinely the pair's JOINT blind spot. |
+| C2p2-C1 | C (pass 2) | COSMETIC | `def selfReader` spells out "self". | **(Fixed)** — renamed `slfReader` (the `slf` abbreviation convention). |
+| C2p2-C2 | C (pass 2) | COSMETIC | Blind-seed success criterion §1 had a stale example `attendsR (reifyR {slf,oth}) = {slf,oth}`. | Fixed — the seed's criterion now shows the actual minting section. |
+| C2p2-S0 | C (pass 2) | — | Pass-2 blind re-review returned **ZERO SERIOUS**; C1-S1 fully resolved (named reader), C3-S1 tautology resolved; all five audit clauses PASS. | Phase C loop CONVERGED. The C2p2-R1 REAL strengthening below does not reopen C (no SERIOUS closed by it). |
 
 ## 5. Deviations from charter (disclosed)
 

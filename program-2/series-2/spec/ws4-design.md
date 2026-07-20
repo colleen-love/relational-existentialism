@@ -28,12 +28,13 @@ and both arms must be tested on a witnessed pair with a real mutual-reading stru
 On `RCar`: the two loci `slf`, `oth` read the shared field `{slf, oth}` BETWEEN them — all four readings
 witnessed (`ws3_four_readings`): `slf` reads `slf` and `oth`, `oth` reads `slf` and `oth` (`decide`). The
 recursion is genuine: `oth` reads `slf`, which reads `oth`, which reads `slf`. The residue witness is `bnd`:
-- **The residue (non-empty, load-bearing on MUTUALITY, the C3-S1 repair):** `bnd` is plain-bisimilar to the pair
-  (the collapse engine, every node `SHNE`) yet JOINTLY UNATTENDED by two DISTINCT reaches — `bnd ∉ attendsR slf =
-  {slf,oth}` AND `bnd ∉ attendsR oth = {slf,oth,sh}` (both `decide`), where the other's reach STRICTLY EXTENDS
-  the self's. So the mutual reading, combining the self's reach and the other's WIDER reach, genuinely SUBTRACTS
-  `bnd`: it is bisimilar to what they are yet in NEITHER's (different) attention, the joint blind spot the
-  mutuality cannot close. This is the `ws2_composite_residue` move (bisimilar yet unattended = the finite
+- **The residue (non-empty, load-bearing on MUTUALITY, the C3-S1 / C2p2-R1 repair):** `bnd` is plain-bisimilar to
+  the pair (the collapse engine, every node `SHNE`) yet JOINTLY UNATTENDED by two INCOMPARABLE reaches — `bnd ∉
+  attendsR slf = {slf,oth,p}` AND `bnd ∉ attendsR oth = {slf,oth,q}` (both `decide`), with `p ∈ slf∖oth` and `q ∈
+  oth∖slf` so neither reach contains the other. So the mutual reading, combining the self's reach and the
+  other's, genuinely SUBTRACTS `bnd`: it is bisimilar to what they are yet in NEITHER's (distinct) attention, the
+  joint blind spot the mutuality cannot close. Both non-membership conjuncts are load-bearing (`p` ruled out only
+  by the self's, `q` only by the other's — the C2p2-R1 repair to nested reaches). This is the `ws2_composite_residue` move (bisimilar yet unattended = the finite
   attention subtracts) lifted from ONE reader to the JOINT attention of the pair — the mutuality is load-bearing
   because the two reaches DIFFER (Phase C flagged that coinciding reaches made "jointly" a single membership).
 - **The reading order structurally constrained:** `∀ z ∈ attendsR bnd, rankR z < rankR bnd` (`bnd` reads only

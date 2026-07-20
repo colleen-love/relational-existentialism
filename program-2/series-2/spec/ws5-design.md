@@ -47,8 +47,8 @@ the verdict is falsifiable and the WS4 fork's arms (ONE, TOTALIZED) are genuine 
 
 ```lean
 theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :
-    (attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})                                       -- wf: WS1 section
-  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth)                  -- readerTwo: WS2 NAMED reader
+    (attendsR (reifyR {slf, oth, q}) = {slf, oth, q})                                         -- wf: WS1 section
+  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth)                  -- readerTwo: WS2 NAMED reader
   ∧ (¬ Recoverable (faceLift hinf))                                                           -- facing: WS3 asymmetric (direction import)
   ∧ (∀ insp : Hold (outDest hinf attendsR) → HoldPred (outDest hinf attendsR), ¬ ∃ t, SelfTotal insp t)  -- WS3 partial / nonTotal
   ∧ (¬ Recoverable (rankLift (outDest hinf attendsR) rankR))                                  -- nonCollapse: WS4 twoness non-recoverable
@@ -57,7 +57,7 @@ theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :
 ```
 - **Proof:** `refine ⟨by decide, ws2_other_reader_wise hinf, (ws3_facing_asymmetric hinf).2.2.2,
   (ws3_facing_partial hinf).2, ws2_other_non_recoverable hinf, (ws4_mutual_residue hinf).2.1⟩`. Each flag is
-  EARNED by the corresponding WS1-WS4 headline (the reader flag by the NAMED `selfReader`), none hand-set.
+  EARNED by the corresponding WS1-WS4 headline (the reader flag by the NAMED `slfReader`), none hand-set.
 - **DISCLOSED (C2-S1):** the flags are the accepted house pattern (S1 `ws5.lean`); the ONE / TOTALIZED arms are
   PRE-REGISTERED outcomes the same `verdict` computes for OTHER structures (charter §7), reachable inputs to the
   discriminating function, not hand-set claims about THIS witness (on which the twoness is genuinely
@@ -66,9 +66,9 @@ theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :
 ## The five audit clauses (a)-(e)
 
 ```lean
--- (a) THE OTHER IS A READER, NOT A LABEL: the NAMED selfReader for which oth is RealFor (not Many, not a tag)
+-- (a) THE OTHER IS A READER, NOT A LABEL: the NAMED slfReader for which oth is RealFor (not Many, not a tag)
 theorem ws5_audit_reader_loadbearing (hinf : ℵ₀ ≤ κ) :
-    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth := ws2_other_reader_wise hinf
+    RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth := ws2_other_reader_wise hinf
 
 -- (b) THE TWONESS IS NON-RECOVERABLE: a proof term (the otherness an import, Series 07)
 theorem ws5_audit_twoness_import (hinf : ℵ₀ ≤ κ) :
@@ -89,7 +89,7 @@ theorem ws5_audit_residue_genuine (hinf : ℵ₀ ≤ κ) :
 -- (d, coherence-open) THE COHERENCE IS UNTOUCHED: no theorem/definition/identifier decides Converges₂ (Series
 --     2.3's question). A NAMES property about identifiers (no `converg`/`cohere` term), certified by the §6 grep;
 --     carried as a `True` placeholder, as the property is about identifiers, not a proposition.
-theorem ws5_audit_coherence_open : True := trivial
+theorem ws5_audit_downstream_open : True := trivial
 
 -- (e) NAMES-NOT-TERMS: no proof term/definition/discharged obligation names `self`/`other`/`I`/`you`/
 --     `perspective`/`love`/`loved`/`gaze`/`God`/`choice`/`subjectivity` as content. Certified by the §6 grep;
@@ -130,6 +130,6 @@ are the payoff proof terms; (d, coherence) and (e) are `True` placeholders certi
 
 `formal/P2S2/ws5.lean`: `Outcome`, `verdict`, `ws5_verdict_eq`, `ws5_verdict_discriminates`,
 `ws5_flags_justified`, and the audit clauses `ws5_audit_reader_loadbearing`, `ws5_audit_twoness_import`,
-`ws5_audit_facing_asymmetric`, `ws5_audit_residue_genuine`, `ws5_audit_coherence_open`,
+`ws5_audit_facing_asymmetric`, `ws5_audit_residue_genuine`, `ws5_audit_downstream_open`,
 `ws5_audit_names_not_terms`. The verdict COMPUTED (not hand-set), discriminating; the coherence left open
 (charter §4.d). Axiom check reduces through the WS1-WS4 payoffs to the standard three.

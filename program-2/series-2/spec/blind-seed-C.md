@@ -26,23 +26,26 @@ The design builds on an imported ground with this API (all pre-existing, assumed
 ## The carrier under review
 
 ```lean
-abbrev RCar : Type := Fin 4
+abbrev RCar : Type := Fin 5
 def slf : RCar := 0
 def oth : RCar := 1
-def sh  : RCar := 2
-def bnd : RCar := 3
+def p   : RCar := 2
+def q   : RCar := 3
+def bnd : RCar := 4
 def attendsR : RCar → Finset RCar := fun x =>
-  if x = slf then {slf, oth} else if x = oth then {slf, oth, sh} else if x = sh then {sh} else {oth}
+  if x = slf then {slf, oth, p} else if x = oth then {slf, oth, q}
+  else if x = p then {p} else if x = q then {q} else {oth}
 def rankR : RCar → ℕ := fun x => if x = oth then 1 else if x = bnd then 2 else 0
 def reifyR : Finset RCar → RCar := fun s =>
-  if s = {slf, oth, sh} then oth else if s = {oth} then bnd else slf
-def rfield : Finset RCar := {slf, oth, sh}
+  if s = {slf, oth, q} then oth else if s = {oth} then bnd else slf
+def rfield : Finset RCar := {slf, oth, p, q}
 noncomputable def faceLift (hinf : ℵ₀ ≤ κ) : RCar → LkObj κ (ULift.{0} Bool) RCar :=
   fun x => PkMap κ (fun z => ((⟨decide (rankR x < rankR z)⟩ : ULift.{0} Bool), z)) (outDest hinf attendsR x)
-noncomputable def selfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift (outDest hinf attendsR) rankR) :=
+noncomputable def slfReader (hinf : ℵ₀ ≤ κ) : FiniteAttention (rankLift (outDest hinf attendsR) rankR) :=
   ⟨slf, {slf}, Set.finite_singleton slf, ⟨Set.mem_singleton slf, (grounded : ∀ z ∈ {slf}, SReaches _ slf z)⟩⟩
 ```
-Note: `attendsR slf = {slf,oth}` is a PROPER SUBSET of `attendsR oth = {slf,oth,sh}` (the two reaches differ).
+Note: the two reaches are INCOMPARABLE — `attendsR slf = {slf,oth,p}` and `attendsR oth = {slf,oth,q}` with
+`p ∈ slf∖oth`, `q ∈ oth∖slf` (neither contains the other).
 Claimed carrier facts (all by `decide`/`rfl`): every node `SHNE (outDest hinf attendsR)`; `plainOf (rankLift
 (outDest hinf attendsR) lab) = outDest hinf attendsR`; `plainOf (faceLift hinf) = outDest hinf attendsR`.
 
@@ -51,18 +54,18 @@ Claimed carrier facts (all by `decide`/`rfl`): every node `SHNE (outDest hinf at
 ```lean
 -- WS1
 theorem ws1_other_is_locus (hinf : ℵ₀ ≤ κ) :
-    (reifyR {slf, oth, sh} = oth ∧ attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})
+    (reifyR {slf, oth, q} = oth ∧ attendsR (reifyR {slf, oth, q}) = {slf, oth, q})
   ∧ oth ≠ slf
   ∧ (attendsR oth).Nonempty
   ∧ (slf ∈ rfield ∧ oth ∈ rfield
       ∧ (∀ z ∈ attendsR slf, z ∈ rfield) ∧ (∀ z ∈ attendsR oth, z ∈ rfield))
   ∧ (∀ x : RCar, Cardinal.mk (↥((outDest hinf attendsR x).1)) < Cardinal.aleph0)
 
--- WS2  (selfReader is a NAMED def, above; ws2_other_reader_wise proves RealFor for THAT fixed reader, not ∃att)
+-- WS2  (slfReader is a NAMED def, above; ws2_other_reader_wise proves RealFor for THAT fixed reader, not ∃att)
 theorem ws2_other_distinguishes (hinf : ℵ₀ ≤ κ) :
     AttentionDistinguishes (rankLift (outDest hinf attendsR) rankR) oth slf
 theorem ws2_other_reader_wise (hinf : ℵ₀ ≤ κ) :
-    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth
+    RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth
 theorem ws2_other_non_recoverable (hinf : ℵ₀ ≤ κ) :
     ¬ Recoverable (rankLift (outDest hinf attendsR) rankR)
 
@@ -101,20 +104,20 @@ theorem ws5_verdict_discriminates :
   ∧ verdict false true true true true = Outcome.disconnected
   ∧ verdict true false true true true = Outcome.partial'
 theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :   -- bundles the WS1-WS4 headline propositions (each flag=true earned)
-    (attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})
-  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth)
+    (attendsR (reifyR {slf, oth, q}) = {slf, oth, q})
+  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth)
   ∧ (¬ Recoverable (faceLift hinf))
   ∧ (∀ insp : Hold (outDest hinf attendsR) → HoldPred (outDest hinf attendsR), ¬ ∃ t, SelfTotal insp t)
   ∧ (¬ Recoverable (rankLift (outDest hinf attendsR) rankR))
   ∧ (∃ y : RCar, (∃ R, IsBisim (outDest hinf attendsR) R ∧ R oth y) ∧ y ∉ attendsR slf ∧ y ∉ attendsR oth)
 -- plus audit clauses ws5_audit_reader_loadbearing/twoness_import/facing_asymmetric/residue_genuine
--- (proof-term aliases of the above), and ws5_audit_coherence_open : True, ws5_audit_names_not_terms : True.
+-- (proof-term aliases of the above), and ws5_audit_downstream_open : True, ws5_audit_names_not_terms : True.
 ```
 
 ## Success criteria (restated mechanically)
 
-1. WS1: `oth` is a relatum of `RCar`, minted by a genuine `reifyR` section (`attendsR (reifyR {slf,oth}) =
-   {slf,oth}`), distinct from `slf`, with a nonempty finite attention, over a shared field `rfield` containing
+1. WS1: `oth` is a relatum of `RCar`, minted by a genuine `reifyR` section (`attendsR (reifyR {slf,oth,q}) =
+   {slf,oth,q}`), distinct from `slf`, with a nonempty finite attention, over a shared field `rfield` containing
    both and every relatum either attends; the out-neighborhoods are `< ℵ₀` (no cardinal ceiling).
 2. WS2: there is a NAMED `FiniteAttention` for which `oth` is `RealFor` (the reader load-bearing, not an
    existential over separated pairs), and the `oth`/`slf` separation is `¬ Recoverable`.

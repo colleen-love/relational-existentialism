@@ -45,47 +45,53 @@ other), asymmetric because knowing is directed, and partial because no reader to
 ## 3. The shared witness (`§WITNESS`, fixed here, built in WS1, used by WS2-WS4)
 
 One monomorphic carrier at `Cardinal.{0}` carries every payoff, so WS4's residue and collapse arms and the
-reader payoff are exercised on the SAME structure (audit (a), (d)). Carrier `RCar := Fin 4`.
+reader payoff are exercised on the SAME structure (audit (a), (d)). Carrier `RCar := Fin 5`.
 
 | Node | def | role | `attendsR` | `rankR` |
 |---|---|---|---|---|
-| `slf` | `0` | the self (base of the constitution tower) | `{slf, oth}` | 0 |
-| `oth` | `1` | the OTHER: the reified self-relation, upgraded to a locus reading back | `{slf, oth, sh}` | 1 |
-| `sh`  | `2` | a shared relatum in the other's wider reach (makes the two reaches distinct) | `{sh}` | 0 |
-| `bnd` | `3` | a higher closure the pair does NOT jointly attend (the residue witness) | `{oth}` | 2 |
+| `slf` | `0` | the self (base of the constitution tower) | `{slf, oth, p}` | 0 |
+| `oth` | `1` | the OTHER: the reified self-relation, upgraded to a locus reading back | `{slf, oth, q}` | 1 |
+| `p`   | `2` | a relatum in the SELF's reach only (self reads it, the other does not) | `{p}` | 0 |
+| `q`   | `3` | a relatum in the OTHER's reach only (the other reads it, the self does not) | `{q}` | 0 |
+| `bnd` | `4` | a higher closure the pair does NOT jointly attend (the residue witness) | `{oth}` | 2 |
 
-- **The other is seeded by reification.** `reifyR : Finset RCar → RCar` is pointwise: `{slf,oth,sh} ↦ oth`,
-  `{oth} ↦ bnd`, else `slf`. It sections `attendsR` at these patterns: `attendsR (reifyR {slf,oth,sh}) =
-  {slf,oth,sh}` and `attendsR (reifyR {oth}) = {oth}` (the `FinReify` section, pointwise; total `FinReify` is
-  unsatisfiable on the finite carrier, as in S0/S1). The other `oth` is the reified reach pattern `{slf,oth,sh}`
+- **The other is seeded by reification.** `reifyR : Finset RCar → RCar` is pointwise: `{slf,oth,q} ↦ oth`,
+  `{oth} ↦ bnd`, else `slf`. It sections `attendsR` at these patterns: `attendsR (reifyR {slf,oth,q}) =
+  {slf,oth,q}` and `attendsR (reifyR {oth}) = {oth}` (the `FinReify` section, pointwise; total `FinReify` is
+  unsatisfiable on the finite carrier, as in S0/S1). The other `oth` is the reified reach pattern `{slf,oth,q}`
   (which contains the self-relation `{slf}`), a relatum of the SAME field `RCar`, `rankR oth = 1 > 0 = rankR
   slf`. This GENERALIZES S0's `ws1_first_other` (the self-loop `{slf}` reified into the first other is the base
-  case) by giving the reified relatum its OWN attention that reads back into the field and reaches STRICTLY
-  FURTHER than the self's (the C3-S1 repair: distinct reaches make WS4's joint residue non-decorative).
+  case) by giving the reified relatum its OWN attention that reads back into the field.
+- **The two reaches are INCOMPARABLE (the C2p2-R1 repair).** `attendsR slf = {slf,oth,p}` and `attendsR oth =
+  {slf,oth,q}` with `p ∈ slf∖oth` and `q ∈ oth∖slf`: each perspective reads a relatum the other does not, so
+  neither reach contains the other. This makes WS4's joint residue genuinely joint (both non-membership
+  conjuncts load-bearing, `p` ruled out only by the self's, `q` only by the other's), not one effective
+  membership.
 - **The four readings, all four witnessed on the carrier.** self-of-self `slf ∈ attendsR slf`; self-of-other
   `oth ∈ attendsR slf`; other-of-self `slf ∈ attendsR oth`; other-of-other `oth ∈ attendsR oth`. All by `decide`.
 - **The direction of the facing (WS3).** The self reads UP the constitution tower (`slf → oth`, `rankR slf = 0 <
-  1 = rankR oth`), the other reads DOWN and FLAT (`oth → slf`, `oth → oth`, `oth → sh`; no strictly-upward edge
+  1 = rankR oth`), the other reads DOWN and FLAT (`oth → slf`, `oth → oth`, `oth → q`; no strictly-upward edge
   from `oth`). Knowing is directed: the up/down direction of a reading is non-recoverable from the symmetric
   relating, which forgets it (WS3, `faceLift`).
 - **The residue witness (WS4, audit (d) non-vacuity).** `bnd` is plain-bisimilar to the pair (the collapse
-  engine, every node `SHNE`) yet JOINTLY UNATTENDED by two DISTINCT reaches: `bnd ∉ attendsR slf = {slf,oth}`
-  AND `bnd ∉ attendsR oth = {slf,oth,sh}`. So the mutual reading, combining the self's reach and the other's
-  WIDER reach, genuinely SUBTRACTS `bnd` — the joint blind spot the mutuality cannot close, load-bearing on the
-  JOINT attention (the C3-S1 repair: two distinct reaches, not one membership). The higher reader `bnd` is
-  rank-constrained: `∀ x ∈ attendsR bnd, rankR x < rankR bnd` (`decide`), so the reading order is not free/total
-  (PR1-S1 foreclosed).
+  engine, every node `SHNE`) yet JOINTLY UNATTENDED by two INCOMPARABLE reaches: `bnd ∉ attendsR slf =
+  {slf,oth,p}` AND `bnd ∉ attendsR oth = {slf,oth,q}`, with `p` ruled out only by the self's conjunct and `q`
+  only by the other's. So the mutual reading, combining the self's reach and the other's, genuinely SUBTRACTS
+  `bnd` — the joint blind spot the mutuality cannot close, load-bearing on the JOINT attention (the C2p2-R1
+  repair: both conjuncts biting, neither implied by the other). The higher reader `bnd` is rank-constrained:
+  `∀ x ∈ attendsR bnd, rankR x < rankR bnd` (`decide`), so the reading order is not free/total (PR1-S1
+  foreclosed).
 - **SHNE.** Every node's `attendsR` is a nonempty finite set, and every reachable node has nonempty `attends`,
-  so every node is `SHNE (outDest hinf attendsR)`. Proved `ws1_rcar_SHNE` by reduction to `attendsR_ne_empty`
+  so every node is `SHNE (outDest hinf attendsR)`. Proved `ws1_rcar_SHNE` by reduction to `outDestR_ne_empty`
   (`decide`), so the collapse engine `ws1_atomless_bisim` applies to every pair.
 
-All facts about the witness reduce by the kernel (`Fin 3` has computable `DecidableEq`), so `decide`/`rfl`
+All facts about the witness reduce by the kernel (`Fin 5` has computable `DecidableEq`), so `decide`/`rfl`
 discharge the finite obligations, exactly as S0's `attendsU` and S1's `attendsT` witnesses do.
 
 ## 4. The discipline (the honesty invariants, applied)
 
 - **The other is a READER, not a label (K1, the central sin, audit (a)).** WS2's `ws2_other_reader_wise` proves
-  `RealFor` for a NAMED `def selfReader` (a fixed bounded attention, not an existential over readers — the C1-S1
+  `RealFor` for a NAMED `def slfReader` (a fixed bounded attention, not an existential over readers — the C1-S1
   repair); the reader's `reads` membership is load-bearing. `Many` is not used, the reader is never quantified
   out. The other's own `attendsR` reads back into the field (all four readings witnessed), so it is a locus,
   never a point-tag.
@@ -117,14 +123,15 @@ discharge the finite obligations, exactly as S0's `attendsU` and S1's `attendsT`
 ## 5. The two watch-points (protocol §0.8)
 
 - **WS2 — is the other a genuine reader, or a label (K1)?** `ws2_other_reader_wise` is a `RealFor` on a NAMED
-  `def selfReader` (a fixed bounded reader, not existential — the C1-S1 repair), the other's `attendsR` reading
+  `def slfReader` (a fixed bounded reader, not existential — the C1-S1 repair), the other's `attendsR` reading
   back into the field (all four readings, `decide`). The other is never the reader quantified out; the twoness
   is `¬ Recoverable` (`ws2_other_non_recoverable`), an import.
 - **WS4 — is the mutual residue genuine, or the global diagonal in disguise (PR1-S1)?** `ws4_mutual_residue` is
-  read off the JOINT attention subtracting the bisimilar `bnd` by two DISTINCT reaches (`bnd ∉ attendsR slf =
-  {slf,oth}` AND `bnd ∉ attendsR oth = {slf,oth,sh}`, both by `decide` — the C3-S1 repair), on the witnessed
-  pair with all four readings and the rank-constrained higher reader; the diagonal is a disclosed companion.
-  Both arms reachable, the concurrency of the collapse arm exhibited by the verdict discriminating.
+  read off the JOINT attention subtracting the bisimilar `bnd` by two INCOMPARABLE reaches (`bnd ∉ attendsR slf =
+  {slf,oth,p}` AND `bnd ∉ attendsR oth = {slf,oth,q}`, both by `decide`, `p ∈ slf∖oth`, `q ∈ oth∖slf` — the
+  C2p2-R1 repair), on the witnessed pair with all four readings and the rank-constrained higher reader; the
+  diagonal is a disclosed companion. Both arms reachable, the concurrency of the collapse arm exhibited by the
+  verdict discriminating.
 
 ## 6. The mechanical checks (Phase E)
 

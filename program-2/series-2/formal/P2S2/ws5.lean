@@ -74,8 +74,8 @@ section (`wf`); the NAMED reader for which `oth` is `RealFor` (`readerTwo`); the
 (`facing`, `¬ Recoverable (faceLift)`); the WS3 diagonal (`nonTotal`); the WS2 twoness import (`nonCollapse`,
 `¬ Recoverable (rankLift)`); and the WS4 joint-unattended residue (the mutual content). None hand-set. -/
 theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    (attendsR (reifyR {slf, oth, sh}) = {slf, oth, sh})
-  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth)
+    (attendsR (reifyR {slf, oth, q}) = {slf, oth, q})
+  ∧ (RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth)
   ∧ (¬ Recoverable (faceLift hinf))
   ∧ (∀ insp : Hold (outDest hinf attendsR) → HoldPred (outDest hinf attendsR), ¬ ∃ t, SelfTotal insp t)
   ∧ (¬ Recoverable (rankLift (outDest hinf attendsR) rankR))
@@ -86,10 +86,10 @@ theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
 
 /-! ## The five audit clauses (a)-(e) -/
 
-/-- **(a) THE OTHER IS A READER, NOT A LABEL.** The NAMED finite attention `selfReader` for which `oth` is
+/-- **(a) THE OTHER IS A READER, NOT A LABEL.** The NAMED finite attention `slfReader` for which `oth` is
 `RealFor` (not `Many`, not a tag; the reader fixed, its `reads` membership load-bearing). -/
 theorem ws5_audit_reader_loadbearing {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    RealFor (rankLift (outDest hinf attendsR) rankR) (selfReader hinf) oth :=
+    RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth :=
   ws2_other_reader_wise hinf
 
 /-- **(b) THE TWONESS IS NON-RECOVERABLE.** A proof term (the otherness an import, Series 07). -/
@@ -104,7 +104,7 @@ theorem ws5_audit_facing_asymmetric {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
 
 /-- **(d) THE RESIDUE IS GENUINE, THE MUTUALITY TESTED.** The four readings witnessed, the joint-unattended
 residue (`bnd` in neither reach), and the reading order rank-constrained (no PR1-S1). Both arms reachable via
-`ws5_verdict_discriminates`. The coherence is left OPEN (`ws5_audit_coherence_open`). -/
+`ws5_verdict_discriminates`. The coherence is left OPEN (`ws5_audit_downstream_open`). -/
 theorem ws5_audit_residue_genuine {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     ((oth ∈ attendsR slf ∧ slf ∈ attendsR oth) ∧ (slf ∈ attendsR slf ∧ oth ∈ attendsR oth))
   ∧ (∃ y : RCar, (∃ R, IsBisim (outDest hinf attendsR) R ∧ R oth y)
@@ -117,7 +117,7 @@ the coherence/convergence of the two readings (Series 2.3's `Converges₂`). A N
 `converg`/`cohere` term), certified by the §6 grep; carried as a `True` placeholder, as the property is about
 identifiers, not a proposition. This `True` is the CORRECT non-decision — the coherence is left open, not
 decided. -/
-theorem ws5_audit_coherence_open : True := trivial
+theorem ws5_audit_downstream_open : True := trivial
 
 /-- **(e) NAMES-NOT-TERMS.** No proof term, definition, or discharged obligation is named as content
 `self`/`other`/`I`/`you`/`perspective`/`love`/`loved`/`gaze`/`God`/`choice`/`subjectivity`. A NAMES property,
