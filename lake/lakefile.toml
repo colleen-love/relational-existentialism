@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -68,6 +68,14 @@ roots = ["P2S0", "P2S0.AxiomCheck"]
 name = "P2S1"
 srcDir = "../program-2/series-1/formal"
 roots = ["P2S1", "P2S1.AxiomCheck"]
+
+# `program-2/series-2/formal/` — Program 2 Series 2 (2.2), the OTHER. Imports the `P2S1` ground (and through it,
+# transitively, `P2S0` and the `P1` foundation); it does NOT import `P2S0` or `P1` directly. `P2S2` imports
+# `P2S2.ws1`…`P2S2.ws5`; `P2S2.AxiomCheck` runs the axiom pass. Gate: `check program-2/series-2 "^import (P2S1|P2S2)…"`.
+[[lean_lib]]
+name = "P2S2"
+srcDir = "../program-2/series-2/formal"
+roots = ["P2S2", "P2S2.AxiomCheck"]
 
 # mathlib is retained (cache present under `.lake`); Series 07 imports it.
 [[require]]
