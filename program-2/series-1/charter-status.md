@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress. At program close it is the honest account of where Series 2.1 landed against its own charter.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: B (design committed; Phase C review next). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition MET:** the Series 2.0 ground has landed.
+- **Phase:** B in progress (six design files committed as a batch; Phase C blind review next). **Precondition MET:** the Series 2.0 ground has landed.
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The **Series 2.0 ground** (`P2S0`) is BUILT — verdict
   GROUND-ESTABLISHED (resting on `ws1_first_other` after Charter Extension 1), sorry-free, axiom-clean,
@@ -97,6 +97,18 @@ mediated by S0's finite-attention ground. Sound because every layer is built and
 imports it. It changes the *provenance* of the carrier, not any target; not a target narrowing. Importing
 outside the chain remains forbidden (gate-enforced).
 
+**Scope decision (2026-07-20, Phase B): GRAIN deferred to a later series.** The grain fork
+(`spec/grain-exploration.md`) is the clock knot's twin (resolution endogenous where the tower sees it, an import
+where it does not). Phase B (`ws4-design.md` C5) DEFERS it: carrying a second fork on the same WS4 structure
+risks overloading the clock knot and diluting its non-vacuity. Not a target narrowing (grain was never a charter
+target; charter §7 lists it as a "WS4-enrichment or later-series candidate"). The exploration stands for 2.x.
+
+**Scope decision (2026-07-20, Phase B): the STREAM is S0's `impLift`, located at the tick's choice-point.** WS3
+reuses S0's proven import machinery (`impLift` / `ws4_import_breaks_baseline` / `ws4_import_quantified`) rather
+than reconstructing a fresh stream, per charter §3 ("the stream generalizing S0's `impLift` into time"). The two
+available closures `kA`/`kB` are the choice, encoded as `Bool`. Provenance disclosure, not a target narrowing:
+the exogeneity and load-bearing obligations are proved, not assumed.
+
 Otherwise none yet. Any narrowing of a target between charter and design, or between design and build, is
 disclosed here at the moment it happens; an undisclosed narrowing is the PR1-S2 defect and is prohibited.
 
@@ -115,3 +127,11 @@ Series 2.1 adds none and closes none of these.
 - **2026-07-20 — Foundation.** The P1 foundation (`program-2/formal/P1`: `P1.Core` = Series 12 WS1 verbatim, `P1.Reader` = Series 12 WS2 verbatim) transcribed, registered in `lake/lakefile.toml` + `scripts/gate.sh`, built green (sorry-free, axiom-clean). Guardrails documented in `P1.lean` (PR1-S1 machinery excluded; `RealFor` not `Many`, PR1-S2). Grain preorder explored on paper (`spec/grain-exploration.md`) ahead of Phase B.
 - **2026-07-20 — Import permitted.** Program 2 relaxes Program 1's transcribe-only discipline: a series may `import P1`. Recorded in §5; banner/protocol/charter updated.
 - **2026-07-20 — Foundation audit (FND-1).** Delegated transcription review returned 0 SERIOUS / 0 REAL / 1 COSMETIC (see §4); fidelity and guardrails independently spot-checked and confirmed. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase B (design).** `spec/README.md` (shared carrier, the `Fin 7` witness `TCar`, discipline,
+  outcomes) and `spec/ws1-design.md`…`ws5-design.md` written against the real `P2S0` API and committed as one
+  batch before any `formal/` file exists (Phase B gate). Winning constructions: WS1 the cycle reified pointwise
+  into `kA` (generalizing `ws1_first_other`); WS2 the residue free + `RealFor` named reader + `¬ Recoverable`
+  arrow; WS3 the stream = S0 `impLift` at the choice-point; WS4 causal order = `attendsT`-membership (endogenous,
+  rank-constrained, partial), linearization = exogenous `ord`-lift (import, quantified), grain deferred; WS5 the
+  verdict computed to twoZone. Scope decisions (grain deferred, stream = `impLift`) disclosed in §5. Next: Phase C
+  blind design review.
