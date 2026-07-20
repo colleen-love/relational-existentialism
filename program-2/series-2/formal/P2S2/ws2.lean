@@ -8,9 +8,10 @@ out-attention relating (the collapse engine `ws1_atomless_bisim`) yet rank-separ
 the `ws1_first_other` / `ws2_composite_distinguishes` pattern), so the other is real FOR a NAMED finite attention
 `slfReader` (`ws2_other_reader_wise`, a genuine `RealFor` witness on a FIXED reader — not existentially tailored,
 not `Many`), and the separation is NON-RECOVERABLE (`ws2_other_non_recoverable`, an import, Series 07). The
-reader is a fixed named bounded attention (its `reads` membership load-bearing), and the OTHER's own attention
-(`attendsR oth`, the four readings of WS3) is what does the distinguishing; the other is never a point-tag, never
-the reader quantified out (K1, the C1-S1 repair: the reader named, not existential).
+reader is a fixed named bounded attention (its `reads` membership load-bearing). WS2's separation needs only that
+the OTHER is a rank-1 attending locus; its full reading `attendsR oth = {slf,oth,q}` is load-bearing across the
+BUNDLE (WS3, WS4), so the other is never a point-tag, never the reader quantified out (K1, the C1-S1 repair: the
+reader named, not existential).
 
 Design docs: `program-2/series-2/spec/ws2-design.md`; shared objects `spec/README.md` §1-§4.
 
@@ -64,8 +65,10 @@ plain-bisimilar to the read relatum `slf ∈ slfReader.reads` yet label-separate
 `ws2_other_distinguishes`). The reader is a fixed named bounded attention whose `reads` membership is
 LOAD-BEARING; `Many` is not used, and the reader is not quantified out. This is the reader-relative reality (a
 relatum is real for a bounded reader that reads a relatum it is plain-bisimilar-yet-label-separated from) that
-`Many` alone does not carry; the OTHER's own attention (`attendsR oth`, WS3's four readings) does the
-distinguishing. -/
+`Many` alone does not carry. Here WS2's separation needs only that the OTHER is a rank-1 attending locus (its
+`attendsR oth` nonempty, `rankR oth ≠ rankR slf`); the four-reading shape `attendsR oth = {slf,oth,q}` is
+load-bearing across the BUNDLE (WS3's directed readings, WS4's joint residue), so `oth` is a genuine locus, not
+an inert tag, over the series' payoffs. -/
 theorem ws2_other_reader_wise (hinf : ℵ₀ ≤ κ) :
     RealFor (rankLift (outDest hinf attendsR) rankR) (slfReader hinf) oth :=
   ⟨slf, Set.mem_singleton slf, ws2_other_distinguishes hinf⟩
