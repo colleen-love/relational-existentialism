@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
+*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition:** Series 2.2 must have landed before Phase B begins (it has: TWO-FACING).
+- **Phase:** B complete (design committed as one batch: `spec/README.md` + `spec/ws1-design.md`…`ws5-design.md`). C (design review) next. **Precondition:** Series 2.2 has landed (TWO-FACING).
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The **Series 2.2 pair** (`P2S2`, TWO-FACING) is built and registered, reaching `P2S1` / `P2S0` / `P1` transitively.
 - **Axiom state:** the imported layers (P2S2, P2S1, P2S0, P1) are axiom-clean on the standard three. Series build N/A.
@@ -58,7 +58,15 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 
 ## 5. Deviations from charter (disclosed)
 
-None yet. Any narrowing between charter and design, or design and build, is disclosed here at the moment it happens.
+- **PX-1 twoness-lift: NOT taken (a disclosed design decision, not a narrowing).** The charter (§5, §7) permits
+  but does not require lifting the twoness from rank to import to fork coherence over lateral peers. Phase B
+  weighed it (`spec/README.md` §5) and declined: the fork's genuineness rests on `slf`/`oth` plain-bisimilarity
+  (orthogonal to rank-vs-import twoness), the twoness is already a `¬ Recoverable` import in S2
+  (`ws2_other_non_recoverable`, cited as the K1 anchor), and a lateral construction would add complexity without
+  strengthening SHAPE-DRAWN. The charter targets are unchanged; `Converges₂` forks over `(slf, oth)` as S2 built
+  them.
+- No narrowing between charter and design. Any narrowing between design and build will be disclosed here at the
+  moment it happens.
 
 ## 6. Permanent opens (inherited, and this series keeps them sharpest)
 
@@ -72,3 +80,4 @@ Series 2.3 adds none and closes none.
 ## 7. Phase log
 
 - **2026-07-20 — Phase A.** Charter committed (`charter.md`). Series 2.3 established as the COHERENCE: define the orientation (typed, never evaluated) and `Converges₂` over the S2 pair, prove it forced in-sight and its dissent an import, and at the knot prove the two-zone fork SHAPE-DRAWN (both zones reached, no PR1-S1 tautology). The direction of convergence is never decided. Scaffold created (`spec/`, `formal/`). Status initialized. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build.
+- **2026-07-20 — Phase B.** Design committed as one batch (`spec/README.md`, `spec/ws1-design.md`…`ws5-design.md`), before any `formal/` file. Winning constructions fixed to typed signatures: the primitive `Valuation`/`Converges₂` (fresh, neutral-named — `Valuation`/`val`/`raise`/`Converges₂`, none matching the forbidden greps), the structural constraint `Faithful₂` and the sight class `InSight` (dest load-bearing), the fresh `valLift`/`valLift_not_recoverable` (transcribed in spirit from Series 12, never imported), and the two-zone fork over `(slf, oth)` foreclosing PR1-S1 by (i) forcing that uses `slf`/`oth` plain-bisimilarity, (ii) a genuinely constrained proper in-sight class (`ws4_insight_proper`), (iii) both zones witnessed. PX-1 weighed and declined (§5). Module naming `P2S3` fixed (registration deferred to Phase E per protocol). Next: Phase C, blind design review pressing hardest on audit (c) — is the fork genuine or a PR1-S1 tautology?
