@@ -98,4 +98,10 @@ check program-2/series-10 "^import (P2S8|P2S10)(\.[A-Za-z0-9_]+)*$"
 # series' tree is forbidden. The sign and its weight are built fresh in `P2S11.*`.
 check program-2/series-11 "^import (P2S8|P2S11)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 12 (`program-2/series-12/formal/`): the `P2S12` library imports its predecessor `P2S11` and its own
+# `P2S12.*` roots (+ mathlib); the `P2S8` / … / `P2S0` chain and `P1` prior art are reached transitively through S11,
+# not imported directly; the tier-1 probes `P2S9`/`P2S10` are NOT imported (their content is not reused); any other
+# series' tree is forbidden. The reading of the weight as a probability and the consistency test are built fresh in `P2S12.*`.
+check program-2/series-12 "^import (P2S11|P2S12)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
