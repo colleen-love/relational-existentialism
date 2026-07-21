@@ -92,4 +92,10 @@ check program-2/series-9 "^import (P2S8|P2S9)(\.[A-Za-z0-9_]+)*$"
 # not imported directly; any other series' tree is forbidden. The invertibility question is built fresh in `P2S10.*`.
 check program-2/series-10 "^import (P2S8|P2S10)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 11 (`program-2/series-11/formal/`): the `P2S11` library imports its predecessor `P2S8` and its own
+# `P2S11.*` roots (+ mathlib); the `P2S7` / … / `P2S0` chain and `P1` prior art are reached transitively through S8,
+# not imported directly; the tier-1 probes `P2S9`/`P2S10` are NOT imported (their content is not reused); any other
+# series' tree is forbidden. The sign and its weight are built fresh in `P2S11.*`.
+check program-2/series-11 "^import (P2S8|P2S11)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
