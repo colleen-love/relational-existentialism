@@ -76,4 +76,10 @@ check program-2/series-6 "^import (P2S5|P2S6)(\.[A-Za-z0-9_]+)*$"
 # through S6, not imported directly; any other series' tree is forbidden. The measure `Q` is built fresh in `P2S7.*`.
 check program-2/series-7 "^import (P2S6|P2S7)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 8 (`program-2/series-8/formal/`): the `P2S8` library imports its predecessor `P2S7` and its own
+# `P2S8.*` roots (+ mathlib); the `P2S6` / … / `P2S0` ground and `P1` prior art are reached transitively through S7,
+# not imported directly; any other series' tree is forbidden. The good, the reconciliation, and the holonomy are
+# built fresh in `P2S8.*`.
+check program-2/series-8 "^import (P2S7|P2S8)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
