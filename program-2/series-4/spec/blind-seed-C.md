@@ -38,7 +38,7 @@ Two carriers are defined by the design:
 ```
 -- WS1
 lemma ws1_W_SHNE (hinf) (x : W) : SHNE (outDest hinf attendsW) x
-theorem ws1_world_is_lateral :
+theorem ws1_lateral_extent :
     rankW w0 = rankW w2 ∧ w0 ≠ w2
   ∧ reachIn attendsW 2 w0 w2 ∧ ¬ reachIn attendsW 1 w0 w2 ∧ ¬ reachIn attendsW 0 w0 w2
 theorem ws1_peers_non_recoverable (hinf) : AttentionDistinguishes (latLiftW hinf) w0 w2
@@ -83,9 +83,9 @@ theorem ws4_two_axes (hinf) :
 
 -- WS5
 inductive Outcome | distinct | reduced | shapeDrawn | partial'  deriving DecidableEq
-def verdict (lateral independent spaceImport bothMoves : Bool) : Outcome :=
+def verdict (lateral independent latImport bothMoves : Bool) : Outcome :=
   if !lateral then Outcome.partial'
-  else if !spaceImport then Outcome.partial'
+  else if !latImport then Outcome.partial'
   else if independent && bothMoves then Outcome.distinct
   else if !independent then Outcome.reduced
   else Outcome.shapeDrawn
@@ -100,7 +100,7 @@ theorem ws5_audit_no_absolute_frame : <= ws3_metric_grounded>
 theorem ws5_audit_fork_genuine (hinf) :
     ( (¬ ∃ R, IsBisimL (latLiftW hinf) R ∧ R w0 w2) ∧ latW r = latW w0 ) ∧ (latT = rankT)
 theorem ws5_audit_knot_is_independence (hinf) : <= the cross-pattern of ws2_axes_independent>
-theorem ws5_audit_space_import (hinf) : ¬ Recoverable (latLiftW hinf)
+theorem ws5_audit_lateral_import (hinf) : ¬ Recoverable (latLiftW hinf)
 theorem ws5_audit_names_not_terms : True
 ```
 

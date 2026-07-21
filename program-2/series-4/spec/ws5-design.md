@@ -13,9 +13,9 @@ inductive Outcome | distinct | reduced | shapeDrawn | partial'  deriving Decidab
 -- distinct iff the world is lateral (WS1), the axes are independent (WS2/WS4), and the space is a real import (WS3);
 -- reduced iff the axes are not independent (breadth is accumulated depth, the T zone);
 -- shapeDrawn iff lateral+import hold but independence is undrawn; partial' iff the world does not hold.
-def verdict (lateral independent spaceImport bothMoves : Bool) : Outcome :=
+def verdict (lateral independent latImport bothMoves : Bool) : Outcome :=
   if !lateral then Outcome.partial'
-  else if !spaceImport then Outcome.partial'
+  else if !latImport then Outcome.partial'
   else if independent && bothMoves then Outcome.distinct
   else if !independent then Outcome.reduced
   else Outcome.shapeDrawn
@@ -38,7 +38,7 @@ theorem ws5_flags_justified (hinf : ℵ₀ ≤ κ) :
     -- independent (WS2/WS4): the cross-pattern of separations, neither grading a function of the other
   ∧ ( (¬ ∃ R, IsBisimL (latLiftW hinf) R ∧ R w0 w2) ∧ (∃ R, IsBisimL (rankLiftW hinf) R ∧ R w0 w2)
       ∧ (¬ ∃ R, IsBisimL (rankLiftW hinf) R ∧ R r w0) ∧ (∃ R, IsBisimL (latLiftW hinf) R ∧ R r w0) )
-    -- spaceImport (WS3): the lateral separation non-recoverable (Series 07)
+    -- latImport (WS3): the lateral separation non-recoverable (Series 07)
   ∧ (¬ Recoverable (latLiftW hinf))
     -- bothMoves (WS4): the lateral move keeps rank, the reification keeps lat; REDUCED reachable on T
   ∧ (rankW w0 = rankW w2 ∧ latW r = latW w0 ∧ latT = rankT)
