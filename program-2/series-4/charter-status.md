@@ -2,18 +2,19 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: B (design). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the first series of Phase 2 (the physics of the built universe, `charter-extension.md`).*
+*Current phase: E complete (build landed, verdict computed), pending Phase F (blind code review). Current verdict: **DISTINCT** (computed by `ws5_verdict_eq`, flags earned by `ws5_flags_justified`). The `formal/` build is sorry-free, axiom-clean (standard three), and gate-green. This is the first series of Phase 2 (the physics of the built universe, `charter-extension.md`).*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) COMMITTED — six design files (`spec/README.md`, `spec/ws1-design.md`…`ws5-design.md`) as one batch, no `formal/` file yet (Phase B gate held). **Precondition:** Series 2.3 has landed (SHAPE-DRAWN, program verdict CONSTRUCTED-AND-WALLED).
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The imported chain (`P2S3`, `P2S2`, `P2S1`, `P2S0`, `P1`) is built and registered, reaching all lower layers transitively.
-- **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
-- **Gate state:** green upstream. S4's `formal/` will import `P2S3` only (gate `(P2S3|P2S4)`), reaching S2/S1/S0/P1 transitively.
-- **Costume gate (Phase-2 discipline):** PASSES at charter — the knot is AXIS-BUILDING (a new lateral axis), not import-powered. The multiplicity of peers is Series 07 (the acknowledged ground); the verdict must rest on axis-independence, verified at Phase F (audit c).
+- **Phase:** A, B, C (3 rounds), D (2 rounds), E COMPLETE. Pending Phase F (blind code review). `formal/` built in the `P2S4` namespace: `ws1`…`ws5`, `AxiomCheck`, aggregator `P2S4.lean`.
+- **Verdict:** **DISTINCT** (computed by `ws5_verdict_eq : verdict true true true true = Outcome.distinct`, the four flags earned by `ws5_flags_justified`, none hand-set).
+- **Build state:** `formal/` compiles (`lake build P2S4 P2S4.AxiomCheck`). Registered in `lake/lakefile.toml` (`[[lean_lib]] P2S4`, roots `["P2S4","P2S4.AxiomCheck"]`, appended to `defaultTargets`). The imported chain (`P2S3` reaching `P2S2`/`P2S1`/`P2S0`/`P1`) builds under it.
+- **Axiom state:** sorry-free and axiom-clean — every payoff reduces to the standard three (`propext`, `Classical.choice`, `Quot.sound`); `ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_audit_names_not_terms` depend on NO axioms; several WS3 facts need only `propext`/`Quot.sound`. Recorded via `P2S4.AxiomCheck`.
+- **Gate state:** GREEN. `scripts/gate.sh` extended with `check program-2/series-4 "^import (P2S3|P2S4)…"`; S4's `formal/` imports only `P2S3` and its own `P2S4.*` roots (+ Mathlib), reaching S2/S1/S0/P1 transitively.
+- **Names grep (§6):** clean — every hit of a forbidden content-word is docstring/comment prose; no proof term, definition, or bound parameter is named for the spatial content.
+- **Costume gate (Phase-2 discipline):** PASSES at charter AND verified through three blind design-review rounds (audit c, "not a costume"): the DISTINCT verdict rests on the axis-independence cross-pattern (`ws2_axes_independent`), not on the multiplicity of peers (which is the acknowledged Series 07 import). To be re-verified at Phase F on the built code.
 - **Open SERIOUS findings:** none. Phase C round 1 → C1-S1/C1-S2 SERIOUS (renamed); round 2 → C2-S1 SERIOUS (one more forbidden name, `spaceImport`, renamed `latImport`). All three closed **Fixed** by rename. A fresh-seed Phase C round 3 is pending to confirm zero SERIOUS before Phase E.
 
 ## 1. The carrier — the world (built here) on the imported chain
@@ -34,21 +35,21 @@
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_lateral_extent`, `ws1_peers_non_recoverable`, `ws1_not_collapsed` (a genuine lateral world, real extent, not a tower) | OPEN | — |
-| WS2 | `ws2_lateral_step_no_rank`, `ws2_reify_no_lateral` (the axes come apart) | OPEN | — |
-| WS3 | `ws3_lateral_is_import` (Series 07), directed + granular + self-relative metric | OPEN | — |
-| WS4 (the knot) | `ws4_two_axes` (independent axes, both moves witnessed, REDUCED reachable, no fiat, no costume) | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
+| WS1 | `ws1_lateral_extent`, `ws1_peers_non_recoverable`, `ws1_not_collapsed` (a genuine lateral world, real extent, not a tower) | **BUILT** | Discharged in `P2S4/ws1.lean` (same-rank peers `w0`/`w2` at path-distance 2, non-recoverable via `AttentionDistinguishes latLiftW`, local non-complete graph). |
+| WS2 | `ws2_lateral_step_no_rank`, `ws2_reify_no_lateral`, `ws2_axes_independent` (the axes come apart) | **BUILT** | Discharged in `P2S4/ws2.lean` — the cross-pattern of separations via explicit `IsBisimL` bisimulations (positive) and label-separations (negative). |
+| WS3 | `ws3_lateral_is_import` (Series 07), `ws3_directed`, `ws3_granular`, `ws3_metric_grounded` | **BUILT** | Discharged in `P2S4/ws3.lean` — import via the collapse engine; the metric directed, granular, and path-grounded self-relative from `w0`. |
+| WS4 (the knot) | `ws4_two_axes`, `ws4_reduced_reachable`, `ws4_distinct_witnessed` (independent axes, both moves witnessed, REDUCED reachable on `T`, no fiat, no costume) | **BUILT** | Discharged in `P2S4/ws4.lean` — DISTINCT on `W`, REDUCED realized on the tower `T` (`latT = rankT`). |
+| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | **BUILT** | Discharged in `P2S4/ws5.lean` — verdict computes DISTINCT by `rfl`, discriminates to all four outcomes, flags earned, audit a–e as proof terms (e the grep-certified placeholder). |
 
-Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here with its reason.
+Names are the charter's provisional targets; Phase B fixed exact signatures; the two renames (C1-S1/C1-S2) and the parameter rename (C2-S1) are recorded in the ledger and §5.
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
-- (a) NO ABSOLUTE FRAME — no proof term asserts a distance frame-independently; every metric claim is FOR a self; a global metric is claimed only where forced. UNVERIFIED.
-- (b) THE FORK NOT BY FIAT — REDUCED genuinely reachable, both a lateral-move-without-rank and a rank-move-without-lateral witnessed, the verdict discriminating. UNVERIFIED.
-- (c) THE KNOT IS NOT THE MULTIPLICITY (the costume gate) — the verdict rests on axis-independence, not on the import-powered existence of many. UNVERIFIED.
-- (d) SPACE IS AN IMPORT — `ws3_lateral_is_import` a proof term resting on Series 07. UNVERIFIED.
-- (e) NAMES-NOT-TERMS — grep clean of the forbidden content-names. UNVERIFIED.
+- (a) NO ABSOLUTE FRAME — `ws5_audit_no_absolute_frame` (= `ws3_metric_grounded`): `latW` is the shortest attention-path length FROM the fixed self `w0`, no shorter path; no two-argument absolute metric. BUILT; to be re-confirmed blind at Phase F.
+- (b) THE FORK NOT BY FIAT — `ws5_audit_fork_genuine`: DISTINCT on `W` (lateral move keeps rank) and REDUCED on `T` (`latT = rankT`) both realized, so independence is not a typing artifact. BUILT; Phase F pending.
+- (c) THE KNOT IS NOT THE MULTIPLICITY (the costume gate) — `ws5_audit_knot_is_independence` (= `ws2_axes_independent`): the verdict rests on the cross-pattern (each grading separates a pair the other does not), not on the multiplicity. BUILT; verified "not a costume" across three blind design rounds; Phase F pending.
+- (d) SPACE IS AN IMPORT — `ws5_audit_lateral_import` (= `ws3_lateral_is_import`): `¬ Recoverable (latLiftW)`, a proof term resting on Series 07's collapse engine. BUILT; Phase F pending.
+- (e) NAMES-NOT-TERMS — the §6 grep is clean (all hits docstring prose); `ws5_audit_names_not_terms` the placeholder. VERIFIED by grep at Phase E; Phase F re-confirms.
 
 ## 4. Findings ledger (recurrence guard, protocol section 0.2a)
 
@@ -90,3 +91,5 @@ Series 2.4 adds none and closes none; it draws the self-relativity of space shar
 - **2026-07-21 — Phase D (design repair, round 1).** Closed C1-S1/C1-S2 by the 2a binary as **Fixed** (rename, same proposition): `ws1_world_is_lateral → ws1_lateral_extent`, `ws5_audit_space_import → ws5_audit_lateral_import`. Addressed C1-S3 by clarifying the names-audit docstring. Noted C1-S4. Updated `spec/ws1-design.md`, `spec/ws5-design.md`, and the §2 target table.
 - **2026-07-21 — Phase C round 2 (design re-review, blind).** Refreshed `spec/blind-seed-C.md` with the corrected names; spawned a fresh blind reviewer (read the seed only, blindness certified). It re-verified all finite computations and re-confirmed audit (a)–(d) SATISFIED (again pressed hardest on (c): "No costume"). It caught ONE more forbidden name the first pass missed: **C2-S1 SERIOUS** — the `verdict` bound parameter `spaceImport` embeds "space". Also C2-S2 REAL (the `True` names placeholder) and four COSMETIC (C2-S3…S6). See the ledger.
 - **2026-07-21 — Phase D (design repair, round 2).** Ran a proactive substring scan over ALL Lean identifiers for the ten forbidden content-words; the only genuine code hit was `spaceImport`. Closed **C2-S1 Fixed** by renaming the parameter `latImport` (across `spec/ws5-design.md`, `spec/README.md`). Addressed C2-S2 (the actual violation was C2-S1, now fixed; the property holds and is enforced by the §6 grep). Noted C2-S3…S6. Next: Phase C round 3 with a fresh seed; expect zero SERIOUS.
+- **2026-07-21 — Phase C round 3 (design re-review, blind) → ZERO SERIOUS.** Fresh-seed blind reviewer (read the seed only, blindness certified) re-worked every finite computation, re-confirmed audit (a)–(e) all SATISFIED (pressed hardest on (c): the DISTINCT verdict rests on the cross-pattern, "not a costume"; and (b): `T` is a genuine coincidence witness). **Zero SERIOUS, zero REAL; all findings COSMETIC** (the `True` names placeholder; the deliberately-allowed strip-word "lateral" in names). The Phase C/D loop is CLOSED. The design is fixed.
+- **2026-07-21 — Phase E (build).** Wrote `formal/P2S4/ws1.lean`…`ws5.lean`, `AxiomCheck.lean`, aggregator `P2S4.lean` in the `P2S4` namespace, importing `P2S3` only. Registered `P2S4` in `lake/lakefile.toml` and added the closure check to `scripts/gate.sh`. The world `W` (a directed 3-ring of same-rank peers + a reified peer) and the tower `T` are built fresh on the attention carrier; the breadth metric is the length-indexed `reachIn` with a structural `Decidable` instance (facts fall to `decide`); the axis-independence is the cross-pattern of explicit `IsBisimL` bisimulations. Section-6 checks all pass: **compiles**, **sorry-free**, **axiom-clean** (standard three; `ws5_verdict_eq`/`_discriminates` need no axioms), **gate-green**, **names grep prose-only**. The WS5 verdict COMPUTES **DISTINCT** (`ws5_verdict_eq`, flags earned). One false-positive gate hit (a docstring line beginning with the word "import") was reworded. Next: Phase F, blind code review on the `formal/` sources.
