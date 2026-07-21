@@ -71,4 +71,9 @@ check program-2/series-5 "^import (P2S4|P2S5)(\.[A-Za-z0-9_]+)*$"
 # and the linearization reading are built fresh in `P2S6.*`.
 check program-2/series-6 "^import (P2S5|P2S6)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 7 (`program-2/series-7/formal/`): the `P2S7` library imports its predecessor `P2S6` and its
+# own `P2S7.*` roots (+ mathlib); the `P2S5` / … / `P2S0` ground and `P1` prior art are reached transitively
+# through S6, not imported directly; any other series' tree is forbidden. The measure `Q` is built fresh in `P2S7.*`.
+check program-2/series-7 "^import (P2S6|P2S7)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
