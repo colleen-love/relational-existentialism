@@ -38,7 +38,7 @@ forced, the free-lunch crux is SELF-RELATIVE (the S6 shape).**
   REALIZED by a genuine free-residue plurality, not stipulated. This split is disclosed here and in the ledger and
   graded honestly (COSMETIC-disclosed, not hidden), per protocol §0.2/§0.5.
 - **Names-not-terms (audit e).** `diagStep`, `Qc`, `ws4_free_lunch_reachable`, `ws4_conserved_reachable`,
-  `ws4_crux_self_relative` embed no forbidden content-word ("creation", "free", "lunch" are prose only).
+  `ws4_crux_both_reachable` embed no forbidden content-word ("creation", "free", "lunch" are prose only).
 
 ## 3. Winning construction — typed signatures
 
@@ -64,7 +64,7 @@ theorem ws4_conserved_reachable {κ} (hinf : ℵ₀ ≤ κ) :
   ∧ Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2))
 
 -- the crux is self-relative: both reachable, neither forced
-theorem ws4_crux_self_relative {κ} (hinf : ℵ₀ ≤ κ) :
+theorem ws4_crux_both_reachable {κ} (hinf : ℵ₀ ≤ κ) :
     (Qc (diagStep ∅ 0) = Qc ∅ + 1) ∧ (Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2)))
 ```
 

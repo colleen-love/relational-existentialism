@@ -20,12 +20,12 @@ inductive Outcome
   | partial'          -- an obligation degenerate ('partial' is a Lean keyword)
   deriving DecidableEq
 
-def verdict (nonTrivial inSightConserved changeIsImport
+def verdict (nonTrivial inSightConserved changeIsSource
              freeLunchReachable conservedReachable globalForced : Bool) : Outcome :=
   if !nonTrivial then Outcome.disconnected
   else if globalForced then Outcome.global
   else if !inSightConserved then Outcome.monotoneOnly
-  else if !changeIsImport then Outcome.partial'
+  else if !changeIsSource then Outcome.partial'
   else if freeLunchReachable && !conservedReachable then Outcome.freeLunch
   else if !freeLunchReachable then Outcome.partial'
   else Outcome.conservedRel
@@ -48,7 +48,7 @@ theorem ws5_verdict_discriminates :                       -- reaches all six out
 theorem ws5_flags_justified {κ} (hinf : ℵ₀ ≤ κ) :
     (rankM e1 ≠ rankM e0 ∧ AttentionDistinguishes (destML hinf) e1 e0)                 -- WS1 nonTrivial
   ∧ (∃ R, IsBisim (plainOf (destML hinf)) R ∧ R (reifyM {e0}) e0)                       -- WS2 inSightConserved
-  ∧ (∀ x y : MCar, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y)        -- WS3 changeIsImport
+  ∧ (∀ x y : MCar, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y)        -- WS3 changeIsSource
   ∧ (Qc (diagStep ∅ 0) = Qc ∅ + 1)                                                      -- WS4 freeLunchReachable
   ∧ (Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2)))                -- WS4 conservedReachable
 ```
@@ -69,7 +69,7 @@ theorem ws5_audit_fork_genuine {κ} (hinf : ℵ₀ ≤ κ) :
   ∧ (Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2)))
   ∧ (rankM e1 ≠ rankM e0)
 
--- (c) THE KNOT IS THE DIAGONAL-AS-SOURCE, NOT THE IMPORT-NESS (the costume gate). Import-ness (WS3, changeIsImport
+-- (c) THE KNOT IS THE DIAGONAL-AS-SOURCE, NOT THE IMPORT-NESS (the costume gate). Import-ness (WS3, changeIsSource
 -- true) ALONE never decides: with the diagonal fork degenerate the verdict is partial'. The WS4 payoffs rest on
 -- the residue (ws2_residue_free), not on boundary import-ness.
 theorem ws5_audit_knot_is_diagonal {κ} (hinf : ℵ₀ ≤ κ) :
@@ -77,8 +77,8 @@ theorem ws5_audit_knot_is_diagonal {κ} (hinf : ℵ₀ ≤ κ) :
   ∧ (verdict true true true false false false = Outcome.partial')
   ∧ (∀ insp : Hold (outDest hinf attendsM) → HoldPred (outDest hinf attendsM), ¬ ResidueRecoverable insp)
 
--- (d) CHANGE IS AN IMPORT. ws3_change_is_import rests on Series 07 (ws4_recoverable_not_import).
-theorem ws5_audit_change_is_import {κ} (hinf : ℵ₀ ≤ κ) :
+-- (d) CHANGE IS AN IMPORT. ws3_change_is_source rests on Series 07 (ws4_recoverable_not_import).
+theorem ws5_audit_change_is_source {κ} (hinf : ℵ₀ ≤ κ) :
     (∀ x y : MCar, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y)
   ∧ ¬ Recoverable (destML hinf)
 

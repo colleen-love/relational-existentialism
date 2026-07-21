@@ -24,10 +24,10 @@ sections `attendsM (reifyM {e0}) = {e0}`, `attendsM (reifyM {e1}) = {e1}`). `ran
 - **The value-difference is a genuine distinction, not a label (audit c, not a costume).** `Q e1 ≠ Q e0` is
   witnessed as `AttentionDistinguishes destML e1 e0`: `e1`, `e0` plain-bisimilar (collapse engine) yet
   rank-separated. So a `Q`-difference IS a `¬ Recoverable` import; `Q` measures import-content.
-- **Strip test.** `ws1_measure_nontrivial` → "a function on configurations taking two distinct values, the
+- **Strip test.** `ws1_rank_nontrivial` → "a function on configurations taking two distinct values, the
   difference a plain-bisimilar-yet-label-separated pair" — a bare `AttentionDistinguishes` / inequality fact,
   no interpretive term load-bearing (charter §0.3).
-- **Names-not-terms (audit e).** `MCar`, `attendsM`, `rankM`, `reifyM`, `destML`, `e0`…`e2`, `ws1_measure_nontrivial`
+- **Names-not-terms (audit e).** `MCar`, `attendsM`, `rankM`, `reifyM`, `destML`, `e0`…`e2`, `ws1_rank_nontrivial`
   embed no forbidden content-word ("measure", "energy", "conservation", …) as a whole word.
 
 ## 3. Winning construction — typed signatures
@@ -53,7 +53,7 @@ lemma sectionM_e0 : attendsM (reifyM {e0}) = {e0}
 lemma reifyM_e0 : reifyM {e0} = e1
 
 -- THE PAYOFF: Q non-trivial, and the difference a genuine import
-theorem ws1_measure_nontrivial {κ} (hinf : ℵ₀ ≤ κ) :
+theorem ws1_rank_nontrivial {κ} (hinf : ℵ₀ ≤ κ) :
     rankM e1 ≠ rankM e0
   ∧ AttentionDistinguishes (destML hinf) e1 e0
   ∧ (∃ x y : MCar, rankM x ≠ rankM y)      -- Q not constant
@@ -66,5 +66,5 @@ forces the labelled edge coords apart). `∃ x y, rankM x ≠ rankM y` by `⟨e1
 ## 4. Outcome classes
 
 - If NO non-trivial measure survived the de-risking (it did): DISCONNECTED (charter §6). Not reached.
-- `ws1_measure_nontrivial` is the ground the whole verdict stands on: `!nonTrivial` in `verdict` returns
+- `ws1_rank_nontrivial` is the ground the whole verdict stands on: `!nonTrivial` in `verdict` returns
   `disconnected` (WS5).

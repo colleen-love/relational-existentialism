@@ -8,7 +8,7 @@
 
 ## 0. Snapshot
 
-- **Phase:** B complete (design + de-risking committed as one batch, no `formal/` yet). A complete (charter committed). **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable). Next: Phase C (blind design review).
+- **Phase:** D complete (design repair, C findings closed). B, A complete. **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable). Phase C (blind design review) returned three SERIOUS findings, all names-not-terms (C1-C3), closed Fixed by renaming; three COSMETIC disclosed. Next: re-run Phase C on the repaired design (expect zero SERIOUS), then Phase E.
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The imported chain (`P2S6`, …, `P1`) is built and registered, reaching all lower layers transitively.
 - **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
@@ -34,11 +34,11 @@
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 (the risky ground) | `ws1_measure_nontrivial` (`Q` well-defined and non-constant, not rigged), the measure `Q` | OPEN | — |
-| WS2 | `ws2_tick_conserves` (a reification-tick preserves `Q` within the self's sight — conserved-relative) | OPEN | — |
-| WS3 | `ws3_change_is_import` (every change in `Q` is an import, the import the sole source, Series 07) | OPEN | — |
-| WS4 (the knot) | the free-lunch fork: `ws4_free_lunch_reachable` / `ws4_conserved_reachable` (the diagonal creates vs relocates, both reachable), on the diagonal not import-ness | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
+| WS1 (the risky ground) | `ws1_rank_nontrivial` (`Q := rankM` well-defined and non-constant, difference a genuine import, not rigged) | BUILT (Phase F pending) | — |
+| WS2 | `ws2_tick_conserves` (a reification-tick preserves `Q` within the self's sight — conserved-relative, the product plain-bisimilar to its constituent) | BUILT (Phase F pending) | — |
+| WS3 | `ws3_change_is_source` / `ws3_source_nonvacuous` (every change in `Q` is an import, the import the sole source, Series 07) | BUILT (Phase F pending) | — |
+| WS4 (the knot) | the free-lunch fork: `ws4_free_lunch_reachable` / `ws4_conserved_reachable` / `ws4_crux_both_reachable` (the diagonal creates vs relocates, both reachable), on the diagonal not import-ness | BUILT (Phase F pending) | — |
+| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, `ws5_audit_no_global/fork_genuine/knot_is_diagonal/change_is_source/names_not_terms`) — verdict computes `conservedRel`, discriminates over six | BUILT (Phase F pending) | — |
 
 Names are the charter's provisional targets; Phase B fixes exact signatures (note the §6 forbidden-word grep: "energy"/"conservation"/"information"/"measure"/"creation"/"self"/"import" etc. may not appear in identifiers).
 
@@ -56,7 +56,12 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
-| — | — | — | (none yet) | — |
+| C1-S1 | C | SERIOUS | `ws1_measure_nontrivial` embeds the forbidden content-word "measure" (names-not-terms, audit e) | **Fixed** — renamed `ws1_rank_nontrivial` (neutral, tracks `rankM`). Design + code + grep clean. |
+| C2-S1 | C | SERIOUS | `ws4_crux_self_relative` embeds the forbidden content-word "self" (audit e) | **Fixed** — renamed `ws4_crux_both_reachable`. |
+| C3-S1 | C | SERIOUS | "import" appears in `ws3_change_is_import`, `ws3_import_nonvacuous`, `ws5_audit_change_is_import`, and the `verdict` param `changeIsImport` (audit e; the import must stay quantified, never named — charter §4.e) | **Fixed** — renamed `ws3_change_is_source`, `ws3_source_nonvacuous`, `ws5_audit_change_is_source`, param `changeIsSource`. |
+| C4-S1 | C | COSMETIC | `ws5_audit_names_not_terms : True` is vacuous (certifies nothing) | Accepted house placeholder (as S6); the §6 grep is the teeth, now clean. Disclosed. |
+| C5-S1 | C | COSMETIC | WS4 count skeleton (`Qc`/`diagStep`) is logically independent of the residue facts (conjoined, not derived) — explicitly NOT REAL per blind-seed §6 (residue conjuncts are the genuine given theorems, non-decorative) | Disclosed in `ws4-design.md` §2 and the ws4 docstring; the load-bearing content is `ws2_residue_free` + `ws1_coincidence_not_identity_witness`, conjoined. Accepted. |
+| C6-S1 | C | COSMETIC | `ws1_rank_nontrivial`'s third conjunct `∃ x y, rankM x ≠ rankM y` is weaker than its first | Kept: it is the charter's explicit "`Q` not constant" property (§2 WS1). Harmless. |
 
 ## 5. Deviations from charter (disclosed)
 

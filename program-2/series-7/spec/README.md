@@ -66,9 +66,9 @@ diagonal works on holds of the plain coalgebra `outDest hinf attendsM` (inhabite
 
 | WS | Payoff | Rests on | Strips to |
 |----|--------|----------|-----------|
-| WS1 | `ws1_measure_nontrivial` | collapse engine + rank gap | "a function on configs taking two distinct values, the difference an import" |
+| WS1 | `ws1_rank_nontrivial` | collapse engine + rank gap | "a function on configs taking two distinct values, the difference an import" |
 | WS2 | `ws2_tick_conserves` | `ws1_atomless_bisim` | "reify {e0} and e0 are plain-bisimilar (in-sight same)" |
-| WS3 | `ws3_change_is_import` | Series 07 (`ws4_recoverable_not_import`) | "different rank + plain-bisimilar ⇒ ¬ Recoverable" |
+| WS3 | `ws3_change_is_source` | Series 07 (`ws4_recoverable_not_import`) | "different rank + plain-bisimilar ⇒ ¬ Recoverable" |
 | WS4 | `ws4_free_lunch_reachable` / `ws4_conserved_reachable` | `ws2_residue_free`, `ws1_coincidence_not_identity_witness` (+ decidable count skeleton, disclosed) | "self-inspection yields distinct free residues (create) / a residue within budget (relocate), both reachable" |
 | WS5 | `verdict` = `conservedRel`, discriminating, flags justified, audit a–e | WS1–WS4 | "a discriminating `Bool⁶ → Outcome`" |
 
