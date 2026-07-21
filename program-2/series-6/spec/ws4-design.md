@@ -14,10 +14,13 @@ identity failing (audit c); the fork is not by fiat (audit b); no persistence is
    verdict must be the residue of a computation over reachable carriers, not asserted.
 2. **Exhibit BOTH carriers and read the self-relativity (CHOSEN).** WOVEN is reachable (`ws2_cont_recoverable` on
    the merged carrier) and SEVERED is reachable (`ws2_cont_is_import` on the cut carrier); neither is forced by
-   the plain structure, so the continuity is self-relative (`ws4_carrier_relative`). The mortality companion:
-   the cut carrier has a moment nothing attends (`attendedBy = ∅` at `c0`), attention-relative cessation
-   (`ws4_cessation_relative`); the merged carrier has every moment attended (`ws4_conservative_reachable`). Both
-   mortality readings reachable.
+   the plain structure, so the continuity is self-relative (`ws4_carrier_relative`). The mortality companion is
+   stated on the DIRECTIONAL knowing that the continuity lift encodes, so the mortal moment and the import
+   describe ONE structure (Phase D, finding C2-S1): on the cut carrier `c0` KNOWS `c1` but `c1` does not know
+   `c0` (`cutKnows`, the directional knowing that `cutLift` tags), so `c0` is known by nothing — a moment nothing
+   holds, attention-relative cessation (`ws4_cessation_relative`, bundled with `¬ Recoverable (cutLift)`, both
+   about the same asymmetric knowing); on the merged carrier the knowing is mutual (`mergeKnows`), so every
+   moment is held (`ws4_conservative_reachable`). Both mortality readings reachable.
 
 ## 2. Triage
 
@@ -51,18 +54,24 @@ theorem ws4_severed_reachable {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) : ¬ Re
 theorem ws4_carrier_relative {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     Recoverable (mergeLift hinf) ∧ ¬ Recoverable (cutLift hinf)
 
--- MORTALITY COMPANION — attention-relative cessation (MORTAL reachable): the cut carrier has a moment nothing
--- attends, and the holding-direction is non-recoverable from the symmetric relating.
-theorem ws4_cessation_relative {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
-    (∃ x : CCar, attendedBy cutAttends x = ∅) ∧ ¬ Recoverable (cutLift hinf)
+-- The directional knowing the continuity lifts encode (mortality is read off THIS, one structure with the lift).
+def cutKnows : CCar → CCar → Prop := fun x y => x = c0 ∧ y = c1              -- c0 knows c1; c1 does not know c0
+def mergeKnows : MCar → MCar → Prop := fun x y => (x = m0 ∧ y = m1) ∨ (x = m1 ∧ y = m0)   -- mutual
 
--- CONSERVATIVE reachable: a carrier where every moment is attended (nothing ceases).
-theorem ws4_conservative_reachable : ∀ x : MCar, (attendedBy attendsM x).Nonempty
+-- MORTALITY COMPANION — attention-relative cessation (MORTAL reachable): a moment nothing actively knows (c0),
+-- and the knowing-direction non-recoverable from the symmetric relating — both about the same asymmetric knowing.
+theorem ws4_cessation_relative {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
+    (∃ x : CCar, ∀ y : CCar, ¬ cutKnows y x) ∧ ¬ Recoverable (cutLift hinf)
+
+-- CONSERVATIVE reachable: on the merged carrier every moment is known (held); nothing ceases.
+theorem ws4_conservative_reachable : ∀ x : MCar, ∃ y : MCar, mergeKnows y x
 ```
 
-`attendedBy attends x := {z | x ∈ attends z}` (P2S0, transitive). On `cutAttends` (`c0 ↦ {c1}`, `c1 ↦ ∅`),
-`attendedBy cutAttends c0 = ∅` (nothing attends `c0`): the mortal moment. On `attendsM` (`m0 ⇄ m1`), each is
-attended by the other: conservative.
+`cutKnows`/`mergeKnows` are the directional knowings the continuity lifts encode (`cutLift` tags `c0 → c1` with
+the active mark, `c1 → c0` with the passive mark; `mergeLift` tags both directions active). On the cut carrier
+nothing knows `c0` (`∀ y, ¬ cutKnows y c0`, since `c0 ≠ c1`): the mortal moment, and the SAME asymmetric knowing
+is the import (`¬ Recoverable (cutLift)`). On the merged carrier each moment is known by the other
+(`mergeKnows m1 m0`, `mergeKnows m0 m1`): conservative. Both by `decide`.
 
 ## 4. Why the fork is genuine (no fiat, no costume)
 
@@ -87,6 +96,6 @@ attention-relative (non-recoverable from the symmetric relating, the knowing-asy
 - `ws4_woven_reachable` → "a `Recoverable` lift exists."
 - `ws4_severed_reachable` → "a non-`Recoverable` lift exists."
 - `ws4_carrier_relative` → "both a `Recoverable` and a non-`Recoverable` lift exist."
-- `ws4_cessation_relative` → "a node with empty in-attention exists; a lift over its relating is not
+- `ws4_cessation_relative` → "a node no directed edge points to exists; the directed-edge lift is not
   `Recoverable`."
-- `ws4_conservative_reachable` → "on a carrier every node has nonempty in-attention."
+- `ws4_conservative_reachable` → "on a carrier every node is the target of some directed edge."

@@ -111,6 +111,9 @@ theorem ws5_audit_names_not_terms : True                   -- (e) grep-certified
 
 - `verdict` / `ws5_verdict_eq` → "an `Outcome`-valued function of six booleans, `= shapeDrawn` by computation."
 - `ws5_verdict_discriminates` → "the function reaches all four outcomes."
-- `ws5_flags_justified` → "the boolean inputs are the WS1–WS4 headline propositions, none hand-set."
+- `ws5_flags_justified` → "the four DECIDING boolean inputs are the WS1–WS4 headline propositions, none
+  hand-set." (The two META-flags `carrierDecided`/`carrierWoven` are not WS-propositions; `carrierDecided = false`
+  is grounded by the self-relativity `ws5_carrier_relative_verdict`, and `carrierWoven` is irrelevant — the
+  certified verdict stops at `shapeDrawn` and never enters that branch. Disclosed, finding C3-S1.)
 - `ws5_carrier_relative_verdict` → "both a `Recoverable` and a non-`Recoverable` lift exist, so no canonical
   carrier is forced."
