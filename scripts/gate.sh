@@ -65,4 +65,10 @@ check program-2/series-4 "^import (P2S3|P2S4)(\.[A-Za-z0-9_]+)*$"
 # relation are built fresh in `P2S5.*`.
 check program-2/series-5 "^import (P2S4|P2S5)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 6 (`program-2/series-6/formal/`): the `P2S6` library imports its predecessor `P2S5` and its
+# own `P2S6.*` roots (+ mathlib); the `P2S4` / `P2S3` / `P2S2` / `P2S1` / `P2S0` ground and `P1` prior art are
+# reached transitively through S5, not imported directly; any other series' tree is forbidden. The weak continuity
+# and the linearization reading are built fresh in `P2S6.*`.
+check program-2/series-6 "^import (P2S5|P2S6)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
