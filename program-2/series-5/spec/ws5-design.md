@@ -35,10 +35,20 @@ theorem ws5_verdict_discriminates :
 theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
     ( (p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1) ∧ attendsT (reifyT cycleA) = cycleA )     -- relatingCycles (WS2)
   ∧ ( ¬ ∃ x : TCar, Relation.TransGen (causalDep attendsT isTick) x x )               -- causationAcyclic (WS3)
-  ∧ ( ∀ t u : TCar, causalDep attendsT isTick t u → rankT t < rankT u )               -- the rank-lift (WS3/WS4)
+  ∧ ( ∀ x : TCar, Relation.TransGen (causalDep attendsT isTick) x x
+        → ∃ z, causalDep attendsT isTick z z )                                        -- loopOnlyAtFold (WS4)
   ∧ ( Relation.TransGen (causalDep attendsF compF) om om )                            -- loopedReachable (WS4)
   ∧ ( ¬ ∃ x : TCar, causalDep attendsT isTick x x )                                   -- foldRealizedOnTower = false
 ```
+
+Each of the five conjuncts is the proposition EARNING the corresponding boolean input to `verdict`:
+`relatingCycles` (WS2), `causationAcyclic` (WS3), `loopOnlyAtFold` (WS4, a causal loop forces a self-constituting
+relatum, via `loop_forces_selfloop` on the WS3 rank-lift), `loopedReachable` (WS4), and `foldRealizedOnTower = false`
+(the tick carrier has no self-membered composite). WS1's fold-as-diagonal is NOT a verdict flag; it grounds the
+MEANING of "the fold" and enters the verdict story through audit (d) (`ws5_audit_fold_is_diagonal`,
+resting on `ws1_fold`), which certifies that the sole loop candidate the verdict localizes is the diagonal's
+self-membered point. (Phase D / finding C7-S1: the `loopOnlyAtFold` slot is now justified by the genuine
+loop-forces-self-edge content, not by the rank-lift, and the WS1 entry point is named explicitly.)
 
 ## 3. Why the verdict is not the costume (audit c)
 
