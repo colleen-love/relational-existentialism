@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -142,3 +142,14 @@ roots = ["P2S7", "P2S7.AxiomCheck"]
 name = "P2S8"
 srcDir = "../program-2/series-8/formal"
 roots = ["P2S8", "P2S8.AxiomCheck"]
+
+# `program-2/series-9/formal/` — Program 2 Series 9 (2.9), THE CONE (the first recovery test of Phase 3, one of two
+# tier-1 probes). Imports its predecessor `P2S8` (and through it, transitively, `P2S7` / … / `P2S0` / the `P1`
+# foundation); it does NOT import `P2S8`'s predecessors directly. `P2S9` imports `P2S9.ws1`…`P2S9.ws5`;
+# `P2S9.AxiomCheck` runs the axiom pass. The reification RATE and its cone are built FRESH, read off the finite
+# attention (`Finset.sup`, earned not postulated), de-risked on paper first. Gate: `check program-2/series-9
+# "^import (P2S8|P2S9)…"`.
+[[lean_lib]]
+name = "P2S9"
+srcDir = "../program-2/series-9/formal"
+roots = ["P2S9", "P2S9.AxiomCheck"]
