@@ -78,6 +78,21 @@ Series 2.7 adds none and closes none; it draws the self-relativity of the ledger
 
 ## 7. Phase log
 
+- **2026-07-21 — Phase E.** `formal/P2S7/` built to the repaired signatures (`ws1`…`ws5`, `AxiomCheck`,
+  aggregator `P2S7.lean`), namespace `P2S7`, importing `P2S6` only. Registered in `lake/lakefile.toml`
+  (`[[lean_lib]] P2S7`, appended to `defaultTargets`) and `scripts/gate.sh` (`(P2S6|P2S7)` closure). Section 6
+  checks: `lake build P2S7 P2S7.AxiomCheck` compiles; sorry-free; axiom-clean (standard three `propext` /
+  `Classical.choice` / `Quot.sound`, several fewer); gate green; names grep clean (identifier-level; hits are
+  docstring prose and the Lean `import` keyword only). The verdict computes `conservedRel` (`ws5_verdict_eq` by
+  `rfl`) and discriminates over all six outcomes (`ws5_verdict_discriminates` by `decide`). Next: Phase F (blind
+  code review).
+- **2026-07-21 — Phase C (re-run) / D.** Phase C loop closed: the re-review on the repaired design returned ZERO
+  SERIOUS and ZERO REAL — audits (a)-(e) pass, strip test passes, names grep clean of all forbidden identifiers.
+  Four COSMETIC notes, all accepted: `conserved`/`conserves` is a distinct word from forbidden `conservation`
+  (no violation); a uniformly-threaded unused `hinf` on the count-only `ws4_crux_both_reachable` (house
+  convention); definitional conjuncts in `ws2_tick_conserves` backed by the real third conjunct; the
+  `ws5_audit_names_not_terms : True` placeholder (meta, the §6 grep the teeth). Phase D closed C1-C3 Fixed by
+  renaming (see the findings ledger §4).
 - **2026-07-21 — Phase B.** Design batch committed as one unit before any `formal/` file (the Phase B gate):
   `spec/measure-derisking.md` (the paper hunt — `Q := rankM` survives all four gates: non-trivial, independent/not
   rigged, tick-conserved in-sight, diagonal test genuine; Candidates 2 and 3 rejected as non-computable and rigged),
