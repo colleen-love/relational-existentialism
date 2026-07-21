@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the first series of Phase 2 (the physics of the built universe, `charter-extension.md`).*
+*Current phase: B (design). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the first series of Phase 2 (the physics of the built universe, `charter-extension.md`).*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition:** Series 2.3 must have landed before Phase B begins (it has: SHAPE-DRAWN, program verdict CONSTRUCTED-AND-WALLED).
+- **Phase:** A complete (charter committed). B (design) COMMITTED — six design files (`spec/README.md`, `spec/ws1-design.md`…`ws5-design.md`) as one batch, no `formal/` file yet (Phase B gate held). **Precondition:** Series 2.3 has landed (SHAPE-DRAWN, program verdict CONSTRUCTED-AND-WALLED).
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The imported chain (`P2S3`, `P2S2`, `P2S1`, `P2S0`, `P1`) is built and registered, reaching all lower layers transitively.
 - **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
@@ -74,3 +74,4 @@ Series 2.4 adds none and closes none; it draws the self-relativity of space shar
 ## 7. Phase log
 
 - **2026-07-21 — Phase A.** Charter committed (`charter.md`). Series 2.4 established as SPACE, the first shake of Phase 2: build THE WORLD (a genuine lateral population of same-rank import-distinguished peers with a local attention graph) as the ground, define two gradings (a directed granular self-relative breadth-distance, and reification depth), prove the axes come apart (WS2) and the lateral separation is an import (WS3, Series 07), and at the knot prove the two-axes fork DISTINCT with REDUCED genuinely reachable, no fiat and no costume (the knot on axis-independence, not on multiplicity). No distance asserted absolutely. Costume gate passes at charter (axis-building). Scaffold (`spec/`, `formal/`) to be created at Phase B. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build. Weigh the candidate witness world (a lateral ring/graph of same-rank peers with local, possibly directed attention, plus a reified element to witness the vertical axis).
+- **2026-07-21 — Phase B.** Six design files committed as one batch before any `formal/` file (Phase B gate held): `spec/README.md` (imported chain, shared witness, discipline, triage, outcomes, module layout) and `spec/ws1-design.md`…`spec/ws5-design.md`. The shared witness is fixed: the WORLD `W = Fin 4` (a directed 3-ring of same-rank peers `w0/w1/w2` at rank 0 plus a reified peer `r` at rank 1) with two gradings `rankW` (vertical) and `latW` (lateral coordinate), and the collapsed TOWER `T = Fin 3` where `latT = rankT` (REDUCED realized). The crux is the cross-pattern of separations: `latW` separates `(w0,w2)` where `rankW` does not, and `rankW` separates `(r,w0)` where `latW` does not, so neither grading is a function of the other (axis-independence, the finding — audit c), while REDUCED is genuinely reachable on `T` (no fiat — audit b). The breadth metric is path-grounded via a length-indexed `reachIn` on the LOCAL (non-complete) graph, self-relative from `w0` (audit a, d). `P2S4` module naming fixed (`P2S4.lean` imports `P2S4.ws1`…`ws5`; `ws1` imports `P2S3`; `AxiomCheck` root); registration deferred to Phase E per protocol. Next: Phase C, blind design review on the signatures only.
