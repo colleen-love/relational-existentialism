@@ -1,14 +1,16 @@
 /-
 `program-2/series-7/formal/P2S7/ws2.lean`
 
-WS2 - The tick preserves `Q` in the self's sight (conserved-relative). Program 2 Series 7 (2.7).
+WS2 - The tick RAISES `Q` (the arrow). Program 2 Series 7 (2.7).
 
-Imports `P2S7.ws1`. Proves that a reification-tick PRESERVES the measure within what the self can see: the tick's
-product `e1 = reifyM {e0}` is plain-bisimilar to its constituent `e0` (the collapse engine `ws1_atomless_bisim`
-identifies them in the plain relating), so IN-SIGHT — over the plain-bisimulation quotient — the reification adds NO
-distinction. The full rank does change at the label level (`rankM e1 = 1 ≠ 0`); the in-sight measure does not. This
-is general relativity's local conservation, the global failing. The conservation is a THEOREM about the independent
-`rankM` (the plain-bisimilarity), resting on the collapse engine, not a definitional triviality.
+Imports `P2S7.ws1`. Proves the honest, Q-SPECIFIC fact about the measure under the tick: a reification-tick STRICTLY
+RAISES `rankM` (`rankM (reifyM {e0}) = rankM e0 + 1`, and again at the next step). The measure is NOT conserved. The
+reified product IS plain-bisimilar to its constituent (the collapse engine identifies the states in-sight) — but
+that is a fact about the STATES, not about `Q`: the collapse HIDES the arrow, it does not conserve the measure. The
+in-sight-invisible increase is exactly the manufactured import (WS3, WS4). This replaces the earlier
+`ws2_tick_conserves`, which proved only the state-bisimilarity and was a costume (a "conservation" that held for any
+measure because in-sight the atomless carrier is one class); see `charter-status.md` finding T1-S1 (Tier-1 landing
+review). The genuine content is the ARROW: `rankM` rises.
 
 Design docs: `program-2/series-7/spec/ws2-design.md`.
 
@@ -26,17 +28,17 @@ set_option linter.unusedVariables false
 
 variable {κ : Cardinal.{0}}
 
-/-- **THE TICK CONSERVES `Q` IN-SIGHT (WS2, conserved-relative).** The tick genuinely reifies `{e0}` (the pointwise
-section `attendsM (reifyM {e0}) = {e0}`, `reifyM {e0} = e1`), and its product `e1` is plain-bisimilar to its
-constituent `e0` (the collapse engine `ws1_atomless_bisim`, both `SHNE`): in the self's plain sight `e1` and `e0`
-are identified, so any in-sight measure agrees on them and the tick adds no in-sight distinction. The full-measure
-change (`rankM e1 = 1 ≠ 0`, WS1) is the import (WS3), invisible in-sight. Conserved-relative, never global. -/
-theorem ws2_tick_conserves (hinf : ℵ₀ ≤ κ) :
-    attendsM (reifyM {e0}) = {e0}
-  ∧ reifyM {e0} = e1
-  ∧ (∃ R, IsBisim (plainOf (destML hinf)) R ∧ R (reifyM {e0}) e0) := by
-  refine ⟨sectionM_e0, reifyM_e0, ?_⟩
-  rw [reifyM_e0, destML, plainOf_rankLiftM]
-  exact ws1_atomless_bisim (outDest hinf attendsM) e1 e0 (SHNE_M hinf e1) (SHNE_M hinf e0)
+/-- **THE TICK RAISES `Q` (WS2, the arrow).** A reification-tick STRICTLY raises the measure: `rankM (reifyM {e0}) =
+rankM e0 + 1`, and again `rankM (reifyM {e1}) = rankM e1 + 1`. The measure is not conserved — it rises. The reified
+product `e1` is plain-bisimilar to its constituent `e0` (`AttentionDistinguishes`, the collapse engine identifies the
+states in-sight), so the rise is INVISIBLE in-sight — but that is a fact about the states, not a conservation of `Q`:
+the collapse hides the arrow. The in-sight-invisible increase is the manufactured import (WS3/WS4). -/
+theorem ws2_tick_raises (hinf : ℵ₀ ≤ κ) :
+    rankM (reifyM {e0}) = rankM e0 + 1
+  ∧ rankM (reifyM {e1}) = rankM e1 + 1
+  ∧ AttentionDistinguishes (destML hinf) (reifyM {e0}) e0 := by
+  refine ⟨by decide, by decide, ?_⟩
+  rw [reifyM_e0]
+  exact (ws1_rank_nontrivial hinf).2.1
 
 end P2S7

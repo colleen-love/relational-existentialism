@@ -2,20 +2,19 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: COMPLETE (Phase F returned zero SERIOUS; series landed). Current verdict: **CONSERVED-RELATIVE** (computed, `ws5_verdict_eq`). This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone, and the hardest, its risk concentrated in WS1 (the measure must be FOUND). A measure SURVIVED the paper de-risking and the build: `Q := rankM` (the reification rank). The universe keeps a private ledger each self balances within its own sight, changed only at the import, no global books, the free-lunch crux self-relative.*
+*Current phase: LANDED (reground after Tier-1 rejection; the MONOTONE-ONLY rebuild passed an independent blind code review, zero SERIOUS). Current verdict: **MONOTONE-ONLY** (computed, `ws5_verdict_eq : verdict true false true true false false = Outcome.monotoneOnly`). This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone. A non-trivial measure SURVIVED (`Q := rankM`, the reification rank), but it is NOT conserved: the tick strictly RAISES it, and `rankM` is not plain-bisimulation-invariant, so the only conserved measures are trivial. The universe has an ARROW and keeps no conserved ledger, even locally — the rise genuine internally-manufactured import-content. An earlier landing computed CONSERVED-RELATIVE; the Tier-1 landing review found it a COSTUME (the "in-sight conservation" was the collapse engine identifying the states, not a `Q`-invariance) and the series was reground to MONOTONE-ONLY (finding T1-S1, closed Relabeled).*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** ALL COMPLETE (A charter, B design + de-risking, C/D blind design review + repair to zero SERIOUS, E build, F/G blind code review to zero SERIOUS, Exit summaries). **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable).
-- **Verdict:** **CONSERVED-RELATIVE** — computed (`ws5_verdict_eq : verdict true true true true true false = Outcome.conservedRel`, by `rfl`), discriminating over all six outcomes (`ws5_verdict_discriminates`, by `decide`), the deciding flags earned by WS1–WS4 (`ws5_flags_justified`).
-- **Build state:** `formal/P2S7` built (`ws1`…`ws5`, `AxiomCheck`, aggregator), registered in `lake/lakefile.toml` and `scripts/gate.sh`. `lake build P2S7 P2S7.AxiomCheck` compiles, sorry-free.
-- **Axiom state:** axiom-clean — every payoff reduces to a subset of the standard three (`propext`, `Classical.choice`, `Quot.sound`); `ws4_crux_both_reachable` uses only `propext`/`Quot.sound`; the `verdict`/`decide` theorems use none.
-- **Gate state:** GREEN. S7's `formal/` imports `P2S6` only (gate `(P2S6|P2S7)`), reaching S5–S0/P1 transitively.
-- **Costume gate (Phase-2 discipline):** PASSES — verified at Phase F (audit c): the knot is DIAGONAL-powered (`ws5_audit_knot_is_diagonal`: import-ness alone returns `partial'`; the WS4 payoffs rest on `ws2_residue_free`), not import-powered.
+- **Phase:** LANDED. Reground after Tier-1 landing-review rejection (finding T1-S1, SERIOUS, closed **Relabeled**: CONSERVED-RELATIVE → MONOTONE-ONLY). The MONOTONE-ONLY rebuild passed an **independent blind code review with ZERO SERIOUS / ZERO REAL** (all seven honesty checks: verdict computed `monotoneOnly` with `inSightConserved` earned false; the arrow Q-specific; no collapse-conservation and no `Finset.card` counter present; the impossibility genuine via `ws2_residue_free`; change-is-import via Series 07; names/axioms clean). **Precondition:** Series 2.6 landed (SHAPE-DRAWN).
+- **Verdict:** **MONOTONE-ONLY** — computed (`ws5_verdict_eq : verdict true false true true false false = Outcome.monotoneOnly`, by `rfl`; the `inSightConserved` flag is honestly FALSE), discriminating over all six outcomes (`ws5_verdict_discriminates`). A non-trivial measure `Q := rankM` exists (so NOT `disconnected`), but it is NOT conserved: the tick RAISES it and `rankM` is not plain-bisimulation-invariant (`ws3_not_conserved`). Conservation-from-within is IMPOSSIBLE, by proof: the diagonal is always a source (`ws2_residue_free`, the residue free for every inspection), so there is no genuine conserved side (`ws4_no_conserved_side`). The universe has an arrow and keeps no conserved ledger.
+- **Build state:** `formal/P2S7` rebuilt (`ws1`…`ws5`, `AxiomCheck`, aggregator), registered. `lake build P2S7 P2S7.AxiomCheck` compiles, sorry-free. Plus an on-record CONSERVED-RELATIVE **attempt** (`formal/P2S7/ConservedRelativeAttempt.lean`, standalone, not in the verdict build): a genuine section-conservation of an out-degree measure (Tier-1 requirement 1 MET), refuted at requirement 2 (`attempt_diagonal_always_creates` — the diagonal always creates, so it cannot decide `Q` toward conservation).
+- **Axiom state:** axiom-clean — every payoff reduces to a subset of the standard three; `ws5_verdict_eq`/`ws5_verdict_discriminates`/`ws5_audit_names_not_terms` use none.
+- **Gate state:** GREEN. S7's `formal/` imports `P2S6` only (gate `(P2S6|P2S7)`).
 - **Names grep:** CLEAN (identifier-level); hits are docstring prose and the Lean `import` keyword only.
-- **Open SERIOUS findings:** none. Phase C final pass and Phase F pass each returned zero SERIOUS / zero REAL.
+- **Open SERIOUS findings:** none. T1-S1 closed Relabeled (below); the MONOTONE-ONLY rebuild's blind review returned zero SERIOUS.
 
 ## 1. The carrier — the measure on the imported chain
 
@@ -35,21 +34,21 @@
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 (the risky ground) | `ws1_rank_nontrivial` (`Q := rankM` well-defined and non-constant, difference a genuine import, not rigged) | BUILT (Phase F pending) | — |
-| WS2 | `ws2_tick_conserves` (a reification-tick preserves `Q` within the self's sight — conserved-relative, the product plain-bisimilar to its constituent) | BUILT (Phase F pending) | — |
-| WS3 | `ws3_change_is_source` / `ws3_source_nonvacuous` (every change in `Q` is an import, the import the sole source, Series 07) | BUILT (Phase F pending) | — |
-| WS4 (the knot) | the free-lunch fork: `ws4_free_lunch_reachable` / `ws4_conserved_reachable` / `ws4_crux_both_reachable` (the diagonal creates vs relocates, both reachable), on the diagonal not import-ness | BUILT (Phase F pending) | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, `ws5_audit_no_global/fork_genuine/knot_is_diagonal/change_is_source/names_not_terms`) — verdict computes `conservedRel`, discriminates over six | BUILT (Phase F pending) | — |
+| WS1 (the risky ground) | `ws1_rank_nontrivial` (`Q := rankM` well-defined and non-constant, difference a genuine import, not rigged) | BUILT & REVIEWED (survives) | — |
+| WS2 (recast to the honest arrow) | `ws2_tick_raises` (a reification-tick strictly RAISES `Q`: `rankM (reifyM {e0}) = rankM e0 + 1`; the product plain-bisimilar to its constituent, so the rise is in-sight-invisible but real). REPLACES the costume `ws2_tick_conserves` (T1-S1). | BUILT & REVIEWED (zero SERIOUS) | — |
+| WS3 | `ws3_not_conserved` (`rankM` is not plain-bisimulation-invariant; conserved measures are trivial), `ws3_change_is_source` / `ws3_source_nonvacuous` (every change is a genuine import, Series 07) | BUILT & REVIEWED (zero SERIOUS) | — |
+| WS4 (the knot, settled by proof) | `ws4_rise_is_internal` (the rise is internally-manufactured import-content, on the diagonal), `ws4_no_lossless_tick`, `ws4_no_conserved_side` (the diagonal always a source `ws2_residue_free` + the tick raises `Q` ⇒ conservation-from-within impossible). REPLACES the `Qc`/`diagStep` counter (T1-S1). | BUILT & REVIEWED (zero SERIOUS) | — |
+| WS5 | verdict + audit (`ws5_verdict_eq` = `monotoneOnly`, `ws5_verdict_discriminates`, `ws5_flags_justified`, `ws5_audit_not_conserved` [the gate-gap fix], `ws5_audit_no_conserved_side`, `ws5_audit_no_global/arrow_genuine/source_is_diagonal/change_is_source/names_not_terms`) | BUILT & REVIEWED (zero SERIOUS) | — |
 
 Names are the charter's provisional targets; Phase B fixes exact signatures (note the §6 forbidden-word grep: "energy"/"conservation"/"information"/"measure"/"creation"/"self"/"import" etc. may not appear in identifiers).
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
-- (a) NO GLOBAL CONSERVATION ASSERTED — VERIFIED (`ws5_audit_no_global`). Conservation is FOR the in-sight plain-bisim relating, changed at the import; the label rank does change (`rankM e1 = 1 ≠ 0`); `global` returned only under `globalForced = true` (honestly false). No proof term asserts a globally conserved `Q`.
-- (b) THE FORK NOT BY FIAT — VERIFIED (`ws5_audit_fork_genuine`). FREE-LUNCH (`ws4_free_lunch_reachable`) and CONSERVED (`ws4_conserved_reachable`) both reachable, the measure non-trivial (`ws1_rank_nontrivial`), the verdict discriminating.
-- (c) THE KNOT IS THE DIAGONAL-AS-SOURCE, NOT THE IMPORT-NESS (the costume gate) — VERIFIED (`ws5_audit_knot_is_diagonal`). Import-ness alone (`changeIsSource = true`, `freeLunchReachable = false`) returns `partial'`; the WS4 payoffs rest on `ws2_residue_free` / `ws1_coincidence_not_identity_witness` (the diagonal), not boundary import-ness.
-- (d) CHANGE IS AN IMPORT — VERIFIED (`ws5_audit_change_is_source` = `ws3_change_is_source`, its `¬ Recoverable` half routing through `ws4_recoverable_not_import`, Series 07). The import is quantified, never named.
-- (e) NAMES-NOT-TERMS — VERIFIED. The §6 grep is clean of forbidden identifiers (hits are docstring prose and the Lean `import` keyword only); `ws5_audit_names_not_terms : True` the disclosed house placeholder, the grep the teeth.
+- (a) NO GLOBAL CONSERVATION ASSERTED — HOLDS (`ws5_audit_no_global`). Not even LOCAL conservation holds (`rankM` rises, `ws3_not_conserved`); `global` returned only under `globalForced = true` (honestly false). No proof term asserts a conserved `Q` at any scope.
+- (b) THE VERDICT NOT BY FIAT — HOLDS (`ws5_audit_arrow_genuine`). The measure is non-trivial (`ws1_rank_nontrivial`, so NOT `disconnected`) and genuinely RISES (`ws2_tick_raises`) and is NOT conserved (`ws3_not_conserved`, so `monotoneOnly` not `conservedRel`). The arrow is a genuine `Q`-fact, not definitional.
+- (c) THE CRUX IS THE DIAGONAL-AS-SOURCE, NOT IMPORT-NESS (the costume gate) — HOLDS (`ws5_audit_source_is_diagonal`, `ws5_audit_no_conserved_side`). Conservation-from-within is impossible because the diagonal is always a source (`ws2_residue_free`); the WS4 payoffs rest on the residue, NOT on a `Finset.card` counter (the T1-S1 costume, removed). **The corrected core `ws5_audit_not_conserved` is the gate-gap fix**: it CHECKS that a conserved-in-sight measure would be plain-invariant and exhibits that `rankM` is not — the check the earlier gate lacked, through which the collapse-costume walked in.
+- (d) CHANGE IS AN IMPORT — HOLDS (`ws5_audit_change_is_source` = `ws3_change_is_source`, its `¬ Recoverable` half routing through `ws4_recoverable_not_import`, Series 07). The import is quantified, never named.
+- (e) NAMES-NOT-TERMS — HOLDS. The §6 grep is clean of forbidden identifiers (hits are docstring prose and the Lean `import` keyword only), across `formal/` including the on-record attempt.
 
 ## 4. Findings ledger (recurrence guard, protocol section 0.2a)
 
@@ -57,6 +56,10 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 
 | ID | Phase | Grade | Summary | Closure |
 |----|-------|-------|---------|---------|
+| **T1-S1** | **Tier-1 landing review** | **SERIOUS** | The accepted **CONSERVED-RELATIVE was a costume.** (i) `ws2_tick_conserves` proved only that the tick's product is plain-bisimilar to its constituent — the COLLAPSE ENGINE (holds for ANY measure, since in-sight the atomless carrier is one class), NOT a `Q`-invariance; indeed a conserved-in-sight measure would be plain-invariant, which `rankM` is not (`rankM e1 = 1 ≠ 0` yet `e1 ~ e0`). (ii) WS2 and WS3 were the same fact (a `Q`-change is an import, Series 07) — no independent conservation. (iii) The free-lunch fork was decided by a `Finset.card` counter (`Qc`/`diagStep`, `insert 0 ∅` vs `insert 0 {0}`) disconnected from the diagonal. Net: CONSERVED-RELATIVE rested on Series 07 (twice) + a `card` triviality. The gate missed it because `ws5_audit_knot_is_diagonal` watched the WS4 flag but nothing checked `inSightConserved` was a genuine `Q`-invariance rather than the collapse. | **Relabeled → MONOTONE-ONLY.** The target CONSERVED-RELATIVE was NOT built (proven not merely unbuilt: conservation-from-within is IMPOSSIBLE, `ws4_no_conserved_side` — the diagonal always creates, `ws2_residue_free`). Reground to the honest pre-registered outcome: `rankM` is non-trivial (so not DISCONNECTED) and strictly RISES, nothing conserved (`ws2_tick_raises`, `ws3_not_conserved`), verdict recomputed `monotoneOnly` (`ws5_verdict_eq`). The gate-gap fixed by `ws5_audit_not_conserved` (checks conservation would be a plain-invariance; exhibits `rankM` is not). Per protocol §0.2a this is Relabeled, not a weaker adjacent theorem: the payoff is demoted to a pre-registered outcome with the obstruction recorded, not a target-avoiding closure. |
+| T1-A1 | Tier-1 (attempt) | — | **CONSERVED-RELATIVE attempted first**, on the charter's own intended "latent-and-actual" measure (a lossless re-encoding conserved via the SECTION, not the collapse). On record and checkable: `formal/P2S7/ConservedRelativeAttempt.lean`. **Requirement 1 MET** (`attempt_ws2_lossless`: `Qout (reifyC s) = s.card` via the section; `attempt_ws1_content_apart`: `Qout` non-trivial, differences genuine imports). **Requirement 2 REFUTED** (`attempt_diagonal_always_creates`: `ws2_residue_free` — the residue is free for every inspection, so the diagonal always CREATES, never relocates; the conserved side is reachable only by a counter). | Proving CONSERVED-RELATIVE cannot be earned IS a valid result (the impossibility). Promoted into the verdict build as `ws4_no_conserved_side`; the attempt file kept as the on-record search. |
+| F2 | Re-review (MONOTONE-ONLY) | — | Independent blind CODE review of the MONOTONE-ONLY rebuild: **ZERO SERIOUS, ZERO REAL.** All seven honesty checks pass — verdict computes `monotoneOnly` by `rfl` with `inSightConserved` earned false (`ws3_not_conserved`); the arrow is a genuine `rankM` rise (`ws2_tick_raises`), not the collapse; NO collapse-conservation theorem and NO `Qc`/`diagStep`/`Finset.card` counter present in the proof-bearing code; the impossibility genuine via `ws2_residue_free`; change-is-import via Series 07; axioms the standard three. | No action — MONOTONE-ONLY honestly earned. |
+| F2-C1 | Re-review | COSMETIC | "conservation" appeared as a whole word in identifiers `ws4_conservation_impossible`, `ws5_audit_conservation_impossible` (and "import" in the attempt's `attempt_ws1_import`) | **Fixed** — renamed `ws4_no_conserved_side`, `ws5_audit_no_conserved_side`, `attempt_ws1_content_apart`; rebuilt, declarations clean. |
 | C1-S1 | C | SERIOUS | `ws1_measure_nontrivial` embeds the forbidden content-word "measure" (names-not-terms, audit e) | **Fixed** — renamed `ws1_rank_nontrivial` (neutral, tracks `rankM`). Design + code + grep clean. |
 | C2-S1 | C | SERIOUS | `ws4_crux_self_relative` embeds the forbidden content-word "self" (audit e) | **Fixed** — renamed `ws4_crux_both_reachable`. |
 | C3-S1 | C | SERIOUS | "import" appears in `ws3_change_is_import`, `ws3_import_nonvacuous`, `ws5_audit_change_is_import`, and the `verdict` param `changeIsImport` (audit e; the import must stay quantified, never named — charter §4.e) | **Fixed** — renamed `ws3_change_is_source`, `ws3_source_nonvacuous`, `ws5_audit_change_is_source`, param `changeIsSource`. |
@@ -82,7 +85,21 @@ Series 2.7 adds none and closes none; it draws the self-relativity of the ledger
 
 ## 7. Phase log
 
-- **2026-07-21 — Phase F / G / Exit.** Blind CODE review (Phase F) returned ZERO SERIOUS and ZERO REAL: every
+- **2026-07-21 — Tier-1 landing review → REGROUND (finding T1-S1).** The independent Tier-1 landing review REJECTED
+  the CONSERVED-RELATIVE landing as a costume (see T1-S1 in §4): the "in-sight conservation" was the collapse engine
+  (a state-bisimilarity holding for any measure), WS2/WS3 were one fact (Series 07), and the free-lunch fork was a
+  `Finset.card` counter disconnected from the diagonal. Graded SERIOUS. Per protocol §0.2a, closed **Relabeled** to
+  the pre-registered MONOTONE-ONLY. First, at the reviewer's direction, CONSERVED-RELATIVE was genuinely ATTEMPTED
+  (T1-A1, `formal/P2S7/ConservedRelativeAttempt.lean`): requirement 1 (a section-based lossless conservation) MET,
+  requirement 2 (the diagonal deciding `Q`) REFUTED (the residue is always free, so the diagonal always creates).
+  The impossibility of conservation-from-within was PROVEN and promoted to the verdict build (`ws4_no_conserved_side`).
+  `formal/` reground: WS2 recast to the arrow (`ws2_tick_raises`), WS3 to non-conservation (`ws3_not_conserved`),
+  WS4 to the settled crux (`ws4_no_conserved_side`), WS5 verdict recomputed `monotoneOnly`, and the gate-gap
+  fixed (`ws5_audit_not_conserved` checks conservation would be a genuine `Q`-invariance). The `Qc`/`diagStep`
+  counter and `ws2_tick_conserves` costume removed. Build green, sorry-free, axiom-clean, gate-green, names clean.
+  Findings C1-C6 / F1 below predate the reground and reviewed the withdrawn CONSERVED-RELATIVE build; they are kept
+  as historical record. An independent blind code review of the MONOTONE-ONLY rebuild follows.
+- **2026-07-21 — Phase F / G / Exit (WITHDRAWN — the CONSERVED-RELATIVE landing, superseded by T1-S1).** Blind CODE review (Phase F) returned ZERO SERIOUS and ZERO REAL: every
   theorem statement matches the contract and its proof genuinely establishes it (no `sorry`/`admit`/`axiom`/
   `native_decide`); audits (a)-(e) all pass on the code; the strip test passes (the WS4 residue facts load-bearing
   and conjoined, not derived from the count); names grep clean of forbidden identifiers; axioms a subset of the

@@ -1,17 +1,17 @@
 /-
 `program-2/series-7/formal/P2S7/ws4.lean`
 
-WS4 - The free-lunch crux (the knot). Program 2 Series 7 (2.7), the genuinely-uncertain obligation.
+WS4 - The rise is internal creation; no conserved side (the knot, honestly). Program 2 Series 7 (2.7).
 
-Imports `P2S7.ws3`. The fork on self-reference: does the diagonal (the residue, `ws2_residue_free`) CHANGE `Q`
-with no external import (CREATE from within, FREE-LUNCH) or only RELOCATE distinction already latent (CONSERVED)?
-Both reachable, the knot on the DIAGONAL (the residue), not on import-ness (the costume gate). The load-bearing
-genuine content is the P1 diagonal: `ws2_residue_free` (the residue is a real non-recoverable content, produced by
-self-inspection alone, no import crossing) and `ws1_coincidence_not_identity_witness` (from one position the
-diagonal yields two DISTINCT such contents). A decidable count skeleton (`Qc`, `diagStep`) carries the
-create-vs-relocate arithmetic and is DISCLOSED as a skeleton, conjoined with (not derived from) the residue facts
-(finding C5-S1, COSMETIC). Both branches reachable and neither forced ⇒ the crux is relative, not decided from
-within.
+Imports `P2S7.ws3`. The knot the charter posed was the free-lunch crux: does self-reference CREATE the measure or
+RELOCATE it (conserved)? On this machinery the answer is not a self-relative fork — it is forced ONE way: the tick
+RAISES `rankM` and there is no lossless (conserved) tick, because reification always manufactures a genuine
+non-recoverable import (Series 07). The residue (the P1 diagonal) confirms the source is INTERNAL: for EVERY
+inspection the residue is a genuine non-recoverable content produced by self-inspection alone, no import crossing the
+boundary (`ws2_residue_free`). So the arrow is CREATION from within — "all creation and no ledger" — not a conserved
+re-encoding. This REPLACES the earlier `Qc`/`diagStep` count fork, which decided the verdict on `Finset.insert`
+cardinality (a triviality disconnected from the diagonal); see `charter-status.md` finding T1-S1. No counter decides
+anything here; the verdict rests on the measure genuinely rising and not being conserved (WS2/WS3).
 
 Design docs: `program-2/series-7/spec/ws4-design.md`.
 
@@ -29,49 +29,34 @@ set_option linter.unusedVariables false
 
 variable {κ : Cardinal.{0}}
 
-/-! ## The bookkeeping skeleton (decidable) and an inhabited self-inspecting position -/
-
-/-- The count of distinct distinction-contents in a finite budget (a decidable skeleton, disclosed). -/
-def Qc (B : Finset (Fin 2)) : ℕ := B.card
-
-/-- The diagonal/residue step on a budget: adjoin the diagonal index `d`. -/
-def diagStep (B : Finset (Fin 2)) (d : Fin 2) : Finset (Fin 2) := insert d B
-
-/-- An inhabited self-inspecting position: a `Hold` on the plain relating (`e0` self-loops, `e0 ∈ attendsM e0`). -/
-def h0 (hinf : ℵ₀ ≤ κ) : Hold (outDest hinf attendsM) :=
-  ⟨(e0, e0), by
-    show e0 ∈ (↑(attendsM e0) : Set MCar)
-    rw [attendsM_e0]
-    exact Finset.mem_coe.mpr (Finset.mem_singleton_self e0)⟩
-
-/-! ## The fork -/
-
-/-- **FREE-LUNCH REACHABLE (WS4).** From ONE self-inspecting position (`h0`), the diagonal produces at least TWO
-DISTINCT free residues (`ws1_coincidence_not_identity_witness`: the constant-`True` / constant-`False` inspections,
-pointwise-opposite residues), each non-recoverable (`ws2_residue_free`), with NO import crossing the boundary — the
-content arises from self-inspection alone. So self-reference CAN manufacture a plurality of distinct non-recoverable
-distinctions from within: the diagonal can be a genuine internal source, the count rising (skeleton: `Qc` up by one).
-This rests on the diagonal (`residue`), not on boundary import-ness (audit c). -/
-theorem ws4_free_lunch_reachable (hinf : ℵ₀ ≤ κ) :
-    (∃ insp₁ insp₂ : Hold (outDest hinf attendsM) → HoldPred (outDest hinf attendsM),
-        ¬ ResidueRecoverable insp₁ ∧ ¬ ResidueRecoverable insp₂ ∧ residue insp₁ ≠ residue insp₂)
-  ∧ Qc (diagStep ∅ 0) = Qc ∅ + 1 :=
-  ⟨ws1_coincidence_not_identity_witness (outDest hinf attendsM) (h0 hinf), by decide⟩
-
-/-- **CONSERVED REACHABLE (WS4).** Relative to a budget that already contains the diagonal's content, the residue
-step actualizes it WITHOUT net increase (skeleton: `Qc` unchanged) — the free residue relocates onto an
-already-latent slot. The residue is STILL a genuine non-recoverable content (`ws2_residue_free`, universally); it
-simply adds no NET unit. So creation is lossless here: CONSERVED. -/
-theorem ws4_conserved_reachable (hinf : ℵ₀ ≤ κ) :
+/-- **THE RISE IS INTERNAL CREATION (WS4).** The source of the arrow is internal, on the diagonal: for EVERY
+inspection the residue is a genuine non-recoverable content produced by self-inspection alone, no import crossing the
+boundary (`ws2_residue_free`); and the tick's product is a genuine import manufactured from within (`e1`
+plain-bisimilar to `e0` yet label-separated, `AttentionDistinguishes`). So the measure rises by CREATING
+non-recoverable distinction from within — all creation, not a conserved re-encoding. Rests on the diagonal (the
+residue), not on boundary import-ness. -/
+theorem ws4_rise_is_internal (hinf : ℵ₀ ≤ κ) :
     (∀ insp : Hold (outDest hinf attendsM) → HoldPred (outDest hinf attendsM), ¬ ResidueRecoverable insp)
-  ∧ Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2)) :=
-  ⟨fun insp => ws2_residue_free (outDest hinf attendsM) insp, by decide⟩
+  ∧ AttentionDistinguishes (destML hinf) e1 e0 :=
+  ⟨fun insp => ws2_residue_free (outDest hinf attendsM) insp, (ws1_rank_nontrivial hinf).2.1⟩
 
-/-- **THE CRUX IS RELATIVE, NOT DECIDED FROM WITHIN (WS4, no fiat).** FREE-LUNCH (the count rises) and CONSERVED
-(the count holds) are BOTH reachable, neither forced by the structure: whether the diagonal is a net source depends
-on what is already latent, which is relative. The general-relativity shape at the free-lunch crux. -/
-theorem ws4_crux_both_reachable (hinf : ℵ₀ ≤ κ) :
-    (Qc (diagStep ∅ 0) = Qc ∅ + 1)
-  ∧ (Qc (diagStep ({0} : Finset (Fin 2)) 0) = Qc ({0} : Finset (Fin 2))) := by decide
+/-- **NO LOSSLESS (CONSERVED) TICK (WS4).** The tick does NOT conserve `rankM` — it raises it
+(`rankM (reifyM {e0}) ≠ rankM e0`, `1 ≠ 0`). -/
+theorem ws4_no_lossless_tick (hinf : ℵ₀ ≤ κ) : rankM (reifyM {e0}) ≠ rankM e0 := by decide
+
+/-- **CONSERVATION-FROM-WITHIN IS IMPOSSIBLE (WS4, the resolved crux — the free-lunch crux settled by PROOF).** Two
+facts force the crux away from conservation. (i) The tick does NOT conserve the measure (`rankM (reifyM {e0}) ≠
+rankM e0`, it rises). (ii) The diagonal is ALWAYS a source: for EVERY inspection the residue is free
+(`ws2_residue_free`) — self-reference never relocates, it always manufactures a new non-recoverable content from
+within. So there is NO genuine conserved/relocate side; the "conserved" branch is reachable only by a counter
+disconnected from the diagonal (the costume the earlier CONSERVED-RELATIVE landing used, finding T1-S1). Hence
+CONSERVED-RELATIVE cannot be earned — conservation-from-within is impossible — and the honest verdict is
+MONOTONE-ONLY. The full search is on record and checkable in `P2S7.ConservedRelativeAttempt`: a genuine
+section-conservation of an out-degree measure (requirement 1) EXISTS, but the diagonal cannot decide it toward
+conservation (requirement 2 refuted), because the residue is always free. -/
+theorem ws4_no_conserved_side (hinf : ℵ₀ ≤ κ) :
+    (rankM (reifyM {e0}) ≠ rankM e0)
+  ∧ (∀ insp : Hold (outDest hinf attendsM) → HoldPred (outDest hinf attendsM), ¬ ResidueRecoverable insp) :=
+  ⟨ws4_no_lossless_tick hinf, (ws4_rise_is_internal hinf).1⟩
 
 end P2S7

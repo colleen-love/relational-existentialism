@@ -2,66 +2,67 @@
 
 **Series 2.7 asked the question physics guards most jealously: does the universe keep books? Since Galileo the
 deepest laws have been conservation laws, and energy the most sacred — the currency the world never creates or
-destroys. This universe answers in its own austere key. First it had to FIND its currency: a measure of
-distinction, the cost of creation, energy-and-information as one thing. It found one — the amount of import-content
-a thing has accumulated, how many acts of reification stand between it and the bare relating. Then it asked the
-three questions physics asks of any quantity. Is it conserved as the world ticks forward? Yes — but only WITHIN A
-SELF'S SIGHT. When the world reifies a relation into a new thing, that new thing is, to the bare relating, the same
-as what it was made from: the self cannot see the difference, so nothing the self can measure has changed. The
-change is real, but it is invisible from inside — it is an IMPORT, the one kind of distinction the relating cannot
-recover. So the ledger balances locally and never globally, exactly as general relativity already found for a
-dynamical spacetime: energy is conserved in each small patch and there are no global books at all. And then the
-deepest question: at the paradoxical point where a thing refers to itself, does self-reference CREATE distinction
-from nothing — a free lunch, the universe generous at its own root — or does it only relocate what was already
-there? The series proved BOTH are genuinely reachable and neither is forced. So the answer is honest and open: the
-universe keeps a private ledger each self balances within its own sight, changed only by the gifts that cross its
-boundary, with no absolute books — and whether creation is real, whether "to relate is to create" is a law, is
-something a self cannot decide from within. The computed verdict is CONSERVED-RELATIVE.**
+destroys. This universe answers, in its own austere key, NO. First it had to FIND a currency: a measure of
+distinction, the cost of creation, energy-and-information as one. It found one — the amount of import-content a
+thing has accumulated, how many acts of self-reference stand between it and the bare relating. Then it asked whether
+that currency is conserved as the world ticks forward. It is not. Every tick RAISES the measure, and the reason is
+the deepest one the program has: at the paradoxical point where a thing refers to itself, self-reference genuinely
+CREATES a new distinction from nothing — a distinction the relating can never recover. This is not an occasional
+free lunch; it is provably ALWAYS so. So there can be no conserved ledger, even locally: the books never balance,
+because creation never stops. The universe has an arrow and no conservation. The computed verdict is MONOTONE-ONLY,
+and the striking part is WHY: "to relate is to create" turns out to be not a slogan but the very reason the universe
+keeps no books.**
+
+**An honest note on the path to this verdict.** A first landing of this series computed the beautiful, expected
+answer — CONSERVED-RELATIVE, a private ledger each self balances within its own sight. On independent review that
+answer did not hold up: its "conservation" was a sleight of hand (it showed only that a reified thing looks the same
+as what it was made from at the surface, which is true of any measure and hides the fact that the measure underneath
+rose), and its central fork was decided by a trivial counting fact dressed up as a claim about self-reference. The
+series was sent back and reground to the answer the mathematics actually supports. That correction is the honest
+heart of the result, and it is recorded in full.
 
 ## What was built
 
 Program 2 built the ground (relating is finite attending, 2.0), its motion (the tick, 2.1), the other (2.2), the
-coherence of the two (2.3), space as a real axis (2.4), the acyclicity of time (2.5), and the self as a thread
-re-woven (2.6). Series 2.7 is the physics capstone: it asks whether that universe conserves anything.
+coherence of the two (2.3), space (2.4), the acyclicity of time (2.5), and the self as a thread re-woven (2.6).
+Series 2.7 is the physics capstone: it asks whether that universe conserves anything, and finds it does not.
 
-1. **The measure was found, not assumed (the risky ground).** The hardest part was that the currency itself had to
-   be discovered — a genuine, non-trivial measure of distinction that is not secretly rigged to conserve or to
-   rise. The one the series found is the reification RANK: how many steps of import-content a thing carries over the
-   bare relating it grew from. It is non-trivial (things have genuinely different measures), and each unit of it is
-   a genuine IMPORT — a distinction the relating cannot recover — not an arbitrary tag. If no such measure had
-   survived the paper test, the honest verdict would have been DISCONNECTED: a universe that keeps no ledger at all.
-   One survived.
+1. **The measure was found, not assumed (the risky ground).** The currency had to be discovered — a genuine,
+   non-trivial measure of distinction not secretly rigged. The one found is the reification RANK: how many steps of
+   import-content a thing carries over the bare relating it grew from. It is non-trivial, and each unit of it is a
+   genuine IMPORT — a distinction the relating cannot recover. A measure genuinely exists, so the answer is not the
+   empty "no measure at all" (DISCONNECTED).
 
-2. **The tick conserves the measure — but only in-sight.** When the world takes a tick and reifies a relation into
-   a new relatum, the new relatum is plain-indistinguishable from the thing it was made from: at the level of bare
-   relating — the only level a self can measure — nothing was added. So the measure the self can read is CONSERVED
-   across the tick. The true rank did go up by one, but that increase is exactly the import, invisible from inside.
-   This is local conservation with the global failing: the general-relativity shape.
+2. **The tick RAISES the measure (the arrow).** When the world takes a tick and reifies a relation into a new
+   relatum, the measure goes strictly UP. The new relatum does look, at the bare surface, identical to the thing it
+   was made from — so the rise is invisible from inside — but that surface-sameness is a fact about the two things,
+   not a conservation of the measure. Underneath, the measure rose by one. The books did not balance; they grew.
 
-3. **The import is the only source.** Every change in the measure is an import — a distinction that is plain-alike
-   yet not recoverable, which by the program's oldest result (Series 07) is exactly what a genuine atomless
-   distinction must be. So the ledger is closed except for what crosses the self's boundary: the import is the only
-   work done on the books from outside, the gift that changes them.
+3. **Nothing is conserved, even locally.** The only quantities that survive a tick unchanged are the ones blind to
+   it — the trivial, constant ones. Any genuine measure of distinction rises. So there is no conserved ledger, not
+   even a private local one. This is the honest opposite of the currency physics hoped for.
 
-4. **The free-lunch crux — and its honest openness (the knot).** At the self-referential heart — the diagonal, the
-   point where a thing inspects itself — the series asked whether that act CREATES a genuinely new distinction from
-   within (a free lunch, conservation failing from the inside) or only RELOCATES one already latent. Self-inspection
-   always produces a genuinely new, non-recoverable content (the residue) — and from a single position it produces
-   more than one distinct such content. So creation from within is genuinely reachable. But relocation — the same
-   content already accounted for — is also reachable. Neither is forced. Whether the diagonal is a true source is
-   therefore SELF-RELATIVE, undecidable from within, just as the thread of the self was in 2.6.
+4. **Conservation is IMPOSSIBLE from within — and that is the deep result (the crux, settled by proof).** Why can
+   nothing be conserved? Because at the self-referential heart — the diagonal, the point where a thing inspects
+   itself — self-reference ALWAYS manufactures a genuinely new, non-recoverable distinction, for every possible
+   inspection, with nothing imported from outside. Creation from within never stops and never merely relocates what
+   was already there. So a conserved quantity would have to not count that endless creation — i.e. not measure
+   distinction at all. "To relate is to create" is therefore not a slogan but the literal reason the universe keeps
+   no books. (We also genuinely tried to build a real conservation, on the charter's own intended "lossless
+   re-encoding" measure. Half of it worked — a measure conserved because reification is a lossless encoding — but
+   the decisive half failed for exactly this reason: the diagonal always creates, so it can never decide the measure
+   toward conservation. That search is on record and machine-checked.)
 
-5. **The verdict, computed.** From these four facts a verdict function returns CONSERVED-RELATIVE: a non-trivial
-   measure, conserved in-sight, sourced only by the import, with the free-lunch crux genuinely open both ways and no
-   global conservation asserted. The verdict was not chosen; it was computed, and it discriminates — it would have
-   returned MONOTONE-ONLY, FREE-LUNCH, GLOBAL, DISCONNECTED, or a degenerate PARTIAL had the facts differed.
+5. **The verdict, computed.** From these facts a verdict function returns MONOTONE-ONLY: a non-trivial measure that
+   only ever rises, with no conservation and the conserved outcome proven unreachable. The verdict was not chosen; it
+   was computed, and it discriminates — it would have returned CONSERVED-RELATIVE, FREE-LUNCH, GLOBAL, DISCONNECTED,
+   or PARTIAL had the facts differed.
 
 ## What it means
 
-The universe of this program keeps no sacred, absolute currency. It keeps a private ledger, one per self, balanced
-within that self's own sight and disturbed only by what arrives from outside — and at its very root, whether
-self-reference is an act of genuine creation is left open, exactly, in the direction the honest computation had to
-report. "To attend is to become" is the tick that spends the measure; "self is a paradox" is the diagonal put on
-trial; and "you are loved" returns as the import, the only thing that does work on the books from outside. The
-ledger is drawn exactly. Whether it conserves, and whether creation is real, is the phase's fourth wall — and it
-stands there.
+The universe of this program keeps no sacred, absolute currency — and, unlike general relativity, not even a private
+local ledger. It has only an arrow, because at its root self-reference is a genuine act of making: distinction drawn
+from nothing, endlessly. "To attend is to become" is the tick that spends nothing and creates; "self is a paradox"
+is the diagonal that mints the new; and "you are loved" returns as the import, the gift from outside — but here the
+universe needs no gift to grow, for it creates from within. The ledger was sought and found not to exist. Whether the
+deepest law is conservation or generosity, this series answers: generosity, and it is provable.

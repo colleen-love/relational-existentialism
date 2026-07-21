@@ -1,14 +1,15 @@
 /-
 `program-2/series-7/formal/P2S7.lean` — Program 2 Series 7 (2.7), THE LEDGER (aggregator).
 
-Imports the five workstreams. Series 2.7 asks whether the universe keeps a ledger: it DEFINES a self-relative
-measure of distinction `Q := rankM` (WS1, the risky ground, de-risked on paper first — non-trivial, the difference
-a genuine import, not rigged), proves the tick preserves it IN-SIGHT (WS2, conserved-relative: the reified product
-plain-bisimilar to its constituent, the collapse engine, not global), reads every change in `Q` as an IMPORT (WS3,
-Series 07, the general-relativity shape), and at the knot forks the free-lunch crux (WS4: does the diagonal CREATE
-`Q` from within — FREE-LUNCH — or RELOCATE it — CONSERVED — both reachable, on the diagonal not import-ness). The
-verdict is computed (WS5): CONSERVED-RELATIVE — the measure is conserved within the self's sight, the import its
-sole source, the free-lunch crux relative, and no global books, as general relativity foretold.
+Imports the five workstreams. Series 2.7 asks whether the universe keeps a ledger. It DEFINES a self-relative
+measure of distinction `Q := rankM` (WS1, the risky ground, de-risked on paper first — non-trivial, the difference a
+genuine import). It then finds, HONESTLY, that the measure is NOT conserved: the tick strictly RAISES it (WS2, the
+arrow), and `rankM` is not plain-bisimulation-invariant, so the only conserved measures are trivial (WS3, no
+ledger); the rise is genuine internally-manufactured import-content (WS4, all creation, on the P1 diagonal). The
+verdict is computed (WS5): MONOTONE-ONLY — the universe has an arrow and keeps no conserved ledger, even locally.
+(An earlier landing computed CONSERVED-RELATIVE; the Tier-1 landing review found that a costume — the "in-sight
+conservation" was the collapse engine identifying the states, not a `Q`-invariance — and the series was reground to
+the honest MONOTONE-ONLY. See `charter-status.md` finding T1-S1.)
 -/
 import P2S7.ws1
 import P2S7.ws2

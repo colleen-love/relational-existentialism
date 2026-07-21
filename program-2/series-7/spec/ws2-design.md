@@ -1,3 +1,7 @@
+> **CORRECTION (finding T1-S1, Tier-1 landing review).** The CONSERVED-RELATIVE design described below was OVERTURNED as a costume: its "in-sight conservation" (`ws2_tick_conserves`) was the collapse engine (a state-bisimilarity holding for any measure), not a `Q`-invariance, and its free-lunch fork was decided by a `Finset.card` counter disconnected from the diagonal. The series was reground to the honest, computed verdict **MONOTONE-ONLY**: the measure `Q := rankM` is non-trivial but RISES under the tick and is not conserved, and conservation-from-within is IMPOSSIBLE (the diagonal is always a source, `ws2_residue_free`). The authoritative record is the built `formal/P2S7/` (verdict `ws5_verdict_eq = monotoneOnly`), `summary.md` / `summary-technical.md`, and `charter-status.md` §4 (T1-S1, T1-A1). The CONSERVED-RELATIVE attempt is on record and checkable in `formal/P2S7/ConservedRelativeAttempt.lean`. This design file is kept as the pre-reground record of the original intent.
+
+---
+
 # WS2 design — the tick preserves `Q` in the self's sight (conserved-relative) (2.7)
 
 **Prove that a reification-tick PRESERVES the measure within what the self can see: the tick's product `e1 =

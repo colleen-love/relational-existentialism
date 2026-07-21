@@ -1,124 +1,105 @@
-# Blind seed — Phase F (code review)
+# Blind seed — Phase F (code review), MONOTONE-ONLY rebuild
 
-You are reviewing the Lean 4 sources of Series 2.7 against a fixed contract. You are BLIND to any motivating prose.
-Judge ONLY whether the CODE proves the claimed signatures, survives the strip test, and passes the audit and
-names checks below. Do NOT read `charter.md`, `charter-status.md`, `charter-extension.md`, `measure-derisking.md`,
-`spec/README.md`, any `summary*.md`, or the narrative sections (1/2/4) of the `spec/ws*-design.md` files.
+You are reviewing the Lean 4 sources of Series 2.7 against a fixed contract. You are BLIND to motivating prose.
+Judge ONLY whether the CODE proves the claimed signatures and whether the verdict is HONESTLY earned (not a
+costume). Do NOT read `charter.md`, `charter-status.md`, `charter-extension.md`, `measure-derisking.md`,
+`spec/README.md`, `summary*.md`, or the narrative sections of `spec/ws*-design.md`.
 
-Read ONLY: this file, and the built sources
-`program-2/series-7/formal/P2S7/ws1.lean`, `ws2.lean`, `ws3.lean`, `ws4.lean`, `ws5.lean`, `AxiomCheck.lean`, and
-`program-2/series-7/formal/P2S7.lean`. You MAY read the foundation `program-2/formal/P1/Core.lean`, `Reader.lean`
-to confirm the imported machinery (given, not under review). Docstrings/comments in the sources are prose — you may
-read them to locate code, but judge the THEOREM STATEMENTS and PROOFS, not the prose claims.
+Read ONLY: this file, and the built sources `program-2/series-7/formal/P2S7/ws1.lean`, `ws2.lean`, `ws3.lean`,
+`ws4.lean`, `ws5.lean`, `AxiomCheck.lean`, `program-2/series-7/formal/P2S7.lean`. You MAY read
+`program-2/formal/P1/Core.lean`, `Reader.lean` to confirm imported machinery.
 
-## 1. The imported machinery (given, already built and axiom-clean)
+## Context: this is a REBUILD after a prior verdict was rejected as a costume
 
-```
-Recoverable destL := ∀ R, IsBisim (plainOf destL) R → IsBisimL destL R
-ws1_atomless_bisim dest x y (SHNE x) (SHNE y) : ∃ R, IsBisim dest R ∧ R x y      -- collapse engine
-ws4_recoverable_not_import destL (Recoverable destL) x y (∃ R, IsBisim (plainOf destL) R ∧ R x y)
-    : ∃ R, IsBisimL destL R ∧ R x y
-rankLift dest (rank : X → ℕ) : X → LkObj κ (ULift ℕ) X ; AttentionDistinguishes destL x y := (plain-bisim) ∧ ¬(label-bisim)
-outDest hinf (attends : X → Finset X) : X → PkObj κ X
-residue insp := diag insp := fun h => ¬ insp h h ; ResidueRecoverable insp := ∃ h, insp h = residue insp
-ws2_residue_free dest insp : ¬ ResidueRecoverable insp
-ws1_coincidence_not_identity_witness dest (h₀ : Hold dest) :
-    ∃ insp₁ insp₂, ¬ ResidueRecoverable insp₁ ∧ ¬ ResidueRecoverable insp₂ ∧ residue insp₁ ≠ residue insp₂
-```
+The prior landing computed CONSERVED-RELATIVE. An independent review found that a COSTUME: its "in-sight
+conservation" (`ws2_tick_conserves`) proved only that the tick's product is plain-bisimilar to its constituent —
+the COLLAPSE ENGINE, which holds for ANY measure because in-sight the atomless carrier is one bisimulation class —
+NOT a `Q`-specific invariance. And its free-lunch fork was decided by a `Finset.card` counter (`insert 0 ∅` grows,
+`insert 0 {0}` doesn't) disconnected from the diagonal. The rebuild claims the HONEST verdict MONOTONE-ONLY: the
+measure rises and nothing is conserved. YOUR JOB is to check the rebuild is genuine and did not smuggle in a new
+costume.
 
-## 2. What the code must prove (the contract; check each theorem body actually establishes its statement)
+## 1. Imported machinery (given, built, axiom-clean)
 
 ```
--- WS1 (ws1.lean): the measure rankM is non-trivial, the difference a genuine import
+Recoverable destL ; ws1_atomless_bisim (collapse engine) ; ws4_recoverable_not_import (Series 07)
+rankLift dest rank ; AttentionDistinguishes destL x y := (plain-bisim) ∧ ¬(label-bisim)
+outDest hinf attends ; Hold dest ; residue insp ; ResidueRecoverable insp
+ws2_residue_free dest insp : ¬ ResidueRecoverable insp     -- the residue is free, for EVERY inspection
+```
+
+## 2. What the code must prove (check each theorem body establishes its stated type)
+
+```
+-- WS1: rankM is a non-trivial measure whose differences are genuine imports
 theorem ws1_rank_nontrivial (hinf) :
-    rankM e1 ≠ rankM e0 ∧ AttentionDistinguishes (destML hinf) e1 e0 ∧ (∃ x y : MCar, rankM x ≠ rankM y)
-theorem rankM_sep_general (dest) (lab) (x y) (lab x ≠ lab y) ((dest x).1 ≠ ∅) : ¬ ∃ R, IsBisimL (rankLift dest lab) R ∧ R x y
-
--- WS2 (ws2.lean): the tick conserves the measure in-sight (product plain-bisimilar to constituent)
-theorem ws2_tick_conserves (hinf) :
-    attendsM (reifyM {e0}) = {e0} ∧ reifyM {e0} = e1 ∧ (∃ R, IsBisim (plainOf (destML hinf)) R ∧ R (reifyM {e0}) e0)
-
--- WS3 (ws3.lean): every change in the measure is an import (Series 07), the source non-vacuous
+    rankM e1 ≠ rankM e0 ∧ AttentionDistinguishes (destML hinf) e1 e0 ∧ (∃ x y, rankM x ≠ rankM y)
+-- WS2: the tick RAISES the measure (the arrow), Q-specifically
+theorem ws2_tick_raises (hinf) :
+    rankM (reifyM {e0}) = rankM e0 + 1 ∧ rankM (reifyM {e1}) = rankM e1 + 1
+  ∧ AttentionDistinguishes (destML hinf) (reifyM {e0}) e0
+-- WS3: the measure is NOT conserved; every change is a genuine import
+theorem ws3_not_conserved (hinf) :
+    ((∃ R, IsBisim (plainOf (destML hinf)) R ∧ R e1 e0) ∧ rankM e1 ≠ rankM e0)
+  ∧ (∀ f : MCar → ℕ, (∀ x y, (∃ R, IsBisim (plainOf (destML hinf)) R ∧ R x y) → f x = f y) → f e1 = f e0)
 theorem ws3_change_is_source (hinf) :
-    (∀ x y : MCar, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y) ∧ ¬ Recoverable (destML hinf)
-theorem ws3_source_nonvacuous (hinf) : AttentionDistinguishes (destML hinf) e1 e0 ∧ rankM e1 ≠ rankM e0
-
--- WS4 (ws4.lean): the free-lunch fork, both reachable, on the diagonal
-theorem ws4_free_lunch_reachable (hinf) :
-    (∃ insp₁ insp₂, ¬ ResidueRecoverable insp₁ ∧ ¬ ResidueRecoverable insp₂ ∧ residue insp₁ ≠ residue insp₂)
-  ∧ Qc (diagStep ∅ 0) = Qc ∅ + 1
-theorem ws4_conserved_reachable (hinf) :
-    (∀ insp, ¬ ResidueRecoverable insp) ∧ Qc (diagStep ({0}) 0) = Qc ({0})
-theorem ws4_crux_both_reachable (hinf) : (Qc (diagStep ∅ 0) = Qc ∅ + 1) ∧ (Qc (diagStep ({0}) 0) = Qc ({0}))
-
--- WS5 (ws5.lean): verdict computed, discriminating, flags justified, audit a-e
-theorem ws5_verdict_eq : verdict true true true true true false = Outcome.conservedRel
-theorem ws5_verdict_discriminates : (reaches all six Outcome constructors)
-theorem ws5_flags_justified (hinf) : (WS1 nonTrivial ∧ WS2 inSight ∧ WS3 changeIsSource ∧ WS4 freeLunch ∧ WS4 conserved)
-theorem ws5_audit_no_global (hinf) :
-    (∃ R, IsBisim (plainOf (destML hinf)) R ∧ R (reifyM {e0}) e0)
-  ∧ (∀ x y, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y)
-  ∧ (verdict true true true true true true = Outcome.global)
-theorem ws5_audit_fork_genuine (hinf) : (Qc rises) ∧ (Qc holds) ∧ rankM e1 ≠ rankM e0
-theorem ws5_audit_knot_is_diagonal (hinf) :
-    (verdict true true true false true false = Outcome.partial') ∧ (verdict true true true false false false = Outcome.partial')
-  ∧ (∀ insp, ¬ ResidueRecoverable insp)
-theorem ws5_audit_change_is_source (hinf) :
     (∀ x y, rankM x ≠ rankM y → AttentionDistinguishes (destML hinf) x y) ∧ ¬ Recoverable (destML hinf)
+-- WS4: the rise is internal creation; conservation-from-within is IMPOSSIBLE (the crux settled by proof)
+theorem ws4_rise_is_internal (hinf) :
+    (∀ insp, ¬ ResidueRecoverable insp) ∧ AttentionDistinguishes (destML hinf) e1 e0
+theorem ws4_no_lossless_tick (hinf) : rankM (reifyM {e0}) ≠ rankM e0
+theorem ws4_conservation_impossible (hinf) :
+    (rankM (reifyM {e0}) ≠ rankM e0) ∧ (∀ insp, ¬ ResidueRecoverable insp)
+-- WS5: verdict computes monotoneOnly, discriminating; flags earned; audits
+theorem ws5_verdict_eq : verdict true false true true false false = Outcome.monotoneOnly
+theorem ws5_verdict_discriminates : (reaches all six Outcome constructors)
+theorem ws5_flags_justified (hinf) : (WS1 nonTrivial ∧ WS2 arrow ∧ WS3 not-conserved ∧ WS4 internal)
+theorem ws5_audit_not_conserved (hinf) :
+    ((∃ R, IsBisim (plainOf (destML hinf)) R ∧ R e1 e0) ∧ rankM e1 ≠ rankM e0)
+  ∧ (∀ f : MCar → ℕ, (plain-invariant f) → f e1 = f e0)
+  ∧ (verdict true false true true false false = Outcome.monotoneOnly)
+theorem ws5_audit_conservation_impossible (hinf) :
+    (rankM (reifyM {e0}) ≠ rankM e0) ∧ (∀ insp, ¬ ResidueRecoverable insp)
+  ∧ (verdict true false true true false false = Outcome.monotoneOnly)
+theorem ws5_audit_no_global (hinf) : (not even local conservation) ∧ (verdict … true true = Outcome.global)
+theorem ws5_audit_arrow_genuine (hinf) : (rankM e1 ≠ rankM e0) ∧ (rankM (reifyM {e0}) = rankM e0 + 1) ∧ (not conserved)
+theorem ws5_audit_source_is_diagonal (hinf) : (∀ insp, ¬ ResidueRecoverable insp) ∧ AttentionDistinguishes (destML hinf) e1 e0
+theorem ws5_audit_change_is_source (hinf) : (∀ x y, rankM x ≠ rankM y → AttentionDistinguishes …) ∧ ¬ Recoverable (destML hinf)
 theorem ws5_audit_names_not_terms : True
 ```
 
-## 3. Success criteria (restated without motivating clauses)
+## 3. The checks (the honesty bar — this is the point of the review)
 
-The code must compile sorry-free; each theorem body must actually prove its stated type (no `sorry`, no `admit`, no
-`axiom`); `rankM` must be defined as a fixed `MCar → ℕ` with NO conservation/rise clause; `verdict` must compute
-`conservedRel` on the certified flags by `rfl`/`decide` and reach all six `Outcome` constructors; the deciding flags
-in `ws5_flags_justified` must be the actual WS1–WS4 theorem payoffs (not restated bare).
+- **Verdict is monotoneOnly, computed.** `ws5_verdict_eq` must be `verdict true false … = Outcome.monotoneOnly` by
+  `rfl`, i.e. the SECOND flag (`inSightConserved`) is FALSE. Confirm the function returns `monotoneOnly` when
+  `inSightConserved = false`. SERIOUS if the verdict is hand-set or does not compute.
+- **`inSightConserved = false` is EARNED, not hand-set.** `ws3_not_conserved` / `ws5_audit_not_conserved` must prove
+  a genuine DISPROOF of conservation: a plain-bisimilar pair `e1 ~ e0` with `rankM e1 ≠ rankM e0` (so `rankM` is not
+  plain-invariant), AND that any plain-invariant `f` agrees on `e1`,`e0` (so conserved measures are trivial on the
+  tick pair). Confirm the proof establishes this. SERIOUS if `inSightConserved`'s falsity is asserted without proof.
+- **The arrow is Q-specific (not the collapse).** `ws2_tick_raises` must prove `rankM (reifyM {e0}) = rankM e0 + 1`
+  — a fact about `rankM` RISING, not "the two states are bisimilar". Confirm it is a genuine `rankM` increase.
+- **No costume conservation.** Confirm NO theorem proves a `rankM`-conservation (`rankM (reifyM s) = rankM
+  constituent`) and calls it in-sight conservation. The rebuild should prove the OPPOSITE (rankM rises). SERIOUS if a
+  collapse-based "conservation" is present and feeds a conserved verdict.
+- **The impossibility is genuine.** `ws4_conservation_impossible` should combine (rankM rises) with (the residue is
+  always free, `ws2_residue_free`) — a real proof that the diagonal always creates, so no conserved side. Confirm it
+  is `ws2_residue_free` (the diagonal) plus the rise, not a `Finset.card` counter. Confirm there is NO `Qc`/`diagStep`
+  counter anywhere deciding the verdict.
+- **change-is-import via Series 07.** `ws3_change_is_source`'s `¬ Recoverable` routes through `ws4_recoverable_not_import`.
+- **names-not-terms.** No identifier/parameter embeds a whole word from {energy, conservation, information, measure,
+  creation, self, import, god, choice, subjectivity}. (Docstring prose and `import` keyword exempt.)
+- **axioms.** `AxiomCheck` shows only propext / Classical.choice / Quot.sound (or fewer).
 
-## 4. Audit checks (mechanical, on the CODE)
+You may run `cd /home/user/relational-existentialism/lake && lake build P2S7 P2S7.AxiomCheck` and grep. Do NOT modify files.
 
-- **(a) no global conservation.** Confirm no theorem body proves `rankM (reifyM s) = rankM (constituent)` or any
-  globally-invariant-`rankM` claim. `ws2_tick_conserves` must give only plain-bisimilarity, NOT rank-equality (indeed
-  `rankM e1 = 1 ≠ 0 = rankM e0`). `global` is returned by `verdict` only under `globalForced = true`. SERIOUS if a
-  global conservation is proved.
-- **(b) rankM not rigged.** Confirm `rankM`'s DEFINITION (`ws1.lean`) is structural (`if x = e1 then 1 else …`), not
-  a conservation/rise clause. SERIOUS if rigged.
-- **(c) knot is the diagonal, not import-ness.** Confirm `ws4_free_lunch_reachable`/`ws4_conserved_reachable` route
-  through `ws2_residue_free` / `ws1_coincidence_not_identity_witness` (the residue), and `ws5_audit_knot_is_diagonal`
-  proves `verdict … false true false = partial'` and `verdict … false false false = partial'` (import-ness alone
-  never yields `conservedRel`/`freeLunch`). SERIOUS if the verdict rests on import-ness.
-- **(d) change is an import.** Confirm `ws3_change_is_source`'s `¬ Recoverable` half routes through
-  `ws4_recoverable_not_import` (Series 07). SERIOUS if asserted without it.
-- **(e) fork not by fiat.** Confirm both `ws4_free_lunch_reachable` and `ws4_conserved_reachable` are proved (not
-  `sorry`), neither branch excluded by construction.
+## 4. Grading
 
-## 5. Strip test (on the CODE)
+- **SERIOUS:** a theorem does not prove its type; a `sorry`/`axiom`; the verdict is hand-set or a new costume (a
+  collapse-based conservation feeding a conserved verdict; a counter deciding the verdict); `inSightConserved=false`
+  unproven; a forbidden identifier; a non-standard axiom; an undisclosed narrowing.
+- **REAL:** a genuine gap correctly labelled once fixed.
+- **COSMETIC/ACCEPTABLE:** a nominal overclaim, over-hypothesis (e.g. an unused `hinf`), naming nit, disclosed placeholder.
 
-For each payoff, mentally delete the interpretive term and confirm the theorem still states a bare fact:
-WS1 → distinct-valued function + a plain-bisimilar/label-separated pair; WS2 → `reifyM {e0}` plain-bisimilar to
-`e0`; WS3 → different rank + plain-bisimilar ⇒ `¬ Recoverable`; WS4 → two distinct free residues + a `Finset.card`
-that rises in one branch, holds in the other; WS5 → a discriminating `Bool⁶ → Outcome`. A payoff that strips to
-vacuity is a finding. The WS4 `Qc`/`diagStep` count is a DECIDABLE SKELETON — judge whether the residue facts
-(`ws2_residue_free`, the distinct-residues witness) are genuinely conjoined (they are the load-bearing content), not
-whether the count "derives" them (it does not, and is not claimed to — this is disclosed).
-
-## 6. Names-not-terms (run this grep mentally over the sources)
-
-No definition, theorem, or PARAMETER name may embed, as a whole word, any of: `energy`, `conservation`,
-`information`, `measure`, `creation`, `self`, `import`, `god`, `choice`, `subjectivity`. Check every `def`, `theorem`,
-`lemma`, `abbrev`, `inductive`, constructor, and the `verdict` parameter list. Docstring/comment PROSE and the Lean
-`import` keyword statements (`import P2S6`, `import P2S7.ws1`) are EXEMPT — those are not identifiers. Flag any
-IDENTIFIER that embeds a forbidden word.
-
-## 7. Grading rubric
-
-- **SERIOUS:** a theorem does not prove its stated type; a `sorry`/`axiom`; a global conservation proved; the knot
-  rests on import-ness not the diagonal; `rankM` rigged; a fork side excluded by fiat; a forbidden word names an
-  identifier; a non-standard axiom (beyond `propext`/`Classical.choice`/`Quot.sound`); an undisclosed narrowing
-  between the contract §2 and the code.
-- **REAL:** a genuine gap correctly labelled once fixed (an overclaimed docstring vs a weaker theorem, an
-  assumed-and-returned hypothesis, the count skeleton doing work the residue facts should).
-- **COSMETIC / ACCEPTABLE:** a nominal overclaim, over-hypothesis, naming nit, or a disclosed skeleton.
-
-Return a structured list of findings, each with a stable ID (`Fn-Sm`), grade, exact location (file + theorem), and
-the defect. If nothing is SERIOUS, say so explicitly.
+Return findings with stable IDs (`Fn-Sm`), grade, location, defect. If nothing is SERIOUS, say so explicitly. The
+central question: **is MONOTONE-ONLY honestly earned, or is there a new costume?**
