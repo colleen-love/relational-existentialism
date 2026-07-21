@@ -53,4 +53,10 @@ check program-2/series-2 "^import (P2S1|P2S2)(\.[A-Za-z0-9_]+)*$"
 # `P2S3.*`, never imported from Series 12.
 check program-2/series-3 "^import (P2S2|P2S3)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 4 (`program-2/series-4/formal/`): the `P2S4` library imports its predecessor `P2S3` and its
+# own `P2S4.*` roots (+ mathlib); the `P2S2` / `P2S1` / `P2S0` ground and `P1` prior art are reached transitively
+# through S3, not imported directly; any other series' tree is forbidden. The world and the two gradings are
+# built fresh in `P2S4.*`.
+check program-2/series-4 "^import (P2S3|P2S4)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
