@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -164,3 +164,15 @@ roots = ["P2S9", "P2S9.AxiomCheck"]
 name = "P2S10"
 srcDir = "../program-2/series-10/formal"
 roots = ["P2S10", "P2S10.AxiomCheck"]
+
+# `program-2/series-11/formal/` — Program 2 Series 11 (2.11), THE PHASE (the decisive quantum test of Phase 3,
+# execution tier 2, after the tier-1 pair 2.9/2.10 cleared). Imports its predecessor `P2S8` (and through it,
+# transitively, `P2S7` / … / `P2S0` / the `P1` foundation); it does NOT import `P2S8`'s predecessors directly, nor the
+# tier-1 probes `P2S9`/`P2S10` (their content is not reused). `P2S11` imports `P2S11.ws1`…`P2S11.ws5`;
+# `P2S11.AxiomCheck` runs the axiom pass. The SIGN (the parity of the imported holonomy) and its squared-modulus WEIGHT
+# are built fresh, earned off the built `incr`/`hol` (no complex number), de-risked on paper first. Gate:
+# `check program-2/series-11 "^import (P2S8|P2S11)…"`.
+[[lean_lib]]
+name = "P2S11"
+srcDir = "../program-2/series-11/formal"
+roots = ["P2S11", "P2S11.AxiomCheck"]
