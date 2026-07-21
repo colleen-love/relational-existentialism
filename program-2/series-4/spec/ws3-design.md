@@ -70,3 +70,54 @@ inherits), not a re-proof.
 - `ws3_directed` → "the reachability relation is asymmetric." A bare relation fact.
 - `ws3_granular` → "the length-0 reach is identity; a length-1 reach of distinct states exists." A bare graph fact.
 - `ws3_metric_grounded` → "a labelling equals the shortest path length from a fixed basepoint." A graph-metric fact.
+
+## 7. EXT-A1 — LOAD-BEARING self-relativity (Charter Extension 1)
+
+The landed audit (a) is SINGLE-BASEPOINT: `ws3_metric_grounded` grounds `latW` as the shortest path FROM `w0`,
+and asserts no absolute two-argument metric — the NEGATIVE content. Charter Extension 1 raises the bar to the
+POSITIVE, load-bearing content: the metric genuinely VARIES by self, with no absolute frame reconciling the
+selves. This is the Phase-2 thesis (every quantity is for a self) made a theorem. The DIRECTED ring already
+carries it: distance from `w0` is `(w0,w1,w2) = (0,1,2)`; distance from `w1` is `(w1,w2,w0) = (0,1,2)`, i.e.
+`w2` is FAR from `w0` (2) but NEAR `w1` (1). Nothing already proved is weakened; one payoff is added and audit
+(a) is restated. `distFrom w0` grounds `latW` on the peers, so `ws3_metric_grounded` and the DISTINCT verdict
+are preserved verbatim.
+
+### New signature
+
+```
+-- the self-relative distance: shortest directed attention-path length FROM the self (arg 1) TO arg 2
+noncomputable def distFrom (x y : W) : ℕ := sInf {n | reachIn attendsW n x y}
+
+-- distFrom x y = k  iff  a path of length k exists and none shorter (the shortest-path characterization)
+lemma distFrom_eq (x y : W) (k : ℕ) (hk : reachIn attendsW k x y)
+    (hmin : ∀ m, m < k → ¬ reachIn attendsW m x y) : distFrom x y = k
+
+theorem ws3_metric_self_relative :
+    -- (1) the metric VARIES by self: two selves disagree at w2 (far from w0, near w1), so as functions differ
+    ( distFrom w0 w2 = 2 ∧ distFrom w1 w2 = 1 ∧ distFrom w0 ≠ distFrom w1 )
+    -- (2) directed: distFrom is not symmetric, so no undirected absolute d(x,y) exists either
+  ∧ ( distFrom w0 w1 = 1 ∧ distFrom w1 w0 = 2 ∧ distFrom w0 w1 ≠ distFrom w1 w0 )
+    -- (3) NO ABSOLUTE FRAME (load-bearing): no single g : W → ℕ is the distance for every self
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, distFrom x = g )
+    -- (4) grounding: distFrom w0 IS latW on the peers, so ws3_metric_grounded / DISTINCT are preserved verbatim
+  ∧ ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) → distFrom w0 x = latW x )
+```
+
+### Triage
+
+- **Load-bearing, not a dressed single basepoint (the EXT-A1 catch to avoid).** Conjunct (1) exhibits TWO selves
+  whose distance functions genuinely DIFFER (not one self re-read); conjunct (3) proves no `g` reconciles them.
+  Conjunct (2) makes it sharp via directedness — no symmetric absolute metric either. Conjunct (4) keeps the old
+  grounding, so nothing is reopened.
+- **Strip test.** Delete "distance," "self": "an indexed family of graph-distance functions that is non-constant
+  in its index, with no single function equal to every member." A bare graph fact.
+- **Audit (a), strengthened.** `ws5_audit_no_absolute_frame` is restated to conjoin `ws3_metric_grounded` (the
+  kept negation) with `ws3_metric_self_relative`'s (1)+(3) (the added positive). Rests on both, none hand-set.
+
+### Outcome classes (EXT-A1)
+
+- **Fixed (expected):** `ws3_metric_self_relative` and the strengthened `ws5_audit_no_absolute_frame` built; the
+  self-relativity load-bearing.
+- **Relabeled (pre-registered):** if the self-varying metric could not be built (the directed ring forced a
+  reconcilable frame), the obstruction is recorded and audit (a) demoted to the single-basepoint form. Not
+  expected — the two distance functions above differ by inspection.

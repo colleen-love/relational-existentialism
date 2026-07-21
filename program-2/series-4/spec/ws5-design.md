@@ -50,10 +50,15 @@ WS4 both-moves-with-`T`-reachable. None hand-set.
 ## 3. The five audit clauses (a)–(e)
 
 ```
--- (a) NO ABSOLUTE FRAME: the metric is self-relative (latW = shortest path FROM the self w0); no absolute distance
+-- (a) NO ABSOLUTE FRAME (LOAD-BEARING, strengthened by Charter Extension 1 / EXT-A1):
+--     the KEPT negation (single-basepoint grounding: latW = shortest path FROM w0) CONJOINED with the ADDED
+--     positive (the metric genuinely varies by self, and no single g reconciles the selves).
 theorem ws5_audit_no_absolute_frame :
-    ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) →
-      reachIn attendsW (latW x) w0 x ∧ ∀ m, m < latW x → ¬ reachIn attendsW m w0 x       -- from WS3
+    ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) →
+        reachIn attendsW (latW x) w0 x ∧ ∀ m, m < latW x → ¬ reachIn attendsW m w0 x )   -- kept (ws3_metric_grounded)
+  ∧ ( distFrom w0 ≠ distFrom w1 )                                                          -- added: varies by self
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, distFrom x = g )                                            -- added: no absolute frame
+    -- rests on ws3_metric_grounded AND ws3_metric_self_relative
 
 -- (b) THE FORK NOT BY FIAT: DISTINCT on W, REDUCED (latT = rankT) reachable on T; both zones real
 theorem ws5_audit_fork_genuine (hinf : ℵ₀ ≤ κ) :
