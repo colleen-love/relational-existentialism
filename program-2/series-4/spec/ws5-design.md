@@ -66,9 +66,12 @@ theorem ws5_audit_knot_is_independence (hinf : ℵ₀ ≤ κ) :
   ∧ ( (¬ ∃ R, IsBisimL (rankLiftW hinf) R ∧ R r w0) ∧ (∃ R, IsBisimL (latLiftW hinf) R ∧ R r w0) )
 
 -- (d) SPACE IS AN IMPORT: the lateral separation non-recoverable, a proof term resting on Series 07
-theorem ws5_audit_space_import (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (latLiftW hinf)          -- from WS3
+theorem ws5_audit_lateral_import (hinf : ℵ₀ ≤ κ) : ¬ Recoverable (latLiftW hinf)          -- from WS3
 
--- (e) NAMES-NOT-TERMS: no proof term named for the spatial content (grep-certified True placeholder)
+-- (e) NAMES-NOT-TERMS: a META-property about IDENTIFIERS, not a proposition, so it cannot be a non-trivial
+--     theorem. It is ENFORCED by the protocol §6 mechanical grep at Phase E (the forbidden content-names never
+--     appear as a proof term / def, only in docstring prose), NOT by this `True`. Carried as the accepted house
+--     placeholder (S2/S3 precedent); the `True` records that the non-decision is deliberate, the grep is the teeth.
 theorem ws5_audit_names_not_terms : True := trivial
 ```
 

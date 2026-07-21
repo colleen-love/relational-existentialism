@@ -49,7 +49,7 @@ noncomputable def latLiftW  (hinf : ℵ₀ ≤ κ) : W → LkObj κ (ULift ℕ) 
 lemma ws1_W_SHNE (hinf : ℵ₀ ≤ κ) (x : W) : SHNE (outDest hinf attendsW) x
 
 -- (A) the world is genuinely lateral: two same-rank peers at path-distance exactly 2 (> 1), real extent
-theorem ws1_world_is_lateral :
+theorem ws1_lateral_extent :
     rankW w0 = rankW w2 ∧ w0 ≠ w2
   ∧ reachIn attendsW 2 w0 w2 ∧ ¬ reachIn attendsW 1 w0 w2 ∧ ¬ reachIn attendsW 0 w0 w2
 
@@ -66,7 +66,7 @@ theorem ws1_not_collapsed (hinf : ℵ₀ ≤ κ) :
 
 ## 4. Outcome classes
 
-- **Built (expected):** `ws1_world_is_lateral`, `ws1_peers_non_recoverable`, `ws1_not_collapsed` all discharged.
+- **Built (expected):** `ws1_lateral_extent`, `ws1_peers_non_recoverable`, `ws1_not_collapsed` all discharged.
   The world holds; it is genuinely lateral, non-recoverable, not a tower.
 - **REDUCED-toward (pre-registered obstruction):** if a genuine lateral population could not be built without a
   tower — same-rank peers forced to collapse — that is reported toward REDUCED, not relabeled. (Not expected:
@@ -74,7 +74,7 @@ theorem ws1_not_collapsed (hinf : ℵ₀ ≤ κ) :
 
 ## 5. Strip annotation (what each payoff SHOULD strip to)
 
-- `ws1_world_is_lateral` → "two same-rank states at reachability-distance 2, not adjacent." A graph-metric fact.
+- `ws1_lateral_extent` → "two same-rank states at reachability-distance 2, not adjacent." A graph-metric fact.
 - `ws1_peers_non_recoverable` → "a distinct pair, plain-bisimilar yet label-separated." A `Recoverable` fact.
 - `ws1_not_collapsed` → "a non-complete reachability relation with non-injective rank." An order/graph fact.
 
