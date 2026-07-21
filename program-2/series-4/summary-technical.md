@@ -50,6 +50,13 @@ peer `r`.
 - `ws3_granular` — length-0 reach is identity, and a smallest positive step (length 1, distinct states) exists.
 - `ws3_metric_grounded` — for each peer, `latW` equals the shortest `reachIn` length FROM `w0` (a path of that
   length exists, none shorter): self-relative, path-grounded, no absolute metric.
+- `ws3_metric_source_relative` (Charter Extension 1, EXT-A1) — the LOAD-BEARING self-relativity. With
+  `stepsFrom x y := sInf {n | reachIn attendsW n x y}` (shortest directed path FROM the self `x`) and its
+  shortest-path characterization `stepsFrom_eq`: the metric genuinely VARIES by self (`stepsFrom w0 w2 = 2` but
+  `stepsFrom w1 w2 = 1`, so `stepsFrom w0 ≠ stepsFrom w1` — `w2` is far from `w0`, near `w1`); it is directed
+  (`stepsFrom w0 w1 = 1 ≠ 2 = stepsFrom w1 w0`, so no symmetric absolute metric); NO single `g : W → ℕ` is the
+  distance for every self (`¬ ∃ g, ∀ x, stepsFrom x = g`); and `stepsFrom w0 = latW` on the peers, so
+  `ws3_metric_grounded` and the DISTINCT verdict are preserved verbatim.
 
 **WS4 — the two-axes fork (`ws4.lean`).**
 - `ws4_reduced_reachable` — `latT = rankT` on `T`, so the two gradings identify the same pairs: REDUCED realized.
@@ -70,8 +77,11 @@ peer `r`.
 
 ## Discipline discharged
 
-- **No absolute frame (audit a):** the metric is `latW` = shortest `reachIn` from the fixed self `w0`; no
-  two-argument absolute distance.
+- **No absolute frame (audit a), LOAD-BEARING (EXT-A1):** the KEPT negation (`latW` = shortest `reachIn` from
+  the fixed `w0`, no absolute two-argument distance) is now conjoined with the ADDED positive
+  (`ws3_metric_source_relative`: the metric genuinely varies by self, and no single `g` reconciles the selves).
+  Self-relativity is a proof term, not an interpretation of a fixed grading. `ws5_audit_no_absolute_frame` rests
+  on `ws3_metric_grounded` and `ws3_metric_source_relative`.
 - **Fork not by fiat (audit b):** DISTINCT on `W`, REDUCED (`latT = rankT`) on `T`; the independence fails on
   `T`, so it is not a typing artifact.
 - **Knot not the multiplicity (audit c, the costume gate):** the DISTINCT verdict's `independent` flag is the

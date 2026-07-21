@@ -36,7 +36,11 @@ thing that axis would be the geometry of.
    recovering labels the bare relating cannot carry, and the program's oldest wall (Series 07) forbids it. The
    distance is DIRECTED (the way there need not equal the way back, inheriting the knowing-asymmetry of 2.0),
    GRANULAR (there is a smallest step, the spatial twin of the tick), and stated always FROM a self — there is
-   no view-from-nowhere distance, because the only frame-independent measure is the One's, which is zero.
+   no view-from-nowhere distance, because the only frame-independent measure is the One's, which is zero. And
+   this self-relativity is LOAD-BEARING, not a figure of speech (Charter Extension 1): two different selves
+   measure genuinely different distances — a peer that is FAR from one self (two steps) is NEAR another (one
+   step) — and because the ring is one-way there is no single distance-map any two selves would agree on.
+   Distance is a fact FOR a self, proved, not merely read off one fixed grading.
 
 4. **The fork was genuine.** The distinctness is a finding, not a definition. A second world was built — a pure
    reification tower where every step sideways is also a step up — and on it the two gradings are literally the

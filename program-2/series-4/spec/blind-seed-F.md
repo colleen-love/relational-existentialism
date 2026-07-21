@@ -10,6 +10,34 @@ STRICT BLINDNESS: Do NOT read `charter.md`, `charter-status.md`, `charter-extens
 against the contracts in this seed. The code's own docstrings may use interpretive words; treat them as
 non-authoritative commentary — judge the THEOREM STATEMENTS and their PROOFS, not the prose.
 
+## 0. THIS PASS: the EXT-A1 re-review (load-bearing self-relativity)
+
+The prior review of this build returned zero SERIOUS. Since then ONE payoff was ADDED to `ws3.lean` and audit
+clause (a) in `ws5.lean` was STRENGTHENED (a bar-raise; nothing else changed — the verdict, the flags, the
+cross-pattern, the fork, the world, the import are byte-for-byte the same). Focus your effort on the addition,
+but still confirm the whole build is sorry-free and the names/strip checks still pass.
+
+The addition (in `ws3.lean`):
+- `stepsFrom (x y : W) : ℕ := sInf {n | reachIn attendsW n x y}` — the shortest directed attention-path length
+  FROM the self `x` TO `y`.
+- `stepsFrom_eq` — `stepsFrom x y = k` given a path of length `k` and none shorter.
+- `ws3_metric_source_relative` — a 4-part conjunction: (1) `stepsFrom w0 w2 = 2 ∧ stepsFrom w1 w2 = 1 ∧
+  stepsFrom w0 ≠ stepsFrom w1` (the metric VARIES by self); (2) `stepsFrom w0 w1 = 1 ∧ stepsFrom w1 w0 = 2 ∧
+  stepsFrom w0 w1 ≠ stepsFrom w1 w0` (directed, no symmetric absolute metric); (3) `¬ ∃ g : W → ℕ, ∀ x,
+  stepsFrom x = g` (no observer-independent metric); (4) `∀ x ∈ {w0,w1,w2}, stepsFrom w0 x = latW x` (grounds
+  `latW`, so the old `ws3_metric_grounded` and the DISTINCT verdict are preserved).
+
+The strengthening (in `ws5.lean`): `ws5_audit_no_absolute_frame` now conjoins the KEPT negation
+(`ws3_metric_grounded`) with the ADDED positive (`stepsFrom w0 ≠ stepsFrom w1` and `¬ ∃ g, ∀ x, stepsFrom x = g`).
+
+**Press HARDEST on this question:** is the self-relativity GENUINELY LOAD-BEARING — two distinct selves with
+genuinely different distance functions and no reconciling frame — or is it a DRESSED-UP SINGLE BASEPOINT (e.g.
+one self re-read, or a trivial/vacuous disagreement, or a `g` that does not exist for a typing reason rather than
+a structural one)? Verify the finite facts by hand on the ring: distance from `w0` is `(w0,w1,w2)=(0,1,2)`,
+distance from `w1` is `(w1,w2,w0)=(0,1,2)`, so `stepsFrom w0 w2 = 2` but `stepsFrom w1 w2 = 1`. Confirm `stepsFrom
+w0 = latW` on the peers so nothing already proved is reopened. Grade SERIOUS if the self-relativity is not
+load-bearing, if the verdict changed from DISTINCT, or if anything previously proved was weakened.
+
 ## 1. The setting (neutral)
 
 The code builds on an imported, already-verified library. The relevant imported API:
