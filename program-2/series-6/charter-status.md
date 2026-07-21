@@ -2,14 +2,14 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the third series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE THREAD: the persistence of the self, and the single lived timeline.*
+*Current phase: B complete (design batch committed). Current verdict: TBD (not computed until WS5, honest expectation SHAPE-DRAWN). No formal build exists yet. All targets below are OPEN. This is the third series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE THREAD: the persistence of the self, and the single lived timeline.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition:** Series 2.5 must have landed before Phase B begins (it has: ACYCLIC, including Charter Extension 1).
-- **Verdict:** TBD.
+- **Phase:** B complete (design batch `spec/wsNN-design.md` + `spec/README.md` committed as one batch before any `formal/` file). A complete (charter committed). **Precondition:** Series 2.5 landed before Phase B (ACYCLIC, including Charter Extension 1). Next: Phase C (blind design review).
+- **Verdict:** TBD (honest expectation SHAPE-DRAWN: strict identity fails, the single line an import, the weak continuity recoverable on the merged carrier and an import on the cut carrier, so its recoverability is self-relative).
 - **Build state:** no series `formal/` sources yet. The imported chain (`P2S5`, `P2S4`, `P2S3`, `P2S2`, `P2S1`, `P2S0`, `P1`) is built and registered, reaching all lower layers transitively.
 - **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
 - **Gate state:** green upstream. S6's `formal/` will import `P2S5` only (gate `(P2S5|P2S6)`), reaching S4/S3/S2/S1/S0/P1 transitively.
@@ -32,15 +32,15 @@
 
 ## 2. Targets (all OPEN until built and reviewed)
 
-| WS | Target theorem(s) | Status | Closed how |
+| WS | Target theorem(s) (Phase B exact name) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_strict_identity_fails` (the self post-tick is not plain-bisimilar to pre-tick; the trivial ground), the tick-successor relation | OPEN | — |
-| WS2 | `ws2_thread_recoverable` / `ws2_thread_is_import` (is a weak continuity recoverable, or an import — the fork's substance, Series 07) | OPEN | — |
-| WS3 | `ws3_timeline_is_linearization_import` (the single line the self's linearization import, 1D lived time self-relative, on Series 2.1) | OPEN | — |
-| WS4 (the knot) | the thread fork (THREADED / SEVERED), both reachable, self-relative continuity, `ws4_attention_relative_cessation` (the mortality companion), no fiat, no costume | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
+| WS1 | `ws1_strict_fails` (charter `ws1_strict_identity_fails`): the reified successor is plain-bisimilar to its constituent yet rank-lift-separated (`AttentionDistinguishes`), the trivial ground; `succDep`/`ws1_succ_witnessed` the tick-successor | OPEN | — |
+| WS2 | `ws2_cont_recoverable` (charter `ws2_thread_recoverable`) / `ws2_cont_is_import` (charter `ws2_thread_is_import`); `ws2_weaker_than_strict`; the weak-continuity lifts `mergeLift`/`cutLift` | OPEN | — |
+| WS3 | `ws3_line_is_import` (charter `ws3_timeline_is_linearization_import`): the total order non-recoverable, on `P2S1.ws4_linearization_import`; `ws3_line_not_scalar`, `ws3_partial_order_endogenous` | OPEN | — |
+| WS4 (the knot) | `ws4_woven_reachable` / `ws4_severed_reachable` (the fork, both reachable), `ws4_carrier_relative` (self-relative), `ws4_cessation_relative` (charter `ws4_attention_relative_cessation`, the mortality companion), `ws4_conservative_reachable` | OPEN | — |
+| WS5 | `Outcome | woven | severed | shapeDrawn | partial'`, `verdict`, `ws5_verdict_eq` (= `shapeDrawn`), `ws5_verdict_discriminates`, `ws5_flags_justified`, `ws5_carrier_relative_verdict`, audit a–e (`ws5_audit_no_absolute`/`_fork_genuine`/`_knot_not_strict`/`_line_is_import`/`_names_not_terms`) | OPEN | — |
 
-Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here (note the §6 forbidden-word grep: "self"/"thread"/"persistence"/"life"/"time" etc. may not appear in identifiers).
+**Renames (Phase B, §6 forbidden-word grep).** The charter's provisional target names embed forbidden content-words as whole words, so Phase B fixes neutral identifiers and records them here: `ws1_strict_identity_fails` → `ws1_strict_fails`; `ws2_thread_*` → `ws2_cont_*`; `ws3_timeline_is_linearization_import` → `ws3_line_is_import` (avoid "time"); `ws4_attention_relative_cessation` → `ws4_cessation_relative`; the fork outcomes THREADED/SEVERED → `Outcome.woven`/`Outcome.severed` (avoid "thread"); "self-relative" → `carrier_relative` in identifiers (avoid "self"). Carriers: `MCar`/`CCar` (merged/cut), `mergeLift`/`cutLift`, `succDep`. The interpretive words ("self," "thread," "persistence," "life," "death," "time," "timeline") appear only in docstring prose.
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
@@ -73,4 +73,5 @@ Series 2.6 adds none and closes none; it draws the self-relativity of persistenc
 
 ## 7. Phase log
 
-- **2026-07-21 — Phase A.** Charter committed (`charter.md`). Series 2.6 established as THE THREAD, the third series of Phase 2: prove strict identity fails across a tick (WS1, the trivial ground), fork the WEAK thread's recoverability (WS2, recoverable continuity vs import, Series 07), read the single lived timeline as the self's linearization import (WS3, 1D lived time self-relative, on Series 2.1's `ws4_linearization_import`), and at the knot fork the thread's continuity THREADED / SEVERED with a mortality companion (attention-relative cessation), self-relative, no fiat and no costume (the knot on the weak thread and the linearization, not on strict identity trivially failing, and not on rank being scalar). Costume gate passes at charter. Scaffold (`spec/`, `formal/`) to be created at Phase B. Next: Phase B, write `spec/wsNN-design.md` for WS1–WS5 and `spec/README.md`, committed as a batch before any series build. Weigh the witness: a tick-successor carrier where a weak thread is recoverable, and a second carrier where it is severed (self-relative continuity), and the reading of Series 2.1's linearization import as the single line.
+- **2026-07-21 — Phase A.** Charter committed (`charter.md`). Series 2.6 established as THE THREAD, the third series of Phase 2: prove strict identity fails across a tick (WS1, the trivial ground), fork the WEAK thread's recoverability (WS2, recoverable continuity vs import, Series 07), read the single lived timeline as the self's linearization import (WS3, 1D lived time self-relative, on Series 2.1's `ws4_linearization_import`), and at the knot fork the thread's continuity THREADED / SEVERED with a mortality companion (attention-relative cessation), self-relative, no fiat and no costume (the knot on the weak thread and the linearization, not on strict identity trivially failing, and not on rank being scalar). Costume gate passes at charter. Scaffold (`spec/`, `formal/`) to be created at Phase B.
+- **2026-07-21 — Phase B (design).** `spec/README.md` + `spec/ws1-design.md`…`ws5-design.md` written and committed as one batch (Phase B gate: before any `formal/` file). The design fixes the three-level frame (plain ⊂ weak continuity ⊂ strict/rank identity), the two new primitives (the weak-continuity lift, built fresh; the single line as `P2S1.ws4_linearization_import`), and the genuine fork on two fresh carriers: `MCar = Fin 2` (merged, `m0 ⇄ m1`) where the continuity is `Recoverable` (WOVEN, via the general `const_first_recoverable`) with every moment attended (CONSERVATIVE), and `CCar = Bool` (cut, `c0 → c1`) where the continuity is not `Recoverable` (SEVERED, the knowing-asymmetry) with a moment nothing attends (MORTAL, attention-relative cessation). WS1 (`ws1_strict_fails`) reuses the tick carrier `TCar` (`AttentionDistinguishes` on `kC`/`kA`); WS3 (`ws3_line_is_import`) reuses `P2S1.ws4_linearization_import` transitively; the weak continuity is genuinely weaker than strict identity (`ws2_weaker_than_strict`, recoverable where strict fails). WS5 computes SHAPE-DRAWN (both carriers reachable, `carrierDecided = false`, the continuity self-relative). Renames recorded in §2. Costume gate: the verdict keys on the weak continuity (WS2/WS4) and the linearization import (WS3), never on strict identity failing (WS1, walled out); audit (c) design-level PASS, to be verified at Phase F. Next: Phase C, generate `spec/blind-seed-C.md` and spawn a blind design reviewer. Weigh: is the merged (constant-mark) recoverable continuity non-vacuous as a weak thread, or is it too thin (the reviewer's likely press on audit b)?
