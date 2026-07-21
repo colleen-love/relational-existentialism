@@ -109,13 +109,17 @@ theorem ws5_audit_fork_genuine :
   ∧ (∀ t u : TCar, causalDep attendsT isTick t u → rankT t < rankT u) :=
   ⟨ws4_looped_reachable, ws4_fold_no_rank, ws3_causal_rank_lift⟩
 
-/-- **(c) THE KNOT IS THE COEXISTENCE, NOT WELL-FOUNDEDNESS.** The relating genuinely cycles (WS2) WHILE
-causation is acyclic (WS3); the verdict demands the cyclic-relating flag beside the acyclicity, so it rests on
-the coexistence, not on rank being well-founded alone. -/
+/-- **(c) THE KNOT IS THE COEXISTENCE, NOT WELL-FOUNDEDNESS (load-bearing).** The proven INTERACTION, not a bare
+conjunction of two independent facts: the SAME directed attention cycle `p0 ⇄ p1` carries NO causation
+(`ws2_cycle_not_causal` - the loop is precisely the place causation is not), WHILE causation on the tick carrier
+is acyclic (`ws3_causation_acyclic`). "The relating loops but time does not" is now a proof term: the loop is
+non-causal, so time climbs OUT of it rather than around it. The verdict also demands the cyclic-relating flag, so
+it rests on this coexistence, not on rank being well-founded alone. -/
 theorem ws5_audit_knot_is_coexistence :
-    ( (p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1) ∧ attendsT (reifyT cycleA) = cycleA )
+    ( (p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1)
+      ∧ ¬ causalDep attendsT isTick p0 p1 ∧ ¬ causalDep attendsT isTick p1 p0 )
   ∧ ( ¬ ∃ x : TCar, Relation.TransGen (causalDep attendsT isTick) x x ) :=
-  ⟨⟨(ws2_relating_cycles).1, (ws2_relating_cycles).2.2⟩, ws3_causation_acyclic⟩
+  ⟨ws2_cycle_not_causal, ws3_causation_acyclic⟩
 
 /-- **(d) THE FOLD IS THE DIAGONAL.** `ws1_fold` and the diagonal conjunct of `ws4_loop_only_at_fold` are the P1
 diagonal (`ws2_residue_distinct` / `ws1_no_self_total_hold`); no import theorem is invoked. -/

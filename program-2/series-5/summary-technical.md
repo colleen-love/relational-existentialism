@@ -49,6 +49,9 @@ strictly raise `rankT` (base↦0, `kA`/`kB`↦1, `kC`↦2), and NO self-membered
   composite outranks every constituent it consumes. PROVED, separate from the definition (audit b).
 - `ws3_causation_acyclic` — `¬ ∃ x : TCar, Relation.TransGen (causalDep attendsT isTick) x x`: no closed causal
   loop, from the rank-lift via `causation_acyclic`.
+- `ws2_cycle_not_causal` — the SAME cyclic edges carry no causation: `(p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1) ∧
+  ¬ causalDep attendsT isTick p0 p1 ∧ ¬ causalDep attendsT isTick p1 p0` (by `decide`; `p0`, `p1` are `¬ isTick`).
+  The load-bearing coexistence: the loop is precisely where causation is not, so time climbs OUT of it, not around.
 
 **WS4 — the loop at the fold (`ws4.lean`).**
 - `loop_forces_selfloop` — if `rank` rises on every distinct-relata edge, a `TransGen` loop forces a self-edge
@@ -83,8 +86,11 @@ strictly raise `rankT` (base↦0, `kA`/`kB`↦1, `kC`↦2), and NO self-membered
   (`ws4_fold_no_rank`), so the acyclicity of the tick carrier is a substantive fact, not a construction artifact.
 - **The knot is the coexistence, not well-foundedness (audit c, the costume gate):** `verdict` returns `acyclic`
   ONLY with `relatingCycles` AND `loopedReachable` true; it does not strip to "a well-founded relation is
-  acyclic." The relating genuinely cycles (WS2) WHILE causation does not (WS3), and the sole loop candidate is
-  the fold (WS4). Verified in the blind design and blind code reviews (audit (c) pressed hardest in both).
+  acyclic." The coexistence is now a proven INTERACTION, not a bare conjunction: `ws2_cycle_not_causal` shows the
+  SAME cyclic edges `p0 ⇄ p1` carry no `causalDep`, so the loop is precisely where causation is not (time climbs
+  out of it, not around), WHILE `ws3_causation_acyclic` holds; `ws5_audit_knot_is_coexistence` bundles the two.
+  The sole loop candidate is the fold (WS4). Verified in the blind design and blind code reviews (audit (c)
+  pressed hardest in both), and strengthened after a post-review bar-raise finding.
 - **The fold is the diagonal (audit d):** `ws1_fold` and the second conjunct of `ws4_loop_only_at_fold` are the
   P1 diagonal (`ws2_residue_distinct` / `ws1_no_self_total_hold`); no import/subsingleton-collapse theorem is
   invoked.

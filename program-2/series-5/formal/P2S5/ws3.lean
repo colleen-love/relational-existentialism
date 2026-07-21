@@ -63,4 +63,16 @@ theorem ws3_causation_acyclic :
     ¬ ∃ x : TCar, Relation.TransGen (causalDep attendsT isTick) x x :=
   causation_acyclic (causalDep attendsT isTick) rankT ws3_causal_rank_lift
 
+/-- **THE CYCLE CARRIES NO CAUSATION (the coexistence, made load-bearing).** The SAME directed attention cycle
+of WS2 (`p0 ⇄ p1`) carries NO causal edge: neither `causalDep attendsT isTick p0 p1` nor `causalDep attendsT
+isTick p1 p0` holds, because `p0`, `p1` are base relata (`¬ isTick`), not reified composites. So the loop is
+precisely the place causation is NOT: following causation climbs OUT of the loop (up into the composite `kA`)
+rather than around it. This is the proven INTERACTION the knot rests on - "the relating loops but time does not"
+as a proof term - beyond "a cycle exists" and "causation is acyclic" holding separately. -/
+theorem ws2_cycle_not_causal :
+    (p1 ∈ attendsT p0 ∧ p0 ∈ attendsT p1)
+  ∧ ¬ causalDep attendsT isTick p0 p1
+  ∧ ¬ causalDep attendsT isTick p1 p0 := by
+  refine ⟨⟨?_, ?_⟩, ?_, ?_⟩ <;> decide
+
 end P2S5

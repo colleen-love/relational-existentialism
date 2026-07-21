@@ -24,6 +24,7 @@ namespace P2S5
 #print axioms causation_acyclic
 #print axioms ws3_causal_rank_lift
 #print axioms ws3_causation_acyclic
+#print axioms ws2_cycle_not_causal
 #print axioms loop_forces_selfloop
 #print axioms ws4_loop_only_at_fold
 #print axioms ws4_no_fold_on_tower

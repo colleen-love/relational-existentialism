@@ -64,8 +64,11 @@ the fold's reachability are load-bearing inputs, not decoration.
   (the reification section, no absolute ceiling); the fold is the only place ascent stops, named in prose only.
 - **(b) THE FORK NOT BY FIAT.** `ws4_looped_reachable` (LOOPED a reachable structure) and `ws4_fold_no_rank`
   (the fold admits no rank-lift); `causalDep` is structural, its acyclicity PROVED (`ws3_causal_rank_lift`).
-- **(c) THE KNOT IS THE COEXISTENCE.** `ws5_flags_justified` earns `relatingCycles` (WS2) beside
-  `causationAcyclic` (WS3); the verdict demands both, so it rests on the coexistence, not rank alone.
+- **(c) THE KNOT IS THE COEXISTENCE.** The proven INTERACTION, not a bare conjunction: `ws2_cycle_not_causal`
+  shows the SAME cyclic edges `p0 ⇄ p1` carry no `causalDep` (the loop is precisely where causation is not),
+  WHILE `ws3_causation_acyclic` holds. "The relating loops but time does not" is a proof term. `ws5_flags_justified`
+  also earns `relatingCycles` (WS2) beside `causationAcyclic` (WS3), so the verdict rests on the coexistence, not
+  rank alone.
 - **(d) THE FOLD IS THE DIAGONAL.** `ws1_fold` and the second conjunct of `ws4_loop_only_at_fold` are
   `ws2_residue_distinct` / `ws1_no_self_total_hold`; no import theorem is invoked.
 - **(e) NAMES-NOT-TERMS.** A meta-property, enforced by the protocol §6 grep (hits are docstring prose only),
@@ -74,7 +77,8 @@ the fold's reachability are load-bearing inputs, not decoration.
 ```
 theorem ws5_audit_no_absolute_frame ...        -- (a) bundles ws1_no_pole_below, ws1_no_pole_above
 theorem ws5_audit_fork_genuine ...             -- (b) bundles ws4_looped_reachable, ws4_fold_no_rank
-theorem ws5_audit_knot_is_coexistence ...      -- (c) bundles ws2_relating_cycles, ws3_causation_acyclic
+theorem ws2_cycle_not_causal ...               -- the p0 ⇄ p1 edges carry no causalDep (the loop is non-causal)
+theorem ws5_audit_knot_is_coexistence ...      -- (c) bundles ws2_cycle_not_causal, ws3_causation_acyclic
 theorem ws5_audit_fold_is_diagonal ...         -- (d) bundles ws1_fold, ws4_loop_only_at_fold's diagonal conjunct
 theorem ws5_audit_names_not_terms : True       -- (e) grep-certified placeholder
 ```
