@@ -77,12 +77,17 @@ theorem ws5_flags_justified {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
 
 /-! ## The five audit clauses (a)-(e) -/
 
-/-- **(a) NO ABSOLUTE FRAME.** The metric is self-relative: `latW` is the shortest attention-path length FROM the
-fixed self `w0`, with no shorter path; no theorem asserts a distance frame-independently. -/
+/-- **(a) NO ABSOLUTE FRAME — LOAD-BEARING (strengthened, Charter Extension 1 / EXT-A1).** Two contents: the KEPT
+negation (`ws3_metric_grounded` — `latW` is the shortest path FROM the fixed self `w0`, no absolute two-argument
+metric), CONJOINED with the ADDED positive (`ws3_metric_source_relative` — the metric genuinely VARIES by self,
+`stepsFrom w0 ≠ stepsFrom w1`, and NO single `g : W → ℕ` is the distance for every self). Self-relativity is now a
+proof term, not an interpretation of a fixed grading read "from `w0`". -/
 theorem ws5_audit_no_absolute_frame :
-    ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) →
-      reachIn attendsW (latW x) w0 x ∧ ∀ m : ℕ, m < latW x → ¬ reachIn attendsW m w0 x :=
-  ws3_metric_grounded
+    ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) →
+        reachIn attendsW (latW x) w0 x ∧ ∀ m : ℕ, m < latW x → ¬ reachIn attendsW m w0 x )
+  ∧ ( stepsFrom w0 ≠ stepsFrom w1 )
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, stepsFrom x = g ) :=
+  ⟨ws3_metric_grounded, (ws3_metric_source_relative).1.2.2, (ws3_metric_source_relative).2.2.1⟩
 
 /-- **(b) THE FORK NOT BY FIAT.** DISTINCT on `W` (the lateral move keeps rank), REDUCED on `T` (`latT = rankT`)
 reachable: both zones real, the independence not a typing artifact. -/

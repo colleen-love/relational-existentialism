@@ -59,4 +59,53 @@ theorem ws3_metric_grounded :
   · exact ⟨by decide, by intro m hm; change m < 1 at hm; interval_cases m; decide⟩
   · exact ⟨by decide, by intro m hm; change m < 2 at hm; interval_cases m <;> decide⟩
 
+/-! ## EXT-A1 — LOAD-BEARING self-relativity (Charter Extension 1)
+
+The single-basepoint grounding above discharges only the NEGATIVE content (no absolute metric). EXT-A1 adds the
+POSITIVE, load-bearing content: the metric genuinely VARIES by self, and no absolute frame reconciles the selves.
+`stepsFrom x y` is the shortest directed attention-path length FROM the self `x` TO `y`. -/
+
+/-- The self-relative distance: shortest directed attention-path length FROM the first argument (the self). -/
+noncomputable def stepsFrom (x y : W) : ℕ := sInf {n | reachIn attendsW n x y}
+
+/-- The shortest-path characterization: `stepsFrom x y = k` iff a path of length `k` exists and none shorter. -/
+lemma stepsFrom_eq (x y : W) (k : ℕ) (hk : reachIn attendsW k x y)
+    (hmin : ∀ m, m < k → ¬ reachIn attendsW m x y) : stepsFrom x y = k := by
+  have hne : {n | reachIn attendsW n x y}.Nonempty := ⟨k, hk⟩
+  refine le_antisymm (Nat.sInf_le hk) ?_
+  by_contra h
+  push_neg at h
+  have hmem : reachIn attendsW (sInf {n | reachIn attendsW n x y}) x y := Nat.sInf_mem hne
+  exact hmin _ h hmem
+
+/-- **THE METRIC IS LOAD-BEARING SELF-RELATIVE (WS3, EXT-A1).** The distance genuinely VARIES by self (two selves
+disagree at `w2`: FAR from `w0` at 2, NEAR `w1` at 1, so as functions `stepsFrom w0 ≠ stepsFrom w1`); it is DIRECTED
+(`stepsFrom w0 w1 ≠ stepsFrom w1 w0`, so no undirected absolute metric); NO absolute frame reconciles the selves
+(no single `g : W → ℕ` is the distance for every self); and it GROUNDS `latW` on the peers (`stepsFrom w0 = latW`,
+so `ws3_metric_grounded` and the DISTINCT verdict are preserved verbatim). Self-relativity is now a proof term,
+not an interpretation of a fixed grading. -/
+theorem ws3_metric_source_relative :
+    ( stepsFrom w0 w2 = 2 ∧ stepsFrom w1 w2 = 1 ∧ stepsFrom w0 ≠ stepsFrom w1 )
+  ∧ ( stepsFrom w0 w1 = 1 ∧ stepsFrom w1 w0 = 2 ∧ stepsFrom w0 w1 ≠ stepsFrom w1 w0 )
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, stepsFrom x = g )
+  ∧ ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) → stepsFrom w0 x = latW x ) := by
+  have dw0w2 : stepsFrom w0 w2 = 2 :=
+    stepsFrom_eq w0 w2 2 (by decide) (by intro m hm; interval_cases m <;> decide)
+  have dw1w2 : stepsFrom w1 w2 = 1 :=
+    stepsFrom_eq w1 w2 1 (by decide) (by intro m hm; interval_cases m; decide)
+  have dw0w1 : stepsFrom w0 w1 = 1 :=
+    stepsFrom_eq w0 w1 1 (by decide) (by intro m hm; interval_cases m; decide)
+  have dw1w0 : stepsFrom w1 w0 = 2 :=
+    stepsFrom_eq w1 w0 2 (by decide) (by intro m hm; interval_cases m <;> decide)
+  have hne : stepsFrom w0 ≠ stepsFrom w1 := by
+    intro h; have := congrFun h w2; rw [dw0w2, dw1w2] at this; exact absurd this (by decide)
+  refine ⟨⟨dw0w2, dw1w2, hne⟩, ⟨dw0w1, dw1w0, by rw [dw0w1, dw1w0]; decide⟩, ?_, ?_⟩
+  · rintro ⟨g, hg⟩
+    exact hne ((hg w0).trans (hg w1).symm)
+  · intro x hx
+    fin_cases hx
+    · exact stepsFrom_eq w0 w0 (latW w0) (by decide) (by intro m hm; change m < 0 at hm; omega)
+    · exact stepsFrom_eq w0 w1 (latW w1) (by decide) (by intro m hm; change m < 1 at hm; interval_cases m; decide)
+    · exact stepsFrom_eq w0 w2 (latW w2) (by decide) (by intro m hm; change m < 2 at hm; interval_cases m <;> decide)
+
 end P2S4

@@ -56,9 +56,9 @@ WS4 both-moves-with-`T`-reachable. None hand-set.
 theorem ws5_audit_no_absolute_frame :
     ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) →
         reachIn attendsW (latW x) w0 x ∧ ∀ m, m < latW x → ¬ reachIn attendsW m w0 x )   -- kept (ws3_metric_grounded)
-  ∧ ( distFrom w0 ≠ distFrom w1 )                                                          -- added: varies by self
-  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, distFrom x = g )                                            -- added: no absolute frame
-    -- rests on ws3_metric_grounded AND ws3_metric_self_relative
+  ∧ ( stepsFrom w0 ≠ stepsFrom w1 )                                                          -- added: varies by self
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, stepsFrom x = g )                                            -- added: no absolute frame
+    -- rests on ws3_metric_grounded AND ws3_metric_source_relative
 
 -- (b) THE FORK NOT BY FIAT: DISTINCT on W, REDUCED (latT = rankT) reachable on T; both zones real
 theorem ws5_audit_fork_genuine (hinf : ℵ₀ ≤ κ) :

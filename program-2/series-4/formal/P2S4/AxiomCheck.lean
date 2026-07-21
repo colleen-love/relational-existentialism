@@ -23,6 +23,7 @@ namespace P2S4
 #print axioms ws3_directed
 #print axioms ws3_granular
 #print axioms ws3_metric_grounded
+#print axioms ws3_metric_source_relative
 #print axioms ws4_reduced_reachable
 #print axioms ws4_distinct_witnessed
 #print axioms ws4_two_axes

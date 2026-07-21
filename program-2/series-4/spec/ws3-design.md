@@ -79,28 +79,28 @@ POSITIVE, load-bearing content: the metric genuinely VARIES by self, with no abs
 selves. This is the Phase-2 thesis (every quantity is for a self) made a theorem. The DIRECTED ring already
 carries it: distance from `w0` is `(w0,w1,w2) = (0,1,2)`; distance from `w1` is `(w1,w2,w0) = (0,1,2)`, i.e.
 `w2` is FAR from `w0` (2) but NEAR `w1` (1). Nothing already proved is weakened; one payoff is added and audit
-(a) is restated. `distFrom w0` grounds `latW` on the peers, so `ws3_metric_grounded` and the DISTINCT verdict
+(a) is restated. `stepsFrom w0` grounds `latW` on the peers, so `ws3_metric_grounded` and the DISTINCT verdict
 are preserved verbatim.
 
 ### New signature
 
 ```
 -- the self-relative distance: shortest directed attention-path length FROM the self (arg 1) TO arg 2
-noncomputable def distFrom (x y : W) : ℕ := sInf {n | reachIn attendsW n x y}
+noncomputable def stepsFrom (x y : W) : ℕ := sInf {n | reachIn attendsW n x y}
 
--- distFrom x y = k  iff  a path of length k exists and none shorter (the shortest-path characterization)
-lemma distFrom_eq (x y : W) (k : ℕ) (hk : reachIn attendsW k x y)
-    (hmin : ∀ m, m < k → ¬ reachIn attendsW m x y) : distFrom x y = k
+-- stepsFrom x y = k  iff  a path of length k exists and none shorter (the shortest-path characterization)
+lemma stepsFrom_eq (x y : W) (k : ℕ) (hk : reachIn attendsW k x y)
+    (hmin : ∀ m, m < k → ¬ reachIn attendsW m x y) : stepsFrom x y = k
 
-theorem ws3_metric_self_relative :
+theorem ws3_metric_source_relative :
     -- (1) the metric VARIES by self: two selves disagree at w2 (far from w0, near w1), so as functions differ
-    ( distFrom w0 w2 = 2 ∧ distFrom w1 w2 = 1 ∧ distFrom w0 ≠ distFrom w1 )
-    -- (2) directed: distFrom is not symmetric, so no undirected absolute d(x,y) exists either
-  ∧ ( distFrom w0 w1 = 1 ∧ distFrom w1 w0 = 2 ∧ distFrom w0 w1 ≠ distFrom w1 w0 )
+    ( stepsFrom w0 w2 = 2 ∧ stepsFrom w1 w2 = 1 ∧ stepsFrom w0 ≠ stepsFrom w1 )
+    -- (2) directed: stepsFrom is not symmetric, so no undirected absolute d(x,y) exists either
+  ∧ ( stepsFrom w0 w1 = 1 ∧ stepsFrom w1 w0 = 2 ∧ stepsFrom w0 w1 ≠ stepsFrom w1 w0 )
     -- (3) NO ABSOLUTE FRAME (load-bearing): no single g : W → ℕ is the distance for every self
-  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, distFrom x = g )
-    -- (4) grounding: distFrom w0 IS latW on the peers, so ws3_metric_grounded / DISTINCT are preserved verbatim
-  ∧ ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) → distFrom w0 x = latW x )
+  ∧ ( ¬ ∃ g : W → ℕ, ∀ x : W, stepsFrom x = g )
+    -- (4) grounding: stepsFrom w0 IS latW on the peers, so ws3_metric_grounded / DISTINCT are preserved verbatim
+  ∧ ( ∀ x : W, x ∈ ({w0, w1, w2} : Finset W) → stepsFrom w0 x = latW x )
 ```
 
 ### Triage
@@ -112,11 +112,11 @@ theorem ws3_metric_self_relative :
 - **Strip test.** Delete "distance," "self": "an indexed family of graph-distance functions that is non-constant
   in its index, with no single function equal to every member." A bare graph fact.
 - **Audit (a), strengthened.** `ws5_audit_no_absolute_frame` is restated to conjoin `ws3_metric_grounded` (the
-  kept negation) with `ws3_metric_self_relative`'s (1)+(3) (the added positive). Rests on both, none hand-set.
+  kept negation) with `ws3_metric_source_relative`'s (1)+(3) (the added positive). Rests on both, none hand-set.
 
 ### Outcome classes (EXT-A1)
 
-- **Fixed (expected):** `ws3_metric_self_relative` and the strengthened `ws5_audit_no_absolute_frame` built; the
+- **Fixed (expected):** `ws3_metric_source_relative` and the strengthened `ws5_audit_no_absolute_frame` built; the
   self-relativity load-bearing.
 - **Relabeled (pre-registered):** if the self-varying metric could not be built (the directed ring forced a
   reconcilable frame), the obstruction is recorded and audit (a) demoted to the single-basepoint form. Not
