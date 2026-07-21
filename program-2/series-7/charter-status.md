@@ -2,13 +2,13 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: A (charter written). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone, and the hardest, its risk concentrated in WS1 (the measure must be FOUND).*
+*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone, and the hardest, its risk concentrated in WS1 (the measure must be FOUND). A measure SURVIVED the paper de-risking: `Q := rankM` (the reification rank), the series does NOT land DISCONNECTED.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** A complete (charter committed). B (design) not started. **Precondition:** Series 2.6 must have landed before Phase B begins (it has: SHAPE-DRAWN). **And Phase B MUST de-risk the measure on paper before any build.**
+- **Phase:** B complete (design + de-risking committed as one batch, no `formal/` yet). A complete (charter committed). **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable). Next: Phase C (blind design review).
 - **Verdict:** TBD.
 - **Build state:** no series `formal/` sources yet. The imported chain (`P2S6`, …, `P1`) is built and registered, reaching all lower layers transitively.
 - **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
@@ -73,4 +73,14 @@ Series 2.7 adds none and closes none; it draws the self-relativity of the ledger
 
 ## 7. Phase log
 
+- **2026-07-21 — Phase B.** Design batch committed as one unit before any `formal/` file (the Phase B gate):
+  `spec/measure-derisking.md` (the paper hunt — `Q := rankM` survives all four gates: non-trivial, independent/not
+  rigged, tick-conserved in-sight, diagonal test genuine; Candidates 2 and 3 rejected as non-computable and rigged),
+  `spec/ws1-design.md`…`spec/ws5-design.md`, `spec/README.md`. The measure is the reification rank on `MCar = Fin 4`;
+  the measure lift `destML = rankLift (outDest attendsM) rankM`. WS1 non-trivial (rank gap = genuine import), WS2 tick
+  conserves in-sight (product plain-bisimilar to constituent, the collapse engine — not global, the label rank does
+  change), WS3 change is import (Series 07), WS4 the free-lunch fork on the P1 diagonal (`ws2_residue_free`,
+  `ws1_coincidence_not_identity_witness`; a decidable count skeleton disclosed), WS5 verdict computed
+  (`conservedRel`, discriminating over six outcomes). Costume gate held in design (WS4 rests on the diagonal, not
+  import-ness; import-ness alone returns `partial'`). Next: Phase C (blind design review).
 - **2026-07-21 — Phase A.** Charter committed (`charter.md`). Series 2.7 established as THE LEDGER, the physics capstone and the fourth series of Phase 2: FIND a self-relative measure of distinction `Q` (WS1, the risky ground), prove the tick conserves it in-sight (WS2, conserved-relative), the import its sole source (WS3, Series 07, the GR shape), and at the knot fork the free-lunch crux — does the diagonal CREATE `Q` (FREE-LUNCH, conservation fails from within, "to relate is to create" as a law) or RELOCATE it (CONSERVED) — no fiat and no costume (the knot on the diagonal-as-source, not on import-ness). No global conservation asserted (the phase thesis; the global fails, GR-style). Costume gate passes at charter (diagonal-powered). Scaffold (`spec/`, `formal/`) to be created at Phase B. **Next: Phase B, and it MUST begin with paper de-risking of the measure** — a candidate `Q` that survives the tick (conserves in-sight) and the diagonal (the free-lunch test) BY HAND — before writing `spec/wsNN-design.md` and before any build. If no measure survives, DISCONNECTED is the honest outcome, pre-registered.
