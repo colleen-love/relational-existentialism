@@ -59,4 +59,10 @@ check program-2/series-3 "^import (P2S2|P2S3)(\.[A-Za-z0-9_]+)*$"
 # built fresh in `P2S4.*`.
 check program-2/series-4 "^import (P2S3|P2S4)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 5 (`program-2/series-5/formal/`): the `P2S5` library imports its predecessor `P2S4` and its
+# own `P2S5.*` roots (+ mathlib); the `P2S3` / `P2S2` / `P2S1` / `P2S0` ground and `P1` prior art are reached
+# transitively through S4, not imported directly; any other series' tree is forbidden. The fold and the causal
+# relation are built fresh in `P2S5.*`.
+check program-2/series-5 "^import (P2S4|P2S5)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
