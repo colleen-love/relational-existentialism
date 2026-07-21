@@ -26,6 +26,10 @@ def tickR : Cfg → Cfg := fun x => if x = e0 then e0' else if x = e0' then e0 e
 def IsCore (t : Cfg → Cfg) (m : Cfg → ℕ) (D : Finset Cfg) : Prop :=
     (∀ x ∈ D, t x ∈ D) ∧ (D.image t = D)
   ∧ (∀ x ∈ D, ∀ y ∈ D, t x = t y → x = y) ∧ (∀ x ∈ D, m (t x) = m x)
+
+-- Decidability instance (so `ws4_no_core_built`, `ws4_core_reachable` discharge by `decide` over Finset Cfg):
+instance decIsCore (t : Cfg → Cfg) (m : Cfg → ℕ) (D : Finset Cfg) : Decidable (IsCore t m D) := by
+  unfold IsCore; infer_instance
 ```
 
 The tick unfolds (all `decide`/`rfl`): `tick e0 = e1`, `tick e1 = e2`, `tick e0' = e0`, `tick e2 = e0` — a tail `e0'` feeding a 3-cycle `e0→e1→e2→e0`. Everything downstream is a finite fact on `Fin 4`: `decide`/`rfl`/`omega`-checkable.

@@ -34,14 +34,19 @@ def IsCore (t : Cfg → Cfg) (m : Cfg → ℕ) (D : Finset Cfg) : Prop :=
   ∧ (∀ x ∈ D, ∀ y ∈ D, t x = t y → x = y)
   ∧ (∀ x ∈ D, m (t x) = m x)
 
+instance decIsCore (t : Cfg → Cfg) (m : Cfg → ℕ) (D : Finset Cfg) : Decidable (IsCore t m D) := by
+  unfold IsCore; infer_instance
+
 /-- **THE CRITERION IS GENUINE AND SATISFIABLE (WS3.ii).** (a) `IsCore` ENTAILS rank-preservation — it is the higher
 bar, not decodability. (b) It is SATISFIABLE on the built rank by a genuine dynamics: the relabelling swap `tickR` of
 the two rank-0 states has the measure-preserving bijective core `{e0, e0'}`. So the criterion is real, not vacuous;
 WS4 tests whether the BUILT tick meets it. -/
 theorem ws3_core_criterion :
-    (∀ t m D, IsCore t m D → ∀ x ∈ D, m (t x) = m x)                 -- entails the higher bar
-  ∧ (∃ D : Finset Cfg, D.Nonempty ∧ IsCore tickR mu D) := by         -- satisfiable on the built rank
-  refine ⟨fun t m D h x hx => h.2.2.2 x hx, ⟨{e0, e0'}, ⟨e0, by decide⟩, by decide⟩⟩
+    (∀ t m D, IsCore t m D →                                          -- entails the FULL higher bar:
+        (∀ x ∈ D, m (t x) = m x)                                      --   rank-preservation, AND
+      ∧ (∀ x ∈ D, ∀ y ∈ D, t x = t y → x = y))                       --   injectivity (bijection of the finite D)
+  ∧ (∃ D : Finset Cfg, D.Nonempty ∧ IsCore tickR mu D) := by         -- and is satisfiable on the built rank
+  refine ⟨fun t m D h => ⟨h.2.2.2, h.2.2.1⟩, ⟨{e0, e0'}, ⟨e0, by decide⟩, by decide⟩⟩
 ```
 
 with the control dynamics (built on the same carrier and the SAME built rank):
