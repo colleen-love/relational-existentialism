@@ -2,19 +2,20 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: B (design committed). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone, and the hardest, its risk concentrated in WS1 (the measure must be FOUND). A measure SURVIVED the paper de-risking: `Q := rankM` (the reification rank), the series does NOT land DISCONNECTED.*
+*Current phase: COMPLETE (Phase F returned zero SERIOUS; series landed). Current verdict: **CONSERVED-RELATIVE** (computed, `ws5_verdict_eq`). This is the fourth series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LEDGER: the measure and its conservation — the physics capstone, and the hardest, its risk concentrated in WS1 (the measure must be FOUND). A measure SURVIVED the paper de-risking and the build: `Q := rankM` (the reification rank). The universe keeps a private ledger each self balances within its own sight, changed only at the import, no global books, the free-lunch crux self-relative.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** D complete (design repair, C findings closed). B, A complete. **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable). Phase C (blind design review) returned three SERIOUS findings, all names-not-terms (C1-C3), closed Fixed by renaming; three COSMETIC disclosed. Next: re-run Phase C on the repaired design (expect zero SERIOUS), then Phase E.
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The imported chain (`P2S6`, …, `P1`) is built and registered, reaching all lower layers transitively.
-- **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
-- **Gate state:** green upstream. S7's `formal/` will import `P2S6` only (gate `(P2S6|P2S7)`), reaching S5–S0/P1 transitively.
-- **Costume gate (Phase-2 discipline):** PASSES at charter — the knot is DIAGONAL-powered (the free-lunch crux: does self-reference create or relocate the measure), not import-powered, and NOT the mere import-ness of a distinction. To be verified at Phase F (audit c).
-- **Open SERIOUS findings:** none (no review has run).
+- **Phase:** ALL COMPLETE (A charter, B design + de-risking, C/D blind design review + repair to zero SERIOUS, E build, F/G blind code review to zero SERIOUS, Exit summaries). **Precondition:** Series 2.6 landed (SHAPE-DRAWN). **The measure was de-risked on paper first** (`spec/measure-derisking.md`): `Q := rankM` survives the tick (in-sight conservation, the collapse engine) and the diagonal (both fork sides reachable).
+- **Verdict:** **CONSERVED-RELATIVE** — computed (`ws5_verdict_eq : verdict true true true true true false = Outcome.conservedRel`, by `rfl`), discriminating over all six outcomes (`ws5_verdict_discriminates`, by `decide`), the deciding flags earned by WS1–WS4 (`ws5_flags_justified`).
+- **Build state:** `formal/P2S7` built (`ws1`…`ws5`, `AxiomCheck`, aggregator), registered in `lake/lakefile.toml` and `scripts/gate.sh`. `lake build P2S7 P2S7.AxiomCheck` compiles, sorry-free.
+- **Axiom state:** axiom-clean — every payoff reduces to a subset of the standard three (`propext`, `Classical.choice`, `Quot.sound`); `ws4_crux_both_reachable` uses only `propext`/`Quot.sound`; the `verdict`/`decide` theorems use none.
+- **Gate state:** GREEN. S7's `formal/` imports `P2S6` only (gate `(P2S6|P2S7)`), reaching S5–S0/P1 transitively.
+- **Costume gate (Phase-2 discipline):** PASSES — verified at Phase F (audit c): the knot is DIAGONAL-powered (`ws5_audit_knot_is_diagonal`: import-ness alone returns `partial'`; the WS4 payoffs rest on `ws2_residue_free`), not import-powered.
+- **Names grep:** CLEAN (identifier-level); hits are docstring prose and the Lean `import` keyword only.
+- **Open SERIOUS findings:** none. Phase C final pass and Phase F pass each returned zero SERIOUS / zero REAL.
 
 ## 1. The carrier — the measure on the imported chain
 
@@ -44,11 +45,11 @@ Names are the charter's provisional targets; Phase B fixes exact signatures (not
 
 ## 3. Audit clauses (WS5, all UNVERIFIED until Phase F)
 
-- (a) NO GLOBAL CONSERVATION ASSERTED — no proof term asserts a globally conserved `Q`; conservation is FOR a self, in-sight, changed at the import; a global invariant claimed only if forced. UNVERIFIED.
-- (b) THE FORK NOT BY FIAT — FREE-LUNCH and CONSERVED both reachable, the measure non-trivial, the verdict discriminating. UNVERIFIED.
-- (c) THE KNOT IS THE DIAGONAL-AS-SOURCE, NOT THE IMPORT-NESS (the costume gate) — the verdict rests on whether self-reference creates or relocates, not on a distinction being an import. UNVERIFIED.
-- (d) CHANGE IS AN IMPORT — `ws3_change_is_import` a proof term resting on Series 07. UNVERIFIED.
-- (e) NAMES-NOT-TERMS — grep clean of the forbidden content-names. UNVERIFIED.
+- (a) NO GLOBAL CONSERVATION ASSERTED — VERIFIED (`ws5_audit_no_global`). Conservation is FOR the in-sight plain-bisim relating, changed at the import; the label rank does change (`rankM e1 = 1 ≠ 0`); `global` returned only under `globalForced = true` (honestly false). No proof term asserts a globally conserved `Q`.
+- (b) THE FORK NOT BY FIAT — VERIFIED (`ws5_audit_fork_genuine`). FREE-LUNCH (`ws4_free_lunch_reachable`) and CONSERVED (`ws4_conserved_reachable`) both reachable, the measure non-trivial (`ws1_rank_nontrivial`), the verdict discriminating.
+- (c) THE KNOT IS THE DIAGONAL-AS-SOURCE, NOT THE IMPORT-NESS (the costume gate) — VERIFIED (`ws5_audit_knot_is_diagonal`). Import-ness alone (`changeIsSource = true`, `freeLunchReachable = false`) returns `partial'`; the WS4 payoffs rest on `ws2_residue_free` / `ws1_coincidence_not_identity_witness` (the diagonal), not boundary import-ness.
+- (d) CHANGE IS AN IMPORT — VERIFIED (`ws5_audit_change_is_source` = `ws3_change_is_source`, its `¬ Recoverable` half routing through `ws4_recoverable_not_import`, Series 07). The import is quantified, never named.
+- (e) NAMES-NOT-TERMS — VERIFIED. The §6 grep is clean of forbidden identifiers (hits are docstring prose and the Lean `import` keyword only); `ws5_audit_names_not_terms : True` the disclosed house placeholder, the grep the teeth.
 
 ## 4. Findings ledger (recurrence guard, protocol section 0.2a)
 
@@ -62,6 +63,9 @@ Empty. Phase C (design review) and Phase F (code review) findings are recorded h
 | C4-S1 | C | COSMETIC | `ws5_audit_names_not_terms : True` is vacuous (certifies nothing) | Accepted house placeholder (as S6); the §6 grep is the teeth, now clean. Disclosed. |
 | C5-S1 | C | COSMETIC | WS4 count skeleton (`Qc`/`diagStep`) is logically independent of the residue facts (conjoined, not derived) — explicitly NOT REAL per blind-seed §6 (residue conjuncts are the genuine given theorems, non-decorative) | Disclosed in `ws4-design.md` §2 and the ws4 docstring; the load-bearing content is `ws2_residue_free` + `ws1_coincidence_not_identity_witness`, conjoined. Accepted. |
 | C6-S1 | C | COSMETIC | `ws1_rank_nontrivial`'s third conjunct `∃ x y, rankM x ≠ rankM y` is weaker than its first | Kept: it is the charter's explicit "`Q` not constant" property (§2 WS1). Harmless. |
+| F1 | F | — | Phase F blind CODE review: ZERO SERIOUS, ZERO REAL. Every theorem statement matches the contract and its proof establishes it (no `sorry`/`admit`/`axiom`); audits (a)-(e) all pass; strip test passes; names grep clean; axioms the standard three (or fewer). | No action needed — series exits. |
+| F1-C1 | F | COSMETIC | WS4's create-vs-relocate is carried by the arithmetic skeleton `Qc` on hand-chosen budgets (∅ vs `{0}`); the residue facts are identical across branches | Disclosed (skeleton C5-S1); permitted by protocol §0.3 / blind-seed §5 (the count is a decidable skeleton, conjoined with — not derived from — the load-bearing `ws2_residue_free` / `ws1_coincidence_not_identity_witness`). Accepted. |
+| F1-C2 | F | COSMETIC | `ws5_flags_justified` exhibits the payoff propositions behind each flag rather than literally tying them to the `true` bool inputs | Standard house idiom (as S6 `ws5_flags_justified`); the deciding flags ARE the WS1-WS4 payoffs. Accepted. |
 
 ## 5. Deviations from charter (disclosed)
 
@@ -78,6 +82,15 @@ Series 2.7 adds none and closes none; it draws the self-relativity of the ledger
 
 ## 7. Phase log
 
+- **2026-07-21 — Phase F / G / Exit.** Blind CODE review (Phase F) returned ZERO SERIOUS and ZERO REAL: every
+  theorem statement matches the contract and its proof genuinely establishes it (no `sorry`/`admit`/`axiom`/
+  `native_decide`); audits (a)-(e) all pass on the code; the strip test passes (the WS4 residue facts load-bearing
+  and conjoined, not derived from the count); names grep clean of forbidden identifiers; axioms a subset of the
+  standard three. Two COSMETIC observations (the disclosed WS4 count skeleton; the house `ws5_flags_justified`
+  idiom), both accepted — no Phase G repair required. Exit criteria met (protocol §7): Phase F zero SERIOUS, build
+  sorry-free / axiom-clean / gate-green, names grep clean, the WS5 verdict computes `conservedRel` from the built
+  theorems, every SERIOUS finding (C1-C3) closed Fixed. **Verdict: CONSERVED-RELATIVE.** Wrote `summary.md`,
+  `summary-technical.md`. The series is landed.
 - **2026-07-21 — Phase E.** `formal/P2S7/` built to the repaired signatures (`ws1`…`ws5`, `AxiomCheck`,
   aggregator `P2S7.lean`), namespace `P2S7`, importing `P2S6` only. Registered in `lake/lakefile.toml`
   (`[[lean_lib]] P2S7`, appended to `defaultTargets`) and `scripts/gate.sh` (`(P2S6|P2S7)` closure). Section 6
