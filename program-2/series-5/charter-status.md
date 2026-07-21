@@ -2,19 +2,20 @@
 
 **The living ledger. The charter is the fixed bar; this file records what is proved, what is open, and how every SERIOUS finding closed (Fixed or Relabeled, per protocol section 0.2a). It never edits the target to record progress.**
 
-*Current phase: D (design review passed, one REAL finding repaired). Current verdict: TBD (not computed until WS5). No formal build exists yet. All targets below are OPEN. This is the second series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LOOP: closed time, on the fold as its ground.*
+*Current phase: E complete (formal build landed; verdict computed). Current verdict: ACYCLIC (`ws5_verdict_eq : verdict true true true true false = Outcome.acyclic`, by `rfl`) — to be confirmed at Phase F. The build is sorry-free, axiom-clean (standard three), gate-green, names-grep clean. This is the second series of Phase 2 (the physics of the built universe, `charter-extension.md`), THE LOOP: closed time, on the fold as its ground.*
 
 ---
 
 ## 0. Snapshot
 
-- **Phase:** C + D complete (blind design review returned ZERO SERIOUS; the one REAL finding C7-S1 repaired). E (code) next. **Precondition:** Series 2.4 landed (DISTINCT, including Charter Extension 1).
-- **Verdict:** TBD.
-- **Build state:** no series `formal/` sources yet. The imported chain (`P2S4`, `P2S3`, `P2S2`, `P2S1`, `P2S0`, `P1`) is built and registered, reaching all lower layers transitively.
-- **Axiom state:** the imported layers are axiom-clean on the standard three. Series build N/A.
-- **Gate state:** green upstream. S5's `formal/` will import `P2S4` only (gate `(P2S4|P2S5)`), reaching S3/S2/S1/S0/P1 transitively.
-- **Costume gate (Phase-2 discipline):** PASSES at charter — the knot is DIAGONAL/CYCLE-powered (the coexistence of cyclic relating and acyclic time, and the fold's uniqueness), not import-powered, and NOT rank-well-foundedness alone. To be verified at Phase F (audit c).
-- **Open SERIOUS findings:** none (no review has run).
+- **Phase:** E complete (formal build landed, verdict computed ACYCLIC). F (code review) next. **Precondition:** Series 2.4 landed (DISTINCT, including Charter Extension 1).
+- **Verdict:** ACYCLIC (computed by `rfl`, `ws5_verdict_eq`; to be confirmed at Phase F).
+- **Build state:** `formal/P2S5` built — `P2S5.lean` (aggregator), `P2S5/ws1.lean`…`ws5.lean`, `P2S5/AxiomCheck.lean`. Imports `P2S4` only, reaching `P2S3` / `P2S2` / `P2S1` / `P2S0` / `P1` transitively. Registered in `lake/lakefile.toml` (target `P2S5`, in `defaultTargets`) and `scripts/gate.sh`.
+- **Axiom state:** every payoff reduces to Mathlib's standard three (`propext`, `Classical.choice`, `Quot.sound`) or none, via `AxiomCheck`. No `sorry`.
+- **Gate state:** GREEN including `program-2/series-5` (`^import (P2S4|P2S5)…`).
+- **Names grep (§6):** CLEAN — every hit of the forbidden-word grep is docstring/comment prose; no declaration or identifier is a forbidden whole word.
+- **Costume gate (Phase-2 discipline):** PASSES — the knot is DIAGONAL/CYCLE-powered (the coexistence of cyclic relating and acyclic time, and the fold's uniqueness), not import-powered, and NOT rank-well-foundedness alone. `verdict` returns `acyclic` only with `relatingCycles` AND `loopedReachable` true. To be confirmed at Phase F (audit c).
+- **Open SERIOUS findings:** none (design review returned zero SERIOUS; code review pending).
 
 ## 1. The carrier — the fold on the imported chain
 
@@ -34,11 +35,11 @@
 
 | WS | Target theorem(s) | Status | Closed how |
 |----|-------------------|--------|-----------|
-| WS1 | `ws1_no_pole_below`, `ws1_no_pole_above`, `ws1_fold`, `ws1_no_total_count` (the topology of the whole: no poles, the fold, the whole uncountable from within) | OPEN | — |
-| WS2 | `ws2_relating_cycles` (attention genuinely cycles and reifies) | OPEN | — |
-| WS3 | `ws3_causation_acyclic` (the reification-dependency raises rank, well-founded, no return among distinct relata) | OPEN | — |
-| WS4 (the knot) | `ws4_loop_only_at_fold` (the fold the sole candidate) + the fork (ACYCLIC / LOOPED / SHAPE-DRAWN), LOOPED reachable, no fiat, no costume | OPEN | — |
-| WS5 | verdict function + audit (`ws5_verdict_eq`, `ws5_verdict_discriminates`, `ws5_flags_justified`, audit a–e) | OPEN | — |
+| WS1 | `ws1_no_pole_below`, `ws1_no_pole_above`, `ws1_reify_nonvacuous`, `ws1_fold`, `ws1_no_total_count` (the topology of the whole: no poles, the fold on the diagonal, the whole uncountable from within) | BUILT | Phase E (pending F) |
+| WS2 | `ws2_relating_cycles` (attention genuinely cycles `p0 ⇄ p1` and reifies to `kA`) | BUILT | Phase E (pending F) |
+| WS3 | `causalDep` (structural), `ws3_causal_rank_lift` (proved), `causation_acyclic`, `ws3_causation_acyclic` (no closed causal loop on the tick carrier) | BUILT | Phase E (pending F) |
+| WS4 (the knot) | `loop_forces_selfloop`, `ws4_loop_only_at_fold` (the fold the sole candidate, on the diagonal), `ws4_no_fold_on_tower` (ACYCLIC), `ws4_looped_reachable` + `ws4_fold_no_rank` (LOOPED reachable, no fiat) | BUILT | Phase E (pending F) |
+| WS5 | `verdict`, `ws5_verdict_eq` (= `acyclic` by `rfl`), `ws5_verdict_discriminates`, `ws5_flags_justified`, audit `ws5_audit_no_absolute_frame` / `_fork_genuine` / `_knot_is_coexistence` / `_fold_is_diagonal` / `_names_not_terms` (a–e) | BUILT | Phase E (pending F) |
 
 Names are the charter's provisional targets; Phase B fixes exact signatures, and any rename is recorded here with its reason (and note the §6 forbidden-word grep: "time"/"loop"/"self"/"fold" etc. may not appear in identifiers).
 
@@ -80,3 +81,4 @@ Series 2.5 adds none and closes none; it draws the shape of the whole and the ac
 - **2026-07-21 — Phase B.** Design batch written and committed as one unit (`spec/ws1-design.md`…`ws5-design.md`, `spec/README.md`), before any `formal/` file (Phase B gate). Primitives fixed: the causal relation `causalDep attends comp t u := comp u ∧ t ∈ attends u` (a structural reification-dependency, NO rank in the definition, so audit (b) holds and acyclicity is proved not stipulated); the fold as the P1 diagonal (`ws1_no_self_total_hold` / `ws2_residue_distinct`, audit (d)). Two witnesses, both `Cardinal.{0}` on `Fin`: the tick carrier `TCar = Fin 7` (reached from `P2S1`) for the ACYCLIC zone (the relating cycles `p0 ⇄ p1` while `causalDep` strictly raises `rankT`, no self-membered composite), and the fold carrier `FCar = Fin 1` (fresh) for the LOOPED-reachable zone (a self-membered `om = {om}` gives a genuine causal self-loop admitting no rank-lift, so the fork is not by fiat). Verdict `verdict : Bool⁵ → Outcome`, `= acyclic` by `rfl`, discriminating, flags earned by the WS1–WS4 headlines; ACYCLIC demands the WS2 cyclic-relating flag AND the LOOPED-reachable flag, so the knot rests on the coexistence not on well-foundedness alone (audit c). All signatures VALIDATED against the compiler in a throwaway target (imports `P2S4`, sorry-free, axioms within the standard three) before commit, so Phase E builds to proven-buildable contracts. `P2S5` module naming fixed (Phase E registration recipe in `protocol.md`). Next: Phase C, generate `spec/blind-seed-C.md` and spawn a blind reviewer.
 - **2026-07-21 — Phase C (design review, blind, delegated).** Generated `spec/blind-seed-C.md` (signatures, mechanical success criteria, audit checks a–e, strip test, forbidden-word list, rubric — no motivating prose). Spawned a blind `general-purpose` reviewer pointed at the blind seed ONLY; it confirmed reading no forbidden file. Verdict: ZERO SERIOUS. Audit (c) traced — `verdict` reaches `acyclic` only with `relatingCycles` AND `loopedReachable` true (not well-foundedness alone); audit (b) — `causalDep` structural, acyclicity proved, self-edge reachable; audit (d) — `ws1_fold` / `ws4_loop_only_at_fold` rest on the diagonal, no import; audit (e) — no identifier is a forbidden whole-word. One REAL (C7-S1), two COSMETIC. Findings recorded in §4.
 - **2026-07-21 — Phase D (design repair).** C7-S1 closed **(Fixed)**: `ws5_flags_justified` conjunct 3 rewired from the rank-lift to the genuine WS4 proposition `∀ x, TransGen (causalDep attendsT isTick) x x → ∃ z, causalDep attendsT isTick z z` (loop forces a self-constituting relatum, via `loop_forces_selfloop`); `spec/ws5-design.md` prose corrected to name WS1's entry point as audit (d) rather than a verdict flag. C8/C9 accepted COSMETIC. No SERIOUS finding closed by a design edit, so no Phase C re-loop; Phase C passes with zero SERIOUS. Next: Phase E, write and register `formal/P2S5`.
+- **2026-07-21 — Phase E (code).** Built `formal/P2S5` to the post-repair signatures: `P2S5.lean` (aggregator), `P2S5/ws1.lean`…`ws5.lean`, `P2S5/AxiomCheck.lean`, in the `P2S5` namespace, importing `P2S4` only. Registered the library in `lake/lakefile.toml` (added to `defaultTargets`) and the closure check in `scripts/gate.sh` (`^import (P2S4|P2S5)…`). WS1 the fold on the diagonal + the poles; WS2 the relating cycles; WS3 the structural `causalDep` with acyclicity PROVED from `ws3_causal_rank_lift`; WS4 `ws4_loop_only_at_fold` (bundling the rank localization with the diagonal) + `ws4_looped_reachable`/`ws4_fold_no_rank` (LOOPED reachable, no fiat); WS5 the computed verdict. §6 mechanical checks all pass: `lake build P2S5 P2S5.AxiomCheck` compiles; no `sorry`; `AxiomCheck` shows only the standard three axioms (or none); `scripts/gate.sh` green including S5; the forbidden-word grep hits are docstring prose only (no identifier is a forbidden whole word). Universe note: the general `{X : Type u}` payoffs (`ws1_fold`, `ws1_no_total_count`, `ws4_loop_only_at_fold`) auto-bind `κ` per-theorem rather than a section `variable`, so `κ` tracks `X`'s universe. **WS5 verdict COMPUTED: ACYCLIC** (`ws5_verdict_eq`, by `rfl`) — the relating loops but time does not; the fold is the sole loop candidate, unrealized on the genuine tower, its self-reference a degenerate fixed point (the diagonal). Next: Phase F, generate `spec/blind-seed-F.md` and spawn a blind code reviewer over `formal/`.
