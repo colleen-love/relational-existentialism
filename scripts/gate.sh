@@ -117,4 +117,25 @@ check program-2/series-13 "^import (P2S9|P2S13)(\.[A-Za-z0-9_]+)*$"
 # `PR2R1.*` roots (+ mathlib) are the only other allowed imports.
 check program-2/review "^import (P2S10|P2S12|P2S13|PR2R1)(\.[A-Za-z0-9_]+)*$"
 
+# Program 3 Series 0 (`program-3/series-0/formal/`): the `P3S0` library imports `PR2R1` at the series boundary
+# (`P3S0.ws1`), reaching `P2S8` and the rest of the built arc transitively, plus its own `P3S0.*` roots (+
+# mathlib); any other tree is forbidden.
+check program-3/series-0 "^import (PR2R1|P3S0)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 1 (`program-3/series-1/formal/`): the `P3S1` library imports `P3S0` at the series
+# boundary and its own `P3S1.*` roots (+ mathlib); nothing else directly.
+check program-3/series-1 "^import (P3S0|P3S1)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 2 (`program-3/series-2/formal/`): the `P3S2` library imports `P3S1` at the series
+# boundary (reaching `P3S0` transitively) and its own `P3S2.*` roots (+ mathlib); nothing else directly.
+check program-3/series-2 "^import (P3S1|P3S2)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 3 (`program-3/series-3/formal/`): the `P3S3` library imports `P3S2` at the series
+# boundary and its own `P3S3.*` roots (+ mathlib); nothing else directly.
+check program-3/series-3 "^import (P3S2|P3S3)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 4 (`program-3/series-4/formal/`): the `P3S4` library imports `P3S3` at the series
+# boundary and its own `P3S4.*` roots (+ mathlib); nothing else directly.
+check program-3/series-4 "^import (P3S3|P3S4)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
