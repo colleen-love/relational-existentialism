@@ -4,21 +4,21 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 
 ## Snapshot
 
-- Phase: the full arc is landed (3.0 flowing, 3.1 arrow, 3.2 ledger, 3.3 phase, 3.4 curved). At the owner's direction the gate review and the end-of-arc review are merged into one blind program review of all five landings, run next.
+- Phase: the arc is landed, blind-reviewed (Program Review 3-1), and repaired. Program standing after repair: the core is flowing / observational-arrow / ledger; the post-gate pair is word-level phase (sign forced at ±1 scope) / per-event flux law with strict contraction. The review and closure are under `spec/`.
 - Program verdict: none yet. Read off the series as they land; the pre-registered outcomes are in the charter.
 
 ## The plan at a glance
 
 | Series | Question | Depends on | Status |
 |---|---|---|---|
-| 3.0 The Flow | a reversible signed-flow dynamics on the whole state space of attention graphs | step zero | landed, **flowing**; awaits gate review |
-| 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | landed, **arrow**; awaits gate review |
-| 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | landed, **ledger**; awaits gate review |
+| 3.0 The Flow | a reversible signed-flow dynamics on the whole state space of attention graphs | step zero | landed, **flowing**; reviewed, survives at full strength |
+| 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | landed, **arrow**; reviewed, re-scoped to observational non-invertibility |
+| 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | landed, **ledger**; reviewed, survives at modest depth |
 | gate | program review of the core; the remaining series are chartered only on acceptance | 3.0–3.2 | — |
-| 3.3 The Phase | winding along histories; a genuine phase group; forced-within-a-family weights | 3.0, gate | landed, **phase**; awaits review |
-| 3.4 The Curve | does grain concentration induce a law of distance change | 3.2, gate | landed, **curved**; awaits review |
+| 3.3 The Phase | winding along histories; a classified ±1 phase, forced within its family | 3.0, gate | landed, **phase**; reviewed, repaired (P3R1-S1 relabeled: word-level) |
+| 3.4 The Curve | does grain concentration induce a law of distance change | 3.2, gate | landed, **curved**; reviewed, repaired (strict contraction added; gravity phrase struck) |
 
-Not series: the cone transfers from Series 2.9 by one bridge theorem; Gleason uniqueness and the area law stay disclosed forward-notes.
+Not series: the cone is expected to transfer from Series 2.9 via a bridge theorem (no artifact yet, per P3R1-C1); Gleason uniqueness and the area law stay disclosed forward-notes.
 
 ## Inherited obligations
 
@@ -42,3 +42,5 @@ Unchanged from Programs 1 and 2, carried untouched: the content of the compass, 
 - 2026-07-22 — At the owner's direction, 3.3 and 3.4 were built ahead of the gate review, and the gate and end-of-arc reviews are merged into one blind program review of the whole arc.
 - 2026-07-22 — Series 3.3 landed, verdict **phase** (`ws5_verdict_tied`). Histories exist as objects and compose; the winding is a cocycle and provably path-dependent (co-terminal histories with windings 1 and 2); the sign is forced by classification (every composition-respecting ±1 phase is trivial or parity — the theorem Program Review 2-1 found missing); both interference poles witnessed on named co-terminal histories; the cancellation test provably does not force the exponent. Landing note at `series-3/landing.md`.
 - 2026-07-22 — Series 3.4 landed, verdict **curved** (`ws5_verdict_tied`). The capstone: the dynamical metric is genuine, the static grain underdetermines it (2.13's INERT recovered as the reason the law must be dynamical), the metric moves under the flow, attending is being close, and the flux-curvature law holds universally — attention flux toward a relatum lowers its charge by exactly one and brings it within unit distance. Landing note at `series-4/landing.md`.
+- 2026-07-22 — Program Review 3-1 delivered (blind, single reader, no delegation; report at `spec/program-review-3-1.md`). Three serious findings: the 3.3 winding is a function of the move word, not the transport map (verified mechanically by the reviewer and re-derived by the program seat before repair); 3.1's refutation arms were closed before the series was built, and its dynamical theorem was equivalent to its static one; 3.4's law is one definitional unfolding deep, with the strict contraction unclaimed. Four real findings (3.2 double-count; pre-registration without risk plus the skipped gate; the phase group not delivered; 3.1 prose). The reviewer also confirmed the Program 2 repair program genuinely executed (bridges, tied verdicts, labeled witnesses, no vacuous audits, non-degeneracy discharged) and 3.0 surviving at full strength.
+- 2026-07-22 — Series repair complete (closure at `spec/program-review-3-1-closure.md`). New theorems: `P3S3.transport_swap` / `stepSign_swap` / `ws2_winding_orientation` (the word-level obstruction recorded; the phase relabeled to oriented words); `P3S1.ws3_macro_not_autonomous` (step zero's macro-non-autonomy landed; the arrow re-scoped to observational non-invertibility, with the closed-arms disclosure); `P3S4.ws4_flux_contracts` and `mem_ball_one_iff` (the strict contraction stated; the gravity phrase struck). The 3.0 `nondegen` tying hypothesis now carries the full two-sided wall. Docstring corrections per P3R1-R4. All five series rebuild green, axiom-clean, gate green. Closed-arms disclosure: 3.1's `transparent` arm was closed by counting and `opaque` by 3.0 before the series was built; future outlines must state per arm why it is live.
