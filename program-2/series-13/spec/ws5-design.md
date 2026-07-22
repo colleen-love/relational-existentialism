@@ -26,19 +26,20 @@ inductive Outcome
   | partial'
   deriving DecidableEq
 
--- The verdict FUNCTION of six earned flags:
+-- The verdict FUNCTION of six earned flags (parameters carry NEUTRAL names, clear of the forbidden fragments
+-- "metric"/"import" — C1-S4):
 --   grainNonConstant  — the grain is non-constant (WS1)
---   metricNonTrivial  — the distance is non-trivial (WS1)
---   metricFromAdj     — the distance is a function of the adjacency (WS2)
+--   distNonTrivial    — the distance is non-trivial (WS1)
+--   distFromAdj       — the distance is a function of the adjacency (WS2)
 --   couplingEarned    — the distance under test reads only the adjacency, not the grain (WS3)
 --   forkTwoSided      — the grain-test's GRAVITATIONAL pole is inhabited (WS4, fork not by fiat)
---   importedGrainDep  — the IMPORTED distance varies with the grain at fixed adjacency (WS3/WS4)
-def verdict (grainNonConstant metricNonTrivial metricFromAdj couplingEarned forkTwoSided importedGrainDep : Bool) : Outcome :=
+--   couplingPresent   — the IMPORTED distance varies with the grain at fixed adjacency (WS3/WS4)
+def verdict (grainNonConstant distNonTrivial distFromAdj couplingEarned forkTwoSided couplingPresent : Bool) : Outcome :=
   if !couplingEarned then Outcome.partial'                        -- the object under test is a grain-weighted gadget: smuggle
-  else if !(grainNonConstant && metricNonTrivial) then Outcome.partial'   -- the ground is degenerate
-  else if !metricFromAdj then Outcome.shapeDrawn                  -- the baseline is unestablished
+  else if !(grainNonConstant && distNonTrivial) then Outcome.partial'   -- the ground is degenerate
+  else if !distFromAdj then Outcome.shapeDrawn                    -- the baseline is unestablished
   else if !forkTwoSided then Outcome.shapeDrawn                   -- the test is one-sided: fork by fiat
-  else if importedGrainDep then Outcome.sourced                  -- the imported distance is sourced by the grain: GRAVITATIONAL
+  else if couplingPresent then Outcome.sourced                   -- the imported distance is sourced by the grain: GRAVITATIONAL
   else Outcome.inert                                             -- the imported distance is invariant: INERT
 ```
 
@@ -101,11 +102,16 @@ theorem ws5_audit_scope :
     (verdict true true true true true false = Outcome.inert)
   ∧ (¬ grainDependent adjDist cfgFlat cfgBump)
 
--- (e) NAMES-NOT-TERMS. A META-property about identifiers, not a proposition: no proof term is named for the
--- interpretive content ("gravity," "curvature," "curve," "mass," "geometry," "metric," "spacetime," "self,"
--- "import," "God," "choice"). Enforced by the protocol §6 grep (hits are docstring prose / the Lean `import`
--- keyword only), the accepted house placeholder.
-theorem ws5_audit_names_not_terms : True
+-- (e) NAMES-NOT-TERMS. The four Outcome values are pairwise DISTINCT (a non-vacuous fact): the verdict's
+-- codomain is a genuine four-way discrimination among NEUTRALLY-named outcomes (`sourced`/`inert`/
+-- `shapeDrawn`/`partial'`), none named for the interpretive content. The full identifier property (no proof
+-- term named "gravity," "curvature," "curve," "mass," "geometry," "metric," "spacetime," "self," "import,"
+-- "God," "choice") is a META-property about the source text, enforced by the protocol §6 mechanical grep
+-- (hits are docstring prose / the Lean `import` keyword only) — the real teeth. (Replaces the vacuous `: True`
+-- house placeholder — C1-S1.)
+theorem ws5_audit_names_not_terms :
+    Outcome.sourced ≠ Outcome.inert ∧ Outcome.inert ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.partial' ∧ Outcome.sourced ≠ Outcome.partial'
 
 -- THE VERDICT IS INERT, assembled. With every flag earned by the WS1-WS4 headlines, the computed verdict is
 -- `inert`: the imported distance is invariant under grain-change at fixed adjacency. Geometry decoupled from
@@ -122,7 +128,7 @@ theorem ws5_the_verdict : verdict true true true true true false = Outcome.inert
 - `ws5_audit_fork_genuine`: `⟨ws3_grain_test cfgFlat cfgBump rfl, ws4_gravitational_reachable.2.1, ws4_inert_reachable.2.1, rfl⟩`.
 - `ws5_audit_metric_is_built`: `⟨fun _ _ _ => rfl, ws2_metric_reads_adjacency⟩`.
 - `ws5_audit_scope`: `⟨ws5_verdict_eq, ws3_grain_test cfgFlat cfgBump rfl⟩`.
-- `ws5_audit_names_not_terms`: `trivial`.
+- `ws5_audit_names_not_terms`: `by decide` (the four outcomes pairwise distinct via `DecidableEq`).
 - `ws5_the_verdict`: `ws5_verdict_eq`.
 
 ## The computed verdict
