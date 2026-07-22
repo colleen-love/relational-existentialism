@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…
@@ -188,3 +188,15 @@ roots = ["P2S11", "P2S11.AxiomCheck"]
 name = "P2S12"
 srcDir = "../program-2/series-12/formal"
 roots = ["P2S12", "P2S12.AxiomCheck"]
+
+# `program-2/series-13/formal/` — Program 2 Series 13 (2.13), THE CURVE (the capstone of Phase 3 and the last series
+# of the built arc). Imports `P2S9` only (the cone, reaching `P2S8 / P2S7 / … / P2S4 / … / P2S0 / P1` transitively —
+# chiefly Series 2.4's distance and Series 2.7's grain); it does NOT import the quantum sub-arc `P2S11`/`P2S12` or the
+# reversibility fork `P2S10` (their content is not reused). `P2S13` imports `P2S13.ws1`…`P2S13.ws5`; `P2S13.AxiomCheck`
+# runs the axiom pass. The reading of the grain as a possible SOURCE of the distance and the grain-dependence test on
+# the model's own distance are built FRESH in `P2S13.*`, de-risked on paper first. Gate: `check program-2/series-13
+# "^import (P2S9|P2S13)…"`.
+[[lean_lib]]
+name = "P2S13"
+srcDir = "../program-2/series-13/formal"
+roots = ["P2S13", "P2S13.AxiomCheck"]
