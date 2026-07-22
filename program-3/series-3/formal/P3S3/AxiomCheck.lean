@@ -11,6 +11,9 @@ namespace P3S3
 
 #print axioms ws1_run_append
 #print axioms ws1_wind_append
+#print axioms transport_swap
+#print axioms stepSign_swap
+#print axioms ws2_winding_orientation
 #print axioms ws2_winding_path_dependent
 #print axioms ws2_windings_both_parities
 #print axioms ws3_sign_forced

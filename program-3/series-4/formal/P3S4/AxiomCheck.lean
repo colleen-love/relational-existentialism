@@ -15,6 +15,7 @@ namespace P3S4
 #print axioms ws2_metric_moves
 #print axioms ws3_attention_is_proximity
 #print axioms ws4_flux_curves
+#print axioms ws4_flux_contracts
 #print axioms ws5_verdict_tied
 #print axioms ws5_verdict_eq
 

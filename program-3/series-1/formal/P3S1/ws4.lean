@@ -30,7 +30,8 @@ theorem ws4_summary_is_p2_sym (g : G) (a b : Fin 3) :
   simp [summary, P2S0.sym]
 
 /-- The summary erases the charge: the one-edge pair has one summary and opposite charges at the source.
-What the coarse-graining forgets is exactly the ledger's quantity. -/
+What the coarse-graining forgets includes the ledger's quantity — an instance, not a characterization of
+the summary's fibers (Program Review 3-1, P3R1-R4). -/
 theorem ws4_charge_erased :
     summary gFwd = summary gBwd ∧ charge gFwd 0 ≠ charge gBwd 0 := by
   refine ⟨ws2_summary_lossy.2, ?_⟩

@@ -62,13 +62,17 @@ theorem ws5_verdict_tied (hinf : ℵ₀ ≤ κ) (b1 b2 b3 b4 b5 : Bool)
         (∀ w, w ≠ y → w ≠ z → charge (transport x y z g) w = charge g w)
       ∧ (charge (transport x y z g) y + charge (transport x y z g) z = charge g y + charge g z)))
     (h4 : b4 = true ↔ (∀ (g k : G), capVec g = capVec k → Connected g k))
-    (h5 : b5 = true ↔ (¬ ∃ R, IsBisim (outDest hinf PR2R1.attV) R ∧ R PR2R1.v1 PR2R1.v0)) :
+    (h5 : b5 = true ↔ ((¬ ∃ R, IsBisim (outDest hinf PR2R1.attV) R ∧ R PR2R1.v1 PR2R1.v0)
+        ∧ (PR2R1.labL PR2R1.v0 ≠ PR2R1.labL PR2R1.v1
+            ∧ Recoverable (rankLift (outDest hinf PR2R1.attV) PR2R1.labL))
+        ∧ (PR2R1.labD PR2R1.v1 ≠ PR2R1.labD PR2R1.v2
+            ∧ ¬ Recoverable (rankLift (outDest hinf PR2R1.attV) PR2R1.labD)))) :
     verdict b1 b2 b3 b4 b5 = Outcome.flowing := by
   have e1 : b1 = true := h1.mpr ws1_moves_reversible
   have e2 : b2 = true := h2.mpr ws2_capacity_conserved
   have e3 : b3 = true := h3.mpr ws2_exchange_zero_sum
   have e4 : b4 = true := h4.mpr ws4_flow_connects
-  have e5 : b5 = true := h5.mpr (ws3_wall_is_a_state hinf).1
+  have e5 : b5 = true := h5.mpr (ws3_wall_is_a_state hinf)
   subst e1; subst e2; subst e3; subst e4; subst e5
   rfl
 

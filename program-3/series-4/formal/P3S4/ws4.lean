@@ -3,11 +3,16 @@
 
 WS4 - The flux-curvature law. Program 3 Series 4 (3.4), the curve.
 
-The heart of the capstone: for every state and every applicable move, transporting attention toward a
-relatum lowers its charge by exactly one and brings it within unit distance of the mover. Grain flux and
-metric change are two faces of the same event, coupled by an exact universal law: concentration of the
-conserved quantity contracts distance. The shape of gravity, in the model's own key, as a theorem about
-the dynamics.
+For every state and every applicable move, transporting attention toward a relatum lowers its charge by
+exactly one and brings it within unit distance of the mover — and, when the relatum was not the mover,
+the distance strictly contracts, from at least two to at most one (`ws4_flux_contracts`).
+
+Scope, repaired at Program Review 3-1 (P3R1-S3). This is a per-event law linking two readings of one
+attention event: the charge conjunct is exact degree bookkeeping, and the distance bound follows from the
+metric's definition once the new edge exists — the two are coupled by common cause, not by one driving
+the other. The strict contraction is the law's non-definitional content. No field equation is stated or
+claimed, and no theorem gives distance change as a function of the charge distribution; `ws1` proves the
+static version of such a law does not exist.
 
 Sorry-free; axiom-clean beyond Mathlib's standard `propext` / `Classical.choice` / `Quot.sound`.
 -/
@@ -42,10 +47,10 @@ lemma inDeg_target {x y z : Fin 3} (g : G) (hy : y ∈ g x) (hz : z ∉ g x) :
   rw [hrest]
   omega
 
-/-- The flux-curvature law: transporting attention toward a relatum lowers its charge by exactly one and
-brings it within unit distance of the mover. For every state and every applicable move. Concentration of
-the conserved quantity contracts distance — an exact coupling of the grain to the metric, as a law of the
-dynamics. -/
+/-- The flux law: transporting attention toward a relatum lowers its charge by exactly one and brings it
+within unit distance of the mover. For every state and every applicable move. A per-event law linking two
+readings of one attention event; the charge conjunct is exact bookkeeping, the distance conjunct the
+metric's definition once the edge exists (see the header's scope note, Program Review 3-1, P3R1-S3). -/
 theorem ws4_flux_curves (x y z : Fin 3) (g : G) (hy : y ∈ g x) (hz : z ∉ g x) :
     charge (transport x y z g) z = charge g z - 1
   ∧ flowDist (transport x y z g) x z ≤ 1 := by
@@ -55,5 +60,25 @@ theorem ws4_flux_curves (x y z : Fin 3) (g : G) (hy : y ∈ g x) (hz : z ∉ g x
     push_cast
     ring
   · exact ws3_attention_is_proximity _ x z (transport_row_target hy hz)
+
+/-- The one-step ball is the mover and its attended relata. -/
+lemma mem_ball_one_iff (g : G) (x z : Fin 3) : z ∈ ball g 1 x ↔ z = x ∨ z ∈ g x := by
+  show z ∈ insert x ((g x).biUnion (fun y => ball g 0 y)) ↔ _
+  simp [ball, Finset.mem_insert, Finset.mem_biUnion]
+
+/-- The strict contraction (the law's non-definitional content, stated at Program Review 3-1's direction,
+P3R1-S3): when the relatum was neither attended nor the mover itself, its distance from the mover was at
+least two before the move and is at most one after. Attention flux strictly contracts distance. -/
+theorem ws4_flux_contracts (x y z : Fin 3) (g : G) (hy : y ∈ g x) (hz : z ∉ g x) (hzx : z ≠ x) :
+    2 ≤ flowDist g x z ∧ flowDist (transport x y z g) x z ≤ 1 := by
+  refine ⟨?_, (ws4_flux_curves x y z g hy hz).2⟩
+  unfold flowDist
+  split_ifs with h0 h1
+  · exact absurd (Finset.mem_singleton.mp h0) hzx
+  · rcases (mem_ball_one_iff g x z).mp h1 with h | h
+    · exact absurd h hzx
+    · exact absurd h hz
+  · omega
+  · omega
 
 end P3S4

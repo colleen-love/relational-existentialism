@@ -16,6 +16,7 @@ namespace P3S1
 #print axioms ws2_no_decoder
 #print axioms ws3_micro_loses_nothing
 #print axioms ws3_observation_always_lossy
+#print axioms ws3_macro_not_autonomous
 #print axioms ws4_summary_is_p2_sym
 #print axioms ws4_charge_erased
 #print axioms ws5_verdict_tied

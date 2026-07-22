@@ -1,0 +1,58 @@
+# Program Review 3-1 (blind, adversarial): Program 3 in full, Series 3.0–3.4
+
+> Recorded verbatim from the blind reviewer (a single independent reader, instructed to work alone with no delegation; it rebuilt the suite, reproduced the gate, axiom, and hygiene checks, and mechanically re-derived its central falsity claim before grading). Closure dispositions are in `program-review-3-1-closure.md`.
+
+**Scope.** All five landed series (`P3S0`–`P3S4`, every `ws1..ws5` and `AxiomCheck`), the charter, protocol, status ledger, all five outlines and landing notes, `program-3/spec/derisk/Derisk.lean`, and the Program 2 objects every claimed bridge names (`P2S8.incr` and `hol`; `P2S0.sym`; `PR2R1.attV` and `pr2s1_two_sided_wall`). Graded on the house scale against the charter's six disciplines and Program Review 2-1's catalogued failure patterns.
+
+**Method and verification note (disclosed).** Rebuilt independently: all five series plus `AxiomCheck` roots, green; every headline on Mathlib's standard three axioms or fewer, every `ws5_verdict_eq` on none — and the axiom detail claimed in the 3.1 landing note matches the actual build output, corroborating that the claimed landing checks were really run. `scripts/gate.sh` green on all twenty-four lines. Greps clean: no `sorry`, no `native_decide`, no custom `axiom`, no `: True`/`trivial` audit theorems anywhere in the program-3 tree. The single sharpest falsity claim below (the 3.3 winding) was verified mechanically: a scratch file compiled against `P3S3` proving, structurally for every state, `transport x z y g = transport x y z g`, and then that the history `[(0,2,1)]` has the identical run from `gFwd` as `hDirect = [(0,1,2)]` with winding `-1` against `hDirect`'s `+1`.
+
+**One-sentence summary.** The mechanical layer is impeccable and the worst Program 2 defects are genuinely repaired — whole-space structural theorems, real bridges, tied verdicts, labeled witnesses, no vacuous audits — but the interpretive layer re-offends at the three places the physics lives: the "arrow" series could not have failed and proves only that a symmetric projection is non-invertible, the "phase" series' winding is not a function of what the flow does, and the "flux-curvature law" is one definitional unfolding deep; the core survives at reduced strength, the post-gate pair survives as flags but not as physics.
+
+---
+
+## Serious findings
+
+### P3R1-S1 — 3.3: the winding is not a function of the flow; "genuine holonomy" is false of the trajectories, and the "sign is chosen" critique is relocated into the step-sign, not closed.
+
+The transport map is symmetric in its last two arguments: `transport x z y g = transport x y z g` for every state (re-derived and compiled for this review). But `stepSign` assigns the two presentations opposite signs. Consequently the histories `[(0,1,2)]` and `[(0,2,1)]` induce the identical map — the same state trajectory from every start — with windings `+1` and `-1` (verified mechanically). The winding is therefore a function of the move-word's presentation, not of the path through state space. The ws2 docstrings "the flow has genuine holonomy" and "the phase reads the path, not the endpoints" are false of the flow and of paths: the phase reads the word. `ws2_winding_path_dependent` is then unimpressive as stated — any word-function not invariant under the presentation symmetry of its own generators is "path-dependent," including on a pair of words that denote one and the same move.
+
+This also decides the honest answer to the "sign is chosen" question. `ws3_sign_forced` is a genuine theorem — every additive-to-multiplicative `±1`-valued function on ℤ is trivial or parity — and it is literally the theorem PR2-S4 found missing, with its multiplicativity hypothesis honestly motivated by the cocycle law. Credit where due. But the classification sits downstream of two unclassified choices: the `±1`-valuedness (disclosed) and the step-sign's orientation convention itself, which is not merely "a choice" but an incoherent one at the level of the objects the prose talks about, since it assigns opposite phases to one map. The critique is relocated from `amp` into `wind`, not closed. The verdict `phase` survives only as: a word-indexed cocycle on the free monoid of move triples carries a forced `±1` character. Correction owed: either quotient histories by transport-map equality and prove the winding descends (it provably does not — so this branch is a relabel: the phase lives on oriented moves, and the orientation is a declared convention, stated as such), or derive a canonical orientation from the built structure.
+
+### P3R1-S2 — 3.1: the "decisive series" could not fail — both refutation arms were unreachable in principle — and its one dynamical theorem is logically equivalent to its static one.
+
+The `transparent` arm (summary injective) is arithmetically impossible for the built summary: the image lies in symmetric boolean matrices (2⁶ = 64 against 512 states) — a counting argument available at outline time. The `opaque` arm contradicts 3.0's already-landed involution. So of the four pre-registered outcomes only `arrow` and `partial'` were live, and step zero had already decided the substance before the series was built. This is the PR1-S1 shape — pre-registered alternatives the built class cannot express — recurring in the exact series whose "honorable failure" framing carries the program's risk narrative.
+
+Separately, `ws3_observation_always_lossy` adds no content to `ws2_summary_lossy`: for a bijection `T`, `summary ∘ T` is non-injective iff `summary` is. The genuinely dynamical seed the de-risk produced — `check3b_macro_reads_microstate` (two summary-identical states diverge in summary under the same move, so the macro evolution is not a function of the macro state) — was dropped between step zero and the landed series. No projected-dynamics object exists in the series, so the charter's target "the projected dynamics is not [reversible]" is not stated by any theorem; nothing in the series distinguishes past from future. The verdict `arrow` survives as its own flags; "the program's central bet is cashed" does not, because there was no live bet to cash. Correction owed: land `check3b` inside `P3S1` as the macro-non-autonomy theorem, disclose that both failure arms were closed before the series began, and re-scope the verdict word to observational non-invertibility.
+
+### P3R1-S3 — 3.4: the flux-curvature law is a definitional consequence of `flowDist`, `lawless` was unreachable, and "the shape of gravity" overclaims a membership fact.
+
+The distance conjunct of `ws4_flux_curves` follows from `z ∈ (transport x y z g) x` by the definition of `flowDist` alone (membership in the row is membership in the 1-ball), which is also the entire content of `ws3_attention_is_proximity` — a workstream headline that is the metric's definition unfolded once. Given these definitions the law could not have failed; the pre-registered `lawless` arm was unreachable in principle. The "coupling" is coupling by common cause — both quantities read the same edge event — and `ws1_grain_underdetermines` proves the static grain→metric law does not exist; no theorem states any law of distance change as a function of the charge distribution. "The shape of gravity, in the model's own key" exceeds a bound-not-delta bookkeeping identity. The law's hypotheses admit `z = x`, where nothing contracts; the strict contraction that does hold for `z ≠ x` (distance ≥ 2 before, ≤ 1 after) is nowhere stated, though it is the one non-definitional sentence available. Correction owed: state the strict-contraction theorem, delete or demote the gravity phrase, and either build a grain-driven law or re-scope the capstone to a per-event bookkeeping identity.
+
+## Real findings
+
+- **P3R1-R1** — 3.2's heart is an additive corollary of 3.0's local law (legitimate, chartered, but "the heart of the series" describes summation), and `ws4_creation_not_flow` is the contrapositive of `ws3_orbits_are_capacity` counted twice in the flag vector. The genuinely new content is the orbit theorem. Verdict `ledger` survives.
+- **P3R1-R2** — Pre-registration without epistemic risk (each series' verdict was computable at outline time), and the gate that was the revised protocol's one safeguard was skipped — disclosed accurately in the status, but the honest record documents an arc landed with zero independent scrutiny before this review.
+- **P3R1-R3** — 3.3's chartered "genuine phase group" was not delivered (the family is the ±1 rebit, with a classification over it); the landing note discloses the scope but the status table still advertises the phase group; and the charter's "winds along the signed flow" narrative has no tying theorem to `incr` or the charge.
+- **P3R1-R4** — 3.1 prose exceeding statements: "what the coarse-graining forgets is exactly the ledger's quantity" (an instance, not an "exactly"); "no amount of further flowing repairs the loss" (prose quantifies over words; the theorem states single moves).
+
+## Cosmetic findings
+
+**P3R1-C1.** (a) 3.0's `nondegen` flag ties only to the not-total clause of the wall theorem, not the two-sidedness its name promises (the omitted clauses are proved in the same theorem). (b) "The cone transfers by one bridge theorem" is a claim of ease never backed by an artifact. (c) `ws3_wall_is_a_state` is a disclosed wholesale re-export. (d) "The loss counted on a fiber" is a ≥ 3 bound on one fiber; the macro alphabet size (64 against 512) is never stated. (e) "The world" for three relata; the scale itself is honestly carried.
+
+## What survives attack
+
+The mechanical layer is impeccable and was independently reproduced. The Program 2 repair program is genuinely executed program-wide: labeled witness decides, real bridges to the real objects, tied verdicts (the PR2-S2 defect is dead), no vacuous audits, and the non-degeneracy discipline discharged with both sides of the import boundary inhabited via the PR2R1 wall, now a state the flow provably visits. Series 3.0 is the real thing and fully survives. `ws3_sign_forced` and `ws3_orbits_are_capacity` are genuine theorems answering specific Program Review 2-1 findings at their stated scope; `ws4_exponent_not_forced` and `ws1_grain_underdetermines` are honest negative results built against the program's own interest. The disclosure culture held: the landing notes self-flagged three of the five points this review grades, and the status ledger records the protocol revision and gate skip accurately.
+
+## Per-series verdict survival
+
+| Series | Announced | Survival |
+|---|---|---|
+| 3.0 | flowing | survives at full stated strength |
+| 3.1 | arrow | survives as flags; not as "the decisive bet cashed" or as an arrow of time |
+| 3.2 | ledger | survives, at modest depth; one theorem double-counted |
+| 3.3 | phase | partial: sign-forcing survives at ±1 scope; "genuine holonomy of the flow" does not |
+| 3.4 | curved | survives as flags; not as a flux-curvature coupling law or "the shape of gravity" |
+
+## Program verdict
+
+"Recovered core" survives at reduced strength; "recovered" does not survive at stated strength. What should be repaired rather than re-scoped: land `check3b` (macro non-autonomy) in `P3S1` and re-scope "arrow" to observational non-invertibility with the closed-arms disclosure; either canonicalize the winding's orientation from the built charge flux or relabel the phase as word-level with the convention declared; state 3.4's unstated strict-contraction theorem and strike "the shape of gravity" from the docstrings; fix the status table's "genuine phase group"; and run the gate that was skipped before anything further is chartered.
