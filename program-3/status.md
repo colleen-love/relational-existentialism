@@ -11,7 +11,7 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 
 | Series | Question | Depends on | Status |
 |---|---|---|---|
-| 3.0 The Flow | a reversible signed-flow dynamics on the whole state space of attention graphs | step zero | not started |
+| 3.0 The Flow | a reversible signed-flow dynamics on the whole state space of attention graphs | step zero | landed, **flowing**; awaits gate review |
 | 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | not started |
 | 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | not started |
 | gate | program review of the core; the remaining series are chartered only on acceptance | 3.0–3.2 | — |
@@ -34,3 +34,5 @@ Unchanged from Programs 1 and 2, carried untouched: the content of the compass, 
 - 2026-07-22 — Series repair added to the protocol as the series loop's fifth phase.
 - 2026-07-22 — Step zero passed. `program-3/spec/derisk/Derisk.lean` (self-contained, compiled by hand): transports are involutions on every state, capacity is conserved, bystanders keep their charge and the exchange partners' total is unchanged, the direction-erasing summary is lossy and its macro-step reads the erased microstate. One binding method lesson: whole-space kernel `decide` over the 512-state function space is infeasible (recursion-depth and heartbeat exhaustion, then timeout); universal targets must be proved structurally, `decide` reserved for witnesses. The lesson is written into the 3.0 outline.
 - 2026-07-22 — Series 3.0 outline written (`series-0/outline.md`) and handed to a fresh executor for design and code.
+- 2026-07-22 — Protocol revised for speed and cost: design and code move into the program seat, the per-series skeptical review is batched at the gate and the end of the arc (with fresh independent readers), and the landing check per series is mechanical only. The independence trade-off is stated in the protocol.
+- 2026-07-22 — Series 3.0 landed, verdict **flowing** (`ws5_verdict_tied`). All targets at full strength, including full connectivity (`ws4_flow_connects`, row-wise, structural). The executor's near-complete build was inherited by the program seat and finished (one proof repair in `flowReach_add`). Build, gate, axioms, hygiene all clean; landing note at `series-0/landing.md`. Awaits the gate review. Next: the 3.1 outline (the Arrow).

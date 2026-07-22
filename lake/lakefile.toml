@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13", "PR2R1"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13", "PR2R1", "P3S0"]
 
 # `program-2/review/formal/` — the Program Review 2-1 REPAIRS module (`PR2R1`): the Fixed branches of
 # `program-2/spec/program-review-1.md`. A REVIEW artifact, deliberately cross-cutting: it imports the probe
@@ -12,6 +12,17 @@ defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S
 name = "PR2R1"
 srcDir = "../program-2/review/formal"
 roots = ["PR2R1", "PR2R1.AxiomCheck"]
+
+# `program-3/series-0/formal/` — Program 3 Series 0 (3.0), THE FLOW: the ground of Program 3, a reversible,
+# capacity-conserving, charge-exchanging flow dynamics on the whole state space of attention graphs. `P3S0`
+# imports its workstreams `P3S0.ws1`…`P3S0.ws5`; `P3S0.AxiomCheck` runs the axiom pass. The series boundary
+# import is `PR2R1` (in `P3S0.ws1`), reaching `P2S8` (Series 2.8's signed increment) and the two-sided wall
+# and the rest of the built arc transitively; nothing else is imported directly. Gate: `check
+# program-3/series-0 "^import (PR2R1|P3S0)…"`.
+[[lean_lib]]
+name = "P3S0"
+srcDir = "../program-3/series-0/formal"
+roots = ["P3S0", "P3S0.AxiomCheck"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…

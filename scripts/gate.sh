@@ -117,4 +117,9 @@ check program-2/series-13 "^import (P2S9|P2S13)(\.[A-Za-z0-9_]+)*$"
 # `PR2R1.*` roots (+ mathlib) are the only other allowed imports.
 check program-2/review "^import (P2S10|P2S12|P2S13|PR2R1)(\.[A-Za-z0-9_]+)*$"
 
+# Program 3 Series 0 (`program-3/series-0/formal/`): the `P3S0` library imports `PR2R1` at the series boundary
+# (`P3S0.ws1`), reaching `P2S8` and the rest of the built arc transitively, plus its own `P3S0.*` roots (+
+# mathlib); any other tree is forbidden.
+check program-3/series-0 "^import (PR2R1|P3S0)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
