@@ -118,7 +118,15 @@ theorem ws5_audit_scope : ∀ n : ℤ, amp n = 1 ∨ amp n = -1 := amp_values
 discharged obligation is named as a forbidden content-word ("weight," "measure," "probability," "Born," "chance,"
 "random," "stochastic," "self," "import," "God," "choice") as content. Enforced by the protocol §6 mechanical grep and
 the §5 semantic check (hits are docstring prose or the Lean `import` keyword only), not by this `True`; carried as the
-accepted house placeholder. -/
-theorem ws5_audit_names_not_terms : True := trivial
+accepted house placeholder.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.squared ≠ Outcome.unsquared
+  ∧ Outcome.unsquared ≠ Outcome.deterministic
+  ∧ Outcome.deterministic ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.partial'
+  ∧ Outcome.squared ≠ Outcome.partial' := by
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S12

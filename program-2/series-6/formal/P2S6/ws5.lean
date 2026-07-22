@@ -133,7 +133,14 @@ theorem ws5_audit_line_is_import {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
 discharged obligation is named as a forbidden content-word ("self," "thread," "persistence," "life," "death,"
 "time," "here," "there," "god," "choice," "subjectivity") as a whole word. Enforced by the protocol §6 mechanical
 grep (hits are docstring prose only), not by this `True`; carried as the accepted house placeholder, the grep the
-teeth. -/
-theorem ws5_audit_names_not_terms : True := trivial
+teeth.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.partial' ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.woven
+  ∧ Outcome.woven ≠ Outcome.severed
+  ∧ Outcome.partial' ≠ Outcome.severed := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S6

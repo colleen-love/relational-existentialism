@@ -118,7 +118,15 @@ theorem ws5_audit_fork_genuine :
 /-- **(e) NAMES-NOT-TERMS.** No proof term, definition, or discharged obligation is named as content
 `time`/`now`/`clock`/`before`/`after`/`moment`/`self`/`other`/`chance`/`choice`/`subjectivity`. A NAMES
 property, certified by the mechanical grep (protocol §6); carried here as a `True` placeholder, as the property
-is about identifiers, not a proposition. -/
-theorem ws5_audit_names_not_terms : True := trivial
+is about identifiers, not a proposition.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.disconnected ≠ Outcome.partial'
+  ∧ Outcome.partial' ≠ Outcome.twoZone
+  ∧ Outcome.twoZone ≠ Outcome.endogenous
+  ∧ Outcome.endogenous ≠ Outcome.causalImport
+  ∧ Outcome.disconnected ≠ Outcome.causalImport := by
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S1

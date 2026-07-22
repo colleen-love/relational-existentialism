@@ -109,7 +109,14 @@ theorem ws5_audit_lateral_import {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) : ¬
 /-- **(e) NAMES-NOT-TERMS.** A META-property about identifiers, not a proposition: no proof term, definition, or
 discharged obligation is named as content "space," "distance," "world," "here," "there," "self," "time," "god,"
 "choice," or "subjectivity". Enforced by the protocol §6 mechanical grep (hits are docstring prose only), not by
-this `True`; carried as the accepted house placeholder (S2/S3), the grep the teeth. -/
-theorem ws5_audit_names_not_terms : True := trivial
+this `True`; carried as the accepted house placeholder (S2/S3), the grep the teeth.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.partial' ≠ Outcome.distinct
+  ∧ Outcome.distinct ≠ Outcome.reduced
+  ∧ Outcome.reduced ≠ Outcome.shapeDrawn
+  ∧ Outcome.partial' ≠ Outcome.shapeDrawn := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S4
