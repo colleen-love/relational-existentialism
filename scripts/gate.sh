@@ -130,4 +130,12 @@ check program-3/series-1 "^import (P3S0|P3S1)(\.[A-Za-z0-9_]+)*$"
 # boundary (reaching `P3S0` transitively) and its own `P3S2.*` roots (+ mathlib); nothing else directly.
 check program-3/series-2 "^import (P3S1|P3S2)(\.[A-Za-z0-9_]+)*$"
 
+# Program 3 Series 3 (`program-3/series-3/formal/`): the `P3S3` library imports `P3S2` at the series
+# boundary and its own `P3S3.*` roots (+ mathlib); nothing else directly.
+check program-3/series-3 "^import (P3S2|P3S3)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 4 (`program-3/series-4/formal/`): the `P3S4` library imports `P3S3` at the series
+# boundary and its own `P3S4.*` roots (+ mathlib); nothing else directly.
+check program-3/series-4 "^import (P3S3|P3S4)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail

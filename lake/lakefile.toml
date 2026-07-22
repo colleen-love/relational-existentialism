@@ -1,5 +1,5 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13", "PR2R1", "P3S0", "P3S1", "P3S2"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13", "PR2R1", "P3S0", "P3S1", "P3S2", "P3S3", "P3S4"]
 
 # `program-2/review/formal/` — the Program Review 2-1 REPAIRS module (`PR2R1`): the Fixed branches of
 # `program-2/spec/program-review-1.md`. A REVIEW artifact, deliberately cross-cutting: it imports the probe
@@ -39,6 +39,22 @@ roots = ["P3S1", "P3S1.AxiomCheck"]
 name = "P3S2"
 srcDir = "../program-3/series-2/formal"
 roots = ["P3S2", "P3S2.AxiomCheck"]
+
+# `program-3/series-3/formal/` — Program 3 Series 3 (3.3), the phase: histories, the path-dependent
+# winding, the forced sign, interference. Imports `P3S2` at the series boundary. Gate: `check
+# program-3/series-3 "^import (P3S2|P3S3)…"`.
+[[lean_lib]]
+name = "P3S3"
+srcDir = "../program-3/series-3/formal"
+roots = ["P3S3", "P3S3.AxiomCheck"]
+
+# `program-3/series-4/formal/` — Program 3 Series 4 (3.4), the curve: the dynamical metric and the exact
+# flux-curvature law. Imports `P3S3` at the series boundary. Gate: `check program-3/series-4
+# "^import (P3S3|P3S4)…"`.
+[[lean_lib]]
+name = "P3S4"
+srcDir = "../program-3/series-4/formal"
+roots = ["P3S4", "P3S4.AxiomCheck"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…

@@ -4,7 +4,7 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 
 ## Snapshot
 
-- Phase: the core is landed (3.0 flowing, 3.1 arrow, 3.2 ledger). The charter's gate is reached: the batched adversarial review of the three landings is the next step, before 3.3 and 3.4 are chartered.
+- Phase: the full arc is landed (3.0 flowing, 3.1 arrow, 3.2 ledger, 3.3 phase, 3.4 curved). At the owner's direction the gate review and the end-of-arc review are merged into one blind program review of all five landings, run next.
 - Program verdict: none yet. Read off the series as they land; the pre-registered outcomes are in the charter.
 
 ## The plan at a glance
@@ -15,8 +15,8 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 | 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | landed, **arrow**; awaits gate review |
 | 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | landed, **ledger**; awaits gate review |
 | gate | program review of the core; the remaining series are chartered only on acceptance | 3.0–3.2 | — |
-| 3.3 The Phase | winding along histories; a genuine phase group; forced-within-a-family weights | 3.0, gate | not started |
-| 3.4 The Curve | does grain concentration induce a law of distance change | 3.2, gate | not started |
+| 3.3 The Phase | winding along histories; a genuine phase group; forced-within-a-family weights | 3.0, gate | landed, **phase**; awaits review |
+| 3.4 The Curve | does grain concentration induce a law of distance change | 3.2, gate | landed, **curved**; awaits review |
 
 Not series: the cone transfers from Series 2.9 by one bridge theorem; Gleason uniqueness and the area law stay disclosed forward-notes.
 
@@ -39,3 +39,6 @@ Unchanged from Programs 1 and 2, carried untouched: the content of the compass, 
 - 2026-07-22 — Series 3.1 landed, verdict **arrow** (`ws5_verdict_tied`). The decisive series: every transport injective (the microdynamics loses nothing), the direction-erasing summary lossy with a three-state fiber and no decoder, and the loss permanent under every further move. The summary is Program 2's symmetric relating by bridge theorem, and what it erases is exactly the charge. Landing note at `series-1/landing.md`.
 - 2026-07-22 — Series 3.2 landed, verdict **ledger** (`ws5_verdict_tied`). The world's total ledger closed in every state; an exact flux law for every region and move (conserved interior and exterior, exact at the boundary); the flow's orbits are precisely the capacity classes; creation (capacity change) provably outside the flow; the holonomy exhibited as the ledger's blind spot. Landing note at `series-2/landing.md`.
 - 2026-07-22 — The gate is reached. Core verdicts: flowing, arrow, ledger — the reversible, quantized, locally conserved world with an emergent arrow that the charter's minimum viable model named. Next: the batched adversarial review (program loop step 3) before 3.3 and 3.4 are chartered.
+- 2026-07-22 — At the owner's direction, 3.3 and 3.4 were built ahead of the gate review, and the gate and end-of-arc reviews are merged into one blind program review of the whole arc.
+- 2026-07-22 — Series 3.3 landed, verdict **phase** (`ws5_verdict_tied`). Histories exist as objects and compose; the winding is a cocycle and provably path-dependent (co-terminal histories with windings 1 and 2); the sign is forced by classification (every composition-respecting ±1 phase is trivial or parity — the theorem Program Review 2-1 found missing); both interference poles witnessed on named co-terminal histories; the cancellation test provably does not force the exponent. Landing note at `series-3/landing.md`.
+- 2026-07-22 — Series 3.4 landed, verdict **curved** (`ws5_verdict_tied`). The capstone: the dynamical metric is genuine, the static grain underdetermines it (2.13's INERT recovered as the reason the law must be dynamical), the metric moves under the flow, attending is being close, and the flux-curvature law holds universally — attention flux toward a relatum lowers its charge by exactly one and brings it within unit distance. Landing note at `series-4/landing.md`.
