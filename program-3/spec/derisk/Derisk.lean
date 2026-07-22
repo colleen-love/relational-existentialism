@@ -20,6 +20,8 @@ import Mathlib
 
 namespace P3Derisk
 
+set_option maxRecDepth 100000
+
 /-- The whole universe of the de-risk: every attention graph on three relata. 512 states. -/
 abbrev G : Type := Fin 3 → Finset (Fin 3)
 
