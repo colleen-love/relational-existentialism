@@ -4,7 +4,7 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 
 ## Snapshot
 
-- Phase: step zero passed; series 3.0 outlined and handed to its executor.
+- Phase: the core is landed (3.0 flowing, 3.1 arrow, 3.2 ledger). The charter's gate is reached: the batched adversarial review of the three landings is the next step, before 3.3 and 3.4 are chartered.
 - Program verdict: none yet. Read off the series as they land; the pre-registered outcomes are in the charter.
 
 ## The plan at a glance
@@ -12,8 +12,8 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 | Series | Question | Depends on | Status |
 |---|---|---|---|
 | 3.0 The Flow | a reversible signed-flow dynamics on the whole state space of attention graphs | step zero | landed, **flowing**; awaits gate review |
-| 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | not started |
-| 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | not started |
+| 3.1 The Arrow | irreversibility emerges from coarse-graining a reversible flow | 3.0 | landed, **arrow**; awaits gate review |
+| 3.2 The Ledger | conservation as a theorem about closed regions; creation self-relative | 3.0 | landed, **ledger**; awaits gate review |
 | gate | program review of the core; the remaining series are chartered only on acceptance | 3.0–3.2 | — |
 | 3.3 The Phase | winding along histories; a genuine phase group; forced-within-a-family weights | 3.0, gate | not started |
 | 3.4 The Curve | does grain concentration induce a law of distance change | 3.2, gate | not started |
@@ -36,3 +36,6 @@ Unchanged from Programs 1 and 2, carried untouched: the content of the compass, 
 - 2026-07-22 — Series 3.0 outline written (`series-0/outline.md`) and handed to a fresh executor for design and code.
 - 2026-07-22 — Protocol revised for speed and cost: design and code move into the program seat, the per-series skeptical review is batched at the gate and the end of the arc (with fresh independent readers), and the landing check per series is mechanical only. The independence trade-off is stated in the protocol.
 - 2026-07-22 — Series 3.0 landed, verdict **flowing** (`ws5_verdict_tied`). All targets at full strength, including full connectivity (`ws4_flow_connects`, row-wise, structural). The executor's near-complete build was inherited by the program seat and finished (one proof repair in `flowReach_add`). Build, gate, axioms, hygiene all clean; landing note at `series-0/landing.md`. Awaits the gate review. Next: the 3.1 outline (the Arrow).
+- 2026-07-22 — Series 3.1 landed, verdict **arrow** (`ws5_verdict_tied`). The decisive series: every transport injective (the microdynamics loses nothing), the direction-erasing summary lossy with a three-state fiber and no decoder, and the loss permanent under every further move. The summary is Program 2's symmetric relating by bridge theorem, and what it erases is exactly the charge. Landing note at `series-1/landing.md`.
+- 2026-07-22 — Series 3.2 landed, verdict **ledger** (`ws5_verdict_tied`). The world's total ledger closed in every state; an exact flux law for every region and move (conserved interior and exterior, exact at the boundary); the flow's orbits are precisely the capacity classes; creation (capacity change) provably outside the flow; the holonomy exhibited as the ledger's blind spot. Landing note at `series-2/landing.md`.
+- 2026-07-22 — The gate is reached. Core verdicts: flowing, arrow, ledger — the reversible, quantized, locally conserved world with an emergent arrow that the charter's minimum viable model named. Next: the batched adversarial review (program loop step 3) before 3.3 and 3.4 are chartered.

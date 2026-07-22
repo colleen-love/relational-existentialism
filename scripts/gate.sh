@@ -122,4 +122,12 @@ check program-2/review "^import (P2S10|P2S12|P2S13|PR2R1)(\.[A-Za-z0-9_]+)*$"
 # mathlib); any other tree is forbidden.
 check program-3/series-0 "^import (PR2R1|P3S0)(\.[A-Za-z0-9_]+)*$"
 
+# Program 3 Series 1 (`program-3/series-1/formal/`): the `P3S1` library imports `P3S0` at the series
+# boundary and its own `P3S1.*` roots (+ mathlib); nothing else directly.
+check program-3/series-1 "^import (P3S0|P3S1)(\.[A-Za-z0-9_]+)*$"
+
+# Program 3 Series 2 (`program-3/series-2/formal/`): the `P3S2` library imports `P3S1` at the series
+# boundary (reaching `P3S0` transitively) and its own `P3S2.*` roots (+ mathlib); nothing else directly.
+check program-3/series-2 "^import (P3S1|P3S2)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
