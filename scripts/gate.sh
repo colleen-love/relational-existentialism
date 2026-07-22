@@ -104,4 +104,11 @@ check program-2/series-11 "^import (P2S8|P2S11)(\.[A-Za-z0-9_]+)*$"
 # series' tree is forbidden. The reading of the weight as a probability and the consistency test are built fresh in `P2S12.*`.
 check program-2/series-12 "^import (P2S11|P2S12)(\.[A-Za-z0-9_]+)*$"
 
+# Program 2 Series 13 (`program-2/series-13/formal/`): the `P2S13` library imports the cone `P2S9` and its own
+# `P2S13.*` roots (+ mathlib); Series 2.4's distance / Series 2.7's grain / the `P1` prior art are reached transitively
+# through S9, not imported directly; the quantum sub-arc `P2S11`/`P2S12` and the reversibility fork `P2S10` are NOT
+# imported (their content is not reused); any other series' tree is forbidden. The reading of the grain as a source and
+# the grain-dependence test are built fresh in `P2S13.*`.
+check program-2/series-13 "^import (P2S9|P2S13)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail
