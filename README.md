@@ -134,6 +134,7 @@ This repository is dual-licensed by content type:
 
 - **All code** (Lean, tooling, build configuration) is licensed under the **[Apache License 2.0](./LICENSE)**.
 - **All writing** (specs, documentation, essays, poetry, this README) is licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](./LICENSE-docs)**.
+- **Exception — [`papers/`](./papers/)**: the manuscripts in the `papers/` directory are **Copyright © 2026 Colleen Love, all rights reserved**, and are excluded from both licenses above (see [`papers/LICENSE.md`](./papers/LICENSE.md)). This carve-out keeps the manuscripts eligible for submission to venues that require work not already under a public license.
 
 You are free to use, modify, and redistribute accordingly; attribution is required for the writing, and the code carries Apache 2.0's patent and notice terms. If a file's type is ambiguous, the license follows its function: executable or checkable artifacts are code; everything meant to be read by humans is writing.
 
