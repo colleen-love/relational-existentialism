@@ -4,8 +4,7 @@ The living ledger. Every landing, review, finding, and repair gets a dated entry
 
 ## Snapshot
 
-- Phase: chartered, nothing built.
-- Next step: step zero, the scratch de-risk (charter, "Step zero"), then the 3.0 outline.
+- Phase: step zero passed; series 3.0 outlined and handed to its executor.
 - Program verdict: none yet. Read off the series as they land; the pre-registered outcomes are in the charter.
 
 ## The plan at a glance
@@ -32,3 +31,6 @@ Unchanged from Programs 1 and 2, carried untouched: the content of the compass, 
 ## Log
 
 - 2026-07-22 — Program 3 chartered. `charter.md`, `protocol.md`, and this ledger written in the new house style, replacing the two-tier document set of Program 2. Series-level status and protocol files are retired; each series carries one outline, and this file carries the record. Awaiting step zero.
+- 2026-07-22 — Series repair added to the protocol as the series loop's fifth phase.
+- 2026-07-22 — Step zero passed. `program-3/spec/derisk/Derisk.lean` (self-contained, compiled by hand): transports are involutions on every state, capacity is conserved, bystanders keep their charge and the exchange partners' total is unchanged, the direction-erasing summary is lossy and its macro-step reads the erased microstate. One binding method lesson: whole-space kernel `decide` over the 512-state function space is infeasible (recursion-depth and heartbeat exhaustion, then timeout); universal targets must be proved structurally, `decide` reserved for witnesses. The lesson is written into the 3.0 outline.
+- 2026-07-22 — Series 3.0 outline written (`series-0/outline.md`) and handed to a fresh executor for design and code.
