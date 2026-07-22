@@ -4,17 +4,17 @@ The ground of Program 3. One question: does a reversible, capacity-conserving, c
 
 ## Step zero result
 
-The scratch de-risk (`program-3/spec/derisk/Derisk.lean`, self-contained, compiled by hand) passed all three checks over the full 512-state space:
+The scratch de-risk (`program-3/spec/derisk/Derisk.lean`, self-contained, compiled by hand) passed all three checks:
 
-1. the transport moves (a self moves one unit of attention between two targets) are involutions, hence bijections, on the whole space;
-2. every transport conserves each self's attention capacity, and moves signed charge zero-sum between exactly the two exchange partners;
-3. the direction-erasing summary is lossy, and the macro-step reads the erased microstate (the seed of 3.1's arrow).
+1. the transport moves (a self moves one unit of attention between two targets) are involutions, hence bijections, on every state — proved structurally, for every state and every move;
+2. every transport conserves each self's attention capacity, bystanders keep their charge, and the two exchange partners' total charge is unchanged — also structural;
+3. the direction-erasing summary is lossy, and the macro-step reads the erased microstate (the seed of 3.1's arrow) — concrete witnesses.
 
-The design exists. This series builds it properly.
+The design exists. One method lesson came with it, and it is binding on this series: a first attempt proved checks 1 and 2 by `decide` quantified over the whole 512-state function space, and the kernel cannot evaluate that in reasonable time (recursion-depth and heartbeat exhaustion, then timeout). Universal targets in this series are therefore proved structurally; `decide` is reserved for witnesses, small existentials, and statements over single states.
 
 ## The objects
 
-- The state space: `G := Fin 3 → Finset (Fin 3)`, taken whole. There is no witness carrier; the universe of the series is all 512 states, and universal quantifiers range over all of it.
+- The state space: `G := Fin 3 → Finset (Fin 3)`, taken whole. There is no witness carrier; the universe of the series is all 512 states, and universal quantifiers range over all of it — discharged structurally, per the step-zero lesson, not by whole-space `decide`.
 - The move: `transport x y z : G → G` — if `x` attends `y` and not `z`, the attention moves to `z`; in the mirror case it moves back; otherwise identity. The de-risk file has a working definition the executor may reuse or improve.
 - The capacity: `capacity g x := (g x).card` — attention given.
 - The charge: `charge g x` — attention given minus attention received, the sum over targets of Series 2.8's signed increment.
