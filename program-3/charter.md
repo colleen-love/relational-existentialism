@@ -12,9 +12,9 @@ The question, in one sentence: if the signed flow is made the generator, does th
 
 ## What moves and what stays
 
-Two of Program 2's tenets are restated, not abandoned.
+Two of Program 2's commitments are restated, not abandoned.
 
-To relate is to create, relativized. The source of creation stays absolute: the diagonal's residue, the fact that something new arrives, remains the import and the wall. What becomes self-relative is the ledger of creation: each self's account sums its own signed flows, exchange inside a closed symmetric region is zero-sum, and net creation appears only at the boundary of a self's sight or where holonomy lives. Conservation should return as a theorem about closed regions, the local-but-not-global shape Series 2.7 reached for and could not honestly earn.
+Creation, relativized. The source of creation stays absolute: the diagonal's residue, the fact that something new arrives, remains the import and the wall. What becomes self-relative is the ledger of creation: each self's account sums its own signed flows, exchange inside a closed symmetric region is zero-sum, and net creation appears only at the boundary of a self's sight or where holonomy lives. Conservation should return as a theorem about closed regions, the local-but-not-global shape Series 2.7 reached for and could not honestly earn.
 
 Time, demoted and recovered. Reification stops being the fundamental tick and becomes a coarse-graining: a summary of flow history that discards the microstate. The arrow of time is the information lost in that summary. Irreversibility becomes thermodynamic rather than fundamental, which is the arrangement our universe actually has, and which Series 2.10 named as its specification.
 
