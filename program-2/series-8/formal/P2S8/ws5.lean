@@ -122,7 +122,16 @@ theorem ws5_audit_coherence_pervasive :
 /-- **(e) NAMES-NOT-TERMS.** A META-property about identifiers, not a proposition: no proof term, definition, or
 discharged obligation is named as a forbidden content-word ("good," "common," "value," "justice," "consensus,"
 "ethics," "self," "import," "god," "love," "compass") as a whole word. Enforced by the protocol §6 mechanical grep
-(hits are docstring prose only), not by this `True`; carried as the accepted house placeholder. -/
-theorem ws5_audit_names_not_terms : True := trivial
+(hits are docstring prose only), not by this `True`; carried as the accepted house placeholder.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.frustrated ≠ Outcome.gluable
+  ∧ Outcome.gluable ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.pairwiseOnly
+  ∧ Outcome.pairwiseOnly ≠ Outcome.disconnected
+  ∧ Outcome.disconnected ≠ Outcome.partial'
+  ∧ Outcome.frustrated ≠ Outcome.partial' := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S8

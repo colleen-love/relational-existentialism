@@ -111,4 +111,10 @@ check program-2/series-12 "^import (P2S11|P2S12)(\.[A-Za-z0-9_]+)*$"
 # the grain-dependence test are built fresh in `P2S13.*`.
 check program-2/series-13 "^import (P2S9|P2S13)(\.[A-Za-z0-9_]+)*$"
 
+# Program Review 2-1 repairs (`program-2/review/formal/`): the `PR2R1` library is a REVIEW artifact,
+# deliberately cross-cutting — it imports the probe tips of both Phase-3 branches (P2S10, P2S12, P2S13),
+# reaching every built layer transitively, because its theorems are ABOUT the built layers. Its own
+# `PR2R1.*` roots (+ mathlib) are the only other allowed imports.
+check program-2/review "^import (P2S10|P2S12|P2S13|PR2R1)(\.[A-Za-z0-9_]+)*$"
+
 exit $fail

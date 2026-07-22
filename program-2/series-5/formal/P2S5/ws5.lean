@@ -133,7 +133,14 @@ theorem ws5_audit_fold_is_diagonal {X : Type u} (dest : X → PkObj κ X)
 discharged obligation is named as a forbidden content-word ("time," "loop," "causal," "fold," "pole," "self,"
 "here," "there," "god," "choice," "subjectivity") as a whole word. Enforced by the protocol §6 mechanical grep
 (hits are docstring prose only), not by this `True`; carried as the accepted house placeholder, the grep the
-teeth. -/
-theorem ws5_audit_names_not_terms : True := trivial
+teeth.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.partial' ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.looped
+  ∧ Outcome.looped ≠ Outcome.acyclic
+  ∧ Outcome.partial' ≠ Outcome.acyclic := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S5

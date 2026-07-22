@@ -129,7 +129,14 @@ theorem ws5_audit_faces_are_readers {κ : Cardinal.{0}} (hinf : ℵ₀ ≤ κ) :
 
 /-- **(e) NAMES-NOT-TERMS.** No proof term, definition, or discharged obligation is named as content
 `love`/`loved`/`coherence`/`convergence`/`compass`/`orientation`/`self`/`other`/`God`/`choice`/`subjectivity`. A
-NAMES property about identifiers, certified by the protocol §6 grep; carried here as a grep-certified `True`. -/
-theorem ws5_audit_names_not_terms : True := trivial
+NAMES property about identifiers, certified by the protocol §6 grep; carried here as a grep-certified `True`.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.disconnected ≠ Outcome.partial'
+  ∧ Outcome.partial' ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.forcedFull
+  ∧ Outcome.disconnected ≠ Outcome.forcedFull := by
+  refine ⟨?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S3

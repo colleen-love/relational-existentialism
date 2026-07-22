@@ -1,5 +1,17 @@
 name = "RelExist"
-defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13"]
+defaultTargets = ["Series07", "Series12", "Series13", "P1", "P2S0", "P2S1", "P2S2", "P2S3", "P2S4", "P2S5", "P2S6", "P2S7", "P2S8", "P2S9", "P2S10", "P2S11", "P2S12", "P2S13", "PR2R1"]
+
+# `program-2/review/formal/` — the Program Review 2-1 REPAIRS module (`PR2R1`): the Fixed branches of
+# `program-2/spec/program-review-1.md`. A REVIEW artifact, deliberately cross-cutting: it imports the probe
+# tips of both Phase-3 branches (`P2S10`, `P2S12`, `P2S13`), reaching every built layer transitively,
+# because its theorems are ABOUT the built layers (the two-sided wall, the cone/reach containment, the
+# destructive-iff-odd-holonomy equivalence, the square-not-forced obstruction, the S13 faithfulness bridge,
+# the verdict-tying theorems). `PR2R1.AxiomCheck` runs the axiom pass. Gate: `check program-2/review
+# "^import (P2S10|P2S12|P2S13|PR2R1)…"`.
+[[lean_lib]]
+name = "PR2R1"
+srcDir = "../program-2/review/formal"
+roots = ["PR2R1", "PR2R1.AxiomCheck"]
 
 # ── Layout (Series 07 complete; Series 03–06, 08–11 closed under `archive/`) ──
 # Series 03, 04, 05, 06, 08, 09, 10, and 11 are closed and frozen under `archive/series-03/`…

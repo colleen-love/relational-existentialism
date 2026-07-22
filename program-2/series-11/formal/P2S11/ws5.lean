@@ -120,7 +120,15 @@ theorem ws5_audit_scope : ∀ n : ℤ, amp n = 1 ∨ amp n = -1 := amp_values
 discharged obligation is named as a forbidden content-word ("phase," "amplitude," "interference," "quantum,"
 "superposition," "wave," "complex," "self," "import," "God," "choice") as a whole word. Enforced by the protocol §6
 mechanical grep (hits are docstring prose or the Lean `import` keyword only), not by this `True`; carried as the
-accepted house placeholder. -/
-theorem ws5_audit_names_not_terms : True := trivial
+accepted house placeholder.
+Made non-vacuous at Program Review 2-1 (PR2-R2, the accepted S13 C1-S1 form): the statement below proves
+the outcome codomain a genuine discrimination among neutrally-named values. -/
+theorem ws5_audit_names_not_terms :
+    Outcome.interfering ≠ Outcome.additiveOnly
+  ∧ Outcome.additiveOnly ≠ Outcome.shapeDrawn
+  ∧ Outcome.shapeDrawn ≠ Outcome.disconnected
+  ∧ Outcome.disconnected ≠ Outcome.partial'
+  ∧ Outcome.interfering ≠ Outcome.partial' := by
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩ <;> decide
 
 end P2S11
