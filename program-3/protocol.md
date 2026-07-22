@@ -1,6 +1,6 @@
 # Program 3 protocol
 
-How Program 3 runs. Two loops: a program loop with four steps, and inside its second step, a series loop with four phases. One persistent conversation (the program seat) runs everything except a series' design and code, which go to a fresh executor per series.
+How Program 3 runs. Two loops: a program loop with four steps, and inside its second step, a series loop with five phases. One persistent conversation (the program seat) runs everything except a series' design and code, which go to a fresh executor per series.
 
 This protocol replaces Program 2's two-tier document set. There are no per-series status or protocol files. Each series has one document, its outline; everything else a series produces is its `formal/` code and an entry in the program status.
 
@@ -26,7 +26,9 @@ Calm prose. Sentence case. Bold is reserved for verdicts and the rare load-beari
 
 **3. Code.** The same executor builds `formal/`: proves the targets, computes the verdict through tied flags, runs the build, the axiom check, and the gate. The executor's product is the branch and a short landing note (verdict, theorem list, anything that deviated from the outline and why). The executor's job ends here.
 
-**4. Series review.** Back in the program seat. An independent skeptical read of the landed code against the outline: rebuild, check the disciplines (non-degenerate carrier, derived quantities, tied verdict, bridges, no vacuous audits, prose matches Lean), run the strip test on each headline, and press hardest wherever the verdict is the desired one. Where the reviewer's prior runs in the verdict's favor, spawn one blind reader with the outline's targets and the code only. The review ends in one of three ways: accepted, with the verdict and any findings recorded in `status.md`; sent back, with graded findings, for one repair pass by an executor; or relabeled, when the target cannot be met, with the obstruction recorded and the pre-registered alternative outcome taken. Acceptance is recorded in the program status, and the next series may begin.
+**4. Series review.** Back in the program seat. An independent skeptical read of the landed code against the outline: rebuild, check the disciplines (non-degenerate carrier, derived quantities, tied verdict, bridges, no vacuous audits, prose matches Lean), run the strip test on each headline, and press hardest wherever the verdict is the desired one. Where the reviewer's prior runs in the verdict's favor, spawn one blind reader with the outline's targets and the code only. The review ends in one of three ways: accepted, with the verdict and any findings recorded in `status.md`; sent to repair, with graded findings; or relabeled, when the target cannot be met, with the obstruction recorded and the pre-registered alternative outcome taken. Acceptance is recorded in the program status, and the next series may begin.
+
+**5. Series repair.** Runs when the review sends findings back. Each serious finding closes fixed (the strengthened target built, the theorem named) or relabeled (the obstruction recorded, the pre-registered alternative taken); real findings close on the ordinary schedule; cosmetic ones opportunistically. Repairs go to an executor when they touch design or proofs, and stay in the program seat when they are mechanical. After the repair pass the series returns to review. A repair that avoids its target re-enters review as a new serious finding; the loop ends only in acceptance or relabeling.
 
 ## Records
 
