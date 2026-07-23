@@ -4,12 +4,39 @@
 
 ## Method and verification status (read first)
 
-This review was produced by a fan-out research pipeline: five search angles, 25 sources fetched, 123 claims extracted with direct quotes from the fetched texts. The pipeline's adversarial verification stage (three independent votes per claim) was interrupted by a session usage limit after confirming one claim; the remaining claims are **source-quoted but not adversarially verified**. Practical meaning: each claim below was extracted by a reader agent from the actual source with a supporting quote, which is far stronger than citation from memory, but quotes can be misread in context. Before submission, the load-bearing claims (marked LB below) should be re-verified by hand or by re-running the verification stage.
+This review was produced by a fan-out research pipeline: five search angles, 25 sources fetched, 122 claims extracted with direct quotes from the fetched texts. The pipeline ran twice. Round 1 (2026-07-22) completed search and extraction but its adversarial verification stage was interrupted by a session usage limit. Round 2 (2026-07-23) re-ran the full fetch and put the 25 top-ranked claims through three-vote adversarial verification with Opus verifiers: **23 confirmed, 2 refuted, 0 unverified**, followed by a synthesis that merged the confirmed claims into the seven findings summarized in the "Round 2 verified findings" section below.
+
+Coverage caveat from the verifier run itself: the top-25 ranking concentrated on Strand 1's mathematical-novelty and OSR-positioning claims. **No Strand 2 claim reached verification**, and several Strand 1 tail items (Quine atom uniqueness as stated in Aczel 1988 specifically, Newman, Schaffer, Leitgeb and Ladyman in detail, Dipert) also did not. Those remain at the [quoted] tier.
 
 Confidence tiers used below:
-- **[verified]** confirmed by independent adversarial votes (one claim).
-- **[quoted]** extracted from the fetched source with a supporting direct quote.
+- **[verified]** confirmed by three-vote adversarial verification in round 2.
+- **[refuted]** killed 1-2 or 0-3 in round 2 verification; do not cite without reading the paper directly.
+- **[quoted]** extracted from the fetched source with a supporting direct quote; not adversarially verified.
 - **[check]** citation metadata or interpretation that needs a manual check before submission.
+
+## Round 2 verified findings (all high confidence, votes as noted)
+
+1. **[verified 3-0]** "Behaviorally identified" is exactly Rutten's *simple* coalgebra (Universal Coalgebra, Thm 8.1: simplicity iff coinduction, bisimilar implies equal), reused verbatim as "bisimulation simple" in Gylterud, Stenholm and Veltri (Def. 2.7, with a proved equivalence to Rutten's notion). Rutten Prop. 8.2: every coalgebra becomes simple by quotienting by its greatest bisimulation, so imposing the condition alone is always harmless; the theorem's content lies in its interaction with atomlessness and plurality. Full-text search of Rutten: zero occurrences of "hereditarily" or "atomless."
+2. **[verified 3-0, one merged component 2-1]** Final coalgebras of P_κ exist and are canonically constructed: Rutten Ex. 6.8 and Thms 10.3-10.4; Worrell 2005 (finite powerset final coalgebra = finitely branching strongly extensional trees, convergence in ω+ω); Adámek, Levy, Milius, Moss and Sousa (P_λ converges in exactly λ+ω steps; steps are saturated strongly extensional trees).
+3. **[verified 3-0 on the merged negative existential]** No checked source states the theorem's specific result (the hereditarily non-empty part of a simple P_κ coalgebra is a singleton). Rutten, Worrell, and Adámek et al. work directly with strongly extensional P_κ coalgebras and never isolate the hereditarily non-empty part; **their headline results run the opposite direction: final coalgebras are large, containing empty and leaf trees**. Gylterud et al. show the machinery is active and formalized without stating the result.
+4. **[verified 3-0]** ROSR is a live, explicitly defended position, not a strawman: Esfeld and Lam's position (5), attributed to French and Ladyman 2003, still defended in French 2010 section 7; Lam and Wüthrich's definition ("free-standing physical structures ... without any recourse to relata").
+5. **[verified 3-0]** The existing case against ROSR is informal; no prior formal impossibility proof existed in the debate as of 2010. The three-pronged objection cites Busch 2003, Cao 2003, Chakravartty 2003, Psillos 2006. (Note: round 1 quoted SEP dating Chakravartty's canonical formulation to 1998, p. 399; round 2's verified finding cites Chakravartty 2003 among the objectors. Both may be real works; [check] both against the primary texts.)
+6. **[verified 3-0]** The Bain vs Lam and Wüthrich exchange is the key formal-framework round: Bain (arXiv 2011, published Synthese 2013) defends ROSR via category-theoretic reformulation; Lam and Wüthrich (BJPS) reply that category theory "does not offer a more hospitable environment to ROSR than set theory" and that the strategy backfires (relations as subsets of Cartesian products do not exist in all categories).
+7. **[verified 3-0 on the merged core]** Weak discernibility is the standard escape route and its scope matters: Muller and Saunders (BJPS 2008) on fermions and PII; Muller and Seevinck 2009 extending it; Ladyman 2007 on contextual individuation. **Two adjacent detail claims were refuted (see below).**
+
+### Refuted in round 2 (do not cite without direct reading)
+
+- **[refuted 1-2]** "Muller and Seevinck 2009 maximally extend Muller and Saunders 2008, establishing weak discernibility of an arbitrary number of similar fermions in finite-dimensional Hilbert spaces." The precise extension relationship and scope wording did not survive verification. Read the two papers before characterizing the relationship between them.
+- **[refuted 1-2]** "The discernment of fermions is achieved via physically meaningful, permutation-invariant categorical (non-probabilistic) relations, meaning the individuation is purely relational." The "purely relational individuation" gloss did not survive. State the results' scope only from the papers themselves.
+
+Impact check on the drafts: neither refuted claim is asserted in either draft. The Parmenides draft describes weak discernibility generically (irreflexive relations discerning qualitatively identical objects, Saunders on fermions) and does not characterize the Muller-Seevinck extension or the categorical-relations mechanism. The lit-review entries that repeated these two claims are corrected here.
+
+### Verifier-run caveats (recorded verbatim in substance)
+
+- The novelty finding rests on negative existentials that cannot be exhaustively verified; the Worrell PDF resisted clean text extraction (custom font encoding) and was checked by page rendering.
+- The result may still be folklore in the AFA and non-well-founded set theory community (Quine atom uniqueness under strong extensionality is close to folklore); a targeted check of Aczel 1988, Barwise and Moss (Vicious Circles), and the modal logic literature on strongly extensional Kripke frames was not completed and remains owed.
+- The Esfeld and Lam objector citations were corroborated cross-source, not checked against the paper's own bibliography.
+- The 2023-2026 autoformalization literature moves fast and was not covered by verification.
 
 ---
 
@@ -43,8 +70,8 @@ The question was whether "the hereditarily non-empty part of a behaviorally iden
 - **The gap the paper fills, in the literature's own words:** Esfeld and Lam state the existing objection to eliminativism is informal and threefold (metaphysical: relations require relata; empirical; logical: quantification and set theory presuppose objects), and explicitly decline to rule out the coherence of relations-without-relata a priori. So as of that survey, no formal impossibility result existed in this debate. [quoted, LB]
 
 **Weak discernibility (the expected referee objection).**
-- Canonical citations: Saunders, "Physics and Leibniz's Principles"; Muller and Saunders 2008 (BJPS 59(3): 499-548, DOI 10.1093/bjps/axn027): all finite fermion assemblies weakly discerned by permutation-invariant categorical relations, no haecceities and no revision of logic or set theory; Muller and Seevinck 2009 (Philosophy of Science 76(2): 179-200, DOI 10.1086/647486): maximal extension to arbitrary similar particles. [quoted]
-- Boson caveat inside the result itself: categorical discernibility of bosons is state-dependent; probabilistic relations are needed for full generality. [quoted]
+- Canonical citations: Saunders, "Physics and Leibniz's Principles"; Muller and Saunders 2008 (BJPS 59(3): 499-548, DOI 10.1093/bjps/axn027); Muller and Seevinck 2009 (Philosophy of Science 76(2): 179-200, DOI 10.1086/647486). The core (weak discernibility as the standard escape, fermions and PII) is **[verified 3-0]**. Caution: the two detail glosses round 1 recorded here (the "maximal extension to arbitrary similar particles" characterization and the "purely relational individuation via permutation-invariant categorical relations" mechanism) were **[refuted 1-2]** in round 2; state the results' exact scope only from the papers themselves.
+- Boson caveat inside the result itself: categorical discernibility of bosons is state-dependent; probabilistic relations are needed for full generality. [quoted; treat with the same caution as above]
 - **Two findings that strengthen the paper's hand:**
   - Esfeld and Lam (moderate OSRists, not enemies of the program) argue weak discernibility yields numerical diversity but not individuation, and cannot ground priority of relations over relata; their own moderate OSR takes a numerical plurality of objects as primitive. The theorem's "plurality or behavioral identity: pick one" is exactly this concession, now forced formally. [quoted, LB]
   - Leitgeb and Ladyman 2008 (Philosophia Mathematica 16(3)) present graph-theoretic counterexamples violating even weak formulations of PII, and respond by taking identity and difference of positions as primitive structural facts grounded in nothing beyond the structure. That response is, in the paper's terms, occupying the two-loop horn (declining behavioral identity). So the paper's trilemma has named occupants in the literature for all three horns. [quoted, LB]
@@ -127,8 +154,9 @@ Strand 2: Benzmüller and Woltzenlogel Paleo 2014 (ECAI) and 2016 (IJCAI); Oppen
 
 ## Open actions before submission
 
-1. Re-run the adversarial verification stage on the LB-marked claims (the pipeline can be resumed; or verify by hand).
-2. Expert check on the mathematical novelty question (coalgebra specialist; MathOverflow).
-3. Resolve every [check]: exact years, venues, authors, page ranges.
+1. ~~Re-run the adversarial verification stage~~ Done 2026-07-23 (round 2, Opus verifiers): 23 confirmed, 2 refuted, findings folded in above. Still owed: verification never reached Strand 2 or the Strand 1 tail (Aczel 1988 Quine-atom statement, Newman, Schaffer, Leitgeb and Ladyman detail, Dipert); verify those by hand or with a targeted follow-up run.
+2. Targeted folklore check the verifier itself requested: Aczel 1988, Barwise and Moss (Vicious Circles), and the modal logic literature on strongly extensional Kripke frames, for any statement of the leafless-part collapse. Then the expert check (coalgebra specialist; MathOverflow).
+3. Resolve every [check]: exact years, venues, authors, page ranges. Note the Chakravartty 1998 vs 2003 discrepancy recorded above.
 4. Read Lal and Teh 2017 and Eva 2016 in full (the sweep only located them).
 5. Read Leitgeb and Ladyman 2008 in full: it is the closest philosophical neighbor and partially anticipates the two-loop horn.
+6. Read Muller and Saunders 2008 and Muller and Seevinck 2009 directly before characterizing their exact scope (two detail glosses refuted in round 2).
