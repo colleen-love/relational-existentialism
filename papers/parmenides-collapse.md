@@ -4,7 +4,7 @@
 
 *First draft. Copyright © 2026 Colleen Love. All rights reserved.*
 
-*Status note: this is a working draft. The formal claims are machine-checked and stable. The related-work positioning is grounded in the source-quoted literature sweep recorded in `literature-review.md`; claims marked [TBV] still need manual verification before submission (see that file's confidence tiers and open-actions list).*
+*Status note: this is a working draft. The formal claims are machine-checked and stable. The related-work positioning is grounded in the source-quoted literature sweep recorded in `literature-review.md`; citation metadata was hand-verified in rounds 3 and 4 of that file; the remaining pre-submission items (the Eva full read, the specialist pass, proofs-stage spot-checks, and the footnote artifact decision) are listed at its end.*
 
 ---
 
@@ -42,7 +42,7 @@ Third, **the proofs are elementary and given in full.** Nothing is deferred to t
 
 The paper proceeds as follows. Section 2 motivates coalgebras and bisimulation as the right formal home for eliminativist OSR and states the three conditions precisely. Section 3 states the theorem, sketches the proof, and presents the countermodels. Section 4 defends the adequacy of the formalization, addressing weak discernibility directly: we argue that weak discernibility is a claim *about* certain structured worlds, while behavioral identity is the identity criterion the eliminativist is committed to, and that the theorem shows these come apart exactly where the eliminativist needs them to coincide. Section 5 locates the mathematics honestly with respect to known facts about non-well-founded sets and final coalgebras: the collapse phenomenon has citable kin, including a published instance, and we state precisely what is and is not new here. Section 6 draws the consequences: the eliminativist's live options are existence monism or the admission of an exogenous distinction, and we prove a supplementary result about that distinction: the formalism can detect that it is not carried by the relating, but provably cannot distinguish whether it is given or chosen. Section 7 concludes. Appendix A gives the proofs.
 
-[^lean]: All results in this paper, including those in the appendix, are additionally machine-verified in Lean 4 against Mathlib, resting on no axioms beyond Lean's standard classical triple; the artifact is available at [repository/DOI, TBV]. We rest nothing on this: the printed proofs are complete, and the checker cannot certify the one thing a reader should scrutinize, namely whether the definitions capture the philosophy. That argument is Section 4.
+[^lean]: All results in this paper, including those in the appendix, are additionally machine-verified in Lean 4 against Mathlib, resting on no axioms beyond Lean's standard classical triple; the artifact is available at [repository/DOI to be inserted if this footnote is retained]. We rest nothing on this: the printed proofs are complete, and the checker cannot certify the one thing a reader should scrutinize, namely whether the definitions capture the philosophy. That argument is Section 4.
 
 ## 2. The formal home: worlds as coalgebras
 
@@ -224,29 +224,29 @@ The philosophical reading in Section 6 follows: any internal criterion meant to 
 
 ## References
 
-*[Working list, compiled from the source-quoted literature sweep in `literature-review.md`. Entries marked [TBV] need a final metadata check; unmarked entries carry source-verified details from the sweep. Full reading of Lal & Teh and Eva is still owed.]*
+*[Working list; metadata hand-verified in rounds 3 and 4 of `literature-review.md`, with routine spot-checks remaining at proofs stage. A full reading of Eva is still owed.]*
 
 - Aczel, P. (1988). *Non-Well-Founded Sets*. CSLI Lecture Notes 14. Stanford: CSLI.
-- Adámek, J., Levy, P., Milius, S., Moss, L. & Sousa, L. (2015). "On final coalgebras of power-set functors and saturated trees." *Applied Categorical Structures* 23: 609-641. doi:10.1007/s10485-014-9372-9. [TBV: pages]
+- Adámek, J., Levy, P., Milius, S., Moss, L. & Sousa, L. (2015). "On final coalgebras of power-set functors and saturated trees." *Applied Categorical Structures* 23: 609-641. doi:10.1007/s10485-014-9372-9.
 - Bain, J. (2013). "Category-theoretic structure and radical ontic structural realism." *Synthese* 190: 1621-1635.
-- Barwise, J. & Moss, L. (1996). *Vicious Circles*. Stanford: CSLI. [TBV]
-- Bigaj, T. (2022). [Absolute discernibility of quantum particles; per SEP Structural Realism.] [TBV]
-- Chakravartty, A. (1998). [The canonical relations-need-relata formulation, p. 399.] [TBV: title and venue]
+- Barwise, J. & Moss, L. (1996). *Vicious Circles: On the Mathematics of Non-Wellfounded Phenomena*. CSLI Lecture Notes 60. Stanford: CSLI.
+- Bigaj, T. (2022). *Identity and Indiscernibility in Quantum Mechanics*. Palgrave Macmillan.
+- Chakravartty, A. (1998). "Semirealism." *Studies in History and Philosophy of Science* 29: 391-408. (The relations-need-relata formulation at p. 399.)
 - Black, M. (1952). "The identity of indiscernibles." *Mind* 61: 153-164.
 - Button, T. (2006). "Realistic structuralism's identity crisis: a hybrid solution." *Analysis* 66: 216-222.
 - Carnap, R. (1928). *Der logische Aufbau der Welt*. §14 (the railtrack network).
 - Caulton, A. (2013). "Discerning 'indistinguishable' quantum systems." *Philosophy of Science* 80(1): 49-72.
 - Dipert, R. (1997). "The mathematical structure of the world: the world as graph." *Journal of Philosophy* 94: 329-358.
-- Esfeld, M. & Lam, V. "Ontic structural realism as a metaphysics of objects." [The five-position taxonomy; weak discernibility as diversity without individuation; primitive plurality; the super-holist scenario.] Preprint: philsci-archive 5531. [TBV: final venue and year]
+- Esfeld, M. & Lam, V. (2011). "Ontic structural realism as a metaphysics of objects." In Bokulich & Bokulich (eds.), *Scientific Structuralism* (Boston Studies in the Philosophy of Science 281). Springer: 143-159. Preprint: philsci-archive 5531.
 - Eva, B. (2016). "Category theory and physical structuralism." *European Journal for Philosophy of Science* 6(2): 231-246.
-- French, S. (2010). [The collapse of intermediate positions into eliminativism, section 7.] [TBV]
-- French, S. (2014). *The Structure of the World*. Oxford: OUP. [TBV]
-- French, S. & Ladyman, J. (2003). "Remodelling structural realism." *Synthese* 136: 31-56. [TBV: pages]
-- Gylterud, H., Stenholm, E. & Veltri, N. "Terminal coalgebras and non-wellfounded sets in homotopy type theory." arXiv:2001.06696. [TBV: final venue]
-- Ladyman, J. (1998). "What is structural realism?" *Studies in History and Philosophy of Science* 29: 409-424. [TBV: pages]
-- Ladyman, J. (2007). "On the identity and diversity of objects in a structure." *Proceedings of the Aristotelian Society*, supp. vol. [TBV]
+- French, S. (2010). "The interdependence of structure, objects and dependence." *Synthese* 175 (supp.): 89-109. (Section 7: the collapse of intermediate positions into eliminativism.)
+- French, S. (2014). *The Structure of the World*. Oxford: OUP.
+- French, S. & Ladyman, J. (2003). "Remodelling structural realism." *Synthese* 136: 31-56.
+- Gylterud, H., Stenholm, E. & Veltri, N. "Terminal coalgebras and non-wellfounded sets in homotopy type theory." arXiv:2001.06696. (Journal venue unconfirmed; cited from the arXiv version.)
+- Ladyman, J. (1998). "What is structural realism?" *Studies in History and Philosophy of Science* 29: 409-424.
+- Ladyman, J. (2007). "On the identity and diversity of objects in a structure." *Proceedings of the Aristotelian Society*, supp. vol. 81: 23-43.
 - Hawley, K. (2006). "Weak discernibility." *Analysis* 66: 300-303.
-- Keranen, J. (2001). "The identity problem for realist structuralism." [TBV: venue]
+- Keranen, J. (2001). "The identity problem for realist structuralism." *Philosophia Mathematica* 9(3): 308-330.
 - Ketland, J. (2006). "Structuralism and the identity of indiscernibles." *Analysis* 66: 303-315. (The "dumb-bell" structure, p. 309.)
 - Ladyman, J. (2005). "Mathematical structuralism and the identity of indiscernibles." *Analysis* 65: 218-221.
 - Ladyman, J. & Ross, D. (2007). *Every Thing Must Go*. Oxford: OUP.
@@ -256,12 +256,12 @@ The philosophical reading in Section 6 follows: any internal criterion meant to 
 - Moss, L. "Non-wellfounded set theory." *Stanford Encyclopedia of Philosophy* (2008, rev. 2018).
 - Muller, F. A. & Saunders, S. (2008). "Discerning fermions." *British Journal for the Philosophy of Science* 59(3): 499-548. doi:10.1093/bjps/axn027.
 - Muller, F. A. & Seevinck, M. (2009). "Discerning elementary particles." *Philosophy of Science* 76(2): 179-200. doi:10.1086/647486. arXiv:0905.3273.
-- Newman, M. H. A. (1928). "Mr. Russell's 'causal theory of perception'." *Mind* 37: 137-148. [TBV: pages]
-- Oderberg, D. [The objection to graphical structuralism answered by Shackel 2011.] [TBV]
+- Newman, M. H. A. (1928). "Mr. Russell's 'causal theory of perception'." *Mind* 37: 137-148.
+- Oderberg, D. (2011). "The world is not an asymmetric graph." *Analysis*. (The objection Shackel 2011 answers; pages at proofs stage.)
 - Rutten, J. (2000). "Universal coalgebra: a theory of systems." *Theoretical Computer Science* 249: 3-80.
-- Saunders, S. (2003). "Physics and Leibniz's principles." In Brading & Castellani (eds.), *Symmetries in Physics*. Cambridge: CUP. [TBV: year]
+- Saunders, S. (2003). "Physics and Leibniz's principles." In Brading & Castellani (eds.), *Symmetries in Physics: Philosophical Reflections*. Cambridge: CUP: 289-307.
 - Saunders, S. (2006). "Are quantum particles objects?" *Analysis* 66: 52-63.
-- Schaffer, J. (2010). "Monism: the priority of the whole." *Philosophical Review* 119: 31-76. [TBV: pages]
-- Shackel, N. (2011). [Defense of metaphysical graphical structuralism against Oderberg.] *Analysis* 71(1): 10-21. [TBV: title and end page]
-- Shapiro, S. (2007). "Identity, indiscernibility, and ante rem structuralism: the tale of i and -i." *Philosophia Mathematica* 16. [TBV: pages]
-- Worrell, J. (2005). "On the final sequence of a finitary set functor." *Theoretical Computer Science* 338: 184-199. [TBV: volume and pages]
+- Schaffer, J. (2010). "Monism: the priority of the whole." *Philosophical Review* 119(1): 31-76.
+- Shackel, N. (2011). "The world as a graph: defending metaphysical graphical structuralism." *Analysis* 71(1): 10-21.
+- Shapiro, S. (2007). "Identity, indiscernibility, and ante rem structuralism: the tale of i and -i." *Philosophia Mathematica* 16(3). (Pages at proofs stage.)
+- Worrell, J. (2005). "On the final sequence of a finitary set functor." *Theoretical Computer Science* 338: 184-199.

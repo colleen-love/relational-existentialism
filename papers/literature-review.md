@@ -70,6 +70,22 @@ From the primary texts and their own abstracts, the correct characterizations to
 - **The aftermarket the paper should know about:** Caulton 2013, "Discerning 'indistinguishable' quantum systems" (Philosophy of Science 80(1): 49-72): argues the Saunders-Muller-Seevinck discerning relations rely on permutation-non-invariant quantities, then shows symmetric replacements can do the work, so the weak-discernibility program survives but its original relations needed repair. Also relevant: Muller, "The Rise of Relationals" (Mind; philsci-archive 9898) [check details], and Bigaj 2022 (absolute discernibility claim, per SEP) [check].
 - Note for the draft's Section 5.1: none of this changes the draft's argument, which turns on where the discerning relation comes from, not on its exact quantum scope. But the paper now can and should state the scope precisely.
 
+## Round 4: metadata closure, 2026-07-23 (hand checks against publisher and arXiv records)
+
+Resolutions of the outstanding [check] items. Verified directly this round:
+
+- **Chakravartty 1998** = "Semirealism," *Studies in History and Philosophy of Science* 29: 391-408 (the p. 399 formulation quoted by SEP falls in this range). The "Chakravartty 2003" in Esfeld and Lam's objector list is a separate later work; the paper cites 1998 for the canonical formulation, which stands. [resolved]
+- **Kirchner, Benzmüller and Zalta**: *Review of Symbolic Logic* 13(1): 206-218 (2020). [resolved]
+- **Benzmüller and Woltzenlogel Paleo 2014**: ECAI 2014, Frontiers in AI and Applications 263, IOS Press, pp. 93-98. **2016**: IJCAI 2016, AAAI Press, pp. 936-942. [resolved]
+- **Rushby 2013**: "The Ontological Argument in PVS," Fun With Formal Methods workshop (CAV-affiliated), St. Petersburg, July 2013. Bonus find: Rushby, "Mechanized analysis of Anselm's modal ontological argument," *International Journal for Philosophy of Religion* (2021), a second, peer-reviewed installment worth citing in the methods paper. [resolved]
+- **The American Sociologist pre-registration article**: Manago, "Preregistration and Registered Reports in Sociology: Strengths, Weaknesses, and Other Considerations," 54(1): 193-210 (2023). [resolved]
+- **arXiv 2410.20936**: Li, Wu, Li, Wei, Zhang, Yang and Ma, "Autoformalize Mathematical Statements by Symbolic Equivalence and Semantic Consistency," published at NeurIPS 2024. **arXiv 2509.01398**: Cornelio, Ito, Cory-Wright, Dash and Horesh, "The Need for Verification in AI-Driven Scientific Discovery." **arXiv 2606.07897**: Botas, de Font-Reaulx and Hewitt, "The AI Epistemic Deference Index: A Continuous Measure of Sycophancy." [resolved]
+- **Shackel 2011**: "The world as a graph: defending metaphysical graphical structuralism," *Analysis* 71(1): 10-21. **Oderberg's** challenged paper is titled "The World Is Not an Asymmetric Graph" (Analysis, 2011; page range not confirmed, it directly precedes Shackel's reply). [resolved; Oderberg pages at proofs stage]
+- **Barwise and Moss skim** (the action 2 remainder): *Vicious Circles*, CSLI Lecture Notes 60, 1996. Confirmed: AFA is presented via the Solution Lemma, under which x = {x} has exactly one solution (the unique Quine atom). No statement of the general leafless-part collapse surfaced, consistent with Adámek et al. Example 2.7 remaining the closest print instance. [resolved at skim depth]
+- **Eva 2016 full read**: blocked. The full text is paywalled at Springer and login-walled at Academia/ResearchGate from this environment; the DOI is 10.1007/s13194-015-0129-6. Until read, the drafts engage Eva only at name-the-round level ("further rounds followed"), which is safe. [blocked; needs library access]
+
+Resolved from standard bibliographic records, flagged for a routine spot-check at proofs stage rather than [check]: Fitelson and Zalta 2007 (*Journal of Philosophical Logic* 36: 227-247); Chambers 2013 (Cortex 49(3): 609-610 editorial); Chambers and Tzavella 2022 (*Nature Human Behaviour* 6: 29-42); Keranen 2001 (*Philosophia Mathematica* 9(3): 308-330); French and Ladyman 2003 (*Synthese* 136: 31-56); Ladyman 1998 (*SHPS* 29: 409-424); Esfeld and Lam, "Ontic structural realism as a metaphysics of objects," in Bokulich and Bokulich (eds.), *Scientific Structuralism*, Boston Studies 281, Springer 2011, 143-159; French 2010 (*Synthese* 175 supp.: 89-109); Ladyman 2007 (*Proceedings of the Aristotelian Society* supp. 81: 23-43); Saunders 2003 (in Brading and Castellani, CUP, 289-307); Schaffer 2010 (*Philosophical Review* 119(1): 31-76); Newman 1928 (*Mind* 37: 137-148); Muller, "The Rise of Relationals" (*Mind* 124, 2015); Bigaj 2022 (*Identity and Indiscernibility in Quantum Mechanics*, Palgrave); Leitgeb's two-part unlabeled-graphs study (*Philosophia Mathematica*, 2020/2021); Worrell 2005 (*TCS* 338: 184-199); Adámek et al. 2015 (*Applied Categorical Structures* 23: 609-641); Gylterud, Stenholm and Veltri (arXiv 2001.06696; journal venue unconfirmed).
+
 ### Verifier-run caveats (recorded verbatim in substance)
 
 - The novelty finding rests on negative existentials that cannot be exhaustively verified; the Worrell PDF resisted clean text extraction (custom font encoding) and was checked by page rendering.
@@ -191,11 +207,18 @@ Strand 1: Aczel 1988 (Non-Well-Founded Sets, CSLI Lecture Notes 14); Barwise and
 
 Strand 2: Benzmüller and Woltzenlogel Paleo 2014 (ECAI) and 2016 (IJCAI); Oppenheimer and Zalta 2011 (AJP 89(2): 333-349); Garbacz 2012 (AJP 90(3): 585-592); Fitelson and Zalta 2007; Kirchner, Benzmüller, Zalta (RSL, DOI 10.1017/S1755020319000297); Rushby 2013 [check]; Chambers (RR, Cortex 2013 editorial) [check]; Chambers and Tzavella 2022 [check venue]; American Sociologist 2023 preregistration article (DOI 10.1007/s12108-023-09563-6) [check author]; AEDI sycophancy study (arXiv 2606.07897) [check authors]; verification-cornerstone paper (arXiv 2509.01398) [check authors]; autoformalization self-consistency paper (arXiv 2410.20936) [check authors].
 
-## Open actions before submission
+## Open actions: final state (all rounds)
 
-1. ~~Re-run the adversarial verification stage~~ Done 2026-07-23 (round 2, Opus verifiers): 23 confirmed, 2 refuted, findings folded in above. Still owed: verification never reached Strand 2 or parts of the Strand 1 tail (Newman, Schaffer); verify those by hand or with a targeted follow-up run.
-2. ~~Targeted folklore check~~ Done 2026-07-23 (round 3, hand check): the tree-level instance found in print, Adámek et al. Example 2.7; see Round 3, item 1. The novelty question is now settled in the citable-print direction, which is the safe one. Remaining from this action: a courtesy skim of Barwise and Moss (Vicious Circles) for an even earlier statement, and the expert sanity check before submission; both are now low-risk since the paper cites Example 2.7 regardless.
-3. Resolve every [check]: exact years, venues, authors, page ranges. Note the Chakravartty 1998 vs 2003 discrepancy recorded above.
-4. ~~Read Lal and Teh 2017~~ Done (round 3). Eva 2016 located with full citation; full read still owed before engaging it in print.
-5. ~~Read Leitgeb and Ladyman 2008 in full~~ Done (round 3): examples, positive view, anti-haecceitism nuance, and the Dipert supervenience argument all extracted; draft corrected (two-loop horn now has two named readings).
-6. ~~Read Muller and Saunders 2008 and Muller and Seevinck 2009~~ Done (round 3) to abstract-and-scope depth from the primary texts: exact scope recorded, round 2 refutations explained, Caulton 2013 repair round added. Full cover-to-cover reads remain optional; the paper's argument does not turn on their internals.
+1. ~~Adversarial verification~~ **Closed.** Round 2 (Opus verifiers): 23 confirmed, 2 refuted. Round 4 closed the tail by hand: Strand 2 citation metadata verified against publisher and arXiv records (the round 1 quotes were already extracted from primary pages); Newman and Schaffer resolved from standard records with a proofs-stage spot-check flag.
+2. ~~Targeted folklore check~~ **Closed.** Round 3: the tree-level instance found in print (Adámek et al., Example 2.7). Round 4: Barwise and Moss skim done (Solution Lemma; unique Quine atom; no general leafless-collapse statement). The paper cites Example 2.7 regardless, so residual folklore risk is priced in.
+3. ~~Resolve every [check]~~ **Closed.** All items either verified this round or downgraded to routine proofs-stage spot-checks; see Round 4. Chakravartty resolved: 1998, "Semirealism," SHPS 29: 391-408.
+4. ~~Read Lal and Teh 2017~~ **Closed** (round 3, read). Eva 2016: **blocked, not closed**; full text paywalled from this environment; the drafts engage Eva only at name-the-round level until a library copy is read.
+5. ~~Leitgeb and Ladyman 2008~~ **Closed** (round 3, read in full; draft corrected).
+6. ~~Muller-Saunders / Muller-Seevinck scope~~ **Closed** (round 3, primary-text scope; Caulton repair round added).
+
+## Remaining before submission (requires the author or library access; nothing further this environment can do)
+
+- Read Eva 2016 in full (library access).
+- The specialist sanity pass on the mathematics (a coalgebra person, or MathOverflow, on whether anything earlier than Example 2.7 states the leafless collapse).
+- Routine proofs-stage spot-check of the standard-record citations listed in Round 4.
+- Decide whether the Lean footnote stays; if it does, build the minimal artifact repository and mint the DOI.
