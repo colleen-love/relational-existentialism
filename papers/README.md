@@ -19,10 +19,10 @@ excluded from the repository's CC BY 4.0 / Apache 2.0 licensing; see
 Both papers are first drafts. The Parmenides paper is self-contained: complete
 proofs appear in its Appendix A, and the Lean development
 (`program-1/series-07/formal/`) is cited only in a single footnote as an
-additional verification artifact. A minimal, program-vocabulary-free artifact
-repository with a Zenodo DOI is still planned to back that footnote, but it is
-no longer on the paper's critical path; dropping the footnote entirely remains
-an option.
+additional verification artifact. The footnote is being retained
+(decision recorded 2026-07-23), so the minimal, program-vocabulary-free
+artifact repository with a Zenodo DOI still needs to be built before
+submission; it remains off the paper's argumentative critical path.
 
 House rules for these manuscripts:
 

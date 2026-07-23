@@ -4,7 +4,7 @@
 
 *First draft. Copyright © 2026 Colleen Love. All rights reserved.*
 
-*Status note: this is a working draft. The formal claims are machine-checked and stable. The related-work positioning is grounded in the source-quoted literature sweep recorded in `literature-review.md`; citation metadata was hand-verified in rounds 3 and 4 of that file; the remaining pre-submission items (the Eva full read, the specialist pass, proofs-stage spot-checks, and the footnote artifact decision) are listed at its end.*
+*Status note: this is a working draft. The formal claims are machine-checked and stable. The related-work positioning is grounded in the source-quoted literature sweep recorded in `literature-review.md`; citation metadata was hand-verified in rounds 3 through 5 of that file, and Eva 2016 has been read in full. Remaining before submission: the specialist sanity pass on the mathematics, and the minimal artifact repository and DOI for the verification footnote (which is being retained).*
 
 ---
 
@@ -42,7 +42,7 @@ Third, **the proofs are elementary and given in full.** Nothing is deferred to t
 
 The paper proceeds as follows. Section 2 motivates coalgebras and bisimulation as the right formal home for eliminativist OSR and states the three conditions precisely. Section 3 states the theorem, sketches the proof, and presents the countermodels. Section 4 defends the adequacy of the formalization, addressing weak discernibility directly: we argue that weak discernibility is a claim *about* certain structured worlds, while behavioral identity is the identity criterion the eliminativist is committed to, and that the theorem shows these come apart exactly where the eliminativist needs them to coincide. Section 5 locates the mathematics honestly with respect to known facts about non-well-founded sets and final coalgebras: the collapse phenomenon has citable kin, including a published instance, and we state precisely what is and is not new here. Section 6 draws the consequences: the eliminativist's live options are existence monism or the admission of an exogenous distinction, and we prove a supplementary result about that distinction: the formalism can detect that it is not carried by the relating, but provably cannot distinguish whether it is given or chosen. Section 7 concludes. Appendix A gives the proofs.
 
-[^lean]: All results in this paper, including those in the appendix, are additionally machine-verified in Lean 4 against Mathlib, resting on no axioms beyond Lean's standard classical triple; the artifact is available at [repository/DOI to be inserted if this footnote is retained]. We rest nothing on this: the printed proofs are complete, and the checker cannot certify the one thing a reader should scrutinize, namely whether the definitions capture the philosophy. That argument is Section 4.
+[^lean]: All results in this paper, including those in the appendix, are additionally machine-verified in Lean 4 against Mathlib, resting on no axioms beyond Lean's standard classical triple; the artifact is available at [repository/DOI to be inserted]. We rest nothing on this: the printed proofs are complete, and the checker cannot certify the one thing a reader should scrutinize, namely whether the definitions capture the philosophy. That argument is Section 4.
 
 ## 2. The formal home: worlds as coalgebras
 
@@ -118,7 +118,7 @@ A referee may ask why structural indiscernibility is bisimilarity rather than, s
 
 ### 4.3 What the theorem does not show
 
-The theorem also enters a running exchange about mathematical framework. Bain defended radical OSR by arguing that the incoherence charge rests on set-theoretic formulations of structure and that category theory, by de-emphasizing objects, gives relations-without-relata a coherent home; Lam and Wüthrich replied that category theory is no more hospitable (the morphisms-only reformulation is mere relabelling, generalized elements resurrect constituents, and categories like Hilb and nCob lose the relations along with the relata); further rounds followed (Lal and Teh; Eva). The present result takes the critics' side with a different instrument. Rather than arguing that a categorical formulation fails to eliminate objects, we grant the eliminativist a fully categorical home (coalgebras of an endofunctor, with bisimulation its native indiscernibility) and prove that the elimination succeeds and then self-destructs: taken at full strength, it eliminates plurality itself. The problem was never the framework's ability to express relations without relata; it is what relations without relata express.
+The theorem also enters a running exchange about mathematical framework. Bain defended radical OSR by arguing that the incoherence charge rests on set-theoretic formulations of structure and that category theory, by de-emphasizing objects, gives relations-without-relata a coherent home; Lam and Wüthrich replied that category theory is no more hospitable (the morphisms-only reformulation is mere relabelling, generalized elements resurrect constituents, and categories like Hilb and nCob lose the relations along with the relata); Lal and Teh pressed a complementary critique aimed at the underlying forms of categorical generalization. Eva then defended Bain on both fronts, arguing that Bain's case survives largely intact (with the category REL of sets and relations as a further exemplar, and categorical quantum mechanics as ROSR's natural formalism), while closing on a concession: such formalisms establish the intelligibility and coherence of ROSR, but, as Eva grants to Wüthrich and Lam, they "do not count as arguments for the truth of ROSR." The present result needs no side in that exchange, because it enters exactly at Eva's boundary. Grant the eliminativist everything the pro-categorical side asks: a fully categorical home (coalgebras of an endofunctor, with bisimulation its native indiscernibility) in which relations-without-relata is coherently articulated. The theorem then shows what the coherently articulated theory says: taken at full strength, it eliminates plurality itself. The framework question was never the deep one; the problem is not whether relations without relata can be expressed, but what relations without relata express.
 
 The graph-world tradition supplies a further precedent for constraints of this shape. Dipert, defending the thesis that the world is a graph, held that facts about numerical identity and diversity must supervene on the relational facts about each node, and concluded on that ground that the world must be an *asymmetric* graph, since symmetric graphs contain nodes with identical structural descriptions. Leitgeb and Ladyman rejected the supervenience requirement rather than the symmetric worlds; Shackel defended the graph-world against a different formal objection while reading it as a monism. The present theorem sharpens Dipert's own move: at the behavioral grain, and in the atomless case, no asymmetric escape exists at all, because atomlessness erases every downward difference an asymmetry could rest on. A graph-world theorist who keeps Dipert's supervenience principle and drops leaves from the ontology is not driven to asymmetric worlds; she is driven to the One.
 
@@ -224,7 +224,7 @@ The philosophical reading in Section 6 follows: any internal criterion meant to 
 
 ## References
 
-*[Working list; metadata hand-verified in rounds 3 and 4 of `literature-review.md`, with routine spot-checks remaining at proofs stage. A full reading of Eva is still owed.]*
+*[Working list; metadata hand-verified in rounds 3 through 5 of `literature-review.md`. Eva 2016 has been read in full.]*
 
 - Aczel, P. (1988). *Non-Well-Founded Sets*. CSLI Lecture Notes 14. Stanford: CSLI.
 - Adámek, J., Levy, P., Milius, S., Moss, L. & Sousa, L. (2015). "On final coalgebras of power-set functors and saturated trees." *Applied Categorical Structures* 23: 609-641. doi:10.1007/s10485-014-9372-9.
@@ -257,11 +257,11 @@ The philosophical reading in Section 6 follows: any internal criterion meant to 
 - Muller, F. A. & Saunders, S. (2008). "Discerning fermions." *British Journal for the Philosophy of Science* 59(3): 499-548. doi:10.1093/bjps/axn027.
 - Muller, F. A. & Seevinck, M. (2009). "Discerning elementary particles." *Philosophy of Science* 76(2): 179-200. doi:10.1086/647486. arXiv:0905.3273.
 - Newman, M. H. A. (1928). "Mr. Russell's 'causal theory of perception'." *Mind* 37: 137-148.
-- Oderberg, D. (2011). "The world is not an asymmetric graph." *Analysis*. (The objection Shackel 2011 answers; pages at proofs stage.)
+- Oderberg, D. (2011). "The world is not an asymmetric graph." *Analysis* 71(1): 3-10.
 - Rutten, J. (2000). "Universal coalgebra: a theory of systems." *Theoretical Computer Science* 249: 3-80.
 - Saunders, S. (2003). "Physics and Leibniz's principles." In Brading & Castellani (eds.), *Symmetries in Physics: Philosophical Reflections*. Cambridge: CUP: 289-307.
 - Saunders, S. (2006). "Are quantum particles objects?" *Analysis* 66: 52-63.
 - Schaffer, J. (2010). "Monism: the priority of the whole." *Philosophical Review* 119(1): 31-76.
 - Shackel, N. (2011). "The world as a graph: defending metaphysical graphical structuralism." *Analysis* 71(1): 10-21.
-- Shapiro, S. (2007). "Identity, indiscernibility, and ante rem structuralism: the tale of i and -i." *Philosophia Mathematica* 16(3). (Pages at proofs stage.)
+- Shapiro, S. (2008). "Identity, indiscernibility, and ante rem structuralism: the tale of i and -i." *Philosophia Mathematica* 16(3): 285-309.
 - Worrell, J. (2005). "On the final sequence of a finitary set functor." *Theoretical Computer Science* 338: 184-199.
