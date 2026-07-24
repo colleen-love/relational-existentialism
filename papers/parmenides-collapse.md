@@ -132,7 +132,7 @@ First, the world of the theorem is native to the home the eliminativist's defend
 
 Second, the theorem's logical shape is the reverse of the set-theoretic incoherence argument the consensus rightly rejects. That argument says the view cannot be stated, because relations presuppose relata by definition. We grant statement and derive content. The feature of the carrier that would beg the question, primitive non-relational identity facts for its elements, is precisely what the behavioral-identity hypothesis governs: the proof never touches carrier identity except through that hypothesis. The world where brute element-distinctness does individuating work is exhibited, not presupposed: it is the two-loop countermodel, and it is excluded by the eliminativist's own criterion, not by ours.
 
-Third, the conclusion is carrier-free. Corollary A.2' states the collapse without mentioning behavioral identity or the carrier's count: in any plain world there is at most one bisimilarity class of atomless states, and the final map sends every atomless state to Ω. A bisimilarity class is a relational role, the only kind of thing the eliminativist recognizes; roles are invariant under everything the structuralist regards as notation. However many carrier elements a presentation uses, an atomless pure relating supports at most one way of being, and it is the One relating to itself. A critic who deletes our carrier as metaphysically idle deletes nothing the theorem needs.
+Third, the conclusion is carrier-free. Corollary 3 (Appendix A.2) states the collapse without mentioning behavioral identity or the carrier's count: in any plain world there is at most one bisimilarity class of atomless states, and the final map sends every atomless state to Ω. A bisimilarity class is a relational role, the only kind of thing the eliminativist recognizes; roles are invariant under everything the structuralist regards as notation. However many carrier elements a presentation uses, an atomless pure relating supports at most one way of being, and it is the One relating to itself. A critic who deletes our carrier as metaphysically idle deletes nothing the theorem needs.
 
 Fourth, the hypotheses themselves are categorical properties, stated without element-talk in the coalgebra literature: bisimulations are Aczel and Mendler's spans of coalgebra morphisms; behavioral identity is Rutten's simplicity, equivalently the condition that the canonical morphism to the final coalgebra is monic; a leaf is a state whose unfolding factors through the distinguished global element ∅ of P_κ(X), and atomlessness is hereditary avoidance of it. All are invariant under coalgebra isomorphism. The carrier is a coordinate system; the theorem is a statement about the manifold. We state the division of labor plainly rather than overclaim: the theorem's *statement* is categorical and its home is an arrow of **REL**; its *proof* in this paper runs in the set presentation, where the checker can also verify it. Nothing in the objection survives this division except a preference about notation.
 
@@ -182,25 +182,25 @@ Throughout, fix an infinite cardinal κ. For a set X, let P_κ(X) be the set of 
 
 ### A.2 The engine and the theorem
 
-**Lemma A.1 (collapse engine).** On any plain world, the relation R(x, y) iff (SHNE x and SHNE y) is a bisimulation.
+**Lemma 1 (collapse engine).** On any plain world, the relation R(x, y) iff (SHNE x and SHNE y) is a bisimulation.
 
 *Proof.* Suppose R(x, y), so x and y are both SHNE. Let u ∈ dest x. Since x is SHNE, u is SHNE. Since y is SHNE, dest y is non-empty; choose any v ∈ dest y. Since v ∈ dest y and y is SHNE, v is SHNE. So R(u, v), and v ∈ dest y as required. The symmetric condition holds by the same argument with x and y exchanged. ∎
 
-**Corollary A.2.** In any plain world, any two SHNE states are bisimilar.
+**Corollary 2.** In any plain world, any two SHNE states are bisimilar.
 
-**Corollary A.2' (carrier-free form).** In any plain world, there is at most one bisimilarity class of SHNE states.
+**Corollary 3 (carrier-free form).** In any plain world, there is at most one bisimilarity class of SHNE states.
 
-*Proof.* Bisimulations are closed under composition and converse, so bisimilarity is an equivalence relation; by Corollary A.2 all SHNE states fall in one class. ∎
+*Proof.* Bisimulations are closed under composition and converse, so bisimilarity is an equivalence relation; by Corollary 2 all SHNE states fall in one class. ∎
 
-(Proposition A.5 below identifies the unique class: the canonical map into the final coalgebra sends every SHNE state to Ω.)
+(Proposition 7 in Section A.4 identifies the unique class: the canonical map into the final coalgebra sends every SHNE state to Ω.)
 
-**Theorem A.3 (static form).** If (X, dest) is behaviorally identified and atomless, then X has at most one element.
+**Theorem 4 (static form).** If (X, dest) is behaviorally identified and atomless, then X has at most one element.
 
-*Proof.* Let x, y ∈ X. Both are SHNE (atomlessness), so x ~ y (Corollary A.2), so x = y (behavioral identity). ∎
+*Proof.* Let x, y ∈ X. Both are SHNE (atomlessness), so x ~ y (Corollary 2), so x = y (behavioral identity). ∎
 
-**Theorem A.4 (Parmenides collapse).** No plain world is behaviorally identified, atomless, and plural.
+**Theorem 5 (Parmenides collapse).** No plain world is behaviorally identified, atomless, and plural.
 
-*Proof.* Immediate from Theorem A.3. ∎
+*Proof.* Immediate from Theorem 4. ∎
 
 ### A.3 The countermodels
 
@@ -208,7 +208,7 @@ Each countermodel drops exactly one hypothesis and satisfies the remaining ones,
 
 **Leaf world (drops atomlessness).** dest 0 = {1}, dest 1 = ∅. *Plural:* 0 ≠ 1. *Behaviorally identified:* let R be a bisimulation and suppose R(0, 1). Then 1 ∈ dest 0 must be matched by some v ∈ dest 1 = ∅, which is impossible; so R does not relate 0 to 1, and symmetrically not 1 to 0, hence R ⊆ identity. *Not atomless:* dest 1 = ∅, so 1 is a leaf (and 0 is not SHNE either, since its unfolding reaches the leaf). The world is plain.
 
-**Labelled world (drops plainness).** Work over the labelled signature dest' : X → L × P_κ(X) with L = {a, b}: dest' 0 = (a, {0}), dest' 1 = (b, {1}). A bisimulation for the labelled signature additionally requires related states to carry equal labels. *Behaviorally identified (labelled):* no labelled bisimulation relates 0 and 1, since a ≠ b; so every labelled bisimulation is contained in identity. *Atomless:* each state relates to itself, hereditarily. *Plural:* 0 ≠ 1. Not plain: the label is a non-relational coordinate, and Section 6's semantic test confirms it (A.5).
+**Labelled world (drops plainness).** Work over the labelled signature dest' : X → L × P_κ(X) with L = {a, b}: dest' 0 = (a, {0}), dest' 1 = (b, {1}). A bisimulation for the labelled signature additionally requires related states to carry equal labels. *Behaviorally identified (labelled):* no labelled bisimulation relates 0 and 1, since a ≠ b; so every labelled bisimulation is contained in identity. *Atomless:* each state relates to itself, hereditarily. *Plural:* 0 ≠ 1. Not plain: the label is a non-relational coordinate, and Section 6's semantic test confirms it (Section A.5).
 
 **Two-loop world (drops behavioral identity).** dest 0 = {0}, dest 1 = {1}. *Plain, atomless, plural* as above. *Not behaviorally identified:* the total relation X × X is a bisimulation (for R(0, 1): the unique u = 0 ∈ dest 0 is matched by v = 1 ∈ dest 1 with R(0, 1), and conversely), and it is not contained in identity. ∎
 
@@ -216,29 +216,29 @@ Each countermodel drops exactly one hypothesis and satisfies the remaining ones,
 
 For P_κ with κ a regular infinite cardinal, a final coalgebra (Z, ζ) exists [Rutten, Theorems 10.3-10.4; Worrell], and final coalgebras satisfy the coinduction principle: bisimilar elements of Z are equal [Rutten, Theorem 8.1 with the finality argument; equivalently, final coalgebras are behaviorally identified].
 
-**Proposition A.5.** The SHNE part of the final P_κ coalgebra is exactly {Ω}, where Ω is the unique element with ζ(Ω) = {Ω}.
+**Proposition 7.** The SHNE part of the final P_κ coalgebra is exactly {Ω}, where Ω is the unique element with ζ(Ω) = {Ω}.
 
-*Proof.* Existence of Ω: the one-point coalgebra ({∗}, ∗ ↦ {∗}) has a unique coalgebra morphism h into Z; its image Ω = h(∗) satisfies ζ(Ω) = {Ω} by the morphism condition. Ω is SHNE: the predicate "equals Ω" is a post-fixed point of Φ, since ζ(Ω) = {Ω} is non-empty and contains only Ω. Uniqueness and exhaustion: any two SHNE elements of Z are bisimilar (Corollary A.2) and hence equal by coinduction; since Ω is SHNE, every SHNE element equals Ω. ∎
+*Proof.* Existence of Ω: the one-point coalgebra ({∗}, ∗ ↦ {∗}) has a unique coalgebra morphism h into Z; its image Ω = h(∗) satisfies ζ(Ω) = {Ω} by the morphism condition. Ω is SHNE: the predicate "equals Ω" is a post-fixed point of Φ, since ζ(Ω) = {Ω} is non-empty and contains only Ω. Uniqueness and exhaustion: any two SHNE elements of Z are bisimilar (Corollary 2) and hence equal by coinduction; since Ω is SHNE, every SHNE element equals Ω. ∎
 
-It follows that the canonical map h : X → Z sends every SHNE state of every plain world to Ω: the set of homomorphic images of SHNE states is a post-fixed point of Φ (images of non-empty sets are non-empty, and children of images are images of children), so such images are SHNE in Z, and by Proposition A.5 they all equal Ω. This discharges the identification promised after Corollary A.2'.
+It follows that the canonical map h : X → Z sends every SHNE state of every plain world to Ω: the set of homomorphic images of SHNE states is a post-fixed point of Φ (images of non-empty sets are non-empty, and children of images are images of children), so such images are SHNE in Z, and by Proposition 7 they all equal Ω. This discharges the identification promised after Corollary 3.
 
-Reading Z as the space of fully unfolded relational histories, Proposition A.5 is the statement quoted in Section 3.2: there is exactly one way to relate forever without ground. The tree-level instance of this proposition, for the finite powerset functor, is Example 2.7 of Adámek, Levy, Milius, Moss and Sousa; see Section 5.
+Reading Z as the space of fully unfolded relational histories, Proposition 7 is the statement quoted in Section 3.2: there is exactly one way to relate forever without ground. The tree-level instance of this proposition, for the finite powerset functor, is Example 2.7 of Adámek, Levy, Milius, Moss and Sousa; see Section 5.
 
 ### A.5 Imports, recoverable coordinates, and the given-or-chosen result
 
 Fix a plain world (X, dest) and a set L of labels. A coordinate c : X → L is *recoverable* when it is invariant under plain bisimilarity (x ~ y implies c x = c y), and an *import* otherwise.
 
-**Proposition A.6 (a free label is an import).** In the two-loop world with c(0) = a ≠ b = c(1): since 0 ~ 1 under the plain relating (A.3) while c(0) ≠ c(1), c is not recoverable. ∎
+**Proposition 8 (a free label is an import).** In the two-loop world with c(0) = a ≠ b = c(1): since 0 ~ 1 under the plain relating (Section A.3: the total relation on the two-loop world is a bisimulation) while c(0) ≠ c(1), c is not recoverable. ∎
 
-**Proposition A.7 (recoverable coordinates collapse on the atomless part).** In any plain world, a recoverable coordinate is constant on the SHNE states.
+**Proposition 9 (recoverable coordinates collapse on the atomless part).** In any plain world, a recoverable coordinate is constant on the SHNE states.
 
-*Proof.* Any two SHNE states are bisimilar (Corollary A.2); recoverability transports equality of the coordinate along bisimilarity. ∎
+*Proof.* Any two SHNE states are bisimilar (Corollary 2); recoverability transports equality of the coordinate along bisimilarity. ∎
 
-Propositions A.6 and A.7 together give Section 6's dilemma: a coordinate either supervenes on the plain relating, in which case it cannot separate any two atomless states, or it genuinely individuates, in which case it is provably a distinction the relating does not carry.
+Propositions 8 and 9 together give Section 6's dilemma: a coordinate either supervenes on the plain relating, in which case it cannot separate any two atomless states, or it genuinely individuates, in which case it is provably a distinction the relating does not carry.
 
-**Proposition A.8 (given and chosen are indistinguishable from inside).** Let histories be elements of the final coalgebra Z and call a history *productive* when it is SHNE. Then for any function f defined on histories, f takes the same value on all productive histories.
+**Proposition 10 (given and chosen are indistinguishable from inside).** Let histories be elements of the final coalgebra Z and call a history *productive* when it is SHNE. Then for any function f defined on histories, f takes the same value on all productive histories.
 
-*Proof.* By Proposition A.5 there is exactly one productive history, Ω; a function is trivially constant on a one-element set. ∎
+*Proof.* By Proposition 7 there is exactly one productive history, Ω; a function is trivially constant on a one-element set. ∎
 
 The philosophical reading in Section 6 follows: any internal criterion meant to classify the exogenous distinction's origin (given versus chosen) is a function of the atomless relational history, and all such functions are constant, so the classification cannot be made from inside. The force of the observation is that the *only* raw material an atomless relational world offers for such a test is its history, and the history is unique.
 
